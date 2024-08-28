@@ -14,7 +14,7 @@ int main()
         std::cerr << "Error al cargar la imagen del ícono" << std::endl;
         return EXIT_FAILURE;
     }
-
+    pipippii
     // Establecer el ícono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
