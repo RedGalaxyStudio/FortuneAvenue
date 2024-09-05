@@ -1,52 +1,27 @@
 #include "Cinematic.hpp"
-#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <iostream>  // Necesario para std::cerr
 
-Cinematic::Cinematic(sf::RenderWindow& window)
-    : window(window), cargaTerminada(false) {
+// Constructor: inicializa la variable y la ventana
+Cinematic::Cinematic(sf::RenderWindow& windowRef) : window(windowRef) {
+    // Inicializaciones adicionales si es necesario
 }
 
-Cinematic::~Cinematic() {
-    if (hiloCarga.joinable()) {
-        hiloCarga.join(); // Asegura que el hilo termine antes de destruir la clase
-    }
-}
-
-void Cinematic::iniciarCarga() {
-    // Cargar la textura del logo
-    if (!texture.loadFromFile("resource/texture/imagelogopresa.png")) {
-        std::cerr << "Error al cargar la textura del logo" << std::endl;
+// Carga de recursos (texturas y sprites)
+void Cinematic::Resource() {
+    if (!textureLogoStudio.loadFromFile("resource/texture/imagelogopresa.png")) {
+        std::cerr << "Error al cargar la imagen del logotipo" << std::endl;
         return;
     }
 
-    sprite.setTexture(texture);
-    sprite.setOrigin(500, 238.5f); // Ajusta según el tamaño del sprite
-    sprite.setPosition(750, 500);  // Posición del sprite
-
-    // Iniciar el hilo para cargar recursos en segundo plano
-    hiloCarga = std::thread(&Cinematic::cargarRecursos, this);
+    // Configuración del sprite del logotipo
+    spriteLogoStudio.setTexture(textureLogoStudio);
+    spriteLogoStudio.setOrigin(500, 238.5f);
+    spriteLogoStudio.setPosition(750, 500);
 }
 
-void Cinematic::cargarRecursos() {
-    // Cargar recursos necesarios para el juego
-    sf::Texture textura;
-    if (textura.loadFromFile("resource/texture/image.png")) {
-        texturas.push_back(textura);
-    }
-
-    if (!buffer.loadFromFile("resource/sonid/sonidouu.wav")) {
-        std::cerr << "Error al cargar el archivo de sonido" << std::endl;
-        return;
-    }
-
-    sf::Sound sound;
-    sound.setBuffer(buffer);
-    sound.play();
-
-    // Marcar como completada la carga
-    cargaTerminada = true;
-}
-
-void Cinematic::dibujar() {
+// Actualización de la animación (desvanecimiento del logotipo)
+void Cinematic::Update() {
     float alpha = 0.0f;
     bool fadingIn = true;
 
@@ -57,38 +32,38 @@ void Cinematic::dibujar() {
                 window.close();
         }
 
+        // Calcular el tiempo transcurrido y actualizar la opacidad
         sf::Time deltaTime = fadeClock.restart();
 
         if (fadingIn) {
-            alpha += 255.0f * deltaTime.asSeconds(); // Incrementa la opacidad
+            alpha += 255.0f * deltaTime.asSeconds();  // Incrementa la opacidad
             if (alpha >= 255.0f) {
                 alpha = 255.0f;
                 fadingIn = false;
             }
         }
         else {
-            alpha -= 255.0f * deltaTime.asSeconds(); // Decrementa la opacidad
+            alpha -= 255.0f * deltaTime.asSeconds();  // Decrementa la opacidad
             if (alpha <= 0.0f) {
                 alpha = 0.0f;
                 fadingIn = true;
             }
         }
 
-        sprite.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha)));
+        // Actualiza el color del sprite con la nueva opacidad
+        spriteLogoStudio.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha)));
 
-        window.clear();
+        window.clear();  // Limpia la pantalla
+
         if (clock.getElapsedTime().asSeconds() <= 5) {
-            window.draw(sprite);
+            window.draw(spriteLogoStudio);  // Dibuja el logotipo si han pasado menos de 5 segundos
         }
 
-        window.display();
-
-        if (cargaTerminada) {
-            break; // Salir del loop de la pantalla de carga cuando los recursos estén listos
-        }
+        window.display();  // Actualiza la ventana
     }
 }
 
-bool Cinematic::cargaCompleta() const {
-    return cargaTerminada;
+// Método para dibujar (implementa según sea necesario)
+void Cinematic::Draw() {
+    // Implementa el dibujo adicional si es necesario
 }
