@@ -2,37 +2,20 @@
 #define CINEMATIC_HPP
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <thread>
-#include <vector>
 
 class Cinematic {
 public:
-    Cinematic(sf::RenderWindow& window);
-    ~Cinematic();
-
-    // Función para iniciar la pantalla de carga
-    void iniciarCarga();
-
-    // Función para cargar los recursos
-    void cargarRecursos();
-
-    // Función para dibujar la pantalla de carga
-    void dibujar();
-
-    // Verifica si la carga ha terminado
-    bool cargaCompleta() const;
+    Cinematic(sf::RenderWindow& window);  // Constructor que acepta una ventana por referencia
+    void Resource();                      // Carga de recursos
+    void Update();                        // Actualización de la animación
+    void Draw();                          // Dibujado de elementos (si es necesario)
 
 private:
-    sf::RenderWindow& window;
-    sf::Texture texture;
-    sf::Sprite sprite;
-    sf::Clock clock;
-    sf::Clock fadeClock;
-    std::vector<sf::Texture> texturas;
-    sf::SoundBuffer buffer;
-    std::thread hiloCarga;
-    bool cargaTerminada;
+    sf::Clock clock;                      // Reloj para medir el tiempo
+    sf::Clock fadeClock;                  // Reloj para el efecto de desvanecimiento
+    sf::Texture textureLogoStudio;        // Textura del logotipo
+    sf::Sprite spriteLogoStudio;          // Sprite para el logotipo
+    sf::RenderWindow& window;             // Referencia a la ventana de renderizado
 };
 
-#endif // CINEMATIC_HPP
+#endif
