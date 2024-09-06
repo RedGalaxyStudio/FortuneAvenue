@@ -15,6 +15,8 @@ private:
     sf::Clock fadeClock;                  // Reloj para el efecto de desvanecimiento
     sf::Texture textureLogoStudio;        // Textura del logotipo
     sf::Sprite spriteLogoStudio;          // Sprite para el logotipo
+    sf::Texture textureLogoJuego;        // Textura del logotipo
+    sf::Sprite spriteLogoJuego;
     sf::RenderWindow& window;             // Referencia a la ventana de renderizado
 };
 
