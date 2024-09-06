@@ -17,10 +17,12 @@ private:
     sf::Texture TexturaBotonJugarOff;         // Textura del botón Jugar
     sf::Sprite SpriteBotonJugar;           // Sprite para el botón Jugar
     sf::Texture TexturaBotonOpcionesOff;      // Textura del botón Opciones
-    sf::Sprite SpriteBotonOpcion;          // Sprite para el botón Opciones
+    sf::Sprite SpriteBotonOpciones;          // Sprite para el botón Opciones
     sf::Texture TexturaBotonSalirOff;
-    sf::Texture texturaBotonJugarOn;// Textura del botón Salir
-    sf::Sprite SpriteBotonSalir;           // Sprite para el botón Salir
+    sf::Sprite SpriteBotonSalir;  // Sprite para el botón Salir
+    sf::Texture TexturaBotonJugarOn;
+    sf::Texture TexturaBotonOpcionesOn;
+    sf::Texture TexturaBotonSalirOn;
 };
 
 #endif
