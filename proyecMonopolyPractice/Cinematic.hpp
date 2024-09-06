@@ -11,13 +11,15 @@ public:
     void Draw();                          // Dibujado de elementos (si es necesario)
 
 private:
-    sf::Clock clock;                      // Reloj para medir el tiempo
-    sf::Clock fadeClock;                  // Reloj para el efecto de desvanecimiento
     sf::Texture textureLogoStudio;        // Textura del logotipo
     sf::Sprite spriteLogoStudio;          // Sprite para el logotipo
-    sf::Texture textureLogoJuego;        // Textura del logotipo
-    sf::Sprite spriteLogoJuego;
+    sf::Texture textureLogoJuego;         // Textura del logotipo
+    sf::Sprite spriteLogoJuego;           // Sprite para el logotipo
+    sf::Font fuente;                      // Fuente para la lluvia de caracteres
     sf::RenderWindow& window;             // Referencia a la ventana de renderizado
+    sf::Clock clock;                      // Reloj para controlar el tiempo de la animación
+    sf::Clock fadeClock;                  // Reloj para el control del desvanecimiento
 };
 
 #endif
+

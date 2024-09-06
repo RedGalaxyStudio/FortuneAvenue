@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Cinematic.hpp"
 #include "FadeEffect.hpp"
+#include "menuP.hpp"
 
 int main() {
     // Crear la ventana en main
@@ -27,6 +28,15 @@ int main() {
 
     // Iniciar la animación
     cinematic.Update();
+
+    menuP Menup(window);
+
+    // Cargar los recursos necesarios para la cinemática
+    Menup.Resource();
+
+    // Iniciar la animación
+    Menup.Update();
+
 
     return EXIT_SUCCESS;
 }
