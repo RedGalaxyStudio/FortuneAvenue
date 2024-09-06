@@ -136,10 +136,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cinematic.cpp" />
+    <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveEffect.cpp" />
+    <ClCompile Include="RotateEffect.cpp" />
+    <ClCompile Include="ZoomEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp" />
+    <ClInclude Include="FadeEffect.hpp" />
+    <ClInclude Include="MoveEffect.hpp" />
+    <ClInclude Include="RotateEffect.hpp" />
+    <ClInclude Include="ZoomEffect.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

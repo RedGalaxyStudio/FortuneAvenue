@@ -2,10 +2,22 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Cinematic.hpp"
+#include "FadeEffect.hpp"
 
 int main() {
     // Crear la ventana en main
-    sf::RenderWindow window(sf::VideoMode(1500, 1000), "Ventana SFML");
+    sf::RenderWindow window(sf::VideoMode(1280,720), "Ventana SFML");
+    
+    sf::Image icono;
+    if (!icono.loadFromFile("resource/texture/mini.png"))
+    {
+        std::cerr << "Error al cargar la imagen del ícono" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    // Establecer el ícono de la ventana
+    window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
+
 
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
