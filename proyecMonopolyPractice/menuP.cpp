@@ -44,16 +44,16 @@ void menuP::Resource() {
     spriteLogoFortuneAvenue.setPosition(640, 360);
 
     SpriteBotonJugar.setTexture(TexturaBotonJugarOff);
-    SpriteBotonJugar.setOrigin(500, 2);
-    SpriteBotonJugar.setPosition(640, 360);
+    SpriteBotonJugar.setOrigin(103.5, 40);
+    SpriteBotonJugar.setPosition(400, 560);
 
     SpriteBotonOpciones.setTexture(TexturaBotonOpcionesOff);
-    SpriteBotonOpciones.setOrigin(500, 2);
-    SpriteBotonOpciones.setPosition(640, 360);
+    SpriteBotonOpciones.setOrigin(103.5, 40);
+    SpriteBotonOpciones.setPosition(640, 560);
 
     SpriteBotonSalir.setTexture(TexturaBotonSalirOff);
-    SpriteBotonSalir.setOrigin(500, 2);
-    SpriteBotonSalir.setPosition(640, 360);
+    SpriteBotonSalir.setOrigin(103.5, 40);
+    SpriteBotonSalir.setPosition(860, 560);
 }
 
 // Actualización de la animación (desvanecimiento del logotipo)
