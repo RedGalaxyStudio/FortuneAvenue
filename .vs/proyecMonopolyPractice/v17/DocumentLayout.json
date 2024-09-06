@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -22,11 +26,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "menuP.hpp",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.hpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.hpp",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.hpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\menuP.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-06T16:30:02.503Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -34,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Cinematic.hpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.hpp",
@@ -46,7 +63,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Cinematic.cpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.cpp",
@@ -65,9 +82,10 @@
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
               "ToolTip": "C:\\Users\\Daniel\\Desktop\\ProyectosVisualCode\\Proyecto\\proyecto\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAA4AAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-19T19:06:59.25Z"
+              "WhenOpened": "2024-08-19T19:06:59.25Z",
+              "EditorCaption": ""
             }
           ]
         }
