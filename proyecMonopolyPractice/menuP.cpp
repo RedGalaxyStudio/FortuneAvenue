@@ -14,37 +14,44 @@ void menuP::Resource() {
         return;
     }
     if (!TexturaBotonJugarOff.loadFromFile("resource/texture/BotonJugarOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Jugar" << std::endl;
+        std::cerr << "Error al cargar la imagen del Boton Jugar Off" << std::endl;
         return;
     }
-    if (!texturaBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) {
+    if (!TexturaBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) {
         std::cerr << "Error al cargar la imagen del Boton Jugar On" << std::endl;
         return;
     }
-    if (!TexturaBotonOpciones.loadFromFile("resource/texture/BotonOpcionesOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Opciones" << std::endl;
+    if (!TexturaBotonOpcionesOff.loadFromFile("resource/texture/BotonOpcionesOff.png")) {
+        std::cerr << "Error al cargar la imagen del Boton Opciones Off" << std::endl;
         return;
     }
-    if (!TexturaBotonSalir.loadFromFile("resource/texture/BotonSalirOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Salir" << std::endl;
+    if (!TexturaBotonOpcionesOn.loadFromFile("resource/texture/BotonOpcionesOn.png")) {
+        std::cerr << "Error al cargar la imagen del Boton Opciones On" << std::endl;
         return;
     }
-    
+    if (!TexturaBotonSalirOff.loadFromFile("resource/texture/BotonSalirOff.png")) {
+        std::cerr << "Error al cargar la imagen del Boton Salir Off" << std::endl;
+        return;
+    }
+    if (!TexturaBotonSalirOn.loadFromFile("resource/texture/BotonSalirOn.png")) {
+        std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
+        return;
+    } // Faltaba esta llave
 
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(500, 2);
     spriteLogoFortuneAvenue.setPosition(640, 360);
 
-    SpriteBotonJugar.setTexture(TexturaBotonJugar);
+    SpriteBotonJugar.setTexture(TexturaBotonJugarOff);
     SpriteBotonJugar.setOrigin(500, 2);
     SpriteBotonJugar.setPosition(640, 360);
 
-    SpriteBotonOpcion.setTexture(TexturaBotonOpciones);
-    SpriteBotonOpcion.setOrigin(500, 2);
-    SpriteBotonOpcion.setPosition(640, 360);
+    SpriteBotonOpciones.setTexture(TexturaBotonOpcionesOff);
+    SpriteBotonOpciones.setOrigin(500, 2);
+    SpriteBotonOpciones.setPosition(640, 360);
 
-    SpriteBotonSalir.setTexture(TexturaBotonSalir);
+    SpriteBotonSalir.setTexture(TexturaBotonSalirOff);
     SpriteBotonSalir.setOrigin(500, 2);
     SpriteBotonSalir.setPosition(640, 360);
 }
@@ -60,18 +67,36 @@ void menuP::Update() {
 
         // Obtener la posición del ratón
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-        sf::FloatRect buttonJugar = SpriteBotonJugar.getGlobalBounds();
+        sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-        // Detectar si el ratón está sobre el botón
-        if (buttonJugar.contains(static_cast<sf::Vector2f>(mousePosition))) {
-            SpriteBotonJugar.setTexture(texturaBotonJugarOn);
+        // Verificar si el ratón está sobre el botón Jugar
+        if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
+            SpriteBotonJugar.setTexture(TexturaBotonJugarOn);
         }
         else {
-            SpriteBotonJugar.setTexture(TexturaBotonJugar);
+            SpriteBotonJugar.setTexture(TexturaBotonJugarOff);
+        }
+
+        // Verificar si el ratón está sobre el botón Opciones
+        if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
+            SpriteBotonOpciones.setTexture(TexturaBotonOpcionesOn);
+        }
+        else {
+            SpriteBotonOpciones.setTexture(TexturaBotonOpcionesOff);
+        }
+
+        // Verificar si el ratón está sobre el botón Salir
+        if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
+            SpriteBotonSalir.setTexture(TexturaBotonSalirOn);
+        }
+        else {
+            SpriteBotonSalir.setTexture(TexturaBotonSalirOff);
         }
 
         window.clear();
         window.draw(SpriteBotonJugar);
+        window.draw(SpriteBotonOpciones);
+        window.draw(SpriteBotonSalir);
         window.display();
     }
 }
