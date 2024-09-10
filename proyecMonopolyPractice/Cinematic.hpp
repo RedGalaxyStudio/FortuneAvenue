@@ -19,6 +19,8 @@ private:
     sf::RenderWindow& window;             // Referencia a la ventana de renderizado
     sf::Clock clock;                      // Reloj para controlar el tiempo de la animación
     sf::Clock fadeClock;                  // Reloj para el control del desvanecimiento
+    float alpha;
+    bool fadeIn;
 };
 
 #endif
