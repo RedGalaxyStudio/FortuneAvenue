@@ -43,6 +43,19 @@ void menuP::Resource() {
         return;
     }
 
+
+    if(!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) {
+        std::cerr << "Error al cargar el sonido B" << std::endl;
+        return;
+    }
+    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) {
+        std::cerr << "Error al cargar el sonido A" << std::endl;
+        return;
+    }
+
+    HoverSound.setBuffer(HoverBuffer);
+    ClickSound.setBuffer(ClickBuffer);
+
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(300, 300);
@@ -76,6 +89,7 @@ void menuP::Update() {
         // Verificar si el ratón está sobre el botón Jugar
         if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonJugar.setTexture(TextureBotonJugarOn);
+            playHoverSound();
         }
         else {
             SpriteBotonJugar.setTexture(TextureBotonJugarOff);
@@ -84,6 +98,7 @@ void menuP::Update() {
         // Verificar si el ratón está sobre el botón Opciones
         if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
+            playHoverSound();
         }
         else {
             SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
@@ -92,6 +107,7 @@ void menuP::Update() {
         // Verificar si el ratón está sobre el botón Salir
         if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonSalir.setTexture(TextureBotonSalirOn);
+            playHoverSound();
         }
         else {
             SpriteBotonSalir.setTexture(TextureBotonSalirOff);
@@ -126,24 +142,36 @@ void menuP::evento() {
 
             // Verificar si el clic fue en el botón Jugar
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Jugar presionado" << std::endl;
                 // Aquí puedes cambiar la escena o empezar el juego
             }
 
             // Verificar si el clic fue en el botón Opciones
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Opciones presionado" << std::endl;
                 // Aquí puedes abrir el menú de opciones
             }
 
             // Verificar si el clic fue en el botón Salir
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Salir presionado" << std::endl;
                 window.close(); // Salir del juego
             }
         }
     }
 
+}
+void menuP::playHoverSound() {
+    if (HoverSound.getStatus() != sf::Sound::Playing) {
+        HoverSound.play();
+    }
+}
+
+void menuP::playClickSound() {
+    ClickSound.play();
 }
 
 // Método para dibujar (implementa según sea necesario)

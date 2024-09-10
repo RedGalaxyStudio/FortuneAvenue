@@ -1,7 +1,10 @@
 #ifndef MENUP_HPP
 #define MENUP_HPP
 
+
 #include <SFML/Graphics.hpp>
+
+#include <SFML/Audio.hpp>
 
 class menuP {
 public:
@@ -26,6 +29,12 @@ private:
     sf::Texture TextureBotonSalirOn;
     sf::Texture TextureFondoMenu;
     sf::Sprite SpriteFondoMenu;
+    sf::SoundBuffer HoverBuffer;
+    sf::Sound HoverSound;
+    sf::SoundBuffer ClickBuffer;
+    sf::Sound ClickSound;
+    void playHoverSound();
+    void playClickSound();
 };
 
 #endif
