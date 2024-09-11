@@ -14,14 +14,21 @@ void Cinematic::Resource() {
         std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
+
+    if (!TextureFondoLogo.loadFromFile("resource/texture/spritesheetFondo.png")) {
+        std::cerr << "Error al cargar la imagen del logotipo fondo" << std::endl;
+        return;
+    }
+
     window.setMouseCursorVisible(false);
 
+    SpriteFondoLogo.setTexture(TextureFondoLogo);
     spriteLogoStudio.setTexture(textureLogoStudio);
     spriteLogoStudio.setOrigin(500, 238.5f);
     spriteLogoStudio.setPosition(640, 360);
 
     if (!textureLogoJuego.loadFromFile("resource/texture/logojuego1.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo juego" << std::endl;
+        std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
         return;
     }
 
@@ -38,7 +45,6 @@ void Cinematic::Resource() {
 
 // Actualización de la animación (desvanecimiento del logotipo)
 void Cinematic::Update() {
-
     float tiempoAcumulado = 0.0f;  // Para controlar la generación de caracteres
     float intervaloGeneracion = 0.1f;  // Generar un carácter nuevo cada 0.1 segundos
 
@@ -53,7 +59,7 @@ void Cinematic::Update() {
             }
         }
 
-        window.clear();  // Limpia la pantalla
+        window.clear();
 
         if (clock.getElapsedTime().asSeconds() <= 6) {
             // Actualiza la opacidad oscilante
@@ -76,44 +82,16 @@ void Cinematic::Update() {
             window.draw(spriteLogoStudio);
         }
         else if (clock.getElapsedTime().asSeconds() <= 12) {
-            // Después de los primeros 6 segundos
-            float tiempo = clock.getElapsedTime().asSeconds() - 6.0f;
+            // Actualización del spritesheet
+            if (controlframe.getElapsedTime().asSeconds() >= frameTime) {
+                currentFrame = (currentFrame + 1) % totalFrames;
+                int xFrame = (currentFrame % columns) * frameWidth;
+                int yFrame = (currentFrame / columns) * frameHeight;
+                SpriteFondoLogo.setTextureRect(sf::IntRect(xFrame, yFrame, frameWidth, frameHeight));
 
-            static std::vector<sf::Text> caracteresLluvia;
-            tiempoAcumulado += deltaTime.asSeconds();
-
-            if (caracteresLluvia.size() < 100 && tiempoAcumulado >= intervaloGeneracion) {
-                sf::Text nuevoCaracter;
-                nuevoCaracter.setFont(fuente);
-                nuevoCaracter.setCharacterSize(20);
-                nuevoCaracter.setFillColor(sf::Color(255, 255, 255, 128));
-                nuevoCaracter.setString(static_cast<char>(rand() % 26 + 65));  // Genera letras aleatorias
-                nuevoCaracter.setPosition(static_cast<float>(rand() % window.getSize().x), 0.0f);
-                caracteresLluvia.push_back(nuevoCaracter);
-
-                tiempoAcumulado = 0.0f;  // Reinicia el contador de tiempo
+                controlframe.restart();
             }
-
-            // Mueve y dibuja los caracteres
-            for (auto it = caracteresLluvia.begin(); it != caracteresLluvia.end();) {
-                it->move(0.0f, 100.0f * deltaTime.asSeconds());
-                if (it->getPosition().y > window.getSize().y) {
-                    it = caracteresLluvia.erase(it);  // Elimina caracteres fuera de pantalla
-                }
-                else {
-                    window.draw(*it);
-                    ++it;
-                }
-            }
-
-            // Animación de escalado del logotipo del juego
-            float escala = 1.0f + 0.1f * std::sin(tiempo * 3.0f);
-            spriteLogoJuego.setScale(escala, escala);
-
-            // Desvanece el logotipo del juego
-            int logoAlpha = static_cast<int>(255.0f * (1.0f - (tiempo / 6.0f)));
-            spriteLogoJuego.setColor(sf::Color(255, 255, 255, logoAlpha));
-
+            window.draw(SpriteFondoLogo);
             window.draw(spriteLogoJuego);
         }
         else {
