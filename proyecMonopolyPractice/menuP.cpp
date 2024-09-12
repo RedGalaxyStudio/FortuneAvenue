@@ -160,6 +160,7 @@ void menuP::evento() {
             // Verificar si el clic fue en el botón Opciones
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
+                windowOpcion();
                 //std::cout << "Opciones presionado" << std::endl;
                 // Aquí puedes abrir el menú de opciones
             }
@@ -203,6 +204,24 @@ void menuP::Draw() {
 }
 
 void menuP::windowOpcion() {
+    
+    
+    
+    SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
+    SpriteBotonOpciones.setPosition(640, 100);
 
+    window.setMouseCursorVisible(true);
+    while (window.isOpen()) {
+
+        evento();
+
+    
+  
+        // Dibujar elementos en la ventana
+        window.clear();
+        window.draw(SpriteFondoMenu);
+        window.draw(SpriteBotonOpciones);
+        window.display();
+    }
 
 }

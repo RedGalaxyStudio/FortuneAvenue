@@ -1,5 +1,3 @@
-﻿  main.cpp
-  menuP.cpp
+﻿  menuP.cpp
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(65,46): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  Generando código...
   proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
