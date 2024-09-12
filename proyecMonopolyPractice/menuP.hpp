@@ -33,6 +33,14 @@ private:
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
 
+    sf::Texture textureAcercaDeOn;
+    sf::Texture textureAcercaDeOff;
+    sf::Sprite spriteAcercaDe;
+
+    sf::Texture textureXOn;
+    sf::Texture textureXOff;
+    sf::Sprite spriteX;
+
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;
@@ -66,6 +74,9 @@ private:
     // Métodos para manejar el hover
     void handleHover(sf::Sprite* currentButton);
     void resetLastHoveredButton(sf::Sprite* currentButton);
+
+    sf::Vector2i mousePosition;
+    sf::Vector2f mousePosFloat;
 
     
 };
