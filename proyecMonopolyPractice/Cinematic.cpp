@@ -1,55 +1,54 @@
-#include "Cinematic.hpp"
 #include <SFML/Graphics.hpp>
-#include <iostream>  // Necesario para std::cerr
+#include "Cinematic.hpp"
+//#include <iostream>
 
-// Constructor: inicializa la variable y la ventana
+// Constructor e inicialización
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
-    : window(windowRef), alpha(0.0f), fadeIn(true) {
-    // Inicializaciones adicionales si es necesario
+    : window(windowRef), alpha(0.0f), fadeIn(true), currentFrame(0),
+    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0) {
 }
 
 // Carga de recursos (texturas y sprites)
 void Cinematic::Resource() {
+    for (int i = 0; i < 6; ++i) {
+        sf::Texture texture;
+        if (!texture.loadFromFile("resource/texture/part" + std::to_string(i) + ".jpg")) {
+           // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
+        }
+        textures[i] = texture;
+    }
+
+    SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
+    frameRect = sf::IntRect(0, 0, 1280, 720);
+
     if (!textureLogoStudio.loadFromFile("resource/texture/imagelogopresa.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
+       // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
 
-    if (!TextureFondoLogo.loadFromFile("resource/texture/spritesheetFondo.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo fondo" << std::endl;
+    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego1.png")) {
+       // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
         return;
     }
 
-    window.setMouseCursorVisible(false);
-
-    SpriteFondoLogo.setTexture(TextureFondoLogo);
     spriteLogoStudio.setTexture(textureLogoStudio);
     spriteLogoStudio.setOrigin(500, 238.5f);
     spriteLogoStudio.setPosition(640, 360);
-
-    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego1.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
-        return;
-    }
 
     spriteLogoJuego.setTexture(textureLogoJuego);
     spriteLogoJuego.setOrigin(275, 275);
     spriteLogoJuego.setPosition(640, 360);
 
-    // Cargar la fuente para la lluvia de caracteres
-    if (!fuente.loadFromFile("resource/texture/ave.ttf")) {
-        std::cerr << "Error al cargar la fuente" << std::endl;
-        return;
-    }
+
 }
 
-// Actualización de la animación (desvanecimiento del logotipo)
+// Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void Cinematic::Update() {
-    float tiempoAcumulado = 0.0f;  // Para controlar la generación de caracteres
-    float intervaloGeneracion = 0.1f;  // Generar un carácter nuevo cada 0.1 segundos
+    sf::Clock fondoClock;
 
     while (window.isOpen() && clock.getElapsedTime().asSeconds() <= 12) {
         sf::Time deltaTime = fadeClock.restart();
+        sf::Time deltaTimeFondo = fondoClock.restart();  // Obtener el tiempo del reloj del fondo
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -61,20 +60,20 @@ void Cinematic::Update() {
 
         window.clear();
 
+        // Actualizar el fondo y su animación
         if (clock.getElapsedTime().asSeconds() <= 6) {
-            // Actualiza la opacidad oscilante
             if (fadeIn) {
                 alpha += 200.0f * deltaTime.asSeconds();
                 if (alpha >= 255.0f) {
                     alpha = 255.0f;
-                    fadeIn = false;  // Comienza a decrementar
+                    fadeIn = false;
                 }
             }
             else {
                 alpha -= 200.0f * deltaTime.asSeconds();
                 if (alpha <= 0.0f) {
                     alpha = 0.0f;
-                    fadeIn = true;  // Comienza a incrementar
+                    fadeIn = true;
                 }
             }
 
@@ -82,16 +81,7 @@ void Cinematic::Update() {
             window.draw(spriteLogoStudio);
         }
         else if (clock.getElapsedTime().asSeconds() <= 12) {
-            // Actualización del spritesheet
-            if (controlframe.getElapsedTime().asSeconds() >= frameTime) {
-                currentFrame = (currentFrame + 1) % totalFrames;
-                int xFrame = (currentFrame % columns) * frameWidth;
-                int yFrame = (currentFrame / columns) * frameHeight;
-                SpriteFondoLogo.setTextureRect(sf::IntRect(xFrame, yFrame, frameWidth, frameHeight));
-
-                controlframe.restart();
-            }
-            window.draw(SpriteFondoLogo);
+            updateFondo(deltaTimeFondo);
             window.draw(spriteLogoJuego);
         }
         else {
@@ -102,7 +92,26 @@ void Cinematic::Update() {
     }
 }
 
-// Método para dibujar (implementa según sea necesario)
-void Cinematic::Draw() {
-    // Implementa el dibujo adicional si es necesario
+// Actualiza el fondo para mostrar el frame correcto
+void Cinematic::updateFondo(sf::Time deltaTime) {
+    tiempoAcumuladoFondo += deltaTime.asSeconds();
+
+    if (tiempoAcumuladoFondo >= frameTime) {
+        tiempoAcumuladoFondo = 0.0f;
+        currentFrame = (currentFrame + 1) % 12;  // Avanza al siguiente frame dentro de la textura actual
+
+        if (currentFrame == 0) {  // Cambiar de textura después de 12 frames
+            currentTextureIndex = (currentTextureIndex + 1) % 6;
+            SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
+        }
+
+        int frameX = (currentFrame % 3) * 1280;  // 3 columnas de frames
+        int frameY = (currentFrame / 3) * 720;   // 4 filas de frames
+
+        frameRect.left = frameX;
+        frameRect.top = frameY;
+        SpriteFondoLogo.setTextureRect(frameRect);
+    }
+
+    window.draw(SpriteFondoLogo);
 }

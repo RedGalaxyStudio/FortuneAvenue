@@ -1,8 +1,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
+//#include <iostream>
 #include "Cinematic.hpp"
-#include "FadeEffect.hpp"
 #include "menuP.hpp"
 
 int main() {
@@ -21,7 +20,7 @@ int main() {
     sf::Image icono;
     if (!icono.loadFromFile("resource/texture/fortunepocho23.png"))
     {
-        std::cerr << "Error al cargar la imagen del ícono" << std::endl;
+      //  std::cerr << "Error al cargar la imagen del ícono" << std::endl;
         return EXIT_FAILURE;
     }
 
