@@ -1,33 +1,43 @@
 #include <SFML/Graphics.hpp>
 #include "Cinematic.hpp"
-//#include <iostream>
 
 // Constructor e inicialización
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
     : window(windowRef), alpha(0.0f), fadeIn(true), currentFrame(0),
-    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0) {
+    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0), texturesLoaded(false) {
+}
+Cinematic::~Cinematic() {
+    if (textureLoaderThread.joinable()) {
+        textureLoaderThread.join();
+    }
+}
+
+void Cinematic::loadTexturesInBackground() {
+    for (int i = 0; i < 6; ++i) {
+        sf::Texture texture;
+        if (!texture.loadFromFile("resource/texture/part" + std::to_string(i) + ".jpg")) {
+            // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
+        }
+        textures[i] = texture;
+    }
+    SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
+    frameRect = sf::IntRect(0, 0, 1280, 720);
+
+    // Indicar que las texturas ya están cargadas
+    texturesLoaded = true;
 }
 
 // Carga de recursos (texturas y sprites)
 void Cinematic::Resource() {
-    for (int i = 0; i < 6; ++i) {
-        sf::Texture texture;
-        if (!texture.loadFromFile("resource/texture/part" + std::to_string(i) + ".jpg")) {
-           // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
-        }
-        textures[i] = texture;
-    }
 
-    SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
-    frameRect = sf::IntRect(0, 0, 1280, 720);
 
     if (!textureLogoStudio.loadFromFile("resource/texture/imagelogopresa.png")) {
-       // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
+        // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
 
-    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego1.png")) {
-       // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
+    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego14.png")) {
+        // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
         return;
     }
 
@@ -36,9 +46,11 @@ void Cinematic::Resource() {
     spriteLogoStudio.setPosition(640, 360);
 
     spriteLogoJuego.setTexture(textureLogoJuego);
-    spriteLogoJuego.setOrigin(275, 275);
+    spriteLogoJuego.setOrigin(256.5, 209.4);
     spriteLogoJuego.setPosition(640, 360);
 
+    // Lanzar el hilo que cargará las texturas de la Animación #2
+    textureLoaderThread = std::thread(&Cinematic::loadTexturesInBackground, this);
 
 }
 
@@ -48,7 +60,7 @@ void Cinematic::Update() {
 
     while (window.isOpen() && clock.getElapsedTime().asSeconds() <= 12) {
         sf::Time deltaTime = fadeClock.restart();
-        sf::Time deltaTimeFondo = fondoClock.restart();  // Obtener el tiempo del reloj del fondo
+        sf::Time deltaTimeFondo = fondoClock.restart();
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -60,7 +72,7 @@ void Cinematic::Update() {
 
         window.clear();
 
-        // Actualizar el fondo y su animación
+        // Mostrar la Animación #1 (Logotipo)
         if (clock.getElapsedTime().asSeconds() <= 6) {
             if (fadeIn) {
                 alpha += 200.0f * deltaTime.asSeconds();
@@ -76,19 +88,17 @@ void Cinematic::Update() {
                     fadeIn = true;
                 }
             }
-
             spriteLogoStudio.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha)));
             window.draw(spriteLogoStudio);
         }
-        else if (clock.getElapsedTime().asSeconds() <= 12) {
+
+        // Mostrar la Animación #2 (Fondo) solo si las texturas están completamente cargadas
+        else if (clock.getElapsedTime().asSeconds() <= 12 && texturesLoaded) {
             updateFondo(deltaTimeFondo);
             window.draw(spriteLogoJuego);
         }
-        else {
-            break;  // Sale del ciclo después de 12 segundos
-        }
 
-        window.display();  // Actualiza la ventana
+        window.display();
     }
 }
 

@@ -14,19 +14,15 @@ int main() {
     // Configuración del frame rate (opcional)
     window.setFramerateLimit(60);
 
-    // Crear la ventana en main
-    //sf::RenderWindow window(sf::VideoMode(1280,720), "Ventana SFML");
-    
     sf::Image icono;
     if (!icono.loadFromFile("resource/texture/fortunepocho23.png"))
     {
       //  std::cerr << "Error al cargar la imagen del ícono" << std::endl;
         return EXIT_FAILURE;
     }
-
+    window.setMouseCursorVisible(false);
     // Establecer el ícono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
 
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);

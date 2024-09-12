@@ -10,7 +10,7 @@ lastHoveredButton(nullptr) {
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
-    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego1.png")) {
+    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego14.png")) {
         //std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
@@ -58,12 +58,12 @@ void menuP::Resource() {
 
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
-    spriteLogoFortuneAvenue.setOrigin(300, 300);
-    spriteLogoFortuneAvenue.setPosition(640, 275);
+    spriteLogoFortuneAvenue.setOrigin(256.5, 209.4);
+    spriteLogoFortuneAvenue.setPosition(640, 260);
 
     SpriteBotonJugar.setTexture(TextureBotonJugarOff);
     SpriteBotonJugar.setOrigin(103.5, 40);
-    SpriteBotonJugar.setPosition(400, 560);
+    SpriteBotonJugar.setPosition(383, 560);
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
     SpriteBotonOpciones.setOrigin(103.5, 40);
@@ -71,7 +71,7 @@ void menuP::Resource() {
 
     SpriteBotonSalir.setTexture(TextureBotonSalirOff);
     SpriteBotonSalir.setOrigin(103.5, 40);
-    SpriteBotonSalir.setPosition(860, 560);
+    SpriteBotonSalir.setPosition(895, 560);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 
