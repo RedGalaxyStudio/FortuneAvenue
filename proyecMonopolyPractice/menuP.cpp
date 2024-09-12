@@ -43,6 +43,23 @@ void menuP::Resource() {
         //std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
         return;
     }
+        
+    if (!textureAcercaDeOn.loadFromFile("resource/texture/AcercaDeOn.png")) {
+        // std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
+        return;
+    }
+
+    if (!textureAcercaDeOff.loadFromFile("resource/texture/AcercaDeOff.png")) {
+        //std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
+        return;
+    }
+    if (!textureXOn.loadFromFile("resource/texture/XOn.png")) {
+        return;
+    }
+
+    if (!textureXOff.loadFromFile("resource/texture/XOff.png")) {
+        return;
+    }
 
     if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) {
        // std::cerr << "Error al cargar el sonido B" << std::endl;
@@ -62,20 +79,28 @@ void menuP::Resource() {
 
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
-    spriteLogoFortuneAvenue.setOrigin(256.5, 209.4);
+    spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
     spriteLogoFortuneAvenue.setPosition(640, 260);
 
     SpriteBotonJugar.setTexture(TextureBotonJugarOff);
-    SpriteBotonJugar.setOrigin(103.5, 40);
+    SpriteBotonJugar.setOrigin(103.5f, 40);
     SpriteBotonJugar.setPosition(383, 560);
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
-    SpriteBotonOpciones.setOrigin(103.5, 40);
+    SpriteBotonOpciones.setOrigin(103.5f, 40);
     SpriteBotonOpciones.setPosition(640, 560);
 
     SpriteBotonSalir.setTexture(TextureBotonSalirOff);
-    SpriteBotonSalir.setOrigin(103.5, 40);
+    SpriteBotonSalir.setOrigin(103.5f, 40);
     SpriteBotonSalir.setPosition(895, 560);
+
+    spriteX.setTexture(textureXOff);
+    spriteX.setOrigin(20, 20);
+    spriteX.setPosition(1200.5f, 50);
+
+    spriteAcercaDe.setTexture(textureAcercaDeOff);
+    spriteAcercaDe.setOrigin(64.5f, 25);
+    spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 
@@ -84,14 +109,16 @@ void menuP::Update() {
     MusicSound.setLoop(true);
     MusicSound.play();
 
+    SpriteBotonOpciones.setPosition(640, 560);
+
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
 
         evento();
 
         // Actualizar estado de los botones según la posición del mouse
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-        sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+        mousePosition = sf::Mouse::getPosition(window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
         // Verificar si el ratón está sobre el botón Jugar
         if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
@@ -123,6 +150,17 @@ void menuP::Update() {
             resetLastHoveredButton(&SpriteBotonSalir);
         }
 
+        if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
+            spriteAcercaDe.setTexture(textureAcercaDeOn);
+            handleHover(&spriteAcercaDe);
+        }
+        else {
+            spriteAcercaDe.setTexture(textureAcercaDeOff);
+            resetLastHoveredButton(&spriteAcercaDe);
+        }
+
+        
+
         // Dibujar elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);
@@ -130,6 +168,8 @@ void menuP::Update() {
         window.draw(SpriteBotonJugar);
         window.draw(SpriteBotonOpciones);
         window.draw(SpriteBotonSalir);
+        window.draw(spriteAcercaDe);
+        
         window.display();
     }
 }
@@ -170,6 +210,11 @@ void menuP::evento() {
                 playClickSound();
                 //std::cout << "Salir presionado" << std::endl;
                 window.close(); // Salir del juego
+            }
+            if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
+                Update();
+               
             }
         }
     }
@@ -213,13 +258,27 @@ void menuP::windowOpcion() {
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
 
+        mousePosition = sf::Mouse::getPosition(window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
         evento();
+
+        if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+            spriteX.setTexture(textureXOn);
+            handleHover(&spriteX);
+        }
+        else {
+            spriteX.setTexture(textureXOff);
+            resetLastHoveredButton(&spriteX);
+        }
+
 
     
   
         // Dibujar elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);
+        window.draw(spriteX);
         window.draw(SpriteBotonOpciones);
         window.display();
     }
