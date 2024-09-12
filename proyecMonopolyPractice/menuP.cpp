@@ -52,9 +52,13 @@ void menuP::Resource() {
        // std::cerr << "Error al cargar el sonido A" << std::endl;
         return;
     }
+    if (!MusicBuffer.loadFromFile("resource/sounds/MenuB.wav")) {
+        return;
+    }
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
+    MusicSound.setBuffer(MusicBuffer);
 
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
@@ -77,6 +81,9 @@ void menuP::Resource() {
 
 // Actualización de la animación (desvanecimiento del logotipo)
 void menuP::Update() {
+    MusicSound.setLoop(true);
+    MusicSound.play();
+
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
 
@@ -130,7 +137,7 @@ void menuP::Update() {
 void menuP::evento() {
 
     sf::Event event;
-
+    
     while (window.pollEvent(event)) {
         // Cerrar la ventana con Escape o al cerrar
         if (event.type == sf::Event::Closed ||
@@ -193,4 +200,9 @@ void menuP::playClickSound() {
 // Método para dibujar (implementa según sea necesario)
 void menuP::Draw() {
     // Implementa el dibujo adicional si es necesario
+}
+
+void menuP::windowOpcion() {
+
+
 }

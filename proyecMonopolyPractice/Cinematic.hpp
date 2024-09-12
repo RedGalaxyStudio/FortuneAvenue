@@ -1,6 +1,7 @@
 #ifndef CINEMATIC_HPP
 #define CINEMATIC_HPP
 
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <thread>   // Para manejar el hilo
 #include <atomic>   // Para manejar la variable que indicará si las texturas están cargadas
@@ -38,7 +39,11 @@ private:
     float frameTime;
     float tiempoAcumuladoFondo;
     int currentTextureIndex;
+    bool soundOne;
     sf::IntRect frameRect;
+
+    sf::SoundBuffer FondoBuffer;
+    sf::Sound FondoSound;
 
     // Relojes para la animación
     sf::Clock fadeClock;

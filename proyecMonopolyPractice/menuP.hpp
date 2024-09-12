@@ -21,6 +21,10 @@ public:
     // Método para dibujar (implementa según sea necesario)
     void Draw();
 
+    //Ventana de opciones
+    void windowOpcion();
+
+
 private:
     // Ventana de renderizado
     sf::RenderWindow& window;
@@ -49,6 +53,8 @@ private:
     sf::SoundBuffer ClickBuffer;
     sf::Sound HoverSound;
     sf::Sound ClickSound;
+    sf::Sound MusicSound;
+    sf::SoundBuffer MusicBuffer;
 
     // Puntero al último botón que se hizo hover
     sf::Sprite* lastHoveredButton;
@@ -60,6 +66,8 @@ private:
     // Métodos para manejar el hover
     void handleHover(sf::Sprite* currentButton);
     void resetLastHoveredButton(sf::Sprite* currentButton);
+
+    
 };
 
 #endif // MENUP_HPP

@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Cinematic.hpp"
+#include <SFML/Audio.hpp>
 
 // Constructor e inicialización
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
@@ -22,6 +23,13 @@ void Cinematic::loadTexturesInBackground() {
     }
     SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
     frameRect = sf::IntRect(0, 0, 1280, 720);
+
+    if (!FondoBuffer.loadFromFile("resource/sounds/IntroA.wav")) {
+        // std::cerr << "Error al cargar el sonido A" << std::endl;
+        return;
+    }
+
+    FondoSound.setBuffer(FondoBuffer);
 
     // Indicar que las texturas ya están cargadas
     texturesLoaded = true;
@@ -51,14 +59,14 @@ void Cinematic::Resource() {
 
     // Lanzar el hilo que cargará las texturas de la Animación #2
     textureLoaderThread = std::thread(&Cinematic::loadTexturesInBackground, this);
-
+    soundOne = false;
 }
 
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void Cinematic::Update() {
     sf::Clock fondoClock;
 
-    while (window.isOpen() && clock.getElapsedTime().asSeconds() <= 12) {
+    while (window.isOpen()) {
         sf::Time deltaTime = fadeClock.restart();
         sf::Time deltaTimeFondo = fondoClock.restart();
 
@@ -94,8 +102,19 @@ void Cinematic::Update() {
 
         // Mostrar la Animación #2 (Fondo) solo si las texturas están completamente cargadas
         else if (clock.getElapsedTime().asSeconds() <= 12 && texturesLoaded) {
+            if (soundOne != true) {
+
+                FondoSound.play();
+                soundOne = true;
+            }
             updateFondo(deltaTimeFondo);
             window.draw(spriteLogoJuego);
+        }else{
+            // Detener el sonido al finalizar la cinemática, si es necesario
+            FondoSound.stop();
+            break;
+
+        
         }
 
         window.display();
