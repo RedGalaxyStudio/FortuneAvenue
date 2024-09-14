@@ -1,10 +1,10 @@
 #include "menuP.hpp"
-//#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include "SettingsManager.hpp"
 
 // Constructor: inicializa la variable y la ventana
-menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef),
-lastHoveredButton(nullptr) {
+menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef),lastHoveredButton(nullptr){
     // Inicializaciones adicionales si es necesario
 }
 
@@ -69,14 +69,13 @@ void menuP::Resource() {
        // std::cerr << "Error al cargar el sonido A" << std::endl;
         return;
     }
-    if (!MusicBuffer.loadFromFile("resource/sounds/MenuB.wav")) {
+    if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) {
         return;
     }
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
-    MusicSound.setBuffer(MusicBuffer);
-
+    std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound};
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
@@ -102,19 +101,24 @@ void menuP::Resource() {
     spriteAcercaDe.setOrigin(64.5f, 25);
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
+
+    musicSlider = new SettingsManager(100, 100, 300, 20, &MenuMusicFondo,window);  // Slider para la música
+    effectSlider = new SettingsManager(100, 200, 300, 20,effectPointers,window);  // Slider para los efectos
+
+
 }
 
 // Actualización de la animación (desvanecimiento del logotipo)
-void menuP::Update() {
-    MusicSound.setLoop(true);
-    MusicSound.play();
+void menuP::MenuPrincipal() {
+    MenuMusicFondo.setLoop(true);
+    MenuMusicFondo.play();
 
     SpriteBotonOpciones.setPosition(640, 560);
 
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
 
-        evento();
+        eventoMenuP();
 
         // Actualizar estado de los botones según la posición del mouse
         mousePosition = sf::Mouse::getPosition(window);
@@ -174,7 +178,7 @@ void menuP::Update() {
     }
 }
 
-void menuP::evento() {
+void menuP::eventoMenuP() {
 
     sf::Event event;
     
@@ -200,7 +204,7 @@ void menuP::evento() {
             // Verificar si el clic fue en el botón Opciones
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                windowOpcion();
+                MenuOpcion();
                 //std::cout << "Opciones presionado" << std::endl;
                 // Aquí puedes abrir el menú de opciones
             }
@@ -211,10 +215,34 @@ void menuP::evento() {
                 //std::cout << "Salir presionado" << std::endl;
                 window.close(); // Salir del juego
             }
+        }
+    }
+}
+
+void menuP::eventoMenuO() {
+
+    sf::Event event;
+
+    while (window.pollEvent(event)) {
+        // Cerrar la ventana con Escape o al cerrar
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+            window.close();
+        }
+
+        // Manejar eventos del slider de música y efectos
+        musicSlider->handleEvent(event, window);
+        effectSlider->handleEvent(event, window);
+
+        // Manejar clic del mouse
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
             if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                Update();
-               
+                MenuPrincipal();
+
             }
         }
     }
@@ -243,12 +271,9 @@ void menuP::playClickSound() {
     ClickSound.play();
 }
 
-// Método para dibujar (implementa según sea necesario)
-void menuP::Draw() {
-    // Implementa el dibujo adicional si es necesario
-}
+void menuP::MenuJugar(){}
 
-void menuP::windowOpcion() {
+void menuP::MenuOpcion() {
     
     
     
@@ -261,7 +286,7 @@ void menuP::windowOpcion() {
         mousePosition = sf::Mouse::getPosition(window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-        evento();
+        eventoMenuO();
 
         if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
             spriteX.setTexture(textureXOn);
@@ -280,7 +305,13 @@ void menuP::windowOpcion() {
         window.draw(SpriteFondoMenu);
         window.draw(spriteX);
         window.draw(SpriteBotonOpciones);
+        musicSlider->draw(window);
+        effectSlider->draw(window);
         window.display();
     }
 
 }
+
+void menuP::MenuSalir() {}
+
+void menuP::MenuAcercaDe() {}
