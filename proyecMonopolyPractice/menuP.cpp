@@ -10,6 +10,7 @@ menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef), lastHoveredButton
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
+<<<<<<< HEAD
     if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego14.png")) {
         //std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
@@ -90,6 +91,24 @@ void menuP::Resource() {
     if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) {
         return;
     }
+=======
+    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego14.png")) return;
+    if (!TextureBotonJugarOff.loadFromFile("resource/texture/BotonJugarOff.png")) return;
+    if (!TextureBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) return;
+    if (!TextureBotonOpcionesOff.loadFromFile("resource/texture/BotonOpcionesOff.png")) return;
+    if (!TextureBotonOpcionesOn.loadFromFile("resource/texture/BotonOpcionesOn.png")) return;
+    if (!TextureBotonSalirOff.loadFromFile("resource/texture/BotonSalirOff.png")) return;
+    if (!TextureBotonSalirOn.loadFromFile("resource/texture/BotonSalirOn.png")) return;
+    if (!TextureFondoMenu.loadFromFile("resource/texture/fondomenu.png")) return;
+    if (!textureAcercaDeOn.loadFromFile("resource/texture/AcercaDeOn.png")) return;
+    if (!textureAcercaDeOff.loadFromFile("resource/texture/AcercaDeOff.png")) return;
+    if (!textureXOn.loadFromFile("resource/texture/XOn.png")) return;
+    if (!textureXOff.loadFromFile("resource/texture/XOff.png")) return;
+    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) return;
+    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) return;
+    if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
+
+>>>>>>> a8d4a7ddbd441144fa6cd477325e8f82ad48744d
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
@@ -120,8 +139,13 @@ void menuP::Resource() {
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
+<<<<<<< HEAD
     musicSlider = new SettingsManager(100, 100, 300, 20, &MenuMusicFondo, window);  // Slider para la música
     effectSlider = new SettingsManager(100, 200, 300, 20, effectPointers, window);  // Slider para los efectos
+=======
+    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,window);  // Slider para la música
+    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,window);  // Slider para los efectos
+>>>>>>> a8d4a7ddbd441144fa6cd477325e8f82ad48744d
 
 
 }
@@ -181,8 +205,12 @@ void menuP::MenuPrincipal() {
             resetLastHoveredButton(&spriteAcercaDe);
         }
 
+<<<<<<< HEAD
 
 
+=======
+        
+>>>>>>> a8d4a7ddbd441144fa6cd477325e8f82ad48744d
         // Dibujar elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);

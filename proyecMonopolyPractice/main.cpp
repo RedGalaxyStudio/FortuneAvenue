@@ -32,7 +32,7 @@ int main() {
 
     //Iniciar la animación
     cinematic.Update();
-
+    
     menuP Menup(window);
 
     // Cargar los recursos necesarios para la cinemática
