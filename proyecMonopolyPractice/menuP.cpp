@@ -10,68 +10,22 @@ menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef),lastHoveredButton(
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
-    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego14.png")) {
-        //std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
-        return;
-    }
-    if (!TextureBotonJugarOff.loadFromFile("resource/texture/BotonJugarOff.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Jugar Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Jugar On" << std::endl;
-        return;
-    }
-    if (!TextureBotonOpcionesOff.loadFromFile("resource/texture/BotonOpcionesOff.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Opciones Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonOpcionesOn.loadFromFile("resource/texture/BotonOpcionesOn.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Opciones On" << std::endl;
-        return;
-    }
-    if (!TextureBotonSalirOff.loadFromFile("resource/texture/BotonSalirOff.png")) {
-       // std::cerr << "Error al cargar la imagen del Boton Salir Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonSalirOn.loadFromFile("resource/texture/BotonSalirOn.png")) {
-       // std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
+    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego14.png")) return;
+    if (!TextureBotonJugarOff.loadFromFile("resource/texture/BotonJugarOff.png")) return;
+    if (!TextureBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) return;
+    if (!TextureBotonOpcionesOff.loadFromFile("resource/texture/BotonOpcionesOff.png")) return;
+    if (!TextureBotonOpcionesOn.loadFromFile("resource/texture/BotonOpcionesOn.png")) return;
+    if (!TextureBotonSalirOff.loadFromFile("resource/texture/BotonSalirOff.png")) return;
+    if (!TextureBotonSalirOn.loadFromFile("resource/texture/BotonSalirOn.png")) return;
+    if (!TextureFondoMenu.loadFromFile("resource/texture/fondomenu.png")) return;
+    if (!textureAcercaDeOn.loadFromFile("resource/texture/AcercaDeOn.png")) return;
+    if (!textureAcercaDeOff.loadFromFile("resource/texture/AcercaDeOff.png")) return;
+    if (!textureXOn.loadFromFile("resource/texture/XOn.png")) return;
+    if (!textureXOff.loadFromFile("resource/texture/XOff.png")) return;
+    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) return;
+    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) return;
+    if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
 
-    if (!TextureFondoMenu.loadFromFile("resource/texture/fondomenu.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
-        
-    if (!textureAcercaDeOn.loadFromFile("resource/texture/AcercaDeOn.png")) {
-        // std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
-
-    if (!textureAcercaDeOff.loadFromFile("resource/texture/AcercaDeOff.png")) {
-        //std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
-    if (!textureXOn.loadFromFile("resource/texture/XOn.png")) {
-        return;
-    }
-
-    if (!textureXOff.loadFromFile("resource/texture/XOff.png")) {
-        return;
-    }
-
-    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) {
-       // std::cerr << "Error al cargar el sonido B" << std::endl;
-        return;
-    }
-    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) {
-       // std::cerr << "Error al cargar el sonido A" << std::endl;
-        return;
-    }
-    if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) {
-        return;
-    }
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
@@ -164,7 +118,6 @@ void menuP::MenuPrincipal() {
         }
 
         
-
         // Dibujar elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);
