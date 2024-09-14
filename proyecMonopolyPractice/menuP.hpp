@@ -3,8 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "AudioSettings.hpp"
+#include "SettingsManager.hpp" 
 
-class menuP {
+class menuP  : public SettingsManager {
 public:
     // Constructor: inicializa la variable y la ventana
     menuP(sf::RenderWindow& windowRef);
@@ -13,25 +15,41 @@ public:
     void Resource();
 
     // Actualización de la animación (desvanecimiento del logotipo)
-    void Update();
+    void MenuPrincipal();
 
     // Método para manejar eventos
-    void evento();
-
+    void eventoMenuP();
+    void eventoMenuO();
     // Método para dibujar (implementa según sea necesario)
     void Draw();
 
+    void MenuJugar();
     //Ventana de opciones
-    void windowOpcion();
+    void MenuOpcion();
+
+    void MenuSalir();
+
+    void MenuAcercaDe();
 
 
 private:
     // Ventana de renderizado
     sf::RenderWindow& window;
 
+    SettingsManager* musicSlider;   
+    SettingsManager* effectSlider;
+
     // Texturas y sprites para el menú
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
+
+    sf::Texture textureAcercaDeOn;
+    sf::Texture textureAcercaDeOff;
+    sf::Sprite spriteAcercaDe;
+
+    sf::Texture textureXOn;
+    sf::Texture textureXOff;
+    sf::Sprite spriteX;
 
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
@@ -53,8 +71,8 @@ private:
     sf::SoundBuffer ClickBuffer;
     sf::Sound HoverSound;
     sf::Sound ClickSound;
-    sf::Sound MusicSound;
-    sf::SoundBuffer MusicBuffer;
+    sf::Music MenuMusicFondo;
+
 
     // Puntero al último botón que se hizo hover
     sf::Sprite* lastHoveredButton;
@@ -66,6 +84,9 @@ private:
     // Métodos para manejar el hover
     void handleHover(sf::Sprite* currentButton);
     void resetLastHoveredButton(sf::Sprite* currentButton);
+
+    sf::Vector2i mousePosition;
+    sf::Vector2f mousePosFloat;
 
     
 };
