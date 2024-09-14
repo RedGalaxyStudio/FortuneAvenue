@@ -3,7 +3,8 @@
 #include <SFML/Graphics.hpp>
 
 // Constructor: inicializa la variable y la ventana
-menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef) {
+menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef),
+lastHoveredButton(nullptr) {
     // Inicializaciones adicionales si es necesario
 }
 
@@ -43,6 +44,18 @@ void menuP::Resource() {
         return;
     }
 
+    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) {
+        std::cerr << "Error al cargar el sonido B" << std::endl;
+        return;
+    }
+    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) {
+        std::cerr << "Error al cargar el sonido A" << std::endl;
+        return;
+    }
+
+    HoverSound.setBuffer(HoverBuffer);
+    ClickSound.setBuffer(ClickBuffer);
+
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(300, 300);
@@ -66,7 +79,7 @@ void menuP::Resource() {
 void menuP::Update() {
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
-        
+
         evento();
 
         // Actualizar estado de los botones según la posición del mouse
@@ -76,25 +89,31 @@ void menuP::Update() {
         // Verificar si el ratón está sobre el botón Jugar
         if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonJugar.setTexture(TextureBotonJugarOn);
+            handleHover(&SpriteBotonJugar);
         }
         else {
             SpriteBotonJugar.setTexture(TextureBotonJugarOff);
+            resetLastHoveredButton(&SpriteBotonJugar);
         }
 
         // Verificar si el ratón está sobre el botón Opciones
         if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
+            handleHover(&SpriteBotonOpciones);
         }
         else {
             SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
+            resetLastHoveredButton(&SpriteBotonOpciones);
         }
 
         // Verificar si el ratón está sobre el botón Salir
         if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
             SpriteBotonSalir.setTexture(TextureBotonSalirOn);
+            handleHover(&SpriteBotonSalir);
         }
         else {
             SpriteBotonSalir.setTexture(TextureBotonSalirOff);
+            resetLastHoveredButton(&SpriteBotonSalir);
         }
 
         // Dibujar elementos en la ventana
@@ -126,24 +145,49 @@ void menuP::evento() {
 
             // Verificar si el clic fue en el botón Jugar
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Jugar presionado" << std::endl;
                 // Aquí puedes cambiar la escena o empezar el juego
             }
 
             // Verificar si el clic fue en el botón Opciones
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Opciones presionado" << std::endl;
                 // Aquí puedes abrir el menú de opciones
             }
 
             // Verificar si el clic fue en el botón Salir
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
                 std::cout << "Salir presionado" << std::endl;
                 window.close(); // Salir del juego
             }
         }
     }
+}
 
+void menuP::handleHover(sf::Sprite* currentButton) {
+    if (lastHoveredButton != currentButton) {
+        playHoverSound();
+        lastHoveredButton = currentButton;
+    }
+}
+
+void menuP::resetLastHoveredButton(sf::Sprite* currentButton) {
+    if (lastHoveredButton == currentButton) {
+        lastHoveredButton = nullptr;
+    }
+}
+
+void menuP::playHoverSound() {
+    if (HoverSound.getStatus() != sf::Sound::Playing) {
+        HoverSound.play();
+    }
+}
+
+void menuP::playClickSound() {
+    ClickSound.play();
 }
 
 // Método para dibujar (implementa según sea necesario)

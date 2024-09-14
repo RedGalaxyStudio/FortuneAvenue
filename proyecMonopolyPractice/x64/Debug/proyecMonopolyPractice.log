@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Cinematic.cpp
   FadeEffect.cpp
   main.cpp
@@ -7,3 +8,9 @@
   ZoomEffect.cpp
   Generando código...
   proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+=======
+﻿  main.cpp
+  menuP.cpp
+  Generando código...
+  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+>>>>>>> 4ceea5b0e4e24aaebcae3d424e60fe5ff6a81a0b
