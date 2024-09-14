@@ -24,7 +24,7 @@ int main() {
     // Establecer el ícono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
-    /* Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
+    // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
 
     // Cargar los recursos necesarios para la cinemática
@@ -32,7 +32,7 @@ int main() {
 
     //Iniciar la animación
     cinematic.Update();
-    */
+    
     menuP Menup(window);
 
     // Cargar los recursos necesarios para la cinemática
