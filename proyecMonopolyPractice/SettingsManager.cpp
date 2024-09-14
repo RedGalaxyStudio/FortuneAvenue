@@ -22,21 +22,20 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, sf
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));
-    bar.setOutlineColor(sf::Color(200, 200, 200));
+    bar.setOutlineColor(sf::Color::Black);
     bar.setOutlineThickness(2.0f);
 
     filledBar.setSize(sf::Vector2f(width, height));
     filledBar.setPosition(x, y);
-    filledBar.setFillColor(sf::Color(0, 255, 0));
-    filledBar.setOutlineColor(sf::Color(200, 200, 200));
+    filledBar.setFillColor(sf::Color(249, 108, 223));
+    filledBar.setOutlineColor(sf::Color::Black);
     filledBar.setOutlineThickness(2.0f);
 
-    thumb.setRadius(height / 2 + 5.f);
-    thumb.setFillColor(sf::Color::Red);
+    thumb.setRadius((height + 5) / 2 + 5.f);
+    thumb.setFillColor(sf::Color(95, 179, 255));
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
-    thumb.setPosition(x + width - thumb.getRadius() * 2, y - thumb.getRadius());
-
+    thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
     if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
@@ -58,21 +57,20 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));
-    bar.setOutlineColor(sf::Color(200, 200, 200));
+    bar.setOutlineColor(sf::Color::Black);
     bar.setOutlineThickness(2.0f);
 
     filledBar.setSize(sf::Vector2f(width, height));
     filledBar.setPosition(x, y);
-    filledBar.setFillColor(sf::Color(0, 255, 0));
-    filledBar.setOutlineColor(sf::Color(200, 200, 200));
+    filledBar.setFillColor(sf::Color(249, 108, 223));
+    filledBar.setOutlineColor(sf::Color::Black);
     filledBar.setOutlineThickness(2.0f);
 
-    thumb.setRadius(height / 2 + 5.f);
-    thumb.setFillColor(sf::Color::Red);
+    thumb.setRadius((height+ 5) / 2 + 5.f);
+    thumb.setFillColor(sf::Color(95, 179, 255));
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
-    thumb.setPosition(x + width - thumb.getRadius() * 2, y - thumb.getRadius());
-
+    thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
     if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
@@ -116,25 +114,32 @@ void SettingsManager::moveThumb(float mouseX) {
     float barLeft = bar.getPosition().x;
     float barRight = barLeft + bar.getSize().x;
 
+    // Limitar la posición del mouse entre el principio y el final de la barra
     mouseX = clamp(mouseX, barLeft, barRight);
 
+    // Ajustar la posición del thumb para que se mueva hasta el borde final
     thumb.setPosition(mouseX - thumb.getRadius(), thumb.getPosition().y);
 
+    // Calcular el porcentaje del volumen basado en la posición del mouse
     float percentage = (mouseX - barLeft) / bar.getSize().x;
     volume = percentage * 100.0f;
 
+    // Ajustar el tamaño de la barra llena
     filledBar.setSize(sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y));
 
+    // Actualizar el volumen de la música si está presente
     if (music) {
         music->setVolume(volume);
     }
 
+    // Actualizar el volumen de los efectos
     for (auto* effect : effects) {
         if (effect) {
             effect->setVolume(volume);
         }
     }
 
+    // Actualizar el texto del volumen
     updateVolumeText();
 }
 
@@ -166,7 +171,7 @@ void SettingsManager::toggleEffects(bool enable) {
 }
 
 void SettingsManager::updateVolumeText() {
-    volumeText.setString("Volume: " + std::to_string(static_cast<int>(volume)));
+    volumeText.setString(std::to_string(static_cast<int>(volume))+"%");
 }
 
 float SettingsManager::clamp(float value, float min, float max) const {

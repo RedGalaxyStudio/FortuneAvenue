@@ -102,8 +102,8 @@ void menuP::Resource() {
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-    musicSlider = new SettingsManager(100, 100, 300, 20, &MenuMusicFondo,window);  // Slider para la música
-    effectSlider = new SettingsManager(100, 200, 300, 20,effectPointers,window);  // Slider para los efectos
+    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,window);  // Slider para la música
+    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,window);  // Slider para los efectos
 
 
 }
