@@ -39,7 +39,7 @@ int main() {
     Menup.Resource();
 
     // Iniciar la animación
-    Menup.Update();
+    Menup.MenuPrincipal();
 
 
     return EXIT_SUCCESS;

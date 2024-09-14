@@ -13,39 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\EffectLib">
-      <UniqueIdentifier>{70ba6753-74af-49bc-9ec2-4995def09c4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\EffectLib\include">
-      <UniqueIdentifier>{292917c4-a7fd-4cf5-9646-ef9a109463dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\EffectLib\src">
-      <UniqueIdentifier>{cc038fe4-246f-4459-ba90-440d37f9206c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Cinematic">
-      <UniqueIdentifier>{b7ce34e1-0a00-4100-af98-21868146284b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Cinematic\include">
-      <UniqueIdentifier>{39035966-8e27-4357-9b3b-79389c92b911}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Cinematic\src">
-      <UniqueIdentifier>{ae4236d1-b885-4035-be0b-a830e677aefa}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RotateEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ZoomEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cinematic.cpp">
@@ -54,24 +24,30 @@
     <ClCompile Include="menuP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FadeEffect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveEffect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RotateEffect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ZoomEffect.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="menuP.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSettings.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeSlider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
