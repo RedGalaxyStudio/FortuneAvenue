@@ -132,21 +132,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioSettings.cpp" />
     <ClCompile Include="Cinematic.cpp" />
-    <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
-    <ClCompile Include="MoveEffect.cpp" />
-    <ClCompile Include="RotateEffect.cpp" />
-    <ClCompile Include="ZoomEffect.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
+    <ClCompile Include="VolumeSlider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioSettings.hpp" />
     <ClInclude Include="Cinematic.hpp" />
-    <ClInclude Include="FadeEffect.hpp" />
     <ClInclude Include="menuP.hpp" />
-    <ClInclude Include="MoveEffect.hpp" />
-    <ClInclude Include="RotateEffect.hpp" />
-    <ClInclude Include="ZoomEffect.hpp" />
+    <ClInclude Include="SettingsManager.hpp" />
+    <ClInclude Include="VolumeSlider.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
