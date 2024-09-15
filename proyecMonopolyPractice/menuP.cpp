@@ -25,7 +25,15 @@ void menuP::Resource() {
     if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) return;
     if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) return;
     if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
+    if (!Blur.loadFromFile("resource/Shaders/wavePerso.frag", sf::Shader::Fragment)) return;
+    if (!renderTexture.create(window.getSize().x, window.getSize().y)) return;
+   
+    //Blur.setUniform("resolution", sf::Glsl::Vec2(
+    //    static_cast<float>(window.getSize().x),
+    //    static_cast<float>(window.getSize().y)
+    //));
 
+    
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
@@ -71,12 +79,29 @@ void menuP::MenuPrincipal() {
 
     window.setMouseCursorVisible(true);
     while (window.isOpen()) {
+       // Blur.setUniform("time", clock.getElapsedTime().asSeconds());
 
         eventoMenuP();
 
         // Actualizar estado de los botones según la posición del mouse
         mousePosition = sf::Mouse::getPosition(window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+        sf::Vector2i mousePixelPos = sf::Mouse::getPosition(window);
+        sf::Vector2f mousePos = window.mapPixelToCoords(mousePixelPos);
+
+
+
+        sf::Vector2f mouseNormPos = sf::Vector2f(mousePos.x / window.getSize().x, mousePos.y / window.getSize().y);
+
+        // Pasamos la posición del mouse y el tiempo al shader
+        Blur.setUniform("mousePos", mouseNormPos);
+        Blur.setUniform("time", clock.getElapsedTime().asSeconds());
+        Blur.setUniform("resolution", sf::Glsl::Vec2(
+            static_cast<float>(window.getSize().x),
+            static_cast<float>(window.getSize().y)
+        ));
+
 
         // Verificar si el ratón está sobre el botón Jugar
         if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
@@ -117,7 +142,7 @@ void menuP::MenuPrincipal() {
             resetLastHoveredButton(&spriteAcercaDe);
         }
 
-        
+ /*       
         // Dibujar elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);
@@ -128,6 +153,24 @@ void menuP::MenuPrincipal() {
         window.draw(spriteAcercaDe);
         
         window.display();
+*/
+        // Dibujar todo el contenido en el render texture
+        renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+        renderTexture.draw(SpriteFondoMenu);
+        renderTexture.draw(spriteLogoFortuneAvenue);
+        renderTexture.draw(SpriteBotonJugar);
+        renderTexture.draw(SpriteBotonOpciones);
+        renderTexture.draw(SpriteBotonSalir);
+        renderTexture.draw(spriteAcercaDe);
+        renderTexture.draw(spriteX);  // Asegúrate de dibujar todos los elementos
+        renderTexture.display();
+
+        // Aplicar el shader a la textura renderizada
+        sf::Sprite renderedSprite(renderTexture.getTexture());
+        window.clear();
+        window.draw(renderedSprite, &Blur);
+        window.display();
+
     }
 }
 

@@ -55,6 +55,8 @@ private:
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;
 
+    sf::RenderTexture renderTexture;
+
     sf::Texture TextureBotonOpcionesOff;
     sf::Texture TextureBotonOpcionesOn;
     sf::Sprite SpriteBotonOpciones;
@@ -65,7 +67,7 @@ private:
 
     sf::Texture TextureFondoMenu;
     sf::Sprite SpriteFondoMenu;
-
+    sf::Clock clock;
     // Sonidos
     sf::SoundBuffer HoverBuffer;
     sf::SoundBuffer ClickBuffer;
@@ -76,7 +78,7 @@ private:
 
     // Puntero al último botón que se hizo hover
     sf::Sprite* lastHoveredButton;
-
+    sf::Shader Blur;
     // Métodos para manejar el sonido
     void playHoverSound();
     void playClickSound();
