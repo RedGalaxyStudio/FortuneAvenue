@@ -54,7 +54,7 @@ void Cinematic::Resource() {
     spriteLogoStudio.setPosition(640, 360);
 
     spriteLogoJuego.setTexture(textureLogoJuego);
-    spriteLogoJuego.setOrigin(256.5, 209.4);
+    spriteLogoJuego.setOrigin(256.5f, 209.4f);
     spriteLogoJuego.setPosition(640, 360);
 
     // Lanzar el hilo que cargará las texturas de la Animación #2

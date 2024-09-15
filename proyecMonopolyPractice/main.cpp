@@ -20,7 +20,7 @@ int main() {
     window.setMouseCursorVisible(false);
     // Establecer el ícono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
+    
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
 
