@@ -26,20 +26,22 @@ void menuP::Resource() {
     if (!textureAcercaDeOff.loadFromFile("resource/texture/AcercaDeOff.png")) return;
     if (!textureXOn.loadFromFile("resource/texture/XOn.png")) return;
     if (!textureXOff.loadFromFile("resource/texture/XOff.png")) return;
-    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) return;
-    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) return;
+    if (!HoverBuffer.loadFromFile("resource/sounds/HoverBoton.wav")) return;
+    if (!ClickBuffer.loadFromFile("resource/sounds/ClickBoton.wav")) return;
     if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
-    if (!Blur.loadFromFile("resource/Shaders/wavePerso.frag", sf::Shader::Fragment)) return;
+    if (!Blur.loadFromFile("resource/Shaders/blur.frag", sf::Shader::Fragment)) return;
     if (!renderTexture.create(window.getSize().x, window.getSize().y)) return;
    
-    //Blur.setUniform("resolution", sf::Glsl::Vec2(
-    //    static_cast<float>(window.getSize().x),
-    //    static_cast<float>(window.getSize().y)
-    //));
+    Blur.setUniform("resolution", sf::Glsl::Vec2(
+        static_cast<float>(window.getSize().x),
+        static_cast<float>(window.getSize().y)
+    ));
 
     HoverSound.setBuffer(HoverBuffer);
     ClickSound.setBuffer(ClickBuffer);
+
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
+
     // Configuración del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
@@ -88,10 +90,8 @@ void menuP::MenuPrincipal() {
         mousePosition = sf::Mouse::getPosition(window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-        sf::Vector2i mousePixelPos = sf::Mouse::getPosition(window);
+        /*sf::Vector2i mousePixelPos = sf::Mouse::getPosition(window);
         sf::Vector2f mousePos = window.mapPixelToCoords(mousePixelPos);
-
-
 
         sf::Vector2f mouseNormPos = sf::Vector2f(mousePos.x / window.getSize().x, mousePos.y / window.getSize().y);
 
@@ -101,7 +101,7 @@ void menuP::MenuPrincipal() {
         Blur.setUniform("resolution", sf::Glsl::Vec2(
             static_cast<float>(window.getSize().x),
             static_cast<float>(window.getSize().y)
-        ));
+        ));*/
 
 
         // Verificar si el ratón está sobre el botón Jugar
@@ -157,24 +157,7 @@ void menuP::MenuPrincipal() {
         window.draw(spriteAcercaDe);
 
         window.display();
- /*
-        // Dibujar todo el contenido en el render texture
-        renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
-        renderTexture.draw(SpriteFondoMenu);
-        renderTexture.draw(spriteLogoFortuneAvenue);
-        renderTexture.draw(SpriteBotonJugar);
-        renderTexture.draw(SpriteBotonOpciones);
-        renderTexture.draw(SpriteBotonSalir);
-        renderTexture.draw(spriteAcercaDe);
-        renderTexture.draw(spriteX);  // Asegúrate de dibujar todos los elementos
-        renderTexture.display();
 
-        // Aplicar el shader a la textura renderizada
-        sf::Sprite renderedSprite(renderTexture.getTexture());
-        window.clear();
-        window.draw(renderedSprite, &Blur);
-        window.display();
-*/
     }
 }
 
@@ -319,8 +302,8 @@ void menuP::MenuOpcion() {
 
 void menuP::MenuSalir() {
     //crear ventana semitransparente
-    sf::RectangleShape overlay(sf::Vector2f(window.getSize().x, window.getSize().y));
-    overlay.setFillColor(sf::Color(0, 0, 0, 150));  
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
 
    //Ubicacion del mensaje de confirmación
     SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
@@ -383,37 +366,30 @@ void menuP::MenuSalir() {
             }
         }
 
-        // Dibujar el menú de fondo y los botones
-        window.clear();
-        window.draw(SpriteFondoMenu);            
-        window.draw(spriteLogoFortuneAvenue);    
-        window.draw(SpriteBotonJugar);           
-        window.draw(SpriteBotonOpciones);       
-        window.draw(SpriteBotonSalir);           
-        window.draw(spriteAcercaDe);             
+        
+       // Dibujar todo el contenido en el render texture
+       renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+       renderTexture.draw(SpriteFondoMenu);
+       renderTexture.draw(spriteLogoFortuneAvenue);
+       renderTexture.draw(SpriteBotonJugar);
+       renderTexture.draw(SpriteBotonOpciones);
+       renderTexture.draw(SpriteBotonSalir);
+       renderTexture.draw(spriteAcercaDe);
+       renderTexture.display();
 
-        // Dibujar el overlay semitransparente
-        window.draw(overlay);  // Oscurece el fondo
-
-        // Dibujar los elementos de confirmación de salida sobre el overlay
+       // Aplicar el shader a la textura renderizada
+       sf::Sprite renderedSprite(renderTexture.getTexture());
+       window.clear();
+       window.draw(renderedSprite, &Blur); 
+       // Dibujar los elementos de confirmación de salida sobre el overlay
         window.draw(SpriteConfirmarSalir);  // Texto de confirmación
         window.draw(SpriteBotonSi);         // Botón "Sí"
         window.draw(SpriteBotonNo);         // Botón "No"
 
-        window.display();
+       window.display();
+
+        //window.draw(overlay);  // Oscurece el fondo
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 void menuP::MenuAcercaDe() {}
