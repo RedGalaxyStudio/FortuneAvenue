@@ -15,11 +15,8 @@ int main() {
     window.setFramerateLimit(60);
 
     sf::Image icono;
-    if (!icono.loadFromFile("resource/texture/fortunepocho23.png"))
-    {
-      //  std::cerr << "Error al cargar la imagen del ícono" << std::endl;
-        return EXIT_FAILURE;
-    }
+    if (!icono.loadFromFile("resource/texture/fortunepocho23.png")) return EXIT_FAILURE;
+
     window.setMouseCursorVisible(false);
     // Establecer el ícono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());

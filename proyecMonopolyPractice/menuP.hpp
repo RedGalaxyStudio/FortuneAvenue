@@ -6,7 +6,7 @@
 #include "AudioSettings.hpp"
 #include "SettingsManager.hpp" 
 
-class menuP  : public SettingsManager {
+class menuP : public SettingsManager {
 public:
     // Constructor: inicializa la variable y la ventana
     menuP(sf::RenderWindow& windowRef);
@@ -31,12 +31,11 @@ public:
 
     void MenuAcercaDe();
 
-
 private:
     // Ventana de renderizado
     sf::RenderWindow& window;
 
-    SettingsManager* musicSlider;   
+    SettingsManager* musicSlider;
     SettingsManager* effectSlider;
 
     // Texturas y sprites para el menú
@@ -67,14 +66,27 @@ private:
 
     sf::Texture TextureFondoMenu;
     sf::Sprite SpriteFondoMenu;
+
     sf::Clock clock;
+
+
+    sf::Texture TextureConfirmarSalir;
+    sf::Sprite SpriteConfirmarSalir;
+
+    sf::Texture TextureBotonSiOn;
+    sf::Texture TextureBotonSiOff;
+    sf::Sprite SpriteBotonSi;
+
+    sf::Texture TextureBotonNoOn;
+    sf::Texture TextureBotonNoOff;
+    sf::Sprite SpriteBotonNo;
+
     // Sonidos
     sf::SoundBuffer HoverBuffer;
     sf::SoundBuffer ClickBuffer;
     sf::Sound HoverSound;
     sf::Sound ClickSound;
     sf::Music MenuMusicFondo;
-
 
     // Puntero al último botón que se hizo hover
     sf::Sprite* lastHoveredButton;
@@ -90,9 +102,6 @@ private:
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
 
-    
 };
 
 #endif // MENUP_HPP
-
-
