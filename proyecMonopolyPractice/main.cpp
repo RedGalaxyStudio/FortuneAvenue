@@ -1,52 +1,46 @@
-#include <SFML/Audio.hpp>
+//#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
+//#include <iostream>
 #include "Cinematic.hpp"
-#include "FadeEffect.hpp"
+#include "ResourceGlobal.hpp"
 #include "menuP.hpp"
+//#include "Game.hpp"
 
 int main() {
     // Obtener la lista de modos de video soportados
-      // El primer modo suele ser el más grande
+      // El primer modo suele ser el mï¿½s grande
 
     // Crear la ventana en pantalla completa
-    sf::RenderWindow window(sf::VideoMode(1280,720), "Juego en Pantalla Completa",sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1280,720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
 
-    // Configuración del frame rate (opcional)
+    // Configuraciï¿½n del frame rate (opcional)
     window.setFramerateLimit(60);
 
-    // Crear la ventana en main
-    //sf::RenderWindow window(sf::VideoMode(1280,720), "Ventana SFML");
-    
     sf::Image icono;
-    if (!icono.loadFromFile("resource/texture/fortunepocho23.png"))
-    {
-        std::cerr << "Error al cargar la imagen del ícono" << std::endl;
-        return EXIT_FAILURE;
-    }
+    if (!icono.loadFromFile("resource/texture/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
 
-    // Establecer el ícono de la ventana
-    window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
-
+    window.setMouseCursorVisible(false);
+    // Establecer el ï¿½cono de la ventana
+   window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
+    
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
 
-    // Cargar los recursos necesarios para la cinemática
+    // Cargar los recursos necesarios para la cinemï¿½tica
     cinematic.Resource();
 
-    //Iniciar la animación
+    //Iniciar la animaciï¿½n
     cinematic.Update();
-
+    loadTextures();
     menuP Menup(window);
 
-    // Cargar los recursos necesarios para la cinemática
+    // Cargar los recursos necesarios para la cinemï¿½tica
     Menup.Resource();
 
-    // Iniciar la animación
-    Menup.Update();
+    // Iniciar la animaciï¿½n
+   Menup.MenuPrincipal();
 
-
+   
     return EXIT_SUCCESS;
 }
 

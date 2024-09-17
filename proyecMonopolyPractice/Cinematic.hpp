@@ -1,27 +1,60 @@
 #ifndef CINEMATIC_HPP
 #define CINEMATIC_HPP
 
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <thread>   // Para manejar el hilo
+#include <atomic>   // Para manejar la variable que indicará si las texturas están cargadas
+
 
 class Cinematic {
 public:
-    Cinematic(sf::RenderWindow& window);  // Constructor que acepta una ventana por referencia
-    void Resource();                      // Carga de recursos
-    void Update();                        // Actualización de la animación
-    void Draw();                          // Dibujado de elementos (si es necesario)
+    // Constructor
+    Cinematic(sf::RenderWindow& windowRef);
+
+    ~Cinematic();
+
+    // Método para cargar recursos
+    void Resource();
+
+    // Método para actualizar la animación
+    void Update();
 
 private:
-    sf::Texture textureLogoStudio;        // Textura del logotipo
-    sf::Sprite spriteLogoStudio;          // Sprite para el logotipo
-    sf::Texture textureLogoJuego;         // Textura del logotipo
-    sf::Sprite spriteLogoJuego;           // Sprite para el logotipo
-    sf::Font fuente;                      // Fuente para la lluvia de caracteres
-    sf::RenderWindow& window;             // Referencia a la ventana de renderizado
-    sf::Clock clock;                      // Reloj para controlar el tiempo de la animación
-    sf::Clock fadeClock;                  // Reloj para el control del desvanecimiento
+    // Referencia a la ventana
+    sf::RenderWindow& window;
+
+    // Texturas y sprites
+    sf::Texture textures[6];
+    sf::Sprite SpriteFondoLogo;
+    sf::Sprite spriteLogoStudio;
+    sf::Sprite spriteLogoJuego;
+    sf::Texture textureLogoStudio;
+    sf::Texture textureLogoJuego;
+
+    // Variables para la animación
     float alpha;
     bool fadeIn;
+    int currentFrame;
+    float frameTime;
+    float tiempoAcumuladoFondo;
+    int currentTextureIndex;
+    bool soundOne;
+    sf::IntRect frameRect;
+
+    sf::SoundBuffer FondoBuffer;
+    sf::Sound FondoSound;
+
+    // Relojes para la animación
+    sf::Clock fadeClock;
+    sf::Clock clock;
+    sf::Clock fondoClock;
+    // ... resto de la clase
+    std::atomic<bool> texturesLoaded;   // Para saber si las texturas están cargadas
+    std::thread textureLoaderThread;    // Hilo para cargar texturas en segundo plano
+    void loadTexturesInBackground();
+    // Método para actualizar el fondo
+    void updateFondo(sf::Time deltaTime);
 };
 
-#endif
-
+#endif // CINEMATIC_HPP

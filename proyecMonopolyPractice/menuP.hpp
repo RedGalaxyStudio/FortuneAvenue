@@ -3,8 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "AudioSettings.hpp"
+#include "SettingsManager.hpp" 
 
-class menuP {
+class menuP : public SettingsManager {
 public:
     // Constructor: inicializa la variable y la ventana
     menuP(sf::RenderWindow& windowRef);
@@ -12,26 +14,49 @@ public:
     // Carga de recursos (texturas y sprites)
     void Resource();
 
-    // Actualización de la animación (desvanecimiento del logotipo)
-    void Update();
+    // Actualizaciï¿½n de la animaciï¿½n (desvanecimiento del logotipo)
+    void MenuPrincipal();
 
-    // Método para manejar eventos
-    void evento();
+    // Mï¿½todo para manejar eventos
+    void eventoMenuP();
 
-    // Método para dibujar (implementa según sea necesario)
+    void eventoMenuO();
+    // Mï¿½todo para dibujar (implementa segï¿½n sea necesario)
     void Draw();
+    void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
+    void handleCursorChange();
+    void MenuJugar();
+    //Ventana de opciones
+    void MenuOpcion();
+
+    void MenuSalir();
+
+    void MenuAcercaDe();
 
 private:
     // Ventana de renderizado
     sf::RenderWindow& window;
 
-    // Texturas y sprites para el menú
+    SettingsManager* musicSlider;
+    SettingsManager* effectSlider;
+
+    // Texturas y sprites para el menï¿½
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
+
+    sf::Texture textureAcercaDeOn;
+    sf::Texture textureAcercaDeOff;
+    sf::Sprite spriteAcercaDe;
+
+    sf::Texture textureXOn;
+    sf::Texture textureXOff;
+    sf::Sprite spriteX;
 
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;
+
+    sf::RenderTexture renderTexture;
 
     sf::Texture TextureBotonOpcionesOff;
     sf::Texture TextureBotonOpcionesOn;
@@ -41,27 +66,39 @@ private:
     sf::Texture TextureBotonSalirOn;
     sf::Sprite SpriteBotonSalir;
 
-    sf::Texture TextureFondoMenu;
     sf::Sprite SpriteFondoMenu;
 
+    sf::Clock clock;
+
+
+    sf::Texture TextureConfirmarSalir;
+    sf::Sprite SpriteConfirmarSalir;
+
+    sf::Texture TextureBotonSiOn;
+    sf::Texture TextureBotonSiOff;
+    sf::Sprite SpriteBotonSi;
+
+    sf::Texture TextureBotonNoOn;
+    sf::Texture TextureBotonNoOff;
+    sf::Sprite SpriteBotonNo;
+
     // Sonidos
-    sf::SoundBuffer HoverBuffer;
-    sf::SoundBuffer ClickBuffer;
-    sf::Sound HoverSound;
-    sf::Sound ClickSound;
+    sf::Music MenuMusicFondo;
 
-    // Puntero al último botón que se hizo hover
+    // Puntero al ï¿½ltimo botï¿½n que se hizo hover
     sf::Sprite* lastHoveredButton;
+    sf::Shader Blur;
+    // Mï¿½todos para manejar el sonido
 
-    // Métodos para manejar el sonido
-    void playHoverSound();
+    sf::Cursor* currentCursor;
+
     void playClickSound();
 
-    // Métodos para manejar el hover
-    void handleHover(sf::Sprite* currentButton);
-    void resetLastHoveredButton(sf::Sprite* currentButton);
+    // Mï¿½todos para manejar el hover
+
+    sf::Vector2i mousePosition;
+    sf::Vector2f mousePosFloat;
+
 };
 
 #endif // MENUP_HPP
-
-

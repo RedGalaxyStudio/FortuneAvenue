@@ -1,49 +1,74 @@
-#include "Cinematic.hpp"
 #include <SFML/Graphics.hpp>
-#include <iostream>  // Necesario para std::cerr
+#include "Cinematic.hpp"
+#include <SFML/Audio.hpp>
 
-// Constructor: inicializa la variable y la ventana
+// Constructor e inicialización
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
-    : window(windowRef), alpha(0.0f), fadeIn(true) {
-    // Inicializaciones adicionales si es necesario
+    : window(windowRef), alpha(0.0f), fadeIn(true), currentFrame(0),
+    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0), texturesLoaded(false) {
+}
+Cinematic::~Cinematic() {
+    if (textureLoaderThread.joinable()) {
+        textureLoaderThread.join();
+    }
+}
+
+void Cinematic::loadTexturesInBackground() {
+    for (int i = 0; i < 6; ++i) {
+        sf::Texture texture;
+        if (!texture.loadFromFile("resource/texture/Fondos/part" + std::to_string(i) + ".jpg")) {
+            // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
+        }
+        textures[i] = texture;
+    }
+    SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
+    frameRect = sf::IntRect(0, 0, 1280, 720);
+
+    if (!FondoBuffer.loadFromFile("resource/sounds/IntroA.wav")) {
+        // std::cerr << "Error al cargar el sonido A" << std::endl;
+        return;
+    }
+
+    FondoSound.setBuffer(FondoBuffer);
+
+    // Indicar que las texturas ya están cargadas
+    texturesLoaded = true;
 }
 
 // Carga de recursos (texturas y sprites)
 void Cinematic::Resource() {
-    if (!textureLogoStudio.loadFromFile("resource/texture/imagelogopresa.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
+
+
+    if (!textureLogoStudio.loadFromFile("resource/texture/Logos/imagelogopresa.png")) {
+        // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
-    window.setMouseCursorVisible(false);
+
+    if (!textureLogoJuego.loadFromFile("resource/texture/Logos/logojuego14.png")) {
+        // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
+        return;
+    }
 
     spriteLogoStudio.setTexture(textureLogoStudio);
     spriteLogoStudio.setOrigin(500, 238.5f);
     spriteLogoStudio.setPosition(640, 360);
 
-    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego1.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo juego" << std::endl;
-        return;
-    }
-
     spriteLogoJuego.setTexture(textureLogoJuego);
-    spriteLogoJuego.setOrigin(275, 275);
+    spriteLogoJuego.setOrigin(256.5f, 209.4f);
     spriteLogoJuego.setPosition(640, 360);
 
-    // Cargar la fuente para la lluvia de caracteres
-    if (!fuente.loadFromFile("resource/texture/ave.ttf")) {
-        std::cerr << "Error al cargar la fuente" << std::endl;
-        return;
-    }
+    // Lanzar el hilo que cargará las texturas de la Animación #2
+    textureLoaderThread = std::thread(&Cinematic::loadTexturesInBackground, this);
+    soundOne = false;
 }
 
-// Actualización de la animación (desvanecimiento del logotipo)
+// Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void Cinematic::Update() {
+    sf::Clock fondoClock;
 
-    float tiempoAcumulado = 0.0f;  // Para controlar la generación de caracteres
-    float intervaloGeneracion = 0.1f;  // Generar un carácter nuevo cada 0.1 segundos
-
-    while (window.isOpen() && clock.getElapsedTime().asSeconds() <= 12) {
+    while (window.isOpen()) {
         sf::Time deltaTime = fadeClock.restart();
+        sf::Time deltaTimeFondo = fondoClock.restart();
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -53,78 +78,69 @@ void Cinematic::Update() {
             }
         }
 
-        window.clear();  // Limpia la pantalla
+        window.clear();
 
+        // Mostrar la Animación #1 (Logotipo)
         if (clock.getElapsedTime().asSeconds() <= 6) {
-            // Actualiza la opacidad oscilante
             if (fadeIn) {
                 alpha += 200.0f * deltaTime.asSeconds();
                 if (alpha >= 255.0f) {
                     alpha = 255.0f;
-                    fadeIn = false;  // Comienza a decrementar
+                    fadeIn = false;
                 }
             }
             else {
                 alpha -= 200.0f * deltaTime.asSeconds();
                 if (alpha <= 0.0f) {
                     alpha = 0.0f;
-                    fadeIn = true;  // Comienza a incrementar
+                    fadeIn = true;
                 }
             }
-
             spriteLogoStudio.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha)));
             window.draw(spriteLogoStudio);
         }
-        else if (clock.getElapsedTime().asSeconds() <= 12) {
-            // Después de los primeros 6 segundos
-            float tiempo = clock.getElapsedTime().asSeconds() - 6.0f;
 
-            static std::vector<sf::Text> caracteresLluvia;
-            tiempoAcumulado += deltaTime.asSeconds();
+        // Mostrar la Animación #2 (Fondo) solo si las texturas están completamente cargadas
+        else if (clock.getElapsedTime().asSeconds() <= 12 && texturesLoaded) {
+            if (soundOne != true) {
 
-            if (caracteresLluvia.size() < 100 && tiempoAcumulado >= intervaloGeneracion) {
-                sf::Text nuevoCaracter;
-                nuevoCaracter.setFont(fuente);
-                nuevoCaracter.setCharacterSize(20);
-                nuevoCaracter.setFillColor(sf::Color(255, 255, 255, 128));
-                nuevoCaracter.setString(static_cast<char>(rand() % 26 + 65));  // Genera letras aleatorias
-                nuevoCaracter.setPosition(static_cast<float>(rand() % window.getSize().x), 0.0f);
-                caracteresLluvia.push_back(nuevoCaracter);
-
-                tiempoAcumulado = 0.0f;  // Reinicia el contador de tiempo
+                FondoSound.play();
+                soundOne = true;
             }
-
-            // Mueve y dibuja los caracteres
-            for (auto it = caracteresLluvia.begin(); it != caracteresLluvia.end();) {
-                it->move(0.0f, 100.0f * deltaTime.asSeconds());
-                if (it->getPosition().y > window.getSize().y) {
-                    it = caracteresLluvia.erase(it);  // Elimina caracteres fuera de pantalla
-                }
-                else {
-                    window.draw(*it);
-                    ++it;
-                }
-            }
-
-            // Animación de escalado del logotipo del juego
-            float escala = 1.0f + 0.1f * std::sin(tiempo * 3.0f);
-            spriteLogoJuego.setScale(escala, escala);
-
-            // Desvanece el logotipo del juego
-            int logoAlpha = static_cast<int>(255.0f * (1.0f - (tiempo / 6.0f)));
-            spriteLogoJuego.setColor(sf::Color(255, 255, 255, logoAlpha));
-
+            updateFondo(deltaTimeFondo);
             window.draw(spriteLogoJuego);
-        }
-        else {
-            break;  // Sale del ciclo después de 12 segundos
+        }else{
+            // Detener el sonido al finalizar la cinemática, si es necesario
+            FondoSound.stop();
+            break;
+
+        
         }
 
-        window.display();  // Actualiza la ventana
+        window.display();
     }
 }
 
-// Método para dibujar (implementa según sea necesario)
-void Cinematic::Draw() {
-    // Implementa el dibujo adicional si es necesario
+// Actualiza el fondo para mostrar el frame correcto
+void Cinematic::updateFondo(sf::Time deltaTime) {
+    tiempoAcumuladoFondo += deltaTime.asSeconds();
+
+    if (tiempoAcumuladoFondo >= frameTime) {
+        tiempoAcumuladoFondo = 0.0f;
+        currentFrame = (currentFrame + 1) % 12;  // Avanza al siguiente frame dentro de la textura actual
+
+        if (currentFrame == 0) {  // Cambiar de textura después de 12 frames
+            currentTextureIndex = (currentTextureIndex + 1) % 6;
+            SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
+        }
+
+        int frameX = (currentFrame % 3) * 1280;  // 3 columnas de frames
+        int frameY = (currentFrame / 3) * 720;   // 4 filas de frames
+
+        frameRect.left = frameX;
+        frameRect.top = frameY;
+        SpriteFondoLogo.setTextureRect(frameRect);
+    }
+
+    window.draw(SpriteFondoLogo);
 }
