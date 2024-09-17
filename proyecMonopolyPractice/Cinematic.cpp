@@ -16,7 +16,7 @@ Cinematic::~Cinematic() {
 void Cinematic::loadTexturesInBackground() {
     for (int i = 0; i < 6; ++i) {
         sf::Texture texture;
-        if (!texture.loadFromFile("resource/texture/part" + std::to_string(i) + ".jpg")) {
+        if (!texture.loadFromFile("resource/texture/Fondos/part" + std::to_string(i) + ".jpg")) {
             // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
         }
         textures[i] = texture;
@@ -39,12 +39,12 @@ void Cinematic::loadTexturesInBackground() {
 void Cinematic::Resource() {
 
 
-    if (!textureLogoStudio.loadFromFile("resource/texture/imagelogopresa.png")) {
+    if (!textureLogoStudio.loadFromFile("resource/texture/Logos/imagelogopresa.png")) {
         // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
         return;
     }
 
-    if (!textureLogoJuego.loadFromFile("resource/texture/logojuego14.png")) {
+    if (!textureLogoJuego.loadFromFile("resource/texture/Logos/logojuego14.png")) {
         // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
         return;
     }
