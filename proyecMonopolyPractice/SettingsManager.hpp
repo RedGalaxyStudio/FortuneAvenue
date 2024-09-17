@@ -34,7 +34,7 @@ private:
     sf::CircleShape thumb;
     sf::Font font;
     sf::Text volumeText;
-
+    sf::Vector2i mousePos;
     sf::Music* music;
     std::vector<sf::Sound*> effects;
 

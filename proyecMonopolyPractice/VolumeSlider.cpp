@@ -23,8 +23,8 @@ VolumeSlider::VolumeSlider(float x, float y, float width, float height, sf::Musi
     filledBar.setOutlineColor(sf::Color(200, 200, 200)); // Color del borde
     filledBar.setOutlineThickness(2.0f); // Grosor del borde
 
-    // Configurar el mango del slider (thumb) como círculo
-    thumb.setRadius(height / 2 + 5.f); // Un poco más grande que la barra para ser más visible
+    // Configurar el mango del slider (thumb) como cï¿½rculo
+    thumb.setRadius(height / 2 + 5.f); // Un poco mï¿½s grande que la barra para ser mï¿½s visible
     thumb.setFillColor(sf::Color::Red);
     thumb.setOutlineColor(sf::Color::Black); // Color del borde del mango
     thumb.setOutlineThickness(2.0f); // Grosor del borde
@@ -62,8 +62,8 @@ VolumeSlider::VolumeSlider(float x, float y, float width, float height, std::vec
     filledBar.setOutlineColor(sf::Color(200, 200, 200)); // Color del borde
     filledBar.setOutlineThickness(2.0f); // Grosor del borde
 
-    // Configurar el mango del slider (thumb) como círculo
-    thumb.setRadius(height / 2 + 5.f); // Un poco más grande que la barra para ser más visible
+    // Configurar el mango del slider (thumb) como cï¿½rculo
+    thumb.setRadius(height / 2 + 5.f); // Un poco mï¿½s grande que la barra para ser mï¿½s visible
     thumb.setFillColor(sf::Color::Red);
     thumb.setOutlineColor(sf::Color::Black); // Color del borde del mango
     thumb.setOutlineThickness(2.0f); // Grosor del borde
@@ -81,7 +81,7 @@ VolumeSlider::VolumeSlider(float x, float y, float width, float height, std::vec
 }
 
 
-// Manejar los eventos del ratón
+// Manejar los eventos del ratï¿½n
 void VolumeSlider::handleEvent(sf::Event& event, const sf::RenderWindow& window) {
     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
@@ -107,7 +107,7 @@ void VolumeSlider::handleEvent(sf::Event& event, const sf::RenderWindow& window)
     }
 }
 
-// Movimiento del mango del slider (se aplica a música o efectos)
+// Movimiento del mango del slider (se aplica a mï¿½sica o efectos)
 void VolumeSlider::moveThumb(float mouseX) {
     float barLeft = bar.getPosition().x;
     float barRight = barLeft + bar.getSize().x;
@@ -121,7 +121,7 @@ void VolumeSlider::moveThumb(float mouseX) {
 
     filledBar.setSize(sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y));
 
-    // Ajustar el volumen de la música
+    // Ajustar el volumen de la mï¿½sica
     if (music != nullptr) {
         music->setVolume(volume);
     }
@@ -157,7 +157,7 @@ void VolumeSlider::updateVolumeText() {
     volumeText.setString(oss.str());
 }
 
-// Función de ayuda para clamping
+// Funciï¿½n de ayuda para clamping
 float VolumeSlider::clamp(float value, float min, float max) const {
     return std::max(min, std::min(value, max));
 }
