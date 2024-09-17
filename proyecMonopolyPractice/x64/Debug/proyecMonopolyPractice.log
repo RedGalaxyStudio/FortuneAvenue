@@ -1,20 +1,27 @@
 ﻿  menuP.cpp
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         with
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         [
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:             T=unsigned int
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         ]
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         and
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         [
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:             T=float
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,81): warning C4244:         ]
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         with
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         [
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:             T=unsigned int
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         ]
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         and
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         [
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:             T=float
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(340,61): warning C4244:         ]
-  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(13,1): error C2059: error de sintaxis: '<<'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(14,85): error C2143: error de sintaxis: falta ';' delante de '{'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(94,1): error C2059: error de sintaxis: '=='
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(111,1): error C2059: error de sintaxis: '>>'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(142,1): error C2059: error de sintaxis: '<<'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(145,1): error C2059: error de sintaxis: '=='
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(148,1): error C2059: error de sintaxis: '>>'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(208,1): error C2059: error de sintaxis: '<<'
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         with
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         [
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:             T=unsigned int
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         ]
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         and
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         [
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:             T=float
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,81): warning C4244:         ]
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         with
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         [
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:             T=unsigned int
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         ]
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         and
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         [
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:             T=float
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         ]
