@@ -14,15 +14,17 @@ public:
     // Carga de recursos (texturas y sprites)
     void Resource();
 
-    // Actualización de la animación (desvanecimiento del logotipo)
+    // Actualizaciï¿½n de la animaciï¿½n (desvanecimiento del logotipo)
     void MenuPrincipal();
 
-    // Método para manejar eventos
+    // Mï¿½todo para manejar eventos
     void eventoMenuP();
-    void eventoMenuO();
-    // Método para dibujar (implementa según sea necesario)
-    void Draw();
 
+    void eventoMenuO();
+    // Mï¿½todo para dibujar (implementa segï¿½n sea necesario)
+    void Draw();
+    void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
+    void handleCursorChange();
     void MenuJugar();
     //Ventana de opciones
     void MenuOpcion();
@@ -38,7 +40,7 @@ private:
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
 
-    // Texturas y sprites para el menú
+    // Texturas y sprites para el menï¿½
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
 
@@ -64,7 +66,6 @@ private:
     sf::Texture TextureBotonSalirOn;
     sf::Sprite SpriteBotonSalir;
 
-    sf::Texture TextureFondoMenu;
     sf::Sprite SpriteFondoMenu;
 
     sf::Clock clock;
@@ -82,22 +83,18 @@ private:
     sf::Sprite SpriteBotonNo;
 
     // Sonidos
-    sf::SoundBuffer HoverBuffer;
-    sf::SoundBuffer ClickBuffer;
-    sf::Sound HoverSound;
-    sf::Sound ClickSound;
     sf::Music MenuMusicFondo;
 
-    // Puntero al último botón que se hizo hover
+    // Puntero al ï¿½ltimo botï¿½n que se hizo hover
     sf::Sprite* lastHoveredButton;
     sf::Shader Blur;
-    // Métodos para manejar el sonido
-    void playHoverSound();
+    // Mï¿½todos para manejar el sonido
+
+    sf::Cursor* currentCursor;
+
     void playClickSound();
 
-    // Métodos para manejar el hover
-    void handleHover(sf::Sprite* currentButton);
-    void resetLastHoveredButton(sf::Sprite* currentButton);
+    // Mï¿½todos para manejar el hover
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
