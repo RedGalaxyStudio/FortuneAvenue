@@ -227,7 +227,7 @@ void menuP::MenuOpcion() {
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
         botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         eventoMenuO();
-        window.setMouseCursor(*currentCursor);
+        
 
         // Dibujar elementos en la ventana
         window.clear();
@@ -236,6 +236,7 @@ void menuP::MenuOpcion() {
         window.draw(SpriteBotonOpciones);
         musicSlider->draw(window);
         effectSlider->draw(window);
+        window.setMouseCursor(*currentCursor);
         window.display();
     }
 

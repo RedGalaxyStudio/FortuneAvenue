@@ -10,6 +10,7 @@ sf::SoundBuffer HoverBuffer;
 sf::SoundBuffer ClickBuffer;
 sf::Sound HoverSound;  
 sf::Sound ClickSound;  
+sf::Cursor* currentCursor;
 
 
 // Función para cargar la textura del fondo del menú

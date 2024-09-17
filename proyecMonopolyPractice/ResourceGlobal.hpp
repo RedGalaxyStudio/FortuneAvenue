@@ -13,6 +13,7 @@ extern sf::SoundBuffer HoverBuffer;
 extern sf::SoundBuffer ClickBuffer;
 extern sf::Sound HoverSound;
 extern sf::Sound ClickSound;
+extern sf::Cursor* currentCursor;
 
 // Funciones para cargar las texturas y cursores
 void loadSounds();
