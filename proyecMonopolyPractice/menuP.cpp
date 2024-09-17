@@ -1,133 +1,128 @@
 #include "menuP.hpp"
-#include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Audio.hpp>
+#include "SettingsManager.hpp"
+#include "Game.hpp"
+#include "ResourceGlobal.hpp"
+#include "ButtonG.hpp"
 // Constructor: inicializa la variable y la ventana
-menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef),
-lastHoveredButton(nullptr) {
+menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef) {
     // Inicializaciones adicionales si es necesario
 }
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
-    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/logojuego1.png")) {
-        std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
-        return;
-    }
-    if (!TextureBotonJugarOff.loadFromFile("resource/texture/BotonJugarOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Jugar Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonJugarOn.loadFromFile("resource/texture/BotonJugarOn.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Jugar On" << std::endl;
-        return;
-    }
-    if (!TextureBotonOpcionesOff.loadFromFile("resource/texture/BotonOpcionesOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Opciones Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonOpcionesOn.loadFromFile("resource/texture/BotonOpcionesOn.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Opciones On" << std::endl;
-        return;
-    }
-    if (!TextureBotonSalirOff.loadFromFile("resource/texture/BotonSalirOff.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Salir Off" << std::endl;
-        return;
-    }
-    if (!TextureBotonSalirOn.loadFromFile("resource/texture/BotonSalirOn.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
+    if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
+    if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
+    if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
+    if (!TextureBotonNoOff.loadFromFile("resource/texture/Button/BotonNoOff.png")) return;
+    if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
+    if (!TextureBotonJugarOff.loadFromFile("resource/texture/Button/BotonJugarOff.png")) return;
+    if (!TextureBotonJugarOn.loadFromFile("resource/texture/Button/BotonJugarOn.png")) return;
+    if (!TextureBotonOpcionesOff.loadFromFile("resource/texture/Button/BotonOpcionesOff.png")) return;
+    if (!TextureBotonOpcionesOn.loadFromFile("resource/texture/Button/BotonOpcionesOn.png")) return;
+    if (!TextureBotonSalirOff.loadFromFile("resource/texture/Button/BotonSalirOff.png")) return;
+    if (!TextureBotonSalirOn.loadFromFile("resource/texture/Button/BotonSalirOn.png")) return;
+    if (!textureAcercaDeOn.loadFromFile("resource/texture/Button/AcercaDeOn.png")) return;
+    if (!textureAcercaDeOff.loadFromFile("resource/texture/Button/AcercaDeOff.png")) return;
+    if (!textureXOn.loadFromFile("resource/texture/Button/XOn.png")) return;
+    if (!textureXOff.loadFromFile("resource/texture/Button/XOff.png")) return;
+    if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
+    if (!Blur.loadFromFile("resource/Shaders/blur.frag", sf::Shader::Fragment)) return;
+    if (!renderTexture.create(window.getSize().x, window.getSize().y)) return;
+   
+    Blur.setUniform("resolution", sf::Glsl::Vec2(
+        static_cast<float>(window.getSize().x),
+        static_cast<float>(window.getSize().y)
+    ));
 
-    if (!TextureFondoMenu.loadFromFile("resource/texture/fondomenu.png")) {
-        std::cerr << "Error al cargar la imagen del Boton Salir On" << std::endl;
-        return;
-    }
+    loadSounds();
+    std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
 
-    if (!HoverBuffer.loadFromFile("resource/sounds/deciB.wav")) {
-        std::cerr << "Error al cargar el sonido B" << std::endl;
-        return;
-    }
-    if (!ClickBuffer.loadFromFile("resource/sounds/deciA.wav")) {
-        std::cerr << "Error al cargar el sonido A" << std::endl;
-        return;
-    }
-
-    HoverSound.setBuffer(HoverBuffer);
-    ClickSound.setBuffer(ClickBuffer);
-
-    // Configuración del sprite del logotipo
+    // Configuraciï¿½n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
-    spriteLogoFortuneAvenue.setOrigin(300, 300);
-    spriteLogoFortuneAvenue.setPosition(640, 275);
+    spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
+    spriteLogoFortuneAvenue.setPosition(640, 260);
 
     SpriteBotonJugar.setTexture(TextureBotonJugarOff);
-    SpriteBotonJugar.setOrigin(103.5, 40);
-    SpriteBotonJugar.setPosition(400, 560);
+    SpriteBotonJugar.setOrigin(103.5f, 40);
+    SpriteBotonJugar.setPosition(383, 560);
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
-    SpriteBotonOpciones.setOrigin(103.5, 40);
+    SpriteBotonOpciones.setOrigin(103.5f, 40);
     SpriteBotonOpciones.setPosition(640, 560);
 
     SpriteBotonSalir.setTexture(TextureBotonSalirOff);
-    SpriteBotonSalir.setOrigin(103.5, 40);
-    SpriteBotonSalir.setPosition(860, 560);
+    SpriteBotonSalir.setOrigin(103.5f, 40);
+    SpriteBotonSalir.setPosition(895, 560);
+
+    spriteX.setTexture(textureXOff);
+    spriteX.setOrigin(20, 20);
+    spriteX.setPosition(1200.5f, 50);
+
+    spriteAcercaDe.setTexture(textureAcercaDeOff);
+    spriteAcercaDe.setOrigin(64.5f, 25);
+    spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
+
+    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,window);  // Slider para la mï¿½sica
+    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,window);  // Slider para los efectos
+    loadCursors();
+    // Establecer el cursor inicial
+    window.setMouseCursor(normalCursor);
+
 }
 
-// Actualización de la animación (desvanecimiento del logotipo)
-void menuP::Update() {
+// Actualizaciï¿½n de la animaciï¿½n (desvanecimiento del logotipo)
+void menuP::MenuPrincipal() {
+    MenuMusicFondo.setLoop(true);
+    MenuMusicFondo.play();
+
+    // Crear los botones
+    ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
+    ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
+    ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
+    ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
+
+    // Configurar la posiciÃ³n de los botones
+    SpriteBotonOpciones.setPosition(640, 560);
+
     window.setMouseCursorVisible(true);
+
     while (window.isOpen()) {
+        // Manejar eventos del menÃº
+        eventoMenuP();
 
-        evento();
-
-        // Actualizar estado de los botones según la posición del mouse
+        // Obtener la posiciÃ³n actual del ratÃ³n
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-        // Verificar si el ratón está sobre el botón Jugar
-        if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
-            SpriteBotonJugar.setTexture(TextureBotonJugarOn);
-            handleHover(&SpriteBotonJugar);
-        }
-        else {
-            SpriteBotonJugar.setTexture(TextureBotonJugarOff);
-            resetLastHoveredButton(&SpriteBotonJugar);
-        }
+        // Establecer cursor por defecto antes de verificar los botones
+        currentCursor = &normalCursor;
+        
 
-        // Verificar si el ratón está sobre el botón Opciones
-        if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
-            SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
-            handleHover(&SpriteBotonOpciones);
-        }
-        else {
-            SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
-            resetLastHoveredButton(&SpriteBotonOpciones);
-        }
+        // Actualizar el estado de los botones y el cursor
+        botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        botonOpciones.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        botonSalir.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        botonAcercaDe.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        window.setMouseCursor(*currentCursor);
+  
 
-        // Verificar si el ratón está sobre el botón Salir
-        if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
-            SpriteBotonSalir.setTexture(TextureBotonSalirOn);
-            handleHover(&SpriteBotonSalir);
-        }
-        else {
-            SpriteBotonSalir.setTexture(TextureBotonSalirOff);
-            resetLastHoveredButton(&SpriteBotonSalir);
-        }
-
-        // Dibujar elementos en la ventana
+        // Dibujar los elementos en la ventana
         window.clear();
         window.draw(SpriteFondoMenu);
         window.draw(spriteLogoFortuneAvenue);
         window.draw(SpriteBotonJugar);
         window.draw(SpriteBotonOpciones);
         window.draw(SpriteBotonSalir);
+        window.draw(spriteAcercaDe);
         window.display();
     }
 }
 
-void menuP::evento() {
+
+void menuP::eventoMenuP() {
 
     sf::Event event;
 
@@ -143,46 +138,64 @@ void menuP::evento() {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-            // Verificar si el clic fue en el botón Jugar
+            // Verificar si el clic fue en el botï¿½n Jugar
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                std::cout << "Jugar presionado" << std::endl;
-                // Aquí puedes cambiar la escena o empezar el juego
+
+                MenuJugar();
+                // std::cout << "Jugar presionado" << std::endl;
+                 // Aquï¿½ puedes cambiar la escena o empezar el juego
             }
 
-            // Verificar si el clic fue en el botón Opciones
+            // Verificar si el clic fue en el botï¿½n Opciones
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                std::cout << "Opciones presionado" << std::endl;
-                // Aquí puedes abrir el menú de opciones
+                MenuOpcion();
+                //std::cout << "Opciones presionado" << std::endl;
+                // Aquï¿½ puedes abrir el menï¿½ de opciones
             }
 
-            // Verificar si el clic fue en el botón Salir
+            // Verificar si el clic fue en el botï¿½n Salir
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                std::cout << "Salir presionado" << std::endl;
-                window.close(); // Salir del juego
+                //std::cout << "Salir presionado" << std::endl;
+                MenuSalir(); // Salir del juego
+            }
+            if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
+                //std::cout<<"Acerca De presionado" << std::endl;
+                //Aqui puedes leer Acerca De este juego
             }
         }
     }
 }
 
-void menuP::handleHover(sf::Sprite* currentButton) {
-    if (lastHoveredButton != currentButton) {
-        playHoverSound();
-        lastHoveredButton = currentButton;
-    }
-}
+void menuP::eventoMenuO() {
 
-void menuP::resetLastHoveredButton(sf::Sprite* currentButton) {
-    if (lastHoveredButton == currentButton) {
-        lastHoveredButton = nullptr;
-    }
-}
+    sf::Event event;
 
-void menuP::playHoverSound() {
-    if (HoverSound.getStatus() != sf::Sound::Playing) {
-        HoverSound.play();
+    while (window.pollEvent(event)) {
+        // Cerrar la ventana con Escape o al cerrar
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+            window.close();
+        }
+
+        // Manejar eventos del slider de mï¿½sica y efectos
+        musicSlider->handleEvent(event, window);
+        effectSlider->handleEvent(event, window);
+
+        // Manejar clic del mouse
+        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+            if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
+                MenuPrincipal();
+
+            }
+        }
     }
 }
 
@@ -190,7 +203,129 @@ void menuP::playClickSound() {
     ClickSound.play();
 }
 
-// Método para dibujar (implementa según sea necesario)
-void menuP::Draw() {
-    // Implementa el dibujo adicional si es necesario
+void menuP::MenuJugar() {
+
+    Game Game(window);
+
+    // Cargar los recursos necesarios para la cinemï¿½tica
+    Game.Resource();
+
+    //Iniciar la animaciï¿½n
+    Game.Update();
+
+}
+void menuP::MenuOpcion() {
+
+    SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
+    SpriteBotonOpciones.setPosition(640, 100);
+    ButtonG botonX(spriteX, textureXOff, textureXOn);
+
+    window.setMouseCursorVisible(true);
+    while (window.isOpen()) {
+        currentCursor = &normalCursor;
+        mousePosition = sf::Mouse::getPosition(window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+        botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        eventoMenuO();
+        window.setMouseCursor(*currentCursor);
+
+        // Dibujar elementos en la ventana
+        window.clear();
+        window.draw(SpriteFondoMenu);
+        window.draw(spriteX);
+        window.draw(SpriteBotonOpciones);
+        musicSlider->draw(window);
+        effectSlider->draw(window);
+        window.display();
+    }
+
+}
+
+void menuP::MenuSalir() {
+
+
+    
+    //crear ventana semitransparente
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+
+   //Ubicacion del mensaje de confirmaciï¿½n
+    SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
+    SpriteConfirmarSalir.setPosition(580, 150); 
+
+   //Ubicaciones de los botones si y no
+    SpriteBotonSi.setTexture(TextureBotonSiOff);
+    SpriteBotonSi.setPosition(335, 200);  
+
+    SpriteBotonNo.setTexture(TextureBotonNoOff);
+    SpriteBotonNo.setPosition(735, 200);  
+
+    window.setMouseCursorVisible(true);
+    ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
+    ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                // Verificar el click en "si" y cerrar la vetana
+                if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    window.close();  
+                }
+
+                // Verificar el click en "no" y volver al menu principal
+                if (SpriteBotonNo.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    return;  
+                }
+            }
+
+ 
+        }
+        
+            currentCursor = &normalCursor;
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+            BotonSi.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+            BotonNo.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+            // Manejo de hover en el botï¿½n "Sï¿½
+            window.setMouseCursor(*currentCursor);
+
+
+        
+       // Dibujar todo el contenido en el render texture
+       renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+       renderTexture.draw(SpriteFondoMenu);
+       renderTexture.draw(spriteLogoFortuneAvenue);
+       renderTexture.draw(SpriteBotonJugar);
+       renderTexture.draw(SpriteBotonOpciones);
+       renderTexture.draw(SpriteBotonSalir);
+       renderTexture.draw(spriteAcercaDe);
+       renderTexture.display();
+
+       // Aplicar el shader a la textura renderizada
+       sf::Sprite renderedSprite(renderTexture.getTexture());
+       window.clear();
+       window.draw(renderedSprite, &Blur); 
+       // Dibujar los elementos de confirmaciï¿½n de salida sobre el overlay
+        window.draw(SpriteConfirmarSalir);  // Texto de confirmaciï¿½n
+        window.draw(SpriteBotonSi);         // Botï¿½n "Sï¿½"
+        window.draw(SpriteBotonNo);         // Botï¿½n "No"
+
+       window.display();
+
+        //window.draw(overlay);  // Oscurece el fondo
+    }
+}
+
+void menuP::MenuAcercaDe() {
+
 }
