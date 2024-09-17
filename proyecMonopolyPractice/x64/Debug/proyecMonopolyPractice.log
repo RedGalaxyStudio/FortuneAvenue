@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  menuP.cpp
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(13,1): error C2059: error de sintaxis: '<<'
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(14,85): error C2143: error de sintaxis: falta ';' delante de '{'
@@ -25,3 +26,7 @@ C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractic
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         [
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:             T=float
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\menuP.cpp(368,61): warning C4244:         ]
+=======
+﻿  SettingsManager.cpp
+  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\ProyectosVisualCode\Proyecto\proyecto\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+>>>>>>> 457ff99cfc0c0dad51bc73451dd54465cf399622

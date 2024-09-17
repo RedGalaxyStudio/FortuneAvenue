@@ -1,6 +1,6 @@
 #include "SettingsManager.hpp"
 #include <iostream>
-
+#include "ResourceGlobal.hpp"
 SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), music(nullptr), musicEnabled(true), effectsEnabled(true)
 {
 }
@@ -86,8 +86,9 @@ SettingsManager::~SettingsManager()
 }
 
 void SettingsManager::handleEvent(sf::Event& event, const sf::RenderWindow& window) {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-
+    mousePos = sf::Mouse::getPosition(window);
+   
+   
     switch (event.type) {
     case sf::Event::MouseButtonPressed:
         if (thumb.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
@@ -113,7 +114,7 @@ void SettingsManager::handleEvent(sf::Event& event, const sf::RenderWindow& wind
 void SettingsManager::moveThumb(float mouseX) {
     float barLeft = bar.getPosition().x;
     float barRight = barLeft + bar.getSize().x;
-
+ 
     // Limitar la posición del mouse entre el principio y el final de la barra
     mouseX = clamp(mouseX, barLeft, barRight);
 
@@ -144,6 +145,13 @@ void SettingsManager::moveThumb(float mouseX) {
 }
 
 void SettingsManager::draw(sf::RenderWindow& window) const {
+    sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+
+    if (thumb.getGlobalBounds().contains(mousePosF)) {
+        if (currentCursor == &normalCursor) { // Solo cambiar si es el cursor normal
+            currentCursor = &linkCursor;
+        }
+    }
     window.draw(bar);
     window.draw(filledBar);
     window.draw(thumb);

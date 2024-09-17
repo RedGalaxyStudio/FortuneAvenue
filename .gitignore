@@ -1,2 +1,10 @@
 # Ignorar la carpeta .vs
 .vs/
+# Ignorar archivos binarios
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.log
