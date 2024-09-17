@@ -90,8 +90,7 @@ private:
     sf::Shader Blur;
     // M�todos para manejar el sonido
 
-    sf::Cursor* currentCursor;
-
+    
     void playClickSound();
 
     // M�todos para manejar el hover
