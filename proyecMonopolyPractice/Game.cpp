@@ -25,7 +25,7 @@ void Game::Resource() {
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void Game::Update() {
     TextBox textBox(400, 50);  // Crear un cuadro de texto
-    textBox.setPosition(525, 320);  // Posicionar el cuadro de texto
+    textBox.setPosition();  // Posicionar el cuadro de texto
 
 
     while (window.isOpen()) {
@@ -37,6 +37,8 @@ void Game::Update() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+
+                Menup.MenuSalir();
                 window.close();
             }
 

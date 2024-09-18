@@ -126,10 +126,9 @@ void menuP::eventoMenuP() {
     sf::Event event;
 
     while (window->pollEvent(event)) {
-        // Cerrar la ventana con Escape o al cerrar
-        if (event.type == sf::Event::Closed ||
-            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+        // Cerrar la ventana con Escape o al cerrar   
+        // 
+        //  renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
             renderTexture.draw(SpriteFondoMenu);
             renderTexture.draw(spriteLogoFortuneAvenue);
             renderTexture.draw(SpriteBotonJugar);
@@ -137,6 +136,9 @@ void menuP::eventoMenuP() {
             renderTexture.draw(SpriteBotonSalir);
             renderTexture.draw(spriteAcercaDe);
             renderTexture.display();
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+
             MenuSalir();
         }
 
