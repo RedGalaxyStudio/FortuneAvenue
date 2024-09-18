@@ -323,7 +323,7 @@ void menuP::MenuSalir() {
 
 
        // Aplicar el shader a la textura renderizada
-       sf::Sprite renderedSprite(renderTexture.getTexture());
+            renderedSprite.setTexture(renderTexture.getTexture());
        window->clear();
        window->draw(renderedSprite, &Blur); 
        // Dibujar los elementos de confirmaci�n de salida sobre el overlay
@@ -338,54 +338,54 @@ void menuP::MenuSalir() {
 }
 
 void menuP::MenuAcercaDe() {
+    // Crear un rectángulo más pequeño que la ventana y centrarlo
+    sf::RectangleShape overlay(sf::Vector2f(
+        static_cast<float>(window->getSize().x - 50),  // 50 píxeles más pequeño en ancho
+        static_cast<float>(window->getSize().y - 50)   // 50 píxeles más pequeño en alto
+    ));
 
-    //crear ventana semitransparente
-    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
-    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    // Posicionar el rectángulo en el centro, con un margen de 25 píxeles
+    overlay.setPosition(25.0f, 25.0f);
 
+    // Oscurecer el fondo y hacer el rectángulo semitransparente
+    overlay.setFillColor(sf::Color(0, 0, 0, 100));  // Aumentamos la opacidad para que sea más oscuro
 
-
-    window->setMouseCursorVisible(true);
-
+    // Confgurar el texto "Acerca De"
     sf::Font Fuente;
     if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
-        return ;
-    };
+        return;
+    }
 
-    sf::Text TextAcecaDe;
+    sf::Text TextAcercaDe;
     TextAcercaDe.setFont(Fuente);
-    TextAcecaDe.setString("AcercaDe el jueg0");
-    TextAcecaDe.setCharacterSize(15);
-    TextAcecaDe.setFillColor(sf::Color::White);
-    TextAcecaDe.setPosition(100, 50);
+    TextAcercaDe.setString("Acerca De este juego");
+    TextAcercaDe.setCharacterSize(40);  // Tamaño más grande para ser fácilmente legible
+    TextAcercaDe.setFillColor(sf::Color::White);  // Color blanco para contrastar con el fondo oscuro
+    TextAcercaDe.setPosition(360, 100);  // Posicionamos el texto dentro del rectángulo
+    
 
-        ButtonG botonX(spriteX, textureXOff, textureXOn);
-
+    
     window->setMouseCursorVisible(true);
+
     while (window->isOpen()) {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-        botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         eventoMenuO();
-
-
-        // Dibujar elementos en la ventana
+        renderedSprite.setTexture(renderTexture.getTexture());
+        // Dibujar los elementos en la ventana
         window->clear();
-        renderTexture.clear(sf::Color::Transparent);  
-        renderTexture.draw(SpriteFondoMenu);
-        renderTexture.draw(spriteLogoFortuneAvenue);
-        renderTexture.draw(SpriteBotonJugar);
-        renderTexture.draw(SpriteBotonOpciones);
-        renderTexture.draw(SpriteBotonSalir);
-        renderTexture.draw(spriteAcercaDe);
+
+        // Dibujar el fondo del menú y otros elementos
+        window->draw(renderedSprite, &Blur);
         window->draw(spriteX);
-        window->draw(TextAcecaDe);
-        musicSlider->draw(*window);
-        effectSlider->draw(*window);
-        window->setMouseCursor(*currentCursor);
+        // Dibujar el rectángulo oscuro centrado
+        window->draw(overlay);
+
+        // Dibujar el texto "Acerca De"
+        window->draw(TextAcercaDe);
+
         window->display();
     }
-
-
 }
