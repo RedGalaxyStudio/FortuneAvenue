@@ -23,7 +23,8 @@ private:
     sf::Sprite spriteLogoJuego;
     
     sf::Sprite SpriteFondoMenu;
-
+    sf::Vector2i mousePosition;
+    sf::Vector2f mousePosFloat;
     // Sonidos
     //sf::SoundBuffer FondoBuffer;
     //sf::Sound FondoSound;

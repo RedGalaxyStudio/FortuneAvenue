@@ -17,6 +17,7 @@ public:
 
     void handleEvent(sf::Event& event, const sf::RenderWindow& window);
     void draw(sf::RenderWindow& window) const;
+    void Printf()const;
     float getVolume() const;
 
     void toggleMusic(bool enable);
@@ -37,6 +38,9 @@ private:
     sf::Vector2i mousePos;
     sf::Music* music;
     std::vector<sf::Sound*> effects;
+
+    sf::Text IdenVolumen;
+    sf::Sprite ImgVolumen;
 
     void moveThumb(float mouseX);
     void updateVolumeText();
