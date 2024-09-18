@@ -80,6 +80,7 @@ private:
 
     sf::Font Fuente;
     sf::Text TextAcercaDe;
+    sf::Sprite renderedSprite;
 
     // Sonidos
     sf::Music MenuMusicFondo;
