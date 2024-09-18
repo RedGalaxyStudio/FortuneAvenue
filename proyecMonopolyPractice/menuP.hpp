@@ -80,8 +80,12 @@ private:
 
     sf::Font Fuente;
     sf::Text TextAcercaDe;
+<<<<<<< HEAD
     sf::Sprite renderedSprite;
 
+=======
+    sf::RectangleShape overlay;
+>>>>>>> 27da209a7b0eec4060ecefaa28476916c6c9a33c
     // Sonidos
     sf::Music MenuMusicFondo;
 
