@@ -9,8 +9,8 @@
 class menuP : public SettingsManager {
 public:
     // Constructor: inicializa la variable y la ventana
-    menuP(sf::RenderWindow& windowRef);
-
+    menuP();
+    void setWindow(sf::RenderWindow& windowRef);
     // Carga de recursos (texturas y sprites)
     void Resource();
 
@@ -35,7 +35,7 @@ public:
 
 private:
     // Ventana de renderizado
-    sf::RenderWindow& window;
+    sf::RenderWindow* window;
 
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
@@ -48,15 +48,11 @@ private:
     sf::Texture textureAcercaDeOff;
     sf::Sprite spriteAcercaDe;
 
-    sf::Texture textureXOn;
-    sf::Texture textureXOff;
-    sf::Sprite spriteX;
 
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;
 
-    sf::RenderTexture renderTexture;
 
     sf::Texture TextureBotonOpcionesOff;
     sf::Texture TextureBotonOpcionesOn;
@@ -88,10 +84,8 @@ private:
     // Puntero al �ltimo bot�n que se hizo hover
     sf::Sprite* lastHoveredButton;
     sf::Shader Blur;
-    // M�todos para manejar el sonido
-
+   
     
-    void playClickSound();
 
     // M�todos para manejar el hover
 

@@ -1,6 +1,8 @@
 #include "SettingsManager.hpp"
 #include <iostream>
 #include "ResourceGlobal.hpp"
+#include <SFML/Graphics.hpp>
+
 SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), music(nullptr), musicEnabled(true), effectsEnabled(true)
 {
 }
@@ -18,7 +20,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, sf
     if (music) {
         music->setVolume(volume);
     }
-
+    loadVolumenIcon();
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));
@@ -43,6 +45,14 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, sf
     volumeText.setCharacterSize(20);
     volumeText.setPosition(x + width + 15.f, y - 5.f);
     volumeText.setFillColor(sf::Color::White);
+    IdenVolumen.setFont(font);
+    IdenVolumen.setCharacterSize(20);
+    IdenVolumen.setPosition(width - 100, y - 10);
+    IdenVolumen.setFillColor(sf::Color::White);
+    IdenVolumen.setString("Musica");
+    ImgVolumen.setTexture(TextureHigh);
+    ImgVolumen.setOrigin(25, 25);
+    ImgVolumen.setPosition(width + 310, y + 7);
     updateVolumeText();
 }
 
@@ -53,7 +63,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
             effect->setVolume(volume);
         }
     }
-
+    loadVolumenIcon();
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));
@@ -78,6 +88,14 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     volumeText.setCharacterSize(20);
     volumeText.setPosition(x + width + 15.f, y - 5.f);
     volumeText.setFillColor(sf::Color::White);
+    IdenVolumen.setFont(font);
+    IdenVolumen.setPosition(width- 100, y-10);
+    IdenVolumen.setCharacterSize(20);
+    IdenVolumen.setFillColor(sf::Color::White);
+    IdenVolumen.setString("Efectos");
+    ImgVolumen.setTexture(TextureHigh);
+    ImgVolumen.setOrigin(25, 25);
+    ImgVolumen.setPosition(width + 310, y + 7);
     updateVolumeText();
 }
 
@@ -156,6 +174,25 @@ void SettingsManager::draw(sf::RenderWindow& window) const {
     window.draw(filledBar);
     window.draw(thumb);
     window.draw(volumeText);
+    window.draw(IdenVolumen);
+    window.draw(ImgVolumen);
+}
+
+void SettingsManager::Printf() const {
+    sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+
+    if (thumb.getGlobalBounds().contains(mousePosF)) {
+        if (currentCursor == &normalCursor) { // Solo cambiar si es el cursor normal
+            currentCursor = &linkCursor;
+        }
+    }
+  
+     renderTexture.draw(bar);
+     renderTexture.draw(filledBar);
+     renderTexture.draw(thumb);
+     renderTexture.draw(volumeText);
+     renderTexture.draw(IdenVolumen);
+     renderTexture.draw(ImgVolumen);
 }
 
 float SettingsManager::getVolume() const {
@@ -179,7 +216,16 @@ void SettingsManager::toggleEffects(bool enable) {
 }
 
 void SettingsManager::updateVolumeText() {
+    
     volumeText.setString(std::to_string(static_cast<int>(volume))+"%");
+    if (volume == 100) {
+        ImgVolumen.setTexture(TextureHigh);
+    }if (volume == 50) {
+        ImgVolumen.setTexture(TextureMedium);
+    }
+    else if (volume == 0) {
+        ImgVolumen.setTexture(TextureMuted);
+    }
 }
 
 float SettingsManager::clamp(float value, float min, float max) const {
