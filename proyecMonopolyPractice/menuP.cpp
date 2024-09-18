@@ -165,6 +165,8 @@ void menuP::eventoMenuP() {
                 playClickSound();
                 //std::cout<<"Acerca De presionado" << std::endl;
                 //Aqui puedes leer Acerca De este juego
+                MenuAcercaDe();
+
             }
         }
     }
@@ -328,5 +330,52 @@ void menuP::MenuSalir() {
 }
 
 void menuP::MenuAcercaDe() {
+
+    sf::RenderWindow Window(sf::VideoMode(1000, 600), "AcercaDeee");
+
+
+
+    window.setMouseCursorVisible(true);
+
+    sf::Font Fuente;
+    if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
+        return ;
+    };
+
+    sf::Text TextAcecaDe;
+    TextAcercaDe.setFont(Fuente);
+    TextAcecaDe.setString("AcercaDe el jueg0");
+    TextAcecaDe.setCharacterSize(15);
+    TextAcecaDe.setFillColor(sf::Color::White);
+    TextAcecaDe.setPosition(100, 50);
+
+        ButtonG botonX(spriteX, textureXOff, textureXOn);
+
+    window.setMouseCursorVisible(true);
+    while (window.isOpen()) {
+        currentCursor = &normalCursor;
+        mousePosition = sf::Mouse::getPosition(window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+        botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        eventoMenuO();
+
+
+        // Dibujar elementos en la ventana
+        window.clear();
+        renderTexture.clear(sf::Color::Transparent);  
+        renderTexture.draw(SpriteFondoMenu);
+        renderTexture.draw(spriteLogoFortuneAvenue);
+        renderTexture.draw(SpriteBotonJugar);
+        renderTexture.draw(SpriteBotonOpciones);
+        renderTexture.draw(SpriteBotonSalir);
+        renderTexture.draw(spriteAcercaDe);
+        window.draw(spriteX);
+        window.draw(TextAcecaDe);
+        musicSlider->draw(window);
+        effectSlider->draw(window);
+        window.setMouseCursor(*currentCursor);
+        window.display();
+    }
+
 
 }
