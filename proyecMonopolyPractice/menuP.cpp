@@ -6,8 +6,9 @@
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
 // Constructor: inicializa la variable y la ventana
-menuP::menuP(sf::RenderWindow& windowRef) : window(windowRef) {
-    // Inicializaciones adicionales si es necesario
+menuP::menuP() : window(nullptr) {}
+void menuP::setWindow(sf::RenderWindow& win) {
+    window = &win;
 }
 
 // Carga de recursos (texturas y sprites)
@@ -25,15 +26,13 @@ void menuP::Resource() {
     if (!TextureBotonSalirOn.loadFromFile("resource/texture/Button/BotonSalirOn.png")) return;
     if (!textureAcercaDeOn.loadFromFile("resource/texture/Button/AcercaDeOn.png")) return;
     if (!textureAcercaDeOff.loadFromFile("resource/texture/Button/AcercaDeOff.png")) return;
-    if (!textureXOn.loadFromFile("resource/texture/Button/XOn.png")) return;
-    if (!textureXOff.loadFromFile("resource/texture/Button/XOff.png")) return;
     if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
     if (!Blur.loadFromFile("resource/Shaders/blur.frag", sf::Shader::Fragment)) return;
-    if (!renderTexture.create(window.getSize().x, window.getSize().y)) return;
+    if (!renderTexture.create(window->getSize().x, window->getSize().y)) return;
    
     Blur.setUniform("resolution", sf::Glsl::Vec2(
-        static_cast<float>(window.getSize().x),
-        static_cast<float>(window.getSize().y)
+        static_cast<float>(window->getSize().x),
+        static_cast<float>(window->getSize().y)
     ));
 
     loadSounds();
@@ -65,11 +64,11 @@ void menuP::Resource() {
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,window);  // Slider para la m�sica
-    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,window);  // Slider para los efectos
+    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,*window);  // Slider para la m�sica
+    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,*window);  // Slider para los efectos
     loadCursors();
     // Establecer el cursor inicial
-    window.setMouseCursor(normalCursor);
+    window->setMouseCursor(normalCursor);
 
 }
 
@@ -87,16 +86,16 @@ void menuP::MenuPrincipal() {
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
 
-    window.setMouseCursorVisible(true);
+    window->setMouseCursorVisible(true);
 
-    while (window.isOpen()) {
+    while (window->isOpen()) {
         // Manejar eventos del menú
         eventoMenuP();
 
         // Obtener la posición actual del ratón
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
+  
         // Establecer cursor por defecto antes de verificar los botones
         currentCursor = &normalCursor;
         
@@ -106,18 +105,18 @@ void menuP::MenuPrincipal() {
         botonOpciones.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonSalir.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonAcercaDe.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-        window.setMouseCursor(*currentCursor);
+        window->setMouseCursor(*currentCursor);
   
 
         // Dibujar los elementos en la ventana
-        window.clear();
-        window.draw(SpriteFondoMenu);
-        window.draw(spriteLogoFortuneAvenue);
-        window.draw(SpriteBotonJugar);
-        window.draw(SpriteBotonOpciones);
-        window.draw(SpriteBotonSalir);
-        window.draw(spriteAcercaDe);
-        window.display();
+        window->clear();
+        window->draw(SpriteFondoMenu);
+        window->draw(spriteLogoFortuneAvenue);
+        window->draw(SpriteBotonJugar);
+        window->draw(SpriteBotonOpciones);
+        window->draw(SpriteBotonSalir);
+        window->draw(spriteAcercaDe);
+        window->display();
     }
 }
 
@@ -126,18 +125,27 @@ void menuP::eventoMenuP() {
 
     sf::Event event;
 
-    while (window.pollEvent(event)) {
+    while (window->pollEvent(event)) {
         // Cerrar la ventana con Escape o al cerrar
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            window.close();
+            renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+            renderTexture.draw(SpriteFondoMenu);
+            renderTexture.draw(spriteLogoFortuneAvenue);
+            renderTexture.draw(SpriteBotonJugar);
+            renderTexture.draw(SpriteBotonOpciones);
+            renderTexture.draw(SpriteBotonSalir);
+            renderTexture.draw(spriteAcercaDe);
+            renderTexture.display();
+            MenuSalir();
         }
 
         // Manejar clic del mouse
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 
+            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+          
             // Verificar si el clic fue en el bot�n Jugar
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
@@ -176,20 +184,27 @@ void menuP::eventoMenuO() {
 
     sf::Event event;
 
-    while (window.pollEvent(event)) {
+    while (window->pollEvent(event)) {
         // Cerrar la ventana con Escape o al cerrar
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            window.close();
+            renderTexture.clear();  // O cualquier otro color
+            renderTexture.draw(SpriteFondoMenu);
+            renderTexture.draw(SpriteBotonOpciones);
+            renderTexture.draw(spriteX);
+            musicSlider->Printf();
+            effectSlider->Printf();
+            renderTexture.display();
+            MenuSalir();
         }
 
         // Manejar eventos del slider de m�sica y efectos
-        musicSlider->handleEvent(event, window);
-        effectSlider->handleEvent(event, window);
+        musicSlider->handleEvent(event, *window);
+        effectSlider->handleEvent(event, *window);
 
         // Manejar clic del mouse
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
             if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
@@ -201,13 +216,10 @@ void menuP::eventoMenuO() {
     }
 }
 
-void menuP::playClickSound() {
-    ClickSound.play();
-}
 
 void menuP::MenuJugar() {
 
-    Game Game(window);
+    Game Game(*window);
 
     // Cargar los recursos necesarios para la cinem�tica
     Game.Resource();
@@ -220,26 +232,27 @@ void menuP::MenuOpcion() {
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
-    ButtonG botonX(spriteX, textureXOff, textureXOn);
 
-    window.setMouseCursorVisible(true);
-    while (window.isOpen()) {
+    window->setMouseCursorVisible(true);
+    while (window->isOpen()) {
         currentCursor = &normalCursor;
-        mousePosition = sf::Mouse::getPosition(window);
+        mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-        botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+
+
         eventoMenuO();
         
 
         // Dibujar elementos en la ventana
-        window.clear();
-        window.draw(SpriteFondoMenu);
-        window.draw(spriteX);
-        window.draw(SpriteBotonOpciones);
-        musicSlider->draw(window);
-        effectSlider->draw(window);
-        window.setMouseCursor(*currentCursor);
-        window.display();
+        window->clear();
+        window->draw(SpriteFondoMenu);
+        window->draw(spriteX);
+        window->draw(SpriteBotonOpciones);
+        musicSlider->draw(*window);
+        effectSlider->draw(*window);
+        window->setMouseCursor(*currentCursor);
+        window->display();
     }
 
 }
@@ -249,7 +262,7 @@ void menuP::MenuSalir() {
 
     
     //crear ventana semitransparente
-    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
 
    //Ubicacion del mensaje de confirmaci�n
@@ -263,25 +276,25 @@ void menuP::MenuSalir() {
     SpriteBotonNo.setTexture(TextureBotonNoOff);
     SpriteBotonNo.setPosition(735, 200);  
 
-    window.setMouseCursorVisible(true);
+    window->setMouseCursorVisible(true);
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
     ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 
-    while (window.isOpen()) {
+    while (window->isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                window.close();
+                window->close();
             }
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
                 sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
                 // Verificar el click en "si" y cerrar la vetana
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
-                    window.close();  
+                    window->close();  
                 }
 
                 // Verificar el click en "no" y volver al menu principal
@@ -295,37 +308,30 @@ void menuP::MenuSalir() {
         }
         
             currentCursor = &normalCursor;
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
             BotonSi.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
             BotonNo.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
             // Manejo de hover en el bot�n "S�
-            window.setMouseCursor(*currentCursor);
+            window->setMouseCursor(*currentCursor);
 
 
         
        // Dibujar todo el contenido en el render texture
-       renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
-       renderTexture.draw(SpriteFondoMenu);
-       renderTexture.draw(spriteLogoFortuneAvenue);
-       renderTexture.draw(SpriteBotonJugar);
-       renderTexture.draw(SpriteBotonOpciones);
-       renderTexture.draw(SpriteBotonSalir);
-       renderTexture.draw(spriteAcercaDe);
-       renderTexture.display();
+
 
        // Aplicar el shader a la textura renderizada
        sf::Sprite renderedSprite(renderTexture.getTexture());
-       window.clear();
-       window.draw(renderedSprite, &Blur); 
+       window->clear();
+       window->draw(renderedSprite, &Blur); 
        // Dibujar los elementos de confirmaci�n de salida sobre el overlay
-        window.draw(SpriteConfirmarSalir);  // Texto de confirmaci�n
-        window.draw(SpriteBotonSi);         // Bot�n "S�"
-        window.draw(SpriteBotonNo);         // Bot�n "No"
+        window->draw(SpriteConfirmarSalir);  // Texto de confirmaci�n
+        window->draw(SpriteBotonSi);         // Bot�n "S�"
+        window->draw(SpriteBotonNo);         // Bot�n "No"
 
-       window.display();
+       window->display();
 
-        //window.draw(overlay);  // Oscurece el fondo
+        //window->draw(overlay);  // Oscurece el fondo
     }
 }
 

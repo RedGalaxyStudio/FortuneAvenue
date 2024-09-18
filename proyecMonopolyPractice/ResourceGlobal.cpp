@@ -1,6 +1,7 @@
 #include "ResourceGlobal.hpp"
 
 // Definir las texturas y cursores
+
 sf::Texture TextureFondoMenu;
 sf::Cursor normalCursor;
 sf::Cursor linkCursor;
@@ -8,14 +9,29 @@ sf::Cursor textCursor;
 sf::Cursor moveCursor;
 sf::SoundBuffer HoverBuffer;
 sf::SoundBuffer ClickBuffer;
+std::string nombre;
+std::string inpu;
 sf::Sound HoverSound;  
 sf::Sound ClickSound;  
 sf::Cursor* currentCursor;
-
+sf::Texture TextureMuted;
+sf::Texture TextureMedium;
+sf::Texture TextureHigh;
+sf::RenderTexture renderTexture;
+sf::Texture textureXOn;
+sf::Texture textureXOff;
+sf::Sprite spriteX;
+ButtonG* botonX = nullptr; // Definición de la variable
+menuP Menup;
 
 // Función para cargar la textura del fondo del menú
 void loadTextures() {
     if (!TextureFondoMenu.loadFromFile("resource/texture/Fondos/fondomenu.png")) return;
+    if (!textureXOn.loadFromFile("resource/texture/Button/XOn.png")) return;
+    if (!textureXOff.loadFromFile("resource/texture/Button/XOff.png")) return;
+    spriteX.setTexture(textureXOff);
+    // Ahora que las texturas están cargadas, se puede crear el botón
+    botonX = new ButtonG(spriteX, textureXOff, textureXOn);
 }
 
 void loadSounds(){
@@ -27,6 +43,13 @@ void loadSounds(){
     ClickSound.setBuffer(ClickBuffer);
 
 };
+
+void loadVolumenIcon() {
+
+    if (!TextureMuted.loadFromFile("resource/texture/Button/VolumeMuted.png")) return;
+    if (!TextureMedium.loadFromFile("resource/texture/Button/VolumeMedium.png")) return;
+    if (!TextureHigh.loadFromFile("resource/texture/Button/VolumeHigh.png")) return;
+}
 
 // Función para cargar los cursores desde una imagen o textura
 void loadCursors() {
@@ -53,4 +76,7 @@ void loadCursors() {
     if (!textCursor.loadFromPixels(cursorText.getPixelsPtr(), cursorSize, sf::Vector2u(0, 0))) return;
 
     if (!moveCursor.loadFromPixels(cursorMove.getPixelsPtr(), cursorSize, sf::Vector2u(0, 0))) return;
+}
+void playClickSound() {
+    ClickSound.play();
 }

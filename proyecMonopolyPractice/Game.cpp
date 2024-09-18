@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include "ResourceGlobal.hpp"
+#include "menuP.hpp"
 
 // Constructor e inicialización
 Game::Game(sf::RenderWindow& windowRef)
@@ -24,11 +25,13 @@ void Game::Resource() {
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void Game::Update() {
     TextBox textBox(400, 50);  // Crear un cuadro de texto
-    textBox.setPosition(200, 275);  // Posicionar el cuadro de texto
+    textBox.setPosition(525, 320);  // Posicionar el cuadro de texto
 
 
     while (window.isOpen()) {
         
+               mousePosition = sf::Mouse::getPosition(window);
+               mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -37,13 +40,25 @@ void Game::Update() {
                 window.close();
             }
 
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+               
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    Menup.MenuPrincipal();
+
+                }
+            }
             // Manejar la entrada de texto
             textBox.handleInput(event);
         }
+        
+        botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+
 
         window.clear();
         window.draw(SpriteFondoMenu);
         textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
+        window.draw(spriteX);
         window.display();
     }
 }
