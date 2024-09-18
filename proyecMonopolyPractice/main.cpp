@@ -4,7 +4,11 @@
 #include "Cinematic.hpp"
 #include "ResourceGlobal.hpp"
 #include "menuP.hpp"
-//#include "Game.hpp"
+#include "Game.hpp"
+
+
+
+
 
 int main() {
     // Obtener la lista de modos de video soportados
@@ -32,8 +36,7 @@ int main() {
     //Iniciar la animaci�n
     cinematic.Update();
     loadTextures();
-    menuP Menup(window);
-
+    Menup.setWindow(window);
     // Cargar los recursos necesarios para la cinem�tica
     Menup.Resource();
 

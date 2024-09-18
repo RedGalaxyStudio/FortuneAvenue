@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  AudioSettings.cpp
   ButtonG.cpp
   Cinematic.cpp
@@ -11,3 +12,7 @@
   Generando código...
   LINK : no se encontró C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+=======
+﻿  main.cpp
+  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\ProyectosVisualCode\Proyecto\proyecto\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+>>>>>>> a189489f72a36e4bdedc381db2e8528199cb020c
