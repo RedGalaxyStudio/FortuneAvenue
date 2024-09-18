@@ -1,57 +1,60 @@
 #include "TextBox.hpp"
 
 // Constructor con parámetros
+
 TextBox::TextBox() {
-    if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
-    box.setTexture(textureBox);
 
-    if (!font.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
-        std::cerr << "Error loading font\n";
-    }
-    text.setFont(font);
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::Black);
-    text.setString("");
+}// Constructor por defecto
 
-
-}
 
 TextBox::TextBox(float width, float height) {
-     cargarNombre();
-     input = "";
-if (!font.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
+    cargarNombre();
+    input = "";
+    if (!font.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
         std::cerr << "Error loading font\n";
-    }
-     // Variables de texto en SFML
-     
-     textoPregunta.setFont(font);
-     textoPregunta.setCharacterSize(24);
-     textoPregunta.setString("Ingresa tu nombre: ");
-     textoPregunta.setPosition(525, 300);
-     textoGuardado.setFont(font);
-     textoGuardado.setCharacterSize(24);
-     textoGuardado.setString("");
-     textoGuardado.setPosition(525, 250);
-
-     if (!nombre.empty()) {
-         textoGuardado.setString("Bienvenido de nuevo, " + nombre);
-     }
-
+    }  
     if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
     box.setTexture(textureBox);
     
+    // Variables de texto en SFML
+    if (!nombre.empty()) {  
+        
+     textoGuardado.setFont(font);
+    textoGuardado.setCharacterSize(24);
+    textoGuardado.setString("");
+    textoGuardado.setPosition(525, 250);
+
+    x = 50;
+    y = 50;
+    text.setString(nombre);
+        std::cout << "La variable tiene contenido.\n";
+    }
+    else {
+        std::cout << "La variable está vacía.\n";
     
+    textoPregunta.setFont(font);
+    textoPregunta.setCharacterSize(24);
+    textoPregunta.setString("Ingresa tu nombre: ");
+    textoPregunta.setPosition(525, 300);
+    x = 525;
+    y = 320;
+
+    }
     text.setFont(font);
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::White);
     text.setOutlineThickness(2);
     text.setOutlineColor(sf::Color::Black);
+
+
+    
+
 }
 
 // Posición del cuadro de texto
-void TextBox::setPosition(float x, float y) {
+void TextBox::setPosition() {
     box.setPosition(x, y);
-    text.setPosition(x + 25, y + 28); // Desplaza el texto un poco dentro del cuadro
+    text.setPosition(x + 30, y + 25); // Desplaza el texto un poco dentro del cuadro
 }
 
 // Manejo de la entrada de texto
@@ -73,7 +76,6 @@ void TextBox::handleInput(sf::Event event) {
         if (!input.empty()) {
             nombre = input;
             guardarNombre();
-            textoGuardado.setString("Nombre guardado: " + nombre);
         }
     }
 }
@@ -83,7 +85,7 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(box);
     window.draw(text);
     window.draw(textoPregunta);
-    window.draw(textoGuardado);
+    //window.draw(textoGuardado);
 }
 
 void TextBox::guardarNombre() {

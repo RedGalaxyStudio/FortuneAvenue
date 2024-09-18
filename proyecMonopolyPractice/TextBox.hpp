@@ -11,7 +11,7 @@ public:
     TextBox();  // Constructor por defecto
 
     TextBox(float width, float height);  // Constructor con parámetros
-    void setPosition(float x, float y);
+    void setPosition();
     void handleInput(sf::Event event);
     void draw(sf::RenderWindow& window);
     void guardarNombre();
@@ -19,6 +19,7 @@ public:
 private:
     sf::Texture textureBox;
     sf::Sprite box;
+    float x, y;
     sf::Text textoPregunta;
     sf::Text textoGuardado;
     sf::Text text;
