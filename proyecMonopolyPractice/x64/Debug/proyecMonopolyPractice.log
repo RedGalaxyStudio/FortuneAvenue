@@ -1,21 +1,13 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-﻿  Cinematic.cpp
-  FadeEffect.cpp
+﻿  AudioSettings.cpp
+  ButtonG.cpp
+  Cinematic.cpp
+  Game.cpp
   main.cpp
   menuP.cpp
-  MoveEffect.cpp
-  RotateEffect.cpp
-  ZoomEffect.cpp
+  SettingsManager.cpp
+  TextBox.cpp
+  ResourceGlobal.cpp
+  VolumeSlider.cpp
   Generando código...
+  LINK : no se encontró C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
-=======
-﻿  main.cpp
-  menuP.cpp
-  Generando código...
-  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
->>>>>>> 4ceea5b0e4e24aaebcae3d424e60fe5ff6a81a0b
-=======
-﻿  menuP.cpp
-  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\ProyectosVisualCode\Proyecto\proyecto\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
->>>>>>> 4f6ef6cd874e88fd93de972a4ea3416aff4bc20b
