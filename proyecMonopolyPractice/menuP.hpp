@@ -80,7 +80,7 @@ private:
 
     sf::Font Fuente;
     sf::Text TextAcercaDe;
-
+    sf::RectangleShape overlay;
     // Sonidos
     sf::Music MenuMusicFondo;
 

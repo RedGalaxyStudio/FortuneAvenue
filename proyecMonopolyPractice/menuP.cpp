@@ -39,6 +39,11 @@ void menuP::Resource() {
     loadSounds();
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
 
+    // Ajustar el tamaño del rectángulo según el tamaño actual de la ventana
+    overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+
+
     // Configuraci�n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
@@ -136,6 +141,7 @@ void menuP::eventoMenuP() {
             renderTexture.draw(SpriteBotonOpciones);
             renderTexture.draw(SpriteBotonSalir);
             renderTexture.draw(spriteAcercaDe);
+            renderTexture.draw(overlay);
             renderTexture.display();
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -270,7 +276,8 @@ void menuP::MenuSalir() {
 
    //Ubicacion del mensaje de confirmaci�n
     SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
-    SpriteConfirmarSalir.setPosition(580, 150); 
+    SpriteConfirmarSalir.setPosition(640, 360);
+    SpriteConfirmarSalir.setOrigin(383.5f, 250);
 
    //Ubicaciones de los botones si y no
     SpriteBotonSi.setTexture(TextureBotonSiOff);
@@ -341,8 +348,6 @@ void menuP::MenuSalir() {
 void menuP::MenuAcercaDe() {
 
     //crear ventana semitransparente
-    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
-    overlay.setFillColor(sf::Color(0, 0, 0, 150));
 
 
 
@@ -353,12 +358,12 @@ void menuP::MenuAcercaDe() {
         return ;
     };
 
-    sf::Text TextAcecaDe;
+    sf::Text TextAcercaDe;
     TextAcercaDe.setFont(Fuente);
-    TextAcecaDe.setString("AcercaDe el jueg0");
-    TextAcecaDe.setCharacterSize(15);
-    TextAcecaDe.setFillColor(sf::Color::White);
-    TextAcecaDe.setPosition(100, 50);
+    TextAcercaDe.setString("AcercaDe el jueg0");
+    TextAcercaDe.setCharacterSize(15);
+    TextAcercaDe.setFillColor(sf::Color::White);
+    TextAcercaDe.setPosition(100, 50);
 
         ButtonG botonX(spriteX, textureXOff, textureXOn);
 
@@ -381,7 +386,7 @@ void menuP::MenuAcercaDe() {
         renderTexture.draw(SpriteBotonSalir);
         renderTexture.draw(spriteAcercaDe);
         window->draw(spriteX);
-        window->draw(TextAcecaDe);
+        window->draw(TextAcercaDe);
         musicSlider->draw(*window);
         effectSlider->draw(*window);
         window->setMouseCursor(*currentCursor);
