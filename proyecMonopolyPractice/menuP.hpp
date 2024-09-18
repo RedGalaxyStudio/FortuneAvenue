@@ -82,6 +82,9 @@ private:
     sf::Texture TextureBotonNoOff;
     sf::Sprite SpriteBotonNo;
 
+    sf::Font Fuente;
+    sf::Text TextAcercaDe;
+
     // Sonidos
     sf::Music MenuMusicFondo;
 
