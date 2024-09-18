@@ -1,6 +1,5 @@
-//#include <SFML/Audio.hpp>
+
 #include <SFML/Graphics.hpp>
-//#include <iostream>
 #include "Cinematic.hpp"
 #include "ResourceGlobal.hpp"
 #include "menuP.hpp"

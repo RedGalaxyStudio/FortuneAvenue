@@ -127,10 +127,9 @@ void menuP::eventoMenuP() {
     sf::Event event;
 
     while (window->pollEvent(event)) {
-        // Cerrar la ventana con Escape o al cerrar
-        if (event.type == sf::Event::Closed ||
-            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+        // Cerrar la ventana con Escape o al cerrar   
+        // 
+        //  renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
             renderTexture.draw(SpriteFondoMenu);
             renderTexture.draw(spriteLogoFortuneAvenue);
             renderTexture.draw(SpriteBotonJugar);
@@ -138,6 +137,9 @@ void menuP::eventoMenuP() {
             renderTexture.draw(SpriteBotonSalir);
             renderTexture.draw(spriteAcercaDe);
             renderTexture.display();
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+
             MenuSalir();
         }
 
@@ -174,6 +176,8 @@ void menuP::eventoMenuP() {
                 playClickSound();
                 //std::cout<<"Acerca De presionado" << std::endl;
                 //Aqui puedes leer Acerca De este juego
+                MenuAcercaDe();
+
             }
         }
     }
@@ -335,5 +339,54 @@ void menuP::MenuSalir() {
 }
 
 void menuP::MenuAcercaDe() {
+
+    //crear ventana semitransparente
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+
+
+
+    window->setMouseCursorVisible(true);
+
+    sf::Font Fuente;
+    if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
+        return ;
+    };
+
+    sf::Text TextAcecaDe;
+    TextAcercaDe.setFont(Fuente);
+    TextAcecaDe.setString("AcercaDe el jueg0");
+    TextAcecaDe.setCharacterSize(15);
+    TextAcecaDe.setFillColor(sf::Color::White);
+    TextAcecaDe.setPosition(100, 50);
+
+        ButtonG botonX(spriteX, textureXOff, textureXOn);
+
+    window->setMouseCursorVisible(true);
+    while (window->isOpen()) {
+        currentCursor = &normalCursor;
+        mousePosition = sf::Mouse::getPosition(*window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+        botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        eventoMenuO();
+
+
+        // Dibujar elementos en la ventana
+        window->clear();
+        renderTexture.clear(sf::Color::Transparent);  
+        renderTexture.draw(SpriteFondoMenu);
+        renderTexture.draw(spriteLogoFortuneAvenue);
+        renderTexture.draw(SpriteBotonJugar);
+        renderTexture.draw(SpriteBotonOpciones);
+        renderTexture.draw(SpriteBotonSalir);
+        renderTexture.draw(spriteAcercaDe);
+        window->draw(spriteX);
+        window->draw(TextAcecaDe);
+        musicSlider->draw(*window);
+        effectSlider->draw(*window);
+        window->setMouseCursor(*currentCursor);
+        window->display();
+    }
+
 
 }
