@@ -13,6 +13,7 @@ void menuP::setWindow(sf::RenderWindow& win) {
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
+    if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/ConfirmarSalir.png")) return;
     if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
     if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
     if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
