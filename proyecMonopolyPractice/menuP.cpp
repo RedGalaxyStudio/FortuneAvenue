@@ -337,11 +337,13 @@ void menuP::MenuSalir() {
 
 void menuP::MenuAcercaDe() {
 
-    sf::RenderWindow Window(sf::VideoMode(1000, 600), "AcercaDeee");
+    //crear ventana semitransparente
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
 
 
 
-    window.setMouseCursorVisible(true);
+    window->setMouseCursorVisible(true);
 
     sf::Font Fuente;
     if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
@@ -357,17 +359,17 @@ void menuP::MenuAcercaDe() {
 
         ButtonG botonX(spriteX, textureXOff, textureXOn);
 
-    window.setMouseCursorVisible(true);
-    while (window.isOpen()) {
+    window->setMouseCursorVisible(true);
+    while (window->isOpen()) {
         currentCursor = &normalCursor;
-        mousePosition = sf::Mouse::getPosition(window);
+        mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
         botonX.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         eventoMenuO();
 
 
         // Dibujar elementos en la ventana
-        window.clear();
+        window->clear();
         renderTexture.clear(sf::Color::Transparent);  
         renderTexture.draw(SpriteFondoMenu);
         renderTexture.draw(spriteLogoFortuneAvenue);
@@ -375,12 +377,12 @@ void menuP::MenuAcercaDe() {
         renderTexture.draw(SpriteBotonOpciones);
         renderTexture.draw(SpriteBotonSalir);
         renderTexture.draw(spriteAcercaDe);
-        window.draw(spriteX);
-        window.draw(TextAcecaDe);
-        musicSlider->draw(window);
-        effectSlider->draw(window);
-        window.setMouseCursor(*currentCursor);
-        window.display();
+        window->draw(spriteX);
+        window->draw(TextAcecaDe);
+        musicSlider->draw(*window);
+        effectSlider->draw(*window);
+        window->setMouseCursor(*currentCursor);
+        window->display();
     }
 
 
