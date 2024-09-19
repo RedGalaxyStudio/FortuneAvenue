@@ -78,6 +78,11 @@ private:
     sf::Texture TextureBotonNoOff;
     sf::Sprite SpriteBotonNo;
 
+    sf::Font Fuente;
+    sf::Text TextAcercaDe;
+    sf::Sprite renderedSprite;
+
+    sf::RectangleShape overlay;
     // Sonidos
     sf::Music MenuMusicFondo;
 

@@ -13,6 +13,7 @@ void menuP::setWindow(sf::RenderWindow& win) {
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
+    if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/ConfirmarSalir.png")) return;
     if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
     if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
     if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
@@ -37,6 +38,11 @@ void menuP::Resource() {
 
     loadSounds();
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
+
+    // Ajustar el tamaño del rectángulo según el tamaño actual de la ventana
+    overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
+    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+
 
     // Configuraci�n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
@@ -135,6 +141,7 @@ void menuP::eventoMenuP() {
             renderTexture.draw(SpriteBotonOpciones);
             renderTexture.draw(SpriteBotonSalir);
             renderTexture.draw(spriteAcercaDe);
+            renderTexture.draw(overlay);
             renderTexture.display();
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -175,6 +182,8 @@ void menuP::eventoMenuP() {
                 playClickSound();
                 //std::cout<<"Acerca De presionado" << std::endl;
                 //Aqui puedes leer Acerca De este juego
+                MenuAcercaDe();
+
             }
         }
     }
@@ -263,18 +272,19 @@ void menuP::MenuSalir() {
     
     //crear ventana semitransparente
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
-    overlay.setFillColor(sf::Color(0, 0, 0, 150));
+    overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
    //Ubicacion del mensaje de confirmaci�n
     SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
-    SpriteConfirmarSalir.setPosition(580, 150); 
+    SpriteConfirmarSalir.setPosition(640, 360);
+    SpriteConfirmarSalir.setOrigin(383.5f, 300);
 
    //Ubicaciones de los botones si y no
     SpriteBotonSi.setTexture(TextureBotonSiOff);
-    SpriteBotonSi.setPosition(335, 200);  
+    SpriteBotonSi.setPosition(395, 300);  
 
     SpriteBotonNo.setTexture(TextureBotonNoOff);
-    SpriteBotonNo.setPosition(735, 200);  
+    SpriteBotonNo.setPosition(675, 300);  
 
     window->setMouseCursorVisible(true);
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
@@ -321,7 +331,7 @@ void menuP::MenuSalir() {
 
 
        // Aplicar el shader a la textura renderizada
-       sf::Sprite renderedSprite(renderTexture.getTexture());
+            renderedSprite.setTexture(renderTexture.getTexture());
        window->clear();
        window->draw(renderedSprite, &Blur); 
        // Dibujar los elementos de confirmaci�n de salida sobre el overlay
@@ -336,5 +346,60 @@ void menuP::MenuSalir() {
 }
 
 void menuP::MenuAcercaDe() {
+    // Crear un rectángulo más pequeño que la ventana y centrarlo
+    sf::RectangleShape overlay(sf::Vector2f(
+        static_cast<float>(window->getSize().x - 50),  // 50 píxeles más pequeño en ancho
+        static_cast<float>(window->getSize().y - 50)   // 50 píxeles más pequeño en alto
+    ));
 
+
+    // Posicionar el rectángulo en el centro, con un margen de 25 píxeles
+    overlay.setPosition(25.0f, 25.0f);
+
+    //crear ventana semitransparente
+
+
+    // Oscurecer el fondo y hacer el rectángulo semitransparente
+    overlay.setFillColor(sf::Color(0, 0, 0, 100));  // Aumentamos la opacidad para que sea más oscuro
+
+    // Confgurar el texto "Acerca De"
+    sf::Font Fuente;
+    if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
+        return;
+    }
+
+    sf::Text TextAcercaDe;
+    TextAcercaDe.setFont(Fuente);
+
+    TextAcercaDe.setString("Sonic The Fucking Hedgehog ");
+    TextAcercaDe.setCharacterSize(30);  // Tamaño más grande para ser fácilmente legible
+    TextAcercaDe.setFillColor(sf::Color::White);  // Color blanco para contrastar con el fondo oscuro
+    TextAcercaDe.setPosition(50, 100);  // Posicionamos el texto dentro del rectángulo
+    
+ 
+    window->setMouseCursorVisible(true);
+
+    while (window->isOpen()) {
+        currentCursor = &normalCursor;
+        mousePosition = sf::Mouse::getPosition(*window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+        botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+        eventoMenuO();
+        renderedSprite.setTexture(renderTexture.getTexture());
+        // Dibujar los elementos en la ventana
+        window->clear();
+
+        // Dibujar el fondo del menú y otros elementos
+        window->draw(renderedSprite, &Blur);
+        window->draw(spriteX);
+        // Dibujar el rectángulo oscuro centrado
+        window->draw(overlay);
+
+        // Dibujar el texto "Acerca De"
+        window->draw(TextAcercaDe);
+
+        window->draw(TextAcercaDe);
+        window->setMouseCursor(*currentCursor);
+        window->display();
+    }
 }
