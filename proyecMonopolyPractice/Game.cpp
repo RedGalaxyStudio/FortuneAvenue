@@ -10,6 +10,7 @@
 Game::Game(sf::RenderWindow& windowRef)
     : window(windowRef){
     Resource();
+    loadAvatars();
 }
 Game::~Game() {
 }
@@ -26,7 +27,6 @@ void Game::Resource() {
 void Game::Update() {
     TextBox textBox(400, 50);  // Crear un cuadro de texto
     textBox.setPosition();  // Posicionar el cuadro de texto
-
 
     while (window.isOpen()) {
         
@@ -58,8 +58,15 @@ void Game::Update() {
 
 
         window.clear();
+
+       
         window.draw(SpriteFondoMenu);
         textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
+        
+        for (auto& avatar : avatars) {
+            window.draw(avatar);
+        }
+
         window.draw(spriteX);
         window.display();
     }

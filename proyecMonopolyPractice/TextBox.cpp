@@ -35,16 +35,17 @@ TextBox::TextBox(float width, float height) {
     textoPregunta.setFont(font);
     textoPregunta.setCharacterSize(24);
     textoPregunta.setString("Ingresa tu nombre: ");
-    textoPregunta.setPosition(525, 300);
+    textoPregunta.setOutlineColor(sf::Color(135, 135, 135));
+    textoPregunta.setOutlineThickness(2);
     x = 525;
-    y = 320;
+    y = 80;
 
     }
     text.setFont(font);
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::White);
     text.setOutlineThickness(2);
-    text.setOutlineColor(sf::Color::Black);
+    text.setOutlineColor(sf::Color(135, 135, 135));
 
 
     
@@ -55,6 +56,7 @@ TextBox::TextBox(float width, float height) {
 void TextBox::setPosition() {
     box.setPosition(x, y);
     text.setPosition(x + 30, y + 25); // Desplaza el texto un poco dentro del cuadro
+    textoPregunta.setPosition(x, y-45);
 }
 
 // Manejo de la entrada de texto

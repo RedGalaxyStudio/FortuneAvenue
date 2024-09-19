@@ -21,8 +21,42 @@ sf::RenderTexture renderTexture;
 sf::Texture textureXOn;
 sf::Texture textureXOff;
 sf::Sprite spriteX;
+std::vector<sf::CircleShape> avatars;
+std::vector<sf::Texture> avatarTextures;
+
 ButtonG* botonX = nullptr; // Definición de la variable
 menuP Menup;
+
+
+
+void loadAvatars() {
+
+    int avatarCount = 20;  // Si tienes 17 avatares
+    avatars.resize(avatarCount);
+    avatarTextures.resize(avatarCount);
+
+    for (int i = 0; i < avatarCount; ++i) {
+        if (!avatarTextures[i].loadFromFile("resource/texture/Avatars/avatar" + std::to_string(i) + ".png"))
+            return;
+
+        float radio = avatarTextures[i].getSize().x / 2.0f;
+        avatars[i].setRadius(radio);
+        avatars[i].setTexture(&avatarTextures[i]);
+        avatars[i].setOrigin(radio, radio);
+        for (int i = 0; i < avatars.size(); ++i) {
+            int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
+            int col = i % 8;  // Determina la columna (0 a 7)
+
+            float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
+            float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
+
+            avatars[i].setPosition(x, y);
+        }
+
+    }
+
+}
+
 
 // Función para cargar la textura del fondo del menú
 void loadTextures() {
