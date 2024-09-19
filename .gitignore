@@ -1,6 +1,5 @@
-# Ignorar la carpeta .vs
+
 .vs/
-# Ignorar archivos binarios
 *.obj
 *.exe
 *.pdb
@@ -8,3 +7,9 @@
 *.idb
 *.tlog
 *.log
+/x64/
+/proyecMonopolyPractice/x64/
+*.obj
+*.log
+*.pdb
+*.tlog
