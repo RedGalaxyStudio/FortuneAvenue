@@ -30,8 +30,12 @@ extern sf::Texture textureXOn;
 extern sf::Texture textureXOff;
 extern sf::Sprite spriteX;
 extern ButtonG* botonX;
+extern std::vector<sf::CircleShape> avatars;
+extern std::vector<sf::Texture> avatarTextures;
+
 
 // Funciones para cargar las texturas y cursores
+void loadAvatars();
 void playClickSound();
 void loadVolumenIcon();
 void loadSounds();

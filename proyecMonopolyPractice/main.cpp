@@ -25,7 +25,7 @@ int main() {
     window.setMouseCursorVisible(false);
     // Establecer el �cono de la ventana
    window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-    
+    /*
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
 
@@ -33,7 +33,7 @@ int main() {
     cinematic.Resource();
 
     //Iniciar la animaci�n
-    cinematic.Update();
+    cinematic.Update();*/
     loadTextures();
     Menup.setWindow(window);
     // Cargar los recursos necesarios para la cinem�tica
