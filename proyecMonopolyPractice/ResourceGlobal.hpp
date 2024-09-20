@@ -32,6 +32,7 @@ extern sf::Sprite spriteX;
 extern ButtonG* botonX;
 extern std::vector<sf::CircleShape> avatars;
 extern std::vector<sf::Texture> avatarTextures;
+extern sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
 
 
 // Funciones para cargar las texturas y cursores
