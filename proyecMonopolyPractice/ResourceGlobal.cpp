@@ -23,6 +23,10 @@ sf::Texture textureXOff;
 sf::Sprite spriteX;
 std::vector<sf::CircleShape> avatars;
 std::vector<sf::Texture> avatarTextures;
+sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
+
+
+
 
 ButtonG* botonX = nullptr; // Definición de la variable
 menuP Menup;
@@ -43,7 +47,11 @@ void loadAvatars() {
         avatars[i].setRadius(radio);
         avatars[i].setTexture(&avatarTextures[i]);
         avatars[i].setOrigin(radio, radio);
-        for (int i = 0; i < avatars.size(); ++i) {
+
+
+    }
+
+  for (int i = 0; i < avatars.size(); ++i) {
             int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
             int col = i % 8;  // Determina la columna (0 a 7)
 
@@ -51,10 +59,7 @@ void loadAvatars() {
             float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
 
             avatars[i].setPosition(x, y);
-        }
-
-    }
-
+      }
 }
 
 

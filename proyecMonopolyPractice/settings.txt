@@ -1,0 +1,4 @@
+volumeM=95.5
+volumeE=66.5
+musicEnabled=1
+effectsEnabled=1

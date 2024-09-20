@@ -21,7 +21,7 @@ private:
     // Texturas y sprites
     sf::Texture textureLogoJuego;
     sf::Sprite spriteLogoJuego;
-    
+    sf::CircleShape* selectedAvatar = nullptr; // Avatar seleccionado
     sf::Sprite SpriteFondoMenu;
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
@@ -29,7 +29,7 @@ private:
     //sf::SoundBuffer FondoBuffer;
     //sf::Sound FondoSound;
     //bool soundOne;
-
+    sf::Texture sharedTexture; // Textura compartida para los avatares
     // Caja de texto (TextBox)
     TextBox textBox;  // Usar TextBox como miembro de Game
 };
