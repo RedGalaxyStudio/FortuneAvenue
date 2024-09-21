@@ -1,0 +1,179 @@
+/* Estilos básicos y reset */ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Importar la fuente ArcadePix */
+.text {
+    font-family: 'Arcadepix Plus Regular';
+}
+
+body {
+    font-family: "Arcadepix Plus Regular", sans-serif;
+    color: #0028f2;
+    background-color: #000;
+}
+
+/* Degradado de texto para todo el contenido */
+p {
+    background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h1, h2 {
+    background-image: linear-gradient(to right, #0028f0, #f72b8e); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.barra-lateral {
+    position: absolute;
+    top: 0; /* Mantiene la barra lateral en la parte superior */
+    right: 0; /* Mueve la barra lateral a la derecha */
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro, puedes ajustar la opacidad */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column; /* Cambia a columna para que los botones estén en vertical */
+}
+
+nav ul li {
+    margin-bottom: 15px; /* Espaciado entre botones */
+}
+
+nav ul li a {
+    background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.5em; /* Tamaño de fuente más grande */
+    padding: 10px; /* Espaciado interno de los botones */
+}
+
+nav ul li a:hover {
+    background-image: linear-gradient(to right, #0028f0, #f72b8e); /* Degradado invertido en hover */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+section {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.btn,
+.btn-especifico {
+    position: relative;
+    padding: 15px 30px; /* Ajusta según sea necesario */
+    background: linear-gradient(to right, #0028f0, #f72b8e);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    transition: background 0.3s, box-shadow 0.3s; /* Añadir box-shadow a la transición */
+}
+
+.btn:hover,
+.btn-especifico:hover {
+    background: linear-gradient(to right,#0028f0 #f72b8e);
+    box-shadow: 0 0 10px #f72b8e, 0 0 20px #f72b8e; /* Efecto de borde neón */
+}
+
+
+.btn-especifico {
+    position: relative;
+    top: 50px; /* Mueve el botón 50 píxeles hacia abajo */
+}
+
+.seccion {
+    padding: 100px 50px;
+}
+
+.grid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    position: relative;
+}

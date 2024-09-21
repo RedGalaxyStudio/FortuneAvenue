@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\",
+  "WorkspaceRootPath": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\ServidorPrueba.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ServidorPrueba.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -20,11 +21,30 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+=======
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+>>>>>>> cdb3baa9f64ed3977314d2831ec9833b25a757b6
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Cinematic.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Client.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,17 +54,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
+=======
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+>>>>>>> cdb3baa9f64ed3977314d2831ec9833b25a757b6
               "Title": "menuP.hpp",
-              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.hpp",
-              "ToolTip": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
               "RelativeToolTip": "proyecMonopolyPractice\\menuP.hpp",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAwwFIAAAAeAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFEAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-10T16:14:54.368Z",
               "IsPinned": true
@@ -53,15 +81,48 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "menuP.cpp",
-              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
-              "ToolTip": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\menuP.cpp",
-              "ViewState": "AQIAACYAAAAAAAAAAAAhwCoAAABJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-07T00:20:00.431Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-19T19:06:59.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Client.cpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Client.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\Client.cpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Client.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\Client.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-19T17:27:43.19Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -80,16 +141,17 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Cinematic.hpp",
-              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.hpp",
-              "ToolTip": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp",
               "RelativeToolTip": "proyecMonopolyPractice\\Cinematic.hpp",
-              "ViewState": "AQIAACkAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "ViewState": "AQIAACYAAAAAAAAAAAAAAC4AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-07T00:14:33.26Z"
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 4,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp",
@@ -103,10 +165,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
+=======
+              "DocumentIndex": 3,
+>>>>>>> cdb3baa9f64ed3977314d2831ec9833b25a757b6
               "Title": "Cinematic.cpp",
-              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp",
+              "DocumentMoniker": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.cpp",
-              "ToolTip": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp",
+              "ToolTip": "C:\\Users\\Siragon\\Desktop\\RedGalaxy Proyecto1\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\Cinematic.cpp",
               "ViewState": "AQIAABsAAAAAAAAAAAAswCkAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",

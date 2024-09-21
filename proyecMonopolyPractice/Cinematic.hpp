@@ -44,7 +44,7 @@ private:
 
     sf::SoundBuffer FondoBuffer;
     sf::Sound FondoSound;
-
+    
     // Relojes para la animación
     sf::Clock fadeClock;
     sf::Clock clock;
