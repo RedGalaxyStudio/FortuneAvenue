@@ -138,6 +138,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
+    <ClCompile Include="ServidorPrueba.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />

@@ -45,6 +45,9 @@
     <ClCompile Include="ButtonG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ServidorPrueba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">

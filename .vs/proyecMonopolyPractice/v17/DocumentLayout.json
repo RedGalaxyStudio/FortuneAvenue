@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\ServidorPrueba.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ServidorPrueba.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -30,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "menuP.hpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.hpp",
@@ -43,12 +47,11 @@
               "ViewState": "AQIAAE4AAAAAAAAAAAAwwFIAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-10T16:14:54.368Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "menuP.cpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
@@ -62,7 +65,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "ServidorPrueba.cpp",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\ServidorPrueba.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\ServidorPrueba.cpp",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\ServidorPrueba.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\ServidorPrueba.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-19T16:09:02.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Cinematic.hpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.hpp",
@@ -74,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
@@ -86,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Cinematic.cpp",
               "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\FortuneAvenue\\FortuneAvenue\\proyecMonopolyPractice\\Cinematic.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.cpp",
