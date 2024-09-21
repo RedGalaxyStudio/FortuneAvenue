@@ -135,6 +135,7 @@
     <ClCompile Include="AudioSettings.cpp" />
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="Cinematic.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />

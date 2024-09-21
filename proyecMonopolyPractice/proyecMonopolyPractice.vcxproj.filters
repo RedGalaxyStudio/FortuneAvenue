@@ -45,7 +45,11 @@
     <ClCompile Include="ButtonG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ServidorPrueba.cpp">
+=======
+    <ClCompile Include="Client.cpp">
+>>>>>>> cdb3baa9f64ed3977314d2831ec9833b25a757b6
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
