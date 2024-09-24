@@ -3,13 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "AudioSettings.hpp"
 #include "SettingsManager.hpp" 
+#include "WebViewManager.hpp"
+#include <Windows.h>
+
+class WebViewManager;
 
 class menuP : public SettingsManager {
 public:
     // Constructor: inicializa la variable y la ventana
     menuP();
+
     void setWindow(sf::RenderWindow& windowRef);
     // Carga de recursos (texturas y sprites)
     void Resource();
@@ -22,21 +26,29 @@ public:
 
     void eventoMenuO();
     // M�todo para dibujar (implementa seg�n sea necesario)
-    void Draw();
-    void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
-    void handleCursorChange();
+
+    //void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
+    //void handleCursorChange();
     void MenuJugar();
+    void OpenWebView();
+    void CloseWebView();
     //Ventana de opciones
     void MenuOpcion();
-
     void MenuSalir();
-
     void MenuAcercaDe();
 
 private:
+
+    HWND hwnd;
+    WebViewManager* webviewManager;
+    LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    bool isWebViewOpen;
+
     // Ventana de renderizado
     sf::RenderWindow* window;
 
+    sf::Text Sesion;
+    bool SesionValida;
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
 

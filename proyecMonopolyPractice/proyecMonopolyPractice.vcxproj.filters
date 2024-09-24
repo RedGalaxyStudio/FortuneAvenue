@@ -27,9 +27,6 @@
     <ClCompile Include="SettingsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioSettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VolumeSlider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +42,12 @@
     <ClCompile Include="ButtonG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WebViewManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjetosGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
@@ -54,9 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SettingsManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioSettings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VolumeSlider.hpp">
@@ -74,5 +74,20 @@
     <ClInclude Include="ButtonG.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WebViewManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\json_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjetosGlobal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
