@@ -17,13 +17,12 @@ public:
     void guardarNombre();
     void cargarNombre();
 private:
-    sf::Texture textureBox;
-    sf::Sprite box;
+
     float x, y;
     sf::Text textoPregunta;
     sf::Text textoGuardado;
     sf::Text text;
-    sf::Font font;
+
     std::string input;
 };
 

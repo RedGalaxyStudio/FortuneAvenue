@@ -5,8 +5,9 @@
 #include "Game.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
+
 // Constructor: inicializa la variable y la ventana
-menuP::menuP() : window(nullptr) {}
+menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) {}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
@@ -42,7 +43,14 @@ void menuP::Resource() {
     // Ajustar el tamaño del rectángulo según el tamaño actual de la ventana
     overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
-
+   
+    Sesion.setFont(fontUser);
+    Sesion.setCharacterSize(24);
+    Sesion.setFillColor(sf::Color::White);
+    Sesion.setOutlineThickness(2);
+    Sesion.setOutlineColor(sf::Color(135, 135, 135));
+    box.setPosition(50,50);
+    Sesion.setPosition(54, 50);
 
     // Configuraci�n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
@@ -83,6 +91,14 @@ void menuP::MenuPrincipal() {
     MenuMusicFondo.setLoop(true);
     MenuMusicFondo.play();
 
+    if (email.empty()) {
+        Sesion.setString("Iniciar Sesion");
+    }
+    else
+    {
+        Sesion.setString(email);
+    }
+
     // Crear los botones
     ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
@@ -118,6 +134,8 @@ void menuP::MenuPrincipal() {
         window->clear();
         window->draw(SpriteFondoMenu);
         window->draw(spriteLogoFortuneAvenue);
+        window->draw(box);
+        window->draw(Sesion);
         window->draw(SpriteBotonJugar);
         window->draw(SpriteBotonOpciones);
         window->draw(SpriteBotonSalir);
@@ -168,22 +186,24 @@ void menuP::eventoMenuP() {
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
                 MenuOpcion();
-                //std::cout << "Opciones presionado" << std::endl;
-                // Aqu� puedes abrir el men� de opciones
+        
             }
 
             // Verificar si el clic fue en el bot�n Salir
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                //std::cout << "Salir presionado" << std::endl;
+
                 MenuSalir(); // Salir del juego
             }
             if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                //std::cout<<"Acerca De presionado" << std::endl;
-                //Aqui puedes leer Acerca De este juego
+      
                 MenuAcercaDe();
-
+             
+            }
+            if (box.getGlobalBounds().contains(mousePosFloat)) {
+                playClickSound();
+                 OpenWebView();
             }
         }
     }
@@ -268,8 +288,6 @@ void menuP::MenuOpcion() {
 
 void menuP::MenuSalir() {
 
-
-    
     //crear ventana semitransparente
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 10));
@@ -345,7 +363,64 @@ void menuP::MenuSalir() {
     }
 }
 
+LRESULT menuP::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    switch (uMsg) {
+    case WM_DESTROY:
+        CloseWebView(); // Cerrar WebView cuando la ventana se destruye
+        PostQuitMessage(0);
+        return 0;
+    }
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+
+void menuP::OpenWebView() {
+    try {
+        if (!isWebViewOpen) { // Solo abrir si no está abierta
+            // Crear la ventana de WebView2
+            WNDCLASS wc = {};
+            wc.lpfnWndProc = [](HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) -> LRESULT {
+                return reinterpret_cast<menuP*>(GetWindowLongPtr(hwnd, GWLP_USERDATA))->WindowProc(hwnd, uMsg, wParam, lParam);
+                };
+            wc.hInstance = GetModuleHandle(nullptr);
+            wc.lpszClassName = L"WebView2Example";
+
+            RegisterClass(&wc);
+            hwnd = CreateWindowEx(0, L"WebView2Example", L"WebView2 Demo",
+                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+                CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+                nullptr, nullptr, GetModuleHandle(nullptr), this); // Pasa `this` como puntero de datos
+
+            if (!hwnd) {
+                std::cerr << "Error al crear la ventana." << std::endl;
+                return;
+            }
+
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this)); // Guarda el puntero
+
+            // Inicializar WebViewManager
+            webviewManager = new WebViewManager(hwnd);
+            webviewManager->CreateWebView(); // Crear el WebView
+            isWebViewOpen = true; // Marcar que la ventana está abierta
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Excepción: " << e.what() << std::endl;
+    }
+}
+
+
+void menuP::CloseWebView() {
+    if (isWebViewOpen) {
+        //GetUserEmail();
+        DestroyWindow(hwnd); // Cerrar la ventana de WebView2
+        hwnd = nullptr;      // Establecer hwnd a nullptr después de cerrarlo
+        isWebViewOpen = false; // Marcar que la ventana está cerrada
+    }
+}
+
 void menuP::MenuAcercaDe() {
+
     // Crear un rectángulo más pequeño que la ventana y centrarlo
     sf::RectangleShape overlay(sf::Vector2f(
         static_cast<float>(window->getSize().x - 50),  // 50 píxeles más pequeño en ancho

@@ -25,6 +25,9 @@ private:
     sf::Sprite SpriteFondoMenu;
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
+
+    int currentIndex;  // Índice de avatares visibles
+
     // Sonidos
     //sf::SoundBuffer FondoBuffer;
     //sf::Sound FondoSound;

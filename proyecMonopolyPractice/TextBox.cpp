@@ -2,24 +2,17 @@
 
 // Constructor con parámetros
 
-TextBox::TextBox() {
-
-}// Constructor por defecto
+TextBox::TextBox() {}// Constructor por defecto
 
 
 TextBox::TextBox(float width, float height) {
     cargarNombre();
     input = "";
-    if (!font.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
-        std::cerr << "Error loading font\n";
-    }  
-    if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
-    box.setTexture(textureBox);
-    
+
     // Variables de texto en SFML
     if (!nombre.empty()) {  
         
-     textoGuardado.setFont(font);
+     textoGuardado.setFont(fontUser);
     textoGuardado.setCharacterSize(24);
     textoGuardado.setString("");
     textoGuardado.setPosition(525, 250);
@@ -32,7 +25,7 @@ TextBox::TextBox(float width, float height) {
     else {
         std::cout << "La variable está vacía.\n";
     
-    textoPregunta.setFont(font);
+    textoPregunta.setFont(fontUser);
     textoPregunta.setCharacterSize(24);
     textoPregunta.setString("Ingresa tu nombre: ");
     textoPregunta.setOutlineColor(sf::Color(135, 135, 135));
@@ -41,7 +34,7 @@ TextBox::TextBox(float width, float height) {
     y = 80;
 
     }
-    text.setFont(font);
+    text.setFont(fontUser);
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::White);
     text.setOutlineThickness(2);
