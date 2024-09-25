@@ -1,4 +1,6 @@
 #include "ObjetosGlobal.hpp"
 
+menuP Menup;
 
-//menuP Menup;
+
+void cargue(){}

@@ -36,7 +36,7 @@ std::string email;
 std::string id;
 std::string pictureUrl;
 ButtonG* botonX = nullptr; // Definición de la variable
-menuP Menup;
+
 
 
 

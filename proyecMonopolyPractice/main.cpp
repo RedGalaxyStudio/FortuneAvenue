@@ -14,7 +14,7 @@ int main() {
     sf::Image icono;
     if (!icono.loadFromFile("resource/texture/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
 
-    window.setMouseCursorVisible(false);
+    window.setMouseCursorVisible(true);
     // Establecer el  cono de la ventana
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
@@ -35,6 +35,7 @@ int main() {
     //Iniciar la animaci n
     cinematic.Update();*/
     loadTextures();
+    cargue();
     Menup.setWindow(window);
     // Cargar los recursos necesarios para la cinem tica
     Menup.Resource();
