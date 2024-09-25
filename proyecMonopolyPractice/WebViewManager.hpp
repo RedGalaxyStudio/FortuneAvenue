@@ -9,6 +9,7 @@
 #include <string>
 #include <curl/curl.h>
 #include "ObjetosGlobal.hpp"
+
 using namespace Microsoft::WRL;
 
 class WebViewManager {

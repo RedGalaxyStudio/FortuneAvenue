@@ -7,7 +7,7 @@
 #include "ButtonG.hpp"
 
 // Constructor: inicializa la variable y la ventana
-menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) {}
+menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
@@ -91,36 +91,31 @@ void menuP::MenuPrincipal() {
     MenuMusicFondo.setLoop(true);
     MenuMusicFondo.play();
 
-    if (email.empty()) {
-        Sesion.setString("Iniciar Sesion");
-    }
-    else
-    {
-        Sesion.setString(email);
-    }
-
     // Crear los botones
     ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
     ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
     ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
 
+
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
 
-    window->setMouseCursorVisible(true);
-
     while (window->isOpen()) {
+
+
         // Manejar eventos del menú
         eventoMenuP();
 
         // Obtener la posición actual del ratón
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-  
+        window->setMouseCursorVisible(true);
         // Establecer cursor por defecto antes de verificar los botones
         currentCursor = &normalCursor;
-        
+
+        ValidarUser();
+
 
         // Actualizar el estado de los botones y el cursor
         botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -144,6 +139,21 @@ void menuP::MenuPrincipal() {
     }
 }
 
+void menuP::ValidarUser() {
+
+    if (SesionValida) {
+        GetUserEmail();
+        if (email.empty()) {
+            Sesion.setString("Iniciar Sesion");
+        }
+        else
+        {
+            Sesion.setString(email);
+        }
+     SesionValida = false;
+    }
+    
+}
 
 void menuP::eventoMenuP() {
 
@@ -262,7 +272,6 @@ void menuP::MenuOpcion() {
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
 
-    window->setMouseCursorVisible(true);
     while (window->isOpen()) {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
@@ -304,7 +313,6 @@ void menuP::MenuSalir() {
     SpriteBotonNo.setTexture(TextureBotonNoOff);
     SpriteBotonNo.setPosition(675, 300);  
 
-    window->setMouseCursorVisible(true);
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
     ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 
@@ -366,7 +374,7 @@ void menuP::MenuSalir() {
 LRESULT menuP::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
     case WM_DESTROY:
-        CloseWebView(); // Cerrar WebView cuando la ventana se destruye
+        CloseWebView(false); // Cerrar WebView cuando la ventana se destruye
         PostQuitMessage(0);
         return 0;
     }
@@ -410,14 +418,17 @@ void menuP::OpenWebView() {
 }
 
 
-void menuP::CloseWebView() {
+void menuP::CloseWebView(bool Vali) {
+
+    SesionValida = Vali;
+
     if (isWebViewOpen) {
-        //GetUserEmail();
         DestroyWindow(hwnd); // Cerrar la ventana de WebView2
         hwnd = nullptr;      // Establecer hwnd a nullptr después de cerrarlo
         isWebViewOpen = false; // Marcar que la ventana está cerrada
     }
 }
+
 
 void menuP::MenuAcercaDe() {
 

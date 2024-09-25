@@ -141,13 +141,13 @@ void WebViewManager::OnAuthenticationComplete(const std::wstring& token) {
         tokenFile << token;
         tokenFile.close();
         std::wcout << L"Token guardado en el archivo 'token.txt'." << std::endl;
+        Menup.CloseWebView(true);
     }
     else {
         std::cerr << "Error al abrir el archivo para guardar el token." << std::endl;
     }
     
-    //CloseWebView();
-
+    
 }
 
 

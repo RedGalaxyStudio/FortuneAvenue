@@ -14,7 +14,6 @@
 // Declarar la textura global
 extern std::string nombre;
 extern std::string inpu;
-extern menuP Menup;
 extern sf::Texture TextureFondoMenu;
 extern sf::Cursor normalCursor;
 extern sf::Cursor linkCursor;

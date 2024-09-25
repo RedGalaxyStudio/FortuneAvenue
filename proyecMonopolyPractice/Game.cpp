@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "TextBox.hpp"
 #include <SFML/Audio.hpp>
+#include "Scrollbar.hpp"
 #include <string>
 #include "ResourceGlobal.hpp"
 #include "menuP.hpp"
@@ -35,6 +36,8 @@ void Game::Update() {
     recua.setPosition(300, 92);
     TextBox textBox(400, 50);  // Crear un cuadro de texto
     textBox.setPosition();  // Posicionar el cuadro de texto
+    Scrollbar scrollbar(340, 233.5f,14);  // Altura de la ventana, altura del thumb
+    scrollbar.setPosition(1240, 340);  // Colocar la barra a la derecha
 
     // Crear una nueva instancia de sf::CircleShape para la copia
     selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
@@ -56,15 +59,10 @@ void Game::Update() {
 
             // Manejo del desplazamiento con la rueda del mouse
             if (event.type == sf::Event::MouseWheelScrolled) {
-                if (event.mouseWheelScroll.delta > 0) {
-                    currentIndex = std::max(0, currentIndex - 1); // Desplazar hacia arriba
-                }
-                else {
-                    currentIndex = std::min(static_cast<int>(avatars.size()) - 2, currentIndex + 1); // Desplazar hacia abajo
-                }
+                scrollbar.update(event.mouseWheelScroll.delta);  // Actualizar el desplazamiento
             }
 
-            // Manejo de clics en avatares
+            // Manejo de clics en avataresy
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::CircleShape* newSelection = nullptr;
                 for (int i = currentIndex; i < currentIndex + 2 && i < avatars.size(); ++i) {
@@ -99,9 +97,23 @@ void Game::Update() {
         window.draw(SpriteFondoMenu);
         textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
 
-        // Dibujar solo los avatares visibles
-        for (int i = currentIndex; i < currentIndex + 2 && i < avatars.size(); ++i) {
+        // Dibujar todos los avatares
+       // Dibujar todos los avatares aplicando el desplazamiento de la barra
+        for (int i = 0; i < avatars.size(); ++i) {
+            // Obtener la posición original del avatar
+            sf::Vector2f originalPosition = avatars[i].getPosition();
+
+            // Aplicar el desplazamiento de la barra de scroll (scrollOffset)
+            float avatarYOffset = scrollbar.getScrollOffset();  // Obtén el desplazamiento actual del scroll
+
+            // Ajustar la posición vertical del avatar según el desplazamiento
+            avatars[i].setPosition(originalPosition.x, originalPosition.y - avatarYOffset);
+
+            // Dibujar el avatar con la nueva posición
             window.draw(avatars[i]);
+
+            // Restaurar la posición original (para evitar modificar permanentemente su posición)
+            avatars[i].setPosition(originalPosition);
         }
 
         // Dibujar el avatar seleccionado en su posición original
@@ -109,6 +121,7 @@ void Game::Update() {
             window.draw(*selectedAvatar);  // Dibujar el avatar seleccionado en su posición original
         }
         window.draw(selectedAvatarCopy);
+        scrollbar.draw(window);
         window.draw(recua);
         window.draw(spriteX);
         window.display();

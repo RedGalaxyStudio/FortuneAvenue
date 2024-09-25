@@ -6,6 +6,7 @@
 #include "SettingsManager.hpp" 
 #include "WebViewManager.hpp"
 #include <Windows.h>
+#include "ObjetosGlobal.hpp"
 
 class WebViewManager;
 
@@ -31,12 +32,12 @@ public:
     //void handleCursorChange();
     void MenuJugar();
     void OpenWebView();
-    void CloseWebView();
+    void CloseWebView(bool Vali);
     //Ventana de opciones
     void MenuOpcion();
     void MenuSalir();
     void MenuAcercaDe();
-
+    void ValidarUser();
 private:
 
     HWND hwnd;

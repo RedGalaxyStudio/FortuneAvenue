@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
     <ClCompile Include="ObjetosGlobal.cpp" />
+    <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="nlohmann\json_fwd.hpp" />
     <ClInclude Include="ObjetosGlobal.hpp" />
+    <ClInclude Include="Scrollbar.hpp" />
     <ClInclude Include="SettingsManager.hpp" />
     <ClInclude Include="TextBox.hpp" />
     <ClInclude Include="ResourceGlobal.hpp" />
