@@ -14,7 +14,7 @@ void menuP::setWindow(sf::RenderWindow& win) {
 
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
-    if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/ConfirmarSalir.png")) return;
+    if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/boton2.png")) return;
     if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
     if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
     if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
@@ -303,15 +303,15 @@ void menuP::MenuSalir() {
 
    //Ubicacion del mensaje de confirmaci�n
     SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
-    SpriteConfirmarSalir.setPosition(640, 360);
-    SpriteConfirmarSalir.setOrigin(383.5f, 300);
+    SpriteConfirmarSalir.setPosition(660, 370);
+    SpriteConfirmarSalir.setOrigin(340, 240);
 
    //Ubicaciones de los botones si y no
     SpriteBotonSi.setTexture(TextureBotonSiOff);
-    SpriteBotonSi.setPosition(395, 300);  
+    SpriteBotonSi.setPosition(480, 380);  
 
     SpriteBotonNo.setTexture(TextureBotonNoOff);
-    SpriteBotonNo.setPosition(675, 300);  
+    SpriteBotonNo.setPosition(680, 380);  
 
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
     ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
