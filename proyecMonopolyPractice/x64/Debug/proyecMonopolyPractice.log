@@ -1,2 +1,7 @@
-﻿  main.cpp
-  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Documents\GitHub\NeonAvenue\x64\Debug\proyecMonopolyPractice.exe
+<<<<<<< HEAD
+﻿  Game.cpp
+  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+=======
+﻿  menuP.cpp
+  proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+>>>>>>> c4ca653da27fb5418e862cf5be87a696343acc33
