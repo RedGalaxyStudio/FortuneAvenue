@@ -62,16 +62,22 @@ void Game::Update() {
                 scrollbar.update(event.mouseWheelScroll.delta);  // Actualizar el desplazamiento
             }
 
+
             // Manejo de clics en avataresy
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::CircleShape* newSelection = nullptr;
-                for (int i = currentIndex; i < currentIndex + 2 && i < avatars.size(); ++i) {
+                for (int i = 0; i < avatars.size(); ++i) {
                     if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
                         newSelection = &avatars[i];
                         break;
                     }
                 }
 
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    Menup.MenuPrincipal();
+
+                }
                 // Actualizar el borde del avatar seleccionado
                 if (newSelection != selectedAvatar) {
                     if (selectedAvatar) {
