@@ -42,6 +42,7 @@
     <ClCompile Include="ButtonG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="WebViewManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,6 +50,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scrollbar.cpp">
+=======
+<<<<<<< HEAD
+    <ClCompile Include="ServidorPrueba.cpp">
+=======
+    <ClCompile Include="Client.cpp">
+>>>>>>> cdb3baa9f64ed3977314d2831ec9833b25a757b6
+>>>>>>> c4ca653da27fb5418e862cf5be87a696343acc33
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
