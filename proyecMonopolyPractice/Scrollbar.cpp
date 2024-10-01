@@ -60,10 +60,6 @@ void Scrollbar::update(float deltaScroll) {
     float thumbPosition = (scrollOffset / maxScrollOffset) * (windowHeight - scrollbarHeight);
     thumbPosition += y;
     scrollbarThumb.setPosition(x, thumbPosition);
-
-    //std::cout << x;
-    std::cout <<"thumbPosition" << thumbPosition;
-
     // Ajustar las posiciones de los círculos (esquinas redondeadas)
     cornerTL.setPosition(x + conerPs, thumbPosition);  // Esquina superior izquierda
     cornerTR.setPosition(x + scrollbarThumb.getSize().x - conerPs, thumbPosition);  // Esquina superior derecha

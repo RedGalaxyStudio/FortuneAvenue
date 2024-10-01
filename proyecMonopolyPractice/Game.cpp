@@ -30,6 +30,13 @@ void Game::Update() {
     sf::Texture Texrecua;
     sf::Sprite recua;
 
+    // Definir las dimensiones y límites
+    const float avatarWidth = 128.0f;
+    const float avatarHeight = 128.0f;
+    const float avatarSeparation = 28.0f;
+    const float visibleAreaHeight = 170.0f;
+    const float maxScrollOffset = 270.0f;  // Límite máximo de desplazamiento
+
     Texrecua.loadFromFile("resource/texture/Avatars/recua2.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
@@ -62,22 +69,34 @@ void Game::Update() {
                 scrollbar.update(event.mouseWheelScroll.delta);  // Actualizar el desplazamiento
             }
 
-
-            // Manejo de clics en avataresy
+            // Manejo de clics en avatares
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::CircleShape* newSelection = nullptr;
+
+                // Obtener el desplazamiento actual de la barra de scroll
+                float avatarYOffset = scrollbar.getScrollOffset();
+
                 for (int i = 0; i < avatars.size(); ++i) {
-                    if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
+                    // Obtener la posición original del avatar
+                    sf::Vector2f originalPosition = avatars[i].getPosition();
+
+                    // Calcular la posición desplazada del avatar según el scroll
+                    sf::FloatRect bounds = avatars[i].getGlobalBounds();
+                    bounds.top -= avatarYOffset;
+
+                    // Verificar si el mouse está sobre el avatar desplazado
+                    if (bounds.contains(mousePosFloat)) {
                         newSelection = &avatars[i];
                         break;
                     }
                 }
 
+                // Lógica para manejar la selección del avatar
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     Menup.MenuPrincipal();
-
                 }
+
                 // Actualizar el borde del avatar seleccionado
                 if (newSelection != selectedAvatar) {
                     if (selectedAvatar) {
@@ -93,6 +112,7 @@ void Game::Update() {
                     selectedAvatar = newSelection;
                 }
             }
+
             // Manejar la entrada de texto
             textBox.handleInput(event);
         }
@@ -103,33 +123,42 @@ void Game::Update() {
         window.draw(SpriteFondoMenu);
         textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
 
-        // Dibujar todos los avatares
-       // Dibujar todos los avatares aplicando el desplazamiento de la barra
+
+        // Obtener el desplazamiento actual de la barra de scroll
+        float avatarYOffset = scrollbar.getScrollOffset();
+
+        // Limitar el desplazamiento a un valor razonable
+      
+        if (avatarYOffset > maxScrollOffset) avatarYOffset = maxScrollOffset;  // Límite máximo
+        if (avatarYOffset < 0) avatarYOffset = 0;  // No permitir desplazarse más allá del inicio
+        // Dibujar todos los avatares, excepto el seleccionado
         for (int i = 0; i < avatars.size(); ++i) {
-            // Obtener la posición original del avatar
-            sf::Vector2f originalPosition = avatars[i].getPosition();
 
-            // Aplicar el desplazamiento de la barra de scroll (scrollOffset)
-            float avatarYOffset = scrollbar.getScrollOffset();  // Obtén el desplazamiento actual del scroll
 
-            // Ajustar la posición vertical del avatar según el desplazamiento
-            avatars[i].setPosition(originalPosition.x, originalPosition.y - avatarYOffset);
+            // Obtener la posición original del avatar (posiciones basadas en una cuadrícula)
+            int column = i % 8;  // Calcular la columna
+            int row = i / 8;  // Calcular la fila
+
+            float xPos = 92.0f + column * (avatarWidth + avatarSeparation);
+            std::cout << avatarWidth <<"   "<< avatarSeparation <<"   "  << avatarYOffset;
+            float yPos = 472.0f + row * (avatarHeight + avatarSeparation) - avatarYOffset;
+
+            // Establecer la nueva posición del avatar
+            avatars[i].setPosition(xPos, yPos);
 
             // Dibujar el avatar con la nueva posición
             window.draw(avatars[i]);
-
-            // Restaurar la posición original (para evitar modificar permanentemente su posición)
-            avatars[i].setPosition(originalPosition);
         }
 
-        // Dibujar el avatar seleccionado en su posición original
+        // Dibujar solo la copia del avatar seleccionado en la posición del perfil
         if (selectedAvatar != nullptr) {
-            window.draw(*selectedAvatar);  // Dibujar el avatar seleccionado en su posición original
+            window.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
         }
-        window.draw(selectedAvatarCopy);
+
         scrollbar.draw(window);
         window.draw(recua);
         window.draw(spriteX);
         window.display();
     }
 }
+

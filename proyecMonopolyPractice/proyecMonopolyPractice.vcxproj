@@ -142,12 +142,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="ObjetosGlobal.cpp" />
     <ClCompile Include="Scrollbar.cpp" />
-=======
-    <ClCompile Include="ServidorPrueba.cpp" />
->>>>>>> c4ca653da27fb5418e862cf5be87a696343acc33
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />
