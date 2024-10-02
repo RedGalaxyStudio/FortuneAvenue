@@ -22,8 +22,6 @@ private:
     sf::Text textoPregunta;
     sf::Text textoGuardado;
     sf::Text text;
-
-    std::string input;
 };
 
 #endif // TEXTBOX_HPP

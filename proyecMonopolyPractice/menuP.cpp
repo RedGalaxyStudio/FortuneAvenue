@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp"
-#include "Game.hpp"
+#include "IniciaUser.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
 
@@ -15,10 +15,6 @@ void menuP::setWindow(sf::RenderWindow& win) {
 // Carga de recursos (texturas y sprites)
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/boton2.png")) return;
-    if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
-    if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
-    if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
-    if (!TextureBotonNoOff.loadFromFile("resource/texture/Button/BotonNoOff.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
     if (!TextureBotonJugarOff.loadFromFile("resource/texture/Button/BotonJugarOff.png")) return;
     if (!TextureBotonJugarOn.loadFromFile("resource/texture/Button/BotonJugarOn.png")) return;
@@ -49,7 +45,7 @@ void menuP::Resource() {
     Sesion.setFillColor(sf::Color::White);
     Sesion.setOutlineThickness(2);
     Sesion.setOutlineColor(sf::Color(135, 135, 135));
-    box.setPosition(50,50);
+    box.setPosition(70,70);
     Sesion.setPosition(54, 50);
 
     // Configuraci�n del sprite del logotipo
@@ -91,13 +87,14 @@ void menuP::MenuPrincipal() {
     MenuMusicFondo.setLoop(true);
     MenuMusicFondo.play();
 
+    box.setPosition(50, 50);
     // Crear los botones
     ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
     ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
     ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
 
-
+    Inicializar();
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
 
@@ -143,14 +140,16 @@ void menuP::ValidarUser() {
 
     if (SesionValida) {
         GetUserEmail();
-        if (email.empty()) {
+
+        Sesion.setString(input);
+     /*   if (email.empty()) {
             Sesion.setString("Iniciar Sesion");
         }
         else
         {
             Sesion.setString(email);
         }
-     SesionValida = false;
+     SesionValida = false;*/
     }
     
 }
@@ -188,6 +187,7 @@ void menuP::eventoMenuP() {
                 playClickSound();
 
                 MenuJugar();
+          
                 // std::cout << "Jugar presionado" << std::endl;
                  // Aqu� puedes cambiar la escena o empezar el juego
             }
@@ -218,6 +218,12 @@ void menuP::eventoMenuP() {
         }
     }
 }
+
+void menuP::MenuJugar() {
+
+
+};
+
 
 void menuP::eventoMenuO() {
 
@@ -256,15 +262,15 @@ void menuP::eventoMenuO() {
 }
 
 
-void menuP::MenuJugar() {
+void menuP::Inicializar() {
 
-    Game Game(*window);
+    IniciaUser iniciaUser(*window);
 
     // Cargar los recursos necesarios para la cinem�tica
-    Game.Resource();
+    iniciaUser.Resource();
 
     //Iniciar la animaci�n
-    Game.Update();
+    iniciaUser.Update();
 
 }
 void menuP::MenuOpcion() {
@@ -307,10 +313,10 @@ void menuP::MenuSalir() {
     SpriteConfirmarSalir.setOrigin(340, 240);
 
    //Ubicaciones de los botones si y no
-    SpriteBotonSi.setTexture(TextureBotonSiOff);
+
     SpriteBotonSi.setPosition(480, 380);  
 
-    SpriteBotonNo.setTexture(TextureBotonNoOff);
+  
     SpriteBotonNo.setPosition(680, 380);  
 
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);

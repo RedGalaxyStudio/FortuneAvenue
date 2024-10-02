@@ -30,7 +30,7 @@
     <ClCompile Include="VolumeSlider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="IniciaUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextBox.cpp">
@@ -49,9 +49,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scrollbar.cpp">
-         <Filter>Source Files</Filter>
-             </ClCompile>
-    <ClCompile Include="ServidorPrueba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClInclude Include="TextBox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.hpp">
+    <ClInclude Include="IniciaUser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ResourceGlobal.hpp">

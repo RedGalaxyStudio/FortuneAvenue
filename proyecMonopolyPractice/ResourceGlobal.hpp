@@ -13,7 +13,7 @@
 
 // Declarar la textura global
 extern std::string nombre;
-extern std::string inpu;
+extern std::string input;
 extern sf::Texture TextureFondoMenu;
 extern sf::Cursor normalCursor;
 extern sf::Cursor linkCursor;
@@ -42,6 +42,16 @@ extern  std::wstring Token;
 extern  std::string email;
 extern  std::string id;
 extern  std::string pictureUrl;
+
+extern sf::Texture TextureBotonSiOn;
+extern sf::Texture TextureBotonSiOff;
+extern sf::Sprite SpriteBotonSi;
+
+extern sf::Texture TextureBotonNoOn;
+extern sf::Texture TextureBotonNoOff;
+extern sf::Sprite SpriteBotonNo;
+
+
 // Funciones para cargar las texturas y cursores
 void loadAvatars();
 void playClickSound();

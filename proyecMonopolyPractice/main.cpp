@@ -2,7 +2,7 @@
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ResourceGlobal.hpp"
-#include "Game.hpp"
+#include "IniciaUser.hpp"
 
 int main() {
     // Crear la ventana en pantalla completa
