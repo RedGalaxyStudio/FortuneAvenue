@@ -45,8 +45,7 @@ void menuP::Resource() {
     Sesion.setFillColor(sf::Color::White);
     Sesion.setOutlineThickness(2);
     Sesion.setOutlineColor(sf::Color(135, 135, 135));
-    box.setPosition(70,70);
-    Sesion.setPosition(54, 50);
+    Sesion.setPosition(70, 70);
 
     // Configuraci�n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
