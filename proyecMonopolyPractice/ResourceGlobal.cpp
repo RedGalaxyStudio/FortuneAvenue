@@ -14,7 +14,7 @@ sf::Cursor moveCursor;
 sf::SoundBuffer HoverBuffer;
 sf::SoundBuffer ClickBuffer;
 std::string nombre;
-std::string inpu;
+std::string input;
 sf::Sound HoverSound;  
 sf::Sound ClickSound;  
 sf::Cursor* currentCursor;
@@ -37,6 +37,13 @@ std::string id;
 std::string pictureUrl;
 ButtonG* botonX = nullptr; // Definición de la variable
 
+sf::Texture TextureBotonSiOn;
+sf::Texture TextureBotonSiOff;
+sf::Sprite SpriteBotonSi;
+
+sf::Texture TextureBotonNoOn;
+sf::Texture TextureBotonNoOff;
+sf::Sprite SpriteBotonNo;
 
 
 
@@ -75,7 +82,13 @@ void loadTextures() {
     if (!TextureFondoMenu.loadFromFile("resource/texture/Fondos/fondomenu.png")) return;
     if (!textureXOn.loadFromFile("resource/texture/Button/XOn.png")) return;
     if (!textureXOff.loadFromFile("resource/texture/Button/XOff.png")) return;
+    if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
+    if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
+    if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
+    if (!TextureBotonNoOff.loadFromFile("resource/texture/Button/BotonNoOff.png")) return;
     spriteX.setTexture(textureXOff);
+    SpriteBotonNo.setTexture(TextureBotonNoOff);   
+    SpriteBotonSi.setTexture(TextureBotonSiOff);
     // Ahora que las texturas están cargadas, se puede crear el botón
     botonX = new ButtonG(spriteX, textureXOff, textureXOn);
     if (!fontUser.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
@@ -83,7 +96,7 @@ void loadTextures() {
     }
     if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
     box.setTexture(textureBox);
-
+    
 }
 
 void loadSounds(){

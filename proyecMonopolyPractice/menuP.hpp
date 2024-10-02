@@ -19,6 +19,8 @@ public:
     // Carga de recursos (texturas y sprites)
     void Resource();
 
+    void Inicializar();
+    void MenuJugar();
     // Actualizaci�n de la animaci�n (desvanecimiento del logotipo)
     void MenuPrincipal();
 
@@ -30,7 +32,7 @@ public:
 
     //void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
     //void handleCursorChange();
-    void MenuJugar();
+ 
     void OpenWebView();
     void CloseWebView(bool Vali);
     //Ventana de opciones
@@ -83,13 +85,6 @@ private:
     sf::Texture TextureConfirmarSalir;
     sf::Sprite SpriteConfirmarSalir;
 
-    sf::Texture TextureBotonSiOn;
-    sf::Texture TextureBotonSiOff;
-    sf::Sprite SpriteBotonSi;
-
-    sf::Texture TextureBotonNoOn;
-    sf::Texture TextureBotonNoOff;
-    sf::Sprite SpriteBotonNo;
 
     sf::Font Fuente;
     sf::Text TextAcercaDe;
