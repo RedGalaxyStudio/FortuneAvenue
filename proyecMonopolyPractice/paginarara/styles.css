@@ -131,7 +131,6 @@ h2 {
     box-shadow: 0 0 10px #f72b8e, 0 0 20px #f72b8e; /* Efecto de borde neón */
 }
 
-
 .btn-especifico {
     position: relative;
     top: 50px; /* Mueve el botón 50 píxeles hacia abajo */
@@ -176,4 +175,21 @@ footer {
     padding: 20px;
     background-color: #111;
     position: relative;
+}
+
+/* Nuevos botones en la barra de navegación */
+.barra-lateral ul li a[href="#AcercaDe"],
+.barra-lateral ul li a[href="#Contribuidores"] {
+    background-image: linear-gradient(to right, #0058f0, #00f088);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.barra-lateral ul li a[href="#AcercaDe"]:hover,
+.barra-lateral ul li a[href="#Contribuidores"]:hover {
+    background-image: linear-gradient(to right, #0028f0, #f72b8e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }

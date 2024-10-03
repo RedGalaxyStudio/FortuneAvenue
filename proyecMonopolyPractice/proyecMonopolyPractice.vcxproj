@@ -139,6 +139,7 @@
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="Cinematic.hpp" />
+    <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
