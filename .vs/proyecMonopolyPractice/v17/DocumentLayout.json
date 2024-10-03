@@ -91,6 +91,10 @@
           "SelectedChildIndex": 5,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ResourceGlobal.cpp",
@@ -101,8 +105,15 @@
               "ViewState": "AQIAABEAAAAA1Ajnm+olwKwAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-01T19:28:42.499Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
@@ -114,20 +125,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T22:14:49.512Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "WhenOpened": "2024-10-02T22:14:49.512Z"
             },
             {
               "$type": "Document",
@@ -137,7 +135,7 @@
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
               "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\menuP.cpp",
-              "ViewState": "AQIAAFQAAAAAs17sh9kwwGIAAAASAAAA",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAAAGIAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-24T17:12:33.113Z",
               "EditorCaption": ""
@@ -152,8 +150,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T22:14:43.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T22:14:43.125Z"
             },
             {
               "$type": "Document",
@@ -165,8 +162,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\menuP.hpp",
               "ViewState": "AQIAAEwAAAAAAAAAAAAgwCIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T15:36:33.747Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T15:36:33.747Z"
             },
             {
               "$type": "Document",
@@ -178,8 +174,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\IniciaUser.hpp",
               "ViewState": "AQIAABYAAAAAAAAAAIAwwCoAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-25T01:52:23.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-25T01:52:23.275Z"
             },
             {
               "$type": "Document",
@@ -191,8 +186,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\ObjetosGlobal.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T16:45:36.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T16:45:36.673Z"
             },
             {
               "$type": "Document",
@@ -204,8 +198,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\ResourceGlobal.hpp",
               "ViewState": "AQIAADMAAACAMn8OOSYrwD0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-24T15:40:00.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T15:40:00.18Z"
             },
             {
               "$type": "Document",
@@ -217,8 +210,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\nlohmann\\json_fwd.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T16:46:45.471Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T16:46:45.471Z"
             },
             {
               "$type": "Document",
@@ -230,8 +222,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\IniciaUser.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T15:41:33.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T15:41:33.3Z"
             },
             {
               "$type": "Document",
@@ -243,8 +234,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T20:29:19.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T20:29:19.5Z"
             },
             {
               "$type": "Document",
@@ -256,8 +246,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\ButtonG.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T13:53:40.622Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T13:53:40.622Z"
             },
             {
               "$type": "Document",
@@ -269,8 +258,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\Scrollbar.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T16:20:07.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T16:20:07.391Z"
             },
             {
               "$type": "Document",
@@ -282,8 +270,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\TextBox.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T14:05:09.306Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T14:05:09.306Z"
             },
             {
               "$type": "Document",
@@ -295,8 +282,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\VolumeSlider.hpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T15:35:22.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T15:35:22.392Z"
             },
             {
               "$type": "Document",
@@ -308,8 +294,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\ObjetosGlobal.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-25T01:07:30.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-25T01:07:30.556Z"
             },
             {
               "$type": "Document",
@@ -321,8 +306,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\TextBox.cpp",
               "ViewState": "AQIAADMAAAAAAAAAAIBJwEcAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T14:15:11.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T14:15:11.65Z"
             },
             {
               "$type": "Document",
@@ -334,8 +318,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xutility",
               "ViewState": "AQIAACsSAAAAAAAAAIAwwEESAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-02T14:12:19.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T14:12:19.954Z"
             },
             {
               "$type": "Document",
@@ -347,8 +330,7 @@
               "RelativeToolTip": "proyecMonopolyPractice\\SettingsManager.cpp",
               "ViewState": "AQIAAF4AAAAAAAAAAEBVwHcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T23:19:24.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T23:19:24.707Z"
             },
             {
               "$type": "Document",
@@ -360,8 +342,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppCommon.targets",
               "ViewState": "AQIAAN8CAAAAAAAAAAAcwPICAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-10-01T19:31:42.383Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T19:31:42.383Z"
             }
           ]
         }

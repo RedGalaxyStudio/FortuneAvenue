@@ -1,2 +1,12 @@
-﻿  menuP.cpp
+﻿  ButtonG.cpp
+  Client.cpp
+  IniciaUser.cpp
+  ObjetosGlobal.cpp
+  ResourceGlobal.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\xutility(4672,18): warning C4244: '=': conversion from 'wchar_t' to 'char', possible loss of data
+  Scrollbar.cpp
+  TextBox.cpp
+  WebViewManager.cpp
+  Generating Code...
+  LINK : C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe not found or not built by the last incremental link; performing full link
   proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
