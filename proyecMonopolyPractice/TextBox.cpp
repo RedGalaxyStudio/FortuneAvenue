@@ -47,9 +47,9 @@ TextBox::TextBox(float width, float height) {
 
 // Posición del cuadro de texto
 void TextBox::setPosition() {
-    box.setPosition(x, y);
-    text.setPosition(x + 30, y + 25); // Desplaza el texto un poco dentro del cuadro
-    textoPregunta.setPosition(x, y-45);
+    box.setPosition(x + 20, y + 20);
+    text.setPosition(x + 30, y + 45); // Desplaza el texto un poco dentro del cuadro
+    textoPregunta.setPosition(x, y-25);
 }
 
 // Manejo de la entrada de texto
