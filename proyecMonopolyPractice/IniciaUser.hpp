@@ -24,6 +24,8 @@ private:
     // Texturas y sprites
     sf::Texture textureLogoJuego;
     sf::Sprite spriteLogoJuego;
+    sf::Texture ckeck;
+    sf::Sprite spriteCkeck;
     sf::CircleShape* selectedAvatar = nullptr; // Avatar seleccionado
     sf::Sprite SpriteFondoMenu;
     sf::Vector2i mousePosition;

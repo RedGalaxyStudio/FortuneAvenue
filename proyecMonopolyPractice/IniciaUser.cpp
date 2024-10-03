@@ -24,11 +24,15 @@ IniciaUser::~IniciaUser() {
 // Carga de recursos (texturas y sprites)
 void IniciaUser::Resource() {
     if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
+   
+
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void IniciaUser::Update() {
+    if (!ckeck.loadFromFile("resource/texture/Avatars/cheeke2.png")) return;
+    spriteCkeck.setTexture(ckeck);
     if (!std::filesystem::exists("perfil.json")) {
         IniciAcion();
     }else{
@@ -37,35 +41,60 @@ void IniciaUser::Update() {
     
 }
 
-
-
 void IniciaUser::IniciAcion() {
-    SpriteBotonSi.setPosition(800, 50);
+    spriteCkeck.setPosition(850, 70);
 
     sf::Texture Texrecua;
     sf::Sprite recua;
+    // Posiciones base calculadas fuera del bucle
+    float baseXPos = 92.0f;
+    float baseYPos = 472.0f;
+    
+    // Calcular solo una vez fuera del bucle
 
         // Definir las dimensiones y límites
     const float avatarWidth = 128.0f;
     const float avatarHeight = 128.0f;
     const float avatarSeparation = 28.0f;
-    const float visibleAreaHeight = 170.0f;
-    const float maxScrollOffset = 270.0f;  // Límite máximo de desplazamiento
+    const float visibleAreaHeight = 248.0f;
+    const float maxScrollOffset = 156.0f;  // Límite máximo de desplazamiento
 
-    Texrecua.loadFromFile("resource/texture/Avatars/recua2.png");
+    float widthSeparation = avatarWidth + avatarSeparation;
+    float heightSeparation = avatarHeight + avatarSeparation;
+
+    Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
-    recua.setPosition(300, 92);
-    TextBox textBox(400, 50);  // Crear un cuadro de texto
+    recua.setPosition(400, 112);
+    TextBox textBox(496, 50);  // Crear un cuadro de texto
     textBox.setPosition();  // Posicionar el cuadro de texto
-    Scrollbar scrollbar(340, 290, 14);  // Altura de la ventana, altura del thumb
-    scrollbar.setPosition(1240, 340);  // Colocar la barra a la derecha
+    // Definir la altura total del contenido y la altura de la ventana
+    const float totalContentHeight = 440.0f; // Cambia esto según el total que necesites
+    const float scrollbarHeight = 340.0f;
+
+    // Calcular la proporción y la altura del pulgar
+    float proportion = visibleAreaHeight / totalContentHeight;
+    float thumbHeight = scrollbarHeight * proportion;
+
+    // Asegúrate de que el pulgar tenga una altura mínima
+    const float minThumbHeight = 14.0f; // altura mínima para el pulgar
+    thumbHeight = std::max(thumbHeight, minThumbHeight);
+
+    // Ahora puedes crear tu scrollbar
+    Scrollbar scrollbar(340, thumbHeight, 14); // 340 es la altura 
+
+    scrollbar.setPosition(1260, 340);  // Colocar la barra a la derecha
 
     // Crear una nueva instancia de sf::CircleShape para la copia
     selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
     selectedAvatarCopy.setTexture(&sharedTexture);  // Usar la textura compartida
     selectedAvatarCopy.setOrigin(64, 64);  // Establece el origen al centro del círculo
-    selectedAvatarCopy.setPosition(300, 92);  // Establecer la nueva posición para la copia
+    selectedAvatarCopy.setPosition(400, 112);  // Establecer la nueva posición para la copia
+    for (int i = 0; i < avatars.size(); i++) {
+        sf::Vector2f pos = avatars[i].getPosition();
+       // std::cout << "AvatarO " << i << " Position: x = " << pos.x << ", y = " << pos.y << std::endl;
+    }
+    float avatarYOffset = 0.0f; // Declarar fuera del bucle
 
     while (window.isOpen()) {
         mousePosition = sf::Mouse::getPosition(window);
@@ -83,58 +112,70 @@ void IniciaUser::IniciAcion() {
             // Manejo del desplazamiento con la rueda del mouse
             if (event.type == sf::Event::MouseWheelScrolled) {
                 scrollbar.update(event.mouseWheelScroll.delta);  // Actualizar el desplazamiento
+                avatarYOffset = scrollbar.getScrollOffset();
+              //  std::cout << "Scroll delta: " << event.mouseWheelScroll.delta << " | avatarYOffset: " << avatarYOffset << std::endl;
             }
 
-            float avatarYOffset = scrollbar.getScrollOffset();
-
+            
+            //std::cout << "Avateear >> " << avatarYOffset;
             // Limitar el desplazamiento a un valor razonable
-
-            if (avatarYOffset > maxScrollOffset) avatarYOffset = maxScrollOffset;  // Límite máximo
-            if (avatarYOffset < 0) avatarYOffset = 0;  // No permitir desplazarse más allá del inicio
-            // Dibujar todos los avatares, excepto el seleccionado
-            for (int i = 0; i < avatars.size(); ++i) {
-
-
-                // Obtener la posición original del avatar (posiciones basadas en una cuadrícula)
-                int column = i % 8;  // Calcular la columna
-                int row = i / 8;  // Calcular la fila
-
-                float xPos = 92.0f + column * (avatarWidth + avatarSeparation);
-                std::cout << avatarWidth << "   " << avatarSeparation << "   " << avatarYOffset;
-                float yPos = 472.0f + row * (avatarHeight + avatarSeparation) - avatarYOffset;
-
-                // Establecer la nueva posición del avatar
-                avatars[i].setPosition(xPos, yPos);
+            //std::cout << "   avatarYOffset ANS:" << avatarYOffset;
+            if (avatarYOffset > maxScrollOffset){ 
+                avatarYOffset = maxScrollOffset;  // Límite máximo
             }
+            else if (avatarYOffset < 0) {
+                avatarYOffset = 0;  // No permitir desplazarse más allá del inicio
+            }
+            std::cout << "   avatarYOffset 0:" << avatarYOffset;
+            // Dibujar todos los avatares, excepto el seleccionado
+            if (avatarYOffset != 0) {
+                std::vector<sf::FloatRect> avatarBounds(avatars.size());
+                for (int i = 0; i < avatars.size(); ++i) {
+                    int column = i % 8;  // Calcular la columna
+                    int row = i / 8;     // Calcular la fila
+
+                    float xPos = baseXPos + column * widthSeparation;
+
+                    float yPos = (baseYPos + row * heightSeparation) - avatarYOffset;
+                    //std::cout << "     Y pos " << yPos;
+                    // Guardar los límites de los avatares
+                    avatarBounds[i] = sf::FloatRect(xPos, yPos, avatars[i].getGlobalBounds().width, avatars[i].getGlobalBounds().height);
 
 
+                    // Verificar si el avatar está dentro del área visible antes de dibujarlo
+                   // if (yPos + avatarHeight >= 0 && yPos <= window.getSize().y) {
+                        avatars[i].setPosition(xPos, yPos);
+                 //   }
+                    //else {
+                        // No dibujar avatares que están fuera de la pantalla
+                     //   continue;
+                    //}
+                }
+
+            }
 
             // Manejo de clics en avatares
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-          
-
                 // Verificar el click en "si" y cerrar la vetana
-                if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
+                if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     void saveSelectedAvatar();
                     Menup.MenuPrincipal();
                 }
-                  sf::CircleShape* newSelection = nullptr;
+
+
+                sf::CircleShape* newSelection = nullptr;
 
 
                 // Obtener el desplazamiento actual de la barra de scroll
-                float avatarYOffset = scrollbar.getScrollOffset();
-
+               
                 for (int i = 0; i < avatars.size(); ++i) {
-                    // Obtener la posición original del avatar
-                    sf::Vector2f originalPosition = avatars[i].getPosition();
-
-                    // Calcular la posición desplazada del avatar según el scroll
-                    sf::FloatRect bounds = avatars[i].getGlobalBounds();
-                    bounds.top -= avatarYOffset;
+                    //sf::Vector2f originalPosition = avatars[i].getPosition();
+                  //  sf::FloatRect bounds = avatars[i].getGlobalBounds();
+                //    bounds.top -= avatarYOffset;
 
                     // Verificar si el mouse está sobre el avatar desplazado
-                    if (bounds.contains(mousePosFloat)) {
+                    if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
                         newSelection = &avatars[i];
                         break;
                     }
@@ -145,21 +186,22 @@ void IniciaUser::IniciAcion() {
                     playClickSound();
                     Menup.MenuPrincipal();
                 }
-
-                // Actualizar el borde del avatar seleccionado
-                if (newSelection != selectedAvatar) {
-                    if (selectedAvatar) {
-                        selectedAvatar->setOutlineColor(sf::Color::Transparent);  // Quitar borde del avatar previamente seleccionado
-                        selectedAvatar->setOutlineThickness(0);
+                if (newSelection != nullptr) {  // Solo actualiza si hay una nueva selección
+                    // Actualizar el borde del avatar seleccionado
+                    if (newSelection != selectedAvatar) {
+                        if (selectedAvatar) {
+                            selectedAvatar->setOutlineColor(sf::Color::Transparent);  // Quitar borde del avatar previamente seleccionado
+                            selectedAvatar->setOutlineThickness(0);
+                        }
+                        if (newSelection) {
+                            newSelection->setOutlineColor(sf::Color::Black);  // Aplicar borde al nuevo avatar seleccionado
+                            newSelection->setOutlineThickness(4);
+                            // Actualizar la textura de la copia del avatar
+                            selectedAvatarCopy.setTexture(newSelection->getTexture());  // Copiar la textura
+                        }
+                        selectedAvatar = newSelection;
+                        saveSelectedAvatar();
                     }
-                    if (newSelection) {
-                        newSelection->setOutlineColor(sf::Color::Black);  // Aplicar borde al nuevo avatar seleccionado
-                        newSelection->setOutlineThickness(4);
-                        // Actualizar la textura de la copia del avatar
-                        selectedAvatarCopy.setTexture(newSelection->getTexture());  // Copiar la textura
-                    }
-                    selectedAvatar = newSelection;
-                    saveSelectedAvatar();
                 }
             }
 
@@ -168,7 +210,7 @@ void IniciaUser::IniciAcion() {
         }
 
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-        ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
+
        // ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 
         window.clear();
@@ -176,6 +218,9 @@ void IniciaUser::IniciAcion() {
         textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
 
         for (int i = 0; i < avatars.size(); ++i) {
+
+            sf::Vector2f pos = avatars[i].getPosition();
+           // std::cout << "Avatar " << i << " Position: x = " << pos.x << ", y = " << pos.y << std::endl;
             window.draw(avatars[i]);
         }
 
@@ -184,14 +229,12 @@ void IniciaUser::IniciAcion() {
             window.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
         }
         scrollbar.draw(window);
-        window.draw(SpriteBotonSi);
+        
         window.draw(recua);
         window.draw(spriteX);
+        window.draw(spriteCkeck);
         window.display();
     }
-
-
-
 }
 
 void IniciaUser::saveSelectedAvatar() {
@@ -233,8 +276,6 @@ void IniciaUser::saveSelectedAvatar() {
         std::cerr << "Error: No hay avatar seleccionado para guardar." << std::endl;
     }
 }
-
-
 
 void IniciaUser::loadSelectedAvatar() {
 

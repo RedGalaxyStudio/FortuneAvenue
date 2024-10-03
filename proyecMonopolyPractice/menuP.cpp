@@ -92,7 +92,7 @@ void menuP::MenuPrincipal() {
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
     ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
     ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
-
+    window->setMouseCursorVisible(true);
     Inicializar();
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
