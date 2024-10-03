@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Daniel\Desktop\ProyectosVisualCode\Proyecto\proyecto\proyecMonopolyPractice\packages\cpprestsdk.v142.2.10.15\build\native\include;\SFML\include;C:\Users\Daniel\Desktop\proyecMonopolyPractice\ultralight-sdk-1.3.0-win-x64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>\SFML\include;$(ProjectDir)curl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)curl\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
