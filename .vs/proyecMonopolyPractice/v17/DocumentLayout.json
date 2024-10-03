@@ -3,20 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\WebViewManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\IniciaUser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ObjetosGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ObjetosGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\IniciaUser.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\WebViewManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\TextBox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\SettingsManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ObjetosGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ObjetosGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ResourceGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -27,24 +47,12 @@
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\WebViewManager.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ButtonG.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ButtonG.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\IniciaUser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\IniciaUser.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\Scrollbar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -67,15 +75,7 @@
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\VolumeSlider.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\TextBox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppCommon.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\SettingsManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xutility||{3B902123-F8A7-4915-9F01-361F908088D0}"
@@ -88,85 +88,25 @@
       "DocumentGroups": [
         {
           "DockedWidth": 173,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ResourceGlobal.cpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ResourceGlobal.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGlobal.cpp",
               "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ResourceGlobal.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\ResourceGlobal.cpp",
-              "ViewState": "AQIAABEAAAAA1Ajnm+olwKwAAAAPAAAA",
+              "ViewState": "AQIAANcAAAAA1Ajnm+olwKwAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-01T19:28:42.499Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Bookmark",
-<<<<<<< HEAD
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "WebViewManager.hpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.hpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\WebViewManager.hpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.hpp",
-=======
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WebViewManager.hpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\WebViewManager.hpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\WebViewManager.hpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\WebViewManager.hpp",
->>>>>>> 62226cbfda03630ac81c8be43257224b6a7484ac
-              "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.hpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T22:14:49.512Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "menuP.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\menuP.cpp",
-              "ViewState": "AQIAAGMAAAAAAAAAAAAAAGIAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T17:12:33.113Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "WebViewManager.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\WebViewManager.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T22:14:43.125Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "menuP.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.hpp",
@@ -174,23 +114,95 @@
               "RelativeToolTip": "proyecMonopolyPractice\\menuP.hpp",
               "ViewState": "AQIAAEwAAAAAAAAAAAAgwCIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-02T15:36:33.747Z"
+              "WhenOpened": "2024-10-02T15:36:33.747Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
+              "Title": "menuP.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\menuP.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\menuP.cpp",
+              "ViewState": "AQIAABsAAAAAs17sh9kwwC8AAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-24T17:12:33.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WebViewManager.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\WebViewManager.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-02T22:14:43.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "IniciaUser.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\IniciaUser.hpp",
               "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.hpp",
               "RelativeToolTip": "proyecMonopolyPractice\\IniciaUser.hpp",
-              "ViewState": "AQIAABYAAAAAAAAAAIAwwCoAAAAUAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAIAwwBsAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-25T01:52:23.275Z"
+              "WhenOpened": "2024-09-25T01:52:23.275Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "IniciaUser.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\IniciaUser.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\IniciaUser.cpp",
+              "ViewState": "AQIAAEwAAAAAAAAAAAAAAFUAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-24T15:41:33.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SettingsManager.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\SettingsManager.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\SettingsManager.cpp",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAHkAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-24T23:19:24.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TextBox.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\TextBox.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\TextBox.cpp",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADEAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-02T14:15:11.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ObjetosGlobal.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ObjetosGlobal.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ObjetosGlobal.hpp",
@@ -202,7 +214,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
+              "Title": "WebViewManager.hpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.hpp",
+              "RelativeDocumentMoniker": "proyecMonopolyPractice\\WebViewManager.hpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\WebViewManager.hpp",
+              "RelativeToolTip": "proyecMonopolyPractice\\WebViewManager.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-02T22:14:49.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ResourceGlobal.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ResourceGlobal.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGlobal.hpp",
@@ -214,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "json_fwd.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\nlohmann\\json_fwd.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\nlohmann\\json_fwd.hpp",
@@ -223,25 +247,10 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-10-02T16:46:45.471Z"
-<<<<<<< HEAD
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IniciaUser.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\IniciaUser.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\IniciaUser.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\IniciaUser.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T15:41:33.3Z"
-=======
->>>>>>> 62226cbfda03630ac81c8be43257224b6a7484ac
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\main.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
@@ -249,30 +258,11 @@
               "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-<<<<<<< HEAD
-              "WhenOpened": "2024-09-24T20:29:19.5Z"
-=======
-              "WhenOpened": "2024-09-24T15:41:33.3Z"
->>>>>>> 62226cbfda03630ac81c8be43257224b6a7484ac
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-<<<<<<< HEAD
-=======
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-24T20:29:19.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
->>>>>>> 62226cbfda03630ac81c8be43257224b6a7484ac
+              "DocumentIndex": 11,
               "Title": "ButtonG.cpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ButtonG.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ButtonG.cpp",
@@ -284,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Scrollbar.cpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\Scrollbar.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\Scrollbar.cpp",
@@ -296,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "TextBox.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\TextBox.hpp",
@@ -308,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "VolumeSlider.hpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\VolumeSlider.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\VolumeSlider.hpp",
@@ -320,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "ObjetosGlobal.cpp",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\ObjetosGlobal.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ObjetosGlobal.cpp",
@@ -329,18 +319,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-25T01:07:30.556Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "TextBox.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\TextBox.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\TextBox.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\TextBox.cpp",
-              "ViewState": "AQIAADMAAAAAAAAAAIBJwEcAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-02T14:15:11.65Z"
             },
             {
               "$type": "Document",
@@ -357,18 +335,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": "SettingsManager.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\SettingsManager.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\ProyectoReal\\FortuneAvenue\\proyecMonopolyPractice\\SettingsManager.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\SettingsManager.cpp",
-              "ViewState": "AQIAAF4AAAAAAAAAAEBVwHcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-24T23:19:24.707Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
               "Title": "Microsoft.CppCommon.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppCommon.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppCommon.targets",
