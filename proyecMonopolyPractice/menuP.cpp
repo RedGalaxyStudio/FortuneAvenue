@@ -96,6 +96,7 @@ void menuP::MenuPrincipal() {
     Inicializar();
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
+    ValidarUser();
 
     while (window->isOpen()) {
 
@@ -110,8 +111,7 @@ void menuP::MenuPrincipal() {
         // Establecer cursor por defecto antes de verificar los botones
         currentCursor = &normalCursor;
 
-        ValidarUser();
-
+        
 
         // Actualizar el estado de los botones y el cursor
         botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -138,7 +138,7 @@ void menuP::MenuPrincipal() {
 void menuP::ValidarUser() {
 
     if (SesionValida) {
-        GetUserEmail();
+     //   GetUserEmail();
 
         Sesion.setString(input);
      /*   if (email.empty()) {
