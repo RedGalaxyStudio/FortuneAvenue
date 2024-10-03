@@ -53,7 +53,7 @@ void loadAvatars() {
     avatars.resize(avatarCount);
     avatarTextures.resize(avatarCount);
 
-    for (int i = 0; i < avatarCount; ++i) {
+    for (int i = 0; i < avatarCount; i++) {
         if (!avatarTextures[i].loadFromFile("resource/texture/Avatars/avatar" + std::to_string(i) + ".png"))
             return;
 
@@ -65,12 +65,13 @@ void loadAvatars() {
 
     }
 
-  for (int i = 0; i < avatars.size(); ++i) {
+  for (int i = 0; i < avatars.size(); i++) {
             int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
             int col = i % 8;  // Determina la columna (0 a 7)
 
             float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
             float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
+            std::cout<< i << "  X :"<<x<< "y :" <<y<<std::endl;
 
             avatars[i].setPosition(x, y);
       }
