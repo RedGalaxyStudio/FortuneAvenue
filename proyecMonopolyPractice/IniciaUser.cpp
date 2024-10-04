@@ -24,11 +24,15 @@ IniciaUser::~IniciaUser() {
 // Carga de recursos (texturas y sprites)
 void IniciaUser::Resource() {
     if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
+   
+
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void IniciaUser::Update() {
+    if (!ckeck.loadFromFile("resource/texture/Avatars/cheeke2.png")) return;
+    spriteCkeck.setTexture(ckeck);
     if (!std::filesystem::exists("perfil.json")) {
         IniciAcion();
     }else{
@@ -38,7 +42,7 @@ void IniciaUser::Update() {
 }
 
 void IniciaUser::IniciAcion() {
-    SpriteBotonSi.setPosition(800, 50);
+    spriteCkeck.setPosition(850, 70);
 
     sf::Texture Texrecua;
     sf::Sprite recua;
@@ -58,10 +62,10 @@ void IniciaUser::IniciAcion() {
     float widthSeparation = avatarWidth + avatarSeparation;
     float heightSeparation = avatarHeight + avatarSeparation;
 
-    Texrecua.loadFromFile("resource/texture/Avatars/recua2.png");
+    Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
-    recua.setPosition(300, 92);
+    recua.setPosition(400, 112);
     TextBox textBox(496, 50);  // Crear un cuadro de texto
     textBox.setPosition();  // Posicionar el cuadro de texto
     // Definir la altura total del contenido y la altura de la ventana
@@ -79,13 +83,13 @@ void IniciaUser::IniciAcion() {
     // Ahora puedes crear tu scrollbar
     Scrollbar scrollbar(340, thumbHeight, 14); // 340 es la altura 
 
-    scrollbar.setPosition(1240, 340);  // Colocar la barra a la derecha
+    scrollbar.setPosition(1260, 340);  // Colocar la barra a la derecha
 
     // Crear una nueva instancia de sf::CircleShape para la copia
     selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
     selectedAvatarCopy.setTexture(&sharedTexture);  // Usar la textura compartida
     selectedAvatarCopy.setOrigin(64, 64);  // Establece el origen al centro del círculo
-    selectedAvatarCopy.setPosition(300, 92);  // Establecer la nueva posición para la copia
+    selectedAvatarCopy.setPosition(400, 112);  // Establecer la nueva posición para la copia
     for (int i = 0; i < avatars.size(); i++) {
         sf::Vector2f pos = avatars[i].getPosition();
        // std::cout << "AvatarO " << i << " Position: x = " << pos.x << ", y = " << pos.y << std::endl;
@@ -153,7 +157,7 @@ void IniciaUser::IniciAcion() {
             // Manejo de clics en avatares
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 // Verificar el click en "si" y cerrar la vetana
-                if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
+                if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     void saveSelectedAvatar();
                     Menup.MenuPrincipal();
@@ -206,7 +210,7 @@ void IniciaUser::IniciAcion() {
         }
 
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-        ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
+
        // ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 
         window.clear();
@@ -225,9 +229,10 @@ void IniciaUser::IniciAcion() {
             window.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
         }
         scrollbar.draw(window);
-        window.draw(SpriteBotonSi);
+        
         window.draw(recua);
         window.draw(spriteX);
+        window.draw(spriteCkeck);
         window.display();
     }
 }
