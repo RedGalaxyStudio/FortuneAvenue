@@ -22,8 +22,6 @@ private:
     sf::RenderWindow& window;
 
     // Texturas y sprites
-    sf::Texture textureLogoJuego;
-    sf::Sprite spriteLogoJuego;
     sf::Texture ckeck;
     sf::Sprite spriteCkeck;
     sf::CircleShape* selectedAvatar = nullptr; // Avatar seleccionado
@@ -33,12 +31,6 @@ private:
 
     int currentIndex;  // Índice de avatares visibles
 
-    // Sonidos
-    //sf::SoundBuffer FondoBuffer;
-    //sf::Sound FondoSound;
-    //bool soundOne;
-    sf::Texture sharedTexture; // Textura compartida para los avatares
-    // Caja de texto (TextBox)
     TextBox textBox;  // Usar TextBox como miembro de IniciaUser
 };
 
