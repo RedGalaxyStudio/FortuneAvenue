@@ -5,10 +5,12 @@ std::vector<sf::CircleShape> AvatarPlayers;  // Dinámico para el número de jugad
 std::vector<std::string> StringNamePlayers;
 std::vector<sf::Text> NamePlayers;
 std::vector<sf::Sprite> boxPlayers;
+std::vector<sf::Sprite> PiecesSelect;
  sf::Texture TextureFondoGame;
  sf::Sprite spriteFondoGame;
  int NumPlayers;
 
+ 
 void loadResourceGame(){
 
 
@@ -19,6 +21,7 @@ void loadResourceGame(){
 	StringNamePlayers.resize(4);
 	NamePlayers.resize(4);
 	boxPlayers.resize(4);
+	PiecesSelect.resize(4);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -31,6 +34,7 @@ void loadResourceGame(){
 		NamePlayers[i].setFillColor(sf::Color::White);
 		NamePlayers[i].setOutlineThickness(2);
 		NamePlayers[i].setOutlineColor(sf::Color(135, 135, 135));
+		
 	}
 
 
