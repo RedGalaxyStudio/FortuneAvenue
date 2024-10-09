@@ -13,7 +13,7 @@ GameMode::GameMode(sf::RenderWindow* windowRef): window(windowRef) {
 
 
 void GameMode::resource() {
-	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+.png")) return;
+	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S++.png")) return;
 	spriteMapa.setTexture(TextureMapa);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
@@ -30,6 +30,16 @@ void GameMode::resource() {
     std::vector<sf::Vector2f> camino4 = { sf::Vector2f(100, 300), sf::Vector2f(200, 300), sf::Vector2f(300, 300) };
 
     // Agregar los caminos al vector principal
+    for (int i = 1; i < 4; i++) {
+        StringNamePlayers[i] = "bot" + std::to_string(i);
+        NamePlayers[i].setString(StringNamePlayers[i]);
+        globalBounds = NamePlayers[i].getGlobalBounds();
+        NamePlayers[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+        MarcoPlayers[i].setOrigin(65, 65);
+
+
+
+    }
     casillas.push_back(camino1);
     casillas.push_back(camino2);
     casillas.push_back(camino3);
@@ -62,6 +72,32 @@ void GameMode::update() {
     resultadoDado = 0;
     mousePosition = sf::Mouse::getPosition(*window);
     mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+    
+    //perfil 1
+    NamePlayers[0].setPosition(188.65f, 52.5f);
+    boxPlayers[0].setPosition(188.65f, 52.5f);
+    boxPlayers[0].setScale(0.7f, 0.7f);
+    MarcoPlayers[0].setPosition(52.5f, 52.5f);
+    MarcoPlayers[0].setScale(0.7f, 0.7f);
+
+    //perfil 2
+    NamePlayers[1].setPosition(1188.65f, 52.5f);
+    boxPlayers[1].setPosition(1188.65f, 52.5f);
+    boxPlayers[1].setScale(0.7f, 0.7f);
+    MarcoPlayers[1].setPosition(52.5f, 652.5f);
+    MarcoPlayers[1].setScale(0.7f, 0.7f);
+    //perfil 3
+    NamePlayers[2].setPosition(188.65f, 652.5f);
+    boxPlayers[2].setPosition(188.65f, 652.5f);
+    boxPlayers[2].setScale(0.7f, 0.7f);
+    MarcoPlayers[2].setPosition(1052.5f, 52.5f);
+    MarcoPlayers[2].setScale(0.7f, 0.7f);
+    //perfil 4
+    NamePlayers[3].setPosition(1188.65f, 652.5f);
+    boxPlayers[3].setPosition(1188.65f, 652.5f);
+    boxPlayers[3].setScale(0.7f, 0.7f);
+    MarcoPlayers[3].setPosition(1052.5f, 652.5f);
+    MarcoPlayers[3].setScale(0.7f, 0.7f);
 
     while (window->isOpen()) {
         sf::Event event;
@@ -105,7 +141,12 @@ void GameMode::update() {
         window->clear();
         window->draw(spriteFondoGame);
         window->draw(spriteMapa);
-        window->draw(box);
+        for (int i = 0; i < 4; i++)
+        {
+            window->draw(NamePlayers[i]);
+            window->draw(boxPlayers[i]);
+            window->draw(MarcoPlayers[i]);
+        }
         window->draw(Sesion);
         window->draw(selectedAvatarCopy);
         window->draw(recua);
