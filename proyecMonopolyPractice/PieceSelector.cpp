@@ -57,6 +57,7 @@ void PieceSelector::displayPieces() {
     for (size_t i = 0; i < pieces.size(); ++i) {
         window->draw(pieces[i]);  // Draw all pieces
         window->draw(shadow[i]);  // Draw all pieces
+
     }
 }
 
