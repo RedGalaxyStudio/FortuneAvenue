@@ -14,8 +14,7 @@ public:
     void setPosition();
     void handleInput(sf::Event event);
     void draw(sf::RenderWindow& window);
-    void guardarNombre();
-    void cargarNombre();
+
 private:
 
     float x, y;

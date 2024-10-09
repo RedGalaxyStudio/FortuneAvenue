@@ -6,6 +6,7 @@
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
 
+
 // Constructor: inicializa la variable y la ventana
 menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {
@@ -41,12 +42,10 @@ void menuP::Resource() {
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
    
     Sesion.setFont(fontUser);
-    Sesion.setCharacterSize(24);
     Sesion.setFillColor(sf::Color::White);
     Sesion.setOutlineThickness(2);
     Sesion.setOutlineColor(sf::Color(135, 135, 135));
-    Sesion.setPosition(70, 70);
-
+   
     // Configuraci�n del sprite del logotipo
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
@@ -83,17 +82,28 @@ void menuP::Resource() {
 
 // Actualizaci�n de la animaci�n (desvanecimiento del logotipo)
 void menuP::MenuPrincipal() {
+    window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
     MenuMusicFondo.play();
 
-    box.setPosition(50, 50);
+    Inicializar();
+
+    selectedAvatarCopy.setPosition(84,74);
+    selectedAvatarCopy.setScale(1,1);
+
+    recua.setPosition(84,74);
+    recua.setScale(1,1);
+    Sesion.setCharacterSize(24);
+    Sesion.setPosition(273, 74 - 4);
+    box.setPosition(273, 74);
+    box.setScale(1,1);
+
     // Crear los botones
     ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
     ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
     ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
     window->setMouseCursorVisible(true);
-    Inicializar();
     // Configurar la posición de los botones
     SpriteBotonOpciones.setPosition(640, 560);
     ValidarUser();
@@ -127,6 +137,8 @@ void menuP::MenuPrincipal() {
         window->draw(spriteLogoFortuneAvenue);
         window->draw(box);
         window->draw(Sesion);
+        window->draw(selectedAvatarCopy);
+        window->draw(recua);
         window->draw(SpriteBotonJugar);
         window->draw(SpriteBotonOpciones);
         window->draw(SpriteBotonSalir);
@@ -141,6 +153,10 @@ void menuP::ValidarUser() {
      //   GetUserEmail();
 
         Sesion.setString(input);
+        sf::FloatRect globalBounds = Sesion.getGlobalBounds();
+
+        // Ajustar la posición centrando el texto
+        Sesion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
      /*   if (email.empty()) {
             Sesion.setString("Iniciar Sesion");
         }
@@ -160,9 +176,13 @@ void menuP::eventoMenuP() {
     while (window->pollEvent(event)) {
         // Cerrar la ventana con Escape o al cerrar   
         // 
-        //  renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+            renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
             renderTexture.draw(SpriteFondoMenu);
             renderTexture.draw(spriteLogoFortuneAvenue);
+            renderTexture.draw(box);
+            renderTexture.draw(Sesion);
+            renderTexture.draw(selectedAvatarCopy);
+            renderTexture.draw(recua);
             renderTexture.draw(SpriteBotonJugar);
             renderTexture.draw(SpriteBotonOpciones);
             renderTexture.draw(SpriteBotonSalir);
@@ -219,6 +239,9 @@ void menuP::eventoMenuP() {
 }
 
 void menuP::MenuJugar() {
+    GameMode gamemode(window);
+
+    gamemode.update();
 
 
 };
@@ -353,7 +376,7 @@ void menuP::MenuSalir() {
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
             BotonSi.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
             BotonNo.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-            // Manejo de hover en el bot�n "S�
+
             window->setMouseCursor(*currentCursor);
 
 
@@ -462,7 +485,7 @@ void menuP::MenuAcercaDe() {
     sf::Text TextAcercaDe;
     TextAcercaDe.setFont(Fuente);
 
-    TextAcercaDe.setString("Sonic The Fucking Hedgehog ");
+    TextAcercaDe.setString("Contribuciones ");
     TextAcercaDe.setCharacterSize(30);  // Tamaño más grande para ser fácilmente legible
     TextAcercaDe.setFillColor(sf::Color::White);  // Color blanco para contrastar con el fondo oscuro
     TextAcercaDe.setPosition(50, 100);  // Posicionamos el texto dentro del rectángulo
