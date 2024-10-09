@@ -6,7 +6,7 @@
     class GameMode {
     public:
         GameMode(sf::RenderWindow* windowRef);
-
+        
         // Método para actualizar el estado del botón según la posición del mouse
         void update();
         void resource();

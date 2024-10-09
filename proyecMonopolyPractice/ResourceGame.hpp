@@ -16,6 +16,7 @@ extern std::vector<sf::Text> NamePlayers;
 extern std::vector<sf::Sprite> boxPlayers;
 extern sf::Texture TextureFondoGame;
 extern sf::Sprite spriteFondoGame;
+extern std::vector<sf::Sprite> PiecesSelect;
 extern int NumPlayers;
 void loadResourceGame();
 void loadPieceGame();
