@@ -157,8 +157,10 @@
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="Cinematic.hpp" />
+    <ClInclude Include="Client.hpp" />
     <ClInclude Include="Cube.hpp" />
     <ClInclude Include="GameMode.hpp" />
+    <ClInclude Include="Globals.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
