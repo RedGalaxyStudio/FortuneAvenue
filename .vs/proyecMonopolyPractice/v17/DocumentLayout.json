@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\PieceSelector.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -19,32 +11,16 @@
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\GameMode.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\menuP.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\Cinematic.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\PieceSelector.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGlobal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGlobal.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGame.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|solutionrelative:proyecMonopolyPractice\\ResourceGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B07DA0FB-C698-4791-8718-FC71FD986A49}|proyecMonopolyPractice\\proyecMonopolyPractice.vcxproj|C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\IniciaUser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -58,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 173,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,116 +50,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Cinematic.cpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\Cinematic.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\Cinematic.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\Cinematic.cpp",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-08T18:18:28.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\main.cpp",
               "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\main.cpp",
               "RelativeToolTip": "proyecMonopolyPractice\\main.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-08T18:11:22.659Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ResourceGame.hpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.hpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGame.hpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.hpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\ResourceGame.hpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-07T18:38:31.91Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ResourceGame.cpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGame.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGame.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\ResourceGame.cpp",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAABMAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-07T18:38:14.045Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PieceSelector.hpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.hpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\PieceSelector.hpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.hpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\PieceSelector.hpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-07T17:07:28.257Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "menuP.cpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\menuP.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\menuP.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\menuP.cpp",
-              "ViewState": "AgIAAMUBAAAAAAAAAAAAAMEBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-07T20:12:52.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PieceSelector.cpp",
-              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.cpp",
-              "RelativeDocumentMoniker": "proyecMonopolyPractice\\PieceSelector.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\PieceSelector.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\PieceSelector.cpp",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAAAJAAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-06T13:57:09.219Z",
+              "WhenOpened": "2024-10-08T18:11:22.659Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "GameMode.hpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\GameMode.hpp",
               "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.hpp",
               "RelativeToolTip": "proyecMonopolyPractice\\GameMode.hpp",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-06T13:41:14.252Z"
+              "WhenOpened": "2024-10-06T13:41:14.252Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GameMode.cpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\GameMode.cpp",
-              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.cpp",
-              "RelativeToolTip": "proyecMonopolyPractice\\GameMode.cpp",
-              "ViewState": "AgIAADAAAAAAW4PevDEwwDQAAAACAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\GameMode.cpp*",
+              "RelativeToolTip": "proyecMonopolyPractice\\GameMode.cpp*",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-04T18:54:24.033Z"
+              "WhenOpened": "2024-10-04T18:54:24.033Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ResourceGlobal.cpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGlobal.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGlobal.cpp",
@@ -195,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "ResourceGlobal.hpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\ResourceGlobal.hpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\ResourceGlobal.hpp",
@@ -207,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
               "Title": "IniciaUser.cpp",
               "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\proyecMonopolyPractice\\proyecMonopolyPractice\\IniciaUser.cpp",
               "RelativeDocumentMoniker": "proyecMonopolyPractice\\IniciaUser.cpp",

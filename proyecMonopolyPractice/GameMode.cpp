@@ -23,11 +23,17 @@ void GameMode::resource() {
 
     pieces.setTexture(piecesTextures);
     pieces.setOrigin(18, 18);
+    // Vector para cada grupo de casillas (caminos)
+    std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
+    std::vector<sf::Vector2f> camino2 = { sf::Vector2f(376.f,848.f), sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
+    std::vector<sf::Vector2f> camino3 = { sf::Vector2f(100, 200), sf::Vector2f(200, 200), sf::Vector2f(300, 200) };
+    std::vector<sf::Vector2f> camino4 = { sf::Vector2f(100, 300), sf::Vector2f(200, 300), sf::Vector2f(300, 300) };
 
-     casillas = {{376.f,848.f},{325,523},{325,576},
-                 {323,629},{351,676},{394,678},{425,655}
-
-    };
+    // Agregar los caminos al vector principal
+    casillas.push_back(camino1);
+    casillas.push_back(camino2);
+    casillas.push_back(camino3);
+    casillas.push_back(camino4);
 
     posicionActual = 0; // Posición actual del sprite en las casillas
 
@@ -49,8 +55,8 @@ void GameMode::resource() {
 // Implementación del método update
 void GameMode::update() {
     PieceSelector pieceselector(window);
-    pieceselector.Resource();
-    pieceselector.updateSelection();
+   // pieceselector.Resource();
+  //  pieceselector.updateSelection();
 
     sf::Clock clock;
     resultadoDado = 0;
@@ -113,10 +119,18 @@ void GameMode::update() {
 
 void GameMode::moverSprite(sf::Sprite& sprite, int resultadoDado) {
     posicionActual += resultadoDado;
-    if (posicionActual >= casillas.size()) {
-        posicionActual %= casillas.size();  // Si supera el número de casillas, empieza de nuevo
+
+    // Mientras se supere el tamaño del vector actual, cambiar al siguiente vector
+    while (posicionActual >= casillas[vectorActual].size()) {
+        posicionActual -= casillas[vectorActual].size();  // Ajustar la posición
+        vectorActual++;  // Ir al siguiente vector
+
+        // Verificar si llegamos al final de los vectores
+        if (vectorActual >= casillas.size()) {
+            vectorActual = 0;  // Reiniciar al primer vector si se superan todos
+        }
     }
 
-    // Mueve el sprite a la posición de la casilla correspondiente
-    sprite.setPosition(casillas[posicionActual]);
+    // Mueve el sprite a la posición de la casilla correspondiente en el vector actual
+    sprite.setPosition(casillas[vectorActual][posicionActual]);
 }

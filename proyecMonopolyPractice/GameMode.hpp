@@ -14,8 +14,9 @@
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;
-        std::vector<sf::Vector2f> casillas;
+        std::vector<std::vector<sf::Vector2f>> casillas;
         int posicionActual;
+        int vectorActual;    // Índice del vector actual
         sf::Vector2i mousePosition;
         sf::Vector2f mousePosFloat;
         int resultadoDado;
