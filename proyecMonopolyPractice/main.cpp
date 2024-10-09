@@ -8,7 +8,7 @@ int main() {
     // Crear la ventana en pantalla completa
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
 
-    // Configuraci n del frame rate (opcional)
+    // Configuracion del frame rate (opcional)
     window.setFramerateLimit(60);
 
     sf::Image icono;
@@ -24,7 +24,7 @@ int main() {
         std::cerr << "Error al inicializar COM." << std::endl;
         return -1;
     }
-    /*
+    
     // Crear una instancia de la clase Cinematic y pasarle la ventana por referencia
     Cinematic cinematic(window);
 
@@ -32,14 +32,12 @@ int main() {
     cinematic.Resource();
 
     //Iniciar la animaci n
-    cinematic.Update();*/
+    cinematic.Update();
     loadTextures();
     cargue();
     Menup.setWindow(window);
-    // Cargar los recursos necesarios para la cinem tica
     Menup.Resource();
 
-    // Iniciar la animaci n
     Menup.MenuPrincipal();
 
     CoUninitialize();
