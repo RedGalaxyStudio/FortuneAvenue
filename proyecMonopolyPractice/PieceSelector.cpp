@@ -109,7 +109,13 @@ void PieceSelector::updateSelection() {
             for (int i = 0; i < 4; ++i) {
                 boxPlayers[i].setPosition(startX + i * (250 + 10), startY);
                 NamePlayers[i].setPosition(startX + i * (250 + 10), startY);
+                if (i==0)
+                {
+                    PiecesSelect[0].setPosition(startX + i * (250 + 10), startY+100);
+                }
+                
             }
+           
             break;
 
         }
@@ -141,8 +147,18 @@ void PieceSelector::updateSelection() {
                             if (previousSelection != nullptr) {
                                 previousSelection->setColor(sf::Color::White);  // Quitar el efecto de la anterior
                             }
+                            // Asigna la textura y ajusta la escala y el origen
                             newSelection = &pieces[i];
-                            pieces[i].setColor(sf::Color(248,134,255));  // Resaltar la nueva pieza
+                            // Asigna la textura a PiecesSelect[0]
+                            PiecesSelect[0].setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+                            PiecesSelect[0].setScale(pieces[i].getScale());  // Ajustar la escala
+                            PiecesSelect[0].setOrigin(pieces[i].getOrigin());  // Ajustar el origen
+                            PiecesSelect[0].setColor(sf::Color::White);  // Asegurar color correcto
+                            pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
+
+                            // Resaltar la nueva pieza
+                            pieces[i].setColor(sf::Color(248, 134, 255));
+                            playClickSound();
                             previousSelection = &pieces[i];  // Actualizar la selección anterior
                         }
                         break;
@@ -170,6 +186,7 @@ void PieceSelector::updateSelection() {
         
 
         displayPieces();
+        window->draw(PiecesSelect[0]);
         window->display();
     }
 
