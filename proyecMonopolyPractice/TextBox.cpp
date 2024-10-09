@@ -6,7 +6,7 @@ TextBox::TextBox() {}// Constructor por defecto
 
 
 TextBox::TextBox(float width, float height) {
-    cargarNombre();
+
     input = "";
 
     // Variables de texto en SFML
@@ -39,38 +39,38 @@ TextBox::TextBox(float width, float height) {
     text.setFillColor(sf::Color::White);
     text.setOutlineThickness(2);
     text.setOutlineColor(sf::Color(135, 135, 135));
-
-
-    
-
 }
 
 // Posición del cuadro de texto
 void TextBox::setPosition() {
-    box.setPosition(x + 20, y + 20);
-    text.setPosition(x + 30, y + 45); // Desplaza el texto un poco dentro del cuadro
+    box.setPosition(x + 20 + 125, y + 20 + 40);
+    text.setPosition(x + 20 + 125, y + 20 + 40 - 4); // Desplaza el texto un poco dentro del cuadro
     textoPregunta.setPosition(x, y-25);
 }
 
 // Manejo de la entrada de texto
 void TextBox::handleInput(sf::Event event) {
-    const size_t maxLength = 24; // Limite de caracteres
+    const size_t maxLength = 11; // Limite de caracteres
 
+    // Manejo de entrada de texto
     if (event.type == sf::Event::TextEntered && nombre.empty()) {
-        if (event.text.unicode < 128) {
-            if (event.text.unicode == '\b' && !input.empty()) {  // Retroceso
+        if (event.text.unicode < 128) { // Solo caracteres ASCII
+            // Retroceso
+            if (event.text.unicode == '\b' && !input.empty()) {
                 input.pop_back();
             }
-            else if (event.text.unicode != '\b') {
+            // Agregar nuevo carácter solo si no excede el límite
+            else if (event.text.unicode != '\b' && input.size() < maxLength) {
                 input += static_cast<char>(event.text.unicode);
             }
+
             text.setString(input);
-        }
-    }
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter && nombre.empty()) {
-        if (!input.empty()) {
-            nombre = input;
-            guardarNombre();
+            std::cout << "Input Text: " << input << std::endl;
+
+            sf::FloatRect globalBounds = text.getGlobalBounds();
+            // Ajustar la posición centrando el texto
+            text.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
         }
     }
 }
@@ -81,24 +81,4 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(text);
     window.draw(textoPregunta);
     //window.draw(textoGuardado);
-}
-
-void TextBox::guardarNombre() {
-    std::ofstream archivo("nombre.txt");
-    if (archivo.is_open()) {
-        archivo << nombre;
-        archivo.close();
-    }
-    else {
-        std::cerr << "No se pudo abrir el archivo para escribir.\n";
-    }
-}
-
-// Función para cargar el nombre desde un archivo
-void TextBox::cargarNombre() {
-    std::ifstream archivo("nombre.txt");
-    if (archivo.is_open()) {
-        std::getline(archivo, nombre);
-        archivo.close();
-    }
 }

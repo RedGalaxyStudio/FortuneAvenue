@@ -12,6 +12,11 @@
 
 
 // Declarar la textura global
+extern sf::Text Sesion;
+extern sf::RectangleShape overlay;
+extern sf::Texture sharedTexture; // Textura compartida para los avatare
+extern sf::Texture Texrecua;
+extern sf::Sprite recua;
 extern std::string nombre;
 extern std::string input;
 extern sf::Texture TextureFondoMenu;
