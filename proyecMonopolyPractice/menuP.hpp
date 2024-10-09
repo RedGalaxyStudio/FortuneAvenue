@@ -7,8 +7,10 @@
 #include "WebViewManager.hpp"
 #include <Windows.h>
 #include "ObjetosGlobal.hpp"
+#include "GameMode.hpp"
 
 class WebViewManager;
+class GameMode;
 
 class menuP : public SettingsManager {
 public:
@@ -50,7 +52,7 @@ private:
     // Ventana de renderizado
     sf::RenderWindow* window;
 
-    sf::Text Sesion;
+    
     bool SesionValida;
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
@@ -90,7 +92,7 @@ private:
     sf::Text TextAcercaDe;
     sf::Sprite renderedSprite;
 
-    sf::RectangleShape overlay;
+
     // Sonidos
     sf::Music MenuMusicFondo;
 

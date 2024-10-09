@@ -139,10 +139,14 @@
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
     <ClCompile Include="ObjetosGlobal.cpp" />
+    <ClCompile Include="PieceSelector.cpp" />
+    <ClCompile Include="ResourceGame.cpp" />
     <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -153,11 +157,15 @@
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="Cinematic.hpp" />
+    <ClInclude Include="Cube.hpp" />
+    <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="nlohmann\json_fwd.hpp" />
     <ClInclude Include="ObjetosGlobal.hpp" />
+    <ClInclude Include="PieceSelector.hpp" />
+    <ClInclude Include="ResourceGame.hpp" />
     <ClInclude Include="Scrollbar.hpp" />
     <ClInclude Include="SettingsManager.hpp" />
     <ClInclude Include="TextBox.hpp" />

@@ -5,7 +5,7 @@
 
 using json = nlohmann::json;
 
-
+sf::Text Sesion;
 sf::Texture TextureFondoMenu;
 sf::Cursor normalCursor;
 sf::Cursor linkCursor;
@@ -35,8 +35,10 @@ std::wstring Token;
 std::string email;
 std::string id;
 std::string pictureUrl;
+sf::RectangleShape overlay;
 ButtonG* botonX = nullptr; // Definición de la variable
 
+sf::Texture sharedTexture; // Textura compartida para los avatares
 sf::Texture TextureBotonSiOn;
 sf::Texture TextureBotonSiOff;
 sf::Sprite SpriteBotonSi;
@@ -45,7 +47,8 @@ sf::Texture TextureBotonNoOn;
 sf::Texture TextureBotonNoOff;
 sf::Sprite SpriteBotonNo;
 
-
+sf::Texture Texrecua;
+sf::Sprite recua;
 
 void loadAvatars() {
 
@@ -75,6 +78,18 @@ void loadAvatars() {
 
             avatars[i].setPosition(x, y);
       }
+  if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
+
+  selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
+  selectedAvatarCopy.setTexture(&sharedTexture);  // Usar la textura compartida
+  selectedAvatarCopy.setOrigin(64, 64);  // Establece el origen al centro del círculo
+
+  Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
+  recua.setTexture(Texrecua);
+  recua.setOrigin(65, 65);
+
+ 
+
 }
 
 
@@ -97,6 +112,7 @@ void loadTextures() {
     }
     if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
     box.setTexture(textureBox);
+    box.setOrigin(125,40);
     
 }
 
