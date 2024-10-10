@@ -99,7 +99,7 @@ void GameMode::update() {
     //MarcoPlayers[2].setScale(0.7f, 0.7f);
     AvatarPlayers[2].setPosition(1052.5f, 652.5f);
     AvatarPlayers[2].setScale(0.7f, 0.7f);
-
+    //hola
     //perfil 4
     NamePlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setPosition(1188.65f, 652.5f);
@@ -109,7 +109,7 @@ void GameMode::update() {
 
      // Llamar a Juan en un hilo separado
     std::thread hiloCliente(Juan);
-
+   
     AvatarPlayers[3].setPosition(1052.5f, 652.5f);
     AvatarPlayers[3].setScale(0.7f, 0.7f);
 
