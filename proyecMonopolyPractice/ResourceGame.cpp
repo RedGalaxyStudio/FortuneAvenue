@@ -9,7 +9,11 @@ std::vector<sf::Sprite> PiecesSelect;
  sf::Texture TextureFondoGame;
  sf::Sprite spriteFondoGame;
  int NumPlayers;
+<<<<<<< HEAD
 
+=======
+ std::vector<sf::Sprite> MarcoPlayers;
+>>>>>>> cc130ce5fcb8d024f4fbcf6ddc1a896c7e1b6582
  
 void loadResourceGame(){
 
@@ -19,6 +23,7 @@ void loadResourceGame(){
 	// Ajustar el tamaño de los vectores según el número de jugadores
 	AvatarPlayers.resize(4);
 	StringNamePlayers.resize(4);
+	MarcoPlayers.resize(4);
 	NamePlayers.resize(4);
 	boxPlayers.resize(4);
 	PiecesSelect.resize(4);
@@ -28,7 +33,7 @@ void loadResourceGame(){
 		boxPlayers[i].setTexture(textureBox);
 		boxPlayers[i].setOrigin(125, 40);
 		boxPlayers[i].setScale(0.9f, 0.9f);
-
+		MarcoPlayers[i].setTexture(Texrecua);
 		NamePlayers[i].setCharacterSize(21.6f);    
 		NamePlayers[i].setFont(fontUser);
 		NamePlayers[i].setFillColor(sf::Color::White);
