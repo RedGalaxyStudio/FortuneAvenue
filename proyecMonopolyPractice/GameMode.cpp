@@ -28,8 +28,8 @@ void GameMode::resource() {
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
     std::vector<sf::Vector2f> camino2 = { sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
-    std::vector<sf::Vector2f> camino3 = { sf::Vector2f(100, 200), sf::Vector2f(200, 200), sf::Vector2f(300, 200) };
-    std::vector<sf::Vector2f> camino4 = { sf::Vector2f(100, 300), sf::Vector2f(200, 300), sf::Vector2f(300, 300) };
+    std::vector<sf::Vector2f> camino3 = { sf::Vector2f(473,661), sf::Vector2f(505, 632), sf::Vector2f(505 , 586), sf::Vector2f(519 , 544), sf::Vector2f(556 , 544), sf::Vector2f(568 ,586), sf::Vector2f(568 , 636), sf::Vector2f(580 , 678), sf::Vector2f(621 , 677), sf::Vector2f(632 , 637), sf::Vector2f(632 , 585), sf::Vector2f(642 , 542), sf::Vector2f(678,542), sf::Vector2f(694 ,582 ), sf::Vector2f(694 , 636), sf::Vector2f(725 , 668)};
+    std::vector<sf::Vector2f> camino4 = { sf::Vector2f(280 , 300), sf::Vector2f(280 , 300), sf::Vector2f(280 , 300) };
 
     // Agregar los caminos al vector principal
     for (int i = 0; i < 4; i++) {
