@@ -5,14 +5,10 @@
 #include "ResourceGame.hpp"
 #include "WindowClass.h"
 
-
-
 GameMode::GameMode(sf::RenderWindow* windowRef): window(windowRef) {
     loadResourceGame();
 	resource();
 }
-
-
 
 void GameMode::resource() {
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S++.png")) return;
@@ -107,21 +103,22 @@ void GameMode::update() {
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
     //MarcoPlayers[3].setScale(0.7f, 0.7f);
 
+
      // Llamar a Juan en un hilo separado
     std::thread hiloCliente(Juan);
    
     AvatarPlayers[3].setPosition(1052.5f, 652.5f);
     AvatarPlayers[3].setScale(0.7f, 0.7f);
-
     Window Dado(window);
 
     Dado.start(1280, 720); // Cambia el tamaño y el título según sea necesario
-
+    int DadoResul=0;
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {
 
             Dado.loop(event); // Cambia el tamaño y el título según sea necesario
+
 
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -137,7 +134,6 @@ void GameMode::update() {
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
-                hiloCliente.join();
             }
             
 
@@ -150,17 +146,22 @@ void GameMode::update() {
                     //cube.roll();  // Lanzar el dado
                         //saveSelectedAvatar();
                    // Menup.MenuPrincipal();
+                   
                 }
             }
           
         }
-        Dado.logica();
+        resultadoDado = Dado.logica(); // Cambia el tamaño y el título según sea necesario
+        if (resultadoDado != 0) {
+            DadoResul = resultadoDado;
+            std::cout << "\n" << DadoResul;
+        }
         currentCursor = &normalCursor;
 
         window->setMouseCursor(*currentCursor);
 
-        moverSprite(pieces, resultadoDado);
-        resultadoDado = 0;
+        moverSprite(pieces, DadoResul);
+        DadoResul = 0;
         window->clear();
         window->draw(spriteFondoGame);
         window->draw(spriteMapa);
