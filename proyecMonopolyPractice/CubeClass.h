@@ -140,12 +140,12 @@ public :
 		distances = new float[9];
 
 		// Cargar texturas
-		textures[0].loadFromFile("number1.png");
-		textures[2].loadFromFile("number2.png");
-		textures[1].loadFromFile("number3.png");
-		textures[3].loadFromFile("number4.png");
-		textures[4].loadFromFile("number5.png");
-		textures[5].loadFromFile("number6.png");
+		textures[0].loadFromFile("number1.png");//lista
+		textures[2].loadFromFile("number3.png");
+		textures[1].loadFromFile("number4.png");
+		textures[3].loadFromFile("number2.png");
+		textures[4].loadFromFile("number6.png");//lista
+		textures[5].loadFromFile("number5.png");//lista
 
 		move();
 
@@ -185,7 +185,7 @@ public :
 
 	void resetPosition(int dadoIndex) {
 		// Restablecer la posición del centro a su posición inicial
-		center = Vector3D(400, 300, -100);
+		center = Vector3D(640, 360, -100);
 
 		// Restablecer el tamaño del cubo (distancia entre centro y vértices)
 		CDis = 50.0f;  // Asegúrate de que CDis tenga un valor adecuado, o el cubo puede colapsar en un punto
