@@ -51,12 +51,6 @@ void GameMode::resource() {
     casillas.push_back(camino4);
 
     posicionActual = 0; // Posición actual del sprite en las casillas
-
-
-    selectedAvatarCopy.setPosition(52.5f,52.5f);
-    selectedAvatarCopy.setScale(0.7f, 0.7f);  
- //   recua.setPosition(52.5f, 52.5f);
-   // recua.setScale(0.7f, 0.7f);
   
     Sesion.setCharacterSize(17);
     sf::FloatRect globalBounds = Sesion.getGlobalBounds();
@@ -85,6 +79,8 @@ void GameMode::update() {
     boxPlayers[0].setScale(0.7f, 0.7f);
     MarcoPlayers[0].setPosition(52.5f, 52.5f);
     //MarcoPlayers[0].setScale(0.7f, 0.7f);
+    AvatarPlayers[0].setPosition(52.5f, 652.5f);
+    AvatarPlayers[0].setScale(0.7f, 0.7f);
 
     //perfil 2
     NamePlayers[1].setPosition(1188.65f, 52.5f);
@@ -92,19 +88,26 @@ void GameMode::update() {
     boxPlayers[1].setScale(0.7f, 0.7f);
     MarcoPlayers[1].setPosition(52.5f, 652.5f);
    // MarcoPlayers[1].setScale(0.7f, 0.7f);
+    AvatarPlayers[1].setPosition(52.5f, 652.5f);
+    AvatarPlayers[1].setScale(0.7f, 0.7f);
+
     //perfil 3
     NamePlayers[2].setPosition(188.65f, 652.5f);
     boxPlayers[2].setPosition(188.65f, 652.5f);
     boxPlayers[2].setScale(0.7f, 0.7f);
     MarcoPlayers[2].setPosition(1052.5f, 52.5f);
     //MarcoPlayers[2].setScale(0.7f, 0.7f);
+    AvatarPlayers[2].setPosition(1052.5f, 652.5f);
+    AvatarPlayers[2].setScale(0.7f, 0.7f);
+
     //perfil 4
     NamePlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setScale(0.7f, 0.7f);
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
     //MarcoPlayers[3].setScale(0.7f, 0.7f);
-
+    AvatarPlayers[3].setPosition(1052.5f, 652.5f);
+    AvatarPlayers[3].setScale(0.7f, 0.7f);
     Window Dado(window);
 
     Dado.start(1280, 720); // Cambia el tamaño y el título según sea necesario
@@ -119,10 +122,13 @@ void GameMode::update() {
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.draw(spriteFondoGame);
                 renderTexture.draw(spriteMapa);
-                renderTexture.draw(box);
-                renderTexture.draw(Sesion);
-                renderTexture.draw(selectedAvatarCopy);
-                renderTexture.draw(recua);
+                for (int i = 0; i < 4; i++)
+                {
+                    renderTexture.draw(NamePlayers[i]);
+                    renderTexture.draw(boxPlayers[i]);
+                    renderTexture.draw(MarcoPlayers[i]);
+                    renderTexture.draw(AvatarPlayers[i]);
+                }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
@@ -154,12 +160,13 @@ void GameMode::update() {
         window->draw(spriteMapa);
 
         //window->draw(Sesion);
-        window->draw(selectedAvatarCopy); 
+
         for (int i = 0; i < 4; i++)
         {
             window->draw(NamePlayers[i]);
             window->draw(boxPlayers[i]);
             window->draw(MarcoPlayers[i]);
+            window->draw(AvatarPlayers[i]);
         }
         //window->draw(recua);
         Dado.update();
