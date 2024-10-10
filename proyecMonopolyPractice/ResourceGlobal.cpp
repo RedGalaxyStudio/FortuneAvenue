@@ -26,7 +26,6 @@ sf::Texture textureXOn;
 sf::Texture textureXOff;
 sf::Sprite spriteX;
 std::vector<sf::CircleShape> avatars;
-std::vector<sf::Texture> avatarTextures;
 sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
 sf::Texture textureBox;
 sf::Sprite box;
