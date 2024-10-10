@@ -104,6 +104,8 @@ void GameMode::update() {
     boxPlayers[3].setScale(0.7f, 0.7f);
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
     //MarcoPlayers[3].setScale(0.7f, 0.7f);
+     // Llamar a Juan en un hilo separado
+    std::thread hiloCliente(Juan);
 
     Window Dado(window);
 
@@ -126,6 +128,7 @@ void GameMode::update() {
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
+                hiloCliente.join();
             }
             
 
