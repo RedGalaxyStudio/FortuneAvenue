@@ -177,34 +177,36 @@ public :
 				window->close();
 			}
 
-			if (event.type == sf::Event::MouseButtonPressed) {
-				updateDiceAppearance();
-				eventStarted = true;
-				faceIndex = rand() % 6 + 1;
-				mouseStart.x = rand() % 400 + 1;
-				mouseStart.y = rand() % 600 + 1;
-				ok = 1;
-				clock.restart();
-				std::cout << "eventStarted: " << eventStarted << std::endl;
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+				
+					updateDiceAppearance();
+					eventStarted = true;
+					faceIndex = rand() % 6 + 1;
+					mouseStart.x = rand() % 400 + 1;
+					mouseStart.y = rand() % 600 + 1;
+					ok = 1;
+					clock.restart();
+					//std::cout << "eventStarted: " << eventStarted << std::endl;
+					
+				
 			}
-		
-
+			
 
 	};
-	void logica(){
+
+	int logica(){
 		if (eventStarted) {
+			sf::Time elapsed = clock.getElapsedTime(); // Tiempo transcurrido desde que se inició el evento
 
-			sf::Time elapsed = clock.getElapsedTime();  // Tiempo transcurrido desde que se inició el evento
-
-			if (elapsed.asSeconds() < elapsed.asSeconds() + 5.0f) {
+			if (elapsed.asSeconds() < 1.0f) { // Comprobar si han pasado menos de 5 segundos
 				mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
 				mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
 				std::cout << "eventStarted: " << eventStarted << std::endl;  // Imprimir valor actual
+
 				float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
 				float dy = static_cast<float>(mouseEnd.y - mouseStart.y);
 
 				float disP1 = cube->distanceTo(static_cast<float>(mouseStart.x), static_cast<float>(mouseStart.y), static_cast<float>(posz));
-
 
 				float alfaX = atan2f(dx, disP1);
 				float alfaY = atan2f(dy, disP1);
@@ -213,19 +215,21 @@ public :
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
-
-				ok = 0;
+				ok = 0; // Actualizar estado
+				return 0;
 			}
 			else {
-
+				
 				cube->resetPosition(faceIndex);
 
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
-				std::cout << "El evento de la tecla A ha terminado." << std::endl;
+				//std::cout << "El evento de la tecla A ha terminado." << std::endl;
+				return faceIndex;
 			}
-		}
+
+		}else{ return 0; }
 	};
 };
 
