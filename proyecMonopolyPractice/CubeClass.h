@@ -23,10 +23,6 @@ class Cube {
 		Vector3D operator +(Vector3D vec) { return Vector3D(vec.x+x,vec.y+y,vec.z+z); }
 		Vector3D operator *(float a) { return Vector3D(x * a, y * a, z * a); }
 
-		friend std::ostream& operator<<(std::ostream& os, const Vector3D& vec) {
-			os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
-			return os;
-		}
 	};
 
 	Vector3D vertex[8] ={
@@ -44,7 +40,6 @@ class Cube {
 
 	void move(){
 		for (int i = 0; i < 8; i++){
-			std::cout << "\ni:"<< i <<" center:"<< center <<"vertex["<<i<<"]"<< vertex[i]<<" CDis:"<< CDis;
 			C3D[i] = center + vertex[i] * CDis ;
 		}
 	}

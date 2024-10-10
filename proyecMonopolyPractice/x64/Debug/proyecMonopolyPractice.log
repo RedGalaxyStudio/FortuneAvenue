@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-﻿  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
-=======
 ﻿  GameMode.cpp
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\GameMode.cpp(166,54): warning C4267: '-=': conversion from 'size_t' to 'int', possible loss of data
-  proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
->>>>>>> cc130ce5fcb8d024f4fbcf6ddc1a896c7e1b6582
+  ResourceGame.cpp
+  Generating Code...
+  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
