@@ -157,11 +157,7 @@
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
-<<<<<<< HEAD
     <ClInclude Include="CubeClass.h" />
-=======
-    <ClInclude Include="Cube.hpp" />
->>>>>>> cc130ce5fcb8d024f4fbcf6ddc1a896c7e1b6582
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="IniciaUser.hpp" />

@@ -2,8 +2,10 @@
 #include "ResourceGlobal.hpp"
 #include "ObjetosGlobal.hpp"
 #include "PieceSelector.hpp"
-#include "Cube.hpp"
 #include "ResourceGame.hpp"
+#include "WindowClass.h"
+
+
 
 GameMode::GameMode(sf::RenderWindow* windowRef): window(windowRef) {
     loadResourceGame();
@@ -30,15 +32,18 @@ void GameMode::resource() {
     std::vector<sf::Vector2f> camino4 = { sf::Vector2f(100, 300), sf::Vector2f(200, 300), sf::Vector2f(300, 300) };
 
     // Agregar los caminos al vector principal
-    for (int i = 1; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
+        if(i==0){
+            StringNamePlayers[i] = input; 
+        }
+        else{
         StringNamePlayers[i] = "bot" + std::to_string(i);
+        }
+
         NamePlayers[i].setString(StringNamePlayers[i]);
         globalBounds = NamePlayers[i].getGlobalBounds();
         NamePlayers[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-        MarcoPlayers[i].setOrigin(65, 65);
-
-
-
+        MarcoPlayers[i].setOrigin(45.5f,45.5f);
     }
     casillas.push_back(camino1);
     casillas.push_back(camino2);
@@ -50,8 +55,8 @@ void GameMode::resource() {
 
     selectedAvatarCopy.setPosition(52.5f,52.5f);
     selectedAvatarCopy.setScale(0.7f, 0.7f);  
-    recua.setPosition(52.5f, 52.5f);
-    recua.setScale(0.7f, 0.7f);
+ //   recua.setPosition(52.5f, 52.5f);
+   // recua.setScale(0.7f, 0.7f);
   
     Sesion.setCharacterSize(17);
     sf::FloatRect globalBounds = Sesion.getGlobalBounds();
@@ -64,7 +69,8 @@ void GameMode::resource() {
 
 // Implementación del método update
 void GameMode::update() {
-    PieceSelector pieceselector(window);
+
+    //PieceSelector pieceselector(window);
    // pieceselector.Resource();
   //  pieceselector.updateSelection();
 
@@ -72,36 +78,43 @@ void GameMode::update() {
     resultadoDado = 0;
     mousePosition = sf::Mouse::getPosition(*window);
     mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-    
-    //perfil 1
+// Llamadas a setPlayerProfile para cada perfil
+
     NamePlayers[0].setPosition(188.65f, 52.5f);
     boxPlayers[0].setPosition(188.65f, 52.5f);
     boxPlayers[0].setScale(0.7f, 0.7f);
     MarcoPlayers[0].setPosition(52.5f, 52.5f);
-    MarcoPlayers[0].setScale(0.7f, 0.7f);
+    //MarcoPlayers[0].setScale(0.7f, 0.7f);
 
     //perfil 2
     NamePlayers[1].setPosition(1188.65f, 52.5f);
     boxPlayers[1].setPosition(1188.65f, 52.5f);
     boxPlayers[1].setScale(0.7f, 0.7f);
     MarcoPlayers[1].setPosition(52.5f, 652.5f);
-    MarcoPlayers[1].setScale(0.7f, 0.7f);
+   // MarcoPlayers[1].setScale(0.7f, 0.7f);
     //perfil 3
     NamePlayers[2].setPosition(188.65f, 652.5f);
     boxPlayers[2].setPosition(188.65f, 652.5f);
     boxPlayers[2].setScale(0.7f, 0.7f);
     MarcoPlayers[2].setPosition(1052.5f, 52.5f);
-    MarcoPlayers[2].setScale(0.7f, 0.7f);
+    //MarcoPlayers[2].setScale(0.7f, 0.7f);
     //perfil 4
     NamePlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setScale(0.7f, 0.7f);
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
-    MarcoPlayers[3].setScale(0.7f, 0.7f);
+    //MarcoPlayers[3].setScale(0.7f, 0.7f);
+
+    Window Dado(window);
+
+    Dado.start(1280, 720); // Cambia el tamaño y el título según sea necesario
 
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {
+
+            Dado.loop(event); // Cambia el tamaño y el título según sea necesario
+
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.draw(spriteFondoGame);
@@ -118,6 +131,7 @@ void GameMode::update() {
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 // Verificar el click en "si" y cerrar la vetana
+     
                 if (spriteMapa.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     resultadoDado = 1;
@@ -128,28 +142,27 @@ void GameMode::update() {
             }
           
         }
+        Dado.logica();
         currentCursor = &normalCursor;
 
         window->setMouseCursor(*currentCursor);
 
-        //cube.update(clock.getElapsedTime().asSeconds());
-
-
         moverSprite(pieces, resultadoDado);
         resultadoDado = 0;
-
         window->clear();
         window->draw(spriteFondoGame);
         window->draw(spriteMapa);
+
+        //window->draw(Sesion);
+        window->draw(selectedAvatarCopy); 
         for (int i = 0; i < 4; i++)
         {
             window->draw(NamePlayers[i]);
             window->draw(boxPlayers[i]);
             window->draw(MarcoPlayers[i]);
         }
-        window->draw(Sesion);
-        window->draw(selectedAvatarCopy);
-        window->draw(recua);
+        //window->draw(recua);
+        Dado.update();
        // cube.draw(*window);
         window->draw(pieces);
        // pieceselector.displayPieces();
@@ -163,7 +176,7 @@ void GameMode::moverSprite(sf::Sprite& sprite, int resultadoDado) {
 
     // Mientras se supere el tamaño del vector actual, cambiar al siguiente vector
     while (posicionActual >= casillas[vectorActual].size()) {
-        posicionActual -= casillas[vectorActual].size();  // Ajustar la posición
+        posicionActual -= static_cast<int>(casillas[vectorActual].size());  // Ajustar la posición
         vectorActual++;  // Ir al siguiente vector
 
         // Verificar si llegamos al final de los vectores
@@ -174,4 +187,14 @@ void GameMode::moverSprite(sf::Sprite& sprite, int resultadoDado) {
 
     // Mueve el sprite a la posición de la casilla correspondiente en el vector actual
     sprite.setPosition(casillas[vectorActual][posicionActual]);
+}
+
+void GameMode::setPlayerProfile(int index, float x, float y) {
+    NamePlayers[index].setPosition(x, y);
+    boxPlayers[index].setPosition(x, y);
+    boxPlayers[index].setScale(0.7f, 0.7f);
+    if(index)
+
+    MarcoPlayers[index].setPosition(x - 136.15f, y + 600.0f);  // Ajuste dinámico según tu lógica
+    MarcoPlayers[index].setScale(0.7f, 0.7f);
 }

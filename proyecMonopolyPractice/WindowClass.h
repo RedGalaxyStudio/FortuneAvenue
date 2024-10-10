@@ -9,8 +9,6 @@ class Window {
 
 	std::vector<int> textureIndices; // Vector para almacenar los índices de textura
 
-
-	sf::RenderWindow* window = nullptr;
 	float posz = 0;
 	
 	sf::Vector2i mouseStart;
@@ -88,6 +86,42 @@ class Window {
 	}
 
 
+	bool ok = 0;
+	
+
+
+public :
+	sf::Clock clock;  // Reloj para medir el tiempo transcurrido
+	bool eventStarted = false;  // Bandera para saber si el evento ha comenzado
+	sf::RectangleShape shadowOverlay;
+	int faceIndex;
+
+	sf::RenderWindow* window;
+
+
+	Window(sf::RenderWindow* windowRef) : window(windowRef) {
+	}
+
+	void start(unsigned int Width, unsigned int Height){
+
+		cube = new Cube(100);
+		Cube3D.setPrimitiveType(sf::Quads);
+		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
+		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
+		srand(static_cast<unsigned int>(time(0))); // Inicializar semilla
+
+		// Inicializar la sombra
+		shadowOverlay.setSize(sf::Vector2f(100, 100)); // Cambia el tamaño según sea necesario
+		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); // Color negro semitransparente
+		sf::Vector2f size = shadowOverlay.getSize();
+		shadowOverlay.setOrigin(size.x / 2, size.y / 2); // Centra el origen
+
+		Cube3D.resize(cube->show.size() * 4);
+
+	}
+
+
+
 	void update() {
 		// Crear una sombra semitransparente
 		shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y));
@@ -95,7 +129,6 @@ class Window {
 
 		updateDraw();
 
-		window->clear(sf::Color::White);
 
 		// Crear el vertex array para la sombra
 		sf::VertexArray shadow(sf::Quads, cube->show.size() * 4); // Asegúrate de que el tamaño sea correcto
@@ -134,149 +167,66 @@ class Window {
 			}
 		}
 
-		//updateDiceAppearance();
-
-		window->display();
 	}
 
-	void close(){
 
-		delete window;
-	}
-
-	bool ok = 0;
-	void loop()
+	void loop(sf::Event event)
 	{
-		srand(static_cast<unsigned int>(time(0))); // Inicializar semilla
-		int faceIndex;
-		sf::Event event;
-		while (window->isOpen())
-		{
-			while (window->pollEvent(event))
-			{
-				if (event.type == sf::Event::Closed)
-				{
-					window->close();
 
-				}
+			if (event.type == sf::Event::Closed) {
+				window->close();
+			}
 
-				if (event.type == sf::Event::MouseButtonPressed)
-				{
-					updateDiceAppearance();
-
-					eventStarted = true;
-					faceIndex = rand() % 6 + 1;
-					mouseStart.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
-					mouseStart.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
+			if (event.type == sf::Event::MouseButtonPressed) {
+				updateDiceAppearance();
+				eventStarted = true;
+				faceIndex = rand() % 6 + 1;
+				mouseStart.x = rand() % 400 + 1;
+				mouseStart.y = rand() % 600 + 1;
 				ok = 1;
-				}
-				//if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A)
-				//{
-			
-
-					/*}
-				if (ok == 1)
-				{
-					mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
-					mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
-
-					float dx = static_cast<float>(mouseEnd.x) - static_cast<float>(mouseStart.x);
-					float dy = static_cast<float>(mouseEnd.y) - static_cast<float>(mouseStart.y);
-					float disP1 = cube->distanceTo(static_cast<float>(mouseStart.x), static_cast<float>(mouseStart.y), static_cast<float>(posz));
-
-					float alfaX = atan2f(dx, disP1);
-					float alfaY = atan2f(dy, disP1);
-
-					cube->rotate(-alfaY, alfaX, 0);
-					cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
-					Cube3D.resize(cube->show.size() * 4);
-					mouseStart = mouseEnd;
-
-				}*/
-
+				clock.restart();
+				std::cout << "eventStarted: " << eventStarted << std::endl;
 			}
-
-			if (eventStarted) {
-				sf::Time elapsed = clock.getElapsedTime();  // Tiempo transcurrido desde que se inició el evento
-
-				if (elapsed.asSeconds() < 5.0f) {
-					mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
-					mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
-
-					float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
-					float dy = static_cast<float>(mouseEnd.y - mouseStart.y);
-
-
-					//float dx = static_cast<float>(rand() % 100 + 1);
-					//float dy = static_cast<float>(rand() % 100 + 1);
-
-
-					//int randomNumber1 = ; // Número aleatorio entre 1 y 100
-					//int randomNumber2 = rand() % 100 + 1;
-
-					float disP1 = cube->distanceTo(static_cast<float>(mouseStart.x), static_cast<float>(mouseStart.y), static_cast<float>(posz));
-
-
-					float alfaX = atan2f(dx, disP1);
-					float alfaY = atan2f(dy, disP1);
-
-					cube->rotate(alfaY, alfaX, 0);
-					cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
-					Cube3D.resize(cube->show.size() * 4);
-
-
-					ok = 0;
-				}
-				else {
-					
-					cube->resetPosition(faceIndex);
-
-					cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
-					Cube3D.resize(cube->show.size() * 4);
-					eventStarted = false;
-					std::cout << "El evento de la tecla A ha terminado." << std::endl;
-				}
-			}
-
-			
-
-			update();
-
-
-		}
-		close();
-
-
-	}
-
-
-public :
-	sf::Clock clock;  // Reloj para medir el tiempo transcurrido
-	bool eventStarted = false;  // Bandera para saber si el evento ha comenzado
-	sf::RectangleShape shadowOverlay;
-
-	
-	
-	void start(unsigned int Width, unsigned int Height, const char* Title)
-	{
-
-		window = new sf::RenderWindow(sf::VideoMode(Width, Height), Title);
-		cube = new Cube(100);
-		Cube3D.setPrimitiveType(sf::Quads);
-		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
-		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
-
-		// Inicializar la sombra
-		shadowOverlay.setSize(sf::Vector2f(100, 100)); // Cambia el tamaño según sea necesario
-		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); // Color negro semitransparente
-		sf::Vector2f size = shadowOverlay.getSize();
-		shadowOverlay.setOrigin(size.x / 2, size.y / 2); // Centra el origen
-
-		Cube3D.resize(cube->show.size() * 4);
 		
 
-		loop();
 
-	}
+	};
+	void logica(){
+		if (eventStarted) {
 
+			sf::Time elapsed = clock.getElapsedTime();  // Tiempo transcurrido desde que se inició el evento
+
+			if (elapsed.asSeconds() < elapsed.asSeconds() + 5.0f) {
+				mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
+				mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
+				std::cout << "eventStarted: " << eventStarted << std::endl;  // Imprimir valor actual
+				float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
+				float dy = static_cast<float>(mouseEnd.y - mouseStart.y);
+
+				float disP1 = cube->distanceTo(static_cast<float>(mouseStart.x), static_cast<float>(mouseStart.y), static_cast<float>(posz));
+
+
+				float alfaX = atan2f(dx, disP1);
+				float alfaY = atan2f(dy, disP1);
+
+				cube->rotate(alfaY, alfaX, 0);
+				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
+				Cube3D.resize(cube->show.size() * 4);
+
+
+				ok = 0;
+			}
+			else {
+
+				cube->resetPosition(faceIndex);
+
+				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
+				Cube3D.resize(cube->show.size() * 4);
+				eventStarted = false;
+				std::cout << "El evento de la tecla A ha terminado." << std::endl;
+			}
+		}
+	};
 };
+
+
