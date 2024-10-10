@@ -1,18 +1,1 @@
-﻿  ButtonG.cpp
-  Client.cpp
-  GameMode.cpp
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\GameMode.cpp(125,54): warning C4267: '-=': conversión de 'size_t' a 'int'; posible pérdida de datos
-  IniciaUser.cpp
-  ObjetosGlobal.cpp
-  PieceSelector.cpp
-  ResourceGame.cpp
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\ResourceGame.cpp(32,35): warning C4244: 'argumento': conversión de 'float' a 'unsigned int'; posible pérdida de datos
-  ResourceGlobal.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\xutility(4672,18): warning C4244: '=': conversión de 'wchar_t' a 'char'; posible pérdida de datos
-  SettingsManager.cpp
-  TextBox.cpp
-  WebViewManager.cpp
-  main.cpp
-  menuP.cpp
-  Generando código...
-  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+﻿  proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
