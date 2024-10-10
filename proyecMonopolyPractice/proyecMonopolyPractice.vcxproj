@@ -139,7 +139,6 @@
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,7 +157,7 @@
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
-    <ClInclude Include="Cube.hpp" />
+    <ClInclude Include="CubeClass.h" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
@@ -174,6 +173,7 @@
     <ClInclude Include="ResourceGlobal.hpp" />
     <ClInclude Include="VolumeSlider.hpp" />
     <ClInclude Include="WebViewManager.hpp" />
+    <ClInclude Include="WindowClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

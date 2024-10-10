@@ -25,7 +25,7 @@ void GameMode::resource() {
     pieces.setOrigin(18, 18);
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
-    std::vector<sf::Vector2f> camino2 = { sf::Vector2f(376.f,848.f), sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
+    std::vector<sf::Vector2f> camino2 = { sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
     std::vector<sf::Vector2f> camino3 = { sf::Vector2f(100, 200), sf::Vector2f(200, 200), sf::Vector2f(300, 200) };
     std::vector<sf::Vector2f> camino4 = { sf::Vector2f(100, 300), sf::Vector2f(200, 300), sf::Vector2f(300, 300) };
 
