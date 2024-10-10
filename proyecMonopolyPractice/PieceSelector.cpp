@@ -126,9 +126,11 @@ void PieceSelector::updateSelection() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.draw(spriteFondoGame);
-                renderTexture.draw(Sesion);
-                renderTexture.draw(selectedAvatarCopy);
-                renderTexture.draw(recua);
+                for (int i = 0; i < 4; i++)
+                {
+                    renderTexture.draw(NamePlayers[i]);
+                    renderTexture.draw(boxPlayers[i]);
+                }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
@@ -181,6 +183,7 @@ void PieceSelector::updateSelection() {
         {
             window->draw(NamePlayers[i]);
             window->draw(boxPlayers[i]);
+            window->draw(AvatarPlayers[i]);
         }
         
         
