@@ -19,8 +19,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
 
-    // Llamar a Juan en un hilo separado
-    std::thread hiloCliente(Juan);
+   
 
     // Configurar icono de la ventana
     sf::Image icono;
@@ -46,7 +45,7 @@ int main() {
     Menup.MenuPrincipal();
 
     // Esperar a que el hilo del cliente termine
-    hiloCliente.join();
+  
     CoUninitialize();
     return EXIT_SUCCESS;
 }

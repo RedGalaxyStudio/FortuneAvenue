@@ -2,10 +2,19 @@
 #define GAMEMODE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+#include <iostream>
+#include <thread>
+#include <atomic>
+#include <windows.h> // Necesario para HRESULT y COM
+#include "Client.hpp"
+#include "Globals.hpp"
+
 
     class GameMode {
     public:
         GameMode(sf::RenderWindow* windowRef);
+       
         
         // Método para actualizar el estado del botón según la posición del mouse
         void update();
