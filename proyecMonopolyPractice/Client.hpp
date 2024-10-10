@@ -1,5 +1,6 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
+
 #include "Globals.hpp"
 #include <SFML/Network.hpp>
 #include <iostream>
