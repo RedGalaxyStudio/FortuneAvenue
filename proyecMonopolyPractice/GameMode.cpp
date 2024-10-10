@@ -5,14 +5,10 @@
 #include "ResourceGame.hpp"
 #include "WindowClass.h"
 
-
-
 GameMode::GameMode(sf::RenderWindow* windowRef): window(windowRef) {
     loadResourceGame();
 	resource();
 }
-
-
 
 void GameMode::resource() {
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S++.png")) return;
@@ -106,13 +102,8 @@ void GameMode::update() {
     boxPlayers[3].setScale(0.7f, 0.7f);
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
     //MarcoPlayers[3].setScale(0.7f, 0.7f);
-
-     // Llamar a Juan en un hilo separado
-    std::thread hiloCliente(Juan);
-
     AvatarPlayers[3].setPosition(1052.5f, 652.5f);
     AvatarPlayers[3].setScale(0.7f, 0.7f);
-
     Window Dado(window);
 
     Dado.start(1280, 720); // Cambia el tamaño y el título según sea necesario
@@ -137,7 +128,6 @@ void GameMode::update() {
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
-                hiloCliente.join();
             }
             
 

@@ -117,7 +117,7 @@ void recibirMensajes(sf::TcpSocket& socket) {
 
 int Juan() {
     sf::TcpSocket socket;
-    sf::Socket::Status status = socket.connect("192.168.3.192", PORT);
+    sf::Socket::Status status = socket.connect("192.168.3.114", PORT);
     if (status != sf::Socket::Done) {
         std::cerr << "Error al conectar con el servidor.\n";
         return -1;
