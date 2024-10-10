@@ -15,6 +15,7 @@
         // Ventana de renderizado
         sf::RenderWindow* window;
         std::vector<std::vector<sf::Vector2f>> casillas;
+        sf::FloatRect globalBounds;
         int posicionActual;
         int vectorActual;    // Índice del vector actual
         sf::Vector2i mousePosition;
