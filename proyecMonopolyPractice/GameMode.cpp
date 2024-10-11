@@ -16,6 +16,11 @@ void GameMode::resource() {
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
 
+
+    if (!DiceBuffer.loadFromFile("resource/sounds/Dicerolling.wav")) return;
+
+    DiceSound.setBuffer(DiceBuffer);
+
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
     std::vector<sf::Vector2f> camino2 = { sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
@@ -73,7 +78,7 @@ void GameMode::update() {
     const sf::Texture* texture = selectedAvatarCopy.getTexture();
     if (texture != nullptr) {
         AvatarPlayers[0].setTexture(texture);
-        AvatarPlayers[0].setRadius(texture->getSize().x / 2); // Ajusta el tamaño del círculo
+        AvatarPlayers[0].setRadius(static_cast<float>(texture->getSize().x / 2)); // Ajusta el tamaño del círculo
         AvatarPlayers[0].setOrigin(64, 64);
     }
 

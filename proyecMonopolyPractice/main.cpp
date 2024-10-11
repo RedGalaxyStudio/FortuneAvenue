@@ -35,9 +35,9 @@ int main() {
     }
 
     // Crear una instancia de la clase Cinematic
-    //Cinematic cinematic(window);
-    //cinematic.Resource();
-    //cinematic.Update();
+    Cinematic cinematic(window);
+    cinematic.Resource();
+    cinematic.Update();
     loadTextures();
     cargue();
     Menup.setWindow(window);
