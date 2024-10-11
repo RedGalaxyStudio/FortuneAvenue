@@ -14,6 +14,8 @@ public:
     // Método para dibujar la barra de desplazamiento
     void draw(sf::RenderWindow& window);
 
+    void Prinft();
+
     // Método para establecer la posición de la barra
     void setPosition(float xNew, float yNew);
 

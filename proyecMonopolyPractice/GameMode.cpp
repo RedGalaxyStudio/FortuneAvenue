@@ -16,11 +16,6 @@ void GameMode::resource() {
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
 
-    if (!piecesTextures.loadFromFile("resource/texture/Game/pieces/piece1.png"))
-        return;
-
-    pieces.setTexture(piecesTextures);
-    pieces.setOrigin(18, 18);
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
     std::vector<sf::Vector2f> camino2 = { sf::Vector2f(325,523), sf::Vector2f(325,576), sf::Vector2f(323,629), sf::Vector2f(351,676), sf::Vector2f(394,678), sf::Vector2f(425,655) };
@@ -47,23 +42,24 @@ void GameMode::resource() {
     casillas.push_back(camino4);
 
     posicionActual = 0; // Posición actual del sprite en las casillas
-  
-    Sesion.setCharacterSize(17);
-    sf::FloatRect globalBounds = Sesion.getGlobalBounds();
-    // Ajustar la posición centrando el texto
-    Sesion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-    Sesion.setPosition(188.65f, 52.5f - 3);
-    box.setPosition(188.65f,52.5f);
-    box.setScale(0.7f, 0.7f);
 }
 
 // Implementación del método update
 void GameMode::update() {
 
-    //PieceSelector pieceselector(window);
-   // pieceselector.Resource();
-  //  pieceselector.updateSelection();
+    std::atomic<bool> running{ true }; // Inicializa a true
+    const unsigned short PORT = 54000; // Define el puerto
 
+    AvatarNetworkHandler avatarHandler("192.168.3.114", PORT); // Cambia la IP según tu configuración
+    avatarHandler.iniciar(); // Inicia el hilo de recepción de mensajes
+
+
+    PieceSelector pieceselector(window);
+    pieceselector.Resource();
+    piecesTextures = pieceselector.updateSelection();
+    pieces.setTexture(piecesTextures);
+    globalBounds = pieces.getGlobalBounds();
+    pieces.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
     sf::Clock clock;
     resultadoDado = 0;
     mousePosition = sf::Mouse::getPosition(*window);
@@ -74,8 +70,14 @@ void GameMode::update() {
     boxPlayers[0].setPosition(188.65f, 52.5f);
     boxPlayers[0].setScale(0.7f, 0.7f);
     MarcoPlayers[0].setPosition(52.5f, 52.5f);
-    //MarcoPlayers[0].setScale(0.7f, 0.7f);
-    AvatarPlayers[0].setPosition(52.5f, 652.5f);
+    const sf::Texture* texture = selectedAvatarCopy.getTexture();
+    if (texture != nullptr) {
+        AvatarPlayers[0].setTexture(texture);
+        AvatarPlayers[0].setRadius(texture->getSize().x / 2); // Ajusta el tamaño del círculo
+        AvatarPlayers[0].setOrigin(64, 64);
+    }
+
+    AvatarPlayers[0].setPosition(52.5f, 52.5f);
     AvatarPlayers[0].setScale(0.7f, 0.7f);
 
     //perfil 2
@@ -83,7 +85,6 @@ void GameMode::update() {
     boxPlayers[1].setPosition(1188.65f, 52.5f);
     boxPlayers[1].setScale(0.7f, 0.7f);
     MarcoPlayers[1].setPosition(52.5f, 652.5f);
-   // MarcoPlayers[1].setScale(0.7f, 0.7f);
     AvatarPlayers[1].setPosition(52.5f, 652.5f);
     AvatarPlayers[1].setScale(0.7f, 0.7f);
 
@@ -92,21 +93,16 @@ void GameMode::update() {
     boxPlayers[2].setPosition(188.65f, 652.5f);
     boxPlayers[2].setScale(0.7f, 0.7f);
     MarcoPlayers[2].setPosition(1052.5f, 52.5f);
-    //MarcoPlayers[2].setScale(0.7f, 0.7f);
     AvatarPlayers[2].setPosition(1052.5f, 652.5f);
     AvatarPlayers[2].setScale(0.7f, 0.7f);
-    //hola
+
     //perfil 4
     NamePlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setPosition(1188.65f, 652.5f);
     boxPlayers[3].setScale(0.7f, 0.7f);
     MarcoPlayers[3].setPosition(1052.5f, 652.5f);
-    //MarcoPlayers[3].setScale(0.7f, 0.7f);
 
-
-     // Llamar a Juan en un hilo separado
-    std::thread hiloCliente(Juan);
-   
+     
     AvatarPlayers[3].setPosition(1052.5f, 652.5f);
     AvatarPlayers[3].setScale(0.7f, 0.7f);
     Window Dado(window);
@@ -134,6 +130,7 @@ void GameMode::update() {
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
+                running = false; // Cambia el estado de ejecución
             }
             
 
@@ -161,28 +158,28 @@ void GameMode::update() {
         window->setMouseCursor(*currentCursor);
 
         moverSprite(pieces, DadoResul);
+
         DadoResul = 0;
+
         window->clear();
+
         window->draw(spriteFondoGame);
         window->draw(spriteMapa);
-
-        //window->draw(Sesion);
-
         for (int i = 0; i < 4; i++)
         {
             window->draw(NamePlayers[i]);
             window->draw(boxPlayers[i]);
-            window->draw(MarcoPlayers[i]);
             window->draw(AvatarPlayers[i]);
+            window->draw(MarcoPlayers[i]);
+            
         }
-        //window->draw(recua);
         Dado.update();
-       // cube.draw(*window);
         window->draw(pieces);
-       // pieceselector.displayPieces();
-   //     window->draw(spriteX);
+
         window->display();
     }
+    // Desconectar y unir el hilo cliente al final
+    avatarHandler.desconectar();
 }
 
 void GameMode::moverSprite(sf::Sprite& sprite, int resultadoDado) {
@@ -201,14 +198,4 @@ void GameMode::moverSprite(sf::Sprite& sprite, int resultadoDado) {
 
     // Mueve el sprite a la posición de la casilla correspondiente en el vector actual
     sprite.setPosition(casillas[vectorActual][posicionActual]);
-}
-
-void GameMode::setPlayerProfile(int index, float x, float y) {
-    NamePlayers[index].setPosition(x, y);
-    boxPlayers[index].setPosition(x, y);
-    boxPlayers[index].setScale(0.7f, 0.7f);
-    if(index)
-
-    MarcoPlayers[index].setPosition(x - 136.15f, y + 600.0f);  // Ajuste dinámico según tu lógica
-    MarcoPlayers[index].setScale(0.7f, 0.7f);
 }

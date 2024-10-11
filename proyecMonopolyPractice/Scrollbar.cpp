@@ -1,4 +1,5 @@
 #include "Scrollbar.hpp"
+#include "ResourceGlobal.hpp"
 #include <iostream>
 
 // Constructor
@@ -78,6 +79,18 @@ void Scrollbar::draw(sf::RenderWindow& window) {
     window.draw(cornerTR);
     window.draw(cornerBL);
     window.draw(cornerBR);
+}
+
+
+void Scrollbar::Prinft() {
+    renderTexture.draw(scrollbarTrack);
+    renderTexture.draw(scrollbarThumb);
+
+    // Dibujar los bordes redondeados
+    renderTexture.draw(cornerTL);
+    renderTexture.draw(cornerTR);
+    renderTexture.draw(cornerBL);
+    renderTexture.draw(cornerBR);
 }
 
 // Método para establecer la posición de la barra

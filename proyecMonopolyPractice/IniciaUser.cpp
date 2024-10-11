@@ -24,13 +24,18 @@ IniciaUser::~IniciaUser() {
 // Carga de recursos (texturas y sprites)
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
+
+
 }
 
 // Actualización de la animación (desvanecimiento del logotipo y fondo animado)
 void IniciaUser::Update() {
-    if (!ckeck.loadFromFile("resource/texture/Avatars/cheeke2.png")) return;
-    spriteCkeck.setTexture(ckeck);
+
     if (!std::filesystem::exists("perfil.json")) {
+        if (!ckeck.loadFromFile("resource/texture/Avatars/cheeke2.png")) return;
+        spriteCkeck.setTexture(ckeck);
+        if (!TextureFondoMenuAvar.loadFromFile("resource/texture/Fondos/fondomenuAvar.png")) return;
+        SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
         IniciAcion();
     }else{
         loadSelectedAvatar();
@@ -95,8 +100,23 @@ void IniciaUser::IniciAcion(){
 
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear(sf::Color::Transparent);
+                renderTexture.draw(SpriteFondoMenu);
+                for (int i = 0; i < avatars.size(); ++i) {
+                    renderTexture.draw(avatars[i]);
+                }
+                renderTexture.draw(SpriteFondoMenuAvar);
+                if (selectedAvatar != nullptr) {
+                    renderTexture.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
+                }
+                textBox.Prinf();  // Dibujar el cuadro de texto en la ventana
+
+                scrollbar.Prinft();
+                renderTexture.draw(recua);
+                renderTexture.draw(spriteCkeck);
+                renderTexture.draw(overlay);
+                renderTexture.display();
                 Menup.MenuSalir();
-                window.close();
             }
 
             // Manejo del desplazamiento con la rueda del mouse
@@ -183,14 +203,10 @@ void IniciaUser::IniciAcion(){
                     textBox.handleInput(event);
                 }
 
-                botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-
-                // ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 
                 window.clear();
                 window.draw(SpriteFondoMenu);
-                textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
-
+      
                 for (int i = 0; i < avatars.size(); ++i) {
 
                     sf::Vector2f pos = avatars[i].getPosition();
@@ -199,13 +215,16 @@ void IniciaUser::IniciAcion(){
                 }
 
                 // Dibujar solo la copia del avatar seleccionado en la posición del perfil
+               
+                window.draw(SpriteFondoMenuAvar);
+                
                 if (selectedAvatar != nullptr) {
                     window.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
-                }
-                scrollbar.draw(window);
+                }  
+                textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
 
+                scrollbar.draw(window);
                 window.draw(recua);
-                window.draw(spriteX);
                 window.draw(spriteCkeck);
                 window.display();
             }

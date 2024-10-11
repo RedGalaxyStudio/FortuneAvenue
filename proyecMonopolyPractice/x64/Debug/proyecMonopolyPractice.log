@@ -1,2 +1,7 @@
-﻿  GameMode.cpp
+﻿  IniciaUser.cpp
+  Scrollbar.cpp
+  TextBox.cpp
+  main.cpp
+  menuP.cpp
+  Generating Code...
   proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

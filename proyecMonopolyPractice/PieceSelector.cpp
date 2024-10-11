@@ -2,6 +2,7 @@
 #include "ResourceGlobal.hpp"
 #include "ResourceGame.hpp"
 #include "ObjetosGlobal.hpp"
+#include "ButtonG.hpp"
 
 // Constructor
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
@@ -12,11 +13,24 @@ PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 void PieceSelector::Resource() {
 
     StringNamePlayers[0] = input;
-    int piecesCount = 9;  // Si tienes 17 pieces
+    int piecesCount = 16;  //Cantidad de piezas
     pieces.resize(piecesCount);
-    shadow.resize(piecesCount);  // List of pieces to select
+    shadow.resize(piecesCount);  
     piecesTextures.resize(piecesCount);
+    Check.resize(4);
+    CheckTexturesOn.resize(4);
+    CheckTexturesOff.resize(4);
+   
+    for (int i = 0; i < 4; i++) {
+        if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
+        if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;
+            
 
+        Check[i].setTexture(CheckTexturesOff[i]);
+        Check[i].setOrigin(50.0f, 46.5f);
+
+    }
+    
     for (int i = 0; i < piecesCount; i++) {
         if (!piecesTextures[i].loadFromFile("resource/texture/Game/pieces/piece" + std::to_string(i) + ".png"))
             return;
@@ -25,9 +39,9 @@ void PieceSelector::Resource() {
     //    pieces[i].setRadius(radio);
         pieces[i].setTexture(piecesTextures[i]);
         shadow[i].setTexture(piecesTextures[i]);
-        pieces[i].setOrigin(18,18);
-        shadow[i].setOrigin(18,18);
-             
+        globalBounds = pieces[i].getGlobalBounds();
+        pieces[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+        shadow[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
     }
 
@@ -63,7 +77,7 @@ void PieceSelector::displayPieces() {
 
 
 // Update the selection based on user input
-void PieceSelector::updateSelection() {
+sf::Texture PieceSelector::updateSelection() {
     NumPlayers = 0;
     sf::Clock clock;
     
@@ -78,6 +92,8 @@ void PieceSelector::updateSelection() {
     for (int i = 1; i < 4; i++) {
         StringNamePlayers[i] = "bot" + std::to_string(i);
     }
+
+    ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
 
     while (window->isOpen()) {
         NumPlayers += 1;
@@ -112,9 +128,10 @@ void PieceSelector::updateSelection() {
                 NamePlayers[i].setPosition(startX + i * (250 + 10), startY);
                 if (i==0)
                 {
-                    PiecesSelect[0].setPosition(startX + i * (250 + 10), startY+100);
+                    PiecesSelect[i].setPosition(startX + i * (250 + 10), startY+100);
+                    
                 }
-                
+                Check[i].setPosition(startX + i * (250 + 10), startY + 200 );
             }
            
             break;
@@ -123,6 +140,10 @@ void PieceSelector::updateSelection() {
         
         sf::Event event;
         while (window->pollEvent(event)) {
+
+            mousePosFloat = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
+
+
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.draw(spriteFondoGame);
@@ -139,10 +160,6 @@ void PieceSelector::updateSelection() {
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
-
-                mousePosFloat = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-
-
                 for (int i = 0; i < pieces.size(); ++i) {
                     // Verificar si el mouse está sobre la pieza
                     if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
@@ -166,13 +183,24 @@ void PieceSelector::updateSelection() {
                         }
                         break;
                     }
+                 
+                }
+                if (Check[0].getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    const sf::Texture* texturePtr = PiecesSelect[0].getTexture();
+
+                    if (texturePtr != nullptr) {
+                        sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
+                        return textureSelec;
+                    }
                 }
                
             }
 
         }
-        currentCursor = &normalCursor;
 
+        currentCursor = &normalCursor;
+        botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         window->setMouseCursor(*currentCursor);
 
    
@@ -184,6 +212,7 @@ void PieceSelector::updateSelection() {
             window->draw(NamePlayers[i]);
             window->draw(boxPlayers[i]);
             window->draw(AvatarPlayers[i]);
+                      
         }
         
         
@@ -191,6 +220,7 @@ void PieceSelector::updateSelection() {
 
         displayPieces();
         window->draw(PiecesSelect[0]);
+        window->draw(Check[0]);
         window->display();
     }
 

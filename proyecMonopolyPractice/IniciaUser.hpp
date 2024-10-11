@@ -26,6 +26,8 @@ private:
     sf::Sprite spriteCkeck;
     sf::CircleShape* selectedAvatar = nullptr; // Avatar seleccionado
     sf::Sprite SpriteFondoMenu;
+    sf::Sprite SpriteFondoMenuAvar;
+    sf::Texture TextureFondoMenuAvar;
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
 

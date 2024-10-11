@@ -20,7 +20,6 @@
         void update();
         void resource();
         void moverSprite(sf::Sprite& sprite, int resultadoDado);
-        void setPlayerProfile(int index, float x, float y);
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;

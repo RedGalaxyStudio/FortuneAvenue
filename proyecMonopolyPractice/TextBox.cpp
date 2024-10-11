@@ -82,3 +82,9 @@ void TextBox::draw(sf::RenderWindow& window) {
     window.draw(textoPregunta);
     //window.draw(textoGuardado);
 }
+
+void TextBox::Prinf() {
+    renderTexture.draw(box);
+    renderTexture.draw(text);
+    renderTexture.draw(textoPregunta);
+}
