@@ -10,6 +10,8 @@ std::vector<sf::Sprite> PiecesSelect;
  sf::Texture TextureMarco;
  sf::Sprite spriteFondoGame;
  int NumPlayers;
+ sf::SoundBuffer DiceBuffer;
+ sf::Sound DiceSound;
  std::vector<sf::Sprite> MarcoPlayers;
 
 void loadResourceGame(){

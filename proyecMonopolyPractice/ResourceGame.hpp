@@ -20,6 +20,9 @@ extern sf::Sprite spriteFondoGame;
 extern std::vector<sf::Sprite> MarcoPlayers;
 extern std::vector<sf::Sprite> PiecesSelect;
 extern int NumPlayers;
+extern sf::SoundBuffer DiceBuffer;
+extern sf::Sound DiceSound;
+
 void loadResourceGame();
 void loadPieceGame();
 
