@@ -178,7 +178,7 @@ public :
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-				
+				DiceSound.play();
 					updateDiceAppearance();
 					eventStarted = true;
 					faceIndex = rand() % 6 + 1;
