@@ -1,19 +1,2 @@
-﻿  ButtonG.cpp
-  Cinematic.cpp
-  Client.cpp
-  GameMode.cpp
-  IniciaUser.cpp
-  main.cpp
-  menuP.cpp
-  ObjetosGlobal.cpp
-  PieceSelector.cpp
-  ResourceGame.cpp
-  Scrollbar.cpp
-  SettingsManager.cpp
-  TextBox.cpp
-  ResourceGlobal.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include\xutility(4672,18): warning C4244: '=': conversion from 'wchar_t' to 'char', possible loss of data
-  VolumeSlider.cpp
-  WebViewManager.cpp
-  Generating Code...
+﻿  main.cpp
   proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe

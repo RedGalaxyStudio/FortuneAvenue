@@ -132,6 +132,7 @@ void loadVolumenIcon() {
     if (!TextureHigh.loadFromFile("resource/texture/Button/VolumeHigh.png")) return;
 }
 
+
 // Función para cargar los cursores desde una imagen o textura
 void loadCursors() {
     sf::Image cursorNormal;
@@ -188,7 +189,12 @@ void GetUserEmail() {
     curl = curl_easy_init();
     if (curl) {
         std::string url = "https://www.googleapis.com/oauth2/v2/userinfo";
-        std::string bearerToken = "Bearer " + std::string(token.begin(), token.end());
+        std::string bearerToken = "Bearer ";
+        for (wchar_t wc : token) {
+            if (wc < 128) { // Solo convertir caracteres ASCII
+                bearerToken += static_cast<char>(wc);
+            }
+        }
 
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         struct curl_slist* headers = NULL;

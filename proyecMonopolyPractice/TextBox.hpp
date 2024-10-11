@@ -14,7 +14,7 @@ public:
     void setPosition();
     void handleInput(sf::Event event);
     void draw(sf::RenderWindow& window);
-
+    void Prinf();
 private:
 
     float x, y;
