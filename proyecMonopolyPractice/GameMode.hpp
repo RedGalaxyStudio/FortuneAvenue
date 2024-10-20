@@ -10,17 +10,23 @@
 #include <windows.h> // Necesario para HRESULT y COM
 #include "Client.hpp"
 #include "Globals.hpp"
+#include "WindowClass.h"
+#include "Ruleta.hpp"
+#include "MovePieces.hpp"
 
-
-    class GameMode {
+//class MovePieces;
+    class GameMode{
     public:
-        GameMode(sf::RenderWindow* windowRef);
-       
-        
-        // Método para actualizar el estado del botón según la posición del mouse
-        void update();
+        GameMode(sf::RenderWindow& win);
+ 
         void resource();
-        void moverSprite(sf::Sprite& sprite, int resultadoDado);
+   
+        void update();
+        void Event();
+        void DrawPieceMoviendo();
+        void DrawGame();
+        void DrawGameRuleta();
+        MovePieces moverFicha1;
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;
@@ -33,9 +39,30 @@
         int resultadoDado;
         sf::Texture piecesTextures;
         sf::Sprite pieces;
+        sf::Clock TempoAnimacion;
+
+        Window Dado;
+        sf::Clock clock;
+
+        Ruleta ruleta; // Crear la ruleta en el centro de la ventana
+        bool validar;
+
+        sf::View viewTablero; // Declarar la vista
+        sf::Sprite renderedSprite;
+
+        sf::Texture TextureMapa;
+      
+
+        sf::Texture SettingsOn;
+        sf::Texture SettingsOff;
+        sf::Sprite Settings;
+
+
+        sf::Texture TextureArrowDer;
+
+
+        sf::Texture TextureArrowIzq;
 
         
-        sf::Texture TextureMapa;
-        sf::Sprite spriteMapa;
     };
 #endif

@@ -4,7 +4,6 @@
 #include <thread>
 #include <atomic>
 #include <windows.h> // Necesario para HRESULT y COM
-
 #include "Client.hpp"
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
@@ -18,8 +17,6 @@ const unsigned short PORT = 53000; // Definición aquí
 int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
-
-   
 
     // Configurar icono de la ventana
     sf::Image icono;
@@ -35,9 +32,9 @@ int main() {
     }
 
     // Crear una instancia de la clase Cinematic
-    Cinematic cinematic(window);
-    cinematic.Resource();
-    cinematic.Update();
+   // Cinematic cinematic(window);
+   // cinematic.Resource();
+   // cinematic.Update();
     loadTextures();
     cargue();
     Menup.setWindow(window);

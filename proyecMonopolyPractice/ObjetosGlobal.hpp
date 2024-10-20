@@ -2,10 +2,11 @@
 #define OBJETOSGLOBAL_HPP
 
 #include "menuP.hpp"
+
 class menuP;
 
 extern menuP Menup;
- 
+
 void cargue();
 
 #endif // OBJETOSGLOBAL_HPP

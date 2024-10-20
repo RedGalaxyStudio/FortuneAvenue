@@ -22,6 +22,13 @@ extern std::vector<sf::Sprite> PiecesSelect;
 extern int NumPlayers;
 extern sf::SoundBuffer DiceBuffer;
 extern sf::Sound DiceSound;
+extern sf::Sprite spriteMapa;
+extern sf::Clock reloj;
+extern sf::View view; // Declarar la vista
+extern sf::Sprite SpriteArrowDer;
+extern std::vector<sf::Sprite> rastro;
+extern sf::Sprite SpriteArrowIzq;
+
 
 void loadResourceGame();
 void loadPieceGame();

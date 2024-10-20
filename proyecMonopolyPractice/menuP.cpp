@@ -239,7 +239,9 @@ void menuP::eventoMenuP() {
 }
 
 void menuP::MenuJugar() {
-    GameMode gamemode(window);
+
+
+    GameMode gamemode(*window);
 
     gamemode.update();
 
