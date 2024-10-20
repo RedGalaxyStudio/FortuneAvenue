@@ -263,6 +263,10 @@ void GameMode::DrawPieceMoviendo(){
 
     if (viewY > 540) viewY = 540;
     if (viewX < 320) viewX = 320;
+
+    if (viewY < 180) viewY = 180;
+
+
     view.setCenter(viewX, viewY); // Actualizar la vista centrada en la nueva posición
 
     view.setSize(1280 * 0.5, 720 * 0.5); // Actualizar el tamaño de la vista

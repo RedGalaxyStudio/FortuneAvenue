@@ -114,7 +114,7 @@ private:
 
 
     std::vector<sf::Vector2f> camino7{
-    sf::Vector2f(407, 98),
+   // sf::Vector2f(407, 98),
     sf::Vector2f(402, 157),
     sf::Vector2f(442, 209),
     sf::Vector2f(413, 253),

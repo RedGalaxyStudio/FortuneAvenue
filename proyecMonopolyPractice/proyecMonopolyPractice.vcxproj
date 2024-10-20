@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;libboost_system-vc143-mt-x64-1_86.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)curl\lib;$(ProjectDir)boost_1_86_0\stage\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.22621.0\um\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -52,8 +52,9 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
                 }
                 
                 caminoActual++;
-                if (caminoActual >= 6) {
-                    caminoActual = 0;  // Reiniciar caminos si es necesario
+                if (caminoActual >= 7) {
+                    caminoActual = 0;
+                    casillas->resize(1);// Reiniciar caminos si es necesario
                 }
 
             }
@@ -150,6 +151,7 @@ void MovePieces::updateCAmbioCasilla() {
 
         if (viewY > 540) viewY = 540;
         if (viewX < 320) viewX = 320;
+        if (viewY < 180) viewY = 180;
         view.setCenter(viewX, viewY); // Actualizar la vista centrada en la nueva posición
 
         view.setSize(1280 * 0.5, 720 * 0.5); // Actualizar el tamaño de la vista
@@ -187,11 +189,12 @@ void MovePieces::seleccionarCaminoIzq() {
     casillas->push_back(camino3);
     }else if ((*casillas).size() == 3){
         std::vector<sf::Vector2f> camino4_1{
-            sf::Vector2f(764.775, 622.577),
-            sf::Vector2f(764.115, 577.082),
-            sf::Vector2f(790.167, 539.333),
-            sf::Vector2f(835.333, 539.500),
-            sf::Vector2f(881.000, 540.500)
+sf::Vector2f(765, 623),
+sf::Vector2f(764, 577),
+sf::Vector2f(790, 539),
+sf::Vector2f(835, 540),
+sf::Vector2f(881, 540)
+
     };
 
         casillas->push_back(camino4_1);
@@ -201,7 +204,7 @@ void MovePieces::seleccionarCaminoIzq() {
 
         std::vector<sf::Vector2f> camino6_1{
 sf::Vector2f(407, 98),
-sf::Vector2f(402, 157)
+//sf::Vector2f(402, 157)
         };
 
 
@@ -220,7 +223,13 @@ sf::Vector2f(402, 157)
 void MovePieces::seleccionarCaminoDer() {
     
     if ((*casillas).size() == 1) {
-        std::vector<sf::Vector2f> camino2_2 = { sf::Vector2f(425,519), sf::Vector2f(429,588), sf::Vector2f(429,612), sf::Vector2f(425,654) };
+        std::vector<sf::Vector2f> camino2_2{
+     sf::Vector2f(428, 517),
+     sf::Vector2f(429, 566),
+     sf::Vector2f(429, 612),
+     sf::Vector2f(425, 654)
+        };
+
         casillas->push_back(camino2_2);
         casillas->push_back(camino3);
     }
@@ -231,7 +240,6 @@ void MovePieces::seleccionarCaminoDer() {
     sf::Vector2f(923, 679),
     sf::Vector2f(955, 648),
     sf::Vector2f(955, 609),
-    sf::Vector2f(955, 373),
     sf::Vector2f(955, 568),
     sf::Vector2f(926, 541),
     sf::Vector2f(881, 541)
@@ -279,7 +287,7 @@ void MovePieces::animacionRastro(float deltaTime) {
     for (auto& s : rastro) {
         sf::Color color = s.getColor();
         if (color.a > 0) {
-            color.a -= 30 * deltaTime;  // Reducir la opacidad más lentamente para un desvanecimiento más suave
+            color.a -= static_cast<sf::Uint8>(30 * deltaTime);  // Reducir la opacidad más lentamente para un desvanecimiento más suave
             s.setColor(color);
         }
     }
@@ -294,7 +302,7 @@ void MovePieces::animacionRastro(float deltaTime) {
 
 void MovePieces::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
     // Movimiento elástico usando una función de rebote
-    float distancia = std::sqrt(std::pow(posicionFinal.x - sprite->getPosition().x, 2) + std::pow(posicionFinal.y - sprite->getPosition().y, 2));
+    float distancia = static_cast<float>(std::sqrt(std::pow(posicionFinal.x - sprite->getPosition().x, 2) + std::pow(posicionFinal.y - sprite->getPosition().y, 2)));
     if (distancia < 5.0f) {  // Si está lo suficientemente cerca de la casilla
         float rebote = std::sin(deltaTime * 10) * 5;  // Pequeño rebote
         sprite->move(0, 4);  // Mover solo en eje Y para simular rebote
