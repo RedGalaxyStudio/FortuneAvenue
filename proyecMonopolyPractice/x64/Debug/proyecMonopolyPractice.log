@@ -1,2 +1,16 @@
-﻿  MovePieces.cpp
+﻿  ButtonG.cpp
+  GameMode.cpp
+  IniciaUser.cpp
+  main.cpp
+  menuP.cpp
+  MovePieces.cpp
+  ObjetosGlobal.cpp
+  PieceSelector.cpp
+  ResourceGame.cpp
+  Scrollbar.cpp
+  TextBox.cpp
+  ResourceGlobal.cpp
+  WebViewManager.cpp
+  Generating Code...
+C:\Users\Daniel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\PieceSelector.cpp(227,1): warning C4715: 'PieceSelector::updateSelection': not all control paths return a value
   proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

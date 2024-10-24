@@ -2,19 +2,22 @@
 #define GAMEMODE_HPP
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <thread>
 #include <atomic>
+#include <winsock2.h>
 #include <windows.h> // Necesario para HRESULT y COM
 #include "Client.hpp"
 #include "Globals.hpp"
 #include "WindowClass.h"
 #include "Ruleta.hpp"
 #include "MovePieces.hpp"
+#include "ResourceGlobal.hpp"
+#include "ObjetosGlobal.hpp"
+#include "PieceSelector.hpp"
+#include "ResourceGame.hpp"
 
-//class MovePieces;
     class GameMode{
     public:
         GameMode(sf::RenderWindow& win);

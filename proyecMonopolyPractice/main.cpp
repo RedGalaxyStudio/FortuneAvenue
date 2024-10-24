@@ -3,8 +3,8 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
+#include <winsock2.h>
 #include <windows.h> // Necesario para HRESULT y COM
-#include "Client.hpp"
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ResourceGlobal.hpp"

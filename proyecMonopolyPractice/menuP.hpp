@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp" 
 #include "WebViewManager.hpp"
+#include <winsock2.h>
 #include <Windows.h>
 #include "ObjetosGlobal.hpp"
 #include "GameMode.hpp"

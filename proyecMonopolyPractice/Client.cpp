@@ -1,50 +1,82 @@
 #include "Client.hpp"
 
-/*using boost::asio::ip::tcp;
+Client::Client() : client(nullptr), peer(nullptr) {}
 
-Client::Client(boost::asio::io_context& io_context, const std::string& server, short port)
-    : socket_(io_context), endpoint_(tcp::endpoint(boost::asio::ip::address::from_string(server), port)) {
-    start_connect();
+Client::~Client() {
+    if (client) {
+        enet_host_destroy(client);
+    }
+    enet_deinitialize();
 }
 
-void Client::start_connect() {
-    socket_.async_connect(endpoint_, [this](const boost::system::error_code& error) {
-        if (!error) {
-            std::cout << "Conectado al servidor. Enviando imagen..." << std::endl;
-            send_image();
-        }
-        else {
-            std::cerr << "Error al conectar: " << error.message() << std::endl;
-        }
-        });
-}
-
-void Client::send_image() {
-    std::ifstream image_file("image_to_send.png", std::ios::binary | std::ios::ate); // Abrir archivo de imagen
-
-    if (!image_file) {
-        std::cerr << "No se pudo abrir el archivo de imagen." << std::endl;
-        return;
+bool Client::initialize() {
+    if (enet_initialize() != 0) {
+        std::cerr << "Error initializing ENet!" << std::endl;
+        return false;
     }
 
-    std::streamsize image_size = image_file.tellg(); // Obtener el tamaño del archivo
-    image_file.seekg(0, std::ios::beg);
+    client = enet_host_create(nullptr, 1, 2, 0, 0);
+    if (!client) {
+        std::cerr << "Error creating ENet client!" << std::endl;
+        return false;
+    }
+    return true;
+}
 
-    auto buffer = std::make_shared<std::vector<char>>(image_size); // Buffer para la imagen
-    if (image_file.read(buffer->data(), image_size)) {
-        boost::asio::async_write(socket_, boost::asio::buffer(*buffer),
-            [this, buffer](const boost::system::error_code& error, std::size_t bytes_transferred) {
-                if (!error) {
-                    std::cout << "Imagen enviada correctamente, bytes enviados: " << bytes_transferred << std::endl;
-                    socket_.close();  // Cerrar el socket después de enviar
-                }
-                else {
-                    std::cerr << "Error al enviar la imagen: " << error.message() << std::endl;
-                }
-            }
-        );
+bool Client::connectToServer(const std::string& address, uint16_t port) {
+    ENetAddress enetAddress;
+    enet_address_set_host(&enetAddress, address.c_str());
+    enetAddress.port = port;
+
+    peer = enet_host_connect(client, &enetAddress, 2, 0);
+    if (!peer) {
+        std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
+        return false;
+    }
+
+    ENetEvent event;
+    if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
+        std::cout << "Connected to server!" << std::endl;
+        return true;
     }
     else {
-        std::cerr << "Error al leer el archivo de imagen." << std::endl;
+        std::cerr << "Failed to connect to server." << std::endl;
+        return false;
     }
-}*/
+}
+
+bool Client::sendImage(const std::string& filename) {
+    // Load the image data
+    std::vector<char> imageData = loadImage(filename);
+    if (imageData.empty()) {
+        std::cerr << "Failed to load image!" << std::endl;
+        return false;
+    }
+
+    // Send the image as a packet
+    ENetPacket* packet = enet_packet_create(imageData.data(), imageData.size(), ENET_PACKET_FLAG_RELIABLE);
+    enet_peer_send(peer, 0, packet);
+    enet_host_flush(client);
+
+    std::cout << "Image sent!" << std::endl;
+    return true;
+}
+
+void Client::disconnect() {
+    if (peer) {
+        enet_peer_disconnect(peer, 0);
+    }
+    std::cout << "Disconnected from server!" << std::endl;
+}
+
+std::vector<char> Client::loadImage(const std::string& filename) {
+    std::ifstream file(filename, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open the image file!" << std::endl;
+        return {};
+    }
+
+    std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+    return buffer;
+}

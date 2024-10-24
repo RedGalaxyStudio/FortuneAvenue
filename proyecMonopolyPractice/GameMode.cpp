@@ -1,12 +1,4 @@
 #include "GameMode.hpp"
-#include "ResourceGlobal.hpp"
-#include "ObjetosGlobal.hpp"
-#include "PieceSelector.hpp"
-#include "ResourceGame.hpp"
-#include "Ruleta.hpp"
-//#include <boost/asio.hpp>
-//#include "Client.hpp"
-
 
 GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), ruleta(500.0f, 500.0f,640.0f, 360.0f), validar(false) , moverFicha1(win){
     loadResourceGame();
@@ -77,6 +69,17 @@ void GameMode::resource() {
 
 // Implementación del método update
 void GameMode::update() {
+
+
+    Client client;
+
+    client.initialize();
+
+    client.connectToServer("192.168.3.114", 1234);
+    client.sendImage(TextureAvatarPath);
+    
+
+    
 
     PieceSelector pieceselector(window);
     pieceselector.Resource();
@@ -193,7 +196,7 @@ void GameMode::update() {
         window->display();
    
     }
-
+    client.disconnect();
 }
 
 void  GameMode::Event(){

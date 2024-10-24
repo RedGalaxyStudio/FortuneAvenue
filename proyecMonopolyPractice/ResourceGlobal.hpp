@@ -38,7 +38,6 @@ extern sf::Texture textureXOff;
 extern sf::Sprite spriteX;
 extern ButtonG* botonX;
 extern std::vector<sf::CircleShape> avatars;
-extern std::vector<sf::Texture> avatarTextures;
 extern sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
 extern sf::Texture textureBox;
 extern sf::Sprite box;
@@ -51,14 +50,15 @@ extern  std::string pictureUrl;
 extern sf::Texture TextureBotonSiOn;
 extern sf::Texture TextureBotonSiOff;
 extern sf::Sprite SpriteBotonSi;
-
+extern sf::Texture TextureAvatarSelec;
+extern std::string TextureAvatarPath;
 extern sf::Texture TextureBotonNoOn;
 extern sf::Texture TextureBotonNoOff;
 extern sf::Sprite SpriteBotonNo;
 
 
 // Funciones para cargar las texturas y cursores
-void loadAvatars();
+
 void playClickSound();
 void loadVolumenIcon();
 void loadSounds();

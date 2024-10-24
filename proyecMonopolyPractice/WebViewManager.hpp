@@ -2,6 +2,7 @@
 #define WEBVIEWMANAGER_HPP
 
 #include "menuP.hpp"
+#include <winsock2.h>
 #include <windows.h>
 #include <WebView2.h>
 #include <wrl.h>
