@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  ButtonG.cpp
   Client.cpp
   GameMode.cpp
@@ -14,4 +15,7 @@
   menuP.cpp
   Generating Code...
 C:\Users\Daniel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\PieceSelector.cpp(227,1): warning C4715: 'PieceSelector::updateSelection': not all control paths return a value
+=======
+﻿  MovePieces.cpp
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
   proyecMonopolyPractice.vcxproj -> C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

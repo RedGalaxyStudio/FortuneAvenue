@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 #include "CubeClass.h"//#include <iostream>
+<<<<<<< HEAD
+=======
+#include "ResourceGame.hpp"
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
 #include <cstdlib>
 #include <ctime>
 
@@ -99,8 +103,12 @@ public :
 	sf::RenderWindow* window;
 
 
+<<<<<<< HEAD
 	Window(sf::RenderWindow* windowRef) : window(windowRef) {
 	}
+=======
+	Window(sf::RenderWindow* windowRef) : window(windowRef) {}
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
 
 	void start(unsigned int Width, unsigned int Height){
 
@@ -201,7 +209,11 @@ public :
 			if (elapsed.asSeconds() < 1.0f) { // Comprobar si han pasado menos de 5 segundos
 				mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
 				mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
+<<<<<<< HEAD
 				std::cout << "eventStarted: " << eventStarted << std::endl;  // Imprimir valor actual
+=======
+				//std::cout << "eventStarted: " << eventStarted << std::endl;  // Imprimir valor actual
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
 
 				float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
 				float dy = static_cast<float>(mouseEnd.y - mouseStart.y);

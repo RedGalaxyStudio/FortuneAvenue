@@ -4,7 +4,10 @@
 #include <thread>
 #include <atomic>
 #include <windows.h> // Necesario para HRESULT y COM
+<<<<<<< HEAD
 
+=======
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
 #include "Client.hpp"
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
@@ -19,8 +22,11 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
 
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
     // Configurar icono de la ventana
     sf::Image icono;
     if (!icono.loadFromFile("resource/texture/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
@@ -35,9 +41,15 @@ int main() {
     }
 
     // Crear una instancia de la clase Cinematic
+<<<<<<< HEAD
     Cinematic cinematic(window);
     cinematic.Resource();
     cinematic.Update();
+=======
+   // Cinematic cinematic(window);
+   // cinematic.Resource();
+   // cinematic.Update();
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
     loadTextures();
     cargue();
     Menup.setWindow(window);

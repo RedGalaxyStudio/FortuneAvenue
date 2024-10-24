@@ -1,6 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
+<<<<<<< HEAD
 #include "Globals.hpp"
 #include <SFML/Network.hpp>
 #include <iostream>
@@ -43,5 +44,32 @@ private:
 };
 
 #endif // PIECESELECTOR_HPP
+=======
+/*#define WIN32_LEAN_AND_MEAN
+#include <Winsock2.h>
+#include <ws2tcpip.h>  // Puede ser necesario en algunos casos.
+#include <boost/asio.hpp>
+#include <fstream>
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#pragma comment(lib, "Ws2_32.lib") // Vinculación de la librería de Winsock
+
+using boost::asio::ip::tcp;
+
+class Client {
+public:
+    Client(boost::asio::io_context& io_context, const std::string& server, short port);
+
+private:
+    void start_connect();
+    void send_image();
+    tcp::socket socket_;
+    tcp::endpoint endpoint_;
+};
+*/
+#endif // CLIENT_HPP
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
 
 
