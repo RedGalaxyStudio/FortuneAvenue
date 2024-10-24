@@ -228,8 +228,8 @@ void IniciaUser::IniciAcion(){
                 window.draw(recua);
                 window.draw(spriteCkeck);
                 window.display();
-            }
-        }
+    }
+}
     
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
