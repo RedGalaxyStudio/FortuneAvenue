@@ -108,15 +108,33 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+<<<<<<< HEAD
       <AdditionalIncludeDirectories>$(ProjectDir)libs\include;$(ProjectDir)curl\include</AdditionalIncludeDirectories>
+=======
+<<<<<<< HEAD
+      <AdditionalIncludeDirectories>$(ProjectDir)curl\include</AdditionalIncludeDirectories>
+=======
+      <AdditionalIncludeDirectories>$(ProjectDir)boost_1_86_0;$(ProjectDir)curl\include</AdditionalIncludeDirectories>
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
+>>>>>>> 8a404cbb884010bd60e3a0dee54e262f1e18a4fb
       <LanguageStandard>stdcpp20</LanguageStandard>
       <UndefinePreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=2</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+<<<<<<< HEAD
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;libcurl.a;libcurl.dll.a;enet.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)curl\lib;$(ProjectDir)libs\lib</AdditionalLibraryDirectories>
+=======
+<<<<<<< HEAD
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)curl\lib</AdditionalLibraryDirectories>
+=======
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)curl\lib;$(ProjectDir)boost_1_86_0\stage\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.22621.0\um\x64</AdditionalLibraryDirectories>
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
+>>>>>>> 8a404cbb884010bd60e3a0dee54e262f1e18a4fb
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,11 +161,17 @@
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="ObjetosGlobal.cpp" />
+    <ClCompile Include="PieceSelector.cpp" />
+    <ClCompile Include="ResourceGame.cpp" />
+=======
     <ClCompile Include="MovePieces.cpp" />
     <ClCompile Include="ObjetosGlobal.cpp" />
     <ClCompile Include="PieceSelector.cpp" />
     <ClCompile Include="ResourceGame.cpp" />
     <ClCompile Include="Ruleta.cpp" />
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
     <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -164,6 +188,13 @@
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
+<<<<<<< HEAD
+    <ClInclude Include="nlohmann\json.hpp" />
+    <ClInclude Include="nlohmann\json_fwd.hpp" />
+    <ClInclude Include="ObjetosGlobal.hpp" />
+    <ClInclude Include="PieceSelector.hpp" />
+    <ClInclude Include="ResourceGame.hpp" />
+=======
     <ClInclude Include="MovePieces.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="nlohmann\json_fwd.hpp" />
@@ -172,6 +203,7 @@
     <ClInclude Include="PieceSelector.hpp" />
     <ClInclude Include="ResourceGame.hpp" />
     <ClInclude Include="Ruleta.hpp" />
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
     <ClInclude Include="Scrollbar.hpp" />
     <ClInclude Include="SettingsManager.hpp" />
     <ClInclude Include="TextBox.hpp" />

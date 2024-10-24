@@ -1,2 +1,5 @@
 * text=auto
+<<<<<<< HEAD
+=======
 .vs/proyecMonopolyPractice/v17/Browse.VC.db filter=lfs diff=lfs merge=lfs -text
+>>>>>>> f72d20990916be5037739544fb6b23cc6932def9
