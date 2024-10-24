@@ -63,14 +63,10 @@
     <ClCompile Include="ResourceGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Cube.cpp">
-=======
-    <ClCompile Include="MovePieces.cpp">
+    <ClCompile Include="Ruleta.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ruleta.cpp">
->>>>>>> f72d20990916be5037739544fb6b23cc6932def9
+    <ClCompile Include="MovePieces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,20 +119,12 @@
     <ClInclude Include="ResourceGame.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Cube.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
->>>>>>> f72d20990916be5037739544fb6b23cc6932def9
     <ClInclude Include="Client.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Globals.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="CubeClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -149,10 +137,6 @@
     <ClInclude Include="Ruleta.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Particles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
->>>>>>> f72d20990916be5037739544fb6b23cc6932def9
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
