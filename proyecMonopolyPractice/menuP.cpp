@@ -5,7 +5,7 @@
 #include "IniciaUser.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
-
+#include "IniciarPartida.hpp"
 
 // Constructor: inicializa la variable y la ventana
 menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
@@ -239,6 +239,10 @@ void menuP::eventoMenuP() {
 }
 
 void menuP::MenuJugar() {
+
+
+    IniciarPartida inicial(*window);
+    inicial.update();
 
     GameMode gamemode(*window);
 

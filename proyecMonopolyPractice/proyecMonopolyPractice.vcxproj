@@ -140,6 +140,7 @@
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="GameMode.cpp" />
+    <ClCompile Include="IniciarPartida.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="CubeClass.h" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
+    <ClInclude Include="IniciarPartida.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
     <ClInclude Include="MovePieces.hpp" />

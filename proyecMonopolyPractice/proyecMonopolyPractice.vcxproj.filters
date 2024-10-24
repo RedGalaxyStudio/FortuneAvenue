@@ -69,6 +69,9 @@
     <ClCompile Include="MovePieces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IniciarPartida.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
@@ -135,6 +138,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ruleta.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IniciarPartida.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
