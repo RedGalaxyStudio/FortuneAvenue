@@ -7,13 +7,18 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <thread>
+#include <atomic>
+#include <string>
 
 class Client {
 public:
     Client();
     ~Client();
-
+    void run();
     bool initialize();
+    bool createRoom();
+    bool joinRoom(const std::string& roomCode);
     bool connectToServer(const std::string& address, uint16_t port);
     bool sendImage(const std::string& filename);
     void disconnect();
@@ -23,6 +28,9 @@ private:
     ENetPeer* peer;
 
     std::vector<char> loadImage(const std::string& filename);
+
+    std::thread clientThread; // Hilo para el cliente
+    std::atomic<bool> running; // Flag para controlar la ejecución del hilo
 };
 
 #endif // CLIENT_HPP
