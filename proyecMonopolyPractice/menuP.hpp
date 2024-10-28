@@ -15,30 +15,25 @@ class GameMode;
 
 class menuP : public SettingsManager {
 public:
-    // Constructor: inicializa la variable y la ventana
+
     menuP();
 
     void setWindow(sf::RenderWindow& windowRef);
-    // Carga de recursos (texturas y sprites)
+ 
     void Resource();
 
     void Inicializar();
     void MenuJugar();
-    // Actualizaci�n de la animaci�n (desvanecimiento del logotipo)
+
     void MenuPrincipal();
 
-    // M�todo para manejar eventos
     void eventoMenuP();
 
     void eventoMenuO();
-    // M�todo para dibujar (implementa seg�n sea necesario)
 
-    //void updateButtonState(sf::Sprite& buttonSprite, const sf::Texture& hoverTexture, const sf::Texture& defaultTexture);
-    //void handleCursorChange();
- 
     void OpenWebView();
     void CloseWebView(bool Vali);
-    //Ventana de opciones
+
     void MenuOpcion();
     void MenuSalir();
     void MenuAcercaDe();
@@ -50,7 +45,6 @@ private:
     LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
     bool isWebViewOpen;
 
-    // Ventana de renderizado
     sf::RenderWindow* window;
 
     
@@ -58,7 +52,7 @@ private:
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
 
-    // Texturas y sprites para el men�
+
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
 
@@ -93,21 +87,14 @@ private:
     sf::Text TextAcercaDe;
     sf::Sprite renderedSprite;
 
-
-    // Sonidos
     sf::Music MenuMusicFondo;
 
-    // Puntero al �ltimo bot�n que se hizo hover
     sf::Sprite* lastHoveredButton;
     sf::Shader Blur;
    
-    
-
-    // M�todos para manejar el hover
-
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
 
 };
 
-#endif // MENUP_HPP
+#endif 

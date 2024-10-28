@@ -29,8 +29,8 @@ private:
 
     std::vector<char> loadImage(const std::string& filename);
 
-    std::thread clientThread; // Hilo para el cliente
-    std::atomic<bool> running; // Flag para controlar la ejecución del hilo
+    std::thread clientThread; 
+    std::atomic<bool> running; 
 };
 
-#endif // CLIENT_HPP
+#endif

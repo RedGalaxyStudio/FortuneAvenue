@@ -19,7 +19,7 @@ std::string generateRoomCode() {
 }
 
 Client::~Client() {
-    disconnect(); // Desconectar antes de destruir
+    disconnect(); 
     if (client) {
         enet_host_destroy(client);
     }
@@ -47,12 +47,12 @@ void Client::run() {
         while (enet_host_service(client, &event, 100) > 0) {
             switch (event.type) {
             case ENET_EVENT_TYPE_RECEIVE:
-                // Manejar la recepción de datos aquí si es necesario
-                enet_packet_destroy(event.packet); // Libera el paquete
+                
+                enet_packet_destroy(event.packet); 
                 break;
             case ENET_EVENT_TYPE_DISCONNECT:
                 std::cout << "Disconnected from server!" << std::endl;
-                running = false; // Detiene el hilo si se desconecta
+                running = false; 
                 break;
             default:
                 break;
@@ -75,7 +75,7 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
     ENetEvent event;
     if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
         std::cout << "Connected to server!" << std::endl;
-        clientThread = std::thread(&Client::run, this); // Inicia el hilo para manejar eventos
+        clientThread = std::thread(&Client::run, this); 
         return true;
     }
     else {
@@ -90,11 +90,11 @@ bool Client::createRoom() {
         return false;
     }
 
-    // Generar un código de sala de 5 dígitos
+    
     std::string roomCode = generateRoomCode();
     std::cout << "Room created with code: " << roomCode << std::endl;
 
-    // Enviar el código de la sala al servidor
+    
     std::string message = "CREATE_ROOM:" + roomCode;
     ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(peer, 0, packet);
@@ -124,18 +124,22 @@ bool Client::sendImage(const std::string& filename) {
         return false;
     }
 
-    // Load the image data
     std::vector<char> imageData = loadImage(filename);
     if (imageData.empty()) {
         std::cerr << "Failed to load image!" << std::endl;
         return false;
     }
 
-    // Send the image as a packet
-    ENetPacket* packet = enet_packet_create(imageData.data(), imageData.size(), ENET_PACKET_FLAG_RELIABLE);
+    // Añadir prefijo "SEND_IMAGE:" a los datos
+    std::string prefix = "SEND_IMAGE:";
+    std::vector<char> packetData(prefix.begin(), prefix.end());
+    packetData.insert(packetData.end(), imageData.begin(), imageData.end());
+
+    // Crear el paquete con los datos binarios
+    ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
     if (enet_peer_send(peer, 0, packet) < 0) {
         std::cerr << "Failed to send the packet!" << std::endl;
-        enet_packet_destroy(packet);  // Libera el paquete si no se envió
+        enet_packet_destroy(packet);
         return false;
     }
     enet_host_flush(client);
@@ -144,14 +148,15 @@ bool Client::sendImage(const std::string& filename) {
     return true;
 }
 
+
 void Client::disconnect() {
     if (peer) {
         enet_peer_disconnect(peer, 0);
-        peer = nullptr;  // Limpia el puntero
+        peer = nullptr;  
     }
-    running = false; // Detiene el hilo
+    running = false;
     if (clientThread.joinable()) {
-        clientThread.join(); // Espera a que el hilo termine
+        clientThread.join(); 
     }
 }
 

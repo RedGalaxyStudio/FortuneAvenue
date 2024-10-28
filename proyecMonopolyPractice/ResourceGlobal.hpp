@@ -10,11 +10,9 @@
 #include <curl/curl.h>
 
 
-
-// Declarar la textura global
 extern sf::Text Sesion;
 extern sf::RectangleShape overlay;
-extern sf::Texture sharedTexture; // Textura compartida para los avatare
+extern sf::Texture sharedTexture; 
 extern sf::Texture Texrecua;
 extern sf::Sprite recua;
 extern std::string nombre;
@@ -38,7 +36,7 @@ extern sf::Texture textureXOff;
 extern sf::Sprite spriteX;
 extern ButtonG* botonX;
 extern std::vector<sf::CircleShape> avatars;
-extern sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
+extern sf::CircleShape selectedAvatarCopy; 
 extern sf::Texture textureBox;
 extern sf::Sprite box;
 extern sf::Font fontUser;
@@ -57,7 +55,6 @@ extern sf::Texture TextureBotonNoOff;
 extern sf::Sprite SpriteBotonNo;
 
 
-// Funciones para cargar las texturas y cursores
 
 void playClickSound();
 void loadVolumenIcon();
@@ -67,4 +64,4 @@ void loadCursors();
 void GetUserEmail();
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
 
-#endif // TEXTUREGLOBAL_HPP
+#endif 

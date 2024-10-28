@@ -15,8 +15,8 @@ public:
 
 private:
     sf::Color fillColor;
-    sf::RenderTexture renderTexture1; // Textura para shader1
-    sf::RenderTexture renderTexture2; // Textura para shader2
+    sf::RenderTexture renderTexture1; 
+    sf::RenderTexture renderTexture2; 
 
     bool turno;
 
@@ -32,7 +32,7 @@ private:
     float rotationSpeed;
 
     float width, height;
-    float centerX, centerY;  // Posición central de la ruleta
+    float centerX, centerY;  
     float radius;
 
     sf::Clock clock;
@@ -53,7 +53,7 @@ private:
     sf::CircleShape borde;
     sf::CircleShape ruletaBase;
 
-    static const int numSegments = 7; // Número de segmentos
+    static const int numSegments = 7; 
     ParticleSystem particleSystem;
 
     sf::Color segmentColors[numSegments] = {
@@ -83,6 +83,6 @@ private:
     void setupBase();
 };
 
-#endif // RUELTA_HPP
+#endif 
 
 

@@ -23,6 +23,10 @@ private:
 sf::Texture TextureUnirsePartida;
 sf::Sprite SpriteCrearPartida;
 sf::Sprite SpriteUnirsePartida;
+
+sf::Vector2i mousePosition;
+sf::Vector2f mousePosFloat;
+
 };
 
 #endif // INICIARPARTIDA_HPP

@@ -7,7 +7,6 @@ class ButtonG {
 public:
     ButtonG(sf::Sprite& sprite, sf::Texture& textureNormal, sf::Texture& textureHover);
 
-    // Método para actualizar el estado del botón según la posición del mouse
     void update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor);
     void handleHover(sf::Sprite& currentButton);
     void resetLastHoveredButton();
@@ -21,4 +20,4 @@ private:
 
 };
 
-#endif // BUTTON_HPP
+#endif 

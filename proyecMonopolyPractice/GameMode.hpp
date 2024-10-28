@@ -7,7 +7,7 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include <windows.h> // Necesario para HRESULT y COM
+#include <windows.h> 
 #include "Client.hpp"
 #include "Globals.hpp"
 #include "WindowClass.h"
@@ -49,10 +49,10 @@
         Window Dado;
         sf::Clock clock;
 
-        Ruleta ruleta; // Crear la ruleta en el centro de la ventana
+        Ruleta ruleta; 
         bool validar;
 
-        sf::View viewTablero; // Declarar la vista
+        sf::View viewTablero; 
         sf::Sprite renderedSprite;
 
         sf::Texture TextureMapa;

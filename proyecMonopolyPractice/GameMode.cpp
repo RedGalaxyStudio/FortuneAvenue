@@ -61,34 +61,20 @@ void GameMode::resource() {
     casillas.push_back(camino1);
 
     pieces.setPosition(330,439);
-    view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)); // Tamaño de la vista igual al de la ventana
+    view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)); 
     view.setCenter(pieces.getPosition()); // Centrar la vista en la ficha
 
-    posicionActual = 0; // Posición actual del sprite en las casillas
+    posicionActual = 0; 
 }
 
 // Implementación del método update
 void GameMode::update() {
-
-
-    Client client;
-
-    client.initialize();
-
-    client.connectToServer("192.168.3.114", 1234);
-    client.sendImage(TextureAvatarPath);
-    
-
-    
 
     PieceSelector pieceselector(window);
     pieceselector.Resource();
 
 
     piecesTextures = pieceselector.updateSelection();
-
-    const float marginX = 100.0f; // Margen horizontal
-    const float marginY = 100.0f; // Margen vertical
 
     pieces.setTexture(piecesTextures);
     globalBounds = pieces.getGlobalBounds();
@@ -97,7 +83,6 @@ void GameMode::update() {
     resultadoDado = 0;
     mousePosition = sf::Mouse::getPosition(*window);
     mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-// Llamadas a setPlayerProfile para cada perfil
 
     NamePlayers[0].setPosition(188.65f, 62.5f);
     boxPlayers[0].setPosition(188.65f, 62.5f);
@@ -107,7 +92,7 @@ void GameMode::update() {
     const sf::Texture* texture = selectedAvatarCopy.getTexture();
     if (texture != nullptr) {
         AvatarPlayers[0].setTexture(texture);
-        AvatarPlayers[0].setRadius(static_cast<float>(texture->getSize().x / 2)); // Ajusta el tamaño del círculo
+        AvatarPlayers[0].setRadius(static_cast<float>(texture->getSize().x / 2));
         AvatarPlayers[0].setOrigin(64, 64);
     }
 
@@ -139,15 +124,13 @@ void GameMode::update() {
 
     moverFicha1.Inicializar(&pieces, &casillas);
 
-    // Variables para controlar el tiempo
-
-    float duracionMovimiento = 0.5f;  // Duración del movimiento entre casillas
+    float duracionMovimiento = 0.5f;  
 
      
     AvatarPlayers[3].setPosition(1052.5f, 652.5f);
     AvatarPlayers[3].setScale(0.7f, 0.7f);
 
-    Dado.start(1280, 720); // Cambia el tamaño y el título según sea necesario
+    Dado.start(1280, 720); 
     int DadoResul=0;
     
 
@@ -156,15 +139,12 @@ void GameMode::update() {
         
         Event();
 
-        resultadoDado = Dado.logica(); // Cambia el tamaño y el título según sea necesario
+        resultadoDado = Dado.logica(); 
         if (resultadoDado != 0) {
             DadoResul = resultadoDado;
             TempoAnimacion.restart();
         }
 
-       
-        // Actualizar el movimiento del sprite
-        
         currentCursor = &normalCursor;
 
         window->setMouseCursor(*currentCursor);
@@ -177,8 +157,6 @@ void GameMode::update() {
  
 
       float deltaTime = reloj.restart().asSeconds();
-    // moverFicha1.animacionRastro(deltaTime);
-     
 
         if (moverFicha1.enMovimiento == true) {
   
@@ -196,7 +174,7 @@ void GameMode::update() {
         window->display();
    
     }
-    client.disconnect();
+  //  client.disconnect();
 }
 
 void  GameMode::Event(){
@@ -205,7 +183,7 @@ void  GameMode::Event(){
 
     while (window->pollEvent(event)) {
 
-        Dado.loop(event); // Cambia el tamaño y el título según sea necesario
+        Dado.loop(event); 
 
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -224,18 +202,7 @@ void  GameMode::Event(){
             renderTexture.draw(spriteX);
             renderTexture.draw(overlay);
             Menup.MenuSalir();
-            running = false; // Cambia el estado de ejecución
-        }
-
-        if (moverFicha1.finalCamino) {
-
-            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                // Verificar el click en "si" y cerrar la vetana
-
-
-            }
-
-
+          //  running = false;
         }
 
 
@@ -247,7 +214,7 @@ void  GameMode::Event(){
                 Menup.MenuOpcion();
 
             }
-            // validar = true;
+            validar = true;
 
         }
 
@@ -270,11 +237,10 @@ void GameMode::DrawPieceMoviendo(){
     if (viewY < 180) viewY = 180;
 
 
-    view.setCenter(viewX, viewY); // Actualizar la vista centrada en la nueva posición
+    view.setCenter(viewX, viewY);
 
-    view.setSize(1280 * 0.5, 720 * 0.5); // Actualizar el tamaño de la vista
-
-    window->setView(view); // Establecer la vista antes de dibujar
+    view.setSize(1280 * 0.5, 720 * 0.5); 
+    window->setView(view); 
     window->clear();
 
     window->draw(spriteFondoGame);
@@ -283,16 +249,12 @@ void GameMode::DrawPieceMoviendo(){
      //   window->draw(s);
     ///}
     window->draw(pieces);
-    window->setView(window->getDefaultView()); // Volver a la vista original
+    window->setView(window->getDefaultView());
 
     if (moverFicha1.finalCamino){
     window->draw(SpriteArrowIzq);
     window->draw(SpriteArrowDer);
     }
-
-
-
-  //Dado.update();
 
 }
 void GameMode::DrawGameRuleta() {
@@ -323,13 +285,13 @@ void GameMode::DrawGameRuleta() {
 }
 
 void GameMode::DrawGame() {
-    window->setView(window->getDefaultView()); // Volver a la vista original
+    window->setView(window->getDefaultView()); 
     
     window->clear();
 
     window->draw(spriteFondoGame);
     window->draw(spriteMapa);
-    //window->setView(window->getDefaultView()); // Volver a la vista original
+    //window->setView(window->getDefaultView()); 
    // for (const auto& s : rastro) {
     //    window->draw(s);
     //}
