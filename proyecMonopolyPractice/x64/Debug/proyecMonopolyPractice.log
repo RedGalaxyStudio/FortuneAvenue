@@ -1,19 +1,2 @@
-﻿  ButtonG.cpp
-  Cinematic.cpp
-  Client.cpp
-  GameMode.cpp
-  IniciaUser.cpp
-  main.cpp
-  menuP.cpp
-  ObjetosGlobal.cpp
-  PieceSelector.cpp
-  ResourceGame.cpp
-  Scrollbar.cpp
-  SettingsManager.cpp
-  TextBox.cpp
-  ResourceGlobal.cpp
-  VolumeSlider.cpp
-  WebViewManager.cpp
-  Generating Code...
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\PieceSelector.cpp(227,1): warning C4715: 'PieceSelector::updateSelection': not all control paths return a value
+﻿  GameMode.cpp
   proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe

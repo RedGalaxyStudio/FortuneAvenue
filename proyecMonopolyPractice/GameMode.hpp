@@ -2,25 +2,35 @@
 #define GAMEMODE_HPP
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <thread>
 #include <atomic>
-#include <windows.h> // Necesario para HRESULT y COM
+#include <winsock2.h>
+#include <windows.h> 
 #include "Client.hpp"
 #include "Globals.hpp"
+#include "WindowClass.h"
+#include "Ruleta.hpp"
+#include "MovePieces.hpp"
+#include "ResourceGlobal.hpp"
+#include "ObjetosGlobal.hpp"
+#include "PieceSelector.hpp"
+#include "ResourceGame.hpp"
 
-
-    class GameMode {
+    class GameMode{
     public:
-        GameMode(sf::RenderWindow* windowRef);
-       
-        
-        // Método para actualizar el estado del botón según la posición del mouse
-        void update();
+        GameMode(sf::RenderWindow& win);
+ 
         void resource();
-        void moverSprite(sf::Sprite& sprite, int resultadoDado);
+   
+        void update();
+        void Event();
+        void DrawPieceMoviendo();
+        void DrawGame();
+        void DrawGameRuleta();
+        MovePieces moverFicha1;
+
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;
@@ -34,8 +44,30 @@
         sf::Texture piecesTextures;
         sf::Sprite pieces;
 
-        
+        sf::Clock TempoAnimacion;
+
+        Window Dado;
+        sf::Clock clock;
+
+        Ruleta ruleta; 
+        bool validar;
+
+        sf::View viewTablero; 
+        sf::Sprite renderedSprite;
+
         sf::Texture TextureMapa;
-        sf::Sprite spriteMapa;
+      
+
+        sf::Texture SettingsOn;
+        sf::Texture SettingsOff;
+        sf::Sprite Settings;
+
+
+        sf::Texture TextureArrowDer;
+
+
+        sf::Texture TextureArrowIzq;
+        std::vector<sf::Text> Dinero;
+        int money[4];
     };
 #endif

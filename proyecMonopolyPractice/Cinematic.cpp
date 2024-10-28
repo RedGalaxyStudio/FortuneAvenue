@@ -2,7 +2,7 @@
 #include "Cinematic.hpp"
 #include <SFML/Audio.hpp>
 
-// Constructor e inicialización
+
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
     : window(windowRef), alpha(0.0f), fadeIn(true), currentFrame(0),
     frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0), texturesLoaded(false) {
@@ -17,7 +17,7 @@ void Cinematic::loadTexturesInBackground() {
     for (int i = 0; i < 6; ++i) {
         sf::Texture texture;
         if (!texture.loadFromFile("resource/texture/Fondos/part" + std::to_string(i) + ".jpg")) {
-            // std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
+          //   std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
         }
         textures[i] = texture;
     }
@@ -31,23 +31,17 @@ void Cinematic::loadTexturesInBackground() {
 
     FondoSound.setBuffer(FondoBuffer);
 
-    // Indicar que las texturas ya están cargadas
+ 
     texturesLoaded = true;
 }
 
-// Carga de recursos (texturas y sprites)
+
 void Cinematic::Resource() {
 
 
-    if (!textureLogoStudio.loadFromFile("resource/texture/Logos/imagelogopresa.png")) {
-        // std::cerr << "Error al cargar la imagen del logotipo presa" << std::endl;
-        return;
-    }
+    if (!textureLogoStudio.loadFromFile("resource/texture/Logos/imagelogopresa.png")) return;
 
-    if (!textureLogoJuego.loadFromFile("resource/texture/Logos/logojuego14.png")) {
-        // std::cerr << "Error al cargar la imagen del logotipo del juego" << std::endl;
-        return;
-    }
+    if (!textureLogoJuego.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
 
     spriteLogoStudio.setTexture(textureLogoStudio);
     spriteLogoStudio.setOrigin(500, 238.5f);
@@ -57,12 +51,11 @@ void Cinematic::Resource() {
     spriteLogoJuego.setOrigin(256.5f, 209.4f);
     spriteLogoJuego.setPosition(640, 360);
 
-    // Lanzar el hilo que cargará las texturas de la Animación #2
     textureLoaderThread = std::thread(&Cinematic::loadTexturesInBackground, this);
     soundOne = false;
 }
 
-// Actualización de la animación (desvanecimiento del logotipo y fondo animado)
+
 void Cinematic::Update() {
     sf::Clock fondoClock;
 
@@ -80,7 +73,7 @@ void Cinematic::Update() {
 
         window.clear();
 
-        // Mostrar la Animación #1 (Logotipo)
+        
         if (clock.getElapsedTime().asSeconds() <= 6) {
             if (fadeIn) {
                 alpha += 200.0f * deltaTime.asSeconds();
@@ -100,7 +93,7 @@ void Cinematic::Update() {
             window.draw(spriteLogoStudio);
         }
 
-        // Mostrar la Animación #2 (Fondo) solo si las texturas están completamente cargadas
+
         else if (clock.getElapsedTime().asSeconds() <= 12 && texturesLoaded) {
             if (soundOne != true) {
 
@@ -110,7 +103,7 @@ void Cinematic::Update() {
             updateFondo(deltaTimeFondo);
             window.draw(spriteLogoJuego);
         }else{
-            // Detener el sonido al finalizar la cinemática, si es necesario
+            
             FondoSound.stop();
             break;
 
@@ -121,22 +114,20 @@ void Cinematic::Update() {
     }
 }
 
-// Actualiza el fondo para mostrar el frame correcto
 void Cinematic::updateFondo(sf::Time deltaTime) {
     tiempoAcumuladoFondo += deltaTime.asSeconds();
 
     if (tiempoAcumuladoFondo >= frameTime) {
         tiempoAcumuladoFondo = 0.0f;
-        currentFrame = (currentFrame + 1) % 12;  // Avanza al siguiente frame dentro de la textura actual
+        currentFrame = (currentFrame + 1) % 12;  
 
-        if (currentFrame == 0) {  // Cambiar de textura después de 12 frames
+        if (currentFrame == 0) {  
             currentTextureIndex = (currentTextureIndex + 1) % 6;
             SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
         }
 
-        int frameX = (currentFrame % 3) * 1280;  // 3 columnas de frames
-        int frameY = (currentFrame / 3) * 720;   // 4 filas de frames
-
+        int frameX = (currentFrame % 3) * 1280;  
+        int frameY = (currentFrame / 3) * 720;   
         frameRect.left = frameX;
         frameRect.top = frameY;
         SpriteFondoLogo.setTextureRect(frameRect);

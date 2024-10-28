@@ -18,9 +18,12 @@ public:
     void IniciAcion();
     void saveSelectedAvatar();
     void loadSelectedAvatar();
+    void loadAvatars();
 private:
     sf::RenderWindow& window;
 
+    std::vector<sf::Texture> avatarTextures;
+    std::vector<std::string> textureAvatarsFilePath;
     // Texturas y sprites
     sf::Texture ckeck;
     sf::Sprite spriteCkeck;
@@ -37,3 +40,4 @@ private:
 };
 
 #endif // IniciaUser_HPP
+

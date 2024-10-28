@@ -6,18 +6,27 @@ std::vector<std::string> StringNamePlayers;
 std::vector<sf::Text> NamePlayers;
 std::vector<sf::Sprite> boxPlayers;
 std::vector<sf::Sprite> PiecesSelect;
- sf::Texture TextureFondoGame;
- sf::Texture TextureMarco;
- sf::Sprite spriteFondoGame;
- int NumPlayers;
- sf::SoundBuffer DiceBuffer;
- sf::Sound DiceSound;
- std::vector<sf::Sprite> MarcoPlayers;
+std::vector<sf::Texture> avatarTextures;
+sf::Texture TextureFondoGame;
+sf::Texture TextureMarco;
+sf::Sprite spriteFondoGame;
+int NumPlayers;
+sf::SoundBuffer DiceBuffer;
+sf::Sound DiceSound;
+std::vector<sf::Sprite> MarcoPlayers;
+sf::View view; // Declarar la vista
+sf::Clock reloj;
+std::vector<sf::Sprite> rastro;
+sf::Sprite spriteMapa;
+
+sf::Sprite SpriteArrowDer;
+
+
+sf::Sprite SpriteArrowIzq;
 
 void loadResourceGame(){
 
-
-	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame.jpg")) return;
+	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("resource/texture/Avatars/MarcoTexture.png")) return;
 	spriteFondoGame.setTexture(TextureFondoGame);
 	// Ajustar el tamaño de los vectores según el número de jugadores

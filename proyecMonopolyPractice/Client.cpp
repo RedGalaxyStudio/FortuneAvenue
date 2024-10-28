@@ -1,122 +1,173 @@
 #include "Client.hpp"
-#include "ResourceGlobal.hpp"
-#include <SFML/Network.hpp>
+#include <random>
 #include <iostream>
 #include <thread>
-#include "Globals.hpp"
-#include "ResourceGame.hpp"
 
-std::vector<Jugador> jugadores;
-std::vector<sf::Texture> avatarTextures; // Vector para almacenar las texturas de los avatares
+Client::Client() : client(nullptr), peer(nullptr), running(false) {}
 
-AvatarNetworkHandler::AvatarNetworkHandler(const std::string& ip, unsigned short port)
-{
-    // Conexión al servidor
-    sf::Socket::Status status = socket.connect(ip, port);
-    if (status != sf::Socket::Done) {
-        std::cerr << "Error al conectar con el servidor.\n";
-        running = false;
+std::string generateRoomCode() {
+    std::string code;
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(0, 9);
+
+    for (int i = 0; i < 5; ++i) {
+        code += std::to_string(dist(mt));
+    }
+
+    return code;
+}
+
+Client::~Client() {
+    disconnect(); 
+    if (client) {
+        enet_host_destroy(client);
+    }
+    enet_deinitialize();
+}
+
+bool Client::initialize() {
+    if (enet_initialize() != 0) {
+        std::cerr << "Error initializing ENet!" << std::endl;
+        return false;
+    }
+
+    client = enet_host_create(nullptr, 1, 2, 0, 0);
+    if (!client) {
+        std::cerr << "Error creating ENet client!" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+void Client::run() {
+    running = true;
+    while (running) {
+        ENetEvent event;
+        while (enet_host_service(client, &event, 100) > 0) {
+            switch (event.type) {
+            case ENET_EVENT_TYPE_RECEIVE:
+                
+                enet_packet_destroy(event.packet); 
+                break;
+            case ENET_EVENT_TYPE_DISCONNECT:
+                std::cout << "Disconnected from server!" << std::endl;
+                running = false; 
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+
+bool Client::connectToServer(const std::string& address, uint16_t port) {
+    ENetAddress enetAddress;
+    enet_address_set_host(&enetAddress, address.c_str());
+    enetAddress.port = port;
+
+    peer = enet_host_connect(client, &enetAddress, 2, 0);
+    if (!peer) {
+        std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
+        return false;
+    }
+
+    ENetEvent event;
+    if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
+        std::cout << "Connected to server!" << std::endl;
+        clientThread = std::thread(&Client::run, this); 
+        return true;
     }
     else {
-        std::cout << "Conectado al servidor.\n";
-        socket.setBlocking(false); // No bloquear al recibir
+        std::cerr << "Failed to connect to server." << std::endl;
+        return false;
     }
 }
 
-AvatarNetworkHandler::~AvatarNetworkHandler() {
-    desconectar();
-    if (hiloRecibir.joinable()) {
-        running = false;  // Indica al hilo que debe detenerse
-        hiloRecibir.join();  // Esperar a que el hilo termine
+bool Client::createRoom() {
+    if (!peer) {
+        std::cerr << "Client is not connected to a server!" << std::endl;
+        return false;
+    }
+
+    
+    std::string roomCode = generateRoomCode();
+    std::cout << "Room created with code: " << roomCode << std::endl;
+
+    
+    std::string message = "CREATE_ROOM:" + roomCode;
+    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    enet_peer_send(peer, 0, packet);
+    enet_host_flush(client);
+
+    return true;
+}
+
+bool Client::joinRoom(const std::string& roomCode) {
+    if (!peer) {
+        std::cerr << "Client is not connected to a server!" << std::endl;
+        return false;
+    }
+
+    // Enviar el código de la sala al servidor
+    std::string message = "JOIN_ROOM:" + roomCode;
+    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    enet_peer_send(peer, 0, packet);
+    enet_host_flush(client);
+
+    return true;
+}
+
+bool Client::sendImage(const std::string& filename) {
+    if (!peer) {
+        std::cerr << "Client is not connected to a server!" << std::endl;
+        return false;
+    }
+
+    std::vector<char> imageData = loadImage(filename);
+    if (imageData.empty()) {
+        std::cerr << "Failed to load image!" << std::endl;
+        return false;
+    }
+
+    // Añadir prefijo "SEND_IMAGE:" a los datos
+    std::string prefix = "SEND_IMAGE:";
+    std::vector<char> packetData(prefix.begin(), prefix.end());
+    packetData.insert(packetData.end(), imageData.begin(), imageData.end());
+
+    // Crear el paquete con los datos binarios
+    ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+    if (enet_peer_send(peer, 0, packet) < 0) {
+        std::cerr << "Failed to send the packet!" << std::endl;
+        enet_packet_destroy(packet);
+        return false;
+    }
+    enet_host_flush(client);
+
+    std::cout << "Image sent!" << std::endl;
+    return true;
+}
+
+
+void Client::disconnect() {
+    if (peer) {
+        enet_peer_disconnect(peer, 0);
+        peer = nullptr;  
+    }
+    running = false;
+    if (clientThread.joinable()) {
+        clientThread.join(); 
     }
 }
 
-void AvatarNetworkHandler::iniciar() {
-    hiloRecibir = std::thread(&AvatarNetworkHandler::recibirMensajes, this); // Iniciar hilo de recepción
-}
-
-void AvatarNetworkHandler::enviarAvatarSeleccionado(const sf::CircleShape& avatarCircle) {
-    const sf::Texture* avatarTexture = avatarCircle.getTexture();
-    if (!avatarTexture) {
-        std::cerr << "El círculo no tiene textura asociada.\n";
-        return;
+std::vector<char> Client::loadImage(const std::string& filename) {
+    std::ifstream file(filename, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open the image file!" << std::endl;
+        return {};
     }
 
-    sf::Image avatarImage = avatarTexture->copyToImage();
-    const sf::Uint8* datos = avatarImage.getPixelsPtr();
-    std::size_t tamañoDatos = avatarImage.getSize().x * avatarImage.getSize().y * 4; // RGBA
-
-    sf::Packet paquete;
-    paquete << "AVATAR_IMAGE";
-    paquete << static_cast<sf::Uint32>(tamañoDatos);
-    paquete.append(datos, tamañoDatos);
-
-    if (socket.send(paquete) != sf::Socket::Done) {
-        std::cerr << "Error al enviar la textura del avatar al servidor.\n";
-    }
+    std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+    return buffer;
 }
-
-void AvatarNetworkHandler::recibirMensajes() {
-    while (running) {
-        sf::Packet paqueteRecibido;
-        sf::Socket::Status status = socket.receive(paqueteRecibido);
-
-        if (status == sf::Socket::Done) {
-            procesarPaquete(paqueteRecibido);
-        }
-        else if (status == sf::Socket::Disconnected) {
-            std::cout << "Desconectado del servidor.\n";
-            running = false; // Cambiar a false
-            break; // Salir del bucle
-        }
-        else {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1)); // Tiempo de espera breve
-        }
-    }
-}
-
-
-
-void AvatarNetworkHandler::procesarPaquete(sf::Packet& paqueteRecibido) {
-    std::string tipoMensaje;
-    paqueteRecibido >> tipoMensaje;
-
-    if (tipoMensaje == "NEW_PLAYER" || tipoMensaje == "EXISTING_PLAYER") {
-        std::string nombreJugador;
-        int ficha;
-        sf::Uint32 tamañoFoto, ancho, alto;
-        paqueteRecibido >> nombreJugador >> ficha >> tamañoFoto >> ancho >> alto;
-
-        // Leer los datos binarios de la imagen
-        std::vector<sf::Uint8> fotoData(tamañoFoto);
-        paqueteRecibido.append(fotoData.data(), tamañoFoto);
-
-        sf::Texture avatarTexture;
-        sf::Image imagen;
-        imagen.create(ancho, alto, fotoData.data());  // Ancho y alto obtenidos del servidor
-        avatarTexture.loadFromImage(imagen);
-
-        avatarTextures.push_back(avatarTexture);
-
-        sf::CircleShape avatarCircle(50); // Cambia el tamaño según lo que necesites
-        avatarCircle.setTexture(&avatarTextures.back());
-        avatarCircle.setOrigin(50, 50);
-
-        AvatarPlayers.push_back(avatarCircle);
-
-        Jugador nuevoJugador;
-        nuevoJugador.nombreUsuario = nombreJugador;
-        nuevoJugador.ficha = ficha;
-        nuevoJugador.textura = avatarTexture;
-        jugadores.push_back(nuevoJugador);
-
-        std::cout << "Jugador recibido: " << nombreJugador << "\n";
-    }
-}
-
-void AvatarNetworkHandler::desconectar() {
-    running = false; // Asegúrate de que el hilo de recepción se detenga
-    socket.disconnect();
-}
-
-

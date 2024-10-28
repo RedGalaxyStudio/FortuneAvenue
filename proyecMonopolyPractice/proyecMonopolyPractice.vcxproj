@@ -108,15 +108,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)curl\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libs\include;$(ProjectDir)curl\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <UndefinePreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=2</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)curl\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;libcurl.a;libcurl.dll.a;enet.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)libs\lib;$(ProjectDir)curl\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,12 +140,15 @@
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="GameMode.cpp" />
+    <ClCompile Include="IniciarPartida.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menuP.cpp" />
+    <ClCompile Include="MovePieces.cpp" />
     <ClCompile Include="ObjetosGlobal.cpp" />
     <ClCompile Include="PieceSelector.cpp" />
     <ClCompile Include="ResourceGame.cpp" />
+    <ClCompile Include="Ruleta.cpp" />
     <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -160,13 +163,16 @@
     <ClInclude Include="CubeClass.h" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
+    <ClInclude Include="IniciarPartida.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />
+    <ClInclude Include="MovePieces.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="nlohmann\json_fwd.hpp" />
     <ClInclude Include="ObjetosGlobal.hpp" />
     <ClInclude Include="PieceSelector.hpp" />
     <ClInclude Include="ResourceGame.hpp" />
+    <ClInclude Include="Ruleta.hpp" />
     <ClInclude Include="Scrollbar.hpp" />
     <ClInclude Include="SettingsManager.hpp" />
     <ClInclude Include="TextBox.hpp" />

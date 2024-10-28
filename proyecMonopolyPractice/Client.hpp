@@ -1,47 +1,36 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
-
-#include "Globals.hpp"
-#include <SFML/Network.hpp>
+#define WIN32_LEAN_AND_MEAN
+#include <winsock2.h>
+#include <windows.h>
+#include <enet/enet.h>
+#include <fstream>
 #include <iostream>
+#include <vector>
 #include <thread>
-#include <SFML/Graphics.hpp>
-#include "ResourceGlobal.hpp"
-#include <SFML/Network.hpp>
-#include "ResourceGame.hpp"
+#include <atomic>
+#include <string>
 
-
-    struct Jugador {
-        std::string nombreUsuario;
-        int ficha;
-        std::vector<char> foto; // Almacena los datos de la imagen
-        sf::Texture textura; // Textura para el sprite
-        sf::Sprite sprite; // Sprite del jugador
-    };
-    
-    extern std::vector<Jugador> jugadores; // Declaración externa
-
-class AvatarNetworkHandler {
+class Client {
 public:
-    AvatarNetworkHandler(const std::string& ip, unsigned short port);
-    ~AvatarNetworkHandler();
-
-    void enviarAvatarSeleccionado(const sf::CircleShape& avatarCircle);
-    void recibirMensajes();
-    void iniciar();
-    void desconectar();
+    Client();
+    ~Client();
+    void run();
+    bool initialize();
+    bool createRoom();
+    bool joinRoom(const std::string& roomCode);
+    bool connectToServer(const std::string& address, uint16_t port);
+    bool sendImage(const std::string& filename);
+    void disconnect();
 
 private:
-    sf::TcpSocket socket;
-    std::thread hiloRecibir;
-    std::vector<sf::Texture> avatarTextures; // Vector para almacenar las texturas de los avatares
-   
+    ENetHost* client;
+    ENetPeer* peer;
 
+    std::vector<char> loadImage(const std::string& filename);
 
-    // Métodos auxiliares
-    void procesarPaquete(sf::Packet& paqueteRecibido);
+    std::thread clientThread; 
+    std::atomic<bool> running; 
 };
 
-#endif // PIECESELECTOR_HPP
-
-
+#endif

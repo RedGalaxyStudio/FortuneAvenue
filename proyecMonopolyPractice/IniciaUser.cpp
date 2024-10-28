@@ -36,6 +36,7 @@ void IniciaUser::Update() {
         spriteCkeck.setTexture(ckeck);
         if (!TextureFondoMenuAvar.loadFromFile("resource/texture/Fondos/fondomenuAvar.png")) return;
         SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
+        loadAvatars();
         IniciAcion();
     }else{
         loadSelectedAvatar();
@@ -227,8 +228,8 @@ void IniciaUser::IniciAcion(){
                 window.draw(recua);
                 window.draw(spriteCkeck);
                 window.display();
-            }
-        }
+    }
+}
     
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
@@ -245,8 +246,8 @@ void IniciaUser::saveSelectedAvatar(){
         if (selectedIndex != -1) {
             // Crear un objeto JSON
             json avatarData;
-            avatarData["selected_avatar_index"] = selectedIndex;
-            std::cout << "\nInput antes de guardar en Json: " << input << std::endl;
+            avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
+          //  std::cout << "\nInput antes de guardar en Json: " << input << std::endl;
 
             avatarData["username"] = input;  // Guardar el username (variable input)
 
@@ -272,19 +273,60 @@ void IniciaUser::loadSelectedAvatar() {
         inFile >> avatarData;
         inFile.close();
 
-        int selectedIndex = avatarData["selected_avatar_index"];
+        TextureAvatarPath = avatarData["selected_avatar_path"];
         input = avatarData["username"];  // Cargar el username desde el archivo
 
-       std::cout << "Perfil cargado: Avatar " << selectedIndex << ", Username: " << input << std::endl;
+        
+        if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();
 
-        // Asegúrate de que el índice sea válido
-        if (selectedIndex >= 0 && selectedIndex < avatars.size()) {
-            // Establecer el avatar seleccionado
-            selectedAvatar = &avatars[selectedIndex];
-           // selectedAvatar->setOutlineColor(sf::Color::Black);  // Añadir borde para indicarlo
-           // selectedAvatar->setOutlineThickness(4);
-            selectedAvatarCopy.setTexture(selectedAvatar->getTexture());  // Copiar la textura
-        }
+        selectedAvatarCopy.setTexture(&TextureAvatarSelec);  // Copiar la textura
     }
 }
 
+void IniciaUser::loadAvatars(){
+    
+    int avatarCount = 20;  // Si tienes 17 avatares
+    avatars.resize(avatarCount);
+    avatarTextures.resize(avatarCount);
+    textureAvatarsFilePath.resize(avatarCount);
+
+
+
+    for (int i = 0; i < avatarCount; i++) {
+
+        textureAvatarsFilePath[i] = "resource/texture/Avatars/avatar" + std::to_string(i) + ".png";
+
+        if (!avatarTextures[i].loadFromFile(textureAvatarsFilePath[i]))
+            return;
+
+        float radio = avatarTextures[i].getSize().x / 2.0f;
+        avatars[i].setRadius(radio);
+        avatars[i].setTexture(&avatarTextures[i]);
+        avatars[i].setOrigin(radio, radio);
+
+
+    }
+
+    for (int i = 0; i < avatars.size(); i++) {
+        int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
+        int col = i % 8;  // Determina la columna (0 a 7)
+
+        float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
+        float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
+        std::cout << i << "  X :" << x << "y :" << y << std::endl;
+
+        avatars[i].setPosition(x, y);
+    }
+    if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
+
+    selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
+    selectedAvatarCopy.setTexture(&sharedTexture);  // Usar la textura compartida
+    selectedAvatarCopy.setOrigin(64, 64);  // Establece el origen al centro del círculo
+
+    Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
+    recua.setTexture(Texrecua);
+    recua.setOrigin(65, 65);
+
+
+
+}

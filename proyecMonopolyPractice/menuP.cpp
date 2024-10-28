@@ -5,15 +5,14 @@
 #include "IniciaUser.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
+//#include "IniciarPartida.hpp"
 
-
-// Constructor: inicializa la variable y la ventana
 menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
 
-// Carga de recursos (texturas y sprites)
+
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/boton2.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
@@ -37,7 +36,7 @@ void menuP::Resource() {
     loadSounds();
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
 
-    // Ajustar el tamaño del rectángulo según el tamaño actual de la ventana
+   
     overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
    
@@ -45,8 +44,7 @@ void menuP::Resource() {
     Sesion.setFillColor(sf::Color::White);
     Sesion.setOutlineThickness(2);
     Sesion.setOutlineColor(sf::Color(135, 135, 135));
-   
-    // Configuraci�n del sprite del logotipo
+  
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
     spriteLogoFortuneAvenue.setPosition(640, 260);
@@ -72,15 +70,14 @@ void menuP::Resource() {
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,*window);  // Slider para la m�sica
-    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,*window);  // Slider para los efectos
+    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,*window);  
+    effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,*window); 
     loadCursors();
-    // Establecer el cursor inicial
+
     window->setMouseCursor(normalCursor);
 
 }
 
-// Actualizaci�n de la animaci�n (desvanecimiento del logotipo)
 void menuP::MenuPrincipal() {
     window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
@@ -98,32 +95,33 @@ void menuP::MenuPrincipal() {
     box.setPosition(273, 74);
     box.setScale(1,1);
 
-    // Crear los botones
+    // Crear botones
     ButtonG botonJugar(SpriteBotonJugar, TextureBotonJugarOff, TextureBotonJugarOn);
     ButtonG botonOpciones(SpriteBotonOpciones, TextureBotonOpcionesOff, TextureBotonOpcionesOn);
     ButtonG botonSalir(SpriteBotonSalir, TextureBotonSalirOff, TextureBotonSalirOn);
     ButtonG botonAcercaDe(spriteAcercaDe, textureAcercaDeOff, textureAcercaDeOn);
     window->setMouseCursorVisible(true);
-    // Configurar la posición de los botones
+   
     SpriteBotonOpciones.setPosition(640, 560);
     ValidarUser();
 
     while (window->isOpen()) {
 
 
-        // Manejar eventos del menú
+       
         eventoMenuP();
 
-        // Obtener la posición actual del ratón
+        
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
         window->setMouseCursorVisible(true);
-        // Establecer cursor por defecto antes de verificar los botones
+        
+
         currentCursor = &normalCursor;
 
         
 
-        // Actualizar el estado de los botones y el cursor
+        
         botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonOpciones.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonSalir.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -131,7 +129,7 @@ void menuP::MenuPrincipal() {
         window->setMouseCursor(*currentCursor);
   
 
-        // Dibujar los elementos en la ventana
+
         window->clear();
         window->draw(SpriteFondoMenu);
         window->draw(spriteLogoFortuneAvenue);
@@ -174,9 +172,8 @@ void menuP::eventoMenuP() {
     sf::Event event;
 
     while (window->pollEvent(event)) {
-        // Cerrar la ventana con Escape o al cerrar   
-        // 
-            renderTexture.clear(sf::Color::Transparent);  // O cualquier otro color
+       
+            renderTexture.clear(sf::Color::Transparent);  
             renderTexture.draw(SpriteFondoMenu);
             renderTexture.draw(spriteLogoFortuneAvenue);
             renderTexture.draw(box);
@@ -195,34 +192,33 @@ void menuP::eventoMenuP() {
             MenuSalir();
         }
 
-        // Manejar clic del mouse
+        
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
           
-            // Verificar si el clic fue en el bot�n Jugar
+            
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
 
                 MenuJugar();
           
-                // std::cout << "Jugar presionado" << std::endl;
-                 // Aqu� puedes cambiar la escena o empezar el juego
+               
             }
 
-            // Verificar si el clic fue en el bot�n Opciones
+            
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
                 MenuOpcion();
         
             }
 
-            // Verificar si el clic fue en el bot�n Salir
+           
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
 
-                MenuSalir(); // Salir del juego
+                MenuSalir(); 
             }
             if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
@@ -239,7 +235,13 @@ void menuP::eventoMenuP() {
 }
 
 void menuP::MenuJugar() {
-    GameMode gamemode(window);
+
+
+   // IniciarPartida inicial(*window);
+    ///inicial.update();
+
+    GameMode gamemode(*window);
+
 
     gamemode.update();
 
@@ -252,10 +254,10 @@ void menuP::eventoMenuO() {
     sf::Event event;
 
     while (window->pollEvent(event)) {
-        // Cerrar la ventana con Escape o al cerrar
+       
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            renderTexture.clear();  // O cualquier otro color
+            renderTexture.clear();  
             renderTexture.draw(SpriteFondoMenu);
             renderTexture.draw(SpriteBotonOpciones);
             renderTexture.draw(spriteX);
@@ -265,11 +267,11 @@ void menuP::eventoMenuO() {
             MenuSalir();
         }
 
-        // Manejar eventos del slider de m�sica y efectos
+       
         musicSlider->handleEvent(event, *window);
         effectSlider->handleEvent(event, *window);
 
-        // Manejar clic del mouse
+        
         if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -288,10 +290,10 @@ void menuP::Inicializar() {
 
     IniciaUser iniciaUser(*window);
 
-    // Cargar los recursos necesarios para la cinem�tica
+    
     iniciaUser.Resource();
 
-    //Iniciar la animaci�n
+    
     iniciaUser.Update();
 
 }
@@ -310,7 +312,7 @@ void menuP::MenuOpcion() {
         eventoMenuO();
         
 
-        // Dibujar elementos en la ventana
+       
         window->clear();
         window->draw(SpriteFondoMenu);
         window->draw(spriteX);
@@ -325,16 +327,14 @@ void menuP::MenuOpcion() {
 
 void menuP::MenuSalir() {
 
-    //crear ventana semitransparente
+    
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
-   //Ubicacion del mensaje de confirmaci�n
+   
     SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
     SpriteConfirmarSalir.setPosition(660, 370);
     SpriteConfirmarSalir.setOrigin(340, 240);
-
-   //Ubicaciones de los botones si y no
 
     SpriteBotonSi.setPosition(480, 380);  
 
@@ -355,13 +355,13 @@ void menuP::MenuSalir() {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
                 sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-                // Verificar el click en "si" y cerrar la vetana
+                
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     window->close();  
                 }
 
-                // Verificar el click en "no" y volver al menu principal
+                
                 if (SpriteBotonNo.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     return;  
@@ -379,30 +379,25 @@ void menuP::MenuSalir() {
 
             window->setMouseCursor(*currentCursor);
 
-
-        
-       // Dibujar todo el contenido en el render texture
-
-
-       // Aplicar el shader a la textura renderizada
             renderedSprite.setTexture(renderTexture.getTexture());
        window->clear();
        window->draw(renderedSprite, &Blur); 
-       // Dibujar los elementos de confirmaci�n de salida sobre el overlay
-        window->draw(SpriteConfirmarSalir);  // Texto de confirmaci�n
-        window->draw(SpriteBotonSi);         // Bot�n "S�"
-        window->draw(SpriteBotonNo);         // Bot�n "No"
+  
+
+        window->draw(SpriteConfirmarSalir);  
+        window->draw(SpriteBotonSi);        
+        window->draw(SpriteBotonNo);       
 
        window->display();
 
-        //window->draw(overlay);  // Oscurece el fondo
+        
     }
 }
 
 LRESULT menuP::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
     case WM_DESTROY:
-        CloseWebView(false); // Cerrar WebView cuando la ventana se destruye
+        CloseWebView(false); 
         PostQuitMessage(0);
         return 0;
     }
@@ -412,8 +407,8 @@ LRESULT menuP::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void menuP::OpenWebView() {
     try {
-        if (!isWebViewOpen) { // Solo abrir si no está abierta
-            // Crear la ventana de WebView2
+        if (!isWebViewOpen) { 
+
             WNDCLASS wc = {};
             wc.lpfnWndProc = [](HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) -> LRESULT {
                 return reinterpret_cast<menuP*>(GetWindowLongPtr(hwnd, GWLP_USERDATA))->WindowProc(hwnd, uMsg, wParam, lParam);
@@ -425,19 +420,19 @@ void menuP::OpenWebView() {
             hwnd = CreateWindowEx(0, L"WebView2Example", L"WebView2 Demo",
                 WS_OVERLAPPEDWINDOW | WS_VISIBLE,
                 CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
-                nullptr, nullptr, GetModuleHandle(nullptr), this); // Pasa `this` como puntero de datos
+                nullptr, nullptr, GetModuleHandle(nullptr), this); 
 
             if (!hwnd) {
                 std::cerr << "Error al crear la ventana." << std::endl;
                 return;
             }
 
-            SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this)); // Guarda el puntero
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this)); 
 
-            // Inicializar WebViewManager
+            
             webviewManager = new WebViewManager(hwnd);
-            webviewManager->CreateWebView(); // Crear el WebView
-            isWebViewOpen = true; // Marcar que la ventana está abierta
+            webviewManager->CreateWebView();
+            isWebViewOpen = true; 
         }
     }
     catch (const std::exception& e) {
@@ -451,32 +446,27 @@ void menuP::CloseWebView(bool Vali) {
     SesionValida = Vali;
 
     if (isWebViewOpen) {
-        DestroyWindow(hwnd); // Cerrar la ventana de WebView2
-        hwnd = nullptr;      // Establecer hwnd a nullptr después de cerrarlo
-        isWebViewOpen = false; // Marcar que la ventana está cerrada
+        DestroyWindow(hwnd); 
+        hwnd = nullptr;      
+        isWebViewOpen = false; 
     }
 }
 
 
 void menuP::MenuAcercaDe() {
 
-    // Crear un rectángulo más pequeño que la ventana y centrarlo
+    
     sf::RectangleShape overlay(sf::Vector2f(
-        static_cast<float>(window->getSize().x - 50),  // 50 píxeles más pequeño en ancho
-        static_cast<float>(window->getSize().y - 50)   // 50 píxeles más pequeño en alto
+        static_cast<float>(window->getSize().x - 50),  
+        static_cast<float>(window->getSize().y - 50)   
     ));
 
 
-    // Posicionar el rectángulo en el centro, con un margen de 25 píxeles
+    
     overlay.setPosition(25.0f, 25.0f);
 
-    //crear ventana semitransparente
+    overlay.setFillColor(sf::Color(0, 0, 0, 100));  
 
-
-    // Oscurecer el fondo y hacer el rectángulo semitransparente
-    overlay.setFillColor(sf::Color(0, 0, 0, 100));  // Aumentamos la opacidad para que sea más oscuro
-
-    // Confgurar el texto "Acerca De"
     sf::Font Fuente;
     if (!Fuente.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
         return;
@@ -485,11 +475,10 @@ void menuP::MenuAcercaDe() {
     sf::Text TextAcercaDe;
     TextAcercaDe.setFont(Fuente);
 
-    TextAcercaDe.setString("Contribuciones ");
-    TextAcercaDe.setCharacterSize(30);  // Tamaño más grande para ser fácilmente legible
-    TextAcercaDe.setFillColor(sf::Color::White);  // Color blanco para contrastar con el fondo oscuro
-    TextAcercaDe.setPosition(50, 100);  // Posicionamos el texto dentro del rectángulo
-    
+    TextAcercaDe.setString(" Contribuciones ");
+    TextAcercaDe.setCharacterSize(30);  
+    TextAcercaDe.setFillColor(sf::Color::White);  
+    TextAcercaDe.setPosition(50, 100);  
  
     window->setMouseCursorVisible(true);
 
@@ -500,16 +489,16 @@ void menuP::MenuAcercaDe() {
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         eventoMenuO();
         renderedSprite.setTexture(renderTexture.getTexture());
-        // Dibujar los elementos en la ventana
+
         window->clear();
 
-        // Dibujar el fondo del menú y otros elementos
+ 
         window->draw(renderedSprite, &Blur);
         window->draw(spriteX);
-        // Dibujar el rectángulo oscuro centrado
+
         window->draw(overlay);
 
-        // Dibujar el texto "Acerca De"
+
         window->draw(TextAcercaDe);
 
         window->draw(TextAcercaDe);

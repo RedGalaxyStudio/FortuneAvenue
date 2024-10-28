@@ -63,7 +63,13 @@
     <ClCompile Include="ResourceGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
+    <ClCompile Include="Ruleta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovePieces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IniciarPartida.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,13 +122,25 @@
     <ClInclude Include="ResourceGame.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Client.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Globals.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePieces.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ruleta.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IniciarPartida.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
