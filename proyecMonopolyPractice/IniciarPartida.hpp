@@ -8,7 +8,8 @@ class IniciarPartida {
 public:
     // Constructor
     IniciarPartida(sf::RenderWindow& win);
-
+    void updatejoinRoom();
+    void updatecreateRoom();
     void resource();
 
     void update();
