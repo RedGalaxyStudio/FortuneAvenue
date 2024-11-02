@@ -15,6 +15,7 @@ public:
     void handleInput(sf::Event event, const size_t maxLength);
     void draw(sf::RenderWindow& window);
     void Prinf();
+    std::string Actu();
 private:
 
     float x, y;

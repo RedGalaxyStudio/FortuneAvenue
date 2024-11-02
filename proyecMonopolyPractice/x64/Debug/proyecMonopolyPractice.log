@@ -1,2 +1,7 @@
-﻿  GameMode.cpp
+﻿  IniciaUser.cpp
+  IniciarPartida.cpp
+  TextBox.cpp
+  main.cpp
+  menuP.cpp
+  Generando código...
   proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
