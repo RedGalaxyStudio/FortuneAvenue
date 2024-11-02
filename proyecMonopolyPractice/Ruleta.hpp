@@ -57,13 +57,13 @@ private:
     ParticleSystem particleSystem;
 
     sf::Color segmentColors[numSegments] = {
-        sf::Color(255, 0, 0),
-        sf::Color(0, 255, 0),
-        sf::Color(0, 0, 255),
-        sf::Color(255, 255, 0),
-        sf::Color(0, 255, 255),
-        sf::Color(255, 0, 255),
-        sf::Color(255, 165, 0)/*
+        sf::Color(243, 156, 18),
+        sf::Color(241, 196, 14),
+        sf::Color(171, 255, 46),
+        sf::Color(0, 191, 255),
+        sf::Color(255, 107, 181),
+        sf::Color(231, 77, 60),
+        sf::Color(145, 22, 254)/*
         sf::Color(239, 17, 17),//0
         sf::Color(94, 206, 64), //1
         sf::Color(175, 122, 197),//2

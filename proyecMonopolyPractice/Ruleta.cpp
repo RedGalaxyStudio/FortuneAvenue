@@ -185,7 +185,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
         window.draw(ruletaBase);
         textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
 
-        window.draw(textureCircule1,&shader); // Dibuja en la ventana aplicando shader3
+        window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
         window.draw(CentroCircule);
         window.draw(icons[currentSegment]);
     }
@@ -213,7 +213,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
 
         textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
 
-        window.draw(textureCircule1,&shader); // Dibuja en la ventana aplicando shader3
+        window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
 
         window.draw(CentroCircule);
 
@@ -236,7 +236,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
 
         textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
 
-        window.draw(textureCircule1,&shader); // Dibuja en la ventana aplicando shader3
+        window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
        
         window.draw(CentroCircule);
         for (const auto& icon : icons) {
@@ -376,7 +376,7 @@ void Ruleta::setupBase() {
     borde.setPosition(centerX, centerY);
     borde.setFillColor(sf::Color(0, 0, 0, 0));  // Fondo oscuro para mejor contraste
     borde.setOutlineThickness(radius * 0.08f);
-    borde.setOutlineColor(sf::Color::Yellow);  // Glow effect en el borde
+    borde.setOutlineColor(sf::Color(255, 194, 10));  // Glow effect en el borde
 
     ruletaBase.setRadius(radius);
     ruletaBase.setOrigin(radius, radius);
