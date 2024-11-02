@@ -254,6 +254,8 @@ void PieceSelector::updateSelection() {
 
         window->draw(CODE);
         window->display();
+
+        
     }
 
 }
