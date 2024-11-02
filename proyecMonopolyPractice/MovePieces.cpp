@@ -127,6 +127,11 @@ void MovePieces::updateCAmbioCasilla() {
                     seleccionarCaminoDer();
                 }
 
+                if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    finalCamino = false;
+                    seleccionarCaminoIzq();
+                }
 
             }
 
@@ -164,6 +169,9 @@ void MovePieces::updateCAmbioCasilla() {
 
             window->draw(SpriteArrowIzq);
             window->draw(SpriteArrowDer);
+            if((*casillas).size() == 5){
+                window->draw(SpriteArrowArriba);
+            }
         
 
         window->display();

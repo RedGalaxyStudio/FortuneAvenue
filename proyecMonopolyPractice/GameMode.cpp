@@ -10,23 +10,23 @@ void GameMode::resource() {
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
 
-
+    //Cargar Texturas de Flechas
     if (!TextureArrowIzq.loadFromFile("resource/texture/Game/Izq.png")) return;
     if (!TextureArrowDer.loadFromFile("resource/texture/Game/Der.png")) return;
+    if (!TextureArrowArriba.loadFromFile("resource/texture/Game/Arriba.png")) return;
 
-
+    //posicin y tamanio de flechas
     SpriteArrowIzq.setTexture(TextureArrowIzq);
     SpriteArrowIzq.setOrigin(200.0f,90.5f);
     SpriteArrowIzq.setPosition(300, 400);
-
 
     SpriteArrowDer.setTexture(TextureArrowDer);
     SpriteArrowDer.setOrigin(200.0f, 90.5f);
     SpriteArrowDer.setPosition(900, 400);
 
-
-
-
+    SpriteArrowArriba.setTexture(TextureArrowArriba);
+    SpriteArrowArriba.setOrigin(200.0f, 90.5f);
+    SpriteArrowArriba.setPosition(900, 400);
 
     Settings.setTexture(SettingsOff);
     Settings.setOrigin(25,25);
@@ -118,35 +118,39 @@ void GameMode::update() {
 
     
     //perfil 2
-    playersGame[1].NamePlayer.setPosition(1188.65f, 52.5f);
-    playersGame[1].boxPlayer.setPosition(1188.65f, 52.5f);
+
+    playersGame[1].NamePlayer.setPosition(188.65f, 552.5f);
+    playersGame[1].boxPlayer.setPosition(188.65f, 552.5f);
     playersGame[1].boxPlayer.setScale(0.7f, 0.7f);
-    playersGame[1].MarcoPlayer.setPosition(52.5f, 652.5f);
-    playersGame[1].AvatarPlayer.setPosition(52.5f, 652.5f);
+    playersGame[1].MarcoPlayer.setPosition(1052.5f, 52.5f);
+    playersGame[1].AvatarPlayer.setPosition(1052.5f, 552.5f);
     playersGame[1].AvatarPlayer.setScale(0.7f, 0.7f);
-    Dinero[1].setPosition(1170.65f, 85.5f);
+    Dinero[1].setPosition(170.65f, 585.5f);
 
     //perfil 3
-    playersGame[2].NamePlayer.setPosition(188.65f , 552.5f);
-    playersGame[2].boxPlayer.setPosition(188.65f, 552.5f);
+    playersGame[2].NamePlayer.setPosition(1188.65f, 52.5f);
+    playersGame[2].boxPlayer.setPosition(1188.65f, 52.5f);
     playersGame[2].boxPlayer.setScale(0.7f, 0.7f);
-    playersGame[2].MarcoPlayer.setPosition(1052.5f, 52.5f);
-    playersGame[2].AvatarPlayer.setPosition(1052.5f, 552.5f);
-    Dinero[2].setPosition(170.65f, 485.5f);
+    playersGame[2].MarcoPlayer.setPosition(52.5f, 552.5f);
+    playersGame[2].AvatarPlayer.setPosition(52.5f, 552.5f);
+    Dinero[2].setPosition(1170.65f, 85.5f);
 
     //perfil 4
-    playersGame[3].NamePlayer.setPosition(1188.65f, 652.5f);
-    playersGame[3].boxPlayer.setPosition(1188.65f, 652.5f);
+    playersGame[3].NamePlayer.setPosition(1188.65f, 552.5f);
+    playersGame[3].boxPlayer.setPosition(1188.65f, 552.5f);
     playersGame[3].boxPlayer.setScale(0.7f, 0.7f);
-    playersGame[3].MarcoPlayer.setPosition(1052.5f, 652.5f);
-    Dinero[3].setPosition(1160.65f, 685.5f);
+    playersGame[3].MarcoPlayer.setPosition(1052.5f, 552.5f);
+    Dinero[3].setPosition(1170.65f, 585.5f);
+
 
 
     float duracionMovimiento = 0.5f;  
 
      
+
     playersGame[3].AvatarPlayer.setPosition(1052.5f, 652.5f);
     playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
+
 
     Dado.start(1280, 720); 
     int DadoResul=0;

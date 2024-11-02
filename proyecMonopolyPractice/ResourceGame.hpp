@@ -19,6 +19,9 @@ extern sf::View view;
 extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
 extern sf::Sprite SpriteArrowIzq;
+
+extern sf::Sprite SpriteArrowArriba;
+
 extern std::string Code;
 extern int CplayerIndex;
 
@@ -49,7 +52,6 @@ struct PlayerGame {
 
 extern std::vector<PlayerInfo> playerInfos;
 extern std::vector<PlayerGame> playersGame;
-
 
 void loadResourceGame();
 void loadPieceGame();

@@ -14,8 +14,13 @@ std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
 std::string Code;
 sf::Sprite SpriteArrowDer;
+
+sf::Sprite SpriteArrowArriba;
+
+
 std::string username;
 std::vector<char> image; // Store image data directly.
+
 sf::Sprite SpriteArrowIzq;
 bool SelectingPiece = false; // Inicialmente en selección de pieza
 bool Game = false;        // No en juego al principio
