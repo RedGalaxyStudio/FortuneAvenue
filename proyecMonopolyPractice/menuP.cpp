@@ -6,7 +6,7 @@
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
 #include "IniciarPartida.hpp"
-
+#include "PieceSelector.hpp"
 menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
@@ -237,13 +237,12 @@ void menuP::eventoMenuP() {
 void menuP::MenuJugar() {
 
 
-    IniciarPartida inicial(*window);
-    inicial.update();
-
-    GameMode gamemode(*window);
+   IniciarPartida inicial(*window);
+   inicial.update();
 
 
-    gamemode.update();
+
+
 
 
 };

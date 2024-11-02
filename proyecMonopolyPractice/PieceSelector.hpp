@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 
 class PieceSelector {
 private:
@@ -18,6 +19,9 @@ private:
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
     sf::FloatRect globalBounds;
+    
+    sf::Text CODE;
+
 public:
     
     PieceSelector(sf::RenderWindow* windowRef);
@@ -26,8 +30,8 @@ public:
     void displayPieces();
 
     
-    sf::Texture updateSelection();
-
+    void updateSelection();
+    void updatePlayerPieceSelection(int newPieceIndex);
     
     sf::Sprite& getSelectedPiece();
 };

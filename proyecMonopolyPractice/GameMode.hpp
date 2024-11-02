@@ -8,13 +8,12 @@
 #include <atomic>
 #include <winsock2.h>
 #include <windows.h> 
-#include "Client.hpp"
 #include "Globals.hpp"
+#include "ObjetosGlobal.hpp"
 #include "WindowClass.h"
 #include "Ruleta.hpp"
 #include "MovePieces.hpp"
 #include "ResourceGlobal.hpp"
-#include "ObjetosGlobal.hpp"
 #include "PieceSelector.hpp"
 #include "ResourceGame.hpp"
 
@@ -30,6 +29,9 @@
         void DrawGame();
         void DrawGameRuleta();
         MovePieces moverFicha1;
+        MovePieces moverFicha2;
+        MovePieces moverFicha3;
+        MovePieces moverFicha4;
 
     private:
         // Ventana de renderizado
@@ -67,5 +69,7 @@
 
 
         sf::Texture TextureArrowIzq;
+        std::vector<sf::Text> Dinero;
+        int money[4];
     };
 #endif

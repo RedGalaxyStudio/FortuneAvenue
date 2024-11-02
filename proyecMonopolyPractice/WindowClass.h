@@ -1,10 +1,10 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
 #include "CubeClass.h"
+#include <SFML/Graphics.hpp>
 #include "ResourceGame.hpp"
 #include <cstdlib>
 #include <ctime>
+#include "Client.hpp"
 
 class Window {
 
@@ -17,7 +17,7 @@ class Window {
 	sf::Mouse mouse;
 	sf::VertexArray Cube3D;
 	Cube* cube;
-
+	
 
 	float calcdis(sf::Vector2i p1, sf::Vector2i p2)
 	{
@@ -170,7 +170,7 @@ public :
 	}
 
 
-	void loop(sf::Event event)
+	void loop(sf::Event event, Client* client)
 	{
 
 			if (event.type == sf::Event::Closed) {
@@ -181,14 +181,18 @@ public :
 				DiceSound.play();
 					updateDiceAppearance();
 					eventStarted = true;
-					faceIndex = rand() % 6 + 1;
+					
+					client->rollDice();
+					
 					mouseStart.x = rand() % 400 + 1;
 					mouseStart.y = rand() % 600 + 1;
 					ok = 1;
 					clock.restart();
 					//std::cout << "eventStarted: " << eventStarted << std::endl;
-					
-				
+					do{
+						faceIndex = client->lastRollResult;
+					} while (espera == false);
+					espera = false;
 			}
 			
 

@@ -3,16 +3,17 @@
 #include "ResourceGame.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ButtonG.hpp"
+#include "GameMode.hpp"
 
 // Constructor
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
-    : window(windowRef), selectedPiece(0) {
+    : window(windowRef), selectedPiece(-1) {
     loadResourceGame();
 }
 
 void PieceSelector::Resource() {
 
-    StringNamePlayers[0] = input;
+    playerInfos[0].username = input;
     int piecesCount = 16;  //Cantidad de piezas
     pieces.resize(piecesCount);
     shadow.resize(piecesCount);  
@@ -77,60 +78,85 @@ void PieceSelector::displayPieces() {
 
 
 // Update the selection based on user input
-sf::Texture PieceSelector::updateSelection() {
+void PieceSelector::updateSelection() {
     NumPlayers = 0;
     sf::Clock clock;
     
+    GameMode gamemode(*window);
+
     mousePosition = sf::Mouse::getPosition(*window);
     mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
     float startX = 275;  // Posición inicial calculada en X
     float startY = 100;  // Posición calculada en Y (centrado verticalmente)
-    NamePlayers[0].setString(StringNamePlayers[0]);
-    globalBounds = NamePlayers[0].getGlobalBounds();
-    NamePlayers[0].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+    playersGame[0].NamePlayer.setString(playerInfos[0].username);
+    globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
+    playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
     for (int i = 1; i < 4; i++) {
-        StringNamePlayers[i] = "bot" + std::to_string(i);
+        playerInfos[i].username = "bot" + std::to_string(i);
     }
+    CODE.setFont(fontUser);
+    CODE.setCharacterSize(20);
+    CODE.setString("CODIGO: " + Code);
+    CODE.setFillColor(sf::Color::White);
+    CODE.setOutlineThickness(2);
+    CODE.setOutlineColor(sf::Color(135, 135, 135));
 
+    // Ahora calcula los límites y centra
+    globalBounds = CODE.getGlobalBounds();
+    CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+    // Finalmente, establece la posición
+    CODE.setPosition(640, 30);
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
 
+    CplayerIndex = 1;
+    playerInfos[CplayerIndex].indexPiece = 5;
+    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
+    CplayerIndex = 2;
+    playerInfos[CplayerIndex].indexPiece = 7;
+    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
+    CplayerIndex = 3;
+
+    playerInfos[CplayerIndex].indexPiece = 9;
+    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
+    CplayerIndex = -1;
     while (window->isOpen()) {
         NumPlayers += 1;
         switch (NumPlayers)
         {
         case 1:
-            NamePlayers[1].setString(StringNamePlayers[1]);
-            globalBounds = NamePlayers[1].getGlobalBounds();
-            NamePlayers[1].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+            playersGame[1].NamePlayer.setString(playerInfos[1].username);
+            globalBounds = playersGame[1].NamePlayer.getGlobalBounds();
+            playersGame[1].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
             for (int i = 0; i < 2; ++i) {
-                boxPlayers[i].setPosition(startX + i * (250 + 10), startY);
-                NamePlayers[i].setPosition(startX + i * (250 + 10), startY);
+                playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
+                playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
             }
             break;
 
         case 2:
-            NamePlayers[2].setString(StringNamePlayers[2]);
-            globalBounds = NamePlayers[2].getGlobalBounds();
-            NamePlayers[2].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+            playersGame[2].NamePlayer.setString(playerInfos[2].username);
+            globalBounds = playersGame[2].NamePlayer.getGlobalBounds();
+            playersGame[2].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
             for (int i = 0; i < 3; ++i) {
-                boxPlayers[i].setPosition(startX + i * (250 + 10), startY);
-                NamePlayers[i].setPosition(startX + i * (250 + 10), startY);
+                playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
+                playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
             }
             break;
 
         case 3:
-            NamePlayers[3].setString(StringNamePlayers[3]);
-            globalBounds = NamePlayers[3].getGlobalBounds();
-            NamePlayers[3].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+            playersGame[3].NamePlayer.setString(playerInfos[3].username);
+            globalBounds = playersGame[3].NamePlayer.getGlobalBounds();
+            playersGame[3].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
             for (int i = 0; i < 4; ++i) {
-                boxPlayers[i].setPosition(startX + i * (250 + 10), startY);
-                NamePlayers[i].setPosition(startX + i * (250 + 10), startY);
-                if (i==0)
-                {
-                    PiecesSelect[i].setPosition(startX + i * (250 + 10), startY+100);
+                playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
+                playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
+                
+                
+                playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY+100);
                     
-                }
+                
                 Check[i].setPosition(startX + i * (250 + 10), startY + 200 );
             }
            
@@ -149,8 +175,8 @@ sf::Texture PieceSelector::updateSelection() {
                 renderTexture.draw(spriteFondoGame);
                 for (int i = 0; i < 4; i++)
                 {
-                    renderTexture.draw(NamePlayers[i]);
-                    renderTexture.draw(boxPlayers[i]);
+                    renderTexture.draw(playersGame[i].NamePlayer);
+                    renderTexture.draw(playersGame[i].boxPlayer);
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
@@ -170,12 +196,13 @@ sf::Texture PieceSelector::updateSelection() {
                             // Asigna la textura y ajusta la escala y el origen
                             newSelection = &pieces[i];
                             // Asigna la textura a PiecesSelect[0]
-                            PiecesSelect[0].setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
-                            PiecesSelect[0].setScale(pieces[i].getScale());  // Ajustar la escala
-                            PiecesSelect[0].setOrigin(pieces[i].getOrigin());  // Ajustar el origen
-                            PiecesSelect[0].setColor(sf::Color::White);  // Asegurar color correcto
+                            playersGame[0].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+                            playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
+                            playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
+                            playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
                             pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-
+                            playerInfos[0].indexPiece = i;
+                            client.playerChangedPiece();
                             // Resaltar la nueva pieza
                             pieces[i].setColor(sf::Color(248, 134, 255));
                             playClickSound();
@@ -187,11 +214,11 @@ sf::Texture PieceSelector::updateSelection() {
                 }
                 if (Check[0].getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
-                    const sf::Texture* texturePtr = PiecesSelect[0].getTexture();
+                    const sf::Texture* texturePtr = playersGame[0].PieceSelect.getTexture();
 
                     if (texturePtr != nullptr) {
                         sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
-                        return textureSelec;
+                        gamemode.update();
                     }
                 }
                
@@ -203,31 +230,56 @@ sf::Texture PieceSelector::updateSelection() {
         botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         window->setMouseCursor(*currentCursor);
 
-   
+           if (CplayerIndex>0&& CplayerIndex<=3){ 
+            updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
+                CplayerIndex = -1;
+           }
+        
+
 
         window->clear();
         window->draw(spriteFondoGame);
         for (int i = 0; i < 4; i++)
         {
-            window->draw(NamePlayers[i]);
-            window->draw(boxPlayers[i]);
-            window->draw(AvatarPlayers[i]);
-                      
+            window->draw(playersGame[i].NamePlayer);
+            window->draw(playersGame[i].boxPlayer);
+            window->draw(playersGame[i].AvatarPlayer);
+            window->draw(playersGame[i].PieceSelect);
+            window->draw(Check[i]);
         }
         
-        
-        
+
 
         displayPieces();
-        window->draw(PiecesSelect[0]);
-        window->draw(Check[0]);
+
+        window->draw(CODE);
         window->display();
     }
 
 }
 
+void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
+    // Suponiendo que `pieces` es un vector de sprites que contiene todas las piezas del juego
+    // y `playersGame` es un arreglo de estructuras que almacena la información de los jugadores.
 
-// Get the selected piece
-sf::Sprite& PieceSelector::getSelectedPiece() {
-    return pieces[selectedPiece];
+    // Primero, quita el resaltado de la pieza previamente seleccionada del jugador
+    if (playersGame[CplayerIndex].PieceSelect.getColor() != sf::Color::White) {
+        // Asegúrate de que estamos quitando el efecto de la pieza seleccionada previamente
+        playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White);
+    }
+
+    // Ahora resaltar la nueva pieza seleccionada
+    pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
+
+    // Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
+    playersGame[CplayerIndex].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
+    playersGame[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
+    playersGame[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
+    playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
+
+    // Guardar el índice de la pieza seleccionada
+    //playerInfos[CplayerIndex].indexPiece = newPieceIndex;
+
+    // Asegúrate de que el nuevo sprite esté correctamente posicionado si es necesario
+    // playersGame[playerIndex].PieceSelect.setPosition(...);
 }

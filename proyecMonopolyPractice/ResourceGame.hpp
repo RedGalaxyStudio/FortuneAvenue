@@ -6,15 +6,10 @@
 #include <string>
 #include <iostream>
 
-extern std::vector<sf::CircleShape> AvatarPlayers; 
-extern std::vector<std::string> StringNamePlayers;
-extern std::vector<sf::Text> NamePlayers;
-extern std::vector<sf::Sprite> boxPlayers;
+
 extern sf::Texture TextureFondoGame;
 extern  sf::Texture TextureMarco;
 extern sf::Sprite spriteFondoGame;
-extern std::vector<sf::Sprite> MarcoPlayers;
-extern std::vector<sf::Sprite> PiecesSelect;
 extern int NumPlayers;
 extern sf::SoundBuffer DiceBuffer;
 extern sf::Sound DiceSound;
@@ -24,6 +19,38 @@ extern sf::View view;
 extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
 extern sf::Sprite SpriteArrowIzq;
+extern std::string Code;
+extern int CplayerIndex;
+
+struct PlayerInfo {
+	std::string username;
+	std::vector<char> image;
+	int money = 200;
+	int roomconect;
+	bool isSelectingPiece = true; // Inicialmente en selección de pieza
+	bool isInGame = false;        // No en juego al principio
+	int indexPiece;
+
+};
+
+extern bool espera;
+extern bool SelectingPiece; // Inicialmente en selección de pieza
+extern bool Game;        // No en juego al principio
+
+struct PlayerGame {
+
+
+	sf::CircleShape AvatarPlayer;  // Dinámico para el número de jugadores
+	sf::Sprite MarcoPlayer;
+	sf::Text NamePlayer;
+	sf::Sprite boxPlayer;
+	sf::Sprite PieceSelect;
+};
+
+extern std::vector<PlayerInfo> playerInfos;
+extern std::vector<PlayerGame> playersGame;
+
+
 void loadResourceGame();
 void loadPieceGame();
 

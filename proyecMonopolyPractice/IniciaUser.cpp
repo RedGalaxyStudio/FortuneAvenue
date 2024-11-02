@@ -64,7 +64,7 @@ void IniciaUser::IniciAcion(){
     float heightSeparation = avatarHeight + avatarSeparation;
 
     recua.setPosition(400, 112);
-    TextBox textBox(496, 50);  // Crear un cuadro de texto
+    TextBox textBox(496, 50, "Ingresa tu nombre: ");  // Crear un cuadro de texto
     textBox.setPosition();  // Posicionar el cuadro de texto
     // Definir la altura total del contenido y la altura de la ventana
     const float totalContentHeight = 440.0f; // Cambia esto según el total que necesites
@@ -201,19 +201,17 @@ void IniciaUser::IniciAcion(){
                 }
             }
                     // Manejar la entrada de texto
-                    textBox.handleInput(event);
-                }
-
-
-                window.clear();
-                window.draw(SpriteFondoMenu);
+                    textBox.handleInput(event,11);
+        }
+        window.clear();
+        window.draw(SpriteFondoMenu);
       
-                for (int i = 0; i < avatars.size(); ++i) {
+        for (int i = 0; i < avatars.size(); ++i) {
 
                     sf::Vector2f pos = avatars[i].getPosition();
 
                     window.draw(avatars[i]);
-                }
+        }
 
                 // Dibujar solo la copia del avatar seleccionado en la posición del perfil
                
@@ -233,7 +231,7 @@ void IniciaUser::IniciAcion(){
     
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
-        // Encuentra el índice del avatar seleccionado
+
         int selectedIndex = -1;
         for (int i = 0; i < avatars.size(); ++i) {
             if (&avatars[i] == selectedAvatar) {
@@ -242,23 +240,21 @@ void IniciaUser::saveSelectedAvatar(){
             }
         }
 
-        // Verificar si se encontró un índice válido
+
         if (selectedIndex != -1) {
             // Crear un objeto JSON
             json avatarData;
             avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
-          //  std::cout << "\nInput antes de guardar en Json: " << input << std::endl;
 
-            avatarData["username"] = input;  // Guardar el username (variable input)
+            avatarData["username"] = input;  
 
-            // Guardar en un archivo JSON
+         
             std::ofstream outFile("perfil.json");
 
             // Verificar si el archivo se puede abrir
             if (outFile.is_open()) {
                 outFile << avatarData.dump(4);  // Indentar con 4 espacios para mejor legibilidad
                 outFile.close();
-                std::cout << "Perfil guardado con éxito: Avatar " << selectedIndex << ", Username: " << input << std::endl;
             }
         }
     }
@@ -274,7 +270,7 @@ void IniciaUser::loadSelectedAvatar() {
         inFile.close();
 
         TextureAvatarPath = avatarData["selected_avatar_path"];
-        input = avatarData["username"];  // Cargar el username desde el archivo
+        input = avatarData["username"];  
 
         
         if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();
@@ -313,8 +309,7 @@ void IniciaUser::loadAvatars(){
 
         float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
         float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
-        std::cout << i << "  X :" << x << "y :" << y << std::endl;
-
+      
         avatars[i].setPosition(x, y);
     }
     if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;

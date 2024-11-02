@@ -1,12 +1,12 @@
 #include "GameMode.hpp"
-
-GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), ruleta(500.0f, 500.0f,640.0f, 360.0f), validar(false) , moverFicha1(win){
+#include <String>
+GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), ruleta(500.0f, 500.0f,640.0f, 360.0f), validar(false) , moverFicha1(win), moverFicha2(win) , moverFicha3(win) ,moverFicha4(win) {
     loadResourceGame();
 	resource();
 }
 
 void GameMode::resource() {
-	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S++.png")) return;
+	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
 
@@ -44,91 +44,109 @@ void GameMode::resource() {
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
+
+
     // Agregar los caminos al vector principal
     for (int i = 0; i < 4; i++) {
-        if(i==0){
-            StringNamePlayers[i] = input; 
-        }
-        else{
-        StringNamePlayers[i] = "bot" + std::to_string(i);
-        }
 
-        NamePlayers[i].setString(StringNamePlayers[i]);
-        globalBounds = NamePlayers[i].getGlobalBounds();
-        NamePlayers[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-        MarcoPlayers[i].setOrigin(45.5f,45.5f);
+        globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
+        playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+        playersGame[i].MarcoPlayer.setOrigin(45.5f,45.5f);
     }
     casillas.push_back(camino1);
 
-    pieces.setPosition(330,439);
+
+    
     view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)); 
-    view.setCenter(pieces.getPosition()); // Centrar la vista en la ficha
+    view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centrar la vista en la ficha
 
     posicionActual = 0; 
 }
 
-// Implementación del método update
 void GameMode::update() {
 
-    PieceSelector pieceselector(window);
-    pieceselector.Resource();
+    Dinero.resize(4);
+    money[0] = 200;
+    money[1] = 200;
+    money[2] = 200;
+    money[3] = 200;
+
+    for (int i = 0; i < 4; i++)
+    {
+        Dinero[i].setString(std::to_string(money[i]));
+        Dinero[i].setCharacterSize(17);
+        Dinero[i].setFont(fontUser);
+        Dinero[i].setFillColor(sf::Color::White);
+        Dinero[i].setOutlineThickness(2);
+        Dinero[i].setOutlineColor(sf::Color(135, 135, 135));
+        playersGame[i].PieceSelect.setScale(1, 1);
+        globalBounds = playersGame[i].PieceSelect.getGlobalBounds();
+        playersGame[i].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+        
+    }
+ 
+    moverFicha1.Inicializar(&playersGame[0].PieceSelect, &casillas);
+    moverFicha2.Inicializar(&playersGame[1].PieceSelect, &casillas);
+    moverFicha3.Inicializar(&playersGame[2].PieceSelect, &casillas);
+    moverFicha4.Inicializar(&playersGame[3].PieceSelect, &casillas);
 
 
-    piecesTextures = pieceselector.updateSelection();
+    playersGame[0].PieceSelect.setPosition(330, 439);
+    playersGame[1].PieceSelect.setPosition(354, 427);
+    playersGame[2].PieceSelect.setPosition(399, 427);
+    playersGame[3].PieceSelect.setPosition(428, 440);
 
-    pieces.setTexture(piecesTextures);
-    globalBounds = pieces.getGlobalBounds();
-    pieces.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
     sf::Clock clock;
     resultadoDado = 0;
     mousePosition = sf::Mouse::getPosition(*window);
     mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-    NamePlayers[0].setPosition(188.65f, 62.5f);
-    boxPlayers[0].setPosition(188.65f, 62.5f);
-    boxPlayers[0].setScale(0.7f, 0.7f);
-    MarcoPlayers[0].setPosition(52.5f, 62.5f);
-
+    playersGame[0].NamePlayer.setPosition(188.65f, 62.5f);
+    playersGame[0].boxPlayer.setPosition(188.65f, 62.5f);
+    playersGame[0].boxPlayer.setScale(0.7f, 0.7f);
+    playersGame[0].MarcoPlayer.setPosition(52.5f, 62.5f);
+    Dinero[0].setPosition(170.65f, 95.5f);
     const sf::Texture* texture = selectedAvatarCopy.getTexture();
     if (texture != nullptr) {
-        AvatarPlayers[0].setTexture(texture);
-        AvatarPlayers[0].setRadius(static_cast<float>(texture->getSize().x / 2));
-        AvatarPlayers[0].setOrigin(64, 64);
+        playersGame[0].AvatarPlayer.setTexture(texture);
+        playersGame[0].AvatarPlayer.setRadius(static_cast<float>(texture->getSize().x / 2));
+        playersGame[0].AvatarPlayer.setOrigin(64, 64);
     }
 
-    AvatarPlayers[0].setPosition(52.5f, 62.5f);
-    AvatarPlayers[0].setScale(0.7f, 0.7f);
+    playersGame[0].AvatarPlayer.setPosition(52.5f, 62.5f);
+    playersGame[0].AvatarPlayer.setScale(0.7f, 0.7f);
 
     
     //perfil 2
-    NamePlayers[1].setPosition(1188.65f, 52.5f);
-    boxPlayers[1].setPosition(1188.65f, 52.5f);
-    boxPlayers[1].setScale(0.7f, 0.7f);
-    MarcoPlayers[1].setPosition(52.5f, 652.5f);
-    AvatarPlayers[1].setPosition(52.5f, 652.5f);
-    AvatarPlayers[1].setScale(0.7f, 0.7f);
+    playersGame[1].NamePlayer.setPosition(1188.65f, 52.5f);
+    playersGame[1].boxPlayer.setPosition(1188.65f, 52.5f);
+    playersGame[1].boxPlayer.setScale(0.7f, 0.7f);
+    playersGame[1].MarcoPlayer.setPosition(52.5f, 652.5f);
+    playersGame[1].AvatarPlayer.setPosition(52.5f, 652.5f);
+    playersGame[1].AvatarPlayer.setScale(0.7f, 0.7f);
+    Dinero[1].setPosition(1170.65f, 85.5f);
 
     //perfil 3
-    NamePlayers[2].setPosition(188.65f, 652.5f);
-    boxPlayers[2].setPosition(188.65f, 652.5f);
-    boxPlayers[2].setScale(0.7f, 0.7f);
-    MarcoPlayers[2].setPosition(1052.5f, 52.5f);
-    AvatarPlayers[2].setPosition(1052.5f, 652.5f);
-    AvatarPlayers[2].setScale(0.7f, 0.7f);
+    playersGame[2].NamePlayer.setPosition(188.65f , 552.5f);
+    playersGame[2].boxPlayer.setPosition(188.65f, 552.5f);
+    playersGame[2].boxPlayer.setScale(0.7f, 0.7f);
+    playersGame[2].MarcoPlayer.setPosition(1052.5f, 52.5f);
+    playersGame[2].AvatarPlayer.setPosition(1052.5f, 552.5f);
+    Dinero[2].setPosition(170.65f, 485.5f);
 
     //perfil 4
-    NamePlayers[3].setPosition(1188.65f, 652.5f);
-    boxPlayers[3].setPosition(1188.65f, 652.5f);
-    boxPlayers[3].setScale(0.7f, 0.7f);
-    MarcoPlayers[3].setPosition(1052.5f, 652.5f);
+    playersGame[3].NamePlayer.setPosition(1188.65f, 652.5f);
+    playersGame[3].boxPlayer.setPosition(1188.65f, 652.5f);
+    playersGame[3].boxPlayer.setScale(0.7f, 0.7f);
+    playersGame[3].MarcoPlayer.setPosition(1052.5f, 652.5f);
+    Dinero[3].setPosition(1160.65f, 685.5f);
 
-    moverFicha1.Inicializar(&pieces, &casillas);
 
     float duracionMovimiento = 0.5f;  
 
      
-    AvatarPlayers[3].setPosition(1052.5f, 652.5f);
-    AvatarPlayers[3].setScale(0.7f, 0.7f);
+    playersGame[3].AvatarPlayer.setPosition(1052.5f, 652.5f);
+    playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
 
     Dado.start(1280, 720); 
     int DadoResul=0;
@@ -183,7 +201,7 @@ void  GameMode::Event(){
 
     while (window->pollEvent(event)) {
 
-        Dado.loop(event); 
+        Dado.loop(event,&client); 
 
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
         sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -194,10 +212,10 @@ void  GameMode::Event(){
             renderTexture.draw(spriteMapa);
             for (int i = 0; i < 4; i++)
             {
-                renderTexture.draw(NamePlayers[i]);
-                renderTexture.draw(boxPlayers[i]);
-                renderTexture.draw(MarcoPlayers[i]);
-                renderTexture.draw(AvatarPlayers[i]);
+                renderTexture.draw(playersGame[i].NamePlayer);
+                renderTexture.draw(playersGame[i].boxPlayer);
+                renderTexture.draw(playersGame[i].MarcoPlayer);
+                renderTexture.draw(playersGame[i].AvatarPlayer);
             }
             renderTexture.draw(spriteX);
             renderTexture.draw(overlay);
@@ -227,7 +245,7 @@ void  GameMode::Event(){
 
 void GameMode::DrawPieceMoviendo(){
 
-    sf::Vector2f fichaPos = pieces.getPosition();
+    sf::Vector2f fichaPos = playersGame[0].PieceSelect.getPosition();
     float viewX = fichaPos.x;
     float viewY = fichaPos.y;
 
@@ -248,7 +266,7 @@ void GameMode::DrawPieceMoviendo(){
     //for (const auto& s : rastro) {
      //   window->draw(s);
     ///}
-    window->draw(pieces);
+    window->draw(playersGame[0].PieceSelect);
     window->setView(window->getDefaultView());
 
     if (moverFicha1.finalCamino){
@@ -269,10 +287,11 @@ void GameMode::DrawGameRuleta() {
     renderTexture.draw(spriteMapa);
     for (int i = 0; i < 4; i++)
     {
-        renderTexture.draw(NamePlayers[i]);
-        renderTexture.draw(boxPlayers[i]);
-        renderTexture.draw(MarcoPlayers[i]);
-        renderTexture.draw(AvatarPlayers[i]);
+        renderTexture.draw(playersGame[i].NamePlayer);
+        renderTexture.draw(playersGame[i].boxPlayer);
+        renderTexture.draw(playersGame[i].MarcoPlayer);
+        renderTexture.draw(playersGame[i].AvatarPlayer);
+
     }
     renderTexture.draw(overlay);
 
@@ -291,21 +310,19 @@ void GameMode::DrawGame() {
 
     window->draw(spriteFondoGame);
     window->draw(spriteMapa);
-    //window->setView(window->getDefaultView()); 
-   // for (const auto& s : rastro) {
-    //    window->draw(s);
-    //}
-    window->draw(pieces);
+
     Dado.update();
     float deltaTime = clock.restart().asSeconds();
 
     //ruleta.draw(*window, deltaTime, validar);
     for (int i = 0; i < 4; i++)
     {
-        window->draw(NamePlayers[i]);
-        window->draw(boxPlayers[i]);
-        window->draw(AvatarPlayers[i]);
-        window->draw(MarcoPlayers[i]);
+        window->draw(playersGame[i].NamePlayer);
+        window->draw(playersGame[i].boxPlayer);
+        window->draw(playersGame[i].AvatarPlayer);
+        window->draw(playersGame[i].MarcoPlayer);
+        window->draw(Dinero[i]);
+        window->draw(playersGame[i].PieceSelect);
 
     }
 

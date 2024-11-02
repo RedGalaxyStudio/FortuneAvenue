@@ -5,8 +5,8 @@
 TextBox::TextBox() {}// Constructor por defecto
 
 
-TextBox::TextBox(float width, float height) {
-
+TextBox::TextBox(float width, float height,std::string solicitud) {
+    
     input = "";
 
     // Variables de texto en SFML
@@ -27,7 +27,7 @@ TextBox::TextBox(float width, float height) {
     
     textoPregunta.setFont(fontUser);
     textoPregunta.setCharacterSize(24);
-    textoPregunta.setString("Ingresa tu nombre: ");
+    textoPregunta.setString(solicitud);
     textoPregunta.setOutlineColor(sf::Color(135, 135, 135));
     textoPregunta.setOutlineThickness(2);
     x = 525;
@@ -43,14 +43,14 @@ TextBox::TextBox(float width, float height) {
 
 // Posición del cuadro de texto
 void TextBox::setPosition() {
-    box.setPosition(x + 20 + 125, y + 20 + 40);
-    text.setPosition(x + 20 + 125, y + 20 + 40 - 4); // Desplaza el texto un poco dentro del cuadro
-    textoPregunta.setPosition(x, y-25);
+    box.setPosition(x + 145, y + 60);
+    text.setPosition(x + 145, y + 56); // Desplaza el texto un poco dentro del cuadro
+    textoPregunta.setPosition(x, y - 25);
 }
 
 // Manejo de la entrada de texto
-void TextBox::handleInput(sf::Event event) {
-    const size_t maxLength = 11; // Limite de caracteres
+void TextBox::handleInput(sf::Event event, const size_t maxLength) {
+    //const size_t maxLength = 11; // Limite de caracteres
 
     // Manejo de entrada de texto
     if (event.type == sf::Event::TextEntered && nombre.empty()) {
