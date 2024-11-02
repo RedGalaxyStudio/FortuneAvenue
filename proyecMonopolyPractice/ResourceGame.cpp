@@ -20,6 +20,7 @@ std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
 
 sf::Sprite SpriteArrowDer;
+sf::Sprite SpriteArrowArriba;
 
 
 sf::Sprite SpriteArrowIzq;

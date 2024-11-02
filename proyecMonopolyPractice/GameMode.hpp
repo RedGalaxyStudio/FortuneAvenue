@@ -67,6 +67,9 @@
 
 
         sf::Texture TextureArrowIzq;
+
+        sf::Texture TextureArrowArriba;
+
         std::vector<sf::Text> Dinero;
         int money[4];
     };
