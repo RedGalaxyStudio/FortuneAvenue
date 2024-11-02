@@ -1,11 +1,6 @@
 #include "ResourceGame.hpp"
 #include "ResourceGlobal.hpp"
 
-std::vector<sf::CircleShape> AvatarPlayers;  // Dinámico para el número de jugadores
-std::vector<std::string> StringNamePlayers;
-std::vector<sf::Text> NamePlayers;
-std::vector<sf::Sprite> boxPlayers;
-std::vector<sf::Sprite> PiecesSelect;
 std::vector<sf::Texture> avatarTextures;
 sf::Texture TextureFondoGame;
 sf::Texture TextureMarco;
@@ -13,42 +8,47 @@ sf::Sprite spriteFondoGame;
 int NumPlayers;
 sf::SoundBuffer DiceBuffer;
 sf::Sound DiceSound;
-std::vector<sf::Sprite> MarcoPlayers;
 sf::View view; // Declarar la vista
 sf::Clock reloj;
 std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
-
+std::string Code;
 sf::Sprite SpriteArrowDer;
+
 sf::Sprite SpriteArrowArriba;
 
 
+std::string username;
+std::vector<char> image; // Store image data directly.
+
 sf::Sprite SpriteArrowIzq;
+bool SelectingPiece = false; // Inicialmente en selección de pieza
+bool Game = false;        // No en juego al principio
+std::vector<PlayerInfo> playerInfos;
+std::vector<PlayerGame> playersGame;
+bool espera;
+int CplayerIndex;
 
 void loadResourceGame(){
 
 	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("resource/texture/Avatars/MarcoTexture.png")) return;
 	spriteFondoGame.setTexture(TextureFondoGame);
-	// Ajustar el tamaño de los vectores según el número de jugadores
-	AvatarPlayers.resize(4);
-	StringNamePlayers.resize(4);
-	MarcoPlayers.resize(4);
-	NamePlayers.resize(4);
-	boxPlayers.resize(4);
-	PiecesSelect.resize(4);
 
+	playerInfos.resize(4);
+	playersGame.resize(4);
+	espera=false;
 	for (int i = 0; i < 4; i++)
 	{
-		boxPlayers[i].setTexture(textureBox);
-		boxPlayers[i].setOrigin(125, 40);
-		boxPlayers[i].setScale(0.9f, 0.9f);
-		MarcoPlayers[i].setTexture(TextureMarco);
-		NamePlayers[i].setCharacterSize(17);
-		NamePlayers[i].setFont(fontUser);
-		NamePlayers[i].setFillColor(sf::Color::White);
-		NamePlayers[i].setOutlineThickness(2);
-		NamePlayers[i].setOutlineColor(sf::Color(135, 135, 135));
+		playersGame[i].boxPlayer.setTexture(textureBox);
+		playersGame[i].boxPlayer.setOrigin(125, 40);
+		playersGame[i].boxPlayer.setScale(0.9f, 0.9f);
+		playersGame[i].MarcoPlayer.setTexture(TextureMarco);
+		playersGame[i].NamePlayer.setCharacterSize(17);
+		playersGame[i].NamePlayer.setFont(fontUser);
+		playersGame[i].NamePlayer.setFillColor(sf::Color::White);
+		playersGame[i].NamePlayer.setOutlineThickness(2);
+		playersGame[i].NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		
 	}
 

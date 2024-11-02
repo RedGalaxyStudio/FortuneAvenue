@@ -99,10 +99,10 @@ void MovePieces::updateCAmbioCasilla() {
                 renderTexture.draw(spriteMapa);
                 for (int i = 0; i < 4; i++)
                 {
-                    renderTexture.draw(NamePlayers[i]);
-                    renderTexture.draw(boxPlayers[i]);
-                    renderTexture.draw(MarcoPlayers[i]);
-                    renderTexture.draw(AvatarPlayers[i]);
+                    renderTexture.draw(playersGame[i].NamePlayer);
+                    renderTexture.draw(playersGame[i].boxPlayer);
+                    renderTexture.draw(playersGame[i].MarcoPlayer);
+                    renderTexture.draw(playersGame[i].AvatarPlayer);
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
