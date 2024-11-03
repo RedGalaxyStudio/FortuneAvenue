@@ -156,45 +156,72 @@ void GameMode::update() {
     int DadoResul=0;
     
 
-
+    muerte = false;
     while (window->isOpen()) {
-        
+
         Event();
 
-        resultadoDado = Dado.logica(); 
+        resultadoDado = Dado.logica();
         if (resultadoDado != 0) {
             DadoResul = resultadoDado;
             TempoAnimacion.restart();
+        }
+
+        if (muerte == true) {
+            TempoAnimacion.restart();
+            muerte = false;
+        }
+
+
+        if (validar == true && muerte == false && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
+
+            validar = false;
         }
 
         currentCursor = &normalCursor;
 
         window->setMouseCursor(*currentCursor);
 
-        if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f ) {
-               
-                moverFicha1.iniciarMovimiento(DadoResul, duracionMovimiento);
-                DadoResul = 0;
-        }
- 
+        if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
 
-      float deltaTime = reloj.restart().asSeconds();
+            moverFicha1.iniciarMovimiento(DadoResul, duracionMovimiento);
+            DadoResul = 0;
+        }
+
+        // Variables para controlar el temporizador
+        sf::Clock clock;
+        float tiempoRuletaVisible = 3.0f; // 3 segundos
+        bool ruletaVisible = false;
+
+        // En tu lógica de juego:
+        float deltaTime = reloj.restart().asSeconds();
 
         if (moverFicha1.enMovimiento == true) {
-  
-        moverFicha1.actualizarMovimiento(deltaTime);
-  
-        DrawPieceMoviendo(); 
-            
+            moverFicha1.actualizarMovimiento(deltaTime);
+            DrawPieceMoviendo();
         }
-        else if (validar == true) { 
-            DrawGameRuleta();  }
+        else if (validar == true) {
+            if (!ruletaVisible) {
+                // Mostrar la ruleta y reiniciar el temporizador
+                DrawGameRuleta();
+                ruletaVisible = true;
+                clock.restart(); // Reinicia el reloj
+            }
+            else {
+                // Verifica si ha pasado el tiempo
+                if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
+                    ruletaVisible = false; // Oculta la ruleta
+                }
+                else {
+                    DrawGameRuleta(); // Mantén la ruleta visible
+                }
+            }
+        }
         else {
-
             DrawGame();
         }
+
         window->display();
-   
     }
   //  client.disconnect();
 }
@@ -242,10 +269,7 @@ void  GameMode::Event(){
 
     }
 
-
-
 }
-
 
 void GameMode::DrawPieceMoviendo(){
 

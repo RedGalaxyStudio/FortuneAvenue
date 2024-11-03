@@ -1,8 +1,23 @@
-﻿  Client.cpp
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(280,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(285,41): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(357,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(360,41): warning C4101: 'e': variable local sin referencia
+﻿  ButtonG.cpp
+  Client.cpp
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(280,45): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(285,41): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(357,45): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(360,41): warning C4101: 'e': unreferenced local variable
+  GameMode.cpp
+  IniciaUser.cpp
+  IniciarPartida.cpp
+  MovePieces.cpp
+  ObjetosGlobal.cpp
   PieceSelector.cpp
-  Generando código...
-  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+  ResourceGame.cpp
+  ResourceGlobal.cpp
+  Ruleta.cpp
+  Scrollbar.cpp
+  SettingsManager.cpp
+  TextBox.cpp
+  WebViewManager.cpp
+  main.cpp
+  menuP.cpp
+  Generating Code...
+  proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
