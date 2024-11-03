@@ -33,6 +33,7 @@ public:
     void handleServerMessage(const std::string& message);
     int lastRollResult;  
     void playerChangedPiece();
+    void ReadyPlayer();
 private:
     ENetHost* client;
     ENetPeer* peer;
