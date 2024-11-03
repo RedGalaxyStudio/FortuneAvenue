@@ -60,7 +60,7 @@ void GameMode::resource() {
 
     std::vector<sf::Vector2f> caminoruleta8 = { sf::Vector2f(402, 157) };
 
-    std::vector<sf::Vector2f> 
+  
 
 
 
@@ -330,7 +330,7 @@ void GameMode::DrawGameRuleta() {
 void GameMode::DrawGame() {
 
     
-    hh
+    
 
 
 

@@ -1,6 +1,9 @@
-<<<<<<< HEAD
 ﻿  Client.cpp
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(262,45): warning C4101: 'e': variable local sin referencia
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(267,41): warning C4101: 'e': variable local sin referencia
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(356,45): warning C4101: 'e': variable local sin referencia
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(359,41): warning C4101: 'e': variable local sin referencia
+  GameMode.cpp
+  PieceSelector.cpp
+  Generando código...
   proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
-=======
-﻿  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
->>>>>>> a114afe055677bc5e96e05e628c499033022eea7

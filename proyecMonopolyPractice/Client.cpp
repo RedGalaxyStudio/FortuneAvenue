@@ -298,7 +298,7 @@ void Client::handleServerMessage(const std::string& message) {
         else {
             std::cerr << "Error: Index out of bounds for player information." << std::endl;
         }
-<<<<<<< HEAD
+
     }
     else  if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
         // Extraer la información del mensaje
@@ -313,10 +313,10 @@ void Client::handleServerMessage(const std::string& message) {
         std::cout << "Player " << playerIndex << " selected piece index " << indexselectinpiece << std::endl;
 
         playerInfos[Index].indexPiece = indexselectinpiece;
-=======
+
 
         std::cout << "\nEJEcuto existen2";
->>>>>>> a114afe055677bc5e96e05e628c499033022eea7
+
     }
     else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
         std::cout << "\nEJEcuto index1";
