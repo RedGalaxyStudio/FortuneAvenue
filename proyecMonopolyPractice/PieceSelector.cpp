@@ -230,6 +230,7 @@ void PieceSelector::updateSelection() {
 
         }
 
+        
         currentCursor = &normalCursor;
         botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         window->setMouseCursor(*currentCursor);
