@@ -39,6 +39,7 @@ struct PlayerInfo {
 extern bool espera;
 extern bool SelectingPiece; // Inicialmente en selección de pieza
 extern bool Game;        // No en juego al principio
+extern bool muerte;        // No en juego al principio
 
 struct PlayerGame {
 

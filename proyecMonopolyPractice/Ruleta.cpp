@@ -1,5 +1,5 @@
 #include "Ruleta.hpp"
-
+#include "ResourceGame.hpp"
 
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY)
@@ -218,7 +218,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
         window.draw(CentroCircule);
 
         icons[currentSegment].setPosition(centerX, centerY);
-     
+        muerte = true;
         window.draw(icons[currentSegment]);
         
 

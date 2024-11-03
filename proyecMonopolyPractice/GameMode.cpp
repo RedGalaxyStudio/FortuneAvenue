@@ -156,7 +156,7 @@ void GameMode::update() {
     int DadoResul=0;
     
 
-
+    muerte = false;
     while (window->isOpen()) {
         
         Event();
@@ -165,6 +165,17 @@ void GameMode::update() {
         if (resultadoDado != 0) {
             DadoResul = resultadoDado;
             TempoAnimacion.restart();
+        }
+
+        if(muerte==true) {
+            TempoAnimacion.restart();
+             muerte = false;
+        }
+
+        
+        if (validar==true&&muerte== false && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
+           
+            validar = false;
         }
 
         currentCursor = &normalCursor;
@@ -180,17 +191,18 @@ void GameMode::update() {
 
       float deltaTime = reloj.restart().asSeconds();
 
-        if (moverFicha1.enMovimiento == true) {
-  
-        moverFicha1.actualizarMovimiento(deltaTime);
-  
-        DrawPieceMoviendo(); 
-            
-        }
-        else if (validar == true) { 
-            DrawGameRuleta();  }
-        else {
+      if (moverFicha1.enMovimiento == true) {
 
+          moverFicha1.actualizarMovimiento(deltaTime);
+
+          DrawPieceMoviendo();
+
+      }
+      else if (validar == true) {
+          DrawGameRuleta();
+
+      }
+        else {
             DrawGame();
         }
         window->display();
@@ -242,10 +254,7 @@ void  GameMode::Event(){
 
     }
 
-
-
 }
-
 
 void GameMode::DrawPieceMoviendo(){
 
