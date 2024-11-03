@@ -110,7 +110,8 @@ void IniciarPartida::updatejoinRoom() {
                     playClickSound();
                     code = textBoxRoom.Actu();
                     client.joinRoom(code);
-                    client.sendImage(TextureAvatarPath);
+                    Code = code;
+                    //client.sendImage(TextureAvatarPath);
                     pieceselector.Resource();
                     pieceselector.updateSelection();
                 }
@@ -125,6 +126,7 @@ void IniciarPartida::updatejoinRoom() {
 
         window->clear();
         window->draw(spriteFondoGame); // Dibuja el fondo
+        window->draw(SpriteUnirse); // Dibuja el fondo
         textBoxRoom.draw(*window);  // Dibujar el cuadro de texto en la ventana
         window->display();
     }
