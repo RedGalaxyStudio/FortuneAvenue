@@ -191,6 +191,24 @@ void Client::playerChangedPiece() {
     enet_host_flush(client);
 }
 
+
+void Client::ReadyPlayer() {
+    if (!peer) {
+        std::cerr << "Client is not connected to a server!" << std::endl;
+    }
+
+    std::string message = "PLAYER_READY";
+    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    enet_peer_send(peer, 0, packet);
+    enet_host_flush(client);
+
+}
+
+
+
+
+
+
 // Manejar mensajes recibidos del servidor
 void Client::handleServerMessage(const std::string& message) {
     if (message.rfind("YOUR_TURN", 0) == 0) {
@@ -242,7 +260,7 @@ void Client::handleServerMessage(const std::string& message) {
         }
         else {
             std::cout << "\nEJEcuto toy remal";
-            return;
+            
         }
 
         int index;
@@ -342,9 +360,20 @@ void Client::handleServerMessage(const std::string& message) {
         catch (const std::out_of_range& e) {
             std::cerr << "\nError: Número fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
         }
-        }
+    }
+    else if (message.rfind("PLAYER_READY:", 0) == 0) {
+            // Extraer el `indexPlayer` del mensaje
+            int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
+            indexPlayer = (indexPlayer - playerIndex + 4) % 4;
+            playerInfos[indexPlayer].isSelectingPiece = true;
 
+            // Ahora puedes usar `indexPlayer` para actualizar el estado del jugador en el cliente
+            std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
 
+            // Realiza cualquier acción adicional para indicar que este jugador está listo,
+            // como actualizar el estado en la interfaz de usuario.
+           
+    }
     else{
         std::cerr << "Unknown message received from server: " << message << std::endl;
     }

@@ -30,7 +30,7 @@ struct PlayerInfo {
 	std::vector<char> image;
 	int money = 200;
 	int roomconect;
-	bool isSelectingPiece = true; // Inicialmente en selección de pieza
+	bool isSelectingPiece = false; // Inicialmente en selección de pieza
 	bool isInGame = false;        // No en juego al principio
 	int indexPiece;
 

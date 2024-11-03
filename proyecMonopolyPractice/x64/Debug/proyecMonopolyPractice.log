@@ -1,1 +1,8 @@
-﻿  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+﻿  Client.cpp
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(280,45): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(285,41): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(357,45): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(360,41): warning C4101: 'e': variable local sin referencia
+  PieceSelector.cpp
+  Generando código...
+  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
