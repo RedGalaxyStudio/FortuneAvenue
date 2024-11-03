@@ -11,13 +11,17 @@ IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), pieceselec
 void IniciarPartida::resource() {
     TextureCrearPartidaOff.loadFromFile("resource/texture/Game/CrearPartidaOff.png");
     TextureCrearPartidaOn.loadFromFile("resource/texture/Game/CrearPartidaOn.png");
+    TextureUnirse.loadFromFile("resource/texture/Game/unirse1encendido.png");
 
     TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
     TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
 
     SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
+    SpriteUnirse.setTexture(TextureUnirse);
     SpriteCrearPartida.setOrigin(150, 59);
+    SpriteUnirse.setOrigin(100, 100);
     SpriteCrearPartida.setPosition(640, 300);
+    SpriteUnirse.setPosition(640, 700);
 
     SpriteUnirsePartida.setTexture(TextureUnirsePartidaOff);
     SpriteUnirsePartida.setOrigin(150, 59);
@@ -102,13 +106,19 @@ void IniciarPartida::updatejoinRoom() {
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 
-                if (SpriteUnirsePartida.getGlobalBounds().contains(mousePosFloat)) {
+                if (SpriteUnirse.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
-
+                    code = textBoxRoom.Actu();
                     client.joinRoom(code);
-                    client.sendImage(TextureAvatarPath);
+                    Code = code;
+                    //client.sendImage(TextureAvatarPath);
+                    pieceselector.Resource();
+                    pieceselector.updateSelection();
                 }
             }
+
+
+
 
             textBoxRoom.handleInput(event,5);
 
@@ -116,6 +126,7 @@ void IniciarPartida::updatejoinRoom() {
 
         window->clear();
         window->draw(spriteFondoGame); // Dibuja el fondo
+        window->draw(SpriteUnirse); // Dibuja el fondo
         textBoxRoom.draw(*window);  // Dibujar el cuadro de texto en la ventana
         window->display();
     }

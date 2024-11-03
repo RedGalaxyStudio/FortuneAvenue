@@ -26,10 +26,12 @@ private:
     sf::Texture TextureCrearPartidaOn;
     sf::Texture TextureUnirsePartidaOff;
     sf::Texture TextureUnirsePartidaOn;
+    sf::Texture TextureUnirse;
 
 
     sf::Sprite SpriteCrearPartida;
     sf::Sprite SpriteUnirsePartida;
+    sf::Sprite SpriteUnirse;
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;

@@ -75,6 +75,12 @@ void TextBox::handleInput(sf::Event event, const size_t maxLength) {
     }
 }
 
+std::string TextBox::Actu() {
+
+    return input;
+
+}
+
 // Dibujo del cuadro de texto
 void TextBox::draw(sf::RenderWindow& window) {
     window.draw(box);
