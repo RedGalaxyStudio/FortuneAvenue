@@ -218,13 +218,20 @@ void PieceSelector::updateSelection() {
 
                     if (texturePtr != nullptr) {
                         sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
+                        
                         gamemode.update();
+
                     }
                 }
                
             }
 
+        }if (SelectingPiece) {
+
         }
+        
+
+
 
         currentCursor = &normalCursor;
         botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);

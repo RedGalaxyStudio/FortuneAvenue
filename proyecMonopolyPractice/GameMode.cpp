@@ -158,23 +158,23 @@ void GameMode::update() {
 
     muerte = false;
     while (window->isOpen()) {
-        
+
         Event();
 
-        resultadoDado = Dado.logica(); 
+        resultadoDado = Dado.logica();
         if (resultadoDado != 0) {
             DadoResul = resultadoDado;
             TempoAnimacion.restart();
         }
 
-        if(muerte==true) {
+        if (muerte == true) {
             TempoAnimacion.restart();
-             muerte = false;
+            muerte = false;
         }
 
-        
-        if (validar==true&&muerte== false && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
-           
+
+        if (validar == true && muerte == false && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
+
             validar = false;
         }
 
@@ -182,31 +182,46 @@ void GameMode::update() {
 
         window->setMouseCursor(*currentCursor);
 
-        if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f ) {
-               
-                moverFicha1.iniciarMovimiento(DadoResul, duracionMovimiento);
-                DadoResul = 0;
+        if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
+
+            moverFicha1.iniciarMovimiento(DadoResul, duracionMovimiento);
+            DadoResul = 0;
         }
- 
 
-      float deltaTime = reloj.restart().asSeconds();
+        // Variables para controlar el temporizador
+        sf::Clock clock;
+        float tiempoRuletaVisible = 3.0f; // 3 segundos
+        bool ruletaVisible = false;
 
-      if (moverFicha1.enMovimiento == true) {
+        // En tu lógica de juego:
+        float deltaTime = reloj.restart().asSeconds();
 
-          moverFicha1.actualizarMovimiento(deltaTime);
-
-          DrawPieceMoviendo();
-
-      }
-      else if (validar == true) {
-          DrawGameRuleta();
-
-      }
+        if (moverFicha1.enMovimiento == true) {
+            moverFicha1.actualizarMovimiento(deltaTime);
+            DrawPieceMoviendo();
+        }
+        else if (validar == true) {
+            if (!ruletaVisible) {
+                // Mostrar la ruleta y reiniciar el temporizador
+                DrawGameRuleta();
+                ruletaVisible = true;
+                clock.restart(); // Reinicia el reloj
+            }
+            else {
+                // Verifica si ha pasado el tiempo
+                if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
+                    ruletaVisible = false; // Oculta la ruleta
+                }
+                else {
+                    DrawGameRuleta(); // Mantén la ruleta visible
+                }
+            }
+        }
         else {
             DrawGame();
         }
+
         window->display();
-   
     }
   //  client.disconnect();
 }
