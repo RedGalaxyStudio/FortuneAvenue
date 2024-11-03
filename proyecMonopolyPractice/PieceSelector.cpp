@@ -37,7 +37,6 @@ void PieceSelector::Resource() {
             return;
 
         float radio = piecesTextures[i].getSize().x / 2.0f;
-    //    pieces[i].setRadius(radio);
         pieces[i].setTexture(piecesTextures[i]);
         shadow[i].setTexture(piecesTextures[i]);
         globalBounds = pieces[i].getGlobalBounds();
@@ -79,7 +78,7 @@ void PieceSelector::displayPieces() {
 
 // Update the selection based on user input
 void PieceSelector::updateSelection() {
-    NumPlayers = 0;
+    NumPlayers = 1;
     sf::Clock clock;
     
     GameMode gamemode(*window);
@@ -122,7 +121,9 @@ void PieceSelector::updateSelection() {
     updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
     CplayerIndex = -1;
     while (window->isOpen()) {
-        NumPlayers += 1;
+        
+        NumPlayers++;
+
         switch (NumPlayers)
         {
         case 1:
@@ -164,6 +165,8 @@ void PieceSelector::updateSelection() {
 
         }
         
+
+
         sf::Event event;
         while (window->pollEvent(event)) {
 
@@ -218,15 +221,20 @@ void PieceSelector::updateSelection() {
 
                     if (texturePtr != nullptr) {
                         sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
-                        
-                        gamemode.update();
+
+                        playerInfos[0].isSelectingPiece = true;
+                        client.ReadyPlayer();
 
                     }
                 }
                
             }
 
-        }if (SelectingPiece) {
+        }
+        
+        if (SelectingPiece) {
+        
+            gamemode.update();
 
         }
         
@@ -242,8 +250,16 @@ void PieceSelector::updateSelection() {
                 CplayerIndex = -1;
            }
         
+           for (int i = 0; i < 4; i++)
+           {
+               if (playerInfos[i].isSelectingPiece) {
+                   Check[i].setTexture(CheckTexturesOn[i]);
+               }
+           }
+           
+           if (playerInfos[0].isSelectingPiece && playerInfos[1].isSelectingPiece&& playerInfos[2].isSelectingPiece&& playerInfos[3].isSelectingPiece){
 
-
+           }
         window->clear();
         window->draw(spriteFondoGame);
         for (int i = 0; i < 4; i++)
