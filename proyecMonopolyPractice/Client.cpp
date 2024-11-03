@@ -264,7 +264,7 @@ void Client::handleServerMessage(const std::string& message) {
         size_t firstColon = message.find(":", 20); // La primera posición después de "PLAYER_CHANGED_PIECE:"
         int Index = std::stoi(message.substr(20, firstColon - 20));
         int indexselectinpiece = std::stoi(message.substr(firstColon + 1));
-
+        std::cout << "\n\n" << Index;
         Index = (Index - playerIndex + 4) % 4;
         CplayerIndex = Index;
         

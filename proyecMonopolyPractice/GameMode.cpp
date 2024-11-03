@@ -44,6 +44,24 @@ void GameMode::resource() {
     // Vector para cada grupo de casillas (caminos)
     std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
+    std::vector<sf::Vector2f> caminoruleta1 = { sf::Vector2f(325, 323), sf::Vector2f(425,654)};
+    
+    std::vector<sf::Vector2f> caminoruleta2 = { sf::Vector2f(790, 539) };
+
+    std::vector<sf::Vector2f> caminoruleta3 = { sf::Vector2f(425, 650) };
+
+    std::vector<sf::Vector2f> caminoruleta4 = { sf::Vector2f(923, 679) };
+
+    std::vector<sf::Vector2f> caminoruleta5 = { sf::Vector2f(328, 161) };
+
+    std::vector<sf::Vector2f> caminoruleta6 = { sf::Vector2f(556 , 544), sf::Vector2f(632 , 585)  };
+
+    std::vector<sf::Vector2f> caminoruleta7 = { sf::Vector2f(840, 476), sf::Vector2f(958, 372), sf::Vector2f(930, 231), sf::Vector2f(688, 137), sf::Vector2f(675, 40), sf::Vector2f(514, 141) };
+
+    std::vector<sf::Vector2f> caminoruleta8 = { sf::Vector2f(402, 157) };
+
+    std::vector<sf::Vector2f> 
+
 
 
     // Agregar los caminos al vector principal
@@ -143,7 +161,7 @@ void GameMode::update() {
     Dinero[3].setPosition(1170.65f, 585.5f);
 
 
-
+    
     float duracionMovimiento = 0.5f;  
 
      
@@ -155,6 +173,8 @@ void GameMode::update() {
     Dado.start(1280, 720); 
     int DadoResul=0;
     
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        //z
 
 
     while (window->isOpen()) {
@@ -308,8 +328,17 @@ void GameMode::DrawGameRuleta() {
 }
 
 void GameMode::DrawGame() {
+
+    
+    hh
+
+
+
+
     window->setView(window->getDefaultView()); 
     
+
+
     window->clear();
 
     window->draw(spriteFondoGame);

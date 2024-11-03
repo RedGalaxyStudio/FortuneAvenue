@@ -1,21 +1,2 @@
-﻿  ButtonG.cpp
-  Cinematic.cpp
-  Client.cpp
-  GameMode.cpp
-  IniciarPartida.cpp
-  IniciaUser.cpp
-  main.cpp
-  menuP.cpp
-  MovePieces.cpp
-  ObjetosGlobal.cpp
-  PieceSelector.cpp
-  ResourceGame.cpp
-  Ruleta.cpp
-  Scrollbar.cpp
-  SettingsManager.cpp
-  TextBox.cpp
-  ResourceGlobal.cpp
-  VolumeSlider.cpp
-  WebViewManager.cpp
-  Generando código...
-  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
+﻿  Client.cpp
+  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
