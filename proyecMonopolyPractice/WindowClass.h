@@ -189,9 +189,13 @@ public :
 					ok = 1;
 					clock.restart();
 					//std::cout << "eventStarted: " << eventStarted << std::endl;
-					do{
-						faceIndex = client->lastRollResult;
-					} while (espera == false);
+					std::unique_lock<std::mutex> lock(client->mtx);
+					client->cv.wait(lock, [] { return espera; }); // Espera hasta que `espera` sea `true`
+
+					// Asigna el resultado una vez que `espera` es true
+					faceIndex = client->lastRollResult;
+
+					std::cout <<"\nResultado en clase dado:" << faceIndex<<"\n";
 					espera = false;
 			}
 			

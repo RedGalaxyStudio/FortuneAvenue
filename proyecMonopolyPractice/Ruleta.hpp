@@ -19,7 +19,8 @@ private:
     sf::RenderTexture renderTexture2; 
 
     bool turno;
-
+    float initialSpeed;
+    float decelerationRate;
     sf::CircleShape textureCircule1;
     sf::CircleShape textureCircule2;
 

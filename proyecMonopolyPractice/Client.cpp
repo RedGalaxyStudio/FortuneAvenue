@@ -2,55 +2,76 @@
 
 Client::Client() : client(nullptr), peer(nullptr), running(false), lastRollResult(0) {}
 
-std::string generateRoomCode() {
+std::string generateRoomCode()
+{
     std::string code;
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(0, 9);
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i)
+    {
         code += std::to_string(dist(mt));
     }
 
     return code;
 }
 
-Client::~Client() {
+Client::~Client()
+{
     disconnect();
-    if (client) {
+    if (client)
+    {
         enet_host_destroy(client);
     }
     enet_deinitialize();
 }
 
-bool Client::initialize() {
-    if (enet_initialize() != 0) {
-        std::cerr << "Error initializing ENet!" << std::endl;
-        return false;
+bool Client::initialize()
+{
+    static bool enetInitialized = false;
+    if (!enetInitialized)
+    {
+        if (enet_initialize() != 0)
+        {
+            std::cerr << "Error initializing ENet!" << std::endl;
+            return false;
+        }
+        enetInitialized = true;
     }
 
-    client = enet_host_create(nullptr, 1, 2, 0, 0);
-    if (!client) {
-        std::cerr << "Error creating ENet client!" << std::endl;
-        return false;
+    // Solo crear cliente si no existe
+    if (!client)
+    {
+        client = enet_host_create(nullptr, 1, 2, 0, 0);
+        if (!client)
+        {
+            std::cerr << "Error creating ENet client!" << std::endl;
+            return false;
+        }
     }
     return true;
 }
 
-void Client::run() {
+void Client::run()
+{
     running = true;
-    while (running) {
+    while (running)
+    {
         ENetEvent event;
-        while (enet_host_service(client, &event, 100) > 0) {
-            switch (event.type) {
-            case ENET_EVENT_TYPE_RECEIVE: {
-                std::string message(reinterpret_cast<char*>(event.packet->data), event.packet->dataLength);
-                handleServerMessage(message);  // Manejar el mensaje recibido
+        while (enet_host_service(client, &event, 100) > 0)
+        {
+            switch (event.type)
+            {
+            case ENET_EVENT_TYPE_RECEIVE:
+            {
+                std::string message(reinterpret_cast<char *>(event.packet->data), event.packet->dataLength);
+                handleServerMessage(message); // Manejar el mensaje recibido
                 enet_packet_destroy(event.packet);
                 break;
             }
             case ENET_EVENT_TYPE_DISCONNECT:
-                std::cout << "Disconnected from server!" << std::endl;
+                //      std::cout << "Disconnected from server!" << std::endl;
                 running = false;
                 break;
             default:
@@ -60,31 +81,85 @@ void Client::run() {
     }
 }
 
-bool Client::connectToServer(const std::string& address, uint16_t port) {
+bool Client::connectToServer(const std::string &address, uint16_t port)
+{
+    // Si ya estï¿½ conectado, desconectarse primero
+    if (isConnected)
+    {
+        //   std::cerr << "Already connected, disconnecting first..." << std::endl;
+        disconnect(); // Llamamos a disconnect para desconectar primero
+    }
+
     ENetAddress enetAddress;
     enet_address_set_host(&enetAddress, address.c_str());
     enetAddress.port = port;
 
+    // Conectar al servidor
     peer = enet_host_connect(client, &enetAddress, 2, 0);
-    if (!peer) {
-        std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
+    if (!peer)
+    {
+        // std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
         return false;
     }
 
     ENetEvent event;
-    if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
-        std::cout << "Connected to server!" << std::endl;
-        clientThread = std::thread(&Client::run, this);
-        return true;
+    const int maxRetries = 10;
+    const int retryDelay = 10;
+    int totalTimeWaited = 0;
+
+    // Intentar conectar
+    for (int i = 0; i < maxRetries; ++i)
+    {
+        if (enet_host_service(client, &event, retryDelay) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+        {
+            //   std::cout << "Connected to server!" << std::endl;
+            isConnected = true;
+            clientThread = std::thread(&Client::run, this); // Iniciar el hilo
+            return true;
+        }
+        totalTimeWaited += retryDelay;
+        if (totalTimeWaited >= 100)
+            break;
     }
-    else {
-        std::cerr << "Failed to connect to server." << std::endl;
-        return false;
-    }
+
+    // std::cerr << "Failed to connect to server within 0.1 seconds." << std::endl;
+    enet_peer_reset(peer); // Limpiar la conexiï¿½n si falla
+    return false;
 }
 
-std::string Client::createRoom() {
-    if (!peer) {
+void Client::disconnect()
+{
+    if (!isConnected)
+        return; // Si no estï¿½ conectado, no hace nada
+
+    // Desconectar y liberar recursos
+    if (peer)
+    {
+        enet_peer_disconnect(peer, 0);
+        peer = nullptr;
+    }
+
+    running = false; // Detener el hilo de ejecuciï¿½n
+    if (clientThread.joinable())
+    {
+        clientThread.join(); // Esperar a que termine el hilo
+    }
+
+    // Destruir el cliente y liberar recursos
+    if (client)
+    {
+        enet_host_destroy(client);
+        client = nullptr;
+    }
+
+    isConnected = false; // Actualizar estado de la conexiï¿½n
+    std::cout << "Disconnected from server!" << std::endl;
+}
+
+std::string Client::createRoom(const std::string &username, const std::string &filename)
+{
+    if (!peer)
+    {
         std::cerr << "Client is not connected to a server!" << std::endl;
         return "No";
     }
@@ -92,75 +167,88 @@ std::string Client::createRoom() {
     std::string roomCode = generateRoomCode();
     std::cout << "Room created with code: " << roomCode << std::endl;
     playerIndex = 0;
-    std::string message = "CREATE_ROOM:" + roomCode;
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-    enet_peer_send(peer, 0, packet);
+
+    std::vector<char> imageData = loadImage(filename);
+    if (imageData.empty())
+    {
+        std::cerr << "Failed to load image!" << std::endl;
+    }
+
+    // Crear el mensaje que incluye roomCode y username
+    std::string prefix = "CREATE_ROOM:" + roomCode + ":" + username + ":";
+    std::vector<char> packetData(prefix.begin(), prefix.end());
+
+    // Aï¿½adir los datos de la imagen al paquete
+    packetData.insert(packetData.end(), imageData.begin(), imageData.end());
+
+    // Crear el paquete ENet
+    ENetPacket *packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+    if (enet_peer_send(peer, 0, packet) < 0)
+    {
+        std::cerr << "Failed to send the packet!" << std::endl;
+        enet_packet_destroy(packet);
+    }
+
     enet_host_flush(client);
 
     return roomCode;
 }
 
-bool Client::joinRoom(const std::string& roomCode) {
-    if (!peer) {
-        std::cerr << "Client is not connected to a server!" << std::endl;
-        return false;
-    }
-
-    std::string message = "JOIN_ROOM:" + roomCode;
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-    enet_peer_send(peer, 0, packet);
-    enet_host_flush(client);
-
-    return true;
-}
-
-bool Client::sendImage(const std::string& filename) {
-
-    std::cout << "\nEJEcuto imagen 1";
-    if (!peer) {
+bool Client::joinRoom(const std::string &roomCode, const std::string &username, const std::string &filename)
+{
+    if (!peer)
+    {
         std::cerr << "Client is not connected to a server!" << std::endl;
         return false;
     }
 
     std::vector<char> imageData = loadImage(filename);
-    if (imageData.empty()) {
+    if (imageData.empty())
+    {
         std::cerr << "Failed to load image!" << std::endl;
         return false;
     }
 
-    std::string prefix = "SEND_IMAGE:";
+    // Crear el mensaje que incluye roomCode y username
+    std::string prefix = "JOIN_ROOM:" + roomCode + ":" + username + ":";
     std::vector<char> packetData(prefix.begin(), prefix.end());
+
+    // Aï¿½adir los datos de la imagen al paquete
     packetData.insert(packetData.end(), imageData.begin(), imageData.end());
 
-    ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
-    if (enet_peer_send(peer, 0, packet) < 0) {
+    // Crear el paquete ENet
+    ENetPacket *packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+    if (enet_peer_send(peer, 0, packet) < 0)
+    {
         std::cerr << "Failed to send the packet!" << std::endl;
         enet_packet_destroy(packet);
         return false;
     }
+
     enet_host_flush(client);
+    return true;
+}
+
+bool Client::sendImage(const std::string &filename)
+{
+
+    std::cout << "\nEJEcuto imagen 1";
+    if (!peer)
+    {
+        std::cerr << "Client is not connected to a server!" << std::endl;
+        return false;
+    }
 
     std::cout << "Image sent!" << std::endl;
     std::cout << "\nEJEcuto imagen 2";
     return true;
-
-
 }
 
-void Client::disconnect() {
-    if (peer) {
-        enet_peer_disconnect(peer, 0);
-        peer = nullptr;
-    }
-    running = false;
-    if (clientThread.joinable()) {
-        clientThread.join();
-    }
-}
-
-std::vector<char> Client::loadImage(const std::string& filename) {
+std::vector<char> Client::loadImage(const std::string &filename)
+{
     std::ifstream file(filename, std::ios::binary);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Failed to open the image file!" << std::endl;
         return {};
     }
@@ -170,97 +258,129 @@ std::vector<char> Client::loadImage(const std::string& filename) {
     return buffer;
 }
 
-// Nueva función para solicitar tirada de dados
-void Client::rollDice() {
-    if (!peer) {
+// Nueva funciï¿½n para solicitar tirada de dados
+void Client::rollDice()
+{
+    if (!peer)
+    {
         std::cerr << "Client is not connected to a server!" << std::endl;
     }
 
     std::string message = "ROLL_DICE";
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(peer, 0, packet);
     enet_host_flush(client);
 }
 
-
-void Client::playerChangedPiece() {
+void Client::playerChangedPiece()
+{
     std::string message = "SELECTING_PIECE:" + std::to_string(playerInfos[0].indexPiece);
     std::cout << "\nSELECTING_PIECE:" << playerInfos[0].indexPiece;
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(peer, 0, packet);
     enet_host_flush(client);
 }
 
-
-void Client::ReadyPlayer() {
-    if (!peer) {
+void Client::ReadyPlayer()
+{
+    if (!peer)
+    {
         std::cerr << "Client is not connected to a server!" << std::endl;
     }
 
     std::string message = "PLAYER_READY";
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(peer, 0, packet);
     enet_host_flush(client);
-
 }
 
-
-
-
-
-
 // Manejar mensajes recibidos del servidor
-void Client::handleServerMessage(const std::string& message) {
-    if (message.rfind("YOUR_TURN", 0) == 0) {
+void Client::handleServerMessage(const std::string &message)
+{
+    if (message.rfind("YOUR_TURN", 0) == 0)
+    {
         std::cout << "It's your turn!" << std::endl;
-        // Aquí el jugador puede decidir llamar a rollDice
+        // Aquï¿½ el jugador puede decidir llamar a rollDice
     }
-    else if (message.rfind("TURN_RESULT:", 0) == 0) {
-        std::cout << "\nEJEcu turn 1";
-        int diceRoll = std::stoi(message.substr(12)); // Lee el resultado después de "TURN_RESULT:"
-        lastRollResult = diceRoll;
-        espera = true;
-        std::cout << "Dice roll result: " << diceRoll << std::endl;
+    else if (message.rfind("ROLL_RESULT:", 0) == 0)
+    {
+        std::cout << "\nEjecuciï¿½n de ROLL_RESULT";
+
+        // Extrae `currentPlayerIndex` y `dado` del mensaje.
+        size_t playerIndexPos = message.find(":PLAYER_INDEX:") + std::string(":PLAYER_INDEX:").length();
+        size_t dicePos = message.find(":DICE:", playerIndexPos);
+
+        if (playerIndexPos != std::string::npos && dicePos != std::string::npos)
+        {
+            int currentPlayerIndex = std::stoi(message.substr(playerIndexPos, dicePos - playerIndexPos));
+            int diceRoll = std::stoi(message.substr(dicePos + std::string(":DICE:").length()));
+
+            lastRollResult = diceRoll;
+
+            {
+                std::lock_guard<std::mutex> lock(mtx);
+                espera = true; // Cambia espera a true
+            }
+
+            cv.notify_one(); // Notifica a cualquier hilo en espera
+
+            std::cout << "\nResultado en clase cliente:" << lastRollResult;
+            std::cout << "\nDice roll result: " << diceRoll << " para jugador con ï¿½ndice: " << currentPlayerIndex << std::endl;
+        }
+        else
+        {
+            std::cerr << "Formato del mensaje ROLL_RESULT incorrecto" << std::endl;
+        }
     }
-    else if (message == "NOT_YOUR_TURN") {
+
+    else if (message == "NOT_YOUR_TURN")
+    {
 
         std::cout << "Wait for your turn!" << std::endl;
-
     }
-    else if (message.rfind("PLAYER_INDEX:", 0) == 0) {
+    else if (message.rfind("PLAYER_INDEX:", 0) == 0)
+    {
         std::cout << "\nEJEcuto playerindex1";
-        // Extraer el índice del jugador
+        // Extraer el ï¿½ndice del jugador
         std::string indexStr = message.substr(std::string("PLAYER_INDEX:").length());
         playerIndex = std::stoi(indexStr);
 
+        // Aquï¿½ puedes realizar la lï¿½gica que necesites con el ï¿½ndice del jugador
+        std::cout << "Tu ï¿½ndice de jugador es: " << playerIndex << std::endl;
+        std::cout << "\nEJEcuto playerindex2";
 
-        // Aquí puedes realizar la lógica que necesites con el índice del jugador
-        std::cout << "Tu índice de jugador es: " << playerIndex << std::endl;
+        // Aquï¿½ puedes realizar la lï¿½gica que necesites con el ï¿½ndice del jugador
+        std::cout << "Tu ï¿½ndice de jugador es: " << playerIndex << std::endl;
         std::cout << "\nEJEcuto playerindex2";
     }
-    else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
-        // Eliminar el prefijo "EXISTING_PLAYER:"
-        if (message.length() < 16) {
+    else if (message.rfind("NEW_PLAYER:", 0) == 0)
+    {
+        // Eliminar el prefijo "NEW_PLAYER:"
+        if (message.length() < 11)
+        { // 11 es la longitud de "NEW_PLAYER:"
             std::cout << "\nEJEcuto toy mal";
             return;
         }
         std::cout << "\nEJEcuto existen1";
-        std::string data = message.substr(16);
+        std::string data = message.substr(11); // Obtener los datos sin el prefijo
 
         // Dividir la cadena de datos en partes usando ":" como delimitador
         std::istringstream iss(data);
-        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
+        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imageStr;
 
         if (std::getline(iss, username, ':') &&
             std::getline(iss, indexStr, ':') &&
             std::getline(iss, moneyStr, ':') &&
             std::getline(iss, isSelectingStr, ':') &&
-            std::getline(iss, isInGameStr, ':')) {
-            // Todos los valores se han leído correctamente
+            std::getline(iss, isInGameStr, ':') &&
+            std::getline(iss, imageStr))
+        {
+            // Todos los valores se han leï¿½do correctamente
         }
-        else {
+        else
+        {
             std::cout << "\nEJEcuto toy remal";
-
+            return;
         }
 
         int index;
@@ -270,111 +390,251 @@ void Client::handleServerMessage(const std::string& message) {
 
         std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
 
-        // Convertir el índice y el dinero a sus tipos apropiados
-        try {
+        // Convertir el ï¿½ndice y el dinero a sus tipos apropiados
+        try
+        {
             index = std::stoi(indexStr);
             money = std::stoi(moneyStr);
             isSelecting = (isSelectingStr == "true");
             isInGame = (isInGameStr == "true");
         }
-        catch (const std::invalid_argument& e) {
-            // Manejar el error (el valor no es un número)
+        catch (const std::invalid_argument &e)
+        {
+            // Manejar el error (el valor no es un nï¿½mero)
             std::cout << "\nEJEcuto no sirvo";
             return;
         }
-        catch (const std::out_of_range& e) {
-            // Manejar el error (el número está fuera del rango)
+        catch (const std::out_of_range &e)
+        {
+            // Manejar el error (el nï¿½mero estï¿½ fuera del rango)
             std::cout << "\nEJEcuto no 98989";
             return;
         }
         std::cout << "\nEJEcuto existen3";
-        if (playerIndex != 0) {
+
+        if (playerIndex != 0)
+        {
 
             index = (index - playerIndex + 4) % 4;
-
         }
 
-
-        // Asegurarse de que el índice esté dentro de los límites
-        if (index >= 0 && index < playerInfos.size()) {
+        // Asegurarse de que el ï¿½ndice estï¿½ dentro de los lï¿½mites
+        if (index >= 0 && index < playerInfos.size())
+        {
             std::cout << "\nEJEcuto existen6";
-            // Actualizar la información del jugador en la posición correspondiente
+            // Actualizar la informaciï¿½n del jugador en la posiciï¿½n correspondiente
             playerInfos[index].username = username;
             playerInfos[index].money = money;
             playerInfos[index].isSelectingPiece = isSelecting;
             playerInfos[index].isInGame = isInGame;
 
-            // Imprimir la información del jugador
+            // Procesar la imagen
+            std::vector<char> image(imageStr.begin(), imageStr.end());
+            playerInfos[index].image = image;
+
+            // Cargar la textura del avatar
+            playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
+            playersGame[index].NamePlayer.setString(playerInfos[index].username);
+
+            // Imprimir la informaciï¿½n del jugador
             std::cout << "Player " << index << ": " << username
-                << " | Money: " << money
-                << " | Is Selecting: " << (isSelecting ? "Yes" : "No")
-                << " | Is In Game: " << (isInGame ? "Yes" : "No")
-                << std::endl;
+                      << " | Money: " << money
+                      << " | Is Selecting: " << (isSelecting ? "Yes" : "No")
+                      << " | Is In Game: " << (isInGame ? "Yes" : "No")
+                      << std::endl;
 
             std::cout << "\nEJEcuto existen4";
         }
-        else {
+        else
+        {
             std::cerr << "Error: Index out of bounds for player information." << std::endl;
         }
 
         std::cout << "\nEJEcuto existen2";
     }
-    else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
-        std::cout << "\nEJEcuto index1";
-        std::cout << "\nMensaje recibido: " << message;
-        std::string indexStr;
-        std::string pieceIndexStr;
-        try {
-            // Encontrar las posiciones de los delimitadores ":" en el mensaje
-            size_t firstColon = message.find(":", 20);   // Buscar el primer ":" después del prefijo
-            size_t secondColon = message.find(":", firstColon + 1); // Buscar el segundo ":" después del primero
+    else if (message.rfind("EXISTING_PLAYER:", 0) == 0)
+    {
+        // Eliminar el prefijo "EXISTING_PLAYER:"
+        if (message.length() < 16)
+        {
+            std::cout << "\nEJEcuto toy mal";
+            return;
+        }
+        std::cout << "\nEJEcuto existen1";
+        std::string data = message.substr(16);
+        //
+        // Dividir la cadena de datos en partes usando ":" como delimitador
+        std::istringstream iss(data);
+        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imageStr;
+//
+        if (std::getline(iss, username, ':') &&
+            std::getline(iss, indexStr, ':') &&
+            std::getline(iss, moneyStr, ':') &&
+            std::getline(iss, isSelectingStr, ':') &&
+            std::getline(iss, isInGameStr, ':'))
+        {
+//
+            if (std::getline(iss, username, ':') &&
+                std::getline(iss, indexStr, ':') &&
+                std::getline(iss, moneyStr, ':') &&
+                std::getline(iss, isSelectingStr, ':') &&
+                std::getline(iss, isInGameStr, ':') &&
+                std::getline(iss, imageStr))
+            {
 
-            if (firstColon == std::string::npos || secondColon == std::string::npos) {
-                std::cerr << "Error: Formato de mensaje inesperado. Faltan delimitadores." << std::endl;
+                // Todos los valores se han leï¿½do correctamente
+            }
+            else
+            {
+                std::cout << "\nEJEcuto toy remal";
+            }
+//
+            int index;
+            int money;
+            bool isSelecting;
+            bool isInGame;
+
+            std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
+
+            // Convertir el ï¿½ndice y el dinero a sus tipos apropiados
+            try
+            {
+
+                index = std::stoi(indexStr);
+                money = std::stoi(moneyStr);
+                isSelecting = (isSelectingStr == "true");
+                isInGame = (isInGameStr == "true");
+
+                index = std::stoi(indexStr);
+                money = std::stoi(moneyStr);
+                isSelecting = (isSelectingStr == "true");
+                isInGame = (isInGameStr == "true");
+            }
+            catch (const std::invalid_argument &e)
+            {
+                // Manejar el error (el valor no es un nï¿½mero)
+                std::cout << "\nEJEcuto no sirvo";
                 return;
             }
+            catch (const std::out_of_range &e)
+            {
+                // Manejar el error (el nï¿½mero estï¿½ fuera del rango)
+                std::cout << "\nEJEcuto no 98989";
+                return;
+            }
+            std::cout << "\nEJEcuto existen3";
 
-            // Extraer las subcadenas correspondientes al índice del jugador y al índice de la pieza
-            indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
-            pieceIndexStr = message.substr(secondColon + 1);
+            if (playerIndex != 0)
+            {
 
-            // Mostrar los valores extraídos para depuración
-            std::cout << "\nindexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'";
+                index = (index - playerIndex + 4) % 4;
+            }
 
-            // Convertir los valores a enteros
-            int Index = std::stoi(indexStr);
-            int indexselectinpiece = std::stoi(pieceIndexStr);
+            std::vector<char> image(imageStr.begin(), imageStr.end());
 
-            // Ajustar el índice del jugador
-            Index = (Index - playerIndex + 4) % 4;
-            CplayerIndex = Index;
+            // Asegurarse de que el ï¿½ndice estï¿½ dentro de los lï¿½mites
+            if (index >= 0 && index < playerInfos.size())
+            {
+                std::cout << "\nEJEcuto existen6";
+                // Actualizar la informaciï¿½n del jugador en la posiciï¿½n correspondiente
+                playerInfos[index].username = username;
+                playerInfos[index].money = money;
+                playerInfos[index].isSelectingPiece = isSelecting;
+                playerInfos[index].isInGame = isInGame;
+                playerInfos[index].image = image;
 
-            // Actualizar la información en el cliente
-            std::cout << "Player " << playerIndex << " seleccionó la pieza con índice " << indexselectinpiece << std::endl;
-            playerInfos[Index].indexPiece = indexselectinpiece;
-            std::cout << "\nEJEcuto index 2";
+                std::vector<char> &imageData = playerInfos[index].image;
+
+                playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());
+                playersGame[index].NamePlayer.setString(playerInfos[index].username);
+
+                // Imprimir la informaciï¿½n del jugador
+                std::cout << "Player " << index << ": " << username
+                          << " | Money: " << money
+                          << " | Is Selecting: " << (isSelecting ? "Yes" : "No")
+                          << " | Is In Game: " << (isInGame ? "Yes" : "No")
+                          << std::endl;
+
+                std::cout << "\nEJEcuto existen4";
+            }
+            else
+            {
+                std::cerr << "Error: Index out of bounds for player information." << std::endl;
+            }}
+
+            std::cout << "\nEJEcuto existen2";
         }
-        catch (const std::invalid_argument& e) {
-            std::cerr << "\nError: Argumento no válido al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+        else if (message.rfind("PLAYER_COUNT:", 0) == 0)
+        {
+            // Extraer la cantidad de jugadores de la mensaje
+            std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
+            int playerCount = std::stoi(playerCountStr);
+            NumPlayers = playerCount;
         }
-        catch (const std::out_of_range& e) {
-            std::cerr << "\nError: Número fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+        else
+
+            if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0)
+        {
+            std::cout << "\nEJEcuto index1";
+            std::cout << "\nMensaje recibido: " << message;
+            std::string indexStr;
+            std::string pieceIndexStr;
+            try
+            {
+                // Encontrar las posiciones de los delimitadores ":" en el mensaje
+                size_t firstColon = message.find(":", 20);              // Buscar el primer ":" despuï¿½s del prefijo
+                size_t secondColon = message.find(":", firstColon + 1); // Buscar el segundo ":" despuï¿½s del primero
+
+                if (firstColon == std::string::npos || secondColon == std::string::npos)
+                {
+                    std::cerr << "Error: Formato de mensaje inesperado. Faltan delimitadores." << std::endl;
+                    return;
+                }
+
+                // Extraer las subcadenas correspondientes al ï¿½ndice del jugador y al ï¿½ndice de la pieza
+                indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
+                pieceIndexStr = message.substr(secondColon + 1);
+
+                // Mostrar los valores extraï¿½dos para depuraciï¿½n
+                std::cout << "\nindexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'";
+
+                // Convertir los valores a enteros
+                int Index = std::stoi(indexStr);
+                int indexselectinpiece = std::stoi(pieceIndexStr);
+
+                // Ajustar el ï¿½ndice del jugador
+                Index = (Index - playerIndex + 4) % 4;
+                CplayerIndex = Index;
+
+                // Actualizar la informaciï¿½n en el cliente
+                std::cout << "Player " << playerIndex << " seleccionï¿½ la pieza con ï¿½ndice " << indexselectinpiece << std::endl;
+                playerInfos[Index].indexPiece = indexselectinpiece;
+                std::cout << "\nEJEcuto index 2";
+            }
+            catch (const std::invalid_argument &e)
+            {
+                std::cerr << "\nError: Argumento no vï¿½lido al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+            }
+            catch (const std::out_of_range &e)
+            {
+                std::cerr << "\nError: Nï¿½mero fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+            }
+        }
+        else if (message.rfind("PLAYER_READY:", 0) == 0)
+        {
+            // Extraer el indexPlayer del mensaje
+            int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
+            indexPlayer = (indexPlayer - playerIndex + 4) % 4;
+            playerInfos[indexPlayer].isSelectingPiece = true;
+
+            // Ahora puedes usar indexPlayer para actualizar el estado del jugador en el cliente
+            std::cout << "Jugador " << indexPlayer << " estï¿½ listo." << std::endl;
+
+            // Realiza cualquier acciï¿½n adicional para indicar que este jugador estï¿½ listo,
+            // como actualizar el estado en la interfaz de usuario.
+        }
+        else
+        {
+            std::cerr << "Unknown message received from server: " << message << std::endl;
         }
     }
-    else if (message.rfind("PLAYER_READY:", 0) == 0) {
-        // Extraer el indexPlayer del mensaje
-        int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
-        indexPlayer = (indexPlayer - playerIndex + 4) % 4;
-        playerInfos[indexPlayer].isSelectingPiece = true;
-
-        // Ahora puedes usar indexPlayer para actualizar el estado del jugador en el cliente
-        std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
-
-        // Realiza cualquier acción adicional para indicar que este jugador está listo,
-        // como actualizar el estado en la interfaz de usuario.
-
-    }
-    else {
-        std::cerr << "Unknown message received from server: " << message << std::endl;
-    }
-}

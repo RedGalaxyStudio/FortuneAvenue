@@ -12,11 +12,9 @@
 #include <atomic>
 #include <string>
 #include <sstream>
-
 #include <random>
-
-
-
+#include <condition_variable>
+#include <mutex>
 
 class Client {
 public:
@@ -24,8 +22,8 @@ public:
     ~Client();
     void run();
     bool initialize();
-    std::string createRoom();
-    bool joinRoom(const std::string& roomCode);
+    std::string createRoom(const std::string& username, const std::string& filename);
+    bool joinRoom(const std::string& roomCode, const std::string& username, const std::string& filename);
     bool connectToServer(const std::string& address, uint16_t port);
     bool sendImage(const std::string& filename);
     void disconnect();
@@ -34,14 +32,20 @@ public:
     int lastRollResult;  
     void playerChangedPiece();
     void ReadyPlayer();
-private:
+    ENetPeer* peer; 
+    std::atomic<bool> running; 
+    bool isConnected;
     ENetHost* client;
-    ENetPeer* peer;
+    std::mutex mtx;
+    std::condition_variable cv;
+private:
+    
+    
     int playerIndex;
     std::vector<char> loadImage(const std::string& filename);
   
     std::thread clientThread; 
-    std::atomic<bool> running; 
+
 };
 
 #endif

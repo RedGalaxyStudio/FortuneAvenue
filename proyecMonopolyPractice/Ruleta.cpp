@@ -1,5 +1,6 @@
 #include "Ruleta.hpp"
 #include "ResourceGame.hpp"
+#include <cstdlib> // Para rand() y RAND_MAX
 
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY)
@@ -66,6 +67,10 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
             //std::cout << "El rotationSpeed * deltaTime: " << rotationSpeed * deltaTime << std::endl;
         }
         turno = false;
+        // Variables para variaciones aleatorias
+        initialSpeed = static_cast<float>(rand() % 100 + 400); // Velocidad inicial aleatoria entre 400 y 500
+        decelerationRate = static_cast<float>(rand() % 20 + 40); // Desaceleración aleatoria entre 40 y 60
+
         rotationSpeed = (isSpinning) ? 300.0f : 0.0f;
         clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
     }
@@ -79,11 +84,10 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
         lightClock.restart();
     }
 
+
+
     // Rotar la ruleta
     if (isSpinning) {
-
-       // particleSystem.addParticle(ruletaBase.getPosition());
-
         currentRotation += rotationSpeed * deltaTime; // Aumenta el ángulo de rotación
         std::cout << "El currentRotation: " << currentRotation << std::endl;
 
@@ -94,29 +98,33 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
         // Rota cada segmento de la ruleta
         for (auto& segment : segments) {
             segment.rotate(rotationSpeed * deltaTime);
-      
         }
 
         // Actualizar la posición de los íconos para que roten junto con la ruleta
         for (int i = 0; i < numSegments; ++i) {
             float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
             icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
-            std::cout << "El rotationSpeed * deltaTime: " << rotationSpeed << std::endl;
+
             if (rotationSpeed == 0.0f) {
                 isSpinning = false;
             }
             icons[i].rotate(rotationSpeed * deltaTime);
-
         }
 
-        // Incrementa la velocidad inicialmente para que la ruleta gane velocidad
-        if (rotationSpeed < 500.0f) {
+        // Aumenta la velocidad inicialmente para que la ruleta gane velocidad
+        if (rotationSpeed < initialSpeed) {
             rotationSpeed += 10.0f * deltaTime; // Aceleración inicial
         }
 
-        // Disminuye gradualmente la velocidad
-        rotationSpeed = std::max(rotationSpeed - 50.0f * deltaTime, 0.0f); // Disminuye más lentamente
- 
+        // Disminuye gradualmente la velocidad con una tasa aleatoria en cada giro
+        rotationSpeed = std::max(rotationSpeed - decelerationRate * deltaTime, 0.0f);
+
+        // Verifica si el giro ha terminado y reinicia valores
+        if (rotationSpeed == 0.0f) {
+            isSpinning = false;
+            initialSpeed = static_cast<float>(rand() % 100 + 400); // Nueva velocidad inicial aleatoria para el próximo giro
+            decelerationRate = static_cast<float>(rand() % 20 + 40); // Nueva tasa de desaceleración aleatoria para el próximo giro
+        }
     }
 
     float segmentAngle = 360.0f / numSegments; // Cada segmento cubre este ángulo
@@ -187,6 +195,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
 
         window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
         window.draw(CentroCircule);
+      //  std::cout << "\nruleta icon2";
         window.draw(icons[currentSegment]);
     }
     else if (!isSpinning && resultado == true) {
@@ -202,7 +211,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
             renderTexture1.draw(segment); // Dibuja el sprite con shader1
 
         }
-        particleSystem.addParticle(ruletaBase.getPosition(), fillColor);
+        particleSystem.addParticle(ruletaBase.getPosition(), fillColor, 50.0f);
         particleSystem.update(deltaTime);
         particleSystem.draw(window);
 
@@ -219,6 +228,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime,bool Validar) {
 
         icons[currentSegment].setPosition(centerX, centerY);
         muerte = true;
+    //    std::cout << "\nruleta icon1";
         window.draw(icons[currentSegment]);
         
 

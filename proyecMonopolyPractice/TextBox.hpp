@@ -17,7 +17,7 @@ public:
     void Prinf();
     std::string Actu();
 private:
-
+    std::string input;
     float x, y;
     sf::Text textoPregunta;
     sf::Text textoGuardado;

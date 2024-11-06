@@ -38,21 +38,25 @@ class ParticleSystem {
 public:
     std::vector<Particle> particles;
 
-    void addParticle(const sf::Vector2f& position,sf::Color Jose) {
-        // Añadir varias partículas al sistema con diferentes velocidades y duraciones
-        for (int i = 0; i < 50; ++i) { // Ajusta la cantidad de partículas
-           // sf::Vector2f velocity(static_cast<float>(rand() % 200 - 100), static_cast<float>(rand() % 200 - 100)); // Velocidad aleatoria
+    void addParticle(const sf::Vector2f& position, sf::Color color, float startRadius) {
+        for (int i = 0; i < 50; ++i) {
+            // Generar un ángulo aleatorio entre 0 y 2*PI
             float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 2 * 3.14159f;
 
-            // Genera una velocidad aleatoria, opcionalmente dentro de un rango
+            // Generar una velocidad aleatoria
             float speed = static_cast<float>(rand() % 100 + 50);
 
-            // Calcula las componentes X e Y de la velocidad usando coseno y seno
+            // Calcular la posición inicial en un radio alrededor del punto central
+            sf::Vector2f offset(cos(angle) * startRadius, sin(angle) * startRadius);
+            sf::Vector2f initialPosition = position + offset;
+
+            // Calcular la velocidad en la dirección del ángulo
             sf::Vector2f velocity(cos(angle) * speed, sin(angle) * speed);
 
-            particles.emplace_back(position, velocity, 5.0f, 3.0f, Jose); // Lifetime de 2 segundos y tamaño de 3px
+            particles.emplace_back(initialPosition, velocity, 5.0f, 3.0f, color);
         }
     }
+
 
     void update(float dt) {
         for (auto& particle : particles) {

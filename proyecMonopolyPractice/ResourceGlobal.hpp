@@ -16,7 +16,7 @@ extern sf::Texture sharedTexture;
 extern sf::Texture Texrecua;
 extern sf::Sprite recua;
 extern std::string nombre;
-extern std::string input;
+extern std::string input1;
 extern sf::Texture TextureFondoMenu;
 extern sf::Cursor normalCursor;
 extern sf::Cursor linkCursor;

@@ -14,7 +14,7 @@ sf::Cursor moveCursor;
 sf::SoundBuffer HoverBuffer;
 sf::SoundBuffer ClickBuffer;
 std::string nombre;
-std::string input;
+std::string input1;
 sf::Sound HoverSound;  
 sf::Sound ClickSound;  
 sf::Cursor* currentCursor;

@@ -47,7 +47,7 @@
         sf::Sprite pieces;
 
         sf::Clock TempoAnimacion;
-
+        bool animacionIniciada;
         Window Dado;
         sf::Clock clock;
 
@@ -72,7 +72,6 @@
 
         sf::Texture TextureArrowArriba;
 
-        std::vector<sf::Text> Dinero;
-        int money[4];
+
     };
 #endif

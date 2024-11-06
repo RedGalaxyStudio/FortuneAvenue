@@ -16,7 +16,7 @@ std::string Code;
 sf::Sprite SpriteArrowDer;
 bool muerte;
 sf::Sprite SpriteArrowArriba;
-
+bool server;
 
 std::string username;
 std::vector<char> image; // Store image data directly.
