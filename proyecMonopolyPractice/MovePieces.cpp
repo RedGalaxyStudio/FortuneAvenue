@@ -169,7 +169,7 @@ void MovePieces::updateCAmbioCasilla() {
 
             window->draw(SpriteArrowIzq);
             window->draw(SpriteArrowDer);
-            if((*casillas).size() == 5){
+            if((*casillas).size() == 4){
                 window->draw(SpriteArrowArriba);
             }
         

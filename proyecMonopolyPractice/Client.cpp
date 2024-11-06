@@ -1,6 +1,6 @@
 #include "Client.hpp"
 
-Client::Client() : client(nullptr), peer(nullptr), running(false) ,lastRollResult(0){}
+Client::Client() : client(nullptr), peer(nullptr), running(false), lastRollResult(0) {}
 
 std::string generateRoomCode() {
     std::string code;
@@ -184,7 +184,7 @@ void Client::rollDice() {
 
 
 void Client::playerChangedPiece() {
-    std::string message = "SELECTING_PIECE:"+ std::to_string(playerInfos[0].indexPiece);
+    std::string message = "SELECTING_PIECE:" + std::to_string(playerInfos[0].indexPiece);
     std::cout << "\nSELECTING_PIECE:" << playerInfos[0].indexPiece;
     ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(peer, 0, packet);
@@ -213,7 +213,7 @@ void Client::ReadyPlayer() {
 void Client::handleServerMessage(const std::string& message) {
     if (message.rfind("YOUR_TURN", 0) == 0) {
         std::cout << "It's your turn!" << std::endl;
-        // Aquí el jugador puede decidir llamar a `rollDice`
+        // Aquí el jugador puede decidir llamar a rollDice
     }
     else if (message.rfind("TURN_RESULT:", 0) == 0) {
         std::cout << "\nEJEcu turn 1";
@@ -229,14 +229,14 @@ void Client::handleServerMessage(const std::string& message) {
     }
     else if (message.rfind("PLAYER_INDEX:", 0) == 0) {
         std::cout << "\nEJEcuto playerindex1";
-            // Extraer el índice del jugador
-            std::string indexStr = message.substr(std::string("PLAYER_INDEX:").length());
-            playerIndex = std::stoi(indexStr);
+        // Extraer el índice del jugador
+        std::string indexStr = message.substr(std::string("PLAYER_INDEX:").length());
+        playerIndex = std::stoi(indexStr);
 
 
-            // Aquí puedes realizar la lógica que necesites con el índice del jugador
-            std::cout << "Tu índice de jugador es: " << playerIndex << std::endl;
-            std::cout << "\nEJEcuto playerindex2";
+        // Aquí puedes realizar la lógica que necesites con el índice del jugador
+        std::cout << "Tu índice de jugador es: " << playerIndex << std::endl;
+        std::cout << "\nEJEcuto playerindex2";
     }
     else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
         // Eliminar el prefijo "EXISTING_PLAYER:"
@@ -251,16 +251,16 @@ void Client::handleServerMessage(const std::string& message) {
         std::istringstream iss(data);
         std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
 
-        if (std::getline(iss, username, ':')&&
-            std::getline(iss, indexStr, ':')&&
-            std::getline(iss, moneyStr, ':')&&
-            std::getline(iss, isSelectingStr, ':')&&
+        if (std::getline(iss, username, ':') &&
+            std::getline(iss, indexStr, ':') &&
+            std::getline(iss, moneyStr, ':') &&
+            std::getline(iss, isSelectingStr, ':') &&
             std::getline(iss, isInGameStr, ':')) {
             // Todos los valores se han leído correctamente
         }
         else {
             std::cout << "\nEJEcuto toy remal";
-            
+
         }
 
         int index;
@@ -272,10 +272,10 @@ void Client::handleServerMessage(const std::string& message) {
 
         // Convertir el índice y el dinero a sus tipos apropiados
         try {
-             index = std::stoi(indexStr);
-             money = std::stoi(moneyStr);
-             isSelecting = (isSelectingStr == "true");
-             isInGame = (isInGameStr == "true");
+            index = std::stoi(indexStr);
+            money = std::stoi(moneyStr);
+            isSelecting = (isSelectingStr == "true");
+            isInGame = (isInGameStr == "true");
         }
         catch (const std::invalid_argument& e) {
             // Manejar el error (el valor no es un número)
@@ -317,24 +317,7 @@ void Client::handleServerMessage(const std::string& message) {
             std::cerr << "Error: Index out of bounds for player information." << std::endl;
         }
 
-    }
-    else  if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
-        // Extraer la información del mensaje
-        size_t firstColon = message.find(":", 20); // La primera posición después de "PLAYER_CHANGED_PIECE:"
-        int Index = std::stoi(message.substr(20, firstColon - 20));
-        int indexselectinpiece = std::stoi(message.substr(firstColon + 1));
-        std::cout << "\n\n" << Index;
-        Index = (Index - playerIndex + 4) % 4;
-        CplayerIndex = Index;
-        
-        // Actualizar la información en el cliente (puedes adaptar esto según tu interfaz)
-        std::cout << "Player " << playerIndex << " selected piece index " << indexselectinpiece << std::endl;
-
-        playerInfos[Index].indexPiece = indexselectinpiece;
-
-
         std::cout << "\nEJEcuto existen2";
-
     }
     else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
         std::cout << "\nEJEcuto index1";
@@ -352,7 +335,7 @@ void Client::handleServerMessage(const std::string& message) {
             }
 
             // Extraer las subcadenas correspondientes al índice del jugador y al índice de la pieza
-             indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
+            indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
             pieceIndexStr = message.substr(secondColon + 1);
 
             // Mostrar los valores extraídos para depuración
@@ -379,19 +362,19 @@ void Client::handleServerMessage(const std::string& message) {
         }
     }
     else if (message.rfind("PLAYER_READY:", 0) == 0) {
-            // Extraer el `indexPlayer` del mensaje
-            int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
-            indexPlayer = (indexPlayer - playerIndex + 4) % 4;
-            playerInfos[indexPlayer].isSelectingPiece = true;
+        // Extraer el indexPlayer del mensaje
+        int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
+        indexPlayer = (indexPlayer - playerIndex + 4) % 4;
+        playerInfos[indexPlayer].isSelectingPiece = true;
 
-            // Ahora puedes usar `indexPlayer` para actualizar el estado del jugador en el cliente
-            std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
+        // Ahora puedes usar indexPlayer para actualizar el estado del jugador en el cliente
+        std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
 
-            // Realiza cualquier acción adicional para indicar que este jugador está listo,
-            // como actualizar el estado en la interfaz de usuario.
-           
+        // Realiza cualquier acción adicional para indicar que este jugador está listo,
+        // como actualizar el estado en la interfaz de usuario.
+
     }
-    else{
+    else {
         std::cerr << "Unknown message received from server: " << message << std::endl;
     }
 }
