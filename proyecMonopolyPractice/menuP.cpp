@@ -150,7 +150,7 @@ void menuP::ValidarUser() {
     if (SesionValida) {
      //   GetUserEmail();
 
-        Sesion.setString(input);
+        Sesion.setString(input1);
         sf::FloatRect globalBounds = Sesion.getGlobalBounds();
 
         // Ajustar la posición centrando el texto
@@ -240,7 +240,7 @@ void menuP::MenuJugar() {
    IniciarPartida inicial(*window);
    inicial.update();
 
-
+   box.setPosition(273, 74);
 
 
 
@@ -357,6 +357,11 @@ void menuP::MenuSalir() {
                 
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
+
+                    if (client.running && client.peer != nullptr) {
+                        client.disconnect();
+                    }
+
                     window->close();  
                 }
 

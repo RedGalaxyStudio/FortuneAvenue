@@ -65,20 +65,15 @@ void GameMode::resource() {
 
 void GameMode::update() {
 
-    Dinero.resize(4);
-    money[0] = 200;
-    money[1] = 200;
-    money[2] = 200;
-    money[3] = 200;
-
+  
     for (int i = 0; i < 4; i++)
     {
-        Dinero[i].setString(std::to_string(money[i]));
-        Dinero[i].setCharacterSize(17);
-        Dinero[i].setFont(fontUser);
-        Dinero[i].setFillColor(sf::Color::White);
-        Dinero[i].setOutlineThickness(2);
-        Dinero[i].setOutlineColor(sf::Color(135, 135, 135));
+        playersGame[i].Money.setString(std::to_string(playerInfos[i].money));
+        playersGame[i].Money.setCharacterSize(17);
+        playersGame[i].Money.setFont(fontUser);
+        playersGame[i].Money.setFillColor(sf::Color::White);
+        playersGame[i].Money.setOutlineThickness(2);
+        playersGame[i].Money.setOutlineColor(sf::Color(135, 135, 135));
         playersGame[i].PieceSelect.setScale(1, 1);
         globalBounds = playersGame[i].PieceSelect.getGlobalBounds();
         playersGame[i].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -89,12 +84,13 @@ void GameMode::update() {
     moverFicha2.Inicializar(&playersGame[1].PieceSelect, &casillas);
     moverFicha3.Inicializar(&playersGame[2].PieceSelect, &casillas);
     moverFicha4.Inicializar(&playersGame[3].PieceSelect, &casillas);
-
+    animacionIniciada = false;
 
     playersGame[0].PieceSelect.setPosition(330, 439);
     playersGame[1].PieceSelect.setPosition(354, 427);
     playersGame[2].PieceSelect.setPosition(399, 427);
     playersGame[3].PieceSelect.setPosition(428, 440);
+
 
     sf::Clock clock;
     resultadoDado = 0;
@@ -105,7 +101,7 @@ void GameMode::update() {
     playersGame[0].boxPlayer.setPosition(188.65f, 62.5f);
     playersGame[0].boxPlayer.setScale(0.7f, 0.7f);
     playersGame[0].MarcoPlayer.setPosition(52.5f, 62.5f);
-    Dinero[0].setPosition(170.65f, 95.5f);
+    playersGame[0].Money.setPosition(170.65f, 95.5f);
     const sf::Texture* texture = selectedAvatarCopy.getTexture();
     if (texture != nullptr) {
         playersGame[0].AvatarPlayer.setTexture(texture);
@@ -125,7 +121,7 @@ void GameMode::update() {
     playersGame[1].MarcoPlayer.setPosition(1052.5f, 52.5f);
     playersGame[1].AvatarPlayer.setPosition(1052.5f, 552.5f);
     playersGame[1].AvatarPlayer.setScale(0.7f, 0.7f);
-    Dinero[1].setPosition(170.65f, 585.5f);
+    playersGame[1].Money.setPosition(170.65f, 585.5f);
 
     //perfil 3
     playersGame[2].NamePlayer.setPosition(1188.65f, 52.5f);
@@ -133,14 +129,14 @@ void GameMode::update() {
     playersGame[2].boxPlayer.setScale(0.7f, 0.7f);
     playersGame[2].MarcoPlayer.setPosition(52.5f, 552.5f);
     playersGame[2].AvatarPlayer.setPosition(52.5f, 552.5f);
-    Dinero[2].setPosition(1170.65f, 85.5f);
+    playersGame[2].Money.setPosition(1170.65f, 85.5f);
 
     //perfil 4
     playersGame[3].NamePlayer.setPosition(1188.65f, 552.5f);
     playersGame[3].boxPlayer.setPosition(1188.65f, 552.5f);
     playersGame[3].boxPlayer.setScale(0.7f, 0.7f);
     playersGame[3].MarcoPlayer.setPosition(1052.5f, 552.5f);
-    Dinero[3].setPosition(1170.65f, 585.5f);
+    playersGame[3].Money.setPosition(1170.65f, 585.5f);
 
 
 
@@ -167,14 +163,21 @@ void GameMode::update() {
             TempoAnimacion.restart();
         }
 
-        if (muerte == true) {
+        if (muerte == true && !animacionIniciada) {
             TempoAnimacion.restart();
             muerte = false;
+            animacionIniciada = true;    // Marcar que ya se ha iniciado la animación
         }
 
+        // Imprime los valores antes de evaluar la condición
+        std::cout << "Validar: " << validar << std::endl;
+        std::cout << "Muerte: " << muerte << std::endl;
+        std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
 
-        if (validar == true && muerte == false && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
-
+        
+        if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+            std::cout << "\ntempo  "<< TempoAnimacion.getElapsedTime().asSeconds();
+            std::cout << "feo";
             validar = false;
         }
 
@@ -196,6 +199,14 @@ void GameMode::update() {
         // En tu lógica de juego:
         float deltaTime = reloj.restart().asSeconds();
 
+        /*
+        if (validar) {
+            std::cout << "true";
+        }
+        else {
+           std::cout << "false";
+        }*/
+
         if (moverFicha1.enMovimiento == true) {
             moverFicha1.actualizarMovimiento(deltaTime);
             DrawPieceMoviendo();
@@ -206,6 +217,7 @@ void GameMode::update() {
                 DrawGameRuleta();
                 ruletaVisible = true;
                 clock.restart(); // Reinicia el reloj
+                std::cout << "false";
             }
             else {
                 // Verifica si ha pasado el tiempo
@@ -215,6 +227,7 @@ void GameMode::update() {
                 else {
                     DrawGameRuleta(); // Mantén la ruleta visible
                 }
+                std::cout << "true";
             }
         }
         else {
@@ -239,6 +252,8 @@ void  GameMode::Event(){
 
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+
+            renderTexture.clear();
             renderTexture.draw(spriteFondoGame);
             renderTexture.draw(spriteMapa);
             for (int i = 0; i < 4; i++)
@@ -250,6 +265,7 @@ void  GameMode::Event(){
             }
             renderTexture.draw(spriteX);
             renderTexture.draw(overlay);
+
             Menup.MenuSalir();
           //  running = false;
         }
@@ -269,6 +285,13 @@ void  GameMode::Event(){
 
     }
 
+/*
+    if (validar) {
+        std::cout << "true1";
+    }
+    else {
+        std::cout << "false1";
+    }*/
 }
 
 void GameMode::DrawPieceMoviendo(){
@@ -349,7 +372,7 @@ void GameMode::DrawGame() {
         window->draw(playersGame[i].boxPlayer);
         window->draw(playersGame[i].AvatarPlayer);
         window->draw(playersGame[i].MarcoPlayer);
-        window->draw(Dinero[i]);
+        window->draw(playersGame[i].Money);
         window->draw(playersGame[i].PieceSelect);
 
     }

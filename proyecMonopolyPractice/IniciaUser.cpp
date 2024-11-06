@@ -246,7 +246,7 @@ void IniciaUser::saveSelectedAvatar(){
             json avatarData;
             avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
 
-            avatarData["username"] = input;  
+            avatarData["username"] = input1;  
 
          
             std::ofstream outFile("perfil.json");
@@ -270,7 +270,7 @@ void IniciaUser::loadSelectedAvatar() {
         inFile.close();
 
         TextureAvatarPath = avatarData["selected_avatar_path"];
-        input = avatarData["username"];  
+        input1 = avatarData["username"];  
 
         
         if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();

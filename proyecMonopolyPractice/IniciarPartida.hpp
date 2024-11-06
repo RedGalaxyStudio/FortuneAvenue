@@ -28,7 +28,7 @@ private:
     sf::Texture TextureUnirsePartidaOn;
     sf::Texture TextureUnirse;
 
-
+    sf::Text enunciado;
     sf::Sprite SpriteCrearPartida;
     sf::Sprite SpriteUnirsePartida;
     sf::Sprite SpriteUnirse;

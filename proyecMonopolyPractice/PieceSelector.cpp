@@ -12,8 +12,8 @@ PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 }
 
 void PieceSelector::Resource() {
-
-    playerInfos[0].username = input;
+    
+    playerInfos[0].username = input1;
     int piecesCount = 16;  //Cantidad de piezas
     pieces.resize(piecesCount);
     shadow.resize(piecesCount);  
@@ -78,7 +78,7 @@ void PieceSelector::displayPieces() {
 
 // Update the selection based on user input
 void PieceSelector::updateSelection() {
-    NumPlayers = 1;
+   
     sf::Clock clock;
     
     GameMode gamemode(*window);
@@ -91,16 +91,16 @@ void PieceSelector::updateSelection() {
     playersGame[0].NamePlayer.setString(playerInfos[0].username);
     globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
     playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-    for (int i = 1; i < 4; i++) {
-        playerInfos[i].username = "bot" + std::to_string(i);
-    }
+
+
+
     CODE.setFont(fontUser);
     CODE.setCharacterSize(20);
     CODE.setString("CODIGO: " + Code);
     CODE.setFillColor(sf::Color::White);
     CODE.setOutlineThickness(2);
     CODE.setOutlineColor(sf::Color(135, 135, 135));
-
+    
     // Ahora calcula los límites y centra
     globalBounds = CODE.getGlobalBounds();
     CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -109,20 +109,9 @@ void PieceSelector::updateSelection() {
     CODE.setPosition(640, 30);
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
 
-    CplayerIndex = 1;
-    playerInfos[CplayerIndex].indexPiece = 5;
-    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
-    CplayerIndex = 2;
-    playerInfos[CplayerIndex].indexPiece = 7;
-    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
-    CplayerIndex = 3;
-
-    playerInfos[CplayerIndex].indexPiece = 9;
-    updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
-    CplayerIndex = -1;
     while (window->isOpen()) {
         
-        NumPlayers++;
+    
 
         switch (NumPlayers)
         {
@@ -224,7 +213,7 @@ void PieceSelector::updateSelection() {
 
                         playerInfos[0].isSelectingPiece = true;
                         client.ReadyPlayer();
-
+                        gamemode.update();
                     }
                 }
                
@@ -263,7 +252,7 @@ void PieceSelector::updateSelection() {
            }
         window->clear();
         window->draw(spriteFondoGame);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < NumPlayers; i++)
         {
             window->draw(playersGame[i].NamePlayer);
             window->draw(playersGame[i].boxPlayer);

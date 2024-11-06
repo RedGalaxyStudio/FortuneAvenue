@@ -19,6 +19,7 @@ extern sf::View view;
 extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
 extern sf::Sprite SpriteArrowIzq;
+extern bool server;
 
 extern sf::Sprite SpriteArrowArriba;
 
@@ -43,12 +44,13 @@ extern bool muerte;        // No en juego al principio
 
 struct PlayerGame {
 
-
+	sf::Texture textureAvatarPLayer;
 	sf::CircleShape AvatarPlayer;  // Dinámico para el número de jugadores
 	sf::Sprite MarcoPlayer;
 	sf::Text NamePlayer;
 	sf::Sprite boxPlayer;
 	sf::Sprite PieceSelect;
+	sf::Text Money;
 };
 
 extern std::vector<PlayerInfo> playerInfos;
