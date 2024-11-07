@@ -108,9 +108,11 @@ void PieceSelector::updateSelection() {
     // Finalmente, establece la posición
     CODE.setPosition(640, 30);
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
-
+    
     while (window->isOpen()) {
-        
+       
+                NumPlayers++;
+     
     
 
         switch (NumPlayers)
@@ -139,6 +141,7 @@ void PieceSelector::updateSelection() {
             playersGame[3].NamePlayer.setString(playerInfos[3].username);
             globalBounds = playersGame[3].NamePlayer.getGlobalBounds();
             playersGame[3].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+            client.sendImage(TextureAvatarPath);
             for (int i = 0; i < 4; ++i) {
                 playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
                 playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
@@ -235,10 +238,10 @@ void PieceSelector::updateSelection() {
         botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         window->setMouseCursor(*currentCursor);
 
-           if (CplayerIndex>0&& CplayerIndex<=3){ 
+        if (CplayerIndex>0&& CplayerIndex<=3){ 
             updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
                 CplayerIndex = -1;
-           }
+        }
         
            for (int i = 0; i < 4; i++)
            {
@@ -252,7 +255,7 @@ void PieceSelector::updateSelection() {
            }
         window->clear();
         window->draw(spriteFondoGame);
-        for (int i = 0; i < NumPlayers; i++)
+        for (int i = 0; i < 4; i++)
         {
             window->draw(playersGame[i].NamePlayer);
             window->draw(playersGame[i].boxPlayer);

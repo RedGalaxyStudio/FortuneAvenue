@@ -97,7 +97,7 @@ void GameMode::update() {
         playersGame[i].PieceSelect.setScale(1, 1);
         globalBounds = playersGame[i].PieceSelect.getGlobalBounds();
         playersGame[i].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-        
+        playersGame[i].AvatarPlayer.setTexture(&playersGame[i].textureAvatarPLayer);
     }
  
     moverFicha1.Inicializar(&playersGame[0].PieceSelect, &casillas);
@@ -191,9 +191,9 @@ void GameMode::update() {
         }
 
         // Imprime los valores antes de evaluar la condición
-        std::cout << "Validar: " << validar << std::endl;
-        std::cout << "Muerte: " << muerte << std::endl;
-        std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
+        //std::cout << "Validar: " << validar << std::endl;
+        //std::cout << "Muerte: " << muerte << std::endl;
+        //std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
 
         
         if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
