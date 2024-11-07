@@ -141,6 +141,7 @@ void PieceSelector::updateSelection() {
             playersGame[3].NamePlayer.setString(playerInfos[3].username);
             globalBounds = playersGame[3].NamePlayer.getGlobalBounds();
             playersGame[3].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+            client.sendImage(TextureAvatarPath);
             for (int i = 0; i < 4; ++i) {
                 playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
                 playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);

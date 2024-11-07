@@ -191,9 +191,9 @@ void GameMode::update() {
         }
 
         // Imprime los valores antes de evaluar la condición
-        std::cout << "Validar: " << validar << std::endl;
-        std::cout << "Muerte: " << muerte << std::endl;
-        std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
+        //std::cout << "Validar: " << validar << std::endl;
+        //std::cout << "Muerte: " << muerte << std::endl;
+        //std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
 
         
         if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
