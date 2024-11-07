@@ -1,8 +1,8 @@
 ﻿  Client.cpp
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(370,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(375,41): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(466,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(471,41): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(564,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(567,41): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(359,45): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(364,41): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(458,45): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(463,41): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(556,45): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(559,41): warning C4101: 'e': variable local sin referencia
   proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

@@ -138,33 +138,25 @@ std::string Client::createRoom(const std::string& username, const std::string& f
         std::cerr << "Client is not connected to a server!" << std::endl;
         return "No";
     }
+    std::cout << "112";
 
     std::string roomCode = generateRoomCode();
     std::cout << "Room created with code: " << roomCode << std::endl;
     playerIndex = 0;
 
-    std::vector<char> imageData = loadImage(filename);
-    if (imageData.empty()) {
-        std::cerr << "Failed to load image!" << std::endl;
-           }
-
     // Crear el mensaje que incluye roomCode y username
     std::string prefix = "CREATE_ROOM:" + roomCode + ":" + username + ":";
     std::vector<char> packetData(prefix.begin(), prefix.end());
-
-    // Añadir los datos de la imagen al paquete
-    packetData.insert(packetData.end(), imageData.begin(), imageData.end());
 
     // Crear el paquete ENet
     ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
     if (enet_peer_send(peer, 0, packet) < 0) {
         std::cerr << "Failed to send the packet!" << std::endl;
         enet_packet_destroy(packet);
-        
     }
 
     enet_host_flush(client);
-
+    std::cout << "144";
     return roomCode;
 }
 
@@ -175,18 +167,11 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
         return false;
     }
 
-    std::vector<char> imageData = loadImage(filename);
-    if (imageData.empty()) {
-        std::cerr << "Failed to load image!" << std::endl;
-        return false;
-    }
+    std::cout << "12";
 
     // Crear el mensaje que incluye roomCode y username
     std::string prefix = "JOIN_ROOM:" + roomCode + ":" + username + ":";
     std::vector<char> packetData(prefix.begin(), prefix.end());
-
-    // Añadir los datos de la imagen al paquete
-    packetData.insert(packetData.end(), imageData.begin(), imageData.end());
 
     // Crear el paquete ENet
     ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
@@ -274,6 +259,9 @@ void Client::ReadyPlayer() {
 
 // Manejar mensajes recibidos del servidor
 void Client::handleServerMessage(const std::string& message) {
+
+    std::cout << "\n mensage:" << message;
+
     if (message.rfind("YOUR_TURN", 0) == 0) {
         std::cout << "It's your turn!" << std::endl;
         // Aquí el jugador puede decidir llamar a `rollDice`
@@ -328,6 +316,7 @@ void Client::handleServerMessage(const std::string& message) {
         
         
     if (message.rfind("NEW_PLAYER:", 0) == 0) {
+        std::cout << "\nNEW_PLAYER";
         // Eliminar el prefijo "NEW_PLAYER:"
         if (message.length() < 11) { // 11 es la longitud de "NEW_PLAYER:"
             std::cout << "\nEJEcuto toy mal";
@@ -338,14 +327,14 @@ void Client::handleServerMessage(const std::string& message) {
 
         // Dividir la cadena de datos en partes usando ":" como delimitador
         std::istringstream iss(data);
-        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imageStr;
+        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
 
         if (std::getline(iss, username, ':') &&
             std::getline(iss, indexStr, ':') &&
             std::getline(iss, moneyStr, ':') &&
             std::getline(iss, isSelectingStr, ':') &&
-            std::getline(iss, isInGameStr, ':') &&
-            std::getline(iss, imageStr)) {
+            std::getline(iss, isInGameStr, ':')) { 
+            //&&std::getline(iss, imageStr)
             // Todos los valores se han leído correctamente
         }
         else {
@@ -398,11 +387,11 @@ void Client::handleServerMessage(const std::string& message) {
             playerInfos[index].isInGame = isInGame;
 
             // Procesar la imagen
-            std::vector<char> image(imageStr.begin(), imageStr.end());
-            playerInfos[index].image = image;
+            //std::vector<char> image(imageStr.begin(), imageStr.end());
+            //playerInfos[index].image = image;
 
             // Cargar la textura del avatar
-            playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
+          //  playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
             playersGame[index].NamePlayer.setString(playerInfos[index].username);
 
             // Imprimir la información del jugador
@@ -424,6 +413,8 @@ void Client::handleServerMessage(const std::string& message) {
 
     else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
         // Eliminar el prefijo "EXISTING_PLAYER:"
+        std::cout << "\nEXISTING_PLAYER";
+
         if (message.length() < 16) {
             std::cout << "\nEJEcuto toy mal";
             return;
@@ -433,14 +424,15 @@ void Client::handleServerMessage(const std::string& message) {
 
         // Dividir la cadena de datos en partes usando ":" como delimitador
         std::istringstream iss(data);
-        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imageStr;
+        std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
 
         if (std::getline(iss, username, ':')&&
             std::getline(iss, indexStr, ':')&&
             std::getline(iss, moneyStr, ':')&&
             std::getline(iss, isSelectingStr, ':')&&
-            std::getline(iss, isInGameStr, ':') &&
-            std::getline(iss, imageStr)) {
+            std::getline(iss, isInGameStr, ':')){ //&&
+         //   std::getline(iss, imageStr)
+         
             // Todos los valores se han leído correctamente
         }
         else {
@@ -484,7 +476,7 @@ void Client::handleServerMessage(const std::string& message) {
         }
 
 
-        std::vector<char> image(imageStr.begin(), imageStr.end());
+        //std::vector<char> image(imageStr.begin(), imageStr.end());
 
 
         // Asegurarse de que el índice esté dentro de los límites
@@ -495,11 +487,11 @@ void Client::handleServerMessage(const std::string& message) {
             playerInfos[index].money = money;
             playerInfos[index].isSelectingPiece = isSelecting;
             playerInfos[index].isInGame = isInGame;
-            playerInfos[index].image = image;
-           
+            
+           /*
             std::vector<char>& imageData = playerInfos[index].image;
 
-            playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());
+            playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());*/
             playersGame[index].NamePlayer.setString(playerInfos[index].username);
             
 
