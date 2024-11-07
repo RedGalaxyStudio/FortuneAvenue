@@ -97,7 +97,7 @@ void GameMode::update() {
         playersGame[i].PieceSelect.setScale(1, 1);
         globalBounds = playersGame[i].PieceSelect.getGlobalBounds();
         playersGame[i].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-        
+        playersGame[i].AvatarPlayer.setTexture(&playersGame[i].textureAvatarPLayer);
     }
  
     moverFicha1.Inicializar(&playersGame[0].PieceSelect, &casillas);

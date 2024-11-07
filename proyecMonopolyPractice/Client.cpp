@@ -553,10 +553,18 @@ void Client::handleServerMessage(const std::string& message) {
             return;
         }
 
+        IIndex = (IIndex - playerIndex + 4) % 4;
+
         // Extraer los datos de la imagen
         size_t imageStartPos = message.find(":", pos) + 1;  // Después del índice
         std::vector<char> imageData(message.begin() + imageStartPos, message.end());
-
+        // Cargar la textura desde los datos de la imagen
+        if (playersGame[IIndex].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size())) {
+            std::cout << "Texture loaded successfully for player " << IIndex << std::endl;
+        }
+        else {
+            std::cerr << "Failed to load texture for player " << IIndex << std::endl;
+        }
         // Aquí puedes manejar la imagen recibida
         std::cout << "Received image from player " << IIndex << std::endl;
         std::string filename = "received_player_" + std::to_string(IIndex) + "_image.png";
