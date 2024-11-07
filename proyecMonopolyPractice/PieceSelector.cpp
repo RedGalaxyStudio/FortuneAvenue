@@ -110,10 +110,10 @@ void PieceSelector::updateSelection() {
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
     
     while (window->isOpen()) {
-       if(NumPlayers<4) {
-
-            NumPlayers++;
-        }
+       
+                NumPlayers++;
+     
+    
 
         switch (NumPlayers)
         {
@@ -237,10 +237,10 @@ void PieceSelector::updateSelection() {
         botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         window->setMouseCursor(*currentCursor);
 
-           if (CplayerIndex>0&& CplayerIndex<=3){ 
+        if (CplayerIndex>0&& CplayerIndex<=3){ 
             updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
                 CplayerIndex = -1;
-           }
+        }
         
            for (int i = 0; i < 4; i++)
            {
@@ -254,7 +254,7 @@ void PieceSelector::updateSelection() {
            }
         window->clear();
         window->draw(spriteFondoGame);
-        for (int i = 0; i < NumPlayers; i++)
+        for (int i = 0; i < 4; i++)
         {
             window->draw(playersGame[i].NamePlayer);
             window->draw(playersGame[i].boxPlayer);

@@ -85,34 +85,31 @@ void IniciarPartida::update() {
                     playClickSound();
                     
                     
-                        if (!server){
-                            server = client.initialize();
-                            if (client.connectToServer("208.68.36.50", 1234)) {
+                    if (!server){
+                        server = client.initialize();
+                        client.connectToServer("208.68.36.50", 1234);//) {
+                            Code = client.createRoom(playerInfos[0].username, TextureAvatarPath);
+                            std::cout << Code;
 
-
-                                Code = client.createRoom(playerInfos[0].username, TextureAvatarPath);
-                                std::cout << Code;
-
-                                pieceselector.Resource();
-                                pieceselector.updateSelection();
-                            }
-                            else {
-                                message.showMessage();  // Muestra el mensaje al iniciar el programa
-                            }
+                            pieceselector.Resource();
+                            pieceselector.updateSelection();
+                        //}
+                       // else {
+                            message.showMessage();  // Muestra el mensaje al iniciar el programa
+                        //}
                     }else{
-                            if (client.connectToServer("208.68.36.50", 1234)) {
+                        if (client.connectToServer("208.68.36.50", 1234)) {
 
+                            Code = client.createRoom(playerInfos[0].username, TextureAvatarPath);
+                            std::cout << Code;
 
-                                Code = client.createRoom(playerInfos[0].username, TextureAvatarPath);
-                                std::cout << Code;
-
-                                pieceselector.Resource();
-                                pieceselector.updateSelection();
-                            }
-                            else {
-                                message.showMessage();  // Muestra el mensaje al iniciar el programa
-                            }
+                            pieceselector.Resource();
+                            pieceselector.updateSelection();
                         }
+                        else {
+                                message.showMessage();  // Muestra el mensaje al iniciar el programa
+                        }
+                    }
                 }
 
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)&&Valida==true) {
