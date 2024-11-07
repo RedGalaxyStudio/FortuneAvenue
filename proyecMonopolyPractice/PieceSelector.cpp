@@ -108,10 +108,12 @@ void PieceSelector::updateSelection() {
     // Finalmente, establece la posición
     CODE.setPosition(640, 30);
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
-
-    while (window->isOpen()) {
-        
     
+    while (window->isOpen()) {
+       if(NumPlayers<4) {
+
+            NumPlayers++;
+        }
 
         switch (NumPlayers)
         {

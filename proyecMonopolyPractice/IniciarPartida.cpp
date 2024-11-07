@@ -208,14 +208,15 @@ void IniciarPartida::updatejoinRoom() {
                             pieceselector.Resource();
                             pieceselector.updateSelection();
                        
-                   }
-                  else {
-                       message.showMessage();
-                   } }
-                        else {
-                            messageInvalido.showMessage();
+                         }
+                         else {
+                            message.showMessage();
+                         } 
+                    }
+                    else {
+                        messageInvalido.showMessage();
                             client.disconnect();
-                        }
+                    }
                 }
 
 

@@ -17,15 +17,15 @@ void GameMode::resource() {
 
     //posicin y tamanio de flechas
     SpriteArrowIzq.setTexture(TextureArrowIzq);
-    SpriteArrowIzq.setOrigin(200.0f,90.5f);
-    SpriteArrowIzq.setPosition(300, 400);
+    SpriteArrowIzq.setOrigin(350.0f, 350.0f);
+    SpriteArrowIzq.setPosition(370, 400);
 
     SpriteArrowDer.setTexture(TextureArrowDer);
-    SpriteArrowDer.setOrigin(200.0f, 90.5f);
+    SpriteArrowDer.setOrigin(350.0f, 350.0f);
     SpriteArrowDer.setPosition(900, 400);
 
     SpriteArrowArriba.setTexture(TextureArrowArriba);
-    SpriteArrowArriba.setOrigin(200.0f, 90.5f);
+    SpriteArrowArriba.setOrigin(350.0f, 350.0f);
     SpriteArrowArriba.setPosition(900, 400);
 
     Settings.setTexture(SettingsOff);
