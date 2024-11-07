@@ -188,21 +188,45 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 
 
 bool Client::sendImage(const std::string& filename) {
-
-    std::cout << "\nEJEcuto imagen 1";
     if (!peer) {
         std::cerr << "Client is not connected to a server!" << std::endl;
         return false;
     }
 
-   
+    // Cargar la imagen desde el archivo
+    sf::Image image;
+    if (!image.loadFromFile(filename)) {
+        std::cerr << "Failed to load image: " << filename << std::endl;
+        return false;
+    }
+
+    // Convertir la imagen a un arreglo de bytes
+    std::vector<char> imageData(image.getSize().x * image.getSize().y * 4);  // Asumimos 4 bytes por píxel (RGBA)
+    const sf::Uint8* pixels = image.getPixelsPtr();
+
+    // Copiar los datos de los píxeles al vector de bytes
+    std::copy(pixels, pixels + image.getSize().x * image.getSize().y * 4, imageData.begin());
+
+    // Crear un paquete ENet para enviar la imagen
+    std::string message = "SEND_IMAGE:";
+    message += std::string(imageData.begin(), imageData.end());  // Agregar los datos de la imagen después del encabezado
+
+    ENetPacket* packet = enet_packet_create(message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
+
+    // Enviar el paquete al servidor
+    if (enet_peer_send(peer, 0, packet) < 0) {
+        std::cerr << "Failed to send image." << std::endl;
+        enet_packet_destroy(packet);
+        return false;
+    }
+
+    // Liberar el paquete después de enviarlo
+    enet_packet_destroy(packet);
 
     std::cout << "Image sent!" << std::endl;
-    std::cout << "\nEJEcuto imagen 2";
     return true;
-
-
 }
+
 
 
 
@@ -516,7 +540,30 @@ void Client::handleServerMessage(const std::string& message) {
         int playerCount = std::stoi(playerCountStr);
         NumPlayers = playerCount;
 
-    } else 
+    } else if (message.rfind("SEND_IMAGE:", 0) == 0) {
+        // Recuperar el índice del jugador
+        int IIndex = 0;
+        size_t pos = 11;  // Después del encabezado "SEND_IMAGE:"
+
+        try {
+            IIndex = std::stoi(message.substr(pos, message.find(":", pos) - pos));
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error parsing player index: " << e.what() << std::endl;
+            return;
+        }
+
+        // Extraer los datos de la imagen
+        size_t imageStartPos = message.find(":", pos) + 1;  // Después del índice
+        std::vector<char> imageData(message.begin() + imageStartPos, message.end());
+
+        // Aquí puedes manejar la imagen recibida
+        std::cout << "Received image from player " << IIndex << std::endl;
+        std::string filename = "received_player_" + std::to_string(IIndex) + "_image.png";
+
+    }
+
+    else
         
     if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
         std::cout << "\nEJEcuto index1";
