@@ -1,12 +1,31 @@
-﻿  Client.cpp
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(401,45): warning C4101: 'e': variable local sin referencia
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(407,41): warning C4101: 'e': variable local sin referencia
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(513,49): warning C4101: 'e': variable local sin referencia
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(519,45): warning C4101: 'e': variable local sin referencia
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(614,49): warning C4101: 'e': variable local sin referencia
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Client.cpp(618,45): warning C4101: 'e': variable local sin referencia
+﻿  ButtonG.cpp
+  Cinematic.cpp
+  Client.cpp
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(401,45): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(407,41): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(513,49): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(519,45): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(614,49): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(618,45): warning C4101: 'e': variable local sin referencia
+  GameMode.cpp
+  IniciarPartida.cpp
+  IniciaUser.cpp
+  main.cpp
+  menuP.cpp
+  MensageBox.cpp
+  MovePieces.cpp
+  ObjetosGlobal.cpp
+  PieceSelector.cpp
+  ResourceGame.cpp
+  Ruleta.cpp
+  Scrollbar.cpp
+  SettingsManager.cpp
+  TextBox.cpp
+  ResourceGlobal.cpp
+  VolumeSlider.cpp
   WebViewManager.cpp
   Generando código...
+  LINK : no se encontró C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
 enet.lib(win32.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(win32.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 enet.lib(packet.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(packet.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 enet.lib(host.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(host.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
@@ -14,4 +33,4 @@ enet.lib(protocol.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(p
 enet.lib(peer.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(peer.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 enet.lib(callbacks.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(callbacks.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 enet.lib(list.obj) : warning LNK4099: no se encontró PDB '' con 'enet.lib(list.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
-  proyecMonopolyPractice.vcxproj -> C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+  proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
