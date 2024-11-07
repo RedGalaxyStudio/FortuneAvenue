@@ -1,12 +1,10 @@
 ﻿  Client.cpp
-<<<<<<< HEAD
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(359,45): warning C4101: 'e': unreferenced local variable
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(364,41): warning C4101: 'e': unreferenced local variable
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(458,45): warning C4101: 'e': unreferenced local variable
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(463,41): warning C4101: 'e': unreferenced local variable
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(556,45): warning C4101: 'e': unreferenced local variable
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(559,41): warning C4101: 'e': unreferenced local variable
-  IniciarPartida.cpp
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(383,45): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(388,41): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(482,45): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(487,41): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(612,45): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(615,41): warning C4101: 'e': unreferenced local variable
   PieceSelector.cpp
   Generating Code...
 enet.lib(win32.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(win32.obj)' or at ''; linking object as if no debug info
@@ -17,12 +15,3 @@ enet.lib(peer.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(peer.o
 enet.lib(callbacks.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(callbacks.obj)' or at ''; linking object as if no debug info
 enet.lib(list.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(list.obj)' or at ''; linking object as if no debug info
   proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
-=======
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(383,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(388,41): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(482,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(487,41): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(603,45): warning C4101: 'e': variable local sin referencia
-C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(606,41): warning C4101: 'e': variable local sin referencia
-  proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe
->>>>>>> 44880dda101d0a74469b02360fac89ba52723e6f
