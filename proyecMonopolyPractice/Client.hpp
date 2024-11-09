@@ -18,33 +18,35 @@
 
 class Client {
 public:
-    Client();
-    ~Client();
-    void run();
-    bool initialize();
-    std::string createRoom(const std::string& username, const std::string& filename);
-    bool joinRoom(const std::string& roomCode, const std::string& username, const std::string& filename);
-    bool connectToServer(const std::string& address, uint16_t port);
-    bool sendImage(const std::string& filename);
-    void disconnect();
-    void rollDice();
-    void handleServerMessage(const std::string& message);
-    int lastRollResult;  
-    void playerChangedPiece();
-    void ReadyPlayer();
-    ENetPeer* peer; 
-    std::atomic<bool> running; 
-    bool isConnected;
-    ENetHost* client;
-    std::mutex mtx;
-    std::condition_variable cv;
+	Client();
+	~Client();
+	void run();
+	bool initialize();
+	std::string createRoom(const std::string& username);
+	bool joinRoom(const std::string& roomCode, const std::string& username);
+	bool connectToServer(const std::string& address, uint16_t port);
+	bool sendImage(const std::string& filename);
+	void disconnect();
+	void rollDice();
+	void handleServerMessage(const std::string& message);
+	int lastRollResult;
+	void playerChangedPiece();
+	void ReadyPlayer();
+	void startSpin();
+	void ruleteGame(float angulo);
+	ENetPeer* peer;
+	std::atomic<bool> running;
+	bool isConnected;
+	ENetHost* client;
+	std::mutex mtx;
+	std::condition_variable cv;
 private:
-    
-    
-    int playerIndex;
-    std::vector<char> loadImage(const std::string& filename);
-  
-    std::thread clientThread; 
+
+
+	int playerIndex;
+	std::vector<char> loadImage(const std::string& filename);
+
+	std::thread clientThread;
 
 };
 

@@ -81,7 +81,7 @@ void menuP::Resource() {
 void menuP::MenuPrincipal() {
     window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
-    MenuMusicFondo.play();
+    //MenuMusicFondo.play();
 
     Inicializar();
 
