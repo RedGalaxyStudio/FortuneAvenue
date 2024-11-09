@@ -81,7 +81,6 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 void MovePieces::updateCAmbioCasilla() {
 
-
     while (finalCamino == true) {
 
         sf::Event event;
@@ -97,8 +96,7 @@ void MovePieces::updateCAmbioCasilla() {
                 renderTexture.clear();
                 renderTexture.draw(spriteFondoGame);
                 renderTexture.draw(spriteMapa);
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     renderTexture.draw(playersGame[i].NamePlayer);
                     renderTexture.draw(playersGame[i].boxPlayer);
                     renderTexture.draw(playersGame[i].MarcoPlayer);
@@ -109,41 +107,43 @@ void MovePieces::updateCAmbioCasilla() {
                 renderTexture.display();
                 Menup.MenuSalir();
 
-                running = false; 
+                running = false;
             }
-
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 
-                if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+                    if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+                        playClickSound();
+                        finalCamino = false;
+                        seleccionarCaminoIzq(); // Maneja la acción de la flecha izquierda
+                    }
+                
+                
+                if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     finalCamino = false;
-                    seleccionarCaminoIzq();
+                    seleccionarCaminoIzq(); // Maneja la acción de la flecha hacia arriba
                 }
+                
 
                 if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     finalCamino = false;
-                    seleccionarCaminoDer();
+                    seleccionarCaminoDer(); // Maneja la acción de la flecha derecha
                 }
 
-                if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
-                    playClickSound();
-                    finalCamino = false;
-                    seleccionarCaminoIzq();
-                }
-
+                
             }
-
         }
 
+        // Cambiar el cursor
         currentCursor = &normalCursor;
-
         window->setMouseCursor(*currentCursor);
 
         float deltaTime = reloj.restart().asSeconds();
-        animacionRastro( deltaTime);
+        animacionRastro(deltaTime);
 
+        // Manejo de la vista
         sf::Vector2f fichaPos = sprite->getPosition();
         float viewX = fichaPos.x;
         float viewY = fichaPos.y;
@@ -151,33 +151,29 @@ void MovePieces::updateCAmbioCasilla() {
         if (viewY > 540) viewY = 540;
         if (viewX < 320) viewX = 320;
         if (viewY < 180) viewY = 180;
-        view.setCenter(viewX, viewY); 
-
+        view.setCenter(viewX, viewY);
         view.setSize(1280 * 0.5, 720 * 0.5);
+        window->setView(view);
 
-        window->setView(view); 
         window->clear();
-
         window->draw(spriteFondoGame);
         window->draw(spriteMapa);
-      //  for (const auto& s : rastro) {
-       //     window->draw(s);
-        //}
-        window->draw(*sprite);
-        window->setView(window->getDefaultView()); 
 
+        window->draw(*sprite); // Dibuja la ficha (si existe)
 
-            window->draw(SpriteArrowIzq);
-            window->draw(SpriteArrowDer);
-            if((*casillas).size() == 4){
-                window->draw(SpriteArrowArriba);
-            }
-        
+        window->setView(window->getDefaultView());
+        window->draw(SpriteArrowIzq); // Dibuja la flecha izquierda si no hay 3 casillas
+        // Dibuja las flechas según el estado de las casillas
+        window->draw(SpriteArrowDer); // Siempre dibuja la flecha derecha
+        if ((*casillas).size() == 3) {
+            window->draw(SpriteArrowArriba); // Dibuja la flecha hacia arriba solo si hay 3 casillas
+        }
+      //  else {
+            
+       // }
 
-        window->display();
-
+        window->display(); // Actualiza la ventana
     }
-
 }
 
 

@@ -60,12 +60,6 @@ void GameMode::resource() {
 
     std::vector<sf::Vector2f> caminoruleta8 = { sf::Vector2f(402, 157) };
 
-
-
-
-
-
-
     // Agregar los caminos al vector principal
     for (int i = 0; i < 4; i++) {
 
@@ -191,9 +185,9 @@ void GameMode::update() {
         }
 
         // Imprime los valores antes de evaluar la condición
-        std::cout << "Validar: " << validar << std::endl;
-        std::cout << "Muerte: " << muerte << std::endl;
-        std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
+        //std::cout << "Validar: " << validar << std::endl;
+        //std::cout << "Muerte: " << muerte << std::endl;
+        //std::cout << "Tiempo: " << TempoAnimacion.getElapsedTime().asSeconds() << " segundos" << std::endl;
 
         
         if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
@@ -377,17 +371,8 @@ void GameMode::DrawGameRuleta() {
 
 void GameMode::DrawGame() {
 
-    
-
-    
-
-
-
-
     window->setView(window->getDefaultView()); 
     
-
-
     window->clear();
 
     window->draw(spriteFondoGame);

@@ -93,7 +93,6 @@ void PieceSelector::updateSelection() {
     playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-
     CODE.setFont(fontUser);
     CODE.setCharacterSize(20);
     CODE.setString("CODIGO: " + Code);
@@ -108,13 +107,12 @@ void PieceSelector::updateSelection() {
     // Finalmente, establece la posición
     CODE.setPosition(640, 30);
     ButtonG botonCheck1(Check[0],CheckTexturesOff[0], CheckTexturesOn[0]);
-    client.sendImage(TextureAvatarPath);
+
+    //client.sendImage(TextureAvatarPath);
     while (window->isOpen()) {
        
                 NumPlayers++;
      
-    
-
         switch (NumPlayers)
         {
         case 1:
@@ -141,6 +139,8 @@ void PieceSelector::updateSelection() {
             playersGame[3].NamePlayer.setString(playerInfos[3].username);
             globalBounds = playersGame[3].NamePlayer.getGlobalBounds();
             playersGame[3].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+            //client.sendImage(TextureAvatarPath);
             for (int i = 0; i < 4; ++i) {
                 playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
                 playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);

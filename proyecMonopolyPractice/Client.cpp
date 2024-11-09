@@ -207,11 +207,8 @@ bool Client::sendImage(const std::string& filename) {
     // Copiar los datos de los píxeles al vector de bytes
     std::copy(pixels, pixels + image.getSize().x * image.getSize().y * 4, imageData.begin());
 
-    // Crear un paquete ENet para enviar la imagen
-    std::string message = "SEND_IMAGE:";
-    message += std::string(imageData.begin(), imageData.end());  // Agregar los datos de la imagen después del encabezado
-
-    ENetPacket* packet = enet_packet_create(message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
+    // Crear un paquete ENet para enviar la imagen (sin usar std::string para los datos binarios)
+    ENetPacket* packet = enet_packet_create(imageData.data(), imageData.size(), ENET_PACKET_FLAG_RELIABLE);
 
     // Enviar el paquete al servidor
     if (enet_peer_send(peer, 0, packet) < 0) {
@@ -540,25 +537,41 @@ void Client::handleServerMessage(const std::string& message) {
         int playerCount = std::stoi(playerCountStr);
         NumPlayers = playerCount;
 
-    } /*else if (message.rfind("SEND_IMAGE:", 0) == 0) {
+    } else if(message.rfind("SEND_IMAGE:", 0) == 0) {
         // Recuperar el índice del jugador
-        std::cout << "\nRecien reciido";
         int IIndex = 0;
         size_t pos = 11;  // Después del encabezado "SEND_IMAGE:"
+        std::cout << "\nyo;";
+        size_t colonPos = message.find(":", pos);
+        if (colonPos == std::string::npos) {
+            std::cerr << "Error: Missing ':' delimiter after player index." << std::endl;
+            return;
+        }
 
         try {
-            IIndex = std::stoi(message.substr(pos, message.find(":", pos) - pos));
+            IIndex = std::stoi(message.substr(pos, colonPos - pos));
         }
         catch (const std::exception& e) {
             std::cerr << "Error parsing player index: " << e.what() << std::endl;
             return;
         }
-        std::cout << "\n despues el stoi reciido";
+
         IIndex = (IIndex - playerIndex + 4) % 4;
 
         // Extraer los datos de la imagen
-        size_t imageStartPos = message.find(":", pos) + 1;  // Después del índice
+        size_t imageStartPos = colonPos + 1;  // Después del índice
+
+        if (imageStartPos >= message.size()) {
+            std::cerr << "Error: Image data is missing." << std::endl;
+            return;
+        }
+
         std::vector<char> imageData(message.begin() + imageStartPos, message.end());
+        if (imageData.empty()) {
+            std::cerr << "Error: Empty image data received." << std::endl;
+            return;
+        }
+
         // Cargar la textura desde los datos de la imagen
         if (playersGame[IIndex].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size())) {
             std::cout << "Texture loaded successfully for player " << IIndex << std::endl;
@@ -566,11 +579,14 @@ void Client::handleServerMessage(const std::string& message) {
         else {
             std::cerr << "Failed to load texture for player " << IIndex << std::endl;
         }
-        // Aquí puedes manejar la imagen recibida
-        std::cout << "Received image from player " << IIndex << std::endl;
+
+        // Guardar la imagen recibida (opcional)
         std::string filename = "received_player_" + std::to_string(IIndex) + "_image.png";
 
-    }*/
+
+        std::cout << "Received image from player " << IIndex << std::endl;
+    }
+
 
     else
         
