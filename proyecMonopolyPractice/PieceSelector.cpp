@@ -92,8 +92,6 @@ void PieceSelector::updateSelection() {
 	globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
 	playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
-
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
 	CODE.setString("CODIGO: " + Code);
@@ -112,6 +110,7 @@ void PieceSelector::updateSelection() {
 	while (window->isOpen()) {
 
 		NumPlayers++;
+
 
 
 

@@ -15,18 +15,20 @@ void GameMode::resource() {
 	if (!TextureArrowDer.loadFromFile("resource/texture/Game/Der.png")) return;
 	if (!TextureArrowArriba.loadFromFile("resource/texture/Game/Arriba.png")) return;
 
-	//posicin y tamanio de flechas
-	SpriteArrowIzq.setTexture(TextureArrowIzq);
-	SpriteArrowIzq.setOrigin(200.0f, 90.5f);
-	SpriteArrowIzq.setPosition(300, 400);
+    //posicin y tamanio de flechas
+    SpriteArrowIzq.setTexture(TextureArrowIzq);
+    SpriteArrowIzq.setOrigin(350.0f, 350.0f);
+    SpriteArrowIzq.setPosition(370, 400);
 
-	SpriteArrowDer.setTexture(TextureArrowDer);
-	SpriteArrowDer.setOrigin(200.0f, 90.5f);
-	SpriteArrowDer.setPosition(900, 400);
+    SpriteArrowDer.setTexture(TextureArrowDer);
+    SpriteArrowDer.setOrigin(350.0f, 350.0f);
+    SpriteArrowDer.setPosition(900, 400);
 
-	SpriteArrowArriba.setTexture(TextureArrowArriba);
-	SpriteArrowArriba.setOrigin(200.0f, 90.5f);
-	SpriteArrowArriba.setPosition(900, 400);
+    SpriteArrowArriba.setTexture(TextureArrowArriba);
+    SpriteArrowArriba.setOrigin(350.0f, 350.0f);
+    SpriteArrowArriba.setPosition(370, 400);
+
+
 
 	Settings.setTexture(SettingsOff);
 	Settings.setOrigin(25, 25);
@@ -46,9 +48,6 @@ void GameMode::resource() {
 
 	std::vector<sf::Vector2f> caminoruleta1 = { sf::Vector2f(0, 0) };
 
-
-
-
 	
 
 
@@ -66,6 +65,7 @@ void GameMode::resource() {
 
 	view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y));
 	view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centrar la vista en la ficha
+
 
 	posicionActual = 0;
 }
@@ -356,6 +356,7 @@ void GameMode::DrawGame() {
 	int cas= moverFichas[0].getcasillaActual();
 	std::cout << "\n la cagaste:"<< CaminoActu;
 
+
 	///if(casillasRuleta.size()> CaminoActu && CaminoActu >= 1){
 	for (int i = 0; i < casillasRuleta[CaminoActu].size(); i++)
 	{
@@ -387,6 +388,7 @@ void GameMode::DrawGame() {
 		window->draw(playersGame[i].MarcoPlayer);
 		window->draw(playersGame[i].Money);
 		window->draw(playersGame[i].PieceSelect);
+
 
 	}
 

@@ -157,9 +157,11 @@ void IniciarPartida::updatejoinRoom() {
 				renderTexture.draw(SpriteUnirse);
 				textBoxRoom.Prinf();  // Dibujar el cuadro de texto en la ventana
 
+
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 				Menup.MenuSalir();
+
 
 
 			}

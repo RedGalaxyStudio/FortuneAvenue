@@ -121,6 +121,9 @@ void MovePieces::updateCAmbioCasilla() {
 			}
 
 
+        window->draw(*sprite); // Dibuja la ficha (si existe)
+
+
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
 				if ((*casillas).size() != 3) {
@@ -190,7 +193,6 @@ void MovePieces::updateCAmbioCasilla() {
 		window->display();
 
 	}
-
 }
 
 
@@ -247,10 +249,6 @@ void MovePieces::seleccionarCaminoIzq() {
 		casillas->push_back(camino7);
 
 	}
-
-
-
-
 
 }
 
