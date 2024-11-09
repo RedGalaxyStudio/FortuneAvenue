@@ -28,15 +28,13 @@
         void DrawPieceMoviendo();
         void DrawGame();
         void DrawGameRuleta();
-        MovePieces moverFicha1;
-        MovePieces moverFicha2;
-        MovePieces moverFicha3;
-        MovePieces moverFicha4;
+
 
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;
         std::vector<std::vector<sf::Vector2f>> casillas;
+        std::vector<std::vector<sf::Vector2f>> casillasRuleta;
         sf::FloatRect globalBounds;
         int posicionActual;
         int vectorActual;    // Índice del vector actual
@@ -45,12 +43,12 @@
         int resultadoDado;
         sf::Texture piecesTextures;
         sf::Sprite pieces;
-
+        std::vector<MovePieces> moverFichas;
         sf::Clock TempoAnimacion;
         bool animacionIniciada;
         Window Dado;
         sf::Clock clock;
-
+        bool ruledraw;
         Ruleta ruleta; 
         bool validar;
 

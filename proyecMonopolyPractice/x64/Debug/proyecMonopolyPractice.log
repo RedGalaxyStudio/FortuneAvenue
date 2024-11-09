@@ -1,12 +1,12 @@
 ﻿  ButtonG.cpp
   Cinematic.cpp
   Client.cpp
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(380,45): warning C4101: 'e': variable local sin referencia
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(385,41): warning C4101: 'e': variable local sin referencia
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(479,45): warning C4101: 'e': variable local sin referencia
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(484,41): warning C4101: 'e': variable local sin referencia
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(628,45): warning C4101: 'e': variable local sin referencia
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(631,41): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(430,40): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(435,36): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(530,40): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(535,36): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(652,41): warning C4101: 'e': variable local sin referencia
+C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\proyecMonopolyPractice\Client.cpp(655,37): warning C4101: 'e': variable local sin referencia
   GameMode.cpp
   IniciarPartida.cpp
   IniciaUser.cpp
