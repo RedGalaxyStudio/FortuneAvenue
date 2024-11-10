@@ -1,2 +1,39 @@
-﻿  Ruleta.cpp
-  proyecMonopolyPractice.vcxproj -> C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
+﻿  ButtonG.cpp
+  Cinematic.cpp
+  Client.cpp
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(430,40): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(435,36): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(530,40): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(535,36): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(652,41): warning C4101: 'e': unreferenced local variable
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp(655,37): warning C4101: 'e': unreferenced local variable
+  Economy.cpp
+  GameMode.cpp
+  IniciarPartida.cpp
+  IniciaUser.cpp
+  main.cpp
+  menuP.cpp
+  MensageBox.cpp
+  MovePieces.cpp
+  ObjetosGlobal.cpp
+  PieceSelector.cpp
+  ResourceGame.cpp
+  Ruleta.cpp
+  Scrollbar.cpp
+  SettingsManager.cpp
+  TextBox.cpp
+  ResourceGlobal.cpp
+  VolumeSlider.cpp
+  Generating Code...
+  Compiling...
+  WebViewManager.cpp
+  Generating Code...
+  LINK : C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe not found or not built by the last incremental link; performing full link
+enet.lib(win32.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(win32.obj)' or at ''; linking object as if no debug info
+enet.lib(packet.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(packet.obj)' or at ''; linking object as if no debug info
+enet.lib(host.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(host.obj)' or at ''; linking object as if no debug info
+enet.lib(protocol.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(protocol.obj)' or at ''; linking object as if no debug info
+enet.lib(peer.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(peer.obj)' or at ''; linking object as if no debug info
+enet.lib(callbacks.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(callbacks.obj)' or at ''; linking object as if no debug info
+enet.lib(list.obj) : warning LNK4099: PDB '' was not found with 'enet.lib(list.obj)' or at ''; linking object as if no debug info
+  proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
