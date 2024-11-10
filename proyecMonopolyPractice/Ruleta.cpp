@@ -109,7 +109,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		// Actualizar la posición de los íconos para que roten junto con la ruleta
 		for (int i = 0; i < numSegments; ++i) {
 			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
-			icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
+			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
 
 			if (rotationSpeed == 0.0f) {
 				isSpinning = false;
@@ -312,8 +312,8 @@ void Ruleta::createSegments() {
 void Ruleta::loadIconTextures() {
 	iconTextures.resize(numSegments);
 	std::string iconPaths[] = {
-		"icon1.png", "icon2.png", "icon3.png",
-		"icon4.png", "icon5.png", "icon6.png", "icon7.png"
+		"icono11.png", "icon2.png", "icono333.png",
+		"icon4.png", "icono55.png", "icono666.png", "icono7.png"
 	};
 
 	for (int i = 0; i < numSegments; ++i) {
@@ -334,7 +334,7 @@ void Ruleta::setupIcons() {
 
 		// Posición del ícono, escalada al radio de la ruleta
 		float iconAngle = i * angleStep + angleStep / 2;
-		icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
+		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
 		icons[i].setScale(ScaleIcon, ScaleIcon);  // 50 es un margen
 		icons[i].setRotation(static_cast<float>(iconAngle * (180.0f / M_PI) + 90.0f));
 	}
