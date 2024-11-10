@@ -163,7 +163,7 @@ void GameMode::update() {
 	while (window->isOpen()) {
 
 		Event();
-		std::cout << "\n la cagaste princi:";
+		//std::cout << "\n la cagaste princi:";
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
 			DadoResul = resultadoDado;
@@ -188,6 +188,7 @@ void GameMode::update() {
 			validar = false;
 			ruledraw = false;
 			animacionIniciada = false;
+			muerte = false;
 		}
 
 		currentCursor = &normalCursor;
@@ -207,7 +208,7 @@ void GameMode::update() {
 
 		// En tu lógica de juego:
 		float deltaTime = reloj.restart().asSeconds();
-		std::cout << "\n la cagaste medio:";
+		//std::cout << "\n la cagaste medio:";
 
 
 		if (moverFichas[0].enMovimiento == true) {
@@ -238,7 +239,7 @@ void GameMode::update() {
 		}
 
 		window->display();
-		std::cout << "\n la cagaste display:";
+		//std::cout << "\n la cagaste display:";
 	}
 	
 }
@@ -294,7 +295,7 @@ void  GameMode::Event() {
 }
 
 void GameMode::DrawPieceMoviendo() {
-	std::cout << "\n la cagaste Movi:";
+	//std::cout << "\n la cagaste Movi:";
 	sf::Vector2f fichaPos = playersGame[0].PieceSelect.getPosition();
 	float viewX = fichaPos.x;
 	float viewY = fichaPos.y;
@@ -323,7 +324,7 @@ void GameMode::DrawPieceMoviendo() {
 	std::cout << "\n la cagaste movi2:";
 }
 void GameMode::DrawGameRuleta() {
-	std::cout << "\n la cagaste rule:";
+	//std::cout << "\n la cagaste rule:";
 	float deltaTime = clock.restart().asSeconds();
 
 	window->clear();
@@ -354,17 +355,23 @@ void GameMode::DrawGame() {
 	int CaminoActu = moverFichas[0].getCaminoActual();
 	//CaminoActu -= 1;
 	int cas= moverFichas[0].getcasillaActual();
-	std::cout << "\n la cagaste:"<< CaminoActu;
 
-	///if(casillasRuleta.size()> CaminoActu && CaminoActu >= 1){
+	//std::cout << "\n CaminoActu:"<< CaminoActu<<"casilla:" <<cas;
+
+	if(turn_ruleta){
+
+	if(casillasRuleta.size()> CaminoActu && CaminoActu >= 1){
 	for (int i = 0; i < casillasRuleta[CaminoActu].size(); i++)
 	{
 		if (playersGame[0].PieceSelect.getPosition() == casillasRuleta[CaminoActu][i])
-		{std::cout << "\n la cagaste horrible:";
+		{
 			ruledraw = true;
+			turn_ruleta = false;
+			ruleta.trurntrue();
 		}
-	}//}
-	
+	}
+	}
+	}
 
 	window->setView(window->getDefaultView());
 

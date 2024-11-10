@@ -29,6 +29,16 @@ std::vector<PlayerGame> playersGame;
 bool espera;
 int CplayerIndex;
 
+
+
+bool turn_dado;
+bool turn_ruleta;
+bool turn_casa;
+
+
+
+
+
 void loadResourceGame(){
 
 	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame2.jpg")) return;

@@ -168,15 +168,9 @@ void IniciarPartida::updatejoinRoom() {
 				if (SpriteUnirse.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 
-					// Desconectar solo si ya está conectado
-					if (client.isConnected) {
-						client.disconnect();
-					}
-
-					// Inicializar solo si no se ha creado el cliente
-					if (!client.client) {
-						client.initialize();
-					}
+					
+					client.initialize();
+					
 
 					code = textBoxRoom.Actu();
 

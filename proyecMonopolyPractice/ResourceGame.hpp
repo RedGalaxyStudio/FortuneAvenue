@@ -42,6 +42,18 @@ extern bool SelectingPiece; // Inicialmente en selección de pieza
 extern bool Game;        // No en juego al principio
 extern bool muerte;        // No en juego al principio
 
+
+extern bool turn_dado;
+extern bool turn_ruleta;
+extern bool turn_casa;
+
+
+
+
+
+
+
+
 struct PlayerGame {
 
 	sf::Texture textureAvatarPLayer;

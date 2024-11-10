@@ -46,6 +46,8 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 			casillaActual++;
 			casillasRestantes--;
+
+			turn_ruleta = true;
 			std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
@@ -210,8 +212,8 @@ void MovePieces::seleccionarCaminoIzq() {
 		};
 
 		std::vector<sf::Vector2f> caminoruleta2_1 = {
-			sf::Vector2f(325,523),
-			sf::Vector2f(425,654)
+			sf::Vector2f(325,523)
+			
 		};
 
 		casillasRuleta->push_back(caminoruleta2_1);

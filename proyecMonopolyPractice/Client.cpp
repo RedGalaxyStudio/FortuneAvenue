@@ -165,20 +165,27 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username) 
 	}
 
 	// Crear el mensaje que incluye roomCode y username
-	std::string message = "JOIN_ROOM:" + roomCode + ":" + username;
+	std::string message = "JOIN_ROOM:" + roomCode + ":" + username + ":";
 
-	// Crear y enviar el paquete ENet
+	// Crear el paquete ENet
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
+	if (!packet) {
+		std::cerr << "Failed to create ENet packet for JOIN_ROOM." << std::endl;
+		return false;
+	}
 
-	enet_packet_destroy(packet);
-
+	// Enviar el paquete y verificar errores
+	if (enet_peer_send(peer, 0, packet) < 0) {
+		std::cerr << "Failed to send JOIN_ROOM packet to server." << std::endl;
+		return false;
+	}
 
 	// Asegurar que el paquete se envíe inmediatamente
 	enet_host_flush(client);
 
 	return true;
 }
+
 
 
 

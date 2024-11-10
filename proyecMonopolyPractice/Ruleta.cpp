@@ -90,8 +90,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		lightClock.restart();
 	}
 
-
-
 	// Rotar la ruleta
 	if (isSpinning) {
 		currentRotation += rotationSpeed * deltaTime; // Aumenta el ángulo de rotación
@@ -130,6 +128,11 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			isSpinning = false;
 			initialSpeed = static_cast<float>(rand() % 100 + 400); // Nueva velocidad inicial aleatoria para el próximo giro
 			decelerationRate = static_cast<float>(rand() % 20 + 40); // Nueva tasa de desaceleración aleatoria para el próximo giro
+		}
+
+		iconPositions.clear();
+		for (const auto& icon : icons) {
+			iconPositions.push_back(icon.getPosition());
 		}
 	}
 
@@ -203,6 +206,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		window.draw(CentroCircule);
 		//  std::cout << "\nruleta icon2";
 		window.draw(icons[currentSegment]);
+		
 	}
 	else if (!isSpinning && resultado == true) {
 
@@ -210,6 +214,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		window.draw(ruletaBase);
 
 		renderTexture1.clear(); // Limpia la textura
+
 		for (const auto& segment : segments) {
 
 			fillColor = segment.getFillColor();
@@ -240,10 +245,18 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 	}
 	else {
-		window.draw(ruletaBase);
 
+		particleSystem.reset();
+		window.draw(ruletaBase);
+		for (int i = 0; i < 7; i++)
+		{
+			segments[i].setFillColor(segmentColors[i]);
+		}
 		renderTexture1.clear(); // Limpia la textura
 		for (const auto& segment : segments) {
+
+
+
 			renderTexture1.draw(segment); // Dibuja el sprite con shader1
 		}
 		renderTexture1.display(); // Finaliza el dibujo en la textura
@@ -256,9 +269,13 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
 
 		window.draw(CentroCircule);
-		for (const auto& icon : icons) {
-			window.draw(icon);
+
+		for (std::size_t i = 0; i < icons.size(); ++i) {
+			icons[i].setPosition(iconPositions[i]); // Restaurar la posición original
+			window.draw(icons[i]); // Dibujar el ícono en su posición original
 		}
+		
+
 
 	}
 
@@ -267,6 +284,12 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 	drawLights(window, deltaTime);
 
+}
+
+void Ruleta::trurntrue() {
+
+	turno = true;
+	resultado = false;
 }
 
 void Ruleta::update(float deltaTime) {
@@ -337,6 +360,11 @@ void Ruleta::setupIcons() {
 		icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
 		icons[i].setScale(ScaleIcon, ScaleIcon);  // 50 es un margen
 		icons[i].setRotation(static_cast<float>(iconAngle * (180.0f / M_PI) + 90.0f));
+	}
+
+	iconPositions.clear();
+	for (const auto& icon : icons) {
+		iconPositions.push_back(icon.getPosition());
 	}
 }
 

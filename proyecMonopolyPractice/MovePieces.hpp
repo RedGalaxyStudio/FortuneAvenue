@@ -56,6 +56,7 @@ private:
 
 
 	std::vector<sf::Vector2f> camino3 = {
+		
 		sf::Vector2f(473,661),
 		sf::Vector2f(505, 632),
 		sf::Vector2f(505 , 586),
@@ -75,7 +76,11 @@ private:
 		sf::Vector2f(772 , 666)
 	};
 
-	std::vector<sf::Vector2f> caminoruleta3 = { sf::Vector2f(556 , 544), sf::Vector2f(632 , 585) };
+	std::vector<sf::Vector2f> caminoruleta3 = { 
+		sf::Vector2f(425,654),
+		sf::Vector2f(556 , 544),
+		sf::Vector2f(632 , 585) 
+	};
 
 	std::vector<sf::Vector2f> camino5{
 	 sf::Vector2f(881, 495),

@@ -72,4 +72,9 @@ public:
             window.draw(particle.shape);
         }
     }
+
+    void reset() {
+        particles.clear(); // Vacía todas las partículas actuales
+    }
+
 };

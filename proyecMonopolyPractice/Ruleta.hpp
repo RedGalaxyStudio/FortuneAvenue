@@ -12,6 +12,7 @@ public:
     Ruleta(float width, float height, float centerX, float centerY);
     void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
     void update(float deltaTime);
+    void trurntrue();
 
 private:
     sf::Color fillColor;
@@ -31,7 +32,7 @@ private:
     float currentRotation;
     bool isSpinning;
     float rotationSpeed;
-
+    std::vector<sf::Vector2f> iconPositions; 
     float width, height;
     float centerX, centerY;  
     float radius;
@@ -64,14 +65,7 @@ private:
         sf::Color(0, 191, 255),
         sf::Color(255, 107, 181),
         sf::Color(231, 77, 60),
-        sf::Color(145, 22, 254)/*
-        sf::Color(239, 17, 17),//0
-        sf::Color(94, 206, 64), //1
-        sf::Color(175, 122, 197),//2
-        sf::Color(241, 196, 15),//3
-        sf::Color(23, 77, 205), //4
-        sf::Color::Magenta, //5
-        sf::Color(52, 73, 94)//6*/
+        sf::Color(145, 22, 254)
     };
 
     void createSegments();
