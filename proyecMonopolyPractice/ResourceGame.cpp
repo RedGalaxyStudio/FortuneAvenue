@@ -29,14 +29,14 @@ std::vector<PlayerGame> playersGame;
 bool espera;
 int CplayerIndex;
 
-
-
+bool turn;
 bool turn_dado;
 bool turn_ruleta;
 bool turn_casa;
+bool turn_impuesto;
 
 
-
+int IndexTurn;
 
 
 void loadResourceGame(){

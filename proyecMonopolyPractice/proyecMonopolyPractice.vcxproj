@@ -139,6 +139,7 @@
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Economy.cpp" />
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="IniciarPartida.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />
+    <ClInclude Include="Economy.hpp" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="IniciarPartida.hpp" />

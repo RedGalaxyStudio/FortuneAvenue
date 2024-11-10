@@ -278,6 +278,18 @@ void Client::rollDice() {
 	std::cout << "\neYYYyy";
 }
 
+void Client::endTurn() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+	std::cout << "\nUYYyy";
+	std::string message = "END_TURN";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+	std::cout << "\neYYyy";
+}
+
 void Client::startSpin() {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
@@ -337,11 +349,28 @@ void Client::ReadyPlayer() {
 // Manejar mensajes recibidos del servidor
 void Client::handleServerMessage(const std::string& message) {
 
+
+
 	std::cout << "\n mensage:" << message;
+
+
+
 
 	if (message.rfind("YOUR_TURN", 0) == 0) {
 		std::cout << "It's your turn!" << std::endl;
 		// Aquí el jugador puede decidir llamar a `rollDice`
+		turn_dado = true;
+		turn = true;
+		IndexTurn = 0;
+	}else 	if (message.rfind("TURN_START", 0) == 0) {
+		std::string playerIndexStr = message.substr(11); // Extraer el índice del jugador, después de "TURN_START:"
+		int playerIndexTurn= std::stoi(playerIndexStr); // Convertirlo a entero
+
+		playerIndexTurn = (playerIndexTurn - playerIndex + 4) % 4;
+
+		IndexTurn = playerIndexTurn;
+		std::cout << "Turn has started for player: " << playerIndexTurn << std::endl;
+
 	}
 	else if (message.rfind("ROLL_RESULT:", 0) == 0) {
 		std::cout << "\nEjecución de ROLL_RESULT";
@@ -376,7 +405,9 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "Wait for your turn!" << std::endl;
 
 	}
+
 	else if (message.rfind("PLAYER_INDEX:", 0) == 0) {
+
 		std::cout << "\nEJEcuto playerindex1";
 		// Extraer el índice del jugador
 		std::string indexStr = message.substr(std::string("PLAYER_INDEX:").length());
@@ -386,297 +417,288 @@ void Client::handleServerMessage(const std::string& message) {
 		// Aquí puedes realizar la lógica que necesites con el índice del jugador
 		std::cout << "Tu índice de jugador es: " << playerIndex << std::endl;
 		std::cout << "\nEJEcuto playerindex2";
+
 	}
-	else
+
+	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
+		std::cout << "\nNEW_PLAYER";
+
+		// Eliminar el prefijo "NEW_PLAYER:"
+		if (message.length() < 11) { // 11 es la longitud de "NEW_PLAYER:"
+			std::cout << "\nEJEcuto toy mal";
+			return;
+		}
+		std::cout << "\nEJEcuto existen1";
+		std::string data = message.substr(11); // Obtener los datos sin el prefijo
+
+		// Dividir la cadena de datos en partes usando ":" como delimitador
+		std::istringstream iss(data);
+		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
+
+		if (std::getline(iss, username, ':') &&
+			std::getline(iss, indexStr, ':') &&
+			std::getline(iss, moneyStr, ':') &&
+			std::getline(iss, isSelectingStr, ':') &&
+			std::getline(iss, isInGameStr, ':')) {
+			//&&std::getline(iss, imageStr)
+			// Todos los valores se han leído correctamente
+		}
+		else {
+			std::cout << "\nEJEcuto toy remal";
+			return;
+		}
+
+		int index;
+		int money;
+		bool isSelecting;
+		bool isInGame;
+
+		std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
+
+		// Convertir el índice y el dinero a sus tipos apropiados
+		try {
+			index = std::stoi(indexStr);
+			money = std::stoi(moneyStr);
+			isSelecting = (isSelectingStr == "true");
+			isInGame = (isInGameStr == "true");
+		}
+		catch (const std::invalid_argument& e) {
+			// Manejar el error (el valor no es un número)
+			std::cout << "\nEJEcuto no sirvo";
+			return;
+		}
+		catch (const std::out_of_range& e) {
+			// Manejar el error (el número está fuera del rango)
+			std::cout << "\nEJEcuto no 98989";
+			return;
+		}
+		std::cout << "\nEJEcuto existen3";
 
 
 
+		if (playerIndex != 0) {
 
+			index = (index - playerIndex + 4) % 4;
 
-		if (message.rfind("NEW_PLAYER:", 0) == 0) {
-			std::cout << "\nNEW_PLAYER";
-			// Eliminar el prefijo "NEW_PLAYER:"
-			if (message.length() < 11) { // 11 es la longitud de "NEW_PLAYER:"
-				std::cout << "\nEJEcuto toy mal";
-				return;
-			}
-			std::cout << "\nEJEcuto existen1";
-			std::string data = message.substr(11); // Obtener los datos sin el prefijo
-
-			// Dividir la cadena de datos en partes usando ":" como delimitador
-			std::istringstream iss(data);
-			std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
-
-			if (std::getline(iss, username, ':') &&
-				std::getline(iss, indexStr, ':') &&
-				std::getline(iss, moneyStr, ':') &&
-				std::getline(iss, isSelectingStr, ':') &&
-				std::getline(iss, isInGameStr, ':')) {
-				//&&std::getline(iss, imageStr)
-				// Todos los valores se han leído correctamente
-			}
-			else {
-				std::cout << "\nEJEcuto toy remal";
-				return;
-			}
-
-			int index;
-			int money;
-			bool isSelecting;
-			bool isInGame;
-
-			std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
-
-			// Convertir el índice y el dinero a sus tipos apropiados
-			try {
-				index = std::stoi(indexStr);
-				money = std::stoi(moneyStr);
-				isSelecting = (isSelectingStr == "true");
-				isInGame = (isInGameStr == "true");
-			}
-			catch (const std::invalid_argument& e) {
-				// Manejar el error (el valor no es un número)
-				std::cout << "\nEJEcuto no sirvo";
-				return;
-			}
-			catch (const std::out_of_range& e) {
-				// Manejar el error (el número está fuera del rango)
-				std::cout << "\nEJEcuto no 98989";
-				return;
-			}
-			std::cout << "\nEJEcuto existen3";
-
-
-
-			if (playerIndex != 0) {
-
-				index = (index - playerIndex + 4) % 4;
-
-			}
-
-
-			// Asegurarse de que el índice esté dentro de los límites
-			if (index >= 0 && index < playerInfos.size()) {
-				std::cout << "\nEJEcuto existen6";
-				// Actualizar la información del jugador en la posición correspondiente
-				playerInfos[index].username = username;
-				playerInfos[index].money = money;
-				playerInfos[index].isSelectingPiece = isSelecting;
-				playerInfos[index].isInGame = isInGame;
-
-				// Procesar la imagen
-				//std::vector<char> image(imageStr.begin(), imageStr.end());
-				//playerInfos[index].image = image;
-
-				// Cargar la textura del avatar
-			  //  playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
-				playersGame[index].NamePlayer.setString(playerInfos[index].username);
-
-				// Imprimir la información del jugador
-				std::cout << "Player " << index << ": " << username
-					<< " | Money: " << money
-					<< " | Is Selecting: " << (isSelecting ? "Yes" : "No")
-					<< " | Is In Game: " << (isInGame ? "Yes" : "No")
-					<< std::endl;
-
-				std::cout << "\nEJEcuto existen4";
-			}
-			else {
-				std::cerr << "Error: Index out of bounds for player information." << std::endl;
-			}
-
-
-			std::cout << "\nEJEcuto existen2";
 		}
 
 
-		else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
-			// Eliminar el prefijo "EXISTING_PLAYER:"
-			std::cout << "\nEXISTING_PLAYER";
+		// Asegurarse de que el índice esté dentro de los límites
+		if (index >= 0 && index < playerInfos.size()) {
+			std::cout << "\nEJEcuto existen6";
+			// Actualizar la información del jugador en la posición correspondiente
+			playerInfos[index].username = username;
+			playerInfos[index].money = money;
+			playerInfos[index].isSelectingPiece = isSelecting;
+			playerInfos[index].isInGame = isInGame;
 
-			if (message.length() < 16) {
-				std::cout << "\nEJEcuto toy mal";
-				return;
-			}
-			std::cout << "\nEJEcuto existen1";
-			std::string data = message.substr(16);
-
-			// Dividir la cadena de datos en partes usando ":" como delimitador
-			std::istringstream iss(data);
-			std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
-
-			if (std::getline(iss, username, ':') &&
-				std::getline(iss, indexStr, ':') &&
-				std::getline(iss, moneyStr, ':') &&
-				std::getline(iss, isSelectingStr, ':') &&
-				std::getline(iss, isInGameStr, ':')) { //&&
-				//   std::getline(iss, imageStr)
-
-				   // Todos los valores se han leído correctamente
-			}
-			else {
-				std::cout << "\nEJEcuto toy remal";
-
-			}
-
-			int index;
-			int money;
-			bool isSelecting;
-			bool isInGame;
-
-			std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
-
-			// Convertir el índice y el dinero a sus tipos apropiados
-			try {
-				index = std::stoi(indexStr);
-				money = std::stoi(moneyStr);
-				isSelecting = (isSelectingStr == "true");
-				isInGame = (isInGameStr == "true");
-
-			}
-			catch (const std::invalid_argument& e) {
-				// Manejar el error (el valor no es un número)
-				std::cout << "\nEJEcuto no sirvo";
-				return;
-			}
-			catch (const std::out_of_range& e) {
-				// Manejar el error (el número está fuera del rango)
-				std::cout << "\nEJEcuto no 98989";
-				return;
-			}
-			std::cout << "\nEJEcuto existen3";
-
-
-
-			if (playerIndex != 0) {
-
-				index = (index - playerIndex + 4) % 4;
-
-			}
-
-
+			// Procesar la imagen
 			//std::vector<char> image(imageStr.begin(), imageStr.end());
+			//playerInfos[index].image = image;
 
+			// Cargar la textura del avatar
+		  //  playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
+			playersGame[index].NamePlayer.setString(playerInfos[index].username);
 
-			// Asegurarse de que el índice esté dentro de los límites
-			if (index >= 0 && index < playerInfos.size()) {
-				std::cout << "\nEJEcuto existen6";
-				// Actualizar la información del jugador en la posición correspondiente
-				playerInfos[index].username = username;
-				playerInfos[index].money = money;
-				playerInfos[index].isSelectingPiece = isSelecting;
-				playerInfos[index].isInGame = isInGame;
+			// Imprimir la información del jugador
+			std::cout << "Player " << index << ": " << username
+				<< " | Money: " << money
+				<< " | Is Selecting: " << (isSelecting ? "Yes" : "No")
+				<< " | Is In Game: " << (isInGame ? "Yes" : "No")
+				<< std::endl;
 
-				/*
-				 std::vector<char>& imageData = playerInfos[index].image;
-
-				 playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());*/
-				playersGame[index].NamePlayer.setString(playerInfos[index].username);
-
-
-				// Imprimir la información del jugador
-				std::cout << "Player " << index << ": " << username
-					<< " | Money: " << money
-					<< " | Is Selecting: " << (isSelecting ? "Yes" : "No")
-					<< " | Is In Game: " << (isInGame ? "Yes" : "No")
-					<< std::endl;
-
-				std::cout << "\nEJEcuto existen4";
-			}
-			else {
-				std::cerr << "Error: Index out of bounds for player information." << std::endl;
-			}
-
-			std::cout << "\nEJEcuto existen2";
+			std::cout << "\nEJEcuto existen4";
 		}
-		else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
-			// Extraer la cantidad de jugadores de la mensaje
-			std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
-			int playerCount = std::stoi(playerCountStr);
-			NumPlayers = playerCount;
-
-		}
-		else if (message.rfind("SEND_IMAGE:", 0) == 0) {
-			// Extraer el índice y el nombre del archivo
-			size_t firstColon = message.find(":", 11); // Buscar el primer ':' después de "SEND_IMAGE:"
-			int IIndex = std::stoi(message.substr(11, firstColon - 11)); // Extraer el índice
-			std::string filename = message.substr(firstColon + 1); // Extraer el nombre del archivo
-
-			std::cout << "Received image info - Player Index: " << playerIndex << ", Filename: " << filename << std::endl;
-
-
-			IIndex = (IIndex - playerIndex + 4) % 4;
-
-			if (!playersGame[IIndex].textureAvatarPLayer.loadFromFile(filename)) {
-				std::cerr << "Error loading image!" << std::endl;
-			}
-
-
-			// Guardar la imagen recibida (opcional)
-
-
-			std::cout << "Received image from player " << IIndex << std::endl;
+		else {
+			std::cerr << "Error: Index out of bounds for player information." << std::endl;
 		}
 
 
-		else
+		std::cout << "\nEJEcuto existen2";
+	}
+	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
+		// Eliminar el prefijo "EXISTING_PLAYER:"
+		std::cout << "\nEXISTING_PLAYER";
 
-			if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
-				std::cout << "\nEJEcuto index1";
-				std::cout << "\nMensaje recibido: " << message;
-				std::string indexStr;
-				std::string pieceIndexStr;
-				try {
-					// Encontrar las posiciones de los delimitadores ":" en el mensaje
-					size_t firstColon = message.find(":", 20);   // Buscar el primer ":" después del prefijo
-					size_t secondColon = message.find(":", firstColon + 1); // Buscar el segundo ":" después del primero
+		if (message.length() < 16) {
+			std::cout << "\nEJEcuto toy mal";
+			return;
+		}
+		std::cout << "\nEJEcuto existen1";
+		std::string data = message.substr(16);
 
-					if (firstColon == std::string::npos || secondColon == std::string::npos) {
-						std::cerr << "Error: Formato de mensaje inesperado. Faltan delimitadores." << std::endl;
-						return;
-					}
+		// Dividir la cadena de datos en partes usando ":" como delimitador
+		std::istringstream iss(data);
+		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
 
-					// Extraer las subcadenas correspondientes al índice del jugador y al índice de la pieza
-					indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
-					pieceIndexStr = message.substr(secondColon + 1);
+		if (std::getline(iss, username, ':') &&
+			std::getline(iss, indexStr, ':') &&
+			std::getline(iss, moneyStr, ':') &&
+			std::getline(iss, isSelectingStr, ':') &&
+			std::getline(iss, isInGameStr, ':')) { //&&
+			//   std::getline(iss, imageStr)
 
-					// Mostrar los valores extraídos para depuración
-					std::cout << "\nindexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'";
+			   // Todos los valores se han leído correctamente
+		}
+		else {
+			std::cout << "\nEJEcuto toy remal";
 
-					// Convertir los valores a enteros
-					int Index = std::stoi(indexStr);
-					int indexselectinpiece = std::stoi(pieceIndexStr);
+		}
 
-					// Ajustar el índice del jugador
-					Index = (Index - playerIndex + 4) % 4;
-					CplayerIndex = Index;
+		int index;
+		int money;
+		bool isSelecting;
+		bool isInGame;
 
-					// Actualizar la información en el cliente
-					std::cout << "Player " << playerIndex << " seleccionó la pieza con índice " << indexselectinpiece << std::endl;
-					playerInfos[Index].indexPiece = indexselectinpiece;
-					std::cout << "\nEJEcuto index 2";
+		std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
+
+		// Convertir el índice y el dinero a sus tipos apropiados
+		try {
+			index = std::stoi(indexStr);
+			money = std::stoi(moneyStr);
+			isSelecting = (isSelectingStr == "true");
+			isInGame = (isInGameStr == "true");
+
+		}
+		catch (const std::invalid_argument& e) {
+			// Manejar el error (el valor no es un número)
+			std::cout << "\nEJEcuto no sirvo";
+			return;
+		}
+		catch (const std::out_of_range& e) {
+			// Manejar el error (el número está fuera del rango)
+			std::cout << "\nEJEcuto no 98989";
+			return;
+		}
+		std::cout << "\nEJEcuto existen3";
+
+
+
+		if (playerIndex != 0) {
+
+			index = (index - playerIndex + 4) % 4;
+
+		}
+
+
+		//std::vector<char> image(imageStr.begin(), imageStr.end());
+
+
+		// Asegurarse de que el índice esté dentro de los límites
+		if (index >= 0 && index < playerInfos.size()) {
+			std::cout << "\nEJEcuto existen6";
+			// Actualizar la información del jugador en la posición correspondiente
+			playerInfos[index].username = username;
+			playerInfos[index].money = money;
+			playerInfos[index].isSelectingPiece = isSelecting;
+			playerInfos[index].isInGame = isInGame;
+
+			/*
+			 std::vector<char>& imageData = playerInfos[index].image;
+
+			 playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());*/
+			playersGame[index].NamePlayer.setString(playerInfos[index].username);
+
+
+			// Imprimir la información del jugador
+			std::cout << "Player " << index << ": " << username
+				<< " | Money: " << money
+				<< " | Is Selecting: " << (isSelecting ? "Yes" : "No")
+				<< " | Is In Game: " << (isInGame ? "Yes" : "No")
+				<< std::endl;
+
+			std::cout << "\nEJEcuto existen4";
+		}
+		else {
+			std::cerr << "Error: Index out of bounds for player information." << std::endl;
+		}
+
+		std::cout << "\nEJEcuto existen2";
+	}
+	else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
+		// Extraer la cantidad de jugadores de la mensaje
+		std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
+		int playerCount = std::stoi(playerCountStr);
+		NumPlayers = playerCount;
+
+	}
+	else if (message.rfind("SEND_IMAGE:", 0) == 0) {
+		// Extraer el índice y el nombre del archivo
+		size_t firstColon = message.find(":", 11); // Buscar el primer ':' después de "SEND_IMAGE:"
+		int IIndex = std::stoi(message.substr(11, firstColon - 11)); // Extraer el índice
+		std::string filename = message.substr(firstColon + 1); // Extraer el nombre del archivo
+
+		std::cout << "Received image info - Player Index: " << playerIndex << ", Filename: " << filename << std::endl;
+
+
+		IIndex = (IIndex - playerIndex + 4) % 4;
+
+		if (!playersGame[IIndex].textureAvatarPLayer.loadFromFile(filename)) {
+			std::cerr << "Error loading image!" << std::endl;
+		}
+
+
+		// Guardar la imagen recibida (opcional)
+
+
+		std::cout << "Received image from player " << IIndex << std::endl;
+	}
+	else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
+			std::cout << "\nEJEcuto index1";
+			std::cout << "\nMensaje recibido: " << message;
+			std::string indexStr;
+			std::string pieceIndexStr;
+			try {
+				// Encontrar las posiciones de los delimitadores ":" en el mensaje
+				size_t firstColon = message.find(":", 20);   // Buscar el primer ":" después del prefijo
+				size_t secondColon = message.find(":", firstColon + 1); // Buscar el segundo ":" después del primero
+
+				if (firstColon == std::string::npos || secondColon == std::string::npos) {
+					std::cerr << "Error: Formato de mensaje inesperado. Faltan delimitadores." << std::endl;
+					return;
 				}
-				catch (const std::invalid_argument& e) {
-					std::cerr << "\nError: Argumento no válido al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
-				}
-				catch (const std::out_of_range& e) {
-					std::cerr << "\nError: Número fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
-				}
-			}
-			else if (message.rfind("PLAYER_READY:", 0) == 0) {
-				// Extraer el `indexPlayer` del mensaje
-				int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
-				indexPlayer = (indexPlayer - playerIndex + 4) % 4;
-				playerInfos[indexPlayer].isSelectingPiece = true;
 
-				// Ahora puedes usar `indexPlayer` para actualizar el estado del jugador en el cliente
-				std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
+				// Extraer las subcadenas correspondientes al índice del jugador y al índice de la pieza
+				indexStr = message.substr(firstColon + 1, secondColon - firstColon - 1);
+				pieceIndexStr = message.substr(secondColon + 1);
 
-				// Realiza cualquier acción adicional para indicar que este jugador está listo,
-				// como actualizar el estado en la interfaz de usuario.
+				// Mostrar los valores extraídos para depuración
+				std::cout << "\nindexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'";
 
+				// Convertir los valores a enteros
+				int Index = std::stoi(indexStr);
+				int indexselectinpiece = std::stoi(pieceIndexStr);
+
+				// Ajustar el índice del jugador
+				Index = (Index - playerIndex + 4) % 4;
+				CplayerIndex = Index;
+
+				// Actualizar la información en el cliente
+				std::cout << "Player " << playerIndex << " seleccionó la pieza con índice " << indexselectinpiece << std::endl;
+				playerInfos[Index].indexPiece = indexselectinpiece;
+				std::cout << "\nEJEcuto index 2";
 			}
-			else {
-				std::cerr << "Unknown message received from server: " << message << std::endl;
+			catch (const std::invalid_argument& e) {
+				std::cerr << "\nError: Argumento no válido al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
 			}
+			catch (const std::out_of_range& e) {
+				std::cerr << "\nError: Número fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+			}
+	}
+	else if (message.rfind("PLAYER_READY:", 0) == 0) {
+			// Extraer el `indexPlayer` del mensaje
+			int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
+			indexPlayer = (indexPlayer - playerIndex + 4) % 4;
+			playerInfos[indexPlayer].isSelectingPiece = true;
+
+			// Ahora puedes usar `indexPlayer` para actualizar el estado del jugador en el cliente
+			std::cout << "Jugador " << indexPlayer << " está listo." << std::endl;
+
+			// Realiza cualquier acción adicional para indicar que este jugador está listo,
+			// como actualizar el estado en la interfaz de usuario.
+
+	}
+	else {
+			std::cerr << "Unknown message received from server: " << message << std::endl;
+	}
 }

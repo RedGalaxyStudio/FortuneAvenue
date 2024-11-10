@@ -28,6 +28,7 @@ public:
 	bool sendImage(const std::string& filename);
 	void disconnect();
 	void rollDice();
+	void endTurn();
 	void handleServerMessage(const std::string& message);
 	int lastRollResult;
 	void playerChangedPiece();

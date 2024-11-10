@@ -16,14 +16,12 @@ public:
 
 private:
     sf::Color fillColor;
-    sf::RenderTexture renderTexture1; 
-    sf::RenderTexture renderTexture2; 
+
 
     bool turno;
     float initialSpeed;
     float decelerationRate;
-    sf::CircleShape textureCircule1;
-    sf::CircleShape textureCircule2;
+
 
     float blinkTimer;
     float blinkDuration;
@@ -32,7 +30,7 @@ private:
     float currentRotation;
     bool isSpinning;
     float rotationSpeed;
-    std::vector<sf::Vector2f> iconPositions; 
+  
     float width, height;
     float centerX, centerY;  
     float radius;
@@ -41,13 +39,10 @@ private:
     sf::Clock lightClock;
     bool lightState = true;
    
-    sf::Shader shader;
-    sf::Shader noise;
-    sf::Shader glowShader;
-    sf::Shader shader_gradient;
     std::vector<sf::ConvexShape> segments;
     std::vector<sf::Texture> iconTextures;
     std::vector<sf::Sprite> icons;
+    std::vector<sf::Sprite> iconsResul;
     std::vector<sf::CircleShape> luces;
     sf::ConvexShape pointer;
 

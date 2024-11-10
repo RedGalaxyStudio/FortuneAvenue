@@ -6,35 +6,12 @@
 Ruleta::Ruleta(float width, float height, float centerX, float centerY)
 	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), isSpinning(false), rotationSpeed(6.0f), turno(true) {
 	// Inicializar shaders
-	if (!shader.loadFromFile("shaderlink.frag", sf::Shader::Fragment)) {
-		std::cerr << "Error al cargar el shader" << std::endl;
-	}
 
-	if (!noise.loadFromFile("shader_noise.frag", sf::Shader::Fragment)) {
-		std::cerr << "Error al cargar el shader" << std::endl;
-	}
-	if (!glowShader.loadFromFile("shader_glow.frag", sf::Shader::Fragment)) {
-		std::cerr << "Error al cargar el shader de glow" << std::endl;
-	}
-
-	if (!shader_gradient.loadFromFile("shader_gradient.frag", sf::Shader::Fragment)) {
-		std::cerr << "Error al cargar el shader de glow" << std::endl;
-	}
 
 	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
 
 
-	renderTexture1.create(static_cast<unsigned int>(radius * 2), static_cast<unsigned int>(radius * 2));
 
-	renderTexture2.create(static_cast<unsigned int>(radius * 2), static_cast<unsigned int>(radius * 2));
-
-
-	sf::Vector2f lightOrigin(640, 360); // Origen de la luz
-
-	shader.setUniform("frag_LightColor", sf::Glsl::Vec3(1.5f, 1.5f, 1.5f)); // Color de luz más brillante
-	shader.setUniform("frag_LightOrigin", lightOrigin);
-	shader.setUniform("frag_LightAttenuation", 0.01f); // Atenuación de luz más baja
-	shader.setUniform("frag_ScreenResolution", sf::Vector2f(1280, 720));
 
 	// Crear segmentos
 	createSegments();
@@ -107,7 +84,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		// Actualizar la posición de los íconos para que roten junto con la ruleta
 		for (int i = 0; i < numSegments; ++i) {
 			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
-			icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
+			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
 
 			if (rotationSpeed == 0.0f) {
 				isSpinning = false;
@@ -130,10 +107,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			decelerationRate = static_cast<float>(rand() % 20 + 40); // Nueva tasa de desaceleración aleatoria para el próximo giro
 		}
 
-		iconPositions.clear();
-		for (const auto& icon : icons) {
-			iconPositions.push_back(icon.getPosition());
-		}
 	}
 
 	float segmentAngle = 360.0f / numSegments; // Cada segmento cubre este ángulo
@@ -180,67 +153,57 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 	if (!isSpinning && rotationSpeed == 0.0f && giro == true && currentSegment != -1) {
 
-		renderTexture1.clear(); // Limpia la textura
+		
 		currentSegmentColor = segments[currentSegment].getFillColor();
+
+		
+
+		giro = false;
+
+	
+		window.draw(ruletaBase);
+
 		for (auto& segment : segments) {
 			segment.setFillColor(currentSegmentColor);
 			segment.setOutlineColor(currentSegmentColor);
 
 			fillColor = segment.getFillColor();
 
-			renderTexture1.draw(segment); // Dibuja el sprite con shader1
+			window.draw(segment); // Dibuja el sprite con shader1
 
 
 		}
-		renderTexture1.display(); // Finaliza el dibujo en la textura
-
-		giro = false;
-
-		shader.setUniform("segmentTexture", renderTexture1.getTexture());
-		shader.setUniform("resolution", sf::Glsl::Vec2(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
-
-		window.draw(ruletaBase);
-		textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
-
-		window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
+		
 		window.draw(CentroCircule);
 		//  std::cout << "\nruleta icon2";
-		window.draw(icons[currentSegment]);
+		window.draw(iconsResul[currentSegment]);
 		
 	}
 	else if (!isSpinning && resultado == true) {
 
 
+
+		particleSystem.addParticle(ruletaBase.getPosition(), fillColor, 50.0f);
+		particleSystem.update(deltaTime);
+		particleSystem.draw(window);
+
 		window.draw(ruletaBase);
 
-		renderTexture1.clear(); // Limpia la textura
 
 		for (const auto& segment : segments) {
 
 			fillColor = segment.getFillColor();
 
-			renderTexture1.draw(segment); // Dibuja el sprite con shader1
+			window.draw(segment); // Dibuja el sprite con shader1
 
 		}
-		particleSystem.addParticle(ruletaBase.getPosition(), fillColor, 50.0f);
-		particleSystem.update(deltaTime);
-		particleSystem.draw(window);
-
-		renderTexture1.display(); // Finaliza el dibujo en la textura
-
-		shader.setUniform("segmentTexture", renderTexture1.getTexture());
-		shader.setUniform("resolution", sf::Glsl::Vec2(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
-
-		textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
-
-		window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
 
 		window.draw(CentroCircule);
 
-		icons[currentSegment].setPosition(centerX, centerY);
+
 		muerte = true;
 		//    std::cout << "\nruleta icon1";
-		window.draw(icons[currentSegment]);
+		window.draw(iconsResul[currentSegment]);
 
 
 	}
@@ -248,30 +211,17 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 		particleSystem.reset();
 		window.draw(ruletaBase);
-		for (int i = 0; i < 7; i++)
-		{
+
+		for (int i = 0; i < 7; i++) {
 			segments[i].setFillColor(segmentColors[i]);
+			segments[i].setOutlineColor(sf::Color::Black);
+			window.draw(segments[i]); // Dibuja el segmento después de configurarlo
 		}
-		renderTexture1.clear(); // Limpia la textura
-		for (const auto& segment : segments) {
 
-
-
-			renderTexture1.draw(segment); // Dibuja el sprite con shader1
-		}
-		renderTexture1.display(); // Finaliza el dibujo en la textura
-
-		shader.setUniform("segmentTexture", renderTexture1.getTexture());
-		shader.setUniform("resolution", sf::Glsl::Vec2(static_cast<float>(radius * 2), static_cast<float>(radius * 2)));
-
-		textureCircule1.setTexture(&renderTexture1.getTexture()); // Crea un sprite a partir de la segunda textura
-
-		window.draw(textureCircule1); // Dibuja en la ventana aplicando shader3
-
+	
 		window.draw(CentroCircule);
 
 		for (std::size_t i = 0; i < icons.size(); ++i) {
-			icons[i].setPosition(iconPositions[i]); // Restaurar la posición original
 			window.draw(icons[i]); // Dibujar el ícono en su posición original
 		}
 		
@@ -322,7 +272,7 @@ void Ruleta::createSegments() {
 
 		segment.setFillColor(segmentColors[i % numSegments]);
 		segment.setOrigin(0.0f, 0.0f);
-		segment.setPosition(radius, radius);
+		segment.setPosition(640, 360);
 		segment.setOutlineThickness(2);
 		segment.setOutlineColor(sf::Color::Black);
 		segments.push_back(segment);
@@ -335,8 +285,8 @@ void Ruleta::createSegments() {
 void Ruleta::loadIconTextures() {
 	iconTextures.resize(numSegments);
 	std::string iconPaths[] = {
-		"icon1.png", "icon2.png", "icon3.png",
-		"icon4.png", "icon5.png", "icon6.png", "icon7.png"
+		"icono11.png", "icon2.png", "icono333.png",
+		"icon4.png", "icono55.png", "icono666.png", "icono7.png"
 	};
 
 	for (int i = 0; i < numSegments; ++i) {
@@ -349,6 +299,7 @@ void Ruleta::loadIconTextures() {
 void Ruleta::setupIcons() {
 
 	icons.resize(numSegments);
+	iconsResul.resize(numSegments);
 	float angleStep = static_cast<float>(2 * M_PI / numSegments);
 	float ScaleIcon = radius / 200;
 	for (int i = 0; i < numSegments; ++i) {
@@ -357,14 +308,14 @@ void Ruleta::setupIcons() {
 
 		// Posición del ícono, escalada al radio de la ruleta
 		float iconAngle = i * angleStep + angleStep / 2;
-		icons[i].setPosition(centerX + (radius - 50) * cos(iconAngle), centerY + (radius - 50) * sin(iconAngle));  // 50 es un margen
-		icons[i].setScale(ScaleIcon, ScaleIcon);  // 50 es un margen
+		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
+		
 		icons[i].setRotation(static_cast<float>(iconAngle * (180.0f / M_PI) + 90.0f));
-	}
 
-	iconPositions.clear();
-	for (const auto& icon : icons) {
-		iconPositions.push_back(icon.getPosition());
+		iconsResul[i].setTexture(iconTextures[i]);
+		iconsResul[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
+		iconsResul[i].setPosition(centerX, centerY);  // 50 es un margen
+	
 	}
 }
 
@@ -405,9 +356,7 @@ void Ruleta::drawLights(sf::RenderWindow& window, float deltaTime) {
 
 void Ruleta::setupBase() {
 
-	textureCircule1.setRadius(radius);
-	textureCircule1.setOrigin(radius, radius);
-	textureCircule1.setPosition(640, 360);
+
 
 	CentroCircule.setRadius(static_cast<float>(radius * 0.2));
 	CentroCircule.setOrigin(static_cast<float>(radius * 0.2), static_cast<float>(radius * 0.2));

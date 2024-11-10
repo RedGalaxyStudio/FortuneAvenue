@@ -176,14 +176,15 @@ public :
 			if (event.type == sf::Event::Closed) {
 				window->close();
 			}
+			if(turn_dado){
 
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-				DiceSound.play();
+				if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+					DiceSound.play();
 					updateDiceAppearance();
 					eventStarted = true;
-					
+
 					client->rollDice();
-					
+
 					mouseStart.x = rand() % 400 + 1;
 					mouseStart.y = rand() % 600 + 1;
 					ok = 1;
@@ -195,8 +196,9 @@ public :
 					// Asigna el resultado una vez que `espera` es true
 					faceIndex = client->lastRollResult;
 
-					std::cout <<"\nResultado en clase dado:" << faceIndex<<"\n";
+					std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 					espera = false;
+				}
 			}
 			
 

@@ -12,7 +12,7 @@ class MovePieces {
 public:
 	MovePieces(sf::RenderWindow& win);
 
-	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillasRuletaC);
+	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillasRuletaC, std::vector<std::vector<sf::Vector2f>>* casillaImpuestoC);
 
 	// Iniciar el movimiento del sprite a lo largo de las casillas
 	void iniciarMovimiento(int numeroCasillas, float duracion);
@@ -35,6 +35,7 @@ private:
 	sf::Sprite* sprite;  // Guardamos la referencia al sprite
 	std::vector<std::vector<sf::Vector2f>>* casillas;  // Lista de caminos/casillas
 	std::vector<std::vector<sf::Vector2f>>* casillasRuleta;  // Lista de caminos/casillas
+	std::vector<std::vector<sf::Vector2f>>* casillasImpuesto;  // Lista de caminos/casillas
 	sf::RenderWindow* window;
 	int caminoActual;  // El camino actual por el que está moviéndose el sprite
 	int casillaActual;  // La casilla actual dentro del camino
@@ -58,28 +59,38 @@ private:
 	std::vector<sf::Vector2f> camino3 = {
 		
 		sf::Vector2f(473,661),
-		sf::Vector2f(505, 632),
-		sf::Vector2f(505 , 586),
-		sf::Vector2f(519 , 544),
-		sf::Vector2f(556 , 544),
-		sf::Vector2f(568 ,586),
-		sf::Vector2f(568 , 636),
-		sf::Vector2f(580 , 678),
-		sf::Vector2f(621 , 677),
-		sf::Vector2f(632 , 637),
-		sf::Vector2f(632 , 585),
-		sf::Vector2f(642 , 542),
-		sf::Vector2f(678, 542),
-		sf::Vector2f(694 ,582),
-		sf::Vector2f(694 , 636),
-		sf::Vector2f(725 , 668),
-		sf::Vector2f(772 , 666)
+		sf::Vector2f(505,632),
+		sf::Vector2f(505,586),
+		sf::Vector2f(519,544),
+		sf::Vector2f(556,544),
+		sf::Vector2f(568,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(580,678),
+		sf::Vector2f(621,677),
+		sf::Vector2f(632,637),
+		sf::Vector2f(632,585),
+		sf::Vector2f(642,542),
+		sf::Vector2f(678,542),
+		sf::Vector2f(694,582),
+		sf::Vector2f(694,636),
+		sf::Vector2f(725,668),
+		sf::Vector2f(772,666)
 	};
 
 	std::vector<sf::Vector2f> caminoruleta3 = { 
 		sf::Vector2f(425,654),
 		sf::Vector2f(556 , 544),
-		sf::Vector2f(632 , 585) 
+		sf::Vector2f(632 , 585)
+	};
+
+	std::vector<sf::Vector2f> caminoimpuesto3 = { 
+		sf::Vector2f(621 , 677),
+		sf::Vector2f(694 ,582)
+	};
+	std::vector<sf::Vector2f> caminocasa3 = { 
+		sf::Vector2f(505,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(694,636)
 	};
 
 	std::vector<sf::Vector2f> camino5{
@@ -121,7 +132,7 @@ private:
 	 sf::Vector2f(460, 79)
 	};
 
-	std::vector<sf::Vector2f> caminoruleta5 = { 
+	std::vector<sf::Vector2f> caminoruleta5  { 
 		sf::Vector2f(840, 476),
 		sf::Vector2f(958, 372), 
 		sf::Vector2f(930, 231), 
@@ -129,7 +140,23 @@ private:
 		sf::Vector2f(675, 40), 
 		sf::Vector2f(514, 141) 
 	};
+	std::vector<sf::Vector2f> caminoimpuesto5  { 
+		sf::Vector2f(840, 476),
+		sf::Vector2f(958, 372),
+		sf::Vector2f(930, 231),
+		sf::Vector2f(688, 137),
+		sf::Vector2f(675, 40),
+		sf::Vector2f(514, 141) 
+	};
 
+	std::vector<sf::Vector2f> caminocasa5  {
+	sf::Vector2f(807, 416),
+	sf::Vector2f(881, 312),
+	sf::Vector2f(842, 238),
+	sf::Vector2f(874, 132),
+	sf::Vector2f(819, 188),
+	sf::Vector2f(544, 175)
+	};
 
 
 	std::vector<sf::Vector2f> camino7{
@@ -142,11 +169,8 @@ private:
 	};
 
 	std::vector<sf::Vector2f> caminoruleta7 = { sf::Vector2f(402, 157) };
-
-
-
-
-
+	std::vector<sf::Vector2f> caminoimpuesto7 = { sf::Vector2f(413, 253) };
+	std::vector<sf::Vector2f> caminocasa7 = { sf::Vector2f(368, 339) };
 };
 
 #endif // MOVEPIECES_HPP

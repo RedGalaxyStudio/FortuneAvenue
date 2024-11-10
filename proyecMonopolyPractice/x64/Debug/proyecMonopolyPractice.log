@@ -1,18 +1,2 @@
-﻿  ButtonG.cpp
-  GameMode.cpp
-  IniciaUser.cpp
-  IniciarPartida.cpp
-  MovePieces.cpp
-  ObjetosGlobal.cpp
-  PieceSelector.cpp
-  ResourceGame.cpp
-  ResourceGlobal.cpp
-  Ruleta.cpp
-  Scrollbar.cpp
-  SettingsManager.cpp
-  TextBox.cpp
-  WebViewManager.cpp
-  main.cpp
-  menuP.cpp
-  Generando código...
+﻿  ResourceGame.cpp
   proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

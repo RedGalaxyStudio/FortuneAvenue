@@ -21,7 +21,11 @@ void PieceSelector::Resource() {
 	Check.resize(4);
 	CheckTexturesOn.resize(4);
 	CheckTexturesOff.resize(4);
-
+	turn_dado = false;
+	turn = false;
+	turn_ruleta=false;
+	turn_casa= false;
+	turn_impuesto= false;
 	for (int i = 0; i < 4; i++) {
 		if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
 		if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;
@@ -92,8 +96,6 @@ void PieceSelector::updateSelection() {
 	globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
 	playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
-
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
 	CODE.setString("CODIGO: " + Code);
@@ -112,6 +114,7 @@ void PieceSelector::updateSelection() {
 	while (window->isOpen()) {
 
 		NumPlayers++;
+
 
 
 
