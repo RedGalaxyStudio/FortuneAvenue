@@ -88,7 +88,7 @@ void GameMode::update() {
 		playersGame[i].AvatarPlayer.setTexture(&playersGame[i].textureAvatarPLayer);
 		playersGame[i].AvatarPlayer.setRadius(static_cast<float>(playersGame[i].textureAvatarPLayer.getSize().x / 2));
 		playersGame[i].AvatarPlayer.setOrigin(64, 64);
-		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas, &casillasRuleta);
+		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas, &casillasRuleta,&casillasimpuesto);
 	}
 
 	animacionIniciada = false;

@@ -35,6 +35,7 @@
         sf::RenderWindow* window;
         std::vector<std::vector<sf::Vector2f>> casillas;
         std::vector<std::vector<sf::Vector2f>> casillasRuleta;
+        std::vector<std::vector<sf::Vector2f>> casillasimpuesto;
         sf::FloatRect globalBounds;
         int posicionActual;
         int vectorActual;    // Índice del vector actual

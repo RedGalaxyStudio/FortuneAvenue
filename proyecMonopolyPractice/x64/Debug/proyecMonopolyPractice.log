@@ -1,4 +1,17 @@
-﻿  GameMode.cpp
+﻿  ButtonG.cpp
+  GameMode.cpp
+  IniciarPartida.cpp
+  IniciaUser.cpp
+  main.cpp
+  menuP.cpp
   MovePieces.cpp
+  ObjetosGlobal.cpp
+  PieceSelector.cpp
+  ResourceGame.cpp
+  Scrollbar.cpp
+  SettingsManager.cpp
+  TextBox.cpp
+  ResourceGlobal.cpp
+  WebViewManager.cpp
   Generating Code...
   proyecMonopolyPractice.vcxproj -> C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe
