@@ -1,2 +1,8 @@
-﻿  ResourceGame.cpp
+﻿  Client.cpp
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(483,39): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(488,35): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(581,39): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(586,35): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(700,40): warning C4101: 'e': variable local sin referencia
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\Client.cpp(703,36): warning C4101: 'e': variable local sin referencia
   proyecMonopolyPractice.vcxproj -> C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe

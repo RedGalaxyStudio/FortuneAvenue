@@ -363,15 +363,33 @@ void Client::handleServerMessage(const std::string& message) {
 		turn = true;
 		IndexTurn = 0;
 	}else 	if (message.rfind("TURN_START", 0) == 0) {
-		std::string playerIndexStr = message.substr(11); // Extraer el índice del jugador, después de "TURN_START:"
-		int playerIndexTurn= std::stoi(playerIndexStr); // Convertirlo a entero
+		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
 
-		playerIndexTurn = (playerIndexTurn - playerIndex + 4) % 4;
+		// Buscar el inicio de "PLAYER_INDEX:" y extraer el valor numérico después
+		size_t indexPos = message.find("PLAYER_INDEX:");  // Encontrar el índice donde empieza "PLAYER_INDEX:"
+		if (indexPos != std::string::npos) {
+			// Extraer la parte después de "PLAYER_INDEX:"
+			std::string playerIndexStr = message.substr(indexPos + 13); // 13 es la longitud de "PLAYER_INDEX:"
 
-		IndexTurn = playerIndexTurn;
-		std::cout << "Turn has started for player: " << playerIndexTurn << std::endl;
+			std::cout << "Extracted player index string: " << playerIndexStr << std::endl;  // Depuración
 
+			// Convertir la cadena extraída a entero
+			int playerIndexTurn = std::stoi(playerIndexStr);
+			std::cout << "Converted player index: " << playerIndexTurn << std::endl;  // Depuración
+
+			// Ajustar el turno
+			playerIndexTurn = (playerIndexTurn - playerIndex + 4) % 4;
+
+			IndexTurn = playerIndexTurn;
+			std::cout << "Turn has started for player: " << playerIndexTurn << std::endl;
+		}
+		else {
+			std::cout << "Invalid message format for TURN_START." << std::endl;
+		}
 	}
+
+
+
 	else if (message.rfind("ROLL_RESULT:", 0) == 0) {
 		std::cout << "\nEjecución de ROLL_RESULT";
 
@@ -616,6 +634,7 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "\nEJEcuto existen2";
 	}
 	else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
+		std::cout << "\nPLAYER_COUNT" << std::endl;
 		// Extraer la cantidad de jugadores de la mensaje
 		std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
 		int playerCount = std::stoi(playerCountStr);
@@ -687,6 +706,7 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("PLAYER_READY:", 0) == 0) {
 			// Extraer el `indexPlayer` del mensaje
+			std::cout << "\n PLAYER READY" << std::endl;
 			int indexPlayer = std::stoi(message.substr(13)); // "PLAYER_READY:" tiene 13 caracteres
 			indexPlayer = (indexPlayer - playerIndex + 4) % 4;
 			playerInfos[indexPlayer].isSelectingPiece = true;
@@ -696,7 +716,7 @@ void Client::handleServerMessage(const std::string& message) {
 
 			// Realiza cualquier acción adicional para indicar que este jugador está listo,
 			// como actualizar el estado en la interfaz de usuario.
-
+			std::cout << "\n PLAYER fin" << std::endl;
 	}
 	else {
 			std::cerr << "Unknown message received from server: " << message << std::endl;
