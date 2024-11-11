@@ -381,7 +381,16 @@ void GameMode::DrawGame() {
 	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado) {
 		client.endTurn();
 		turn = false;
+		
 	}
+	
+
+	// Imprimir los valores de las variables
+	std::cout << "Estado de turn: " << turn << std::endl;
+	std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
+	std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
+	std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
+	std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
 
 	window->setView(window->getDefaultView());
 

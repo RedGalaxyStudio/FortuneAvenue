@@ -48,7 +48,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			casillaActual++;
 			casillasRestantes--;
 
-			turn_ruleta = true;
+			
 			std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
