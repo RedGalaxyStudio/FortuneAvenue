@@ -170,8 +170,8 @@ void GameMode::update() {
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;
-	GameEnd gameend(window);
-	gameend.update();
+	//GameEnd gameend(window);
+	//gameend.update();
 	muerte = false;
 
 	while (window->isOpen()) {
