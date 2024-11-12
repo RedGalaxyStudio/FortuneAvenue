@@ -564,14 +564,15 @@ void Client::handleServerMessage(const std::string& message) {
 
 		// Dividir la cadena de datos en partes usando ":" como delimitador
 		std::istringstream iss(data);
-		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;
+		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imagePath;
 
 		if (std::getline(iss, username, ':') &&
 			std::getline(iss, indexStr, ':') &&
 			std::getline(iss, moneyStr, ':') &&
 			std::getline(iss, isSelectingStr, ':') &&
-			std::getline(iss, isInGameStr, ':')) { //&&
-			//   std::getline(iss, imageStr)
+			std::getline(iss, isInGameStr, ':') &&
+			std::getline(iss, imagePath)) { 
+			
 
 			   // Todos los valores se han leído correctamente
 		}
@@ -584,7 +585,7 @@ void Client::handleServerMessage(const std::string& message) {
 		int money;
 		bool isSelecting;
 		bool isInGame;
-
+		std::string image;
 		std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
 
 		// Convertir el índice y el dinero a sus tipos apropiados
@@ -593,7 +594,7 @@ void Client::handleServerMessage(const std::string& message) {
 			money = std::stoi(moneyStr);
 			isSelecting = (isSelectingStr == "true");
 			isInGame = (isInGameStr == "true");
-
+			image = imagePath; // Guardar la dirección de la imagen
 		}
 		catch (const std::invalid_argument& e) {
 			// Manejar el error (el valor no es un número)
@@ -627,11 +628,13 @@ void Client::handleServerMessage(const std::string& message) {
 			playerInfos[index].money = money;
 			playerInfos[index].isSelectingPiece = isSelecting;
 			playerInfos[index].isInGame = isInGame;
+			playerInfos[index].image = image;
 
-			/*
-			 std::vector<char>& imageData = playerInfos[index].image;
 
-			 playersGame[index].textureAvatarPLayer.loadFromMemory(imageData.data(), imageData.size());*/
+
+			if (!playersGame[index].textureAvatarPLayer.loadFromFile(playerInfos[index].image)) {
+				std::cerr << "Error loading image!" << std::endl;
+			}
 			playersGame[index].NamePlayer.setString(playerInfos[index].username);
 
 
