@@ -1,5 +1,6 @@
 #include "GameMode.hpp"
 #include <String>
+#include "GameEnd.hpp"
 GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), ruleta(500.0f, 500.0f, 640.0f, 360.0f), validar(false), moverFichas(4, MovePieces(win)), ruledraw(false){
 	loadResourceGame();
 	resource();
@@ -169,8 +170,8 @@ void GameMode::update() {
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;
-
-
+	GameEnd gameend(window);
+	gameend.update();
 	muerte = false;
 
 	while (window->isOpen()) {

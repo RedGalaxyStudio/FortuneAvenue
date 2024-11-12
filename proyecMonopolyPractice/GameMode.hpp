@@ -7,7 +7,7 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include <windows.h> 
+//#include <windows.h> 
 #include "Globals.hpp"
 #include "ObjetosGlobal.hpp"
 #include "WindowClass.h"

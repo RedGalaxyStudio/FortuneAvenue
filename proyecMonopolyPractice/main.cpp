@@ -4,7 +4,7 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include <windows.h> 
+//#include <windows.h> 
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ResourceGlobal.hpp"
