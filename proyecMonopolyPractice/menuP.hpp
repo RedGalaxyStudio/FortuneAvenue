@@ -4,13 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp" 
-#include "WebViewManager.hpp"
 #include <winsock2.h>
 #include <Windows.h>
 #include "ObjetosGlobal.hpp"
 #include "GameMode.hpp"
 
-class WebViewManager;
+
 class GameMode;
 
 class menuP : public SettingsManager {
@@ -31,8 +30,6 @@ public:
 
     void eventoMenuO();
 
-    void OpenWebView();
-    void CloseWebView(bool Vali);
 
     void MenuOpcion();
     void MenuSalir();
@@ -40,10 +37,7 @@ public:
     void ValidarUser();
 private:
 
-    HWND hwnd;
-    WebViewManager* webviewManager;
-    LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-    bool isWebViewOpen;
+   
 
     sf::RenderWindow* window;
 

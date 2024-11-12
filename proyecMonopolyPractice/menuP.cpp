@@ -7,7 +7,7 @@
 #include "ButtonG.hpp"
 #include "IniciarPartida.hpp"
 #include "PieceSelector.hpp"
-menuP::menuP() : window(nullptr), hwnd(nullptr), webviewManager(nullptr), isWebViewOpen(false) , SesionValida(true){}
+menuP::menuP() : window(nullptr), SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
@@ -226,10 +226,7 @@ void menuP::eventoMenuP() {
                 MenuAcercaDe();
              
             }
-            if (box.getGlobalBounds().contains(mousePosFloat)) {
-                playClickSound();
-                 OpenWebView();
-            }
+
         }
     }
 }
@@ -397,65 +394,6 @@ void menuP::MenuSalir() {
         
     }
 }
-
-LRESULT menuP::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    switch (uMsg) {
-    case WM_DESTROY:
-        CloseWebView(false); 
-        PostQuitMessage(0);
-        return 0;
-    }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
-
-
-void menuP::OpenWebView() {
-    try {
-        if (!isWebViewOpen) { 
-
-            WNDCLASS wc = {};
-            wc.lpfnWndProc = [](HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) -> LRESULT {
-                return reinterpret_cast<menuP*>(GetWindowLongPtr(hwnd, GWLP_USERDATA))->WindowProc(hwnd, uMsg, wParam, lParam);
-                };
-            wc.hInstance = GetModuleHandle(nullptr);
-            wc.lpszClassName = L"WebView2Example";
-
-            RegisterClass(&wc);
-            hwnd = CreateWindowEx(0, L"WebView2Example", L"WebView2 Demo",
-                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
-                nullptr, nullptr, GetModuleHandle(nullptr), this); 
-
-            if (!hwnd) {
-                std::cerr << "Error al crear la ventana." << std::endl;
-                return;
-            }
-
-            SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this)); 
-
-            
-            webviewManager = new WebViewManager(hwnd);
-            webviewManager->CreateWebView();
-            isWebViewOpen = true; 
-        }
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Excepción: " << e.what() << std::endl;
-    }
-}
-
-
-void menuP::CloseWebView(bool Vali) {
-
-    SesionValida = Vali;
-
-    if (isWebViewOpen) {
-        DestroyWindow(hwnd); 
-        hwnd = nullptr;      
-        isWebViewOpen = false; 
-    }
-}
-
 
 void menuP::MenuAcercaDe() {
 

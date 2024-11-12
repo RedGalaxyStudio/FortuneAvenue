@@ -42,9 +42,6 @@
     <ClCompile Include="ButtonG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WebViewManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ObjetosGlobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ButtonG.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WebViewManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nlohmann\json.hpp">

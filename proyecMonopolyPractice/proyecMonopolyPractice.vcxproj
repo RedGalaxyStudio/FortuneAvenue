@@ -156,7 +156,6 @@
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />
     <ClCompile Include="VolumeSlider.cpp" />
-    <ClCompile Include="WebViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
@@ -184,7 +183,6 @@
     <ClInclude Include="TextBox.hpp" />
     <ClInclude Include="ResourceGlobal.hpp" />
     <ClInclude Include="VolumeSlider.hpp" />
-    <ClInclude Include="WebViewManager.hpp" />
     <ClInclude Include="WindowClass.h" />
   </ItemGroup>
   <ItemGroup>
