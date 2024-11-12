@@ -49,7 +49,7 @@ void TextBox::setPosition() {
 }
 
 // Manejo de la entrada de texto
-void TextBox::handleInput(sf::Event event, const size_t maxLength) {
+std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
     //const size_t maxLength = 11; // Limite de caracteres
 
     // Manejo de entrada de texto
@@ -73,6 +73,7 @@ void TextBox::handleInput(sf::Event event, const size_t maxLength) {
 
         }
     }
+    return input;
 }
 
 std::string TextBox::Actu() {
