@@ -144,7 +144,10 @@ void GameMode::update() {
 	playersGame[1].Money.setPosition(170.65f, 585.5f);
 
 	//perfil 3
-	playersGame[2].NamePlayer.setPosition(1100.65f, 45.5f);
+	globalBounds = playersGame[2].NamePlayer.getGlobalBounds();
+	playersGame[2].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+	playersGame[2].NamePlayer.setPosition(1188.65f, 52.5f);
 	playersGame[2].boxPlayer.setPosition(1188.65f, 52.5f);
 	playersGame[2].boxPlayer.setScale(0.7f, 0.7f);
 	playersGame[2].MarcoPlayer.setPosition(1052.5f, 52.5f);
@@ -154,19 +157,19 @@ void GameMode::update() {
 
 	//perfil 4
 	playersGame[3].NamePlayer.setPosition(1188.65f, 552.5f);
-	playersGame[3].boxPlayer.setPosition(1188.65f, 52.5f);
+	playersGame[3].boxPlayer.setPosition(1188.65f, 552.5f);
 	playersGame[3].boxPlayer.setScale(0.7f, 0.7f);
 	playersGame[3].MarcoPlayer.setPosition(1052.5f, 552.5f);
 	playersGame[3].Money.setPosition(1170.65f, 585.5f);
-
+	playersGame[3].AvatarPlayer.setPosition(1052.5f, 552.5f);
+	playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
 
 
 	float duracionMovimiento = 0.5f;
 
 
 
-	playersGame[3].AvatarPlayer.setPosition(1052.5f, 652.5f);
-	playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
+	
 
 
 	Dado.start(1280, 720);
