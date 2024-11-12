@@ -75,6 +75,9 @@
     <ClCompile Include="Economy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HouseBuy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Economy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HouseBuy.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
