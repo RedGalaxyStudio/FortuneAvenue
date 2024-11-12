@@ -135,7 +135,7 @@ void GameMode::update() {
 
 	//perfil 2
 
-	playersGame[1].NamePlayer.setPosition(145.65f, 545.5f);
+	playersGame[1].NamePlayer.setPosition(188.65f, 552.5f);
 	playersGame[1].boxPlayer.setPosition(188.65f, 552.5f);
 	playersGame[1].boxPlayer.setScale(0.7f, 0.7f);
 	playersGame[1].MarcoPlayer.setPosition(52.5f, 552.5f); 
