@@ -201,7 +201,7 @@ void IniciaUser::IniciAcion(){
                 }
             }
                     // Manejar la entrada de texto
-                    textBox.handleInput(event,11);
+                    input1=textBox.handleInput(event,11);
         }
         window.clear();
         window.draw(SpriteFondoMenu);
@@ -245,7 +245,8 @@ void IniciaUser::saveSelectedAvatar(){
             // Crear un objeto JSON
             json avatarData;
             avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
-
+            
+            std::cout << "\ninput1:" << input1;
             avatarData["username"] = input1;  
 
          
