@@ -9,7 +9,7 @@ void GameMode::resource() {
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
-
+	Opcioncami = -1;
 	//Cargar Texturas de Flechas
 	if (!TextureArrowIzq.loadFromFile("resource/texture/Game/Izq.png")) return;
 	if (!TextureArrowDer.loadFromFile("resource/texture/Game/Der.png")) return;
@@ -251,55 +251,46 @@ void GameMode::update() {
 	
 }
 
-void  GameMode::Event() {
-
+void GameMode::Event() {
 	sf::Event event;
 
-	while (window->pollEvent(event)) {
+	do {
+		if (window->pollEvent(event)) {  // Inicializamos 'event' antes de usarlo
+			Dado.loop(event, &client);  // 'event' ya está inicializado correctamente
 
+			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-		Dado.loop(event, &client);
-	
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+			if (event.type == sf::Event::Closed ||
+				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
-		if (event.type == sf::Event::Closed ||
-			(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+				renderTexture.clear();
+				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteMapa);
+				for (int i = 0; i < 4; i++) {
+					renderTexture.draw(playersGame[i].NamePlayer);
+					renderTexture.draw(playersGame[i].boxPlayer);
+					renderTexture.draw(playersGame[i].MarcoPlayer);
+					renderTexture.draw(playersGame[i].AvatarPlayer);
+				}
+				renderTexture.draw(spriteX);
+				renderTexture.draw(overlay);
 
-			renderTexture.clear();
-			renderTexture.draw(spriteFondoGame);
-			renderTexture.draw(spriteMapa);
-			for (int i = 0; i < 4; i++)
-			{
-				renderTexture.draw(playersGame[i].NamePlayer);
-				renderTexture.draw(playersGame[i].boxPlayer);
-				renderTexture.draw(playersGame[i].MarcoPlayer);
-				renderTexture.draw(playersGame[i].AvatarPlayer);
+				Menup.MenuSalir();
 			}
-			renderTexture.draw(spriteX);
-			renderTexture.draw(overlay);
 
-			Menup.MenuSalir();
-			//  running = false;
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				if (Settings.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					Menup.MenuOpcion();
+				}
+				if (ruledraw) {
+					validar = true;
+				}
+			}
 		}
 
-
-		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-
-			if (Settings.getGlobalBounds().contains(mousePosFloat)) {
-				playClickSound();
-
-				Menup.MenuOpcion();
-
-			}
-			if(ruledraw){
-			validar = true;}
-
-		}
-
-	}
-
-
+	} while (window->pollEvent(event));  // Asegura que el bucle se repita mientras haya eventos pendientes
 }
 
 void GameMode::DrawPieceMoviendo(  ) {
@@ -402,11 +393,11 @@ void GameMode::DrawGame() {
 	
 
 	// Imprimir los valores de las variables
-	//std::cout << "Estado de turn: " << turn << std::endl;
-	//std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
-	//std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
-	//std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
-	//std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+	std::cout << "Estado de turn: " << turn << std::endl;
+	std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
+	std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
+	std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
+	std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
 
 	window->setView(window->getDefaultView());
 
