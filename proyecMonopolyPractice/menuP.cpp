@@ -7,7 +7,9 @@
 #include "ButtonG.hpp"
 #include "IniciarPartida.hpp"
 #include "PieceSelector.hpp"
+
 menuP::menuP() : window(nullptr), SesionValida(true){}
+
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
@@ -201,7 +203,6 @@ void menuP::eventoMenuP() {
             
             if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-
                 MenuJugar();
           
                
@@ -217,12 +218,11 @@ void menuP::eventoMenuP() {
            
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-
                 MenuSalir(); 
+
             }
             if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-      
                 MenuAcercaDe();
              
             }
@@ -264,6 +264,7 @@ void menuP::eventoMenuO() {
         }
 
        
+
         musicSlider->handleEvent(event, *window);
         effectSlider->handleEvent(event, *window);
 

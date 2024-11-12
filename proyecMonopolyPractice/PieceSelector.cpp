@@ -112,54 +112,29 @@ void PieceSelector::updateSelection() {
 	CODE.setPosition(640, 30);
 	ButtonG botonCheck1(Check[0], CheckTexturesOff[0], CheckTexturesOn[0]);
 	client.sendImage(TextureAvatarPath);
+
+	for (int i = 0; i < 4; ++i) {
+		// Asignar nombre al jugador actual
+		playersGame[i].NamePlayer.setString(playerInfos[i].username);
+		globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
+		playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+		// Posicionar el jugador y los elementos relacionados
+		playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
+		playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
+		playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
+		Check[i].setPosition(startX + i * (250 + 10), startY + 200);
+	}
 	while (window->isOpen()) {
 
-		NumPlayers++;
-
-
-
-
-		switch (NumPlayers)
-		{
-		case 1:
-			playersGame[1].NamePlayer.setString(playerInfos[1].username);
-			globalBounds = playersGame[1].NamePlayer.getGlobalBounds();
-			playersGame[1].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-			for (int i = 0; i < 2; ++i) {
-				playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
-				playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
-			}
-			break;
-
-		case 2:
-			playersGame[2].NamePlayer.setString(playerInfos[2].username);
-			globalBounds = playersGame[2].NamePlayer.getGlobalBounds();
-			playersGame[2].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-			for (int i = 0; i < 3; ++i) {
-				playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
-				playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
-			}
-			break;
-
-		case 3:
-			playersGame[3].NamePlayer.setString(playerInfos[3].username);
-			globalBounds = playersGame[3].NamePlayer.getGlobalBounds();
-			playersGame[3].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
-			for (int i = 0; i < 4; ++i) {
-				playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
-				playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
-
-
-				playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
-
-
-				Check[i].setPosition(startX + i * (250 + 10), startY + 200);
-			}
-
-			break;
-
+		
+		for (int i = 0; i < NumPlayers; ++i) {
+			// Asignar nombre al jugador actual
+			playersGame[i].NamePlayer.setString(playerInfos[i].username);
+			globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
+			playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		}
+
 
 
 

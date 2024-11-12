@@ -28,7 +28,7 @@ extern int CplayerIndex;
 extern bool rolldiceJugador;
 struct PlayerInfo {
 	std::string username;
-	std::vector<char> image;
+	std::string image;
 	int money = 200;
 	int roomconect;
 	bool isSelectingPiece = false; // Inicialmente en selección de pieza
