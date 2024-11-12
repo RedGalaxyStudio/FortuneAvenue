@@ -46,7 +46,7 @@ void GameMode::resource() {
 	// Vector para cada grupo de casillas (caminos)
 	std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
-	std::vector<sf::Vector2f> caminoruleta1 = { sf::Vector2f(0, 0) };
+	
 
 	
 
@@ -58,8 +58,14 @@ void GameMode::resource() {
 		playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		playersGame[i].MarcoPlayer.setOrigin(45.5f, 45.5f);
 	}
-	casillas.push_back(camino1);
-	casillasRuleta.push_back(caminoruleta1);
+	casillas0.push_back(camino1);
+	casillas1.push_back(camino1);
+	casillas2.push_back(camino1);
+	casillas3.push_back(camino1);
+	
+
+	
+	
 
 
 
@@ -88,9 +94,16 @@ void GameMode::update() {
 		playersGame[i].AvatarPlayer.setTexture(&playersGame[i].textureAvatarPLayer);
 		playersGame[i].AvatarPlayer.setRadius(static_cast<float>(playersGame[i].textureAvatarPLayer.getSize().x / 2));
 		playersGame[i].AvatarPlayer.setOrigin(64, 64);
-		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas, &casillasRuleta,&casillasimpuesto);
+		
 	}
 	
+
+	moverFichas[0].Inicializar(&playersGame[0].PieceSelect, &casillas0, &casillasimpuesto0);
+	moverFichas[1].Inicializar(&playersGame[1].PieceSelect, &casillas1, &casillasimpuesto1);
+	moverFichas[2].Inicializar(&playersGame[2].PieceSelect, &casillas2, &casillasimpuesto2);
+	moverFichas[3].Inicializar(&playersGame[3].PieceSelect, &casillas3, &casillasimpuesto3);
+
+
 	animacionIniciada = false;
 
 	playersGame[0].PieceSelect.setPosition(330, 439);
@@ -316,7 +329,7 @@ void GameMode::DrawPieceMoviendo(  ) {
 	window->setView(window->getDefaultView());
 
 
-	std::cout << "\n la cagaste movi2:";
+//	std::cout << "\n la cagaste movi2:";
 }
 
 
@@ -354,23 +367,26 @@ void GameMode::DrawGame() {
 	int cas= moverFichas[0].getcasillaActual();
 
 
-	std::cout << "\n CaminoActu:"<< CaminoActu<<"casilla:" <<cas;
+	//std::cout << "\n CaminoActu:"<< CaminoActu<<"casilla:" <<cas;
+	
+	
 
+	if(turn_ruleta && giroRule){
 
-	if(turn_ruleta){
+	
 
-	if(casillasRuleta.size()> CaminoActu && CaminoActu >= 1){
-
-	for (int i = 0; i < casillasRuleta[CaminoActu].size(); i++)
+	for (int i = 0; i < casillasRuleta.size(); i++)
 	{
-		if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[CaminoActu][i])
+		if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 		{
 			ruledraw = true;
 			turn_ruleta = false;
 			ruleta.trurntrue();
 		}
 	}
-	}
+	giroRule = false;
+	turn_ruleta = false;
+	
 	}
 	else if(turn_casa) {
 
@@ -386,11 +402,11 @@ void GameMode::DrawGame() {
 	
 
 	// Imprimir los valores de las variables
-	std::cout << "Estado de turn: " << turn << std::endl;
-	std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
-	std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
-	std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
-	std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+	//std::cout << "Estado de turn: " << turn << std::endl;
+	//std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
+	//std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
+	//std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
+	//std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
 
 	window->setView(window->getDefaultView());
 

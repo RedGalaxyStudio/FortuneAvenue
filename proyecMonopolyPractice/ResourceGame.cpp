@@ -17,7 +17,7 @@ sf::Sprite SpriteArrowDer;
 bool muerte;
 sf::Sprite SpriteArrowArriba;
 bool server;
-
+bool rolldiceJugador;
 std::string username;
 std::vector<char> image; // Store image data directly.
 
@@ -27,7 +27,9 @@ bool Game = false;        // No en juego al principio
 std::vector<PlayerInfo> playerInfos;
 std::vector<PlayerGame> playersGame;
 bool espera;
+bool giroRule;
 int CplayerIndex;
+int Opcioncami;
 
 bool turn;
 bool turn_dado;

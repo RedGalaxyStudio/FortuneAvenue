@@ -32,6 +32,7 @@ public:
 	void handleServerMessage(const std::string& message);
 	int lastRollResult;
 	void playerChangedPiece();
+	void opcionCaminoenvio(int opcionCami);
 	void ReadyPlayer();
 	void startSpin();
 	void ruleteGame(float angulo);

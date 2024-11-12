@@ -33,9 +33,34 @@
     private:
         // Ventana de renderizado
         sf::RenderWindow* window;
-        std::vector<std::vector<sf::Vector2f>> casillas;
-        std::vector<std::vector<sf::Vector2f>> casillasRuleta;
-        std::vector<std::vector<sf::Vector2f>> casillasimpuesto;
+        std::vector<std::vector<sf::Vector2f>> casillas0;
+        std::vector<std::vector<sf::Vector2f>> casillas1;
+        std::vector<std::vector<sf::Vector2f>> casillas2;
+        std::vector<std::vector<sf::Vector2f>> casillas3;
+
+        std::vector<sf::Vector2f> casillasRuleta = {
+        sf::Vector2f(402, 157),
+        sf::Vector2f(840, 476),
+        sf::Vector2f(958, 372),
+        sf::Vector2f(930, 231),
+        sf::Vector2f(688, 137),
+        sf::Vector2f(675, 40),
+        sf::Vector2f(514, 141),
+        sf::Vector2f(425,654),
+        sf::Vector2f(556 , 544),
+        sf::Vector2f(632 , 585),
+        sf::Vector2f(923, 679),
+        sf::Vector2f(328, 161),
+        sf::Vector2f(790, 539),
+        sf::Vector2f(325,523)
+        };
+
+        std::vector<std::vector<sf::Vector2f>> casillasimpuesto0;
+        std::vector<std::vector<sf::Vector2f>> casillasimpuesto1;
+        std::vector<std::vector<sf::Vector2f>> casillasimpuesto2;
+        std::vector<std::vector<sf::Vector2f>> casillasimpuesto3;
+
+
         sf::FloatRect globalBounds;
         int posicionActual;
         int vectorActual;    // Índice del vector actual

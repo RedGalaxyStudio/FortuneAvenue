@@ -25,7 +25,7 @@ extern sf::Sprite SpriteArrowArriba;
 
 extern std::string Code;
 extern int CplayerIndex;
-
+extern bool rolldiceJugador;
 struct PlayerInfo {
 	std::string username;
 	std::vector<char> image;
@@ -37,7 +37,9 @@ struct PlayerInfo {
 
 };
 
+extern int Opcioncami;
 extern bool espera;
+extern bool giroRule;
 extern bool SelectingPiece; // Inicialmente en selección de pieza
 extern bool Game;        // No en juego al principio
 extern bool muerte;        // No en juego al principio
