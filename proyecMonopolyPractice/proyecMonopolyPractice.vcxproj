@@ -140,6 +140,7 @@
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Economy.cpp" />
+    <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="HouseBuy.cpp" />
     <ClCompile Include="IniciarPartida.cpp" />
@@ -156,15 +157,14 @@
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />
-    <ClCompile Include="VolumeSlider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
-    <ClInclude Include="CImg.h" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />
     <ClInclude Include="Economy.hpp" />
+    <ClInclude Include="GameEnd.hpp" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="HouseBuy.hpp" />
@@ -184,7 +184,6 @@
     <ClInclude Include="SettingsManager.hpp" />
     <ClInclude Include="TextBox.hpp" />
     <ClInclude Include="ResourceGlobal.hpp" />
-    <ClInclude Include="VolumeSlider.hpp" />
     <ClInclude Include="WindowClass.h" />
   </ItemGroup>
   <ItemGroup>
