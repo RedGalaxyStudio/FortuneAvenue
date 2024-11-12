@@ -213,45 +213,6 @@ bool Client::sendImage(const std::string& filename) {
 
 
 
-/*bool Client::sendImage(const std::string& filename) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-		return false;
-	}
-
-	// Cargar la imagen desde el archivo
-	sf::Image image;
-	if (!image.loadFromFile(filename)) {
-		std::cerr << "Failed to load image: " << filename << std::endl;
-		return false;
-	}
-
-	// Convertir la imagen a un arreglo de bytes
-	std::vector<char> imageData(image.getSize().x * image.getSize().y * 4);  // Asumimos 4 bytes por píxel (RGBA)
-	const sf::Uint8* pixels = image.getPixelsPtr();
-
-	// Copiar los datos de los píxeles al vector de bytes
-	std::copy(pixels, pixels + image.getSize().x * image.getSize().y * 4, imageData.begin());
-
-	// Crear un paquete ENet para enviar la imagen (sin usar std::string para los datos binarios)
-	ENetPacket* packet = enet_packet_create(imageData.data(), imageData.size(), ENET_PACKET_FLAG_RELIABLE);
-
-	// Enviar el paquete al servidor
-	if (enet_peer_send(peer, 0, packet) < 0) {
-		std::cerr << "Failed to send image." << std::endl;
-		enet_packet_destroy(packet);
-		return false;
-	}
-
-	// Liberar el paquete después de enviarlo
-	enet_packet_destroy(packet);
-
-	std::cout << "Image sent!" << std::endl;
-	return true;
-}*/
-
-
-
 
 std::vector<char> Client::loadImage(const std::string& filename) {
 	std::ifstream file(filename, std::ios::binary);

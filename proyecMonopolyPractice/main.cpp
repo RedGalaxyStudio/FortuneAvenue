@@ -4,7 +4,7 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include <windows.h> 
+//#include <windows.h> 
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ResourceGlobal.hpp"
@@ -23,13 +23,6 @@ int main() {
     if (!icono.loadFromFile("resource/texture/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
     window.setMouseCursorVisible(false);
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
-    
-    HRESULT hr = CoInitialize(nullptr);
-    if (FAILED(hr)) {
-        std::cerr << "Error al inicializar COM." << std::endl;
-        return -1;
-    }
 
 
    // Cinematic cinematic(window);

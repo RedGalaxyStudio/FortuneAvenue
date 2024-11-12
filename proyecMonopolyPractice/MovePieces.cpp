@@ -90,7 +90,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 void MovePieces::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
-
+	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
 		SpriteArrowArriba.setPosition(370, 400);
@@ -114,11 +114,11 @@ void MovePieces::updateCAmbioCasilla() {
 		casillas->resize(1);
 		finalCamino = false;
 		caminoActual--;
-		std::cout << "\ncaminoActual: " << caminoActual;
+		//std::cout << "\ncaminoActual: " << caminoActual;
 	}
 
 	while (finalCamino == true) {
-		std::cout << "\ncaminoActual: " << caminoActual;
+		//std::cout << "\ncaminoActual: " << caminoActual;
 		sf::Event event;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -204,62 +204,61 @@ void MovePieces::updateCAmbioCasilla() {
 				}
 
 			}
-			else {
-
-
-				if (tan == 3) {
-					if (Opcioncami == 0) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoIzq();
-						Opcioncami = -1;
-					}
-
-					if (Opcioncami == 1) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoDer();
-						Opcioncami = -1;
-					}
-
-				}
-				else if (tan == 5) {
-					if (Opcioncami == 0) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoDer();
-						Opcioncami = -1;
-					}
-
-					if (Opcioncami == 1) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoIzq();
-						Opcioncami = -1;
-					}
-				}
-				else if (tan == 1) {
-					if (Opcioncami == 0) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoIzq();
-						Opcioncami = -1;
-					}
-
-					if (Opcioncami == 1) {
-						playClickSound();
-						finalCamino = false;
-						seleccionarCaminoDer();
-						Opcioncami = -1;
-					}
-				}
-
-
-
-			}
-
 		}
 
+
+
+
+		if (!turn) {
+
+			std::cout << "\nOpcioncami:" << Opcioncami;
+			if (tan == 3) {
+				if (Opcioncami == 0) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoIzq();
+					Opcioncami = -1;
+				}
+
+				if (Opcioncami == 1) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoDer();
+					Opcioncami = -1;
+				}
+
+			}
+			else if (tan == 5) {
+				if (Opcioncami == 0) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoDer();
+					Opcioncami = -1;
+				}
+
+				if (Opcioncami == 1) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoIzq();
+					Opcioncami = -1;
+				}
+			}
+			else if (tan == 1) {
+				if (Opcioncami == 0) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoIzq();
+					Opcioncami = -1;
+				}
+
+				if (Opcioncami == 1) {
+					playClickSound();
+					finalCamino = false;
+					seleccionarCaminoDer();
+					Opcioncami = -1;
+				}
+			}
+		}
 		currentCursor = &normalCursor;
 
 		window->setMouseCursor(*currentCursor);

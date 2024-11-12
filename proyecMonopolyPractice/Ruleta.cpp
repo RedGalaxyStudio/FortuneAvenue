@@ -9,10 +9,7 @@ Ruleta::Ruleta(float width, float height, float centerX, float centerY)
 
 
 	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
-
-
-
-
+	
 	// Crear segmentos
 	createSegments();
 
