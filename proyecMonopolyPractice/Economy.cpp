@@ -1,8 +1,13 @@
 #include "Economy.hpp"
+#include "GameMode.hpp"
 
 Economy::Economy(int* _dinero) : dinero(_dinero) {}
 
 void Economy::sumardinero(int suma) {
+   
+    //if() playersGame[i].Money.setString(std::to_string(playerInfos[i].money));
+
+    
     *dinero += suma;  // Modificamos el valor al que apunta 'dinero'
 }
 

@@ -329,7 +329,7 @@ void MovePieces::seleccionarCaminoIzq() {
 
 
 
-		std::vector<sf::Vector2f> caminocasa2_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678) };
+		std::vector<sf::Vector2f> caminocasa2_1 = {  };
 
 		casillas->push_back(camino2_1);
 		casillas->push_back(camino3);
@@ -344,12 +344,11 @@ void MovePieces::seleccionarCaminoIzq() {
 		};
 
 
-		std::vector<sf::Vector2f> caminoimpuesto4_1 = { sf::Vector2f(790, 539) };
-		std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(765, 623) };
+		std::vector<sf::Vector2f> caminoimpuesto4_1 = {  };
+		std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623) };
 
 		casillasImpuesto->push_back(caminoimpuesto4_1);
-		casillasImpuesto->push_back(caminoimpuesto5);
-
+	
 
 		casillas->push_back(camino4_1);
 		casillas->push_back(camino5);
@@ -381,8 +380,8 @@ void MovePieces::seleccionarCaminoDer() {
 		};
 
 	
-		std::vector<sf::Vector2f> caminoimpuesto2_2 = { sf::Vector2f(428, 517) };
-		std::vector<sf::Vector2f> caminocasa2_2 = { sf::Vector2f(429, 566) };
+		std::vector<sf::Vector2f> caminoimpuesto2_2 = {  };
+		std::vector<sf::Vector2f> caminocasa2_2 = {  };
 
 		casillasImpuesto->push_back(caminoimpuesto2_2);
 		casillasImpuesto->push_back(caminoimpuesto3);
@@ -403,11 +402,10 @@ void MovePieces::seleccionarCaminoDer() {
 		};
 
 	
-		std::vector<sf::Vector2f> caminoimpuesto4_2 = { sf::Vector2f(869, 679) };
-		std::vector<sf::Vector2f> caminocasa4_2 = { sf::Vector2f(955, 609) };
+		std::vector<sf::Vector2f> caminoimpuesto4_2 = {  };
+		std::vector<sf::Vector2f> caminocasa4_2 = {  };
 
 		casillasImpuesto->push_back(caminoimpuesto4_2);
-		casillasImpuesto->push_back(caminoimpuesto5);
 
 
 
@@ -428,8 +426,8 @@ void MovePieces::seleccionarCaminoDer() {
 		};
 
 	
-		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(444, 42), sf::Vector2f(320, 118) };
-		std::vector<sf::Vector2f> caminocasa6_2 = { sf::Vector2f(355, 40) };
+		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(790, 539),sf::Vector2f(444, 42), sf::Vector2f(320, 118),sf::Vector2f(869, 679),sf::Vector2f(428, 517) };
+		std::vector<sf::Vector2f> caminocasa6_2 = {  };
 
 		casillasImpuesto->push_back(caminoimpuesto6_2);
 		casillasImpuesto->push_back(caminoimpuesto7);

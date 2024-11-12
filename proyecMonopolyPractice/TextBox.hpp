@@ -12,12 +12,13 @@ public:
 
     TextBox(float width, float height,std::string solicitud);  // Constructor con parámetros
     void setPosition();
-    void handleInput(sf::Event event, const size_t maxLength);
+    std::string handleInput(sf::Event event, const size_t maxLength);
     void draw(sf::RenderWindow& window);
     void Prinf();
     std::string Actu();
-private:
     std::string input;
+private:
+    
     float x, y;
     sf::Text textoPregunta;
     sf::Text textoGuardado;
