@@ -173,36 +173,61 @@ public :
 	void loop(sf::Event event, Client* client)
 	{
 
-			if (event.type == sf::Event::Closed) {
-				window->close();
+		if (event.type == sf::Event::Closed) {
+			window->close();
+		}
+		if (turn_dado) {
+
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+				DiceSound.play();
+				updateDiceAppearance();
+				eventStarted = true;
+
+				client->rollDice();
+
+				mouseStart.x = rand() % 400 + 1;
+				mouseStart.y = rand() % 600 + 1;
+				ok = 1;
+				clock.restart();
+				//std::cout << "eventStarted: " << eventStarted << std::endl;
+				std::unique_lock<std::mutex> lock(client->mtx);
+				client->cv.wait(lock, [] { return espera; }); // Espera hasta que espera sea true
+
+				// Asigna el resultado una vez que espera es true
+				faceIndex = client->lastRollResult;
+				client->lastRollResult = -1;
+				std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
+				espera = false;
 			}
-			if(turn_dado){
+		}
 
-				if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-					DiceSound.play();
-					updateDiceAppearance();
-					eventStarted = true;
+		if (rolldiceJugador) {
+			std::unique_lock<std::mutex> lock(client->mtx);
 
-					client->rollDice();
-
-					mouseStart.x = rand() % 400 + 1;
-					mouseStart.y = rand() % 600 + 1;
-					ok = 1;
-					clock.restart();
-					//std::cout << "eventStarted: " << eventStarted << std::endl;
-					std::unique_lock<std::mutex> lock(client->mtx);
-					client->cv.wait(lock, [] { return espera; }); // Espera hasta que `espera` sea `true`
-
-					// Asigna el resultado una vez que `espera` es true
-					faceIndex = client->lastRollResult;
-
-					std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
-					espera = false;
-				}
+			// Espera hasta que el resultado esté disponible
+			while (client->lastRollResult == -1) { // Suponiendo que -1 indica un valor no asignado
+				client->cv.wait(lock);
 			}
-			
+
+			DiceSound.play();
+			updateDiceAppearance();
+			eventStarted = true;
+
+			mouseStart.x = rand() % 400 + 1;
+			mouseStart.y = rand() % 600 + 1;
+			ok = 1;
+			clock.restart();
+
+			// Ahora que el valor está asegurado, asignamos el resultado
+			faceIndex = client->lastRollResult;
+			client->lastRollResult=-1;
+			std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
+			espera = false;
+			rolldiceJugador = false;
+		}
 
 	};
+
 
 	int logica(){
 		if (eventStarted) {

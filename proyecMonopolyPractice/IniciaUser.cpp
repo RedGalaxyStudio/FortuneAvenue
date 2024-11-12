@@ -321,7 +321,4 @@ void IniciaUser::loadAvatars(){
     Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
-
-
-
 }

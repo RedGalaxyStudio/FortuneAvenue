@@ -278,6 +278,19 @@ void Client::rollDice() {
 	std::cout << "\neYYYyy";
 }
 
+
+void Client::opcionCaminoenvio(int opcionCami) {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+	
+	std::string message = "OPCION_CAMINO:"+ std::to_string(opcionCami);
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+	
+}
+
 void Client::endTurn() {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
@@ -361,6 +374,7 @@ void Client::handleServerMessage(const std::string& message) {
 		// Aquí el jugador puede decidir llamar a `rollDice`
 		turn_dado = true;
 		turn = true;
+		turn_ruleta = true;
 		IndexTurn = 0;
 	}else 	if (message.rfind("TURN_START", 0) == 0) {
 		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
@@ -375,6 +389,7 @@ void Client::handleServerMessage(const std::string& message) {
 
 			// Convertir la cadena extraída a entero
 			int playerIndexTurn = std::stoi(playerIndexStr);
+
 			std::cout << "Converted player index: " << playerIndexTurn << std::endl;  // Depuración
 
 			// Ajustar el turno
@@ -393,7 +408,6 @@ void Client::handleServerMessage(const std::string& message) {
 	else if (message.rfind("ROLL_RESULT:", 0) == 0) {
 		std::cout << "\nEjecución de ROLL_RESULT";
 
-		// Extrae `currentPlayerIndex` y `dado` del mensaje.
 		size_t playerIndexPos = message.find(":PLAYER_INDEX:") + std::string(":PLAYER_INDEX:").length();
 		size_t dicePos = message.find(":DICE:", playerIndexPos);
 
@@ -401,14 +415,24 @@ void Client::handleServerMessage(const std::string& message) {
 			int currentPlayerIndex = std::stoi(message.substr(playerIndexPos, dicePos - playerIndexPos));
 			int diceRoll = std::stoi(message.substr(dicePos + std::string(":DICE:").length()));
 
-			lastRollResult = diceRoll;
+			lastRollResult = diceRoll; // Asigna el resultado del dado aquí
 
-			{
-				std::lock_guard<std::mutex> lock(mtx);
-				espera = true; // Cambia espera a true
+			if (turn) {
+				{
+					std::lock_guard<std::mutex> lock(mtx);
+					espera = true; // Cambia espera a true
+				}
+
+				cv.notify_one(); // Notifica al hilo principal para continuar
 			}
+			else {
+				{
+					std::lock_guard<std::mutex> lock(mtx);
+					rolldiceJugador = true; // Cambia rolldiceJugador a true
+				}
 
-			cv.notify_one(); // Notifica a cualquier hilo en espera
+				cv.notify_one(); // Notifica al hilo principal para continuar
+			}
 
 			std::cout << "\nResultado en clase cliente:" << lastRollResult;
 			std::cout << "\nDice roll result: " << diceRoll << " para jugador con índice: " << currentPlayerIndex << std::endl;
@@ -422,6 +446,38 @@ void Client::handleServerMessage(const std::string& message) {
 
 		std::cout << "Wait for your turn!" << std::endl;
 
+	}
+
+	else if(message.rfind("OPCION_CAMINO:", 0) == 0) {
+		// Encuentra el primer ":" para asegurarse de que haya algo después
+		size_t pos = message.find(":");
+		if (pos != std::string::npos && pos + 1 < message.size()) {
+			// Extrae la parte numérica del mensaje
+			std::string opcionCami = message.substr(pos + 1);
+
+			// Puedes convertir opcionCami a un número si es necesario
+			try {
+				int opcion = std::stoi(opcionCami);  // Convierte el string a int
+				std::cout << "Opción recibida: " << opcion << std::endl;
+
+
+				Opcioncami = opcion;
+
+
+
+
+
+			}
+			catch (const std::invalid_argument& e) {
+				std::cerr << "Error al convertir la opción: " << e.what() << std::endl;
+			}
+			catch (const std::out_of_range& e) {
+				std::cerr << "Número fuera de rango: " << e.what() << std::endl;
+			}
+		}
+		else {
+			std::cerr << "Mensaje mal formado: falta valor después de los dos puntos." << std::endl;
+		}
 	}
 
 	else if (message.rfind("PLAYER_INDEX:", 0) == 0) {

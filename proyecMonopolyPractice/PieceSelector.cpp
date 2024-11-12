@@ -26,7 +26,7 @@ void PieceSelector::Resource() {
 	turn_ruleta=false;
 	turn_casa= false;
 	turn_impuesto= false;
-	
+	rolldiceJugador = false;
 	for (int i = 0; i < 4; i++) {
 		if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
 		if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;

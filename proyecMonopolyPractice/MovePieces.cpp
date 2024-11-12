@@ -1,13 +1,12 @@
 #include "MovePieces.hpp"
 #include "ResourceGlobal.hpp"
 
-MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), casillasRuleta(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false){};
+MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), casillasRuleta(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
 
 
-void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillasRuletaC, std::vector<std::vector<sf::Vector2f>>* casillasImpuestoC) {
+void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillasImpuestoC) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
-	this->casillasRuleta = casillasRuletaC;
 	this->casillasImpuesto = casillasImpuestoC;
 }
 
@@ -48,7 +47,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			casillaActual++;
 			casillasRestantes--;
 
-			
+
 			std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
@@ -56,11 +55,11 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 				if (caminoActual + 1 >= (*casillas).size()) {
 
 					finalCamino = true;
-					
+
 					updateCAmbioCasilla();
 				}
 				caminoActual++;
-				
+
 
 
 			}
@@ -77,6 +76,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 		}
 		else {
 			enMovimiento = false;
+			giroRule = true;
 		}
 
 		animacionRebote(posicionFinal, deltaTime);
@@ -116,81 +116,143 @@ void MovePieces::updateCAmbioCasilla() {
 		caminoActual--;
 		std::cout << "\ncaminoActual: " << caminoActual;
 	}
-    
+
 	while (finalCamino == true) {
 		std::cout << "\ncaminoActual: " << caminoActual;
 		sf::Event event;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-		
+
 		while (window->pollEvent(event)) {
 
+			if (turn) {
+				if (event.type == sf::Event::Closed ||
+					(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
-			if (event.type == sf::Event::Closed ||
-				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+					renderTexture.clear();
+					renderTexture.draw(spriteFondoGame);
+					renderTexture.draw(spriteMapa);
+					for (int i = 0; i < 4; i++)
+					{
+						renderTexture.draw(playersGame[i].NamePlayer);
+						renderTexture.draw(playersGame[i].boxPlayer);
+						renderTexture.draw(playersGame[i].MarcoPlayer);
+						renderTexture.draw(playersGame[i].AvatarPlayer);
+					}
+					renderTexture.draw(spriteX);
+					renderTexture.draw(overlay);
+					renderTexture.display();
+					Menup.MenuSalir();
 
-				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
-				renderTexture.draw(spriteMapa);
-				for (int i = 0; i < 4; i++)
-				{
-					renderTexture.draw(playersGame[i].NamePlayer);
-					renderTexture.draw(playersGame[i].boxPlayer);
-					renderTexture.draw(playersGame[i].MarcoPlayer);
-					renderTexture.draw(playersGame[i].AvatarPlayer);
+					running = false;
 				}
-				renderTexture.draw(spriteX);
-				renderTexture.draw(overlay);
-				renderTexture.display();
-				Menup.MenuSalir();
 
-				running = false;
+
+
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+
+					if (tan == 3) {
+						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(0);
+							seleccionarCaminoIzq();
+							
+						}
+
+						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(1);
+							seleccionarCaminoDer();
+						}
+
+					}
+					else if (tan == 5) {
+						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(0);
+							seleccionarCaminoDer();
+							
+						}
+
+						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(1);
+							seleccionarCaminoIzq();
+						}
+					}
+					else if (tan == 1) {
+						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(0);
+							seleccionarCaminoIzq();
+						}
+
+						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+							playClickSound();
+							finalCamino = false;
+							client.opcionCaminoenvio(1);
+							seleccionarCaminoDer();
+						}
+					}
+
+
+				}
+
 			}
+			else {
 
-
-
-			if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
 				if (tan == 3) {
-					if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+					if (Opcioncami == 0) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoIzq();
+						Opcioncami = -1;
 					}
 
-					if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+					if (Opcioncami == 1) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoDer();
+						Opcioncami = -1;
 					}
 
 				}
 				else if (tan == 5) {
-					if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+					if (Opcioncami == 0) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoDer();
+						Opcioncami = -1;
 					}
 
-					if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+					if (Opcioncami == 1) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoIzq();
+						Opcioncami = -1;
 					}
-				}else if (tan == 1) {
-					if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+				}
+				else if (tan == 1) {
+					if (Opcioncami == 0) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoIzq();
+						Opcioncami = -1;
 					}
 
-					if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+					if (Opcioncami == 1) {
 						playClickSound();
 						finalCamino = false;
 						seleccionarCaminoDer();
+						Opcioncami = -1;
 					}
-				}					
-				
+				}
 
 
 
@@ -266,15 +328,10 @@ void MovePieces::seleccionarCaminoIzq() {
 			sf::Vector2f(425,654)
 		};
 
-		std::vector<sf::Vector2f> caminoruleta2_1 = {
-			sf::Vector2f(325,523)
-			
-		};
+
 
 		std::vector<sf::Vector2f> caminocasa2_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678) };
 
-		casillasRuleta->push_back(caminoruleta2_1);
-		casillasRuleta->push_back(caminoruleta3);
 		casillas->push_back(camino2_1);
 		casillas->push_back(camino3);
 	}
@@ -287,15 +344,13 @@ void MovePieces::seleccionarCaminoIzq() {
 		sf::Vector2f(881, 540)
 		};
 
-		std::vector<sf::Vector2f> caminoruleta4_1 = { sf::Vector2f(790, 539) };
+
 		std::vector<sf::Vector2f> caminoimpuesto4_1 = { sf::Vector2f(790, 539) };
 		std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(765, 623) };
 
 		casillasImpuesto->push_back(caminoimpuesto4_1);
 		casillasImpuesto->push_back(caminoimpuesto5);
 
-		casillasRuleta->push_back(caminoruleta4_1);
-		casillasRuleta->push_back(caminoruleta5);
 
 		casillas->push_back(camino4_1);
 		casillas->push_back(camino5);
@@ -307,7 +362,7 @@ void MovePieces::seleccionarCaminoIzq() {
 			sf::Vector2f(407, 98),
 		};
 
-		
+
 		casillas->push_back(camino6_1);
 		casillas->push_back(camino7);
 
@@ -326,15 +381,13 @@ void MovePieces::seleccionarCaminoDer() {
 	 sf::Vector2f(425, 654)
 		};
 
-		std::vector<sf::Vector2f> caminoruleta2_2 = { sf::Vector2f(425, 654) };
+	
 		std::vector<sf::Vector2f> caminoimpuesto2_2 = { sf::Vector2f(428, 517) };
 		std::vector<sf::Vector2f> caminocasa2_2 = { sf::Vector2f(429, 566) };
 
 		casillasImpuesto->push_back(caminoimpuesto2_2);
 		casillasImpuesto->push_back(caminoimpuesto3);
 
-		casillasRuleta->push_back(caminoruleta2_2);
-		casillasRuleta->push_back(caminoruleta3);
 		casillas->push_back(camino2_2);
 		casillas->push_back(camino3);
 	}
@@ -350,14 +403,14 @@ void MovePieces::seleccionarCaminoDer() {
 		sf::Vector2f(881, 541)
 		};
 
-		std::vector<sf::Vector2f> caminoruleta4_2 = { sf::Vector2f(923, 679) };
+	
 		std::vector<sf::Vector2f> caminoimpuesto4_2 = { sf::Vector2f(869, 679) };
 		std::vector<sf::Vector2f> caminocasa4_2 = { sf::Vector2f(955, 609) };
 
 		casillasImpuesto->push_back(caminoimpuesto4_2);
 		casillasImpuesto->push_back(caminoimpuesto5);
 
-		casillasRuleta->push_back(caminoruleta4_2);
+
 
 		casillas->push_back(camino4_2);
 		casillas->push_back(camino5);
@@ -375,15 +428,13 @@ void MovePieces::seleccionarCaminoDer() {
 	   sf::Vector2f(365, 168)
 		};
 
-		std::vector<sf::Vector2f> caminoruleta6_2 = { sf::Vector2f(328, 161)};
-		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(444, 42), sf::Vector2f(320, 118)};
+	
+		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(444, 42), sf::Vector2f(320, 118) };
 		std::vector<sf::Vector2f> caminocasa6_2 = { sf::Vector2f(355, 40) };
 
 		casillasImpuesto->push_back(caminoimpuesto6_2);
 		casillasImpuesto->push_back(caminoimpuesto7);
 
-		casillasRuleta->push_back(caminoruleta6_2);
-		casillasRuleta->push_back(caminoruleta7);
 
 		casillas->push_back(camino6_2);
 		casillas->push_back(camino7);
