@@ -95,3 +95,4 @@ void TextBox::Prinf() {
     renderTexture.draw(text);
     renderTexture.draw(textoPregunta);
 }
+

@@ -28,7 +28,7 @@
         void DrawPieceMoviendo();
         void DrawGame();
         void DrawGameRuleta();
-
+        void DrawGameImpuesto();
 
     private:
         // Ventana de renderizado
@@ -53,6 +53,26 @@
         sf::Vector2f(328, 161),
         sf::Vector2f(790, 539),
         sf::Vector2f(325,523)
+        };
+
+
+        std::vector<sf::Vector2f> caminoimpuesto{
+    sf::Vector2f(621 , 677),
+    sf::Vector2f(694 ,582),
+    sf::Vector2f(413, 253),
+    sf::Vector2f(444, 42),
+    sf::Vector2f(320, 118),
+    sf::Vector2f(869, 679),
+    sf::Vector2f(428, 517),
+    sf::Vector2f(835, 540),
+    sf::Vector2f(805, 450),
+    sf::Vector2f(925, 396),
+    sf::Vector2f(808, 257),
+    sf::Vector2f(882, 238),
+    sf::Vector2f(773, 190),
+    sf::Vector2f(635, 37)
+
+
         };
 
         std::vector<std::vector<sf::Vector2f>> casillasimpuesto0;
@@ -95,6 +115,10 @@
         sf::Texture TextureArrowIzq;
 
         sf::Texture TextureArrowArriba;
+
+        sf::Texture TextureImpuesto;
+        sf::Sprite SpriteImpuesto;
+
 
 
     };

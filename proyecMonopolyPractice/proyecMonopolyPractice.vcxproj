@@ -142,6 +142,7 @@
     <ClCompile Include="Economy.cpp" />
     <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="GameMode.cpp" />
+    <ClCompile Include="HouseBuy.cpp" />
     <ClCompile Include="IniciarPartida.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
     <ClCompile Include="main.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="GameEnd.hpp" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />
+    <ClInclude Include="HouseBuy.hpp" />
     <ClInclude Include="IniciarPartida.hpp" />
     <ClInclude Include="IniciaUser.hpp" />
     <ClInclude Include="menuP.hpp" />

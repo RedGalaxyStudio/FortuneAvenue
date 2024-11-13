@@ -15,6 +15,7 @@ void GameMode::resource() {
 	if (!TextureArrowIzq.loadFromFile("resource/texture/Game/Izq.png")) return;
 	if (!TextureArrowDer.loadFromFile("resource/texture/Game/Der.png")) return;
 	if (!TextureArrowArriba.loadFromFile("resource/texture/Game/Arriba.png")) return;
+	if (!TextureImpuesto.loadFromFile("resource/texture/Game/Impuesto.png")) return;
 
     //posicin y tamanio de flechas
     SpriteArrowIzq.setTexture(TextureArrowIzq);
@@ -135,7 +136,7 @@ void GameMode::update() {
 
 	//perfil 2
 
-	playersGame[1].NamePlayer.setPosition(145.65f, 545.5f);
+	playersGame[1].NamePlayer.setPosition(188.65f, 552.5f);
 	playersGame[1].boxPlayer.setPosition(188.65f, 552.5f);
 	playersGame[1].boxPlayer.setScale(0.7f, 0.7f);
 	playersGame[1].MarcoPlayer.setPosition(52.5f, 552.5f); 
@@ -221,8 +222,8 @@ void GameMode::update() {
 		// En tu lógica de juego:
 		float deltaTime = reloj.restart().asSeconds();
 		//std::cout << "\n la cagaste medio:";
-
-
+		//DrawGameImpuesto();
+		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
 			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
 			DrawPieceMoviendo();
@@ -357,6 +358,45 @@ void GameMode::DrawGameRuleta() {
 	ruleta.draw(*window, deltaTime, validar);
 }
 
+
+void GameMode::DrawGameImpuesto() {
+
+
+
+	window->clear();
+
+	renderTexture.clear();
+
+	renderTexture.draw(spriteFondoGame);
+	renderTexture.draw(spriteMapa);
+
+	for (int i = 0; i < 4; i++)
+	{
+		renderTexture.draw(playersGame[i].NamePlayer);
+		renderTexture.draw(playersGame[i].boxPlayer);
+		renderTexture.draw(playersGame[i].MarcoPlayer);
+		renderTexture.draw(playersGame[i].AvatarPlayer);
+
+	}
+
+	SpriteImpuesto.setTexture(TextureImpuesto);
+    SpriteImpuesto.setOrigin(310.0f, 310.0f);
+	SpriteImpuesto.setPosition(640, 360);
+
+
+	renderTexture.draw(overlay);
+
+	renderTexture.display();
+
+	renderedSprite.setTexture(renderTexture.getTexture());
+
+	window->draw(renderedSprite);
+	window->draw(SpriteImpuesto);
+	
+}
+
+
+
 void GameMode::DrawGame() {
 	int CaminoActu = moverFichas[IndexTurn].getCaminoActual();
 	//CaminoActu -= 1;
@@ -386,9 +426,17 @@ void GameMode::DrawGame() {
 	}
 	else if(turn_casa) {
 
-
+		
 	}else if(turn_impuesto) {
-
+		for (int i = 0; i < caminoimpuesto.size(); i++)
+		{
+			if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
+			{
+			//	ruledraw = true;
+				turn_impuesto = false;
+				//ruleta.trurntrue();
+			}
+		}
 
 	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado) {
 		client.endTurn();

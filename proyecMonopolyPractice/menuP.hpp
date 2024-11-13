@@ -73,6 +73,9 @@ private:
     sf::Clock clock;
 
 
+
+    
+
     sf::Texture TextureConfirmarSalir;
     sf::Sprite SpriteConfirmarSalir;
 

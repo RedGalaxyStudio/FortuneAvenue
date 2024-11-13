@@ -74,19 +74,19 @@ private:
 		sf::Vector2f(694,582),
 		sf::Vector2f(694,636),
 		sf::Vector2f(725,668),
-		sf::Vector2f(772,666)
+		sf::Vector2f(772,666),
+
+
+		sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623)
 	};
 
 
 
 	std::vector<sf::Vector2f> caminoimpuesto3 = { 
-		sf::Vector2f(621 , 677),
-		sf::Vector2f(694 ,582)
+
 	};
 	std::vector<sf::Vector2f> caminocasa3 = { 
-		sf::Vector2f(505,586),
-		sf::Vector2f(568,636),
-		sf::Vector2f(694,636)
+		
 	};
 
 	std::vector<sf::Vector2f> camino5{
@@ -129,14 +129,7 @@ private:
 	};
 
 	
-	std::vector<sf::Vector2f> caminoimpuesto5  { 
-		sf::Vector2f(840, 476),
-		sf::Vector2f(958, 372),
-		sf::Vector2f(930, 231),
-		sf::Vector2f(688, 137),
-		sf::Vector2f(675, 40),
-		sf::Vector2f(514, 141) 
-	};
+
 
 	std::vector<sf::Vector2f> caminocasa5  {
 	sf::Vector2f(807, 416),
@@ -144,7 +137,19 @@ private:
 	sf::Vector2f(842, 238),
 	sf::Vector2f(874, 132),
 	sf::Vector2f(819, 188),
-	sf::Vector2f(544, 175)
+	sf::Vector2f(595, 175),
+	sf::Vector2f(505,586),
+	sf::Vector2f(568,636),
+	sf::Vector2f(694,636),
+	sf::Vector2f(368, 339), 
+	sf::Vector2f(407, 98),
+	sf::Vector2f(764, 577),
+	sf::Vector2f(429, 566),
+	sf::Vector2f(955, 609),
+	sf::Vector2f(355, 40),
+	sf::Vector2f(323,629),
+	sf::Vector2f(394,678)
+	
 	};
 
 
@@ -158,8 +163,8 @@ private:
 	};
 
 
-	std::vector<sf::Vector2f> caminoimpuesto7 = { sf::Vector2f(413, 253) };
-	std::vector<sf::Vector2f> caminocasa7 = { sf::Vector2f(368, 339) };
+	std::vector<sf::Vector2f> caminoimpuesto7 = {  };
+	std::vector<sf::Vector2f> caminocasa7 = {  };
 };
 
 #endif // MOVEPIECES_HPP
