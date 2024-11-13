@@ -222,8 +222,8 @@ void GameMode::update() {
 		// En tu lógica de juego:
 		float deltaTime = reloj.restart().asSeconds();
 		//std::cout << "\n la cagaste medio:";
-		DrawGameImpuesto();
-		/*
+		//DrawGameImpuesto();
+		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
 			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
 			DrawPieceMoviendo();
@@ -249,7 +249,7 @@ void GameMode::update() {
 		}
 		else {
 			DrawGame();
-		}*/
+		}
 
 		window->display();
 		//std::cout << "\n la cagaste display:";

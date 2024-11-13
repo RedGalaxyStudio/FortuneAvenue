@@ -92,7 +92,7 @@ void IniciarPartida::update() {
 					pieceselector.Resource();
 					pieceselector.updateSelection();
 
-					//    message.showMessage();  // Muestra el mensaje al iniciar el programa
+				
 
 
 				}
@@ -100,7 +100,7 @@ void IniciarPartida::update() {
 				if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 					playClickSound();
 					valida2 = true;
-					std::cout << "haaaaaaaaaaaaaaaaaaaa2aaaaaaaaa";
+				
 				}
 
 
@@ -116,12 +116,12 @@ void IniciarPartida::update() {
 
 		window->setMouseCursor(*currentCursor);
 
-		// Actualiza el estado del MessageBox
+
 		message.update();
 
 
 
-		// Dibuja el MessageBox si está visible
+	
 
 
 		window->clear();
@@ -155,7 +155,7 @@ void IniciarPartida::updatejoinRoom() {
 				renderTexture.clear();
 				renderTexture.draw(spriteFondoGame);
 				renderTexture.draw(SpriteUnirse);
-				textBoxRoom.Prinf();  // Dibujar el cuadro de texto en la ventana
+				textBoxRoom.Prinf(); 
 
 
 				renderTexture.draw(spriteX);

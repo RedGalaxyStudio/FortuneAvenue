@@ -12,23 +12,23 @@
 
 using json = nlohmann::json;
 
-// Constructor e inicialización
+
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
-    : window(windowRef), currentIndex(0) {  // Inicializa el índice actual
+    : window(windowRef), currentIndex(0) {  
     Resource();
     loadAvatars();
 }
 IniciaUser::~IniciaUser() {
 }
 
-// Carga de recursos (texturas y sprites)
+
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
 
 }
 
-// Actualización de la animación (desvanecimiento del logotipo y fondo animado)
+
 void IniciaUser::Update() {
 
     if (!std::filesystem::exists("perfil.json")) {
@@ -47,50 +47,50 @@ void IniciaUser::Update() {
 void IniciaUser::IniciAcion(){
     spriteCkeck.setPosition(850, 70);
 
-    // Posiciones base calculadas fuera del bucle
+    
     float baseXPos = 92.0f;
     float baseYPos = 472.0f;
     
-    // Calcular solo una vez fuera del bucle
+    
 
-        // Definir las dimensiones y límites
+        
     const float avatarWidth = 128.0f;
     const float avatarHeight = 128.0f;
     const float avatarSeparation = 28.0f;
     const float visibleAreaHeight = 248.0f;
-    const float maxScrollOffset = 156.0f;  // Límite máximo de desplazamiento
+    const float maxScrollOffset = 156.0f;  
 
     float widthSeparation = avatarWidth + avatarSeparation;
     float heightSeparation = avatarHeight + avatarSeparation;
 
     recua.setPosition(400, 112);
-    TextBox textBox(496, 50, "Ingresa tu nombre: ");  // Crear un cuadro de texto
-    textBox.setPosition();  // Posicionar el cuadro de texto
-    // Definir la altura total del contenido y la altura de la ventana
-    const float totalContentHeight = 440.0f; // Cambia esto según el total que necesites
+    TextBox textBox(496, 50, "Ingresa tu nombre: ");  
+    textBox.setPosition();  
+    
+    const float totalContentHeight = 440.0f; 
     const float scrollbarHeight = 340.0f;
 
-    // Calcular la proporción y la altura del pulgar
+    
     float proportion = visibleAreaHeight / totalContentHeight;
     float thumbHeight = scrollbarHeight * proportion;
 
-    // Asegúrate de que el pulgar tenga una altura mínima
-    const float minThumbHeight = 14.0f; // altura mínima para el pulgar
+    
+    const float minThumbHeight = 14.0f; 
     thumbHeight = std::max(thumbHeight, minThumbHeight);
 
-    // Ahora puedes crear tu scrollbar
-    Scrollbar scrollbar(340, thumbHeight, 14); // 340 es la altura 
+    
+    Scrollbar scrollbar(340, thumbHeight, 14);  
 
-    scrollbar.setPosition(1260, 340);  // Colocar la barra a la derecha
+    scrollbar.setPosition(1260, 340);  
 
-    // Crear una nueva instancia de sf::CircleShape para la copia
+   
  
-    selectedAvatarCopy.setPosition(400, 112);  // Establecer la nueva posición para la copia
+    selectedAvatarCopy.setPosition(400, 112);  
     for (int i = 0; i < avatars.size(); i++) {
         sf::Vector2f pos = avatars[i].getPosition();
      
     }
-    float avatarYOffset = 0.0f; // Declarar fuera del bucle
+    float avatarYOffset = 0.0f; 
 
     while (window.isOpen()) {
         mousePosition = sf::Mouse::getPosition(window);
@@ -108,9 +108,9 @@ void IniciaUser::IniciAcion(){
                 }
                 renderTexture.draw(SpriteFondoMenuAvar);
                 if (selectedAvatar != nullptr) {
-                    renderTexture.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
+                    renderTexture.draw(selectedAvatarCopy);  
                 }
-                textBox.Prinf();  // Dibujar el cuadro de texto en la ventana
+                textBox.Prinf();  
 
                 scrollbar.Prinft();
                 renderTexture.draw(recua);
@@ -120,26 +120,26 @@ void IniciaUser::IniciAcion(){
                 Menup.MenuSalir();
             }
 
-            // Manejo del desplazamiento con la rueda del mouse
+            
             if (event.type == sf::Event::MouseWheelScrolled) {
-                scrollbar.update(event.mouseWheelScroll.delta);  // Actualizar el desplazamiento
+                scrollbar.update(event.mouseWheelScroll.delta);  
                 avatarYOffset = scrollbar.getScrollOffset();
 
             }
 
 
             if (avatarYOffset > maxScrollOffset) {
-                avatarYOffset = maxScrollOffset;  // Límite máximo
+                avatarYOffset = maxScrollOffset;  
             }
             else if (avatarYOffset < 0) {
-                avatarYOffset = 0;  // No permitir desplazarse más allá del inicio
+                avatarYOffset = 0;  
             }
 
             if (avatarYOffset != 0) {
                 std::vector<sf::FloatRect> avatarBounds(avatars.size());
                 for (int i = 0; i < avatars.size(); ++i) {
-                    int column = i % 8;  // Calcular la columna
-                    int row = i / 8;     // Calcular la fila
+                    int column = i % 8;  
+                    int row = i / 8;     
 
                     float xPos = baseXPos + column * widthSeparation;
 
@@ -151,9 +151,9 @@ void IniciaUser::IniciAcion(){
 
                 }
             }
-                // Manejo de clics en avatares
+                
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                // Verificar el click en "si" y cerrar la vetana
+                
                 if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     saveSelectedAvatar();
@@ -164,43 +164,38 @@ void IniciaUser::IniciAcion(){
                 sf::CircleShape* newSelection = nullptr;
 
 
-                // Obtener el desplazamiento actual de la barra de scroll
+                
 
                 for (int i = 0; i < avatars.size(); ++i) {
-                    //sf::Vector2f originalPosition = avatars[i].getPosition();
-                  //  sf::FloatRect bounds = avatars[i].getGlobalBounds();
-                //    bounds.top -= avatarYOffset;
 
-                    // Verificar si el mouse está sobre el avatar desplazado
                     if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
                         newSelection = &avatars[i];
                         break;
                     }
                 }
 
-                // Lógica para manejar la selección del avatar
+                
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     Menup.MenuPrincipal();
                 }
-                if (newSelection != nullptr) {  // Solo actualiza si hay una nueva selección
-                    // Actualizar el borde del avatar seleccionado
+                if (newSelection != nullptr) {  
                     if (newSelection != selectedAvatar) {
                         if (selectedAvatar) {
-                            selectedAvatar->setOutlineColor(sf::Color::Transparent);  // Quitar borde del avatar previamente seleccionado
+                            selectedAvatar->setOutlineColor(sf::Color::Transparent);  
                             selectedAvatar->setOutlineThickness(0);
                         }
                         if (newSelection) {
-                            newSelection->setOutlineColor(sf::Color::Black);  // Aplicar borde al nuevo avatar seleccionado
+                            newSelection->setOutlineColor(sf::Color::Black);  
                             newSelection->setOutlineThickness(4);
-                            // Actualizar la textura de la copia del avatar
-                            selectedAvatarCopy.setTexture(newSelection->getTexture());  // Copiar la textura
+                         
+                            selectedAvatarCopy.setTexture(newSelection->getTexture());  
                         }
                         selectedAvatar = newSelection;
                     }
                 }
             }
-                    // Manejar la entrada de texto
+                    
                     input1=textBox.handleInput(event,11);
         }
         window.clear();
@@ -213,14 +208,14 @@ void IniciaUser::IniciAcion(){
                     window.draw(avatars[i]);
         }
 
-                // Dibujar solo la copia del avatar seleccionado en la posición del perfil
+               
                
                 window.draw(SpriteFondoMenuAvar);
                 
                 if (selectedAvatar != nullptr) {
-                    window.draw(selectedAvatarCopy);  // Dibujar solo la copia del avatar seleccionado en su perfil
+                    window.draw(selectedAvatarCopy);  
                 }  
-                textBox.draw(window);  // Dibujar el cuadro de texto en la ventana
+                textBox.draw(window);  
 
                 scrollbar.draw(window);
                 window.draw(recua);
@@ -242,7 +237,7 @@ void IniciaUser::saveSelectedAvatar(){
 
 
         if (selectedIndex != -1) {
-            // Crear un objeto JSON
+       
             json avatarData;
             avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
             
@@ -252,9 +247,9 @@ void IniciaUser::saveSelectedAvatar(){
          
             std::ofstream outFile("perfil.json");
 
-            // Verificar si el archivo se puede abrir
+
             if (outFile.is_open()) {
-                outFile << avatarData.dump(4);  // Indentar con 4 espacios para mejor legibilidad
+                outFile << avatarData.dump(4);  
                 outFile.close();
             }
         }
@@ -276,13 +271,13 @@ void IniciaUser::loadSelectedAvatar() {
         
         if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();
 
-        selectedAvatarCopy.setTexture(&TextureAvatarSelec);  // Copiar la textura
+        selectedAvatarCopy.setTexture(&TextureAvatarSelec);  
     }
 }
 
 void IniciaUser::loadAvatars(){
     
-    int avatarCount = 20;  // Si tienes 17 avatares
+    int avatarCount = 20;  
     avatars.resize(avatarCount);
     avatarTextures.resize(avatarCount);
     textureAvatarsFilePath.resize(avatarCount);
@@ -305,19 +300,19 @@ void IniciaUser::loadAvatars(){
     }
 
     for (int i = 0; i < avatars.size(); i++) {
-        int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
-        int col = i % 8;  // Determina la columna (0 a 7)
+        int row = i / 8;  
+        int col = i % 8;  
 
-        float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
-        float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
+        float x = 92.0f + col * 156.0f;  
+        float y = 472.0f + row * 156.0f;  
       
         avatars[i].setPosition(x, y);
     }
     if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
 
-    selectedAvatarCopy.setRadius(64);  // Ajusta el radio al tamaño esperado
-    selectedAvatarCopy.setTexture(&sharedTexture);  // Usar la textura compartida
-    selectedAvatarCopy.setOrigin(64, 64);  // Establece el origen al centro del círculo
+    selectedAvatarCopy.setRadius(64);  
+    selectedAvatarCopy.setTexture(&sharedTexture);  
+    selectedAvatarCopy.setOrigin(64, 64);  
 
     Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
     recua.setTexture(Texrecua);

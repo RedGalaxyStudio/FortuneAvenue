@@ -114,11 +114,11 @@ void MovePieces::updateCAmbioCasilla() {
 		casillas->resize(1);
 		finalCamino = false;
 		caminoActual--;
-		//std::cout << "\ncaminoActual: " << caminoActual;
+	
 	}
 
 	while (finalCamino == true) {
-		//std::cout << "\ncaminoActual: " << caminoActual;
+	
 		sf::Event event;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -454,7 +454,7 @@ void MovePieces::animacionRastro(float deltaTime) {
 		tiempoAcumulado = 0.0f;
 	}
 
-	// Desvanecer el rastro
+	
 	for (auto& s : rastro) {
 		sf::Color color = s.getColor();
 		if (color.a > 0) {
