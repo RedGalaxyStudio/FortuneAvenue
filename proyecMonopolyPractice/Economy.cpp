@@ -16,6 +16,6 @@ void Economy::restardinero(int resta) {
 }
 
 void Economy::impuesto(int sueldo) {
-    int impuesto = sueldo * 0.20;  // Calculamos el 20% de 'sueldo'
+    int impuesto = static_cast<float>(sueldo * 0.20);  // Calculamos el 20% de 'sueldo'
     *dinero -= impuesto;  // Restamos el impuesto del valor al que apunta 'dinero'
 }

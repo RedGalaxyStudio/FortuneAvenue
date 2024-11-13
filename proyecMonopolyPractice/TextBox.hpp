@@ -10,7 +10,7 @@ class TextBox {
 public:
     TextBox();  // Constructor por defecto
 
-    TextBox(float width, float height,std::string solicitud);  // Constructor con parámetros
+    TextBox(float width, float height,std::string solicitud);  
     void setPosition();
     std::string handleInput(sf::Event event, const size_t maxLength);
     void draw(sf::RenderWindow& window);
