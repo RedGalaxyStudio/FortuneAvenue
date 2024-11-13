@@ -9,7 +9,6 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
     
     input = "";
 
-    // Variables de texto en SFML
     if (!nombre.empty()) {  
         
      textoGuardado.setFont(fontUser);
@@ -23,7 +22,7 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
         std::cout << "La variable tiene contenido.\n";
     }
     else {
-        std::cout << "La variable está vacía.\n";
+        std::cout << "La variable esta vacia.\n";
     
     textoPregunta.setFont(fontUser);
     textoPregunta.setCharacterSize(24);
@@ -44,22 +43,21 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
 // Posición del cuadro de texto
 void TextBox::setPosition() {
     box.setPosition(x + 145, y + 60);
-    text.setPosition(x + 145, y + 56); // Desplaza el texto un poco dentro del cuadro
+    text.setPosition(x + 145, y + 56); 
     textoPregunta.setPosition(x, y - 25);
 }
 
-// Manejo de la entrada de texto
-std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
-    //const size_t maxLength = 11; // Limite de caracteres
 
-    // Manejo de entrada de texto
+std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
+ 
+
+  
     if (event.type == sf::Event::TextEntered && nombre.empty()) {
-        if (event.text.unicode < 128) { // Solo caracteres ASCII
-            // Retroceso
+        if (event.text.unicode < 128) {
             if (event.text.unicode == '\b' && !input.empty()) {
                 input.pop_back();
             }
-            // Agregar nuevo carácter solo si no excede el límite
+            
             else if (event.text.unicode != '\b' && input.size() < maxLength) {
                 input += static_cast<char>(event.text.unicode);
             }
@@ -68,7 +66,7 @@ std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
             std::cout << "Input Text: " << input << std::endl;
 
             sf::FloatRect globalBounds = text.getGlobalBounds();
-            // Ajustar la posición centrando el texto
+            
             text.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
         }
@@ -82,12 +80,11 @@ std::string TextBox::Actu() {
 
 }
 
-// Dibujo del cuadro de texto
+
 void TextBox::draw(sf::RenderWindow& window) {
     window.draw(box);
     window.draw(text);
     window.draw(textoPregunta);
-    //window.draw(textoGuardado);
 }
 
 void TextBox::Prinf() {

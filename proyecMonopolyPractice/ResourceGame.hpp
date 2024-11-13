@@ -31,8 +31,8 @@ struct PlayerInfo {
 	std::string image;
 	int money = 200;
 	int roomconect;
-	bool isSelectingPiece = false; // Inicialmente en selección de pieza
-	bool isInGame = false;        // No en juego al principio
+	bool isSelectingPiece = false; 
+	bool isInGame = false;        
 	int indexPiece;
 
 };
@@ -40,13 +40,13 @@ struct PlayerInfo {
 extern int Opcioncami;
 extern bool espera;
 extern bool giroRule;
-extern bool SelectingPiece; // Inicialmente en selección de pieza
-extern bool Game;        // No en juego al principio
-extern bool muerte;        // No en juego al principio
+extern bool SelectingPiece; 
+extern bool Game;        
+extern bool muerte;        
 
 extern int IndexTurn;
 
-extern bool turn;        // No en juego al principio
+extern bool turn;        
 extern bool turn_dado;
 extern bool turn_ruleta;
 extern bool turn_casa;
@@ -61,7 +61,7 @@ extern bool turn_impuesto;
 struct PlayerGame {
 
 	sf::Texture textureAvatarPLayer;
-	sf::CircleShape AvatarPlayer;  // Dinámico para el número de jugadores
+	sf::CircleShape AvatarPlayer;  
 	sf::Sprite MarcoPlayer;
 	sf::Text NamePlayer;
 	sf::Sprite boxPlayer;

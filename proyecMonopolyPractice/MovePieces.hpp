@@ -167,4 +167,4 @@ private:
 	std::vector<sf::Vector2f> caminocasa7 = {  };
 };
 
-#endif // MOVEPIECES_HPP
+#endif
