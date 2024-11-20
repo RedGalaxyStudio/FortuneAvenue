@@ -103,7 +103,7 @@ void PieceSelector::updateSelection() {
 	CODE.setFillColor(sf::Color::White);
 	CODE.setOutlineThickness(2);
 	CODE.setOutlineColor(sf::Color(135, 135, 135));
-
+	bool cierre = false;
 	// Ahora calcula los límites y centra
 	globalBounds = CODE.getGlobalBounds();
 	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -125,7 +125,7 @@ void PieceSelector::updateSelection() {
 		playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
 		Check[i].setPosition(startX + i * (250 + 10), startY + 200);
 	}
-	while (window->isOpen()) {
+	while (window->isOpen()&& !cierre) {
 
 		
 		for (int i = 0; i < NumPlayers; ++i) {
@@ -174,10 +174,12 @@ void PieceSelector::updateSelection() {
 							playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
 							playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
 							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerInfos[0].indexPiece = i;
 							client.playerChangedPiece();
 							// Resaltar la nueva pieza
+							
 							pieces[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
 							previousSelection = &pieces[i];  // Actualizar la selección anterior
@@ -198,6 +200,12 @@ void PieceSelector::updateSelection() {
 						gamemode.update();
 					}
 				}
+				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					cierre = true;
+					client.disconnect();
+
+				}
 
 			}
 
@@ -210,11 +218,11 @@ void PieceSelector::updateSelection() {
 		}
 
 
-
-
-
+		
 		currentCursor = &normalCursor;
 		botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+
 		window->setMouseCursor(*currentCursor);
 
 		if (CplayerIndex > 0 && CplayerIndex <= 3) {
@@ -248,6 +256,8 @@ void PieceSelector::updateSelection() {
 		displayPieces();
 
 		window->draw(CODE);
+		window->draw(spriteX);
+
 		window->display();
 
 
