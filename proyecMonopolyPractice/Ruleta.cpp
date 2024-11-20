@@ -161,6 +161,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		case 0:
 			std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
 			// Aquí realiza acciones específicas para el segmento 0
+		
 			break;
 
 		case 1:
@@ -176,11 +177,40 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		case 3:
 			std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
 			// Acciones para el segmento 3
-			break;
+		
+			{
+				int totalRestado = 0;
+
+				// Recorre a todos los jugadores en la partida
+				for (std::size_t i = 0; i < playersGame.size(); ++i) {
+					// Si no es el jugador con turno
+					if (i != IndexTurn) {
+						// Resta 30 al dinero del jugador
+						playerInfos[i].money -= 30;
+						// Actualiza el texto del dinero del jugador
+						playersGame[i].Money.setString(std::to_string(playerInfos[i].money));
+
+						// Suma los 30 al total restado
+						totalRestado += 30;
+					}
+				}
+
+				// Suma el total restado al jugador con turno actual
+				playerInfos[IndexTurn].money += totalRestado;
+				playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
+
+				std::cout << "Se ha restado 30 de dinero a cada jugador y sumado al jugador en turno." << std::endl;
+
+				break;
+			}
 
 		case 4:
 			std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
 			// Acciones para el segmento 4
+
+						playerInfos[IndexTurn].money += 150;
+			playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
+
 			break;
 
 		case 5:

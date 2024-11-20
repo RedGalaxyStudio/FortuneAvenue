@@ -162,11 +162,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	settings.depthBits = 24;
 	settings.stencilBits = 8;
 
-
+	bool cierre =false;
 	const sf::Vector3f Wquad = { 1., 1., -1. }; // rotation vector components
 	const sf::Vector3f Oquad = { 199., 350., -187.5 }; // rotation vector origin
 	ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 235.);
-	while (window->isOpen()) {
+	while (window->isOpen()&& !cierre) {
 
 
 		sf::Event event;
@@ -195,11 +195,10 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				//if (Settings.getGlobalBounds().contains(mousePosFloat)) {
+				if(SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)) {
 				playClickSound();
-				//	Menup.MenuOpcion();
-			//	}
-
+				cierre = true;
+				}
 			}
 
 
