@@ -250,6 +250,7 @@ void GameMode::update() {
 
 		if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
 			turn_dado = false;
+			std::cout << "\nIndex de quien lo mueve " << IndexTurn;
 			moverFichas[IndexTurn].iniciarMovimiento(DadoResul, duracionMovimiento);
 			DadoResul = 0;
 		}
@@ -264,7 +265,7 @@ void GameMode::update() {
 //		DrawGameImpuesto();
 		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
-
+			std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
 			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
 			DrawPieceMoviendo();
 			window->display();
@@ -531,7 +532,7 @@ void GameMode::DrawGame() {
 	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado) {
 		client.endTurn();
 		turn = false;
-		
+		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 	
 
