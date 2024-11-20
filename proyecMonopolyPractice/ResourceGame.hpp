@@ -42,7 +42,7 @@ extern bool espera;
 extern bool giroRule;
 extern bool SelectingPiece; 
 extern bool Game;        
-extern bool muerte;        
+extern bool animacionRuleta;        
 
 extern int IndexTurn;
 

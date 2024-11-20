@@ -35,6 +35,8 @@ private:
     float centerX, centerY;  
     float radius;
 
+    int currentSegment;
+
     sf::Clock clock;
     sf::Clock lightClock;
     bool lightState = true;

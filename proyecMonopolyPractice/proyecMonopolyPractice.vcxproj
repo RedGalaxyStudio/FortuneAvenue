@@ -137,9 +137,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ButtonG.cpp" />
+    <ClCompile Include="cell.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Economy.cpp" />
+    <ClCompile Include="fileio.cpp" />
     <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="HouseBuy.cpp" />
@@ -160,10 +162,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonG.hpp" />
+    <ClInclude Include="card.h" />
+    <ClInclude Include="cell.h" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />
     <ClInclude Include="Economy.hpp" />
+    <ClInclude Include="fileio.h" />
     <ClInclude Include="GameEnd.hpp" />
     <ClInclude Include="GameMode.hpp" />
     <ClInclude Include="Globals.hpp" />

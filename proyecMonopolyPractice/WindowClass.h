@@ -170,13 +170,15 @@ public :
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
+		std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
 		if (turn_dado) {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+				turn_dado = false;
 				DiceSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
-
+				std::cout << "turn_dado despues: " << std::boolalpha << turn_dado << "\n";
 				client->rollDice();
 
 				mouseStart.x = rand() % 400 + 1;
@@ -192,6 +194,7 @@ public :
 				client->lastRollResult = -1;
 				std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 				espera = false;
+				
 			}
 		}
 

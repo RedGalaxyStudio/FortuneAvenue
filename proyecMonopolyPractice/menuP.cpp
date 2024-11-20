@@ -105,7 +105,7 @@ void menuP::Resource() {
 void menuP::MenuPrincipal() {
     window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
-    //MenuMusicFondo.play();
+    MenuMusicFondo.play();
 
     Inicializar();
 
@@ -142,10 +142,6 @@ void menuP::MenuPrincipal() {
         
 
         currentCursor = &normalCursor;
-
-        
-
-        
         botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonOpciones.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
         botonSalir.update(mousePosFloat, currentCursor, linkCursor, normalCursor);

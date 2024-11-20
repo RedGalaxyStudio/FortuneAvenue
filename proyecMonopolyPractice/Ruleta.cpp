@@ -198,7 +198,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		window.draw(CentroCircule);
 
 
-		muerte = true;
+		animacionRuleta = true;
 		//    std::cout << "\nruleta icon1";
 		window.draw(iconsResul[currentSegment]);
 
@@ -232,6 +232,25 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 	drawLights(window, deltaTime);
 
 }
+
+
+/*   switch (switch_on)
+{
+
+
+
+
+default:
+	break;
+}   */
+
+
+
+
+
+
+
+
 
 void Ruleta::trurntrue() {
 
