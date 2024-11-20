@@ -198,10 +198,17 @@ public :
 			}
 		}
 
+		
+
+	};
+		void loopP(Client* client)
+	{
+
+		
 		if (rolldiceJugador) {
 			std::unique_lock<std::mutex> lock(client->mtx);
-
-			while (client->lastRollResult == -1) { 
+			std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
+			while (client->lastRollResult == -1) {
 				client->cv.wait(lock);
 			}
 
@@ -215,12 +222,11 @@ public :
 			clock.restart();
 
 			faceIndex = client->lastRollResult;
-			client->lastRollResult=-1;
+			client->lastRollResult = -1;
 			std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
 			rolldiceJugador = false;
 		}
-
 	};
 
 

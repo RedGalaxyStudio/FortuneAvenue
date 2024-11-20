@@ -7,6 +7,9 @@ Ruleta::Ruleta(float width, float height, float centerX, float centerY)
 	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), isSpinning(false), rotationSpeed(6.0f), turno(true) {
 	// Inicializar shaders
 
+	currentSegment = -1;
+
+
 
 	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
 	
