@@ -51,6 +51,7 @@ extern bool turn_dado;
 extern bool turn_ruleta;
 extern bool turn_casa;
 extern bool turn_impuesto;
+extern bool turn_Moviendo;
 
 
 
