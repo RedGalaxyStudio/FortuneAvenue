@@ -176,6 +176,7 @@ void GameMode::update() {
 	while (window->isOpen()) {
 
 		Event();
+		Dado.loopP( &client);
 		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
