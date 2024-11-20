@@ -384,7 +384,7 @@ void MovePieces::seleccionarCaminoDer() {
 		std::vector<sf::Vector2f> caminocasa2_2 = {  };
 
 		casillasImpuesto->push_back(caminoimpuesto2_2);
-		casillasImpuesto->push_back(caminoimpuesto3);
+		
 
 		casillas->push_back(camino2_2);
 		casillas->push_back(camino3);

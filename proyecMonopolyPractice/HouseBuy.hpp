@@ -10,30 +10,32 @@
 
 class HouseBuy {
 
-   
-
-
-
 private:
-
-
-public:
-    HouseBuy();   // Constructor que inicializa con el precio y fondos del jugador
-
-    
-
-    void resource();
-    void update();
-};
-
+sf::RenderWindow * window;
 sf::Texture TextureBotonComprar;
 sf::Sprite SpriteBotonComprar;
 
 std::vector<sf::Texture> TextureCasa;
 std::vector<sf::Sprite> SpriteCasa;
 
+sf::Clock tempoCarta;
+sf::Sprite renderedSprite;
+struct houseInfo {
+
+    std::string nombre;
+    int salario;
+    int costo;
+    int impuesto;
+};
+public:
+    HouseBuy();   // Constructor que inicializa con el precio y fondos del jugador
+
+    
+    void setWindow(sf::RenderWindow& win);
+    void resource();
+    void update(sf::Vector2f posicionactuInicial);
 
 
 
-
+};
 #endif // HOUSEBUY_HPP

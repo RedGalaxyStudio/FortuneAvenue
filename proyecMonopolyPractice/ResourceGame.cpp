@@ -14,7 +14,7 @@ std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
 std::string Code;
 sf::Sprite SpriteArrowDer;
-bool muerte;
+bool animacionRuleta;
 sf::Sprite SpriteArrowArriba;
 bool server;
 bool rolldiceJugador;

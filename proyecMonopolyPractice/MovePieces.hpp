@@ -74,20 +74,13 @@ private:
 		sf::Vector2f(694,582),
 		sf::Vector2f(694,636),
 		sf::Vector2f(725,668),
-		sf::Vector2f(772,666),
-
-
-		sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623)
+		sf::Vector2f(772,666)
 	};
 
 
 
-	std::vector<sf::Vector2f> caminoimpuesto3 = { 
 
-	};
-	std::vector<sf::Vector2f> caminocasa3 = { 
-		
-	};
+
 
 	std::vector<sf::Vector2f> camino5{
 	 sf::Vector2f(881, 495),
