@@ -85,13 +85,13 @@ void IniciarPartida::update() {
 					playClickSound();
 
 					client.initialize();
-					client.connectToServer("208.68.36.50", 1234);
-					Code = client.createRoom(playerInfos[0].username);
-					std::cout << Code;
+					if (true == client.connectToServer("208.68.36.50", 1234)) {
+						Code = client.createRoom(playerInfos[0].username);
+						std::cout << Code;
 
-					pieceselector.Resource();
-					pieceselector.updateSelection();
-
+						pieceselector.Resource();
+						pieceselector.updateSelection();
+					}
 				
 
 
@@ -176,13 +176,15 @@ void IniciarPartida::updatejoinRoom() {
 
 					code = textBoxRoom.Actu();
 
-					client.connectToServer("208.68.36.50", 1234);
+					if(true ==client.connectToServer("208.68.36.50", 1234)){
 
 					client.joinRoom(code, playerInfos[0].username);
 					Code = code;
 
 					pieceselector.Resource();
 					pieceselector.updateSelection();
+					
+					}
 
 
 				}

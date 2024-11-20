@@ -24,6 +24,8 @@ Client::~Client() {
 }
 
 bool Client::initialize() {
+
+	std::cout << "\nInicia";
 	static bool enetInitialized = false;
 	if (!enetInitialized) {
 		if (enet_initialize() != 0) {
@@ -41,6 +43,8 @@ bool Client::initialize() {
 			return false;
 		}
 	}
+
+	std::cout << "\nInicia0";
 	return true;
 }
 
@@ -69,6 +73,7 @@ void Client::run() {
 
 bool Client::connectToServer(const std::string& address, uint16_t port) {
 	ENetAddress enetAddress;
+	std::cout << "\nIniciaConec";
 	enet_address_set_host(&enetAddress, address.c_str());
 	enetAddress.port = port;
 
@@ -78,7 +83,7 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 		std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
 		return false;
 	}
-
+	std::cout << "\nIniciaConec 0";
 	ENetEvent event;
 	const int maxRetries = 10;  // Reducir el número de reintentos
 	const int retryDelay = 10;  // Reducir el tiempo de espera entre reintentos
