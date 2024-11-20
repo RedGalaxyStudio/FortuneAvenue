@@ -36,7 +36,7 @@ bool turn_dado;
 bool turn_ruleta;
 bool turn_casa;
 bool turn_impuesto;
-
+bool turn_Moviendo;
 
 int IndexTurn;
 

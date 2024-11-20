@@ -529,7 +529,7 @@ void GameMode::DrawGame() {
 
 		turn_impuesto = false;
 
-	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado) {
+	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo) {
 		client.endTurn();
 		turn = false;
 		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";

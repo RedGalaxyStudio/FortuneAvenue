@@ -153,10 +153,49 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 	if (!isSpinning && rotationSpeed == 0.0f && giro == true && currentSegment != -1) {
 
-		
+
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		
+		// Realiza las acciones según el segmento usando un switch
+		switch (currentSegment) {
+		case 0:
+			std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
+			// Aquí realiza acciones específicas para el segmento 0
+			break;
+
+		case 1:
+			std::cout << "Segmento 1: Realizando acción específica para el segmento 1" << std::endl;
+			// Acciones para el segmento 1
+			break;
+
+		case 2:
+			std::cout << "Segmento 2: Realizando acción específica para el segmento 2" << std::endl;
+			// Acciones para el segmento 2
+			break;
+
+		case 3:
+			std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
+			// Acciones para el segmento 3
+			break;
+
+		case 4:
+			std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
+			// Acciones para el segmento 4
+			break;
+
+		case 5:
+			std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
+			// Acciones para el segmento 5
+			break;
+
+		default:
+			std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
+			break;
+		}
+
+
+
+
 
 		giro = false;
 

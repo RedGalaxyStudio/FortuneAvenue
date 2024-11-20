@@ -338,6 +338,7 @@ void Client::handleServerMessage(const std::string& message) {
 		turn_ruleta = true;
 		turn_casa = true;
 		turn_impuesto = true;
+		turn_Moviendo = true;
 		IndexTurn = 0;
 	}
 	else 	if (message.rfind("TURN_START", 0) == 0) {

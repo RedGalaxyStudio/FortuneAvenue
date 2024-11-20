@@ -76,6 +76,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 		}
 		else {
 			enMovimiento = false;
+			turn_Moviendo = false;
 			giroRule = true;
 		}
 

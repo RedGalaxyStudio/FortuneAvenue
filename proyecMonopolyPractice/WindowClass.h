@@ -202,7 +202,7 @@ public :
 
 	};
 		void loopP(Client* client)
-	{
+	    {
 
 		
 		if (rolldiceJugador) {
