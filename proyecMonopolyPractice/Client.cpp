@@ -256,12 +256,12 @@ void Client::endTurn() {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
 	}
-	std::cout << "\nUYYyy";
+	std::cout << "\nTurno de "<<IndexTurn <<"finalizo";
 	std::string message = "END_TURN";
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, packet);
 	enet_host_flush(client);
-	std::cout << "\neYYyy";
+	
 }
 
 void Client::startSpin() {
@@ -378,9 +378,10 @@ void Client::handleServerMessage(const std::string& message) {
 		if (playerIndexPos != std::string::npos && dicePos != std::string::npos) {
 			int currentPlayerIndex = std::stoi(message.substr(playerIndexPos, dicePos - playerIndexPos));
 			int diceRoll = std::stoi(message.substr(dicePos + std::string(":DICE:").length()));
-
+			
+			currentPlayerIndex = (currentPlayerIndex - playerIndex + 4) % 4;
 			lastRollResult = diceRoll; // Asigna el resultado del dado aquí
-
+			IndexTurn = currentPlayerIndex;
 			if (turn) {
 				{
 					std::lock_guard<std::mutex> lock(mtx);

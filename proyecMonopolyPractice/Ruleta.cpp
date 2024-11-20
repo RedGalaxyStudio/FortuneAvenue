@@ -128,7 +128,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 	pointerAngle = fmod(pointerAngle - currentRotation + 360.0f, 360.0f);
 
 	// Recorre cada segmento y verifica en cuál está el pointer
-	int currentSegment = -1; // Segmento en el que está el pointer
+	currentSegment = -1; // Segmento en el que está el pointer
 	for (int i = 0; i < numSegments; ++i) {
 		float startAngle = i * segmentAngle; // Inicio del segmento
 		float endAngle = startAngle + segmentAngle; // Fin del segmento
@@ -207,6 +207,13 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 
 	}
+
+
+
+
+
+
+
 	else {
 
 		particleSystem.reset();

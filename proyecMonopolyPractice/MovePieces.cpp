@@ -90,7 +90,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 void MovePieces::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
-	std::cout << "\nturn:" << turn;
+//	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
 		SpriteArrowArriba.setPosition(370, 400);
@@ -211,7 +211,7 @@ void MovePieces::updateCAmbioCasilla() {
 
 		if (!turn) {
 
-			std::cout << "\nOpcioncami:" << Opcioncami;
+		//	std::cout << "\nOpcioncami:" << Opcioncami;
 			if (tan == 3) {
 				if (Opcioncami == 0) {
 					playClickSound();
