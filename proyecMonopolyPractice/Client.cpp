@@ -335,6 +335,7 @@ void Client::handleServerMessage(const std::string& message) {
 		// Aquí el jugador puede decidir llamar a `rollDice`
 		turn_dado = true;
 		turn = true;
+		eventoActivo = false;
 		turn_ruleta = true;
 		turn_casa = true;
 		turn_impuesto = true;
@@ -343,7 +344,11 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else 	if (message.rfind("TURN_START", 0) == 0) {
 		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
-
+		turn_dado = true;
+		eventoActivo = false;
+		turn_ruleta = true;
+		turn_casa = true;
+		turn_impuesto = true;
 		// Buscar el inicio de "PLAYER_INDEX:" y extraer el valor numérico después
 		size_t indexPos = message.find("PLAYER_INDEX:");  // Encontrar el índice donde empieza "PLAYER_INDEX:"
 		if (indexPos != std::string::npos) {

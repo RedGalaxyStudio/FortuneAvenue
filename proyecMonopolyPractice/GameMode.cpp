@@ -157,13 +157,10 @@ void GameMode::update() {
 	playersGame[3].AvatarPlayer.setPosition(1052.5f, 552.5f);
 	playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
 
-
 	float duracionMovimiento = 0.5f;
 
-
-
-	
 	HouseBuy houseee;
+
 	houseee.setWindow(*window);
 
 	houseee.resource();
@@ -195,6 +192,7 @@ void GameMode::update() {
 			std::cout << "feo";
 			validar = false;
 			ruleta_draw = false;
+			eventoActivo = false;
 			animacionIniciada = false;
 			animacionRuleta = false;
 			std::cout << "error Ruleta: \n";
@@ -218,6 +216,7 @@ void GameMode::update() {
 			//std::cout << "feo";
 			
 			impuesto_draw = false;
+			eventoActivo = false;
 			animacionIniciada = false;
 			animacionImpuesto = false;
 		}
@@ -262,7 +261,7 @@ void GameMode::update() {
 	
 		float deltaTime = reloj.restart().asSeconds();
 
-//		DrawGameImpuesto();
+		//DrawGameImpuesto();
 		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
 			std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
@@ -283,6 +282,7 @@ void GameMode::update() {
 				
 				if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
 					ruletaVisible = false;
+					
 				}
 				else {
 					DrawGameRuleta(); 
@@ -315,7 +315,7 @@ void GameMode::update() {
 			
 			renderTexture.display();
 			houseee.update(playersGame[0].PieceSelect.getPosition());
-	
+			eventoActivo = false;
 			casa_draw = false;
 		
 		}else  if (impuesto_draw) {
@@ -498,6 +498,7 @@ void GameMode::DrawGame() {
 		{
 			ruleta_draw = true;
 			turn_ruleta = false;
+			eventoActivo = true;
 			ruleta.trurntrue();
 		}
 	}
@@ -505,31 +506,39 @@ void GameMode::DrawGame() {
 	turn_ruleta = false;
 	
 	}
-	else if(turn_casa) {
+	
+	if(turn_casa) {
 		for (int i = 0; i < caminocasa.size(); i++)
 		{
 			if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 			{
 				casa_draw = true;
+				eventoActivo = true;
 			}
 		}
 		
 		turn_casa = false;
 		
-	}else if(turn_impuesto) {
+	}
+	
+	if(turn_impuesto) {
 		for (int i = 0; i < caminoimpuesto.size(); i++)
 		{
 			if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
 			{
 				impuesto_draw = true;
 				turn_impuesto = false;
+				eventoActivo = true;
 				animacionImpuesto = true;
 			}
 		}
 
 		turn_impuesto = false;
 
-	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo) {
+	}
+	
+	
+	if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo) {
 		client.endTurn();
 		turn = false;
 		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
