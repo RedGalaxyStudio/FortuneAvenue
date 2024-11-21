@@ -163,7 +163,7 @@ void GameMode::update() {
 
 	houseee.setWindow(*window);
 
-	houseee.resource();
+	houseee.resource(&client);
 	Dado.start(1280, 720);
 	int DadoResul = 0;
 	//GameEnd gameend(window);

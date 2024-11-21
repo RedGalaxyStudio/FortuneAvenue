@@ -6,7 +6,7 @@
 #include "ResourceGame.hpp"
 #include <vector>
 #include "ResourceGlobal.hpp"
-
+#include "Client.hpp"
 
 class HouseBuy {
 
@@ -29,10 +29,10 @@ struct houseInfo {
 };
 public:
     HouseBuy();   // Constructor que inicializa con el precio y fondos del jugador
-
+    int IndexCAsa;
     
     void setWindow(sf::RenderWindow& win);
-    void resource();
+    void resource(Client* client);
     void update(sf::Vector2f posicionactuInicial);
 
 
