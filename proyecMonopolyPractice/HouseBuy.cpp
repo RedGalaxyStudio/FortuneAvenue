@@ -60,7 +60,7 @@ void HouseBuy::resource(Client* client) {
 	// Crear el sprite para cada textura
 
 	std::ifstream file("resource/texture/Game/Casas/CasasInfo.json");
-	std::cout << "3";
+	//std::cout << "3";
 	if (!file.is_open()) {
 		char error_message[256];
 		strerror_s(error_message, sizeof(error_message), errno);
@@ -68,17 +68,17 @@ void HouseBuy::resource(Client* client) {
 		return;
 	}
 
-	std::cout << "4";
+	//std::cout << "4";
 	// Cargar el contenido del archivo en un objeto JSON
 
 
 
 	json jsonData;
 	file >> jsonData;
-	std::cout << "5";
+	//std::cout << "5";
 	// Vector para almacenar las casas
 	std::vector<houseInfo> houses;
-	std::cout << "6";
+	//std::cout << "6";
 	// Iterar sobre las entradas del JSON
 	for (auto& [key, value] : jsonData.items()) {
 		houseInfo house;
@@ -92,28 +92,14 @@ void HouseBuy::resource(Client* client) {
 		// Agregar al vector
 		houses.push_back(house);
 	}
-	std::cout << "7";
+	//std::cout << "7";
 	// Mostrar las casas cargadas
-	for (const auto& house : houses) {
+	/*for (const auto& house : houses) {
 		std::cout << "Nombre: " << house.nombre
 			<< ", Salario: " << house.salario
 			<< ", Costo: " << house.costo
 			<< ", Impuesto: " << house.impuesto << std::endl;
-	}
-
-
-	float angle = 230.f;  // Ángulo de rotación inicial
-
-	// Luego en tu bucle de rotación:
-	for (int i = 0; i < 116; i++) {
-		angle += 5.f;  // Incrementamos 5 grados por frame
-		if (angle >= 360.f) {
-			angle -= 360.f;  // Mantenemos el ángulo dentro de 0-360 grados
-		}
-
-		std::cout << "\nangulos: " << angle;
-	}
-
+	}*/
 
 
 
@@ -124,11 +110,11 @@ void HouseBuy::resource(Client* client) {
 void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	float angle = 0.f;  // Ángulo de rotación
 	float rotationSpeed = 45.f;  // Velocidad de rotación en grados por segundo
-	std::cout << "\n1";
+	//std::cout << "\n1";
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
 	readData(pp, cc, "quad.vtk");
-	std::cout << "\n2";
+	//std::cout << "\n2";
 	IndexCAsa += 1;
 
 
@@ -142,7 +128,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			q.at(i).push_back({ pp.at(cc.at(i).n[j]).x, pp.at(cc.at(i).n[j]).y, pp.at(cc.at(i).n[j]).z });
 
 
-	std::cout << "\n4";
+	//std::cout << "\n4";
 	std::vector<Cell> cellQua; // (0, Cell(q0, sf::Color::Green));
 	Cell c0(q.at(0), sf::Color(0, 255, 0, 255), posicionactuInicial); cellQua.push_back(c0);
 	Cell c1(q.at(1), sf::Color(255, 0, 0, 255), posicionactuInicial); cellQua.push_back(c1);
@@ -168,7 +154,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 
 
-	std::cout << "\n55";
+	//std::cout << "\n55";
 
 	renderedSprite.setTexture(renderTexture.getTexture());
 
@@ -177,7 +163,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	ITER(pp, i) { pp.at(i).x += 550.; pp.at(i).y += 100.; }
 
 
-	std::cout << "\n122";
+	//std::cout << "\n122";
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 4;
 	settings.depthBits = 24;
