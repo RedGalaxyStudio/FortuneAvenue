@@ -350,7 +350,7 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else 	if (message.rfind("TURN_START", 0) == 0) {
 		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
-		turn_dado = true;
+		//turn_dado = true;
 		eventoActivo = false;
 		turn_ruleta = true;
 		turn_casa = true;

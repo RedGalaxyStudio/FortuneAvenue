@@ -543,7 +543,13 @@ void GameMode::DrawGame() {
 		turn_impuesto = false;
 
 	}
-	
+		// Imprimir los valores de las variables
+	std::cout << "Estado de turn: " << turn << std::endl;
+	std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
+	std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
+	std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
+	std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+	std::cout << "Estado de eventoActivo: " << eventoActivo << std::endl;
 	
 	if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo) {
 		client.endTurn();
@@ -552,12 +558,7 @@ void GameMode::DrawGame() {
 	}
 	
 
-	// Imprimir los valores de las variables
-	//std::cout << "Estado de turn: " << turn << std::endl;
-	//std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
-	//std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
-	//std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
-	//std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+
 
 	window->setView(window->getDefaultView());
 
