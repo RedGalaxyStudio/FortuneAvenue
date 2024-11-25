@@ -389,21 +389,23 @@ void GameMode::Event() {
 					Menup.MenuOpcion();
 				}
 
-				if (ruleta_draw&&turn) {
+				if (ruleta_draw&&turn&& turnoGiro) {
 					client.startSpin();
 					std::cout << "\nLiiiiiiiiiiiii";
 					//giroSound.play();
 					ruleta->trurntrue();
+					turnoGiro = false;
 				}
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				
-				if (ruleta_draw&&turn) {
+				if (ruleta_draw&&turn&& turnoGiro) {
 
 					client.startSpin();
 					std::cout << "\nLiiiiiiiiiiiii";
 					ruleta->trurntrue();
+					turnoGiro = false;
 				}
 			}
 		}
@@ -521,6 +523,7 @@ void GameMode::DrawGame() {
 						ruleta_draw = true;
 						turn_ruleta = false;
 						eventoActivo = true;
+						turnoGiro = true;
 						ruleta->enviarestado();
 						ruleta->trurntrue();
 					}

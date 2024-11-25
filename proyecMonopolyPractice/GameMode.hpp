@@ -27,15 +27,8 @@ public:
 
 
 
-	bool prev_turn = turn;
-	bool prev_turn_impuesto = turn_impuesto;
-	bool prev_turn_casa = turn_casa;
-	bool prev_turn_ruleta = turn_ruleta;
-	bool prev_turn_dado = turn_dado;
-	bool prev_turn_Moviendo = turn_Moviendo;
-	bool prev_eventoActivo = eventoActivo;
-
-
+	
+	bool turnoGiro;
 	GameMode(sf::RenderWindow& win);
 
 	void resource();

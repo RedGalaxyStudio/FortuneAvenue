@@ -69,6 +69,8 @@ struct PlayerGame {
 	sf::Sprite boxPlayer;
 	sf::Sprite PieceSelect;
 	sf::Text Money;
+	bool Activo;
+
 };
 
 extern std::vector<PlayerInfo> playerInfos;
