@@ -82,18 +82,21 @@ void IniciarPartida::update() {
 				}
 
 				if (SpriteCrearPartida.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
+					if (LimTimeBotton.getElapsedTime().asSeconds() >= 1.0f) { // Verifica si ha pasado al menos 1 segundo
+						// Reinicia el reloj
+						LimTimeBotton.restart();
+						playClickSound();
 
-					client.initialize();
-					client.connectToServer("208.68.36.50", 1234);
-					Code = client.createRoom(playerInfos[0].username);
-					std::cout << Code;
+						client.initialize();
+						if (true == client.connectToServer("208.68.36.50", 1234)) {
+							Code = client.createRoom(playerInfos[0].username);
+							std::cout << Code;
 
-					pieceselector.Resource();
-					pieceselector.updateSelection();
+							pieceselector.Resource();
+							pieceselector.updateSelection();
+						}
 
-				
-
+					}
 
 				}
 
@@ -168,23 +171,28 @@ void IniciarPartida::updatejoinRoom() {
 
 			if (event1.type == sf::Event::MouseButtonPressed && event1.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteUnirse.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-
-					
-					client.initialize();
-					
-
-					code = textBoxRoom.Actu();
-
-					client.connectToServer("208.68.36.50", 1234);
-
-					client.joinRoom(code, playerInfos[0].username);
-					Code = code;
-
-					pieceselector.Resource();
-					pieceselector.updateSelection();
+					if (LimTimeBotton.getElapsedTime().asSeconds() >= 1.0f) { // Verifica si ha pasado al menos 1 segundo
+						// Reinicia el reloj
+						LimTimeBotton.restart();
+						playClickSound();
 
 
+						client.initialize();
+
+
+						code = textBoxRoom.Actu();
+
+						if (true == client.connectToServer("208.68.36.50", 1234)) {
+
+							client.joinRoom(code, playerInfos[0].username);
+							Code = code;
+
+							pieceselector.Resource();
+							pieceselector.updateSelection();
+
+						}
+
+					}
 				}
 
 

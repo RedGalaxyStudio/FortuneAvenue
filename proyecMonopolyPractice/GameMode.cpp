@@ -1,15 +1,21 @@
 #include "GameMode.hpp"
 #include <String>
 #include "GameEnd.hpp"
-GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), ruleta(500.0f, 500.0f, 640.0f, 360.0f), validar(false), moverFichas(4, MovePieces(win)), ruledraw(false){
+
+
+GameMode::GameMode(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(4, MovePieces(win)), ruleta_draw(false) {
+	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 	loadResourceGame();
 	resource();
 }
 
 void GameMode::resource() {
+
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
+
+	if(!GameMusicFondo.openFromFile("resource/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
 	//Cargar Texturas de Flechas
 	if (!TextureArrowIzq.loadFromFile("resource/texture/Game/Izq.png")) return;
@@ -31,7 +37,7 @@ void GameMode::resource() {
     SpriteArrowArriba.setPosition(370, 400);
 
 
-
+	
 	Settings.setTexture(SettingsOff);
 	Settings.setOrigin(25, 25);
 	Settings.setPosition(150, 30);
@@ -43,7 +49,18 @@ void GameMode::resource() {
 
 	if (!DiceBuffer.loadFromFile("resource/sounds/Dicerolling.wav")) return;
 
+	if (!girosBuffer.loadFromFile("resource/sounds/ruleta.wav")) return;
+
+	girosSound.setBuffer(girosBuffer);
+
+
+
+
+
+
+
 	DiceSound.setBuffer(DiceBuffer);
+
 
 	std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
@@ -61,8 +78,26 @@ void GameMode::resource() {
 	view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y));
 	view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centra la vista en la ficha
 
-
+	Bienvenida.setCharacterSize(40);
+	Bienvenida.setFont(fontUser);
+	Bienvenida.setFillColor(sf::Color::White);
+	Bienvenida.setOutlineThickness(2);
+	Bienvenida.setOutlineColor(sf::Color(135, 135, 135));
+	Bienvenida.setString("Comienza el juego!");
+	Bienvenida.setPosition(640, 360);
+	sf::FloatRect globalBounds = Bienvenida.getGlobalBounds();
+	Bienvenida.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	posicionActual = 0;
+
+	DescripDado.setCharacterSize(15);
+	DescripDado.setFont(fontUser);
+	DescripDado.setFillColor(sf::Color::White);
+	DescripDado.setOutlineThickness(2);
+	DescripDado.setOutlineColor(sf::Color(135, 135, 135));
+	DescripDado.setString("Presiona la tecla 'ESPACIO'.");
+	DescripDado.setPosition(640, 450);
+	globalBounds = DescripDado.getGlobalBounds();
+	DescripDado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 }
 
 void GameMode::update() {
@@ -86,6 +121,13 @@ void GameMode::update() {
 		
 	}
 	
+	for (const auto& posicion : caminocasa) {
+		sf::CircleShape punto(5); // Radio de 5
+		punto.setFillColor(sf::Color::Red); // Color rojo para los puntos
+		punto.setOrigin(5, 5); // Centrar el origen del círculo
+		punto.setPosition(posicion);
+		puntos.push_back(punto);
+	}
 
 	moverFichas[0].Inicializar(&playersGame[0].PieceSelect, &casillas0, &casillasimpuesto0);
 	moverFichas[1].Inicializar(&playersGame[1].PieceSelect, &casillas1, &casillasimpuesto1);
@@ -148,51 +190,104 @@ void GameMode::update() {
 	playersGame[3].AvatarPlayer.setPosition(1052.5f, 552.5f);
 	playersGame[3].AvatarPlayer.setScale(0.7f, 0.7f);
 
+	SelectingMusicFondo.stop();
+	GameMusicFondo.setLoop(true);
+	GameMusicFondo.play();
+
 
 	float duracionMovimiento = 0.5f;
 
+	HouseBuy houseee;
 
+	houseee.setWindow(*window);
 
-	
-
-
+	houseee.resource(&client);
 	Dado.start(1280, 720);
 	int DadoResul = 0;
 	//GameEnd gameend(window);
 	//gameend.update();
-	muerte = false;
-
+	animacionRuleta = false;
+	InicioPartida();
 	while (window->isOpen()) {
-
+		//ruleta_draw = true;
 		Event();
-		
+		Dado.loopP( &client);
+		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
 			DadoResul = resultadoDado;
 			TempoAnimacion.restart();
 		}
-
-		if (muerte == true && !animacionIniciada) {
+		// mecanica ruleta
+		if (animacionRuleta == true && !animacionIniciada) {
 			TempoAnimacion.restart();
-			muerte = false;
+			animacionRuleta = false;
 			animacionIniciada = true;   
 		}
-
-		if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
-			std::cout << "\ntempo  " << TempoAnimacion.getElapsedTime().asSeconds();
-			std::cout << "feo";
-			validar = false;
-			ruledraw = false;
+		// mecanica ruleta
+		if (client.giroActivo == true && animacionRuleta == true&& ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			//std::cout << "\ntempo  " << TempoAnimacion.getElapsedTime().asSeconds();
+			//std::cout << "feo";
+			client.giroActivo = false;
+			ruleta_draw = false;
+			eventoActivo = false;
 			animacionIniciada = false;
-			muerte = false;
+			animacionRuleta = false;
+			//std::cout << "error Ruleta: \n";
 		}
 
+		// mecanica Impuesto
+		if (animacionImpuesto == true && !animacionIniciada) {
+			TempoAnimacion.restart();
+			animacionImpuesto = false;
+			animacionIniciada = true;
+			//std::cout << "animacionImpuesto entro: " << std::boolalpha << animacionImpuesto << "\n";
+		}
+		// mecanica Impuesto
+
+		//std::cout << "animacionImpuesto: " << std::boolalpha << animacionImpuesto << "\n";
+		//std::cout << "animacionIniciada: " << std::boolalpha << animacionIniciada << "\n";
+		//std::cout << "Tiempo transcurrido: " << TempoAnimacion.getElapsedTime().asSeconds() << "\n";
+
+		if (animacionImpuesto == false && animacionIniciada && impuesto_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			//std::cout << "\ntempo  " << TempoAnimacion.getElapsedTime().asSeconds();
+			//std::cout << "feo";
+			
+			impuesto_draw = false;
+			eventoActivo = false;
+			animacionIniciada = false;
+			animacionImpuesto = false;
+		}
+
+		/*/ mecanica Casa
+		if (animacionCasa == true && !animacionIniciada) {
+			TempoAnimacion.restart();
+			animacionCasa = false;
+			animacionIniciada = true;
+			std::cout << "error Casa: \n";
+		}
+		// mecanica Casa
+		if (animacionIniciada == true && animacionCasa == false && casa_draw &&TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			//std::cout << "\ntempo  " << TempoAnimacion.getElapsedTime().asSeconds();
+			//std::cout << "feo";
+			//std::cout << "error Casa 2: \n";
+			casa_draw = false;
+			animacionIniciada = false;
+			animacionCasa = false;
+		}*/
+
+
+		//cursor
 		currentCursor = &normalCursor;
 
 		window->setMouseCursor(*currentCursor);
 
+		//std::cout <<"\n Dado"<< turn_dado;
+		//dado mecanica movimiento
+
 		if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
 			turn_dado = false;
+			std::cout << "\nIndex de quien lo mueve " << IndexTurn;
 			moverFichas[IndexTurn].iniciarMovimiento(DadoResul, duracionMovimiento);
 			DadoResul = 0;
 		}
@@ -209,10 +304,13 @@ void GameMode::update() {
 		//DrawGameImpuesto();
 		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
+			//std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
 			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
 			DrawPieceMoviendo();
+			window->display();
 		}
-		else if (ruledraw == true) {
+		else if (ruleta_draw == true) {
+
 			if (!ruletaVisible) {
 				
 				DrawGameRuleta();
@@ -224,18 +322,55 @@ void GameMode::update() {
 				
 				if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
 					ruletaVisible = false;
+					
 				}
 				else {
 					DrawGameRuleta(); 
 				}
 				
 			}
+			window->display();
+
 		}
-		else {
+		else if (casa_draw) {
+			renderTexture.clear();
+			renderTexture.draw(spriteFondoGame);
+			renderTexture.draw(spriteMapa);
+
+			
+			for (int i = 0; i < 4; i++)
+			{
+				renderTexture.draw(playersGame[i].NamePlayer);
+				renderTexture.draw(playersGame[i].boxPlayer);
+				renderTexture.draw(playersGame[i].AvatarPlayer);
+				renderTexture.draw(playersGame[i].MarcoPlayer);
+				renderTexture.draw(playersGame[i].Money);
+				renderTexture.draw(playersGame[i].PieceSelect);
+
+
+			}
+		
+
+			renderTexture.draw(Settings);
+			
+			renderTexture.display();
+			houseee.update(playersGame[0].PieceSelect.getPosition());
+			eventoActivo = false;
+			casa_draw = false;
+		
+		}else  if (impuesto_draw) {
+
+			DrawGameImpuesto();
+			window->display();
+		}else
+		{
 			DrawGame();
+			window->display();
 		}
 
-		window->display();
+
+
+	
 		
 	}
 	
@@ -274,8 +409,22 @@ void GameMode::Event() {
 					playClickSound();
 					Menup.MenuOpcion();
 				}
-				if (ruledraw) {
-					validar = true;
+
+				if (ruleta_draw&&turn) {
+					client.startSpin();
+					std::cout << "\nLiiiiiiiiiiiii";
+					//giroSound.play();
+					ruleta->trurntrue();
+				}
+			}
+
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+				
+				if (ruleta_draw&&turn) {
+
+					client.startSpin();
+					std::cout << "\nLiiiiiiiiiiiii";
+					ruleta->trurntrue();
 				}
 			}
 		}
@@ -283,8 +432,8 @@ void GameMode::Event() {
 	} while (window->pollEvent(event));  
 }
 
-void GameMode::DrawPieceMoviendo(  ) {
-	
+void GameMode::DrawPieceMoviendo(){
+
 	sf::Vector2f fichaPos = playersGame[IndexTurn].PieceSelect.getPosition();
 	float viewX = fichaPos.x;
 	float viewY = fichaPos.y;
@@ -303,14 +452,14 @@ void GameMode::DrawPieceMoviendo(  ) {
 
 	window->draw(spriteFondoGame);
 	window->draw(spriteMapa);
-
-	window->draw(playersGame[IndexTurn].PieceSelect);
+	for(int i=0;i<4;i++){
+	window->draw(playersGame[i].PieceSelect);
+	}
 	window->setView(window->getDefaultView());
 
 
 
 }
-
 
 void GameMode::DrawGameRuleta() {
 	
@@ -326,9 +475,8 @@ void GameMode::DrawGameRuleta() {
 	{
 		renderTexture.draw(playersGame[i].NamePlayer);
 		renderTexture.draw(playersGame[i].boxPlayer);
-		renderTexture.draw(playersGame[i].MarcoPlayer);
 		renderTexture.draw(playersGame[i].AvatarPlayer);
-
+		renderTexture.draw(playersGame[i].MarcoPlayer);
 	}
 	renderTexture.draw(overlay);
 
@@ -337,9 +485,10 @@ void GameMode::DrawGameRuleta() {
 	renderedSprite.setTexture(renderTexture.getTexture());
 
 	window->draw(renderedSprite);
-	ruleta.draw(*window, deltaTime, validar);
+	ruleta->draw(*window, deltaTime, client.giroActivo );
 }
 
+void GameMode::DrawGameCasa() {}
 
 void GameMode::DrawGameImpuesto() {
 
@@ -356,8 +505,8 @@ void GameMode::DrawGameImpuesto() {
 	{
 		renderTexture.draw(playersGame[i].NamePlayer);
 		renderTexture.draw(playersGame[i].boxPlayer);
-		renderTexture.draw(playersGame[i].MarcoPlayer);
 		renderTexture.draw(playersGame[i].AvatarPlayer);
+		renderTexture.draw(playersGame[i].MarcoPlayer);
 
 	}
 
@@ -376,63 +525,197 @@ void GameMode::DrawGameImpuesto() {
 	window->draw(SpriteImpuesto);
 	
 }
+void GameMode::InicioPartida() {
+	sf::Clock clocks;  // Inicia el temporizador
+
+	// El bucle solo se ejecutará durante 5 segundos
+	while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
+		Event();  // Llamada para manejar eventos (por ejemplo, clics, teclas presionadas)
+
+		window->setView(window->getDefaultView());
+		window->clear();  // Limpia la ventana para dibujar la siguiente pantalla
+
+		// Dibuja los elementos de fondo y mapa
+		window->draw(spriteFondoGame);
+		window->draw(spriteMapa);
+
+		// Actualiza el dado y calcula el tiempo transcurrido
+		Dado.update();
+		float deltaTime = clock.restart().asSeconds();
+
+		// Dibuja los jugadores en la pantalla
+		for (int i = 0; i < 4; i++) {
+			window->draw(playersGame[i].NamePlayer);
+			window->draw(playersGame[i].boxPlayer);
+			window->draw(playersGame[i].AvatarPlayer);
+			window->draw(playersGame[i].MarcoPlayer);
+			window->draw(playersGame[i].Money);
+			window->draw(playersGame[i].PieceSelect);
+		}
+
+		// Dibuja los puntos en el mapa (si los hay)
+		for (const auto& punto : puntos) {
+			window->draw(punto);
+		}
+
+		// Dibuja los settings (configuración) al final
+		window->draw(Settings);
+		window->draw(overlay);
+		window->draw(Bienvenida);
+		// Muestra todo lo que se ha dibujado en la ventana
+		window->display();
+	}
+}
 
 
 
 void GameMode::DrawGame() {
-	int CaminoActu = moverFichas[IndexTurn].getCaminoActual();
-	//CaminoActu -= 1;
-	int cas= moverFichas[0].getcasillaActual();
-
-
-	//std::cout << "\n CaminoActu:"<< CaminoActu<<"casilla:" <<cas;
 	
-	
+	if(turn){
+		if (!eventoActivo) {
 
-	if(turn_ruleta && giroRule){
+			if (turn_ruleta && giroRule && !turn_dado && !turn_Moviendo) {
 
-	
+				for (int i = 0; i < casillasRuleta.size(); i++)
+				{
+					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
+					{
+						ruleta_draw = true;
+						turn_ruleta = false;
+						eventoActivo = true;
+						ruleta->enviarestado();
+						ruleta->trurntrue();
+					}
+				}
+				giroRule = false;
+				turn_ruleta = false;
 
-	for (int i = 0; i < casillasRuleta.size(); i++)
-	{
-		if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
-		{
-			ruledraw = true;
-			turn_ruleta = false;
-			ruleta.trurntrue();
-		}
-	}
-	giroRule = false;
-	turn_ruleta = false;
-	
-	}
-	else if(turn_casa) {
+			}
 
-		
-	}else if(turn_impuesto) {
-		for (int i = 0; i < caminoimpuesto.size(); i++)
-		{
-			if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
-			{
-			//	ruledraw = true;
-				turn_impuesto = false;
-				//ruleta.trurntrue();
+			if (turn_casa && !turn_dado && !turn_Moviendo) {
+
+				for (int i = 0; i < caminocasa.size(); i++)
+				{
+					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
+					{
+						casa_draw = true;
+						eventoActivo = true;
+					}
+				}
+				turn_casa = false;
 			}
 		}
 
-	}if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado) {
+		if (turn_impuesto && !turn_dado&& !turn_Moviendo) {
+			for (int i = 0; i < caminoimpuesto.size(); i++)
+			{
+				if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
+				{
+					impuesto_draw = true;
+					turn_impuesto = false;
+					eventoActivo = true;
+					animacionImpuesto = true;
+				}
+			}
+			turn_impuesto = false;
+		}
+	}
+	else if(!turn){
+
+		if (!eventoActivo) {
+
+			if (turn_ruleta && giroRule && !turn_dado && !turn_Moviendo) {
+
+				for (int i = 0; i < casillasRuleta.size(); i++)
+				{
+					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
+					{
+						ruleta_draw = true;
+						turn_ruleta = false;
+						eventoActivo = true;
+						
+						{
+							std::unique_lock<std::mutex> lock(client.ruletaMutex);
+							client.ruletaCondVar.wait(lock, [] { return client.ruletaMessageReceived; });
+
+							// Ahora, sabemos que el mensaje fue recibido, y podemos usar el ángulo
+							std::cout << "Ángulo recibido: " << client.anguloActualrule << std::endl;
+
+							// Reiniciar el indicador para evitar problemas en la próxima espera
+							client.ruletaMessageReceived = false;
+						}
+
+						ruleta->trurntrue();
+					}
+				}
+				giroRule = false;
+				turn_ruleta = false;
+
+			}
+
+			if (turn_casa && !turn_dado && !turn_Moviendo) {
+
+				for (int i = 0; i < caminocasa.size(); i++)
+				{
+					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
+					{
+						casa_draw = true;
+						eventoActivo = true;
+					}
+				}
+				turn_casa = false;
+			}
+		}
+
+		if (turn_impuesto && !turn_dado && !turn_Moviendo) {
+			for (int i = 0; i < caminoimpuesto.size(); i++)
+			{
+				if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
+				{
+					impuesto_draw = true;
+					turn_impuesto = false;
+					eventoActivo = true;
+					animacionImpuesto = true;
+				}
+			}
+			turn_impuesto = false;
+		}
+
+	}
+	
+	if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo&& !impuesto_draw&&!casa_draw&&!ruleta_draw) {
 		client.endTurn();
 		turn = false;
-		
+		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 	
 
-	// Imprimir los valores de las variables
-	std::cout << "Estado de turn: " << turn << std::endl;
-	std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
-	std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
-	std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
-	std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+	/*if (turn != prev_turn ||
+		turn_impuesto != prev_turn_impuesto ||
+		turn_casa != prev_turn_casa ||
+		turn_ruleta != prev_turn_ruleta ||
+		turn_dado != prev_turn_dado ||
+		turn_Moviendo != prev_turn_Moviendo ||
+		eventoActivo != prev_eventoActivo) {
+
+		// Ejecutar el código si hubo algún cambio
+		std::cout << "Estado de turn: " << turn << std::endl;
+		std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
+		std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
+		std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
+		std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
+		std::cout << "Estado de turn_Moviendo: " << turn_Moviendo << std::endl;
+		std::cout << "Estado de eventoActivo: " << eventoActivo << std::endl;
+
+		// Actualizar los estados anteriores
+		prev_turn = turn;
+		prev_turn_impuesto = turn_impuesto;
+		prev_turn_casa = turn_casa;
+		prev_turn_ruleta = turn_ruleta;
+		prev_turn_dado = turn_dado;
+		prev_turn_Moviendo = turn_Moviendo;
+		prev_eventoActivo = eventoActivo;
+	}*/
 
 	window->setView(window->getDefaultView());
 
@@ -446,7 +729,6 @@ void GameMode::DrawGame() {
 	Dado.update();
 	float deltaTime = clock.restart().asSeconds();
 
-	//ruleta.draw(*window, deltaTime, validar);
 	for (int i = 0; i < 4; i++)
 	{
 		window->draw(playersGame[i].NamePlayer);
@@ -457,6 +739,12 @@ void GameMode::DrawGame() {
 		window->draw(playersGame[i].PieceSelect);
 
 
+	}
+	if (turn_dado) {
+		window->draw(DescripDado);
+	}
+	for (const auto& punto : puntos) {
+		window->draw(punto);
 	}
 
 	window->draw(Settings);

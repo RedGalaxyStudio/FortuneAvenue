@@ -27,6 +27,8 @@ void PieceSelector::Resource() {
 	turn_casa= false;
 	turn_impuesto= false;
 	rolldiceJugador = false;
+
+
 	for (int i = 0; i < 4; i++) {
 		if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
 		if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;
@@ -87,12 +89,12 @@ void PieceSelector::updateSelection() {
 	sf::Clock clock;
 
 	GameMode gamemode(*window);
-
+	std::vector<int> UsuariosActivos;
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-	float startX = 275;  // Posición inicial calculada en X
-	float startY = 100;  // Posición calculada en Y (centrado verticalmente)
+	 startX = 275;  // Posición inicial calculada en X
+	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
 	playersGame[0].NamePlayer.setString(playerInfos[0].username);
 	globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
 	playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -103,7 +105,7 @@ void PieceSelector::updateSelection() {
 	CODE.setFillColor(sf::Color::White);
 	CODE.setOutlineThickness(2);
 	CODE.setOutlineColor(sf::Color(135, 135, 135));
-
+	bool cierre = false;
 	// Ahora calcula los límites y centra
 	globalBounds = CODE.getGlobalBounds();
 	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -125,7 +127,10 @@ void PieceSelector::updateSelection() {
 		playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
 		Check[i].setPosition(startX + i * (250 + 10), startY + 200);
 	}
-	while (window->isOpen()) {
+	MenuMusicFondo.stop();
+	SelectingMusicFondo.setLoop(true);
+	SelectingMusicFondo.play();
+	while (window->isOpen()&& !cierre) {
 
 		
 		for (int i = 0; i < NumPlayers; ++i) {
@@ -174,10 +179,12 @@ void PieceSelector::updateSelection() {
 							playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
 							playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
 							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerInfos[0].indexPiece = i;
 							client.playerChangedPiece();
 							// Resaltar la nueva pieza
+							
 							pieces[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
 							previousSelection = &pieces[i];  // Actualizar la selección anterior
@@ -198,23 +205,46 @@ void PieceSelector::updateSelection() {
 						gamemode.update();
 					}
 				}
+				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					cierre = true;
+					client.disconnect();
+
+				}
 
 			}
 
 		}
 
-		if (SelectingPiece) {
 
-			gamemode.update();
+
+
+		for (int i = 0; i < 4; i++) {
+
+			if (!playerInfos[i].username.empty()) {
+				UsuariosActivos.push_back(i);
+			}
 
 		}
 
+	
+		SelectingPiece = true;
 
+		for (int i = 0; i < UsuariosActivos.size(); i++) {
+			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece) {
+				SelectingPiece = false;
+				break;
+			}
+		}
 
-
+		if (SelectingPiece) {
+			gamemode.update();
+		}
 
 		currentCursor = &normalCursor;
 		botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+
 		window->setMouseCursor(*currentCursor);
 
 		if (CplayerIndex > 0 && CplayerIndex <= 3) {
@@ -248,6 +278,8 @@ void PieceSelector::updateSelection() {
 		displayPieces();
 
 		window->draw(CODE);
+		window->draw(spriteX);
+
 		window->display();
 
 
@@ -273,7 +305,7 @@ void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 	playersGame[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
 	playersGame[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
 	playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
-
+	playersGame[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
 	// Guardar el índice de la pieza seleccionada
 	//playerInfos[CplayerIndex].indexPiece = newPieceIndex;
 

@@ -4,7 +4,6 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-//#include <windows.h> 
 #include "Cinematic.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ResourceGlobal.hpp"
@@ -25,9 +24,9 @@ int main() {
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
 
-   // Cinematic cinematic(window);
-    //cinematic.Resource();
-    //cinematic.Update();
+   //Cinematic cinematic(window);
+   //cinematic.Resource();
+  // cinematic.Update();
     loadTextures();
     cargue();
     Menup.setWindow(window);

@@ -48,10 +48,10 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			casillasRestantes--;
 
 
-			std::cout << "\nCasi casi csio";
+			//std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
-				std::cout << "\nCasi caso";
+				//std::cout << "\nCasi caso";
 				if (caminoActual + 1 >= (*casillas).size()) {
 
 					finalCamino = true;
@@ -76,6 +76,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 		}
 		else {
 			enMovimiento = false;
+			turn_Moviendo = false;
 			giroRule = true;
 		}
 
@@ -90,7 +91,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 void MovePieces::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
-	std::cout << "\nturn:" << turn;
+//	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
 		SpriteArrowArriba.setPosition(370, 400);
@@ -211,7 +212,7 @@ void MovePieces::updateCAmbioCasilla() {
 
 		if (!turn) {
 
-			std::cout << "\nOpcioncami:" << Opcioncami;
+		//	std::cout << "\nOpcioncami:" << Opcioncami;
 			if (tan == 3) {
 				if (Opcioncami == 0) {
 					playClickSound();
@@ -384,7 +385,7 @@ void MovePieces::seleccionarCaminoDer() {
 		std::vector<sf::Vector2f> caminocasa2_2 = {  };
 
 		casillasImpuesto->push_back(caminoimpuesto2_2);
-		casillasImpuesto->push_back(caminoimpuesto3);
+		
 
 		casillas->push_back(camino2_2);
 		casillas->push_back(camino3);
