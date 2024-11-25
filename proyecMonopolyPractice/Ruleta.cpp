@@ -222,7 +222,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		case 0:
 			std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
 			// Aquí realiza acciones específicas para el segmento 0
-
+			//pierdes un turno
 			client.turnopermitido-=1;
 
 
@@ -233,17 +233,21 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		case 1:
 			std::cout << "Segmento 1: Realizando acción específica para el segmento 1" << std::endl;
 			// Acciones para el segmento 1
+			//robar a un jugador
 			break;
 
 		case 2:
 			std::cout << "Segmento 2: Realizando acción específica para el segmento 2" << std::endl;
 			// Acciones para el segmento 2
+			//Opcion de comprar una casa
+
 			break;
 
 		case 3:
 			std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
 			// Acciones para el segmento 3
-
+			//todos pierden 30 y se les da a el jugador
+			
 			{
 				int totalRestado = 0;
 
@@ -273,7 +277,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		case 4:
 			std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
 			// Acciones para el segmento 4
-
+			//ganas 150
 			playerInfos[IndexTurn].money += 150;
 			playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
 
@@ -281,6 +285,13 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 		case 5:
 			std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
+			//paga impuestos
+			// Acciones para el segmento 5
+			break;
+
+		case 6:
+			std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
+			//inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 			// Acciones para el segmento 5
 			break;
 

@@ -151,6 +151,7 @@
     <ClCompile Include="menuP.cpp" />
     <ClCompile Include="MensageBox.cpp" />
     <ClCompile Include="MovePieces.cpp" />
+    <ClCompile Include="nulo.cpp" />
     <ClCompile Include="ObjetosGlobal.cpp" />
     <ClCompile Include="PieceSelector.cpp" />
     <ClCompile Include="ResourceGame.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="MovePieces.hpp" />
     <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="nlohmann\json_fwd.hpp" />
+    <ClInclude Include="nulo.hpp" />
     <ClInclude Include="ObjetosGlobal.hpp" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="PieceSelector.hpp" />

@@ -120,7 +120,7 @@ void PieceSelector::updateSelection() {
 		playersGame[i].NamePlayer.setString(playerInfos[i].username);
 		globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
 		playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
+		playersGame[i].Activo = false;
 		// Posicionar el jugador y los elementos relacionados
 		playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
 		playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
@@ -130,6 +130,7 @@ void PieceSelector::updateSelection() {
 	MenuMusicFondo.stop();
 	SelectingMusicFondo.setLoop(true);
 	SelectingMusicFondo.play();
+	playersGame[0].Activo = false;
 	while (window->isOpen()&& !cierre) {
 
 		
@@ -221,8 +222,11 @@ void PieceSelector::updateSelection() {
 
 		for (int i = 0; i < 4; i++) {
 
-			if (!playerInfos[i].username.empty()) {
+			if (!playerInfos[i].username.empty()&& !playersGame[i].Activo) {
+				std::cout << "\nusuarios " << i;
 				UsuariosActivos.push_back(i);
+				playersGame[i].Activo = true;
+				std::cout << "\n1";
 			}
 
 		}
@@ -231,8 +235,11 @@ void PieceSelector::updateSelection() {
 		SelectingPiece = true;
 
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
+
+
 			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece) {
 				SelectingPiece = false;
+
 				break;
 			}
 		}
@@ -312,3 +319,60 @@ void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 	// Asegúrate de que el nuevo sprite esté correctamente posicionado si es necesario
 	// playersGame[playerIndex].PieceSelect.setPosition(...);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

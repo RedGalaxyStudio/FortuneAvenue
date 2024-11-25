@@ -410,21 +410,23 @@ void GameMode::Event() {
 					Menup.MenuOpcion();
 				}
 
-				if (ruleta_draw&&turn) {
+				if (ruleta_draw&&turn&& turnoGiro) {
 					client.startSpin();
 					std::cout << "\nLiiiiiiiiiiiii";
 					//giroSound.play();
 					ruleta->trurntrue();
+					turnoGiro = false;
 				}
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				
-				if (ruleta_draw&&turn) {
+				if (ruleta_draw&&turn&& turnoGiro) {
 
 					client.startSpin();
 					std::cout << "\nLiiiiiiiiiiiii";
 					ruleta->trurntrue();
+					turnoGiro = false;
 				}
 			}
 		}
@@ -583,6 +585,7 @@ void GameMode::DrawGame() {
 						ruleta_draw = true;
 						turn_ruleta = false;
 						eventoActivo = true;
+						turnoGiro = true;
 						ruleta->enviarestado();
 						ruleta->trurntrue();
 					}
@@ -682,40 +685,17 @@ void GameMode::DrawGame() {
 		}
 
 	}
+
 	
 	if( turn && !turn_impuesto && !turn_casa &&!turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo&& !impuesto_draw&&!casa_draw&&!ruleta_draw) {
+
 		client.endTurn();
 		turn = false;
 		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 	
 
-	/*if (turn != prev_turn ||
-		turn_impuesto != prev_turn_impuesto ||
-		turn_casa != prev_turn_casa ||
-		turn_ruleta != prev_turn_ruleta ||
-		turn_dado != prev_turn_dado ||
-		turn_Moviendo != prev_turn_Moviendo ||
-		eventoActivo != prev_eventoActivo) {
 
-		// Ejecutar el código si hubo algún cambio
-		std::cout << "Estado de turn: " << turn << std::endl;
-		std::cout << "Estado de turn_impuesto: " << turn_impuesto << std::endl;
-		std::cout << "Estado de turn_casa: " << turn_casa << std::endl;
-		std::cout << "Estado de turn_ruleta: " << turn_ruleta << std::endl;
-		std::cout << "Estado de turn_dado: " << turn_dado << std::endl;
-		std::cout << "Estado de turn_Moviendo: " << turn_Moviendo << std::endl;
-		std::cout << "Estado de eventoActivo: " << eventoActivo << std::endl;
-
-		// Actualizar los estados anteriores
-		prev_turn = turn;
-		prev_turn_impuesto = turn_impuesto;
-		prev_turn_casa = turn_casa;
-		prev_turn_ruleta = turn_ruleta;
-		prev_turn_dado = turn_dado;
-		prev_turn_Moviendo = turn_Moviendo;
-		prev_eventoActivo = eventoActivo;
-	}*/
 
 	window->setView(window->getDefaultView());
 
