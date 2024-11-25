@@ -97,7 +97,7 @@ private:
     sf::Text TextAcercaDe;
     sf::Sprite renderedSprite;
 
-    sf::Music MenuMusicFondo;
+    
 
     sf::Sprite* lastHoveredButton;
     sf::Shader Blur;

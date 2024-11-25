@@ -7,6 +7,7 @@ sf::Texture TextureMarco;
 sf::Sprite spriteFondoGame;
 int NumPlayers;
 sf::SoundBuffer DiceBuffer;
+
 sf::Sound DiceSound;
 sf::View view; // Declarar la vista
 sf::Clock reloj;
@@ -21,6 +22,10 @@ bool rolldiceJugador;
 std::string username;
 std::vector<char> image; // Store image data directly.
 
+ sf::SoundBuffer girosBuffer;
+ sf::Sound girosSound;
+
+ 
 sf::Sprite SpriteArrowIzq;
 bool SelectingPiece = false; // Inicialmente en selección de pieza
 bool Game = false;        // No en juego al principio
@@ -38,7 +43,7 @@ bool turn_casa;
 bool turn_impuesto;
 bool turn_Moviendo;
 bool eventoActivo;
-
+bool isSpinning;
 int IndexTurn;
 
 

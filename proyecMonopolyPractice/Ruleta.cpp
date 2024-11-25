@@ -4,15 +4,15 @@
 
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY)
-	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), isSpinning(false), rotationSpeed(6.0f), turno(true) {
+	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false) {
 	// Inicializar shaders
 
 	currentSegment = -1;
 
 
-
+	isSpinning = false;
 	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
-	
+
 	// Crear segmentos
 	createSegments();
 
@@ -31,31 +31,57 @@ Ruleta::Ruleta(float width, float height, float centerX, float centerY)
 	createPointer();
 }
 
-void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
+void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
-	if (Validar && turno) {
-		isSpinning = !isSpinning;
-	    giro = true;
-		resultado = true;
-		int i = 0;
-	//	for (auto& segment : segments) {
-			//segment.getRotation();
-			//segment.rotate(100);
+	if (turn) {
+		if (giroActivo&& turno) {
+			isSpinning = !isSpinning;
+			girosSound.play();
+			giro = true;
+			resultado = true;
+			isSpinning = true;
+			int i = 0;
 
-
-	//	}
-		for (auto& segment : segments) {
-			segment.setFillColor(segmentColors[i % numSegments]);
-			i++;
-			//std::cout << "El rotationSpeed * deltaTime: " << rotationSpeed * deltaTime << std::endl;
+			for (auto& segment : segments) {
+				segment.setFillColor(segmentColors[i % numSegments]);
+				i++;
+				//std::cout << "El rotationSpeed * deltaTime: " << rotationSpeed * deltaTime << std::endl;
+			}
+			turno = false;
+		
+			initialSpeed = client.initialSpeedActi;// static_cast<float>(rand() % 201 + 800); // 800 a 1000
+	
+			std::cout << "\nGIrooooooooooooooooooooooooooooooooooooooooo";
+			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
+			rotationSpeed = initialSpeed; // Usar initialSpeed directamente
+			//rotationSpeed = (isSpinning) ? 300.0f : 0.0f;
+			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
 		}
-		turno = false;
-		// Variables para variaciones aleatorias
-		initialSpeed = static_cast<float>(rand() % 100 + 400); // Velocidad inicial aleatoria entre 400 y 500
-		decelerationRate = static_cast<float>(rand() % 20 + 40); // Desaceleración aleatoria entre 40 y 60
-
-		rotationSpeed = (isSpinning) ? 300.0f : 0.0f;
-		clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
+	}
+	
+	if (!turn) {
+		if (giroActivo && turno) {
+			isSpinning = !isSpinning;
+			girosSound.play();
+			giro = true;
+			resultado = true;
+			isSpinning = true;
+			int i = 0;
+			for (auto& segment : segments) {
+				segment.setFillColor(segmentColors[i % numSegments]);
+				i++;
+			}
+			turno = false;
+			// Variables para variaciones aleatorias
+			
+			initialSpeed = client.initialSpeedActi;// static_cast<float>(rand() % 201 + 800); // 800 a 1000
+			//decelerationRate = client.decelerationRateActi;
+			std::cout << "\nGIrooooooooooooooooooooooooooooooooooooooooo";
+			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
+			rotationSpeed = initialSpeed;
+	
+			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
+		}
 	}
 
 
@@ -66,14 +92,53 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		lightState = !lightState;
 		lightClock.restart();
 	}
-
-	// Rotar la ruleta
 	if (isSpinning) {
-		currentRotation += rotationSpeed * deltaTime; // Aumenta el ángulo de rotación
-		std::cout << "El currentRotation: " << currentRotation << std::endl;
+		// Actualizar rotación actual
+
+		std::cout << "\ncurrentRotation: " << currentRotation << " rotationSpeed:" << rotationSpeed;
+		currentRotation += rotationSpeed * deltaTime;
+		if (currentRotation >= 360.0f) {
+			currentRotation = fmod(currentRotation, 360.0f);
+		}
+
+
+		// Actualizar segmentos
+		for (auto& segment : segments) {
+			segment.setRotation(currentRotation);
+		}
+
+		// Actualizar íconos
+		for (int i = 0; i < numSegments; ++i) {
+			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));//float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + currentRotation * (M_PI / 180.0f));
+			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
+			icons[i].rotate(rotationSpeed * deltaTime);
+		}
+
+		
+		// Disminuir gradualmente la velocidad
+		rotationSpeed = std::max(rotationSpeed - decelerationRate * deltaTime, 0.0f);
+
+
+
+
+		// Verificar si la ruleta ha parado
+		if (rotationSpeed <= 0.0f) {
+			isSpinning = false;
+			std::cout << "¡Giro finalizado!\n";
+		
+			// Calcular el segmento seleccionado
+			float finalAngle = fmod(currentRotation, 360.0f);
+			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+			std::cout << "Segmento seleccionado: " << currentSegment << "\n";
+		}
+	}
+
+	/* Rotar la ruleta
+	if (isSpinning) {
+		currentRotation += rotationSpeed * deltaTime;
 
 		if (currentRotation >= 360.0f) {
-			currentRotation = fmod(currentRotation, 360.0f); // Mantén el ángulo dentro de 0-360
+			currentRotation = fmod(currentRotation, 360.0f);
 		}
 
 		// Rota cada segmento de la ruleta
@@ -81,10 +146,9 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			segment.rotate(rotationSpeed * deltaTime);
 		}
 
-		// Actualizar la posición de los íconos para que roten junto con la ruleta
 		for (int i = 0; i < numSegments; ++i) {
 			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
-			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
+			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
 
 			if (rotationSpeed == 0.0f) {
 				isSpinning = false;
@@ -92,7 +156,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			icons[i].rotate(rotationSpeed * deltaTime);
 		}
 
-		// Aumenta la velocidad inicialmente para que la ruleta gane velocidad
 		if (rotationSpeed < initialSpeed) {
 			rotationSpeed += 10.0f * deltaTime; // Aceleración inicial
 		}
@@ -103,11 +166,9 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		// Verifica si el giro ha terminado y reinicia valores
 		if (rotationSpeed == 0.0f) {
 			isSpinning = false;
-			initialSpeed = static_cast<float>(rand() % 100 + 400); // Nueva velocidad inicial aleatoria para el próximo giro
-			decelerationRate = static_cast<float>(rand() % 20 + 40); // Nueva tasa de desaceleración aleatoria para el próximo giro
 		}
 
-	}
+	}*/
 
 	float segmentAngle = 360.0f / numSegments; // Cada segmento cubre este ángulo
 
@@ -161,7 +222,12 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		case 0:
 			std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
 			// Aquí realiza acciones específicas para el segmento 0
-		
+
+			client.turnopermitido-=1;
+
+
+
+
 			break;
 
 		case 1:
@@ -177,7 +243,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 		case 3:
 			std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
 			// Acciones para el segmento 3
-		
+
 			{
 				int totalRestado = 0;
 
@@ -208,7 +274,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
 			// Acciones para el segmento 4
 
-						playerInfos[IndexTurn].money += 150;
+			playerInfos[IndexTurn].money += 150;
 			playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
 
 			break;
@@ -223,13 +289,8 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			break;
 		}
 
-
-
-
-
 		giro = false;
 
-	
 		window.draw(ruletaBase);
 
 		for (auto& segment : segments) {
@@ -242,11 +303,11 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 
 		}
-		
+
 		window.draw(CentroCircule);
 		//  std::cout << "\nruleta icon2";
 		window.draw(iconsResul[currentSegment]);
-		
+
 	}
 	else if (!isSpinning && resultado == true) {
 
@@ -276,13 +337,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 
 
 	}
-
-
-
-
-
-
-
 	else {
 
 		particleSystem.reset();
@@ -294,14 +348,11 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 			window.draw(segments[i]); // Dibuja el segmento después de configurarlo
 		}
 
-	
 		window.draw(CentroCircule);
 
 		for (std::size_t i = 0; i < icons.size(); ++i) {
 			window.draw(icons[i]); // Dibujar el ícono en su posición original
 		}
-		
-
 
 	}
 
@@ -313,28 +364,26 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool Validar) {
 }
 
 
-/*   switch (switch_on)
-{
-
-
-
-
-default:
-	break;
-}   */
-
-
-
-
-
-
-
-
-
 void Ruleta::trurntrue() {
 
 	turno = true;
 	resultado = false;
+
+}
+
+void Ruleta::enviarestado() {
+
+
+	float anguloactualrule;
+	// Variables para variaciones aleatorias
+	for (auto& segment : segments) {
+		anguloactualrule = segment.getRotation();
+
+
+
+	}
+
+	client.ruleteGame(anguloactualrule);
 }
 
 void Ruleta::update(float deltaTime) {
@@ -404,13 +453,13 @@ void Ruleta::setupIcons() {
 		// Posición del ícono, escalada al radio de la ruleta
 		float iconAngle = i * angleStep + angleStep / 2;
 		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
-		
+
 		icons[i].setRotation(static_cast<float>(iconAngle * (180.0f / M_PI) + 90.0f));
 
 		iconsResul[i].setTexture(iconTextures[i]);
 		iconsResul[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
 		iconsResul[i].setPosition(centerX, centerY);  // 50 es un margen
-	
+
 	}
 }
 

@@ -26,7 +26,7 @@ private:
     sf::Texture TextureUnirsePartidaOff;
     sf::Texture TextureUnirsePartidaOn;
     sf::Texture TextureUnirse;
-
+    sf::Clock LimTimeBotton;
     sf::Text enunciado;
     sf::Sprite SpriteCrearPartida;
     sf::Sprite SpriteUnirsePartida;

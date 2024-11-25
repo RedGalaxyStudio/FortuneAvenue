@@ -13,6 +13,7 @@ extern sf::Sprite spriteFondoGame;
 extern int NumPlayers;
 extern sf::SoundBuffer DiceBuffer;
 extern sf::Sound DiceSound;
+
 extern sf::Sprite spriteMapa;
 extern sf::Clock reloj;
 extern sf::View view; 
@@ -22,6 +23,11 @@ extern sf::Sprite SpriteArrowIzq;
 extern bool server;
 
 extern sf::Sprite SpriteArrowArriba;
+
+
+extern sf::SoundBuffer girosBuffer;
+extern sf::Sound girosSound;
+
 
 extern std::string Code;
 extern int CplayerIndex;
@@ -53,12 +59,6 @@ extern bool turn_casa;
 extern bool turn_impuesto;
 extern bool turn_Moviendo;
 extern bool eventoActivo;
-
-
-
-
-
-
 
 struct PlayerGame {
 

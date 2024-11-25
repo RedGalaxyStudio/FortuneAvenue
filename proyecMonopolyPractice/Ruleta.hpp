@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include "Particles.h"
+#include <random>
+#include "ObjetosGlobal.hpp"
 #define M_PI 3.14159265358979323846
 
 class Ruleta {
@@ -13,6 +15,7 @@ public:
     void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
     void update(float deltaTime);
     void trurntrue();
+    void enviarestado();
 
 private:
     sf::Color fillColor;
@@ -21,14 +24,16 @@ private:
     bool turno;
     float initialSpeed;
     float decelerationRate;
-
-
+    bool decelerationStarted;
+    bool isSpinning;
     float blinkTimer;
     float blinkDuration;
     bool giro;
     bool resultado;
     float currentRotation;
-    bool isSpinning;
+    
+    bool sincro;
+
     float rotationSpeed;
   
     float width, height;
