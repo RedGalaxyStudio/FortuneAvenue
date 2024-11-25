@@ -34,7 +34,8 @@ void menuP::Resource() {
     if (!MenuMusicFondo.openFromFile("resource/sounds/MenuB.wav")) return;
     if (!Blur.loadFromFile("resource/Shaders/blur.frag", sf::Shader::Fragment)) return;
     if (!renderTexture.create(window->getSize().x, window->getSize().y)) return;
-   
+    if (!SelectingMusicFondo.openFromFile("resource/sounds/SelectingPieces.wav")) return;
+
 
 
     flechainstder.setTexture(Textureflechainstder);
@@ -58,8 +59,8 @@ void menuP::Resource() {
     ));
 
     loadSounds();
-    std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound };
-
+    std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound,&girosSound,&DiceSound };
+    std::vector<sf::Music*> MusicPointers =  { &MenuMusicFondo,&GameMusicFondo };
    
     overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
@@ -94,7 +95,7 @@ void menuP::Resource() {
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-    musicSlider = new SettingsManager(200, 300, 200, 10,&MenuMusicFondo,*window);  
+    musicSlider = new SettingsManager(200, 300, 200, 10,MusicPointers,*window);
     effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,*window); 
     loadCursors();
 

@@ -21,6 +21,8 @@ private:
     sf::FloatRect globalBounds;
     
     sf::Text CODE;
+    float startX;
+    float startY;
 
 public:
     

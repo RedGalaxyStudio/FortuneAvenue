@@ -29,6 +29,7 @@ public:
 	void disconnect();
 	void rollDice();
 	void endTurn();
+	void moneyActu(int money);
 	void handleServerMessage(const std::string& message);
 	int lastRollResult;
 	void playerChangedPiece();
@@ -44,6 +45,16 @@ public:
 	std::condition_variable cv;
 	std::mutex casasMutex;        // Para proteger el acceso a las casas
 	bool casasCargadas;
+	int conteoturn;
+	float anguloActualrule;
+	float initialSpeedActi;
+	float decelerationRateActi;
+	bool giroActivo;
+	int turnopermitido;
+	std::mutex ruletaMutex;
+	std::condition_variable ruletaCondVar;
+	bool ruletaMessageReceived = false;
+	
 private:
 
 

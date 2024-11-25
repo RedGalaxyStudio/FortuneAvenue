@@ -17,9 +17,25 @@
 #include "ResourceGame.hpp"
 
 
+class Ruleta;
 
 class GameMode {
 public:
+
+
+
+
+
+
+	bool prev_turn = turn;
+	bool prev_turn_impuesto = turn_impuesto;
+	bool prev_turn_casa = turn_casa;
+	bool prev_turn_ruleta = turn_ruleta;
+	bool prev_turn_dado = turn_dado;
+	bool prev_turn_Moviendo = turn_Moviendo;
+	bool prev_eventoActivo = eventoActivo;
+
+
 	GameMode(sf::RenderWindow& win);
 
 	void resource();
@@ -129,8 +145,8 @@ sf::Vector2f(773, 190),
 
 	bool animacionImpuesto;
 	bool animacionCasa;
-	Ruleta ruleta;
-	bool validar;
+	Ruleta *ruleta;
+	
 
 	sf::View viewTablero;
 	sf::Sprite renderedSprite;

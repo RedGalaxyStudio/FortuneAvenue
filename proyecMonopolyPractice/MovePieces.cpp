@@ -48,10 +48,10 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			casillasRestantes--;
 
 
-			std::cout << "\nCasi casi csio";
+			//std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
-				std::cout << "\nCasi caso";
+				//std::cout << "\nCasi caso";
 				if (caminoActual + 1 >= (*casillas).size()) {
 
 					finalCamino = true;
