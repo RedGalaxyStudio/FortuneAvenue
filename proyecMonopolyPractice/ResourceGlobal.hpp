@@ -9,7 +9,9 @@
 #include <iostream>
 #include <curl/curl.h>
 
-
+extern sf::Music MenuMusicFondo;
+extern sf::Music GameMusicFondo;
+extern sf::Music SelectingMusicFondo;
 extern sf::Text Sesion;
 extern sf::RectangleShape overlay;
 extern sf::Texture sharedTexture; 

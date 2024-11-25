@@ -12,7 +12,7 @@ public:
     ~SettingsManager();
     SettingsManager(); // Constructor por defecto
 
-    SettingsManager(float x, float y, float width, float height, sf::Music* music, sf::RenderWindow& windowRef);
+    SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>& music, sf::RenderWindow& windowRef);
     SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef);
 
     void handleEvent(sf::Event& event, const sf::RenderWindow& window);
@@ -36,7 +36,7 @@ private:
     sf::Font font;
     sf::Text volumeText;
     sf::Vector2i mousePos;
-    sf::Music* music;
+    std::vector <sf::Music*> music;
     std::vector<sf::Sound*> effects;
 
     sf::Text IdenVolumen;

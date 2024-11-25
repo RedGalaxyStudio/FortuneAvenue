@@ -5,6 +5,9 @@
 
 using json = nlohmann::json;
 
+sf::Music MenuMusicFondo;
+sf::Music SelectingMusicFondo;
+sf::Music GameMusicFondo;
 sf::Text Sesion;
 sf::Texture TextureFondoMenu;
 sf::Cursor normalCursor;

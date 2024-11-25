@@ -3,22 +3,25 @@
 #include "ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 
-SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), music(nullptr), musicEnabled(true), effectsEnabled(true)
+SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), musicEnabled(true), effectsEnabled(true)
 {
 }
 
 SettingsManager::SettingsManager()
-    : window(*(new sf::RenderWindow())), volume(100.0f), isDragging(false), music(nullptr), musicEnabled(true), effectsEnabled(true)
+    : window(*(new sf::RenderWindow())), volume(100.0f), isDragging(false), musicEnabled(true), effectsEnabled(true)
 {
     // Inicializa los miembros según sea necesario
     // Quizás quieras manejar la limpieza de la ventana de renderizado de marcador de posición si se usa
 }
 
-SettingsManager::SettingsManager(float x, float y, float width, float height, sf::Music* music, sf::RenderWindow& windowRef)
+SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>&  music, sf::RenderWindow& windowRef)
     : window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
 {
-    if (music) {
-        music->setVolume(volume);
+
+    for (auto* fondo : music) {
+        if (fondo) {
+            fondo->setVolume(volume);
+        }
     }
     loadVolumenIcon();
     bar.setSize(sf::Vector2f(width, height));
@@ -56,7 +59,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, sf
     updateVolumeText();
 }
 
-SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef): window(windowRef), volume(100.0f), isDragging(false), effects(effects), music(nullptr), musicEnabled(true), effectsEnabled(true)
+SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef): window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
 {
     for (auto* effect : effects) {
         if (effect) {
@@ -147,10 +150,12 @@ void SettingsManager::moveThumb(float mouseX) {
     filledBar.setSize(sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y));
 
     // Actualizar el volumen de la música si está presente
-    if (music) {
-        music->setVolume(volume);
+  
+    for (auto* fondo : music) {
+        if (fondo) {
+            fondo->setVolume(volume);
+        }
     }
-
     // Actualizar el volumen de los efectos
     for (auto* effect : effects) {
         if (effect) {
@@ -201,9 +206,13 @@ float SettingsManager::getVolume() const {
 
 void SettingsManager::toggleMusic(bool enable) {
     musicEnabled = enable;
-    if (music) {
-        music->setVolume(enable ? volume : 0.0f);
+    for (auto* fondo : music) {
+    
+        if (fondo) {
+            fondo->setVolume(enable ? volume : 0.0f);
+        }
     }
+
 }
 
 void SettingsManager::toggleEffects(bool enable) {
