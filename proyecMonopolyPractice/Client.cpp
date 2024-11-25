@@ -95,6 +95,7 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 			std::cout << "Connected to server!" << std::endl;
 			isConnected = true;
 			clientThread = std::thread(&Client::run, this);  // Iniciar el hilo
+			casasCargadas = false;
 			return true;
 		}
 		totalTimeWaited += retryDelay;
@@ -261,12 +262,12 @@ void Client::endTurn() {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
 	}
-	std::cout << "\nTurno de "<<IndexTurn <<"finalizo";
+	std::cout << "\nTurno de " << IndexTurn << "finalizo";
 	std::string message = "END_TURN";
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, packet);
 	enet_host_flush(client);
-	
+
 }
 
 void Client::startSpin() {
@@ -389,7 +390,7 @@ void Client::handleServerMessage(const std::string& message) {
 		if (playerIndexPos != std::string::npos && dicePos != std::string::npos) {
 			int currentPlayerIndex = std::stoi(message.substr(playerIndexPos, dicePos - playerIndexPos));
 			int diceRoll = std::stoi(message.substr(dicePos + std::string(":DICE:").length()));
-			
+
 			currentPlayerIndex = (currentPlayerIndex - playerIndex + 4) % 4;
 			lastRollResult = diceRoll; // Asigna el resultado del dado aquí
 			IndexTurn = currentPlayerIndex;
@@ -742,53 +743,79 @@ void Client::handleServerMessage(const std::string& message) {
 		// como actualizar el estado en la interfaz de usuario.
 		std::cout << "\n PLAYER fin" << std::endl;
 	}
-	else if (message.rfind("START_GAME", 0) == 0) {  
+	else if (message.rfind("START_GAME", 0) == 0) {
 		// Comprueba si empieza con "START_GAME"
-			std::cout << "Mensaje de inicio recibido: " << message << std::endl;
+		std::cout << "Mensaje de inicio recibido: " << message << std::endl;
 
-			// Encuentra la posición de "Casas:"
-			size_t casasPos = message.find("Casas:");
-			if (casasPos != std::string::npos) {
-				// Extrae todo después de "Casas:"
-				std::string casasData = message.substr(casasPos + 6); // +6 para saltar "Casas:"
+		// Encuentra la posición de "Casas:"
+		size_t casasPos = message.find("Casas:");
+		if (casasPos != std::string::npos) {
+			// Extrae todo después de "Casas:"
+			std::string casasData = message.substr(casasPos + 6); // +6 para saltar "Casas:"
 
-				// Convertir los números de cada jugador en vectores separados
-				std::istringstream iss(casasData);
-				std::string palabra;
-				std::vector<std::vector<int>> casasPorJugador;
+			// Convertir los números de cada jugador en vectores separados
+			std::istringstream iss(casasData);
+			std::string palabra;
+			std::vector<std::vector<int>> casasPorJugador;
+			std::vector<int> indicesJugadores;
 
-				while (iss >> palabra) {
-					if (palabra == "Jugador") {
-						// Encontramos un nuevo jugador, inicializamos su vector de casas
-						iss.ignore(256, ':'); // Ignora hasta el próximo ':'
-						casasPorJugador.emplace_back();
+
+
+			while (iss >> palabra) {
+				if (palabra == "Jugador") {
+					// Encontramos un nuevo jugador, inicializamos su vector de casas
+					int jugadorIndex;
+					iss >> jugadorIndex; // Lee el número del jugador
+
+					indicesJugadores.push_back(jugadorIndex); // Guarda el índice
+					iss.ignore(256, ':'); // Ignora hasta el próximo ':'
+					casasPorJugador.emplace_back();
+					// Encontramos un nuevo jugador
+
+				}
+				else {
+					// Convertimos los números de casas
+					try {
+						int casa = std::stoi(palabra);
+						casasPorJugador.back().push_back(casa); // Añadimos al último jugador
 					}
-					else {
-						// Convertimos los números de casas
-						try {
-							int casa = std::stoi(palabra);
-							casasPorJugador.back().push_back(casa); // Añadimos al último jugador
-						}
-						catch (...) {
-							// Ignoramos los caracteres que no son números (por ejemplo, ";")
-						}
+					catch (...) {
+						// Ignoramos los caracteres que no son números (por ejemplo, ";")
 					}
 				}
 
-				// Mostrar las casas de cada jugador
-				for (size_t i = 0; i < casasPorJugador.size(); ++i) {
-					std::cout << "Jugador " << i << " casas: ";
-					for (int casa : casasPorJugador[i]) {
+			}
+
+			// Mostrar las casas de cada jugador
+			// Transferir los datos a PlayerInfo
+			// Transferir los datos a PlayerInfo
+			
+				
+				for (size_t i = 0; i < indicesJugadores.size(); ++i) {
+
+					for (int j = 0; j < 17; ++j) {
+						playerInfos[i].casasPorJugador[j] = casasPorJugador[i][j];
+					}
+
+					// Muestra las casas asignadas
+					std::cout << "Jugador " << indicesJugadores[i] << " casas asignadas: ";
+					for (int casa : playerInfos[i].casasPorJugador) {
 						std::cout << casa << " ";
 					}
 					std::cout << std::endl;
+				} 
+				
+				{
+					std::lock_guard<std::mutex> lock(casasMutex);
+					casasCargadas = true; // Actualiza la bandera	
 				}
-			}
-			else {
-				std::cerr << "Error: no se encontró 'Casas:' en el mensaje." << std::endl;
-			}
-	}
-	else {
-		std::cerr << "Unknown message received from server: " << message << std::endl;
-	}
-}//START_GAMECasas: Jugador 0 : 7 12 15 3 0 4 2 11 8 16 1 9 5 14 13 10 6;
+				cv.notify_one(); // Notifica al hilo principal para continuar
+		}
+		else {
+			std::cerr << "Error: no se encontró 'Casas:' en el mensaje." << std::endl;
+		}
+		}
+		else {
+			std::cerr << "Unknown message received from server: " << message << std::endl;
+		}
+	}//START_GAMECasas: Jugador 0 : 7 12 15 3 0 4 2 11 8 16 1 9 5 14 13 10 6;

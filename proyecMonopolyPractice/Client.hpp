@@ -42,6 +42,8 @@ public:
 	ENetHost* client;
 	std::mutex mtx;
 	std::condition_variable cv;
+	std::mutex casasMutex;        // Para proteger el acceso a las casas
+	bool casasCargadas;
 private:
 
 

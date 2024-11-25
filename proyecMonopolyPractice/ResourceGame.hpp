@@ -34,7 +34,7 @@ struct PlayerInfo {
 	bool isSelectingPiece = false; 
 	bool isInGame = false;        
 	int indexPiece;
-
+	int casasPorJugador[17];
 };
 
 extern int Opcioncami;
