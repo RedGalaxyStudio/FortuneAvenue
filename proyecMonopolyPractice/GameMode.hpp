@@ -89,6 +89,9 @@
         int resultadoDado;
         sf::Texture piecesTextures;
         sf::Sprite pieces;
+        
+        
+
         std::vector<MovePieces> moverFichas;
         sf::Clock TempoAnimacion;
         bool animacionIniciada;

@@ -24,6 +24,7 @@ public:
     void Inicializar();
     void MenuJugar();
 
+
     void MenuPrincipal();
 
     void eventoMenuP();
@@ -32,6 +33,7 @@ public:
 
 
     void MenuOpcion();
+    void instruccionesGame();
     void MenuSalir();
     void MenuAcercaDe();
     void ValidarUser();
@@ -49,6 +51,17 @@ private:
 
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;
+
+
+    sf::Texture Textureflechainstder;
+    sf::Sprite flechainstder;
+
+    sf::Texture Textureflechainstizq;
+    sf::Sprite flechainstizq;
+
+    sf::Texture textureInstruccionesOn;
+    sf::Texture textureInstruccionesOff;
+    sf::Sprite spriteInstrucciones;
 
     sf::Texture textureAcercaDeOn;
     sf::Texture textureAcercaDeOff;

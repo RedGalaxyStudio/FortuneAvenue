@@ -14,10 +14,10 @@ public:
 
 	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillaImpuestoC);
 
-	// Iniciar el movimiento del sprite a lo largo de las casillas
+	
 	void iniciarMovimiento(int numeroCasillas, float duracion);
 
-	// Actualizar la posición del sprite (llamado en cada frame)
+	
 	void actualizarMovimiento(float deltaTime);
 	bool finalCamino;
 	void seleccionarCaminoIzq();
@@ -29,20 +29,20 @@ public:
 	void animacionRebote(sf::Vector2f posicionFinal, float deltaTime);
 	void animacionRotacion(float deltaTime);
 	void animacionEscala(float deltaTime);
-	bool enMovimiento;  // Indica si el sprite está en movimiento
+	bool enMovimiento; 
 
 private:
-	sf::Sprite* sprite;  // Guardamos la referencia al sprite
-	std::vector<std::vector<sf::Vector2f>>* casillas;  // Lista de caminos/casillas
-	std::vector<std::vector<sf::Vector2f>>* casillasRuleta;  // Lista de caminos/casillas
-	std::vector<std::vector<sf::Vector2f>>* casillasImpuesto;  // Lista de caminos/casillas
+	sf::Sprite* sprite;  
+	std::vector<std::vector<sf::Vector2f>>* casillas;  
+	std::vector<std::vector<sf::Vector2f>>* casillasRuleta;  
+	std::vector<std::vector<sf::Vector2f>>* casillasImpuesto;  
 	sf::RenderWindow* window;
-	int caminoActual;  // El camino actual por el que está moviéndose el sprite
-	int casillaActual;  // La casilla actual dentro del camino
-	int casillasRestantes;  // Número de casillas que quedan por mover
+	int caminoActual;  
+	int casillaActual;  
+	int casillasRestantes;  
 
 
-	sf::Vector2f posicionInicial;  // Posición inicial para la interpolación
+	sf::Vector2f posicionInicial;  
 	sf::Vector2f posicionFinal;  // Posición final hacia la que se mueve el sprite
 	float duracionMovimiento;  // Duración de la transición entre casillas
 	float t;  // Valor de interpolación entre 0 y 1
@@ -167,4 +167,4 @@ private:
 	std::vector<sf::Vector2f> caminocasa7 = {  };
 };
 
-#endif // MOVEPIECES_HPP
+#endif

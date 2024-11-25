@@ -45,15 +45,8 @@ void GameMode::resource() {
 
 	DiceSound.setBuffer(DiceBuffer);
 
-	// Vector para cada grupo de casillas (caminos)
 	std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
-	
-
-	
-
-
-	// Agregar los caminos al vector principal
 	for (int i = 0; i < 4; i++) {
 
 		globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
@@ -65,14 +58,8 @@ void GameMode::resource() {
 	casillas2.push_back(camino1);
 	casillas3.push_back(camino1);
 	
-
-	
-	
-
-
-
 	view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y));
-	view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centrar la vista en la ficha
+	view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centra la vista en la ficha
 
 
 	posicionActual = 0;
@@ -124,11 +111,7 @@ void GameMode::update() {
 	playersGame[0].boxPlayer.setScale(0.7f, 0.7f);
 	playersGame[0].MarcoPlayer.setPosition(52.5f, 62.5f);
 	playersGame[0].Money.setPosition(170.65f, 95.5f);
-	/// const sf::Texture* texture = 
-	// if (texture != nullptr) {
-	  //   playersGame[0].AvatarPlayer.setTexture(texture);
 
-   //  }
 
 	playersGame[0].AvatarPlayer.setPosition(52.5f, 62.5f);
 	playersGame[0].AvatarPlayer.setScale(0.7f, 0.7f);
@@ -182,7 +165,7 @@ void GameMode::update() {
 	while (window->isOpen()) {
 
 		Event();
-		//std::cout << "\n la cagaste princi:";
+		
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
 			DadoResul = resultadoDado;
@@ -192,7 +175,7 @@ void GameMode::update() {
 		if (muerte == true && !animacionIniciada) {
 			TempoAnimacion.restart();
 			muerte = false;
-			animacionIniciada = true;    // Marcar que ya se ha iniciado la animación
+			animacionIniciada = true;   
 		}
 
 		if (validar == true && muerte == true && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
@@ -214,14 +197,15 @@ void GameMode::update() {
 			DadoResul = 0;
 		}
 
-		// Variables para controlar el temporizador
 		sf::Clock clock;
-		float tiempoRuletaVisible = 3.0f; // 3 segundos
+		float tiempoRuletaVisible = 3.0f; 
 		bool ruletaVisible = false;
 
-		// En tu lógica de juego:
+	
 		float deltaTime = reloj.restart().asSeconds();
-		//std::cout << "\n la cagaste medio:";
+
+
+
 		//DrawGameImpuesto();
 		
 		if (moverFichas[IndexTurn].enMovimiento == true) {
@@ -230,21 +214,21 @@ void GameMode::update() {
 		}
 		else if (ruledraw == true) {
 			if (!ruletaVisible) {
-				// Mostrar la ruleta y reiniciar el temporizador
+				
 				DrawGameRuleta();
 				ruletaVisible = true;
-				clock.restart(); // Reinicia el reloj
-				std::cout << "false";
+				clock.restart();
+				
 			}
 			else {
-				// Verifica si ha pasado el tiempo
+				
 				if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
-					ruletaVisible = false; // Oculta la ruleta
+					ruletaVisible = false;
 				}
 				else {
-					DrawGameRuleta(); // Mantén la ruleta visible
+					DrawGameRuleta(); 
 				}
-				std::cout << "true";
+				
 			}
 		}
 		else {
@@ -252,7 +236,7 @@ void GameMode::update() {
 		}
 
 		window->display();
-		//std::cout << "\n la cagaste display:";
+		
 	}
 	
 }
@@ -261,8 +245,8 @@ void GameMode::Event() {
 	sf::Event event;
 
 	do {
-		if (window->pollEvent(event)) {  // Inicializamos 'event' antes de usarlo
-			Dado.loop(event, &client);  // 'event' ya está inicializado correctamente
+		if (window->pollEvent(event)) {  
+			Dado.loop(event, &client);  
 
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -296,11 +280,11 @@ void GameMode::Event() {
 			}
 		}
 
-	} while (window->pollEvent(event));  // Asegura que el bucle se repita mientras haya eventos pendientes
+	} while (window->pollEvent(event));  
 }
 
 void GameMode::DrawPieceMoviendo(  ) {
-	//std::cout << "\n la cagaste Movi:";
+	
 	sf::Vector2f fichaPos = playersGame[IndexTurn].PieceSelect.getPosition();
 	float viewX = fichaPos.x;
 	float viewY = fichaPos.y;
@@ -319,19 +303,17 @@ void GameMode::DrawPieceMoviendo(  ) {
 
 	window->draw(spriteFondoGame);
 	window->draw(spriteMapa);
-	//for (const auto& s : rastro) {
-	 //   window->draw(s);
-	///}
+
 	window->draw(playersGame[IndexTurn].PieceSelect);
 	window->setView(window->getDefaultView());
 
 
-//	std::cout << "\n la cagaste movi2:";
+
 }
 
 
 void GameMode::DrawGameRuleta() {
-	//std::cout << "\n la cagaste rule:";
+	
 	float deltaTime = clock.restart().asSeconds();
 
 	window->clear();

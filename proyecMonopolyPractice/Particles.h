@@ -13,7 +13,7 @@ public:
     Particle(const sf::Vector2f& position, const sf::Vector2f& velocity, float lifetime, float size,sf::Color Susana) {
         shape.setPosition(position);
         shape.setRadius(size);
-        shape.setFillColor(Susana); // Color de la partícula (puedes cambiarlo)
+        shape.setFillColor(Susana); 
         this->velocity = velocity;
         this->lifetime = lifetime;
     }
@@ -21,11 +21,11 @@ public:
     void update(float dt) {
         lifetime -= dt;
         shape.move(velocity * dt);
-        float alpha = (lifetime > 0) ? 255 * (lifetime / 3.0f) : 0; // Gradual desaparición
+        float alpha = (lifetime > 0) ? 255 * (lifetime / 3.0f) : 0; 
 
         sf::Color currentColor = shape.getFillColor();
         shape.setFillColor(sf::Color(currentColor.r, currentColor.g, currentColor.b, static_cast<sf::Uint8>(alpha)));
-       // shape.setFillColor(sf::Color(255, 255, 0, static_cast<sf::Uint8>(alpha))); // Ajusta la opacidad
+      
     }
 
     bool isDead() const {
@@ -74,7 +74,7 @@ public:
     }
 
     void reset() {
-        particles.clear(); // Vacía todas las partículas actuales
+        particles.clear(); 
     }
 
 };

@@ -13,8 +13,8 @@ public:
     IniciaUser(sf::RenderWindow& windowRef);
     ~IniciaUser();
 
-    void Resource();       // Carga de recursos (texturas, sonidos, etc.)
-    void Update();         // Lógica principal del juego
+    void Resource();       
+    void Update();         
     void IniciAcion();
     void saveSelectedAvatar();
     void loadSelectedAvatar();
@@ -27,17 +27,17 @@ private:
     // Texturas y sprites
     sf::Texture ckeck;
     sf::Sprite spriteCkeck;
-    sf::CircleShape* selectedAvatar = nullptr; // Avatar seleccionado
+    sf::CircleShape* selectedAvatar = nullptr; 
     sf::Sprite SpriteFondoMenu;
     sf::Sprite SpriteFondoMenuAvar;
     sf::Texture TextureFondoMenuAvar;
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
 
-    int currentIndex;  // Índice de avatares visibles
+    int currentIndex;  
 
-    TextBox textBox;  // Usar TextBox como miembro de IniciaUser
+    TextBox textBox; 
 };
 
-#endif // IniciaUser_HPP
+#endif
 

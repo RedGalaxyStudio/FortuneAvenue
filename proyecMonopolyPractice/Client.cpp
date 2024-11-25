@@ -490,24 +490,22 @@ void Client::handleServerMessage(const std::string& message) {
 
 		std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
 
-		// Convertir el índice y el dinero a sus tipos apropiados
+		
 		try {
 			index = std::stoi(indexStr);
 			money = std::stoi(moneyStr);
 			isSelecting = (isSelectingStr == "true");
 			isInGame = (isInGameStr == "true");
 		}
-		catch (const std::invalid_argument& e) {
-			// Manejar el error (el valor no es un número)
-			std::cout << "\nEJEcuto no sirvo";
+		catch (const std::invalid_argument&) {
+			
 			return;
 		}
-		catch (const std::out_of_range& e) {
-			// Manejar el error (el número está fuera del rango)
-			std::cout << "\nEJEcuto no 98989";
+		catch (const std::out_of_range&) {
+			
 			return;
 		}
-		std::cout << "\nEJEcuto existen3";
+		
 
 
 
@@ -518,31 +516,25 @@ void Client::handleServerMessage(const std::string& message) {
 		}
 
 
-		// Asegurarse de que el índice esté dentro de los límites
+		
 		if (index >= 0 && index < playerInfos.size()) {
-			std::cout << "\nEJEcuto existen6";
-			// Actualizar la información del jugador en la posición correspondiente
+			
 			playerInfos[index].username = username;
 			playerInfos[index].money = money;
 			playerInfos[index].isSelectingPiece = isSelecting;
 			playerInfos[index].isInGame = isInGame;
 
-			// Procesar la imagen
-			//std::vector<char> image(imageStr.begin(), imageStr.end());
-			//playerInfos[index].image = image;
-
-			// Cargar la textura del avatar
-		  //  playersGame[index].textureAvatarPLayer.loadFromMemory(image.data(), image.size());
+			
 			playersGame[index].NamePlayer.setString(playerInfos[index].username);
 
-			// Imprimir la información del jugador
+			
 			std::cout << "Player " << index << ": " << username
 				<< " | Money: " << money
 				<< " | Is Selecting: " << (isSelecting ? "Yes" : "No")
 				<< " | Is In Game: " << (isInGame ? "Yes" : "No")
 				<< std::endl;
 
-			std::cout << "\nEJEcuto existen4";
+		
 		}
 		else {
 			std::cerr << "Error: Index out of bounds for player information." << std::endl;
@@ -552,18 +544,18 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "\nEJEcuto existen2";
 	}
 	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
-		// Eliminar el prefijo "EXISTING_PLAYER:"
+		// Elimina el prefijo "EXISTING_PLAYER:"
 		std::cout << "\nEXISTING_PLAYER";
 
 		if (message.length() < 16) {
-			std::cout << "\nEJEcuto toy mal";
+			
 			return;
 		}
-		std::cout << "\nEJEcuto existen1";
+		
 		std::string data = message.substr(16);
 
-		// Dividir la cadena de datos en partes usando ":" como delimitador
-		std::istringstream iss(data);
+		// para dividir la cadena de datos en partes usando ":" como delimitador :)
+ 		std::istringstream iss(data);
 		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imagePath;
 
 		if (std::getline(iss, username, ':') &&
@@ -588,22 +580,19 @@ void Client::handleServerMessage(const std::string& message) {
 		std::string image;
 		std::cout << "indexStr: '" << indexStr << "', moneyStr: '" << moneyStr << "'\n";
 
-		// Convertir el índice y el dinero a sus tipos apropiados
 		try {
 			index = std::stoi(indexStr);
 			money = std::stoi(moneyStr);
 			isSelecting = (isSelectingStr == "true");
 			isInGame = (isInGameStr == "true");
-			image = imagePath; // Guardar la dirección de la imagen
+			image = imagePath; // Guarda la dirección de la imagen eso uwu
 		}
-		catch (const std::invalid_argument& e) {
-			// Manejar el error (el valor no es un número)
-			std::cout << "\nEJEcuto no sirvo";
+		catch (const std::invalid_argument& ) {
+			
 			return;
 		}
-		catch (const std::out_of_range& e) {
-			// Manejar el error (el número está fuera del rango)
-			std::cout << "\nEJEcuto no 98989";
+		catch (const std::out_of_range&) {
+	
 			return;
 		}
 		std::cout << "\nEJEcuto existen3";
@@ -717,11 +706,11 @@ void Client::handleServerMessage(const std::string& message) {
 				playerInfos[Index].indexPiece = indexselectinpiece;
 				std::cout << "\nEJEcuto index 2";
 			}
-			catch (const std::invalid_argument& e) {
-				std::cerr << "\nError: Argumento no válido al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+			catch (const std::invalid_argument&) {
+
 			}
-			catch (const std::out_of_range& e) {
-				std::cerr << "\nError: Número fuera de rango al intentar convertir a entero. indexStr: '" << indexStr << "', pieceIndexStr: '" << pieceIndexStr << "'" << std::endl;
+			catch (const std::out_of_range&) {
+			
 			}
 	}
 	else if (message.rfind("PLAYER_READY:", 0) == 0) {

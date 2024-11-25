@@ -8,7 +8,7 @@
 
 class Window {
 
-	std::vector<int> textureIndices; // Vector para almacenar los índices de textura
+	std::vector<int> textureIndices; 
 
 	float posz = 0;
 	
@@ -31,40 +31,40 @@ class Window {
 
 
 	void updateDraw() {
-		textureIndices.clear();  // Limpiar el vector en cada actualización
+		textureIndices.clear();  
 
 		for (int i = 0; i < cube->show.size(); i++) {
 			std::vector<int> faceid = cube->show[i];
-			sf::Vertex* face = &Cube3D[i * 4];  // Obtenemos los 4 vértices de la cara
+			sf::Vertex* face = &Cube3D[i * 4];  
 
-			// Asignar la textura correcta según la cara que se está mostrando
+			
 			int textureIndex = -1;
 			for (int j = 0; j < 6; j++) {
 				if (cube->faces[j] == faceid) {
-					textureIndex = j;  // Asignar el índice de textura correspondiente a la cara
+					textureIndex = j;  
 					break;
 				}
 			}
 
-			if (textureIndex == -1) continue;  // Si no se encuentra una textura, saltamos
+			if (textureIndex == -1) continue;  
 
-			textureIndices.push_back(textureIndex);  // Guarda el índice de la textura para esta cara
+			textureIndices.push_back(textureIndex); 
 
 			for (int j = 0; j < 4; j++) {
-				// Asignar la posición en 2D de los vértices
+				
 				face[j].position = sf::Vector2f(cube->C3D[faceid[j]].x, cube->C3D[faceid[j]].y);
-				face[j].color = sf::Color::White;  // No se aplica color
+				face[j].color = sf::Color::White; 
 
-				// Asignar las coordenadas de textura según el vértice
+				
 				if (j == 0)
-					face[j].texCoords = sf::Vector2f(0, 0);  // Esquina superior izquierda
+					face[j].texCoords = sf::Vector2f(0, 0);  
 				else if (j == 1)
-					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x), 0);  // Esquina superior derecha
+					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x), 0);  
 				else if (j == 2)
 					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x),
-						static_cast<float>(cube->textures[textureIndex].getSize().y));  // Esquina inferior derecha
+						static_cast<float>(cube->textures[textureIndex].getSize().y));  
 				else if (j == 3)
-					face[j].texCoords = sf::Vector2f(0, static_cast<float>(cube->textures[textureIndex].getSize().y));  // Esquina inferior izquierda
+					face[j].texCoords = sf::Vector2f(0, static_cast<float>(cube->textures[textureIndex].getSize().y));  
 
 			}
 		}
@@ -73,16 +73,11 @@ class Window {
 	bool isDiceInUse = false;
 
 
-	// Actualiza la apariencia del dado
 	void updateDiceAppearance() {
-		// Dibujar el dado
-		//cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
-		
 
-		// Si el dado no está en uso, dibuja la sombra encima
 		if (!isDiceInUse) {
-			shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y)); // Coloca la sombra sobre el dado
-			window->draw(shadowOverlay);                    // Dibuja la sombra
+			shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y));
+			window->draw(shadowOverlay);                   
 		}
 	}
 
@@ -92,8 +87,8 @@ class Window {
 
 
 public :
-	sf::Clock clock;  // Reloj para medir el tiempo transcurrido
-	bool eventStarted = false;  // Bandera para saber si el evento ha comenzado
+	sf::Clock clock;  
+	bool eventStarted = false;  
 	sf::RectangleShape shadowOverlay;
 	int faceIndex;
 
@@ -108,13 +103,13 @@ public :
 		Cube3D.setPrimitiveType(sf::Quads);
 		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
 		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
-		srand(static_cast<unsigned int>(time(0))); // Inicializar semilla
+		srand(static_cast<unsigned int>(time(0))); 
 
-		// Inicializar la sombra
-		shadowOverlay.setSize(sf::Vector2f(100, 100)); // Cambia el tamaño según sea necesario
-		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); // Color negro semitransparente
+		
+		shadowOverlay.setSize(sf::Vector2f(100, 100)); 
+		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); 
 		sf::Vector2f size = shadowOverlay.getSize();
-		shadowOverlay.setOrigin(size.x / 2, size.y / 2); // Centra el origen
+		shadowOverlay.setOrigin(size.x / 2, size.y / 2); 
 
 		Cube3D.resize(cube->show.size() * 4);
 
@@ -123,47 +118,46 @@ public :
 
 
 	void update() {
-		// Crear una sombra semitransparente
+		
 		shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y));
-		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); // Color negro semitransparente
+		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); 
 
 		updateDraw();
 
 
-		// Crear el vertex array para la sombra
-		sf::VertexArray shadow(sf::Quads, cube->show.size() * 4); // Asegúrate de que el tamaño sea correcto
+		sf::VertexArray shadow(sf::Quads, cube->show.size() * 4); 
 
-		// Dibuja la sombra del cubo
+
 		for (int i = 0; i < cube->show.size(); i++) {
-			sf::Vertex* face = &Cube3D[i * 4];  // Obtiene los 4 vértices de la cara
+			sf::Vertex* face = &Cube3D[i * 4];  
 
-			// Crea un color negro para la sombra, puedes ajustar la opacidad aquí
-			sf::Color shadowColor(0, 0, 0, 150); // Negro con un poco de transparencia
+			
+			sf::Color shadowColor(0, 0, 0, 150); 
 
-			// Calcula la posición de la sombra basada en la posición del cubo
+			
 			for (int j = 0; j < 4; j++) {
-				sf::Vector2f shadowPosition = face[j].position + sf::Vector2f(5.0f, 5.0f); // Cambia los valores de 5.0f a lo que desees para la dirección de la sombra
+				sf::Vector2f shadowPosition = face[j].position + sf::Vector2f(5.0f, 5.0f); 
 
-				// Asigna la posición y color a los vértices de la sombra
+				
 				shadow[i * 4 + j].position = shadowPosition;
 				shadow[i * 4 + j].color = shadowColor;
 			}
 		}
 
-		// Dibuja la sombra
+
 		window->draw(shadow);
 
 		for (int i = 0; i < cube->show.size(); i++) {
 			sf::RenderStates states;
-			if (i < textureIndices.size()) {  // Asegúrate de que el índice es válido
-				int textureIndex = textureIndices[i];  // Usa el índice de textura calculado previamente
-				if (textureIndex == -1) continue;  // Si no hay textura válida, saltamos
+			if (i < textureIndices.size()) {  
+				int textureIndex = textureIndices[i];  
+				if (textureIndex == -1) continue;  
 
-				states.texture = &cube->textures[textureIndex];  // Asigna la textura correcta
+				states.texture = &cube->textures[textureIndex];  
 
-				// Dibuja cada cara individualmente
-				sf::Vertex* face = &Cube3D[i * 4];  // Obtiene los 4 vértices de la cara
-				window->draw(face, 4, sf::TrianglesFan, states);  // Dibuja la cara
+				
+				sf::Vertex* face = &Cube3D[i * 4];  
+				window->draw(face, 4, sf::TrianglesFan, states);  
 			}
 		}
 
@@ -189,11 +183,11 @@ public :
 				mouseStart.y = rand() % 600 + 1;
 				ok = 1;
 				clock.restart();
-				//std::cout << "eventStarted: " << eventStarted << std::endl;
+				
 				std::unique_lock<std::mutex> lock(client->mtx);
-				client->cv.wait(lock, [] { return espera; }); // Espera hasta que espera sea true
+				client->cv.wait(lock, [] { return espera; }); 
 
-				// Asigna el resultado una vez que espera es true
+				
 				faceIndex = client->lastRollResult;
 				client->lastRollResult = -1;
 				std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
@@ -204,8 +198,7 @@ public :
 		if (rolldiceJugador) {
 			std::unique_lock<std::mutex> lock(client->mtx);
 
-			// Espera hasta que el resultado esté disponible
-			while (client->lastRollResult == -1) { // Suponiendo que -1 indica un valor no asignado
+			while (client->lastRollResult == -1) { 
 				client->cv.wait(lock);
 			}
 
@@ -218,7 +211,6 @@ public :
 			ok = 1;
 			clock.restart();
 
-			// Ahora que el valor está asegurado, asignamos el resultado
 			faceIndex = client->lastRollResult;
 			client->lastRollResult=-1;
 			std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
@@ -231,11 +223,11 @@ public :
 
 	int logica(){
 		if (eventStarted) {
-			sf::Time elapsed = clock.getElapsedTime(); // Tiempo transcurrido desde que se inició el evento
+			sf::Time elapsed = clock.getElapsedTime(); 
 
-			if (elapsed.asSeconds() < 1.0f) { // Comprobar si han pasado menos de 5 segundos
-				mouseEnd.x = rand() % 400 + 1;  // Valor aleatorio para la coordenada x
-				mouseEnd.y = rand() % 600 + 1;  // Valor aleatorio para la coordenada y
+			if (elapsed.asSeconds() < 1.0f) { 
+				mouseEnd.x = rand() % 400 + 1; 
+				mouseEnd.y = rand() % 600 + 1;  
 
 				float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
 				float dy = static_cast<float>(mouseEnd.y - mouseStart.y);
@@ -249,7 +241,7 @@ public :
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
-				ok = 0; // Actualizar estado
+				ok = 0; 
 				return 0;
 			}
 			else {
@@ -259,7 +251,7 @@ public :
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
-				//std::cout << "El evento de la tecla A ha terminado." << std::endl;
+				
 				return faceIndex;
 			}
 
