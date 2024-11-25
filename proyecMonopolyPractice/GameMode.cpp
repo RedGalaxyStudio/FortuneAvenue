@@ -244,7 +244,7 @@ void GameMode::update() {
 
 		window->setMouseCursor(*currentCursor);
 
-
+		std::cout <<"\n Dado"<< turn_dado;
 		//dado mecanica movimiento
 
 		if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {

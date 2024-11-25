@@ -370,7 +370,7 @@ void Cell::Rotate(sf::Vector3f O, sf::Vector3f W, float thetaY) {
 
         (*this).setMC(xc1 + O);
         conte += 1;
-        std::cout << "\nConte.x:" << conte; std::cout << "\ncurrentPos.x:" << currentPos.x << " currentPos.y" << currentPos.y;
+       // std::cout << "\nConte.x:" << conte; std::cout << "\ncurrentPos.x:" << currentPos.x << " currentPos.y" << currentPos.y;
     }
     else {
 

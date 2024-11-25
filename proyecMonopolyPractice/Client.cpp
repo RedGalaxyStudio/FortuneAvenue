@@ -347,10 +347,11 @@ void Client::handleServerMessage(const std::string& message) {
 		turn_impuesto = true;
 		turn_Moviendo = true;
 		IndexTurn = 0;
+		std::cout << "It's your turn!2" << std::endl;
 	}
 	else 	if (message.rfind("TURN_START", 0) == 0) {
 		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
-		//turn_dado = true;
+
 		eventoActivo = false;
 		turn_ruleta = true;
 		turn_casa = true;
@@ -373,6 +374,9 @@ void Client::handleServerMessage(const std::string& message) {
 
 			IndexTurn = playerIndexTurn;
 			std::cout << "Turn has started for player: " << playerIndexTurn << std::endl;
+
+			std::cout << "le toca a: " << playerIndexStr << std::endl;  // Depuración
+
 		}
 		else {
 			std::cout << "Invalid message format for TURN_START." << std::endl;
@@ -395,6 +399,8 @@ void Client::handleServerMessage(const std::string& message) {
 			lastRollResult = diceRoll; // Asigna el resultado del dado aquí
 			IndexTurn = currentPlayerIndex;
 			if (turn) {
+				std::cout << "resultado " << lastRollResult << " de :" << IndexTurn << std::endl;  // Depuración
+
 				{
 					std::lock_guard<std::mutex> lock(mtx);
 					espera = true; // Cambia espera a true
@@ -403,12 +409,19 @@ void Client::handleServerMessage(const std::string& message) {
 				cv.notify_one(); // Notifica al hilo principal para continuar
 			}
 			else {
+				std::cout << "resultado " << lastRollResult<<" de :"<< IndexTurn << std::endl;  // Depuración
+
+
 				{
 					std::lock_guard<std::mutex> lock(mtx);
 					rolldiceJugador = true; // Cambia rolldiceJugador a true
 				}
 
 				cv.notify_one(); // Notifica al hilo principal para continuar
+
+
+				std::cout << "resultado finalizo"<< std::endl;  // Depuración
+
 			}
 
 			std::cout << "\nResultado en clase cliente:" << lastRollResult;
@@ -818,4 +831,8 @@ void Client::handleServerMessage(const std::string& message) {
 		else {
 			std::cerr << "Unknown message received from server: " << message << std::endl;
 		}
+
+
+
+		std::cout << "\nfinal mensaje!" << std::endl;
 	}//START_GAMECasas: Jugador 0 : 7 12 15 3 0 4 2 11 8 16 1 9 5 14 13 10 6;
