@@ -128,6 +128,7 @@ void PieceSelector::updateSelection() {
 		Check[i].setPosition(startX + i * (250 + 10), startY + 200);
 	}
 	MenuMusicFondo.stop();
+	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);
 	SelectingMusicFondo.play();
 	playersGame[0].Activo = false;
@@ -203,7 +204,7 @@ void PieceSelector::updateSelection() {
 
 						playerInfos[0].isSelectingPiece = true;
 						client.ReadyPlayer();
-						gamemode.update();
+						
 					}
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
@@ -240,7 +241,7 @@ void PieceSelector::updateSelection() {
 			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece) {
 				SelectingPiece = false;
 
-				break;
+				
 			}
 		}
 

@@ -128,3 +128,26 @@ void Scrollbar::setOutlineThickness(float thickness) {
 float Scrollbar::getScrollOffset() const {
     return scrollOffset;
 }
+
+
+void Scrollbar::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
+    auto mousePos = sf::Mouse::getPosition(window);
+
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (scrollbarThumb.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            dragging = true;
+            dragOffset = mousePos.y - scrollbarThumb.getPosition().y;
+        }
+    }
+
+    if (event.type == sf::Event::MouseButtonReleased) {
+        dragging = false;
+    }
+
+    if (event.type == sf::Event::MouseMoved && dragging) {
+        float newThumbY = mousePos.y - dragOffset;
+        scrollOffset = ((newThumbY - y) / (windowHeight - scrollbarHeight)) * maxScrollOffset;
+        scrollOffset = std::clamp(scrollOffset, 0.0f, maxScrollOffset);
+        update(0);  // Update the thumb position after dragging
+    }
+}

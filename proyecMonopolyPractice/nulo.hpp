@@ -1,4 +1,4 @@
-#ifndef NULO_HPP
+/*#ifndef NULO_HPP
 #define NULO_HPP
 
 #include <SFML/Graphics.hpp>
@@ -30,4 +30,4 @@ public:
     void Update(sf::Vector2f posicionactuInicial); // Actualizar la animación de "nulo"
 };
 
-#endif // NULO_HPP
+#endif // NULO_HPP*/

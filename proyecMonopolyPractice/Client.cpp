@@ -754,7 +754,7 @@ void Client::handleServerMessage(const std::string& message) {
 			playerInfos[index].isSelectingPiece = isSelecting;
 			playerInfos[index].isInGame = isInGame;
 			playerInfos[index].image = image;
-			index = (index - playerIndex + 4) % 4;
+			
 			CplayerIndex = index;
 			playerInfos[index].indexPiece = indexPiece; // Actualizar el índice de la pieza
 
@@ -918,24 +918,41 @@ void Client::handleServerMessage(const std::string& message) {
 					for (int j = 0; j < 17; ++j) {
 						playerInfos[i].casasPorJugador[j] = casasPorJugador[i][j];
 					}
-
+					std::cout << "\n\nerror despues2222";
 					// Muestra las casas asignadas
 					std::cout << "Jugador " << indicesJugadores[i] << " casas asignadas: ";
 					for (int casa : playerInfos[i].casasPorJugador) {
 						std::cout << casa << " ";
 					}
 					std::cout << std::endl;
+
 				} 
-				
+				std::cout << "\n\nerror antes";
 				{
 					std::lock_guard<std::mutex> lock(casasMutex);
 					casasCargadas = true; // Actualiza la bandera	
 				}
 				cv.notify_one(); // Notifica al hilo principal para continuar
+
+
+				std::cout << "\n\nerror despues";
 		}
 		else {
 			std::cerr << "Error: no se encontró 'Casas:' en el mensaje." << std::endl;
 		}
+		}else if (message.rfind("PLAYER_DISCONNECTED:", 0) == 0) {
+			// Extraer el ID del jugador
+
+			size_t colonPos = message.find(":");
+			std::string playerIdStr = message.substr(colonPos + 1);
+			int playerId = std::stoi(playerIdStr);  // Convierte el string a int
+			playerId = (playerId - playerIndex + 4) % 4;
+			// Lógica para manejar la desconexión del jugador
+			std::cout << "Jugador desconectado con ID: " << playerId << std::endl;
+
+			// Eliminar al jugador de la lista, o actualizar el estado de la sala
+			// Por ejemplo:
+		
 		}
 		else {
 			std::cerr << "Unknown message received from server: " << message << std::endl;

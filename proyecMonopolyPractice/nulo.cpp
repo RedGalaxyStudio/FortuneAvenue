@@ -1,4 +1,4 @@
-#include "nulo.hpp"
+/*#include "nulo.hpp"
 #include <sstream>
 #include "nlohmann/json.hpp"
 #include "card.h"
@@ -74,3 +74,4 @@ bool cierre= false;
     }
 
 }
+*/

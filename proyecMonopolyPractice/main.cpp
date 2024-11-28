@@ -14,7 +14,7 @@ std::atomic<bool> running(true);
 const unsigned short PORT = 53000; 
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa"/*, sf::Style::Fullscreen*/);
     window.setFramerateLimit(60);
 
   
