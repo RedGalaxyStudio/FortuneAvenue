@@ -43,6 +43,7 @@ public:
 	void InicioPartida();
 
 private:
+	sf::Text Conteosuel;
 	// Ventana de renderizado
 	sf::RenderWindow* window;
 	std::vector<std::vector<sf::Vector2f>> casillas0;
@@ -137,7 +138,7 @@ sf::Vector2f(773, 190),
 	bool impuesto_draw;
 	bool casa_draw;
 
-
+	
 	bool animacionImpuesto;
 	bool animacionCasa;
 	Ruleta *ruleta;

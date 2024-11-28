@@ -95,7 +95,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 	if (isSpinning) {
 		// Actualizar rotación actual
 
-		std::cout << "\ncurrentRotation: " << currentRotation << " rotationSpeed:" << rotationSpeed;
+		//std::cout << "\ncurrentRotation: " << currentRotation << " rotationSpeed:" << rotationSpeed;
 		currentRotation += rotationSpeed * deltaTime;
 		if (currentRotation >= 360.0f) {
 			currentRotation = fmod(currentRotation, 360.0f);

@@ -98,6 +98,14 @@ void GameMode::resource() {
 	DescripDado.setPosition(640, 450);
 	globalBounds = DescripDado.getGlobalBounds();
 	DescripDado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+	Conteosuel.setCharacterSize(10);
+	Conteosuel.setFont(fontUser);
+	Conteosuel.setFillColor(sf::Color::White);
+	Conteosuel.setOutlineThickness(2);
+	Conteosuel.setOutlineColor(sf::Color(135, 135, 135));
+	Conteosuel.setString(std::to_string(conteosuel));
+	Conteosuel.setPosition(60, 10);
 }
 
 void GameMode::update() {
@@ -281,7 +289,7 @@ void GameMode::update() {
 		currentCursor = &normalCursor;
 
 		window->setMouseCursor(*currentCursor);
-
+		Conteosuel.setString(std::to_string(conteosuel));
 		//std::cout <<"\n Dado"<< turn_dado;
 		//dado mecanica movimiento
 
@@ -726,6 +734,7 @@ void GameMode::DrawGame() {
 	for (const auto& punto : puntos) {
 		window->draw(punto);
 	}
-
+	
 	window->draw(Settings);
+	window->draw(Conteosuel);
 }

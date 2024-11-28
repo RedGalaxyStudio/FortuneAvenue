@@ -27,7 +27,7 @@ extern sf::Sprite SpriteArrowArriba;
 
 extern sf::SoundBuffer girosBuffer;
 extern sf::Sound girosSound;
-
+extern int conteosuel;
 
 extern std::string Code;
 extern int CplayerIndex;

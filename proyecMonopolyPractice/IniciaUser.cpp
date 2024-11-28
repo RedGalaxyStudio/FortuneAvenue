@@ -25,7 +25,7 @@ IniciaUser::~IniciaUser() {
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-
+    conteosuel = 0;
 }
 
 

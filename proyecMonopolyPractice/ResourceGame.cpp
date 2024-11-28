@@ -25,7 +25,7 @@ std::vector<char> image; // Store image data directly.
  sf::SoundBuffer girosBuffer;
  sf::Sound girosSound;
 
- 
+int conteosuel;
 sf::Sprite SpriteArrowIzq;
 bool SelectingPiece = false; // Inicialmente en selección de pieza
 bool Game = false;        // No en juego al principio

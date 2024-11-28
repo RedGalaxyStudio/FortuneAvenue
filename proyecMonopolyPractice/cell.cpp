@@ -347,7 +347,7 @@ void Cell::Rotate(sf::Vector3f O, sf::Vector3f W, float thetaY) {
          currentPos = moveToTarget(currentPos, targetPos, numCalls);
          (*this).cShape.setPosition(currentPos.x, currentPos.y);
   sf::Vector2f posicionactu = (*this).cShape.getScale();
-                std::cout << "\nScale:" << posicionactu.x << " x:y " << posicionactu.y;
+                //std::cout << "\nScale:" << posicionactu.x << " x:y " << posicionactu.y;
 
         // Actualizar el vector normal
         sf::Vector3f n0 = (*this).getN();

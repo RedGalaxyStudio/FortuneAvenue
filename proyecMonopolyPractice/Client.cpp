@@ -351,6 +351,7 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "It's your turn!" << std::endl;
 		// Aquí el jugador puede decidir llamar a `rollDice`
 		conteoturn += 1;
+		conteosuel += 1;
 		std::cout << "\n\nTurno numero:" << conteoturn;
 		size_t moneyPos = message.find(":MONEYSALARIO:");
 		if (moneyPos != std::string::npos) {
@@ -362,7 +363,7 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cout << "Player's current money: " << playerMoney << std::endl;  // Depuración
 			playerInfos[0].money = playerMoney;
 			playersGame[0].Money.setString(std::to_string(playerInfos[0].money));
-
+			conteosuel = 0;
 			// Aquí puedes usar la variable playerMoney según sea necesario
 		}
 		else {
@@ -754,10 +755,10 @@ void Client::handleServerMessage(const std::string& message) {
 			playerInfos[index].isSelectingPiece = isSelecting;
 			playerInfos[index].isInGame = isInGame;
 			playerInfos[index].image = image;
-			
+			if(indexPiece>=0){
 			CplayerIndex = index;
 			playerInfos[index].indexPiece = indexPiece; // Actualizar el índice de la pieza
-
+			}
 
 
 			if (!playersGame[index].textureAvatarPLayer.loadFromFile(playerInfos[index].image)) {
@@ -912,7 +913,7 @@ void Client::handleServerMessage(const std::string& message) {
 			// Transferir los datos a PlayerInfo
 			// Transferir los datos a PlayerInfo
 			
-				
+			    std::cout << "\n" << indicesJugadores.size();
 				for (size_t i = 0; i < indicesJugadores.size(); ++i) {
 
 					for (int j = 0; j < 17; ++j) {
@@ -921,11 +922,12 @@ void Client::handleServerMessage(const std::string& message) {
 					std::cout << "\n\nerror despues2222";
 					// Muestra las casas asignadas
 					std::cout << "Jugador " << indicesJugadores[i] << " casas asignadas: ";
-					for (int casa : playerInfos[i].casasPorJugador) {
-						std::cout << casa << " ";
-					}
+					//for (int casa : playerInfos[i].casasPorJugador) {
+					//	std::cout << casa << " ";
+					//	
+					//}
 					std::cout << std::endl;
-
+					std::cout << "\n\ndes";
 				} 
 				std::cout << "\n\nerror antes";
 				{
@@ -934,25 +936,11 @@ void Client::handleServerMessage(const std::string& message) {
 				}
 				cv.notify_one(); // Notifica al hilo principal para continuar
 
-
 				std::cout << "\n\nerror despues";
 		}
 		else {
 			std::cerr << "Error: no se encontró 'Casas:' en el mensaje." << std::endl;
 		}
-		}else if (message.rfind("PLAYER_DISCONNECTED:", 0) == 0) {
-			// Extraer el ID del jugador
-
-			size_t colonPos = message.find(":");
-			std::string playerIdStr = message.substr(colonPos + 1);
-			int playerId = std::stoi(playerIdStr);  // Convierte el string a int
-			playerId = (playerId - playerIndex + 4) % 4;
-			// Lógica para manejar la desconexión del jugador
-			std::cout << "Jugador desconectado con ID: " << playerId << std::endl;
-
-			// Eliminar al jugador de la lista, o actualizar el estado de la sala
-			// Por ejemplo:
-		
 		}
 		else {
 			std::cerr << "Unknown message received from server: " << message << std::endl;
