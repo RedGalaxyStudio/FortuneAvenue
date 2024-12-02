@@ -19,10 +19,13 @@ private:
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
     sf::FloatRect globalBounds;
-    
+    sf::Sprite fondopiece;
+    sf::Texture Textufondopiece;
+    int previousSelectionIndex[4];
     sf::Text CODE;
     float startX;
     float startY;
+
 
 public:
     

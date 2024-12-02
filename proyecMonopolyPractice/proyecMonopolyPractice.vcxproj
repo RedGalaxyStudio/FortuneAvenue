@@ -158,6 +158,7 @@
     <ClCompile Include="Ruleta.cpp" />
     <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
+    <ClCompile Include="Stealplayer.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="ResourceGlobal.cpp" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="Ruleta.hpp" />
     <ClInclude Include="Scrollbar.hpp" />
     <ClInclude Include="SettingsManager.hpp" />
+    <ClInclude Include="Stealplayer.hpp" />
     <ClInclude Include="TextBox.hpp" />
     <ClInclude Include="ResourceGlobal.hpp" />
     <ClInclude Include="WindowClass.h" />

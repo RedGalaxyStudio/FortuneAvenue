@@ -226,6 +226,7 @@ public :
 			std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
 			rolldiceJugador = false;
+			otherturn = false;
 		}
 	};
 

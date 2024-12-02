@@ -1,4 +1,4 @@
-/*#include "nulo.hpp"
+#include "nulo.hpp"
 #include <sstream>
 #include "nlohmann/json.hpp"
 #include "card.h"
@@ -18,23 +18,26 @@ void Nulo::setWindow(sf::RenderWindow& win) {
 
 void Nulo::Resource(Client* client) {
     
-    if (!TextureBotonNulo.loadFromFile("iconos ruleta/nulo.png")) {
+    if (!TextureBotonNulo.loadFromFile("resource/texture/Button/nulo.png")) {
         std::cerr << "Error al cargar el botón de confirmación.\n";
     }
     SpriteBotonNulo.setTexture(TextureBotonNulo);
-    SpriteBotonNulo.setPosition(640, 545);
-    SpriteBotonNulo.setOrigin(101, 40);
+    SpriteBotonNulo.setPosition(0, 0);
+
 
     }
 
 
-void Nulo::Update(sf::Vector2f posicionactuInicial) {
+void Nulo::Update() {
   
-bool cierre= false;
 
     renderedSprite.setTexture(renderTexture.getTexture());
+    std::cout << "\n\n\nentro";
+    sf::Clock clocks;  // Inicia el temporizador
 
-    while (window->isOpen() && !cierre) {
+    // El bucle solo se ejecutará durante 5 segundos
+    while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
+    
         sf::Event event;
         while (window->pollEvent(event)) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
@@ -58,7 +61,7 @@ bool cierre= false;
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 if (SpriteBotonNulo.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
-                    cierre = true;
+               
                 }
             }
         }
@@ -67,11 +70,14 @@ bool cierre= false;
         window->clear();
         window->draw(renderedSprite);
 
-            window->draw(SpriteBotonNulo);
+           window->draw(SpriteBotonNulo);
         
 
         window->display();
     }
+    client.turnopermitido++;
+    client.endTurn();
+    nular = true;
+  
 
 }
-*/

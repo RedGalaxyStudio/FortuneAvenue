@@ -15,7 +15,7 @@
 #include "ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
 #include "ResourceGame.hpp"
-
+#include "nulo.hpp"
 
 class Ruleta;
 
@@ -41,9 +41,18 @@ public:
 	void DrawGameCasa();
 	void DrawGameImpuesto();
 	void InicioPartida();
-
+	void positionPefil();
 private:
 	sf::Text Conteosuel;
+
+
+	sf::Clock clockMensaje;  // Reloj para medir el tiempo
+	float currentScale = 1.0f;  // Escalado inicial
+	float minScale = 0.8f;      // Tamaño mínimo
+	float maxScale = 1.2f;      // Tamaño máximo
+	float duration = 2.0f;      // Tiempo para hacer un ciclo completo (ampliar + reducir)
+	bool increasing = true;     // Indica si el escalado está aumentando
+
 	// Ventana de renderizado
 	sf::RenderWindow* window;
 	std::vector<std::vector<sf::Vector2f>> casillas0;
@@ -134,9 +143,7 @@ sf::Vector2f(773, 190),
 	bool animacionIniciada;
 	Window Dado;
 	sf::Clock clock;
-	bool ruleta_draw;
-	bool impuesto_draw;
-	bool casa_draw;
+
 
 	
 	bool animacionImpuesto;

@@ -28,7 +28,7 @@ extern sf::Sprite SpriteArrowArriba;
 extern sf::SoundBuffer girosBuffer;
 extern sf::Sound girosSound;
 extern int conteosuel;
-
+extern bool nular;
 extern std::string Code;
 extern int CplayerIndex;
 extern bool rolldiceJugador;
@@ -52,7 +52,12 @@ extern bool animacionRuleta;
 
 extern int IndexTurn;
 
+extern bool ruleta_draw;
+extern bool impuesto_draw;
+extern bool casa_draw;
+extern std::vector<int> UsuariosActivos;
 extern bool turn;        
+extern bool otherturn;        
 extern bool turn_dado;
 extern bool turn_ruleta;
 extern bool turn_casa;

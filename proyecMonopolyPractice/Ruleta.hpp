@@ -16,6 +16,7 @@ public:
     void update(float deltaTime);
     void trurntrue();
     void enviarestado();
+    int event;
 
 private:
     sf::Color fillColor;

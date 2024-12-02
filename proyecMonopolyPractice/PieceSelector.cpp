@@ -4,6 +4,7 @@
 #include "ObjetosGlobal.hpp"
 #include "ButtonG.hpp"
 #include "GameMode.hpp"
+#include "Scrollbar.hpp"
 
 // Constructor
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
@@ -14,7 +15,7 @@ PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 void PieceSelector::Resource() {
 
 	playerInfos[0].username = input1;
-	int piecesCount = 16;  //Cantidad de piezas
+	int piecesCount = 19;  //Cantidad de piezas
 	pieces.resize(piecesCount);
 	shadow.resize(piecesCount);
 	piecesTextures.resize(piecesCount);
@@ -28,12 +29,14 @@ void PieceSelector::Resource() {
 	turn_impuesto= false;
 	rolldiceJugador = false;
 
+	if (!Textufondopiece.loadFromFile("resource/texture/Game/FondoGameScroll.png")) return;
+	fondopiece.setTexture(Textufondopiece);
 
 	for (int i = 0; i < 4; i++) {
 		if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
 		if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;
 
-
+		
 		Check[i].setTexture(CheckTexturesOff[i]);
 		Check[i].setOrigin(50.0f, 46.5f);
 
@@ -87,12 +90,46 @@ void PieceSelector::displayPieces() {
 void PieceSelector::updateSelection() {
 
 	sf::Clock clock;
+	float baseXPos = 92.0f;
+	float baseYPos = 472.0f;
+
+
+
+	float deltaScroll = 0.0f;
+	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
+	const float avatarWidth = 128.0f;
+	const float avatarHeight = 128.0f;
+	const float avatarSeparation = 28.0f;
+	const float visibleAreaHeight = 248.0f;
+	const float maxScrollOffset = 632.0f;
+
+	float widthSeparation = avatarWidth + avatarSeparation;
+	float heightSeparation = avatarHeight + avatarSeparation;
 
 	GameMode gamemode(*window);
-	std::vector<int> UsuariosActivos;
+	
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
+
+
+	const float totalContentHeight = 880.0f;
+	const float scrollbarHeight = 340.0f;
+
+
+	float proportion = visibleAreaHeight / totalContentHeight;
+	float thumbHeight = scrollbarHeight * proportion;
+
+
+	const float minThumbHeight = 14.0f;
+	thumbHeight = std::max(thumbHeight, minThumbHeight);
+
+
+	Scrollbar scrollbarPiece(340, thumbHeight, 14);
+
+	scrollbarPiece.setPosition(1260, 340);
+
+	float avatarYOffset = 0.0f;
 	 startX = 275;  // Posición inicial calculada en X
 	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
 	playersGame[0].NamePlayer.setString(playerInfos[0].username);
@@ -125,13 +162,17 @@ void PieceSelector::updateSelection() {
 		playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
 		playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
 		playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
-		Check[i].setPosition(startX + i * (250 + 10), startY + 200);
+
 	}
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);
 	SelectingMusicFondo.play();
 	playersGame[0].Activo = false;
+	// Configurar perfiles
+	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
+	float separacion = 20.0f;   // Espaciado entre perfiles
+	
 	while (window->isOpen()&& !cierre) {
 
 		
@@ -154,16 +195,67 @@ void PieceSelector::updateSelection() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.draw(spriteFondoGame);
-				for (int i = 0; i < 4; i++)
-				{
-					renderTexture.draw(playersGame[i].NamePlayer);
-					renderTexture.draw(playersGame[i].boxPlayer);
+				for (int i = 0; i < UsuariosActivos.size(); i++) {
+				
+					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
+					renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
+					renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
+					renderTexture.draw(Check[UsuariosActivos[i]]);
 				}
+				
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 				Menup.MenuSalir();
 			}
 
+
+			scrollbarPiece.handleEvent(event, *window);
+			avatarYOffset = scrollbarPiece.getScrollOffset();
+			// scrollbar.evento(event);
+			if (event.type == sf::Event::MouseWheelScrolled) {
+
+				scrollbarPiece.update(event.mouseWheelScroll.delta);
+				avatarYOffset = scrollbarPiece.getScrollOffset();
+
+			}
+
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Down) {
+					deltaScroll = 1.0f; // Desplazamiento hacia abajo
+					scrollbarPiece.update(deltaScroll);
+					avatarYOffset = scrollbarPiece.getScrollOffset();
+				}
+				else if (event.key.code == sf::Keyboard::Up) {
+					deltaScroll = -1.0f; // Desplazamiento hacia arriba
+					scrollbarPiece.update(deltaScroll);
+					avatarYOffset = scrollbarPiece.getScrollOffset();
+				}
+			}
+
+
+			if (avatarYOffset > maxScrollOffset) {
+				avatarYOffset = maxScrollOffset;
+			}
+			else if (avatarYOffset < 0) {
+				avatarYOffset = 0;
+			}
+
+			if (avatarYOffset != 0) {
+				std::vector<sf::FloatRect> avatarBounds(pieces.size());
+				for (int i = 0; i < pieces.size(); ++i) {
+					int column = i % 8;
+					int row = i / 8;
+
+					float xPos = baseXPos + column * widthSeparation;
+
+					float yPos = (baseYPos + row * heightSeparation) - avatarYOffset;
+
+					avatarBounds[i] = sf::FloatRect(xPos, yPos, pieces[i].getGlobalBounds().width, pieces[i].getGlobalBounds().height);
+
+					pieces[i].setPosition(xPos, yPos);
+					shadow[i].setPosition(xPos, yPos);
+				}
+			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
@@ -199,7 +291,7 @@ void PieceSelector::updateSelection() {
 					playClickSound();
 					const sf::Texture* texturePtr = playersGame[0].PieceSelect.getTexture();
 
-					if (texturePtr != nullptr) {
+					if (texturePtr != nullptr&&UsuariosActivos.size()>0) {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
 						playerInfos[0].isSelectingPiece = true;
@@ -231,6 +323,7 @@ void PieceSelector::updateSelection() {
 			}
 
 		}
+		int totalPerfiles = UsuariosActivos.size(); // Usar el número real de perfiles
 
 	
 		SelectingPiece = true;
@@ -258,6 +351,7 @@ void PieceSelector::updateSelection() {
 		if (CplayerIndex > 0 && CplayerIndex <= 3) {
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
+			client.cvExisting.notify_all();
 		}
 
 		for (int i = 0; i < 4; i++)
@@ -272,22 +366,42 @@ void PieceSelector::updateSelection() {
 		}
 		window->clear();
 		window->draw(spriteFondoGame);
-		for (int i = 0; i < 4; i++)
-		{
-			window->draw(playersGame[i].NamePlayer);
-			window->draw(playersGame[i].boxPlayer);
-			window->draw(playersGame[i].AvatarPlayer);
-			window->draw(playersGame[i].PieceSelect);
-			window->draw(Check[i]);
-		}
-
-
-
+		
 		displayPieces();
+		window->draw(fondopiece);
+
+
+	
+
+		if (totalPerfiles > 0) {
+			// Calcular ancho total ocupado por perfiles y separaciones
+			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+
+			// Calcular inicio X para centrar los perfiles horizontalmente
+			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
+
+			float startY = 100.0f; // Centrado verticalmente
+
+			for (int i = 0; i < totalPerfiles; i++) {
+				float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+				float yPos = startY;
+				// Posicionar elementos
+				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY );
+				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY );
+				playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos, startY + 100);
+				Check[UsuariosActivos[i]].setPosition(xPos, yPos + 200);
+				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
+				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
+				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
+				window->draw(Check[UsuariosActivos[i]]);
+			}
+		}
+		
 
 		window->draw(CODE);
 		window->draw(spriteX);
 
+		scrollbarPiece.draw(*window);
 		window->display();
 
 
@@ -298,12 +412,8 @@ void PieceSelector::updateSelection() {
 void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 	// Suponiendo que `pieces` es un vector de sprites que contiene todas las piezas del juego
 	// y `playersGame` es un arreglo de estructuras que almacena la información de los jugadores.
-
+	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
 	// Primero, quita el resaltado de la pieza previamente seleccionada del jugador
-	if (playersGame[CplayerIndex].PieceSelect.getColor() != sf::Color::White) {
-		// Asegúrate de que estamos quitando el efecto de la pieza seleccionada previamente
-		playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White);
-	}
 
 	// Ahora resaltar la nueva pieza seleccionada
 	pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
@@ -316,64 +426,7 @@ void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 	playersGame[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
 	// Guardar el índice de la pieza seleccionada
 	//playerInfos[CplayerIndex].indexPiece = newPieceIndex;
-
+	previousSelectionIndex[CplayerIndex] = newPieceIndex;
 	// Asegúrate de que el nuevo sprite esté correctamente posicionado si es necesario
 	// playersGame[playerIndex].PieceSelect.setPosition(...);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

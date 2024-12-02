@@ -1,0 +1,87 @@
+GIMP 2.10.38 Python Console
+Python 2.7.18 (default, Jul  1 2023, 20:56:56)  [GCC 13.1.0 64 bit (AMD64)]
+>>> from gimpfu import *
+>>> 
+>>> def separar_capas(imagen, drawable):
+...     import os
+...     
+...     # Cambia esta ruta a tu escritorio o carpeta deseada
+...     ruta_guardado = "C:/Users/D2niel/Desktop/CapasExportadas"
+...     if not os.path.exists(ruta_guardado):
+...         os.makedirs(ruta_guardado)  # Crear carpeta si no existe
+... 
+>>>     for i, capa in enumerate(imagen.layers):
+  File "<input>", line 1
+    for i, capa in enumerate(imagen.layers):
+    ^
+IndentationError: unexpected indent
+>>>         if capa.width == 0 or capa.height == 0:
+  File "<input>", line 1
+    if capa.width == 0 or capa.height == 0:
+    ^
+IndentationError: unexpected indent
+>>>             continue  # Ignorar capas vacías
+  File "<input>", line 1
+    continue  # Ignorar capas vacías
+    ^
+IndentationError: unexpected indent
+>>> 
+>>>         # Crear nueva imagen para la capa actual
+>>>         nueva_imagen = pdb.gimp_image_new(capa.width, capa.height, RGB)
+  File "<input>", line 1
+    nueva_imagen = pdb.gimp_image_new(capa.width, capa.height, RGB)
+    ^
+IndentationError: unexpected indent
+>>>         nueva_capa = pdb.gimp_layer_new_from_drawable(capa, nueva_imagen)
+  File "<input>", line 1
+    nueva_capa = pdb.gimp_layer_new_from_drawable(capa, nueva_imagen)
+    ^
+IndentationError: unexpected indent
+>>>         pdb.gimp_image_insert_layer(nueva_imagen, nueva_capa, None, 0)
+  File "<input>", line 1
+    pdb.gimp_image_insert_layer(nueva_imagen, nueva_capa, None, 0)
+    ^
+IndentationError: unexpected indent
+>>>         pdb.gimp_image_resize_to_layers(nueva_imagen)
+  File "<input>", line 1
+    pdb.gimp_image_resize_to_layers(nueva_imagen)
+    ^
+IndentationError: unexpected indent
+>>> 
+>>>         # Guardar como PNG
+>>>         nombre_archivo = "capa_{}.png".format(i + 1)
+  File "<input>", line 1
+    nombre_archivo = "capa_{}.png".format(i + 1)
+    ^
+IndentationError: unexpected indent
+>>>         ruta_completa = os.path.join(ruta_guardado, nombre_archivo)
+  File "<input>", line 1
+    ruta_completa = os.path.join(ruta_guardado, nombre_archivo)
+    ^
+IndentationError: unexpected indent
+>>>         pdb.file_png_save_defaults(nueva_imagen, nueva_capa, ruta_completa, nombre_archivo)
+  File "<input>", line 1
+    pdb.file_png_save_defaults(nueva_imagen, nueva_capa, ruta_completa, nombre_archivo)
+    ^
+IndentationError: unexpected indent
+>>> 
+>>>         # Eliminar la imagen temporal
+>>>         pdb.gimp_image_delete(nueva_imagen)
+  File "<input>", line 1
+    pdb.gimp_image_delete(nueva_imagen)
+    ^
+IndentationError: unexpected indent
+>>> 
+>>> register(
+...     "python_fu_separar_capas",
+...     "Separar capas en imágenes individuales",
+...     "Guarda cada capa de la imagen actual como un archivo PNG separado.",
+...     "Tu Nombre", "Tu Licencia", "2024",
+...     "<Image>/Archivo/Exportar capas...",
+...     "*",
+...     [],
+...     [],
+...     separar_capas
+... )
+>>> 
+>>> main()

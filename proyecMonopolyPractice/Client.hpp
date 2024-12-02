@@ -29,6 +29,9 @@ public:
 	void disconnect();
 	void rollDice();
 	void endTurn();
+	void todospierden();
+	void ganas150();
+
 	void moneyActu(int money);
 	void handleServerMessage(const std::string& message);
 	int lastRollResult;
@@ -55,6 +58,17 @@ public:
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
 	
+
+	void robarUser(int usuariorobao);
+
+
+	std::mutex mtxExisting;
+	std::condition_variable cvExisting;
+
+
+
+	std::mutex mtxx;
+	std::condition_variable cvv;
 private:
 
 
