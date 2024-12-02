@@ -15,7 +15,7 @@
 #include "ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
 #include "ResourceGame.hpp"
-
+#include "nulo.hpp"
 
 class Ruleta;
 
@@ -27,15 +27,8 @@ public:
 
 
 
-	bool prev_turn = turn;
-	bool prev_turn_impuesto = turn_impuesto;
-	bool prev_turn_casa = turn_casa;
-	bool prev_turn_ruleta = turn_ruleta;
-	bool prev_turn_dado = turn_dado;
-	bool prev_turn_Moviendo = turn_Moviendo;
-	bool prev_eventoActivo = eventoActivo;
-
-
+	
+	bool turnoGiro;
 	GameMode(sf::RenderWindow& win);
 
 	void resource();
@@ -47,8 +40,19 @@ public:
 	void DrawGameRuleta();
 	void DrawGameCasa();
 	void DrawGameImpuesto();
-
+	void InicioPartida();
+	void positionPefil();
 private:
+	sf::Text Conteosuel;
+
+
+	sf::Clock clockMensaje;  // Reloj para medir el tiempo
+	float currentScale = 1.0f;  // Escalado inicial
+	float minScale = 0.8f;      // Tamaño mínimo
+	float maxScale = 1.2f;      // Tamaño máximo
+	float duration = 2.0f;      // Tiempo para hacer un ciclo completo (ampliar + reducir)
+	bool increasing = true;     // Indica si el escalado está aumentando
+
 	// Ventana de renderizado
 	sf::RenderWindow* window;
 	std::vector<std::vector<sf::Vector2f>> casillas0;
@@ -120,7 +124,8 @@ sf::Vector2f(773, 190),
 	std::vector<std::vector<sf::Vector2f>> casillasimpuesto1;
 	std::vector<std::vector<sf::Vector2f>> casillasimpuesto2;
 	std::vector<std::vector<sf::Vector2f>> casillasimpuesto3;
-
+	sf::Text Bienvenida;
+	sf::Text DescripDado;
 
 	sf::FloatRect globalBounds;
 	int posicionActual;
@@ -138,11 +143,9 @@ sf::Vector2f(773, 190),
 	bool animacionIniciada;
 	Window Dado;
 	sf::Clock clock;
-	bool ruleta_draw;
-	bool impuesto_draw;
-	bool casa_draw;
 
 
+	
 	bool animacionImpuesto;
 	bool animacionCasa;
 	Ruleta *ruleta;

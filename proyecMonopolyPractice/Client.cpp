@@ -72,38 +72,39 @@ void Client::run() {
 }
 
 bool Client::connectToServer(const std::string& address, uint16_t port) {
+
+	if (!client) {
+		std::cerr << "Client not initialized!" << std::endl;
+		return false;
+	}
+
+	// Configurar dirección
 	ENetAddress enetAddress;
-	std::cout << "\nIniciaConec";
 	enet_address_set_host(&enetAddress, address.c_str());
 	enetAddress.port = port;
 
-	// Conectar al servidor
+	// Intentar conexión
 	peer = enet_host_connect(client, &enetAddress, 2, 0);
 	if (!peer) {
 		std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
 		return false;
 	}
-	std::cout << "\nIniciaConec 0";
-	ENetEvent event;
-	const int maxRetries = 10;  // Reducir el número de reintentos
-	const int retryDelay = 10;  // Reducir el tiempo de espera entre reintentos
-	int totalTimeWaited = 0;
 
-	// Intentar conectar
+	// Esperar respuesta del servidor
+	ENetEvent event;
+	const int maxRetries = 50;
+	const int retryDelay = 50;
 	for (int i = 0; i < maxRetries; ++i) {
 		if (enet_host_service(client, &event, retryDelay) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
 			std::cout << "Connected to server!" << std::endl;
 			isConnected = true;
-			clientThread = std::thread(&Client::run, this);  // Iniciar el hilo
-			casasCargadas = false;
+			clientThread = std::thread(&Client::run, this);
 			return true;
 		}
-		totalTimeWaited += retryDelay;
-		if (totalTimeWaited >= 100) break;
 	}
 
-	std::cerr << "Failed to connect to server within 0.1 seconds." << std::endl;
-	enet_peer_reset(peer);  // Limpiar la conexión si falla
+	std::cerr << "Failed to connect to server after " << maxRetries << " retries." << std::endl;
+	enet_peer_reset(peer);
 	return false;
 }
 
@@ -132,6 +133,17 @@ void Client::disconnect() {
 	std::cout << "Disconnected from server!" << std::endl;
 }
 
+void Client::robarUser(int usuariorobao) {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "ROBARUSER:" + std::to_string(usuariorobao);
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+}
 
 
 std::string Client::createRoom(const std::string& username) {
@@ -283,6 +295,36 @@ void Client::startSpin() {
 
 	//std::cout << "Spin initiated!" << std::endl;
 }
+;
+
+
+void Client::todospierden() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+		return;
+	}
+
+	std::string message = "TODOSPIERDEN";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+	//std::cout << "Spin initiated!" << std::endl;
+}
+
+void Client::ganas150() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+		return;
+	}
+
+	std::string message = "GANAS150";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+	//std::cout << "Spin initiated!" << std::endl;
+}
 
 void Client::ruleteGame(float angulo) {
 	if (!peer) {
@@ -351,6 +393,7 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "It's your turn!" << std::endl;
 		// Aquí el jugador puede decidir llamar a `rollDice`
 		conteoturn += 1;
+		conteosuel += 1;
 		std::cout << "\n\nTurno numero:" << conteoturn;
 		size_t moneyPos = message.find(":MONEYSALARIO:");
 		if (moneyPos != std::string::npos) {
@@ -362,7 +405,7 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cout << "Player's current money: " << playerMoney << std::endl;  // Depuración
 			playerInfos[0].money = playerMoney;
 			playersGame[0].Money.setString(std::to_string(playerInfos[0].money));
-
+			conteosuel = 0;
 			// Aquí puedes usar la variable playerMoney según sea necesario
 		}
 		else {
@@ -380,21 +423,22 @@ void Client::handleServerMessage(const std::string& message) {
 			turn_impuesto = true;
 			turn_Moviendo = true;
 			IndexTurn = 0;
+			otherturn = false;
 		}
 		else {
+			nular = false;
 
-			turnopermitido++;
-			endTurn();
 		}
 		std::cout << "It's your turn!2" << std::endl;
 	}
 	else 	if (message.rfind("TURN_START", 0) == 0) {
 		std::cout << "\nReceived message: " << message << std::endl;  // Depuración
-		
+		otherturn = true;
 		eventoActivo = false;
 		turn_ruleta = true;
 		turn_casa = true;
 		turn_impuesto = true;
+		turn_Moviendo = true; 
 		// Buscar el inicio de "PLAYER_INDEX:" y extraer el valor numérico después
 		size_t indexPos = message.find("PLAYER_INDEX:");  // Encontrar el índice donde empieza "PLAYER_INDEX:"
 		if (indexPos != std::string::npos) {
@@ -420,8 +464,9 @@ void Client::handleServerMessage(const std::string& message) {
 
 			size_t moneyPos = message.find(":MONEYSALARIO:");
 			if (moneyPos != std::string::npos) {
-				size_t moneyStart = moneyPos + 13;
+				size_t moneyStart = moneyPos + 14;
 				std::string moneyStr = message.substr(moneyStart);
+				std::cout << "\n\nMoneymoney:" << moneyStr;
 				int playerMoney = std::stoi(moneyStr);
 				std::cout << "Player's current money: " << playerMoney << std::endl;  // Depuración
 				playerInfos[playerIndexTurn].money = playerMoney;
@@ -578,6 +623,75 @@ void Client::handleServerMessage(const std::string& message) {
 		}
 
 	}
+	else if (message.rfind("GANAR150:", 0) == 0) { // Comienza con "GANAR150:"
+		size_t firstColon = message.find(':');
+		size_t secondColon = message.find(':', firstColon + 1);
+
+		if (firstColon != std::string::npos && secondColon != std::string::npos) {
+			// Extraer partes del mensaje
+			std::string index = message.substr(firstColon + 1, secondColon - firstColon - 1);
+			std::string money = message.substr(secondColon + 1);
+			 
+
+			int indexjugador = std::stoi(index);
+			// Convertir dinero a número entero si es necesario
+			int moneyAmount = std::stoi(money);
+			if (playerIndex != 0) {
+
+				indexjugador = (indexjugador - playerIndex + 4) % 4;
+
+			}
+
+			playerInfos[playerIndex].money = moneyAmount;
+			playersGame[playerIndex].Money.setString(std::to_string(playerInfos[playerIndex].money));
+
+
+			// Realizar acciones con los datos extraídos
+			std::cout << "Jugador con índice " << index << " gana " << moneyAmount << " unidades de dinero." << std::endl;
+
+			// Aquí puedes actualizar el estado del cliente o realizar otras acciones
+		}
+		else {
+			std::cerr << "Formato de mensaje 'GANAR150' inválido: " << message << std::endl;
+		}
+	
+	}else if (message.rfind("TODOSPIERDEN:", 0) == 0) { // Comienza con "TODOSPIERDEN:"
+		std::string data = message.substr(13); // Longitud de "TODOSPIERDEN:"
+
+		// Dividir el resto del mensaje en partes separadas por ':'
+		std::vector<std::string> tokens;
+		size_t start = 0;
+		size_t end = data.find(':');
+		while (end != std::string::npos) {
+			tokens.push_back(data.substr(start, end - start));
+			start = end + 1;
+			end = data.find(':', start);
+		}
+
+		// Procesar cada par índice/dinero
+		for (size_t i = 0; i < tokens.size(); i += 2) {
+			if (i + 1 < tokens.size()) { // Asegurarse de que hay un par índice/dinero
+				std::string index = tokens[i];
+				int moneyAmount = std::stoi(tokens[i + 1]);
+				int indexjugador = std::stoi(index);
+				// Convertir dinero a número entero si es necesario
+				
+				if (playerIndex != 0) {
+
+					indexjugador = (indexjugador - playerIndex + 4) % 4;
+
+				}
+
+				playerInfos[playerIndex].money = moneyAmount;
+				playersGame[playerIndex].Money.setString(std::to_string(playerInfos[playerIndex].money));
+
+				// Realizar acciones con los datos
+				std::cout << "Jugador con índice " << index << " tiene " << moneyAmount << " unidades de dinero." << std::endl;
+
+				// Aquí puedes actualizar la interfaz o las variables del cliente
+			}
+		}
+	}
 	else if (message.rfind("PLAYER_INDEX:", 0) == 0) {
 
 		std::cout << "\nEJEcuto playerindex1";
@@ -682,7 +796,7 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
 		// Elimina el prefijo "EXISTING_PLAYER:"
-		std::cout << "\nEXISTING_PLAYER";
+		std::cout << "\n\nEXISTING_PLAYER:"<<message;
 
 		if (message.length() < 16) {
 
@@ -726,6 +840,8 @@ void Client::handleServerMessage(const std::string& message) {
 			isInGame = (isInGameStr == "true");
 			image = imagePath; // Guarda la dirección de la imagen eso uwu
 			indexPiece = std::stoi(indexPieceStr);
+
+			std::cout << "\n ficha ya seleccionala: " << indexPiece;
 		}
 		catch (const std::invalid_argument&) {
 
@@ -748,16 +864,20 @@ void Client::handleServerMessage(const std::string& message) {
 		// Asegurarse de que el índice esté dentro de los límites
 		if (index >= 0 && index < playerInfos.size()) {
 			std::cout << "\nEJEcuto existen6";
+		
+			std::unique_lock<std::mutex> lock(mtxExisting);
 			// Actualizar la información del jugador en la posición correspondiente
 			playerInfos[index].username = username;
 			playerInfos[index].money = money;
 			playerInfos[index].isSelectingPiece = isSelecting;
 			playerInfos[index].isInGame = isInGame;
 			playerInfos[index].image = image;
-			index = (index - playerIndex + 4) % 4;
+			if(indexPiece>=0){
 			CplayerIndex = index;
 			playerInfos[index].indexPiece = indexPiece; // Actualizar el índice de la pieza
-
+			cvExisting.wait(lock, [] { return CplayerIndex == -1; });
+			std::cout << "\nPIeza :" << CplayerIndex << "playerInfos[index].indexPiece:" << playerInfos[index].indexPiece;
+			}
 
 
 			if (!playersGame[index].textureAvatarPLayer.loadFromFile(playerInfos[index].image)) {
@@ -912,26 +1032,30 @@ void Client::handleServerMessage(const std::string& message) {
 			// Transferir los datos a PlayerInfo
 			// Transferir los datos a PlayerInfo
 			
-				
+			    std::cout << "\n" << indicesJugadores.size();
 				for (size_t i = 0; i < indicesJugadores.size(); ++i) {
 
 					for (int j = 0; j < 17; ++j) {
 						playerInfos[i].casasPorJugador[j] = casasPorJugador[i][j];
 					}
-
+					std::cout << "\n\nerror despues2222";
 					// Muestra las casas asignadas
 					std::cout << "Jugador " << indicesJugadores[i] << " casas asignadas: ";
-					for (int casa : playerInfos[i].casasPorJugador) {
-						std::cout << casa << " ";
-					}
+					//for (int casa : playerInfos[i].casasPorJugador) {
+					//	std::cout << casa << " ";
+					//	
+					//}
 					std::cout << std::endl;
+					std::cout << "\n\ndes";
 				} 
-				
+				std::cout << "\n\nerror antes";
 				{
 					std::lock_guard<std::mutex> lock(casasMutex);
 					casasCargadas = true; // Actualiza la bandera	
 				}
 				cv.notify_one(); // Notifica al hilo principal para continuar
+
+				std::cout << "\n\nerror despues";
 		}
 		else {
 			std::cerr << "Error: no se encontró 'Casas:' en el mensaje." << std::endl;

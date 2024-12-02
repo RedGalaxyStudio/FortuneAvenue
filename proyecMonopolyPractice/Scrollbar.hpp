@@ -28,6 +28,8 @@ public:
     
     float getScrollOffset() const;
 
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window);
+
 private:
     
     sf::RectangleShape scrollbarTrack; 
@@ -36,6 +38,10 @@ private:
     float conerPs,x,y;
     float maxScrollOffset;
     
+    bool dragging = false;         // Indica si el usuario está arrastrando el pulgar
+    float dragOffset = 0.0f;
+
+
     float width;
     float windowHeight;      
     float scrollbarHeight;   

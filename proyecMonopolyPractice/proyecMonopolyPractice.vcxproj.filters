@@ -84,6 +84,12 @@
     <ClCompile Include="fileio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="nulo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stealplayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
@@ -171,6 +177,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fileio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nulo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stealplayer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

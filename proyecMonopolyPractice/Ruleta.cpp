@@ -4,7 +4,7 @@
 
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY)
-	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false) {
+	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
 	// Inicializar shaders
 
 	currentSegment = -1;
@@ -218,75 +218,64 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
 		// Realiza las acciones según el segmento usando un switch
-		switch (currentSegment) {
-		case 0:
-			std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
-			// Aquí realiza acciones específicas para el segmento 0
-
-			client.turnopermitido-=1;
-
-
-
-
-			break;
-
-		case 1:
-			std::cout << "Segmento 1: Realizando acción específica para el segmento 1" << std::endl;
-			// Acciones para el segmento 1
-			break;
-
-		case 2:
-			std::cout << "Segmento 2: Realizando acción específica para el segmento 2" << std::endl;
-			// Acciones para el segmento 2
-			break;
-
-		case 3:
-			std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
-			// Acciones para el segmento 3
-
-			{
-				int totalRestado = 0;
-
-				// Recorre a todos los jugadores en la partida
-				for (std::size_t i = 0; i < playersGame.size(); ++i) {
-					// Si no es el jugador con turno
-					if (i != IndexTurn) {
-						// Resta 30 al dinero del jugador
-						playerInfos[i].money -= 30;
-						// Actualiza el texto del dinero del jugador
-						playersGame[i].Money.setString(std::to_string(playerInfos[i].money));
-
-						// Suma los 30 al total restado
-						totalRestado += 30;
-					}
-				}
-
-				// Suma el total restado al jugador con turno actual
-				playerInfos[IndexTurn].money += totalRestado;
-				playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
-
-				std::cout << "Se ha restado 30 de dinero a cada jugador y sumado al jugador en turno." << std::endl;
+		if(turn){
+			switch (currentSegment) {
+			case 0:
+				std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
+				// Aquí realiza acciones específicas para el segmento 0
+				//pierdes un turno
+				client.turnopermitido -= 1;
 
 				break;
+
+			case 1:
+				std::cout << "Segmento 1: Realizando acción específica para el segmento 1" << std::endl;
+				// Acciones para el segmento 1
+				//robar a un jugador
+				event = 3;
+
+				break;
+
+			case 2:
+				std::cout << "Segmento 2: Realizando acción específica para el segmento 2" << std::endl;
+				// Acciones para el segmento 2
+				//Opcion de comprar una casa
+				event = 1;
+				break;
+
+			case 3:
+				std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
+				// Acciones para el segmento 3
+				//todos pierden 30 y se les da a el jugador
+				client.todospierden();
+					break;
+				
+
+			case 4:
+				std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
+				// Acciones para el segmento 4
+				//ganas 150
+				client.ganas150();
+
+				break;
+
+			case 5:
+				std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
+				//paga impuestos
+				// Acciones para el segmento 5
+				event = 2;
+				break;
+
+			case 6:
+				std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
+				//inversion segura se te quitan 100 y 2 turnos despues se te dan 200
+				// Acciones para el segmento 5
+				break;
+
+			default:
+				std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
+				break;
 			}
-
-		case 4:
-			std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
-			// Acciones para el segmento 4
-
-			playerInfos[IndexTurn].money += 150;
-			playersGame[IndexTurn].Money.setString(std::to_string(playerInfos[IndexTurn].money));
-
-			break;
-
-		case 5:
-			std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
-			// Acciones para el segmento 5
-			break;
-
-		default:
-			std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
-			break;
 		}
 
 		giro = false;

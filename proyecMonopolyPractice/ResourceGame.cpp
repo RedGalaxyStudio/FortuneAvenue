@@ -24,8 +24,8 @@ std::vector<char> image; // Store image data directly.
 
  sf::SoundBuffer girosBuffer;
  sf::Sound girosSound;
-
- 
+ bool nular;
+int conteosuel;
 sf::Sprite SpriteArrowIzq;
 bool SelectingPiece = false; // Inicialmente en selección de pieza
 bool Game = false;        // No en juego al principio
@@ -36,7 +36,14 @@ bool giroRule;
 int CplayerIndex;
 int Opcioncami;
 
+
+
+
+
+std::vector<int> UsuariosActivos;
+
 bool turn;
+bool otherturn;
 bool turn_dado;
 bool turn_ruleta;
 bool turn_casa;
@@ -45,7 +52,9 @@ bool turn_Moviendo;
 bool eventoActivo;
 bool isSpinning;
 int IndexTurn;
-
+bool ruleta_draw;
+bool impuesto_draw;
+bool casa_draw;
 
 void loadResourceGame(){
 

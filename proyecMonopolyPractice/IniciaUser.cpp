@@ -25,7 +25,7 @@ IniciaUser::~IniciaUser() {
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-
+    conteosuel = 0;
 }
 
 
@@ -53,7 +53,8 @@ void IniciaUser::IniciAcion(){
     
     
 
-        
+    float deltaScroll = 0.0f;
+    float scrollStep = 10.0f; // Para el desplazamiento con las teclas
     const float avatarWidth = 128.0f;
     const float avatarHeight = 128.0f;
     const float avatarSeparation = 28.0f;
@@ -120,11 +121,27 @@ void IniciaUser::IniciAcion(){
                 Menup.MenuSalir();
             }
 
-            
+            scrollbar.handleEvent(event, window);
+            avatarYOffset = scrollbar.getScrollOffset();
+           // scrollbar.evento(event);
             if (event.type == sf::Event::MouseWheelScrolled) {
+                
                 scrollbar.update(event.mouseWheelScroll.delta);  
                 avatarYOffset = scrollbar.getScrollOffset();
 
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Down) {
+                    deltaScroll = 1.0f; // Desplazamiento hacia abajo
+                    scrollbar.update(deltaScroll);
+                    avatarYOffset = scrollbar.getScrollOffset();
+                }
+                else if (event.key.code == sf::Keyboard::Up) {
+                    deltaScroll = -1.0f; // Desplazamiento hacia arriba
+                    scrollbar.update(deltaScroll);
+                    avatarYOffset = scrollbar.getScrollOffset();
+                }
             }
 
 
@@ -224,6 +241,8 @@ void IniciaUser::IniciAcion(){
     }
 }
     
+
+
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
 
