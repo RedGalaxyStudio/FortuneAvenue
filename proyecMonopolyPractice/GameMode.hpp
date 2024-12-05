@@ -161,6 +161,7 @@ sf::Vector2f(773, 190),
 	sf::Texture SettingsOff;
 	sf::Sprite Settings;
 
+	sf::Text Impuesto;
 
 	sf::Texture TextureArrowDer;
 
