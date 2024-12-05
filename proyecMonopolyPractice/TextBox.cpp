@@ -41,10 +41,10 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
 }
 
 // Posición del cuadro de texto
-void TextBox::setPosition() {
-    box.setPosition(x + 145, y + 60);
-    text.setPosition(x + 145, y + 56); 
-    textoPregunta.setPosition(x, y - 25);
+void TextBox::setPosition(int XX ,int YY) {
+    box.setPosition(XX + 145, YY + 60);
+    text.setPosition(XX + 145, YY + 56);
+    textoPregunta.setPosition(XX, YY - 25);
 }
 
 

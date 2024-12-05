@@ -145,8 +145,8 @@ void IniciarPartida::update() {
 void IniciarPartida::updatejoinRoom() {
 	std::string code;
 	bool Valida1 = false;
-	TextBox textBoxRoom(496, 80, "Ingresa el codigo: ");
-	textBoxRoom.setPosition();
+	TextBox textBoxRoom(1000, 80, "Ingresa el codigo: ");
+	textBoxRoom.setPosition(1000, 80);
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
 	MensageBox messageInvalido("Codigo invalido", fontUser, 12);
 
