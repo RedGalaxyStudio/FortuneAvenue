@@ -231,6 +231,7 @@ void GameMode::update() {
 	std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 	while (window->isOpen()) {
 		//ruleta_draw = true;
+		impuesto_draw = true;
 		Event();
 		Dado.loopP(&client);
 		// dado mecanica 
@@ -452,7 +453,6 @@ void GameMode::update() {
 	}
 
 }
-
 void GameMode::Event() {
 	sf::Event event;
 
@@ -469,7 +469,7 @@ void GameMode::Event() {
 				renderTexture.clear();
 				renderTexture.draw(spriteFondoGame);
 				renderTexture.draw(spriteMapa);
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < UsuariosActivos.size(); i++) {
 					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
 					renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
 					renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
@@ -510,7 +510,6 @@ void GameMode::Event() {
 
 	} while (window->pollEvent(event));
 }
-
 void GameMode::DrawPieceMoviendo() {
 
 	sf::Vector2f fichaPos = playersGame[IndexTurn].PieceSelect.getPosition();
@@ -539,7 +538,6 @@ void GameMode::DrawPieceMoviendo() {
 
 
 }
-
 void GameMode::DrawGameRuleta() {
 
 	float deltaTime = clock.restart().asSeconds();
@@ -590,9 +588,7 @@ void GameMode::DrawGameRuleta() {
 		window->draw(DescripDado);
 	}
 }
-
 void GameMode::DrawGameCasa() {}
-
 void GameMode::DrawGameImpuesto() {
 
 
@@ -604,27 +600,26 @@ void GameMode::DrawGameImpuesto() {
 	renderTexture.draw(spriteFondoGame);
 	renderTexture.draw(spriteMapa);
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < UsuariosActivos.size(); i++)
 	{
-		renderTexture.draw(playersGame[i].NamePlayer);
-		renderTexture.draw(playersGame[i].boxPlayer);
-		renderTexture.draw(playersGame[i].AvatarPlayer);
-		renderTexture.draw(playersGame[i].MarcoPlayer);
-
+		renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
 	}
-
 	SpriteImpuesto.setTexture(TextureImpuesto);
-	SpriteImpuesto.setOrigin(310.0f, 310.0f);
+	
 	SpriteImpuesto.setPosition(640, 360);
-
+	sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+	SpriteImpuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	renderTexture.draw(overlay);
 
 	renderTexture.display();
 
 	renderedSprite.setTexture(renderTexture.getTexture());
-
 	window->draw(renderedSprite);
+	window->draw(SpriteImpuesto);
 	window->draw(SpriteImpuesto);
 
 }
@@ -694,9 +689,6 @@ void GameMode::InicioPartida() {
 		window->display();
 	}
 }
-
-
-
 void GameMode::DrawGame() {
 
 	if (turn) {
