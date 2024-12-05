@@ -24,6 +24,11 @@ void Stealplayer::resource() {
     if (!UsuariosEleccion.empty()) { // Asegúrate de que el vector no esté vacío
         UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
     }
+
+    if(!texturebottonRobar.loadFromFile("resource/texture/Button/robar.png")) return;
+    SpritebottonRobar.setTexture(texturebottonRobar);
+
+
 }
 void Stealplayer::update() {
 

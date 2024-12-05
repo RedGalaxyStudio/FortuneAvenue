@@ -58,13 +58,13 @@ public:
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
 	
-
+	void invercionSegura();
 	void robarUser(int usuariorobao);
-
+	void casacomprada(int compra);
 
 	std::mutex mtxExisting;
 	std::condition_variable cvExisting;
-
+	bool accionCompra;
 
 
 	std::mutex mtxx;

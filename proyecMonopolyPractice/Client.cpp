@@ -1,6 +1,6 @@
 #include "Client.hpp"
 
-Client::Client() : client(nullptr), peer(nullptr), running(false), lastRollResult(0) , turnopermitido(0), conteoturn(0){}
+Client::Client() : client(nullptr), peer(nullptr), running(false), lastRollResult(0) , turnopermitido(0), conteoturn(0), accionCompra(false){}
 
 std::string generateRoomCode() {
 	std::string code;
@@ -133,18 +133,6 @@ void Client::disconnect() {
 	std::cout << "Disconnected from server!" << std::endl;
 }
 
-void Client::robarUser(int usuariorobao) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "ROBARUSER:" + std::to_string(usuariorobao);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-
 
 std::string Client::createRoom(const std::string& username) {
 	if (!peer) {
@@ -228,9 +216,46 @@ bool Client::sendImage(const std::string& filename) {
 	std::cout << "Filename sent:" << message << std::endl;
 	return true;
 }
+void Client::invercionSegura() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "INVERCIONSEGURA";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
 
 
+}
 
+void Client::robarUser(int usuariorobao) {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+	if (playerIndex != 0) {
+
+		usuariorobao = (usuariorobao - playerIndex + 4) % 4;
+
+	}
+
+	std::string message = "ROBARUSER:" + std::to_string(usuariorobao);
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+}
+void Client::casacomprada(int compra) {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "CASACOMPRA:" + std::to_string(compra);
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+}
 
 std::vector<char> Client::loadImage(const std::string& filename) {
 	std::ifstream file(filename, std::ios::binary);
@@ -483,9 +508,6 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cout << "Invalid message format for TURN_START." << std::endl;
 		}
 	}
-
-
-
 	else if (message.rfind("ROLL_RESULT:", 0) == 0) {
 		std::cout << "\nEjecución de ROLL_RESULT";
 
@@ -532,13 +554,11 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cerr << "Formato del mensaje ROLL_RESULT incorrecto" << std::endl;
 		}
 	}
-
 	else if (message == "NOT_YOUR_TURN") {
 
 		std::cout << "Wait for your turn!" << std::endl;
 
 	}
-
 	else if (message.rfind("OPCION_CAMINO:", 0) == 0) {
 		// Encuentra el primer ":" para asegurarse de que haya algo después
 		size_t pos = message.find(":");
@@ -570,6 +590,31 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cerr << "Mensaje mal formado: falta valor después de los dos puntos." << std::endl;
 		}
 	}
+	else if (message.find("COMPRADA:") == 0) {
+		// Eliminar el prefijo "COMPRADA:"
+		std::string data = message.substr(9);
+
+		// Encontrar la posición del delimitador ':'
+		size_t delimiterPos = data.find(':');
+		if (delimiterPos != std::string::npos) {
+			// Extraer el índice del jugador
+			int indexPlayerr = std::stoi(data.substr(0, delimiterPos));
+			indexPlayerr = (indexPlayerr - playerIndex + 4) % 4;
+			// Extraer el dinero restante
+			int moneyy = std::stoi(data.substr(delimiterPos + 1));
+			playerInfos[indexPlayerr].money = moneyy;
+			playersGame[indexPlayerr].Money.setString(std::to_string(playerInfos[indexPlayerr].money));
+
+			// Imprimir los resultados
+			std::cout << "Index del Jugador: " << indexPlayerr << "\n";
+			std::cout << "Dinero Restante: " << moneyy << "\n";
+			accionCompra = true;
+			// Aquí puedes actualizar tus datos según sea necesario
+		}
+		else {
+			std::cerr << "Error: formato de mensaje incorrecto.\n";
+		}
+	}
 	else if (message.rfind("RULETE_GAME:", 0) == 0) {
 		// Extraer el ángulo de la cadena, después de "RULETE_GAME:"
 		float angulo = std::stof(message.substr(12));  // Convertir la parte del ángulo en float
@@ -584,7 +629,8 @@ void Client::handleServerMessage(const std::string& message) {
 		// Notificar al hilo principal que el mensaje ha sido recibido
 		ruletaCondVar.notify_one();
 
-	}else if (message.rfind("START_SPIN", 0) == 0) {
+	}
+	else if (message.rfind("START_SPIN", 0) == 0) {
 		// Dividir el mensaje en partes
 		std::cout << "aaaaaaaaayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
 		std::istringstream stream(message);
@@ -655,7 +701,8 @@ void Client::handleServerMessage(const std::string& message) {
 			std::cerr << "Formato de mensaje 'GANAR150' inválido: " << message << std::endl;
 		}
 	
-	}else if (message.rfind("TODOSPIERDEN:", 0) == 0) { // Comienza con "TODOSPIERDEN:"
+	}
+	else if (message.rfind("TODOSPIERDEN:", 0) == 0) { // Comienza con "TODOSPIERDEN:"
 		std::string data = message.substr(13); // Longitud de "TODOSPIERDEN:"
 
 		// Dividir el resto del mensaje en partes separadas por ':'
@@ -705,7 +752,6 @@ void Client::handleServerMessage(const std::string& message) {
 		std::cout << "\nEJEcuto playerindex2";
 
 	}
-
 	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
 		std::cout << "\nNEW_PLAYER";
 

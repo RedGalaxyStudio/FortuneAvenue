@@ -7,7 +7,7 @@
 #include <vector>
 #include "ResourceGlobal.hpp"
 #include "Client.hpp"
-
+#include "ButtonG.hpp"
 class HouseBuy {
 
 private:
@@ -15,11 +15,18 @@ sf::RenderWindow * window;
 sf::Texture TextureBotonComprar;
 sf::Sprite SpriteBotonComprar;
 
+
+sf::Texture TextureXcOFF;
+sf::Texture TextureXcOn;
+sf::Sprite Xc;
+
+
 std::vector<sf::Texture> TextureCasa;
 std::vector<sf::Sprite> SpriteCasa;
 
 sf::Clock tempoCarta;
 sf::Sprite renderedSprite;
+sf::Texture ReversoCart;
 struct houseInfo {
 
     std::string nombre;
@@ -27,15 +34,17 @@ struct houseInfo {
     int costo;
     int impuesto;
 };
+
+
 public:
     HouseBuy();   // Constructor que inicializa con el precio y fondos del jugador
     int IndexCAsa;
-    
-    void setWindow(sf::RenderWindow& win);
+    std::vector<houseInfo> houses;
+    void setWindow(sf::RenderWindow& win,int indice);
     void resource(Client* client);
     void update(sf::Vector2f posicionactuInicial);
-
-
+    int index;
+   
 
 };
 #endif // HOUSEBUY_HPP
