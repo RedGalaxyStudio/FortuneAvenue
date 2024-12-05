@@ -24,12 +24,24 @@ p {
     color: transparent;
 }
 
-h1, h2 {
+h1 {
+    font-size: 4em; /* Tamaño del título */
+    margin-bottom: 20px; /* Espaciado */
+    color: #fff; /* Texto blanco */
+    text-shadow: 
+        0 0 2px #fff, 
+        0 0 7px #fff, 
+        0 0 3px rgba(255, 255, 255, 0.5); /* Efecto de neón más suave */
+}
+
+
+h2 { 
     background-image: linear-gradient(to right, #0028f0, #f72b8e); /* Degradado de azul a rosa */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
+
 
 header {
     position: absolute;
