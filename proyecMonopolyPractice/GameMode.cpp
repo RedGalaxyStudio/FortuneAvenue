@@ -231,7 +231,7 @@ void GameMode::update() {
 	std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 	while (window->isOpen()) {
 		//ruleta_draw = true;
-		impuesto_draw = true;
+		//impuesto_draw = true;
 		Event();
 		Dado.loopP(&client);
 		// dado mecanica 
