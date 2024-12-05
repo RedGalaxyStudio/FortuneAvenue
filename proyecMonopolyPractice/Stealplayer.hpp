@@ -11,6 +11,8 @@ private:
     sf::RenderWindow* window;                 // Ventana principal para dibujar
     sf::Text SlectingPlayer;
     std::vector<int> UsuariosEleccion;
+    sf::Texture texturebottonRobar;
+    sf::Sprite SpritebottonRobar;
 
 public:
     Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec);        // Constructor que toma la ventana principal

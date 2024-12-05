@@ -11,7 +11,7 @@ public:
     TextBox();  // Constructor por defecto
 
     TextBox(float width, float height,std::string solicitud);  
-    void setPosition();
+    void setPosition(int XX, int YY);
     std::string handleInput(sf::Event event, const size_t maxLength);
     void draw(sf::RenderWindow& window);
     void Prinf();

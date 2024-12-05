@@ -270,6 +270,10 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
 				//inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 				// Acciones para el segmento 5
+
+				client.invercionSegura();
+
+
 				break;
 
 			default:
