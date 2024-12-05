@@ -66,7 +66,7 @@ void IniciaUser::IniciAcion(){
 
     recua.setPosition(400, 112);
     TextBox textBox(496, 50, "Ingresa tu nombre: ");  
-    textBox.setPosition();  
+    textBox.setPosition(496, 50);
     
     const float totalContentHeight = 440.0f; 
     const float scrollbarHeight = 340.0f;

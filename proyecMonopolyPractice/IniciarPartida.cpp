@@ -95,6 +95,10 @@ void IniciarPartida::update() {
 							pieceselector.Resource();
 							pieceselector.updateSelection();
 						}
+						else
+						{
+							message.showMessage();
+						}
 
 					}
 
@@ -141,10 +145,10 @@ void IniciarPartida::update() {
 void IniciarPartida::updatejoinRoom() {
 	std::string code;
 	bool Valida1 = false;
-	TextBox textBoxRoom(10, 20, "Ingresa el codigo: ");
-	textBoxRoom.setPosition();
+	TextBox textBoxRoom(1000, 80, "Ingresa el codigo: ");
+	textBoxRoom.setPosition(1000, 80);
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-	MensageBox messageInvalido("   Por favor, introduce un código válido de 5 caracteres.", fontUser, 12);
+	MensageBox messageInvalido("Codigo invalido", fontUser, 12);
 
 	while (window->isOpen() && !Valida1) {
 		sf::Event event1;
@@ -175,21 +179,27 @@ void IniciarPartida::updatejoinRoom() {
 						// Reinicia el reloj
 						LimTimeBotton.restart();
 						playClickSound();
-
-
-						client.initialize();
-
-
 						code = textBoxRoom.Actu();
+						if (code.length() == 5) {
+							// Tiene exactamente 5 caracteres
+							client.initialize();
 
-						if (true == client.connectToServer("208.68.36.50", 1234)) {
+							if (true == client.connectToServer("208.68.36.50", 1234)) {
 
-							client.joinRoom(code, playerInfos[0].username);
-							Code = code;
+								client.joinRoom(code, playerInfos[0].username);
+								Code = code;
 
-							pieceselector.Resource();
-							pieceselector.updateSelection();
+								pieceselector.Resource();
+								pieceselector.updateSelection();
 
+							}
+							else {
+								message.showMessage();
+							}
+						}
+						else {
+							messageInvalido.showMessage();
+							// No tiene 5 caracteres
 						}
 
 					}

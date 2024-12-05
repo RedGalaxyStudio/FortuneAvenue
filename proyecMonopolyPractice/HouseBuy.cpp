@@ -7,45 +7,31 @@
 #include <fstream>
 #include "cell.h"
 #include "fileio.h"
-
+#include "ButtonG.hpp"
 
 using json = nlohmann::json;
 
-HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
 
 
-void HouseBuy::setWindow(sf::RenderWindow& win) {
+void HouseBuy::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
+	index = indice;
 }
 void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	TextureCasa.resize(17);
 	SpriteCasa.resize(17);
+	if (!TextureXcOFF.loadFromFile("resource/texture/Button/XOffC.png")) {
+		std::cerr << "Error al cargar el botón de confirmación.\n";
+	}
+	if (!TextureXcOn.loadFromFile("resource/texture/Button/XOnC.png")) {
+		std::cerr << "Error al cargar el botón de confirmación.\n";
+	}
 
 
 
-	// Comprueba si las casas están listas
-	
-	
-		/*	bool cargar = false;
-			// Cargar las texturas de las casas
-			std::unique_lock<std::mutex> lock(client->casasMutex);
-			client->cv.wait(lock, [] { return espera; });
-
-			cargar = client->casasCargadas;
-			if(cargar){
-			for (int i = 0; i < 17; ++i) {
-
-
-			
-			}
-			}*/
-		
-
-	
-
-
-
+	Xc.setTexture(TextureXcOFF);
 
 	// Cargar la textura para el botón de confirmación de salida
 	if (!TextureBotonComprar.loadFromFile("resource/texture/Button/comprarcasa.png")) {
@@ -56,7 +42,10 @@ void HouseBuy::resource(Client* client) {
 	SpriteBotonComprar.setOrigin(101, 40);
 
 
-
+	
+		if (!ReversoCart.loadFromFile("resource/texture/Game/Casas/reversocart.png")) {
+			std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
+		}
 	// Crear el sprite para cada textura
 
 	std::ifstream file("resource/texture/Game/Casas/CasasInfo.json");
@@ -77,7 +66,7 @@ void HouseBuy::resource(Client* client) {
 	file >> jsonData;
 	//std::cout << "5";
 	// Vector para almacenar las casas
-	std::vector<houseInfo> houses;
+	
 	//std::cout << "6";
 	// Iterar sobre las entradas del JSON
 	for (auto& [key, value] : jsonData.items()) {
@@ -101,6 +90,8 @@ void HouseBuy::resource(Client* client) {
 			<< ", Impuesto: " << house.impuesto << std::endl;
 	}*/
 
+	sf::FloatRect globalBounds = Xc.getGlobalBounds();
+	Xc.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
 }
@@ -118,7 +109,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	IndexCAsa += 1;
 
 
-	if (!TextureCasa[IndexCAsa].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(playerInfos[0].casasPorJugador[IndexCAsa]) + ".png")) {
+	if (!TextureCasa[IndexCAsa].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(playerInfos[index].casasPorJugador[IndexCAsa]) + ".png")) {
 		std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
 	}
 
@@ -134,11 +125,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c1(q.at(1), sf::Color(255, 0, 0, 255), posicionactuInicial); cellQua.push_back(c1);
 	Cell c2(q.at(2), sf::Color(0, 0, 255, 255), posicionactuInicial); cellQua.push_back(c2);
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
-	Cell c4(q.at(4), sf::Color(0, 255, 255, 255), posicionactuInicial); cellQua.push_back(c4);
+	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
 	Cell c5(q.at(5), &TextureCasa[IndexCAsa], posicionactuInicial); cellQua.push_back(c5);
 	std::cout << "\nIndexCAsa" << IndexCAsa;
-
 	
+	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 		if (TextureCasa[IndexCAsa].getSize().x == 0 || TextureCasa[IndexCAsa].getSize().y == 0) {
 			std::cout << "La textura " << IndexCAsa << " no tiene contenido." << std::endl;
 		}
@@ -153,7 +144,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	cc.clear();
 
 
-
+	Xc.setPosition(790,148);
 	//std::cout << "\n55";
 
 	renderedSprite.setTexture(renderTexture.getTexture());
@@ -177,13 +168,13 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 
 		sf::Event event;
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
 
 
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
+			
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
@@ -201,18 +192,37 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				Menup.MenuSalir();
 			}
 
-			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-					cierre = true;
+			if (turn) {
+				
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
+					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerInfos[0].money>= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
+						playClickSound();
+						client.casacomprada(playerInfos[0].casasPorJugador[IndexCAsa]);
+						cierre = true;
+					}
+					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
+						playClickSound();
+						cierre = true;
+
+					}
 				}
 			}
+			else if (client.accionCompra){
 
+				playClickSound();
+			cierre = true;
+			client.accionCompra = false;
+			}
+
+			
 
 		}   // Asegura que el bucle se repita mientras haya eventos pendientes
 
-		window->setMouseCursor(*currentCursor);
+		
+		currentCursor = &normalCursor;
+		botonXc.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
+		window->setMouseCursor(*currentCursor);
 		// Obtener el tiempo transcurrido
 
 		window->clear();
@@ -232,8 +242,9 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 		if (cellQua[0].finAnimacion == true) {
 			window->draw(SpriteBotonComprar);
+			window->draw(Xc);
 		}
-
+		
 		window->display();
 
 	}
