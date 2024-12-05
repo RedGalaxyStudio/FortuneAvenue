@@ -65,7 +65,7 @@ public:
     // Constructor de la clase Windown
     Windown(sf::RenderWindow* windowRef) : window(windowRef) {
         card = new Card(100, 150);  // Tamaño de la carta
-        card->setPosition(window->getSize().x / 2, window->getSize().y / 2, 0);  // Posición inicial
+        card->setPosition(static_cast<float>(window->getSize().x / 2), static_cast<float>(window->getSize().y / 2),  0);  // Posición inicial
     }
 
     // Actualizar la ventana y la carta

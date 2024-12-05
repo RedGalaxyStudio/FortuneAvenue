@@ -223,8 +223,8 @@ void GameMode::update() {
 	for(int i=0;i<UsuariosActivos.size();i++){
 		std::cout << "\n2NOoooo"<<i<<"::::"<< UsuariosActivos.size();
 
-		house[i].setWindow(*window,i);
-		house[i].resource(&client);
+		house[UsuariosActivos[i]].setWindow(*window, UsuariosActivos[i]);
+		house[UsuariosActivos[i]].resource(&client);
 		std::cout << "\n233NOoooo";
 	}
 	std::cout << "\n233siioooo";
