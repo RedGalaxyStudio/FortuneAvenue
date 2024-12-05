@@ -42,6 +42,7 @@ public:
 	void DrawGameImpuesto();
 	void InicioPartida();
 	void positionPefil();
+
 private:
 	sf::Text Conteosuel;
 
