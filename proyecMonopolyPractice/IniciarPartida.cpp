@@ -141,7 +141,7 @@ void IniciarPartida::update() {
 void IniciarPartida::updatejoinRoom() {
 	std::string code;
 	bool Valida1 = false;
-	TextBox textBoxRoom(496, 80, "Ingresa el codigo: ");
+	TextBox textBoxRoom(10, 20, "Ingresa el codigo: ");
 	textBoxRoom.setPosition();
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
 	MensageBox messageInvalido("   Por favor, introduce un código válido de 5 caracteres.", fontUser, 12);

@@ -16,6 +16,18 @@ body {
     background-color: #000;
 } 
 
+
+hr {
+    border: none;        /* Elimina bordes predeterminados */
+    height: 1px;         /* Grosor de la línea */
+    background-color: #000; /* Color de la línea (negro) */
+    margin: 10px 0;      /* Espacio superior e inferior */
+}
+
+
+
+
+
 /* Degradado de texto para todo el contenido */
 p {
     background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
