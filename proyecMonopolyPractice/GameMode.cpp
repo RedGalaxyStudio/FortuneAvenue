@@ -568,7 +568,14 @@ void GameMode::DrawGameCasa() {}
 
 void GameMode::DrawGameImpuesto() {
 
+	int Impuesto;
 
+	valortotal = valor - 50;
+
+	Impuesto.setString(valortotal);
+	Impuesto.setPosition(640, 450);
+	globalBounds = Impuesto.getGlobalBounds();
+	Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	window->clear();
 
