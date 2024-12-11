@@ -38,7 +38,7 @@ void IniciarPartida::resource() {
 	enunciado.setPosition(640, 100);
 	sf::FloatRect globalBounds = enunciado.getGlobalBounds();
 	enunciado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	NumPlayers = 1;
+	//NumPlayers = 1;
 }
 
 

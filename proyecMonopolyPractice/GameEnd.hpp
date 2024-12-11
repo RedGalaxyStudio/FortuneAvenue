@@ -9,7 +9,8 @@
 class GameEnd {
 private:
     sf::RenderWindow* window;                 // Ventana principal para dibujar
-    sf::Text fingame;
+    sf::Text fingame12;
+    sf::Text funciona;
    
 
 public:

@@ -235,8 +235,8 @@ void GameMode::update() {
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;
-	//GameEnd gameend(window);
-	//gameend.update();
+	 //GameEnd gameend(window);
+	// gameend.update();
 //	std::cout << "\n23333333siioooo";
 	animacionRuleta = false;
 	InicioPartida();
