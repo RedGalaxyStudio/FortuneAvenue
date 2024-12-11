@@ -23,7 +23,7 @@ void Stealplayer::resource() {
 	SlectingPlayer.setPosition(640, 100);
    //std::cout << "\n3";
     if (!UsuariosEleccion.empty()) { // Asegúrate de que el vector no esté vacío
-      //  UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
+        UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
     }
     isMouseOver.resize(UsuariosEleccion.size());
     PosIsMouseOver.resize(UsuariosEleccion.size());
