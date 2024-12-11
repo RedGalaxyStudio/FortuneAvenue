@@ -600,7 +600,6 @@ void GameMode::DrawGameRuleta() {
 		window->draw(DescripDado);
 	}
 }
-void GameMode::DrawGameCasa() {}
 
 void GameMode::DrawGameImpuesto() {
 
