@@ -181,7 +181,7 @@ void GameMode::update() {
 
 	}
 
-	std::cout << "\n1NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
+	//std::cout << "\n1NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 	for (const auto& posicion : caminocasa) {
 		sf::CircleShape punto(5); // Radio de 5
 		punto.setFillColor(sf::Color::Red); // Color rojo para los puntos
@@ -190,10 +190,10 @@ void GameMode::update() {
 		puntos.push_back(punto);
 	}
 
-	moverFichas[0].Inicializar(&playersGame[0].PieceSelect, &casillas0, &casillasimpuesto0);
-	moverFichas[1].Inicializar(&playersGame[1].PieceSelect, &casillas1, &casillasimpuesto1);
-	moverFichas[2].Inicializar(&playersGame[2].PieceSelect, &casillas2, &casillasimpuesto2);
-	moverFichas[3].Inicializar(&playersGame[3].PieceSelect, &casillas3, &casillasimpuesto3);
+	moverFichas[0].Inicializar(&playersGame[0].PieceSelect, &casillas0);
+	moverFichas[1].Inicializar(&playersGame[1].PieceSelect, &casillas1);
+	moverFichas[2].Inicializar(&playersGame[2].PieceSelect, &casillas2);
+	moverFichas[3].Inicializar(&playersGame[3].PieceSelect, &casillas3);
 
 
 	animacionIniciada = false;
@@ -218,29 +218,29 @@ void GameMode::update() {
 	NUlO.Resource(&client);       // Cargar recursos para la carta de "nulo"
 
 	float duracionMovimiento = 0.5f;
-	std::cout << "\n2NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
+//	std::cout << "\n2NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 	HouseBuy house[4];
 	for(int i=0;i<UsuariosActivos.size();i++){
-		std::cout << "\n2NOoooo"<<i<<"::::"<< UsuariosActivos.size();
+		//std::cout << "\n2NOoooo"<<i<<"::::"<< UsuariosActivos.size();
 
-		house[i].setWindow(*window,i);
-		house[i].resource(&client);
-		std::cout << "\n233NOoooo";
+		house[UsuariosActivos[i]].setWindow(*window, UsuariosActivos[i]);
+		house[UsuariosActivos[i]].resource(&client);
+		//std::cout << "\n233NOoooo";
 	}
-	std::cout << "\n233siioooo";
-	Stealplayer robarjugador(window,UsuariosActivos);
+	//std::cout << "\n233siioooo";
+	Stealplayer robarjugador(window,UsuariosActivos,playersGame);
 	robarjugador.resource();
-	std::cout << "\n2siioooo";
-
+	//std::cout << "\n2siioooo";
+	
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;
 	//GameEnd gameend(window);
 	//gameend.update();
-	std::cout << "\n23333333siioooo";
+//	std::cout << "\n23333333siioooo";
 	animacionRuleta = false;
 	InicioPartida();
-	std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
+	//std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 	while (window->isOpen()) {
 		//ruleta_draw = true;
 		//impuesto_draw = true;
@@ -298,7 +298,7 @@ void GameMode::update() {
 			TempoAnimacion.restart();
 			animacionCasa = false;
 			animacionIniciada = true;
-			std::cout << "error Casa: \n";
+			//std::cout << "error Casa: \n";
 		}
 		// mecanica Casa
 		if (animacionIniciada == true && animacionCasa == false && casa_draw &&TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
@@ -310,7 +310,7 @@ void GameMode::update() {
 			animacionCasa = false;
 		}*/
 
-		std::cout << "\n1222NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
+		//std::cout << "\n1222NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
 		//cursor
 		currentCursor = &normalCursor;
 
@@ -818,14 +818,14 @@ void GameMode::DrawGame() {
 			if (turn_impuesto && !otherturn && !turn_Moviendo) {
 				for (int i = 0; i < caminoimpuesto.size(); i++)
 				{
-					std::cout << "\nIndexTurn3:" << IndexTurn;
+					//std::cout << "\nIndexTurn3:" << IndexTurn;
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
 						impuesto_draw = true;
 						turn_impuesto = false;
 						eventoActivo = true;
 						animacionImpuesto = true;
-						std::cout << "Impuestooooooooooooooooooooooooooooooooooooooo";
+						//std::cout << "Impuestooooooooooooooooooooooooooooooooooooooo";
 					}
 				}
 				turn_impuesto = false;
@@ -843,7 +843,7 @@ void GameMode::DrawGame() {
 
 		client.endTurn();
 		turn = false;
-		std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
+		//std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 
 

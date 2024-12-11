@@ -260,7 +260,7 @@ void IniciaUser::saveSelectedAvatar(){
             json avatarData;
             avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
             
-            std::cout << "\ninput1:" << input1;
+           //std::cout << "\ninput1:" << input1;
             avatarData["username"] = input1;  
 
          

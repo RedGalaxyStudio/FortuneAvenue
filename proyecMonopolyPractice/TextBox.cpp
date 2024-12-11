@@ -19,10 +19,10 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
     x = 50;
     y = 50;
     text.setString(nombre);
-        std::cout << "La variable tiene contenido.\n";
+       //std::cout << "La variable tiene contenido.\n";
     }
     else {
-        std::cout << "La variable esta vacia.\n";
+       //std::cout << "La variable esta vacia.\n";
     
     textoPregunta.setFont(fontUser);
     textoPregunta.setCharacterSize(24);
@@ -63,7 +63,7 @@ std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
             }
 
             text.setString(input);
-            std::cout << "Input Text: " << input << std::endl;
+           //std::cout << "Input Text: " << input << std::endl;
 
             sf::FloatRect globalBounds = text.getGlobalBounds();
             

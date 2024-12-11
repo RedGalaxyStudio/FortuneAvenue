@@ -65,7 +65,7 @@ public:
     // Constructor de la clase Windown
     Windown(sf::RenderWindow* windowRef) : window(windowRef) {
         card = new Card(100, 150);  // Tamaño de la carta
-        card->setPosition(window->getSize().x / 2, window->getSize().y / 2, 0);  // Posición inicial
+        card->setPosition(static_cast<float>(window->getSize().x / 2), static_cast<float>(window->getSize().y / 2),  0);  // Posición inicial
     }
 
     // Actualizar la ventana y la carta
@@ -80,19 +80,19 @@ public:
                 // Gira la carta cuando la tecla sea presionada
                 if (event.type == sf::Event::KeyPressed) {
                     if (event.key.code == sf::Keyboard::Left) {
-                        std::cout << "Izquierda presionada\n";  // Depuración
+                      //  std:: << "Izquierda presionada\n";  // Depuración
                         card->rotate(0.05f, 0);  // Gira la carta sobre el eje X (simulando 3D)
                     }
                     if (event.key.code == sf::Keyboard::Right) {
-                        std::cout << "Derecha presionada\n";  // Depuración
+                      //  std:: << "Derecha presionada\n";  // Depuración
                         card->rotate(-0.05f, 0);  // Gira la carta sobre el eje X
                     }
                     if (event.key.code == sf::Keyboard::Up) {
-                        std::cout << "Arriba presionada\n";  // Depuración
+                       // std:: << "Arriba presionada\n";  // Depuración
                         card->rotate(0, 0.05f);  // Gira la carta sobre el eje Y
                     }
                     if (event.key.code == sf::Keyboard::Down) {
-                        std::cout << "Abajo presionada\n";  // Depuración
+                       // std:: << "Abajo presionada\n";  // Depuración
                         card->rotate(0, -0.05f);  // Gira la carta sobre el eje Y
                     }
                 }

@@ -32,7 +32,8 @@ void Nulo::Update() {
   
 
     renderedSprite.setTexture(renderTexture.getTexture());
-    std::cout << "\n\n\nentro";
+  
+  
     sf::Clock clocks;  // Inicia el temporizador
 
     // El bucle solo se ejecutará durante 5 segundos
