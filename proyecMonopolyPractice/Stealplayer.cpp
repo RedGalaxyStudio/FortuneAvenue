@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructor
-Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec) : window(window), UsuariosEleccion(UsuariosElec) {
+Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
 
@@ -21,12 +21,25 @@ void Stealplayer::resource() {
 	sf::FloatRect globalBounds = SlectingPlayer.getGlobalBounds();
 	SlectingPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	SlectingPlayer.setPosition(640, 100);
+   //std::cout << "\n3";
     if (!UsuariosEleccion.empty()) { // Asegúrate de que el vector no esté vacío
-        UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
+      //  UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
     }
+    isMouseOver.resize(UsuariosEleccion.size());
+    PosIsMouseOver.resize(UsuariosEleccion.size());
+   //std::cout << "\n4";
+    for (auto& MouseOver : isMouseOver) {
+
+        MouseOver.setFillColor(sf::Color(0, 0, 0, 0));
+        MouseOver.setSize(sf::Vector2f(200.0f, 380.0f));
+        MouseOver.setOrigin(100, 64);
+    }
+   //std::cout << "\n7";
+
 
     if(!texturebottonRobar.loadFromFile("resource/texture/Button/robar.png")) return;
     SpritebottonRobar.setTexture(texturebottonRobar);
+    SpritebottonRobar.setOrigin(95, 38);
 
 
 }
@@ -47,35 +60,38 @@ void Stealplayer::update() {
         // Calcular inicio X para centrar los perfiles horizontalmente
         float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
 
-        float startY = 360.0f; // Centrado verticalmente
+        float startY = 300.0f; // Centrado verticalmente
 
         for (int i = 0; i < totalPerfiles; i++) {
             float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
             float yPos = startY;
-            // Posicionar elementos
-            playersGame[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
-            playersGame[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);
-            playersGame[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
-            std::cout << "\n xPos" << xPos << "startY" << startY;
-            playersGame[UsuariosEleccion[i]].MarcoPlayer.setPosition(xPos, startY);
 
-            if (playersGame[UsuariosEleccion[i]].PieceSelect.getTexture() != nullptr) {
-                playersGame[UsuariosEleccion[i]].PieceSelect.setScale(2.0f, 2.0f);
-                sf::FloatRect pieceSelectBounds = playersGame[UsuariosEleccion[i]].PieceSelect.getGlobalBounds();
-                playersGame[UsuariosEleccion[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-                playersGame[UsuariosEleccion[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 240);
+            PosIsMouseOver[i] = sf::Vector2f(startX, startY +270);
+            // Posicionar elementos
+            PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
+            PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);
+            PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
+           //std::cout << "\nMedida: " << PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.getRadius();
+           //std::cout << "\n xPos" << xPos << "startY" << startY;
+            PlayersSteal[UsuariosEleccion[i]].MarcoPlayer.setPosition(xPos, startY);
+            isMouseOver[i].setPosition(xPos, startY);
+            if (PlayersSteal[UsuariosEleccion[i]].PieceSelect.getTexture() != nullptr) {
+                PlayersSteal[UsuariosEleccion[i]].PieceSelect.setScale(2.0f, 2.0f);
+                sf::FloatRect pieceSelectBounds = PlayersSteal[UsuariosEleccion[i]].PieceSelect.getGlobalBounds();
+                PlayersSteal[UsuariosEleccion[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+                PlayersSteal[UsuariosEleccion[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 220);
             }
 
-            sf::FloatRect moneyBounds = playersGame[UsuariosEleccion[i]].Money.getGlobalBounds();
-            playersGame[UsuariosEleccion[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
-            playersGame[UsuariosEleccion[i]].Money.setPosition(xPos, startY + 140);
+            sf::FloatRect moneyBounds = PlayersSteal[UsuariosEleccion[i]].Money.getGlobalBounds();
+            PlayersSteal[UsuariosEleccion[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
+            PlayersSteal[UsuariosEleccion[i]].Money.setPosition(xPos, startY + 120);
 
            
         }
     }
     bool seleccionlista = false;
-
-
+   //std::cout << "\n77";
+    int indexMouseOver=-1;
     while (window->isOpen()&& !seleccionlista) {
         sf::Event event;
         while (window->pollEvent(event)) {
@@ -86,28 +102,38 @@ void Stealplayer::update() {
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
                 renderTexture.draw(spriteFondoGame);
-                for (int i = 0; i < playersGame.size(); i++) {
-                    renderTexture.draw(playersGame[UsuariosEleccion[i]].NamePlayer);
-                    renderTexture.draw(playersGame[UsuariosEleccion[i]].boxPlayer);
-                    renderTexture.draw(playersGame[UsuariosEleccion[i]].MarcoPlayer);
-                    renderTexture.draw(playersGame[UsuariosEleccion[i]].AvatarPlayer);
+                for (int i = 0; i < UsuariosEleccion.size(); i++) {
+                    renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);
+                    renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].boxPlayer);
+                    renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].MarcoPlayer);
+                    renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].AvatarPlayer);
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
                 Menup.MenuSalir();
             }
-            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                
-                for (int i = 0; i < UsuariosEleccion.size(); i++) {
-        
-                    if (playersGame[UsuariosEleccion[i]].boxPlayer.getGlobalBounds().contains(mousePosFloat)) {
-                           playClickSound();
-                           client.robarUser(UsuariosEleccion[i]);
-                    }
+            indexMouseOver = -1;
+            for (int i = 0; i < UsuariosEleccion.size(); i++) {
+
+                if (isMouseOver[i].getGlobalBounds().contains(mousePosFloat)) {
+                    
+                    indexMouseOver = i;
+                    SpritebottonRobar.setPosition(PosIsMouseOver[i]);
+                    
                 }
-         
             }
 
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                if (SpritebottonRobar.getGlobalBounds().contains(mousePosFloat)) {
+
+                    playClickSound();
+                    client.robarUser(UsuariosEleccion[indexMouseOver]);
+                    seleccionlista = true;
+
+                }
+               
+
+            }
 
             
         }
@@ -116,19 +142,22 @@ void Stealplayer::update() {
         window->draw(spriteFondoGame);
 
         for (int i = 0; i < UsuariosEleccion.size(); i++) {
-            window->draw(playersGame[UsuariosEleccion[i]].NamePlayer);
-            window->draw(playersGame[UsuariosEleccion[i]].boxPlayer);
-            window->draw(playersGame[UsuariosEleccion[i]].AvatarPlayer);
-            window->draw(playersGame[UsuariosEleccion[i]].MarcoPlayer);
-            window->draw(playersGame[UsuariosEleccion[i]].Money);
-            window->draw(playersGame[UsuariosEleccion[i]].PieceSelect);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].boxPlayer);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].AvatarPlayer);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].MarcoPlayer);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].Money);
+            window->draw(PlayersSteal[UsuariosEleccion[i]].PieceSelect);
+            if (indexMouseOver != -1){
+                window->draw(isMouseOver[indexMouseOver]);
+                window->draw(SpritebottonRobar);
+            }
+
         }
+       //std::cout << "\n6";
         // Dibujar otros elementos
         window->draw(SlectingPlayer);
+   
         window->display();
     }
 }
-
-
-
-

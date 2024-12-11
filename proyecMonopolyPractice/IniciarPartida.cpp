@@ -77,7 +77,7 @@ void IniciarPartida::update() {
 					playClickSound();
 					updatejoinRoom();
 					Valida = false;
-					std::cout << "haaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+//					////////////////////////////////////////std::cout << "haaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
 				}
 
@@ -90,7 +90,16 @@ void IniciarPartida::update() {
 						client.initialize();
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
 							Code = client.createRoom(playerInfos[0].username);
-							std::cout << Code;
+						//	
+						// 
+						// 
+						// 
+						// 
+						// 
+						// 
+						// 
+						// 
+						// << Code;
 
 							pieceselector.Resource();
 							pieceselector.updateSelection();
