@@ -57,7 +57,7 @@ public:
 	std::mutex ruletaMutex;
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
-	
+	void casasX();
 	void invercionSegura();
 	void robarUser(int usuariorobao);
 	void casacomprada(int compra);

@@ -229,6 +229,19 @@ void Client::invercionSegura() {
 
 }
 
+void Client::casasX() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "XCASA";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+
+}
+
 void Client::robarUser(int usuariorobao) {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
@@ -952,6 +965,10 @@ void Client::handleServerMessage(const std::string& message) {
 		std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
 		int playerCount = std::stoi(playerCountStr);
 		NumPlayers = playerCount;
+
+	}
+	else if (message.rfind("XCASA:", 0) == 0) {
+		accionCompra = true;
 
 	}
 	else if (message.rfind("SEND_IMAGE:", 0) == 0) {

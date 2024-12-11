@@ -85,6 +85,18 @@ void GameMode::resource() {
 	Bienvenida.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	posicionActual = 0;
 
+
+	Impuesto.setCharacterSize(45);
+	Impuesto.setFont(fontUser);
+	Impuesto.setFillColor(sf::Color::White);
+	Impuesto.setOutlineThickness(2);
+	Impuesto.setOutlineColor(sf::Color(135, 135, 135));
+
+	Impuesto.setPosition(640, 360);
+	globalBounds = Impuesto.getGlobalBounds();
+	Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	posicionActual = 0;
+
 	DescripDado.setCharacterSize(15);
 	DescripDado.setFont(fontUser);
 	DescripDado.setFillColor(sf::Color::White);
@@ -592,6 +604,15 @@ void GameMode::DrawGameCasa() {}
 void GameMode::DrawGameImpuesto() {
 
 
+	int valor=100;
+	int valortotal;
+
+	valortotal = valor - 50;
+
+	Impuesto.setString(std::to_string(valortotal));
+	Impuesto.setPosition(640, 450);
+	globalBounds = Impuesto.getGlobalBounds();
+	Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	window->clear();
 

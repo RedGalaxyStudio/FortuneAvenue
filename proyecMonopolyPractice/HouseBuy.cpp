@@ -203,7 +203,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						cierre = true;
-
+						client.casasX();
 					}
 				}
 			}

@@ -42,6 +42,7 @@ public:
 	void DrawGameImpuesto();
 	void InicioPartida();
 	void positionPefil();
+
 private:
 	sf::Text Conteosuel;
 
@@ -161,6 +162,7 @@ sf::Vector2f(773, 190),
 	sf::Texture SettingsOff;
 	sf::Sprite Settings;
 
+	sf::Text Impuesto;
 
 	sf::Texture TextureArrowDer;
 
