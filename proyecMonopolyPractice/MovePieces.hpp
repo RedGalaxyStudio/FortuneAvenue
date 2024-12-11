@@ -12,7 +12,7 @@ class MovePieces {
 public:
 	MovePieces(sf::RenderWindow& win);
 
-	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillaImpuestoC);
+	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC);
 
 	
 	void iniciarMovimiento(int numeroCasillas, float duracion);
@@ -34,8 +34,6 @@ public:
 private:
 	sf::Sprite* sprite;  
 	std::vector<std::vector<sf::Vector2f>>* casillas;  
-	std::vector<std::vector<sf::Vector2f>>* casillasRuleta;  
-	std::vector<std::vector<sf::Vector2f>>* casillasImpuesto;  
 	sf::RenderWindow* window;
 	int caminoActual;  
 	int casillaActual;  
@@ -155,9 +153,6 @@ private:
 		 sf::Vector2f(368, 339)
 	};
 
-
-	std::vector<sf::Vector2f> caminoimpuesto7 = {  };
-	std::vector<sf::Vector2f> caminocasa7 = {  };
 };
 
 #endif

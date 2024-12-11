@@ -197,7 +197,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		// Verificar si el ángulo del pointer está dentro del rango de este segmento
 		if (pointerAngle >= startAngle && pointerAngle < endAngle) {
 			currentSegment = i; // El pointer está en el segmento i
-			// std::cout << "El pointer está en el segmento: toy pegao carnal  " << currentSegment << std::endl;
+			//std::cout << "El pointer está en el segmento: toy pegao carnal  " << currentSegment << std::endl;
 			break;
 		}
 	}
@@ -208,7 +208,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		currentSegment = numSegments - 1; // El pointer está en el último segmento
 	}
 
-	// std::cout << "El pointer está en el segmento: " << currentSegment << std::endl;
+	////std::cout << "El pointer está en el segmento: " << currentSegment << std::endl;
 
 	sf::Color currentSegmentColor;
 
@@ -298,7 +298,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 
 		window.draw(CentroCircule);
-		//  std::cout << "\nruleta icon2";
+		// //std::cout << "\nruleta icon2";
 		window.draw(iconsResul[currentSegment]);
 
 	}
@@ -325,7 +325,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 
 		animacionRuleta = true;
-		//    std::cout << "\nruleta icon1";
+		//   //std::cout << "\nruleta icon1";
 		window.draw(iconsResul[currentSegment]);
 
 

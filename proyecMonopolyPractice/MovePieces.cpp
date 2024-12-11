@@ -1,21 +1,21 @@
 #include "MovePieces.hpp"
 #include "ResourceGlobal.hpp"
 
-MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), casillasRuleta(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
-
-
-void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, std::vector<std::vector<sf::Vector2f>>* casillasImpuestoC) {
+MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
+void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
-	this->casillasImpuesto = casillasImpuestoC;
 }
-
-
 void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
 
+	if (caminoActual + 1 > (*casillas).size() ) {
 
-	if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
+		finalCamino = true;
+		std::cout << " caminoActual + 1" << caminoActual + 1 << "(*casillas).size()" << (*casillas).size();
+		updateCAmbioCasilla();
+		posicionFinal = (*casillas)[caminoActual][casillaActual];
+	}else if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
 
 		posicionInicial = sprite->getPosition();
 		posicionFinal = (*casillas)[caminoActual][casillaActual];
@@ -24,16 +24,17 @@ void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 		this->enMovimiento = true;
 	}
 }
-
 int MovePieces::getCaminoActual() {
 	return caminoActual;
 }
-
 int MovePieces::getcasillaActual() {
 	return casillaActual;
 }
-
 void MovePieces::actualizarMovimiento(float deltaTime) {
+
+
+
+
 
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
@@ -51,8 +52,9 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			//std::cout << "\nCasi casi csio";
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
+				
 				//std::cout << "\nCasi caso";
-				if (caminoActual + 1 >= (*casillas).size()) {
+				if (caminoActual + 1 >= (*casillas).size() && casillasRestantes!=0) {
 
 					finalCamino = true;
 
@@ -63,14 +65,17 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 
 			}
-
+			
+			std::cout << "\nRestantes::::"<<casillasRestantes;
+			
+			if(casillasRestantes!=0){
 			posicionInicial = sprite->getPosition();
-			posicionFinal = (*casillas)[caminoActual][casillaActual];
+			posicionFinal = (*casillas)[caminoActual][casillaActual];}
 		}
 
 		if (enMovimiento && casillasRestantes > 0) {
 
-
+			 
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
 		}
@@ -79,15 +84,13 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			turn_Moviendo = false;
 			giroRule = true;
 		}
-
-		animacionRebote(posicionFinal, deltaTime);
+		if (casillasRestantes != 0) {
+			animacionRebote(posicionFinal, deltaTime);
+		}
 
 	}
 
 }
-
-
-
 void MovePieces::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
@@ -313,8 +316,6 @@ void MovePieces::updateCAmbioCasilla() {
 
 	}
 }
-
-
 void MovePieces::seleccionarCaminoIzq() {
 
 	if ((*casillas).size() == 1) {
@@ -348,9 +349,7 @@ void MovePieces::seleccionarCaminoIzq() {
 		std::vector<sf::Vector2f> caminoimpuesto4_1 = {  };
 		std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623) };
 
-		casillasImpuesto->push_back(caminoimpuesto4_1);
-	
-
+		
 		casillas->push_back(camino4_1);
 		casillas->push_back(camino5);
 	}
@@ -368,8 +367,6 @@ void MovePieces::seleccionarCaminoIzq() {
 	}
 
 }
-
-
 void MovePieces::seleccionarCaminoDer() {
 
 	if ((*casillas).size() == 1) {
@@ -384,7 +381,6 @@ void MovePieces::seleccionarCaminoDer() {
 		std::vector<sf::Vector2f> caminoimpuesto2_2 = {  };
 		std::vector<sf::Vector2f> caminocasa2_2 = {  };
 
-		casillasImpuesto->push_back(caminoimpuesto2_2);
 		
 
 		casillas->push_back(camino2_2);
@@ -406,9 +402,7 @@ void MovePieces::seleccionarCaminoDer() {
 		std::vector<sf::Vector2f> caminoimpuesto4_2 = {  };
 		std::vector<sf::Vector2f> caminocasa4_2 = {  };
 
-		casillasImpuesto->push_back(caminoimpuesto4_2);
-
-
+	
 
 		casillas->push_back(camino4_2);
 		casillas->push_back(camino5);
@@ -430,8 +424,6 @@ void MovePieces::seleccionarCaminoDer() {
 		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(790, 539),sf::Vector2f(444, 42), sf::Vector2f(320, 118),sf::Vector2f(869, 679),sf::Vector2f(428, 517) };
 		std::vector<sf::Vector2f> caminocasa6_2 = {  };
 
-		casillasImpuesto->push_back(caminoimpuesto6_2);
-		casillasImpuesto->push_back(caminoimpuesto7);
 
 
 		casillas->push_back(camino6_2);
@@ -440,7 +432,6 @@ void MovePieces::seleccionarCaminoDer() {
 	}
 
 }
-
 void MovePieces::animacionRastro(float deltaTime) {
 	static float tiempoAcumulado = 0.0f;
 	float intervalo = 0.1f;
@@ -468,9 +459,6 @@ void MovePieces::animacionRastro(float deltaTime) {
 		return s.getColor().a <= 0;
 		}), rastro.end());
 }
-
-
-
 void MovePieces::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 
 	float distancia = static_cast<float>(std::sqrt(std::pow(posicionFinal.x - sprite->getPosition().x, 2) + std::pow(posicionFinal.y - sprite->getPosition().y, 2)));
@@ -479,7 +467,6 @@ void MovePieces::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 		sprite->move(0, 4);
 	}
 }
-
 void MovePieces::animacionRotacion(float deltaTime) {
 	timer += deltaTime;
 
@@ -510,10 +497,6 @@ void MovePieces::animacionRotacion(float deltaTime) {
 		rotacionActual = 0.0f;
 	}
 }
-
-
-
-
 void MovePieces::animacionEscala(float deltaTime) {
 	float escalaMaxima = 1.1f;
 	float escalaMinima = 1.0f;

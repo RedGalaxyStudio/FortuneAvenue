@@ -11,11 +11,15 @@ private:
     sf::RenderWindow* window;                 // Ventana principal para dibujar
     sf::Text SlectingPlayer;
     std::vector<int> UsuariosEleccion;
+    std::vector<sf::RectangleShape> isMouseOver;
+    std::vector<sf::Vector2f> PosIsMouseOver;
     sf::Texture texturebottonRobar;
     sf::Sprite SpritebottonRobar;
-
+    std::vector<PlayerGame> PlayersSteal;
+    
+    
 public:
-    Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec);        // Constructor que toma la ventana principal
+    Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal);        // Constructor que toma la ventana principal
     ~Stealplayer();                               // Destructor
     void resource();
     void update();
