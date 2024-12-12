@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\ButtonG.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ButtonG.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\cell.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\cell.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Cinematic.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Cinematic.obj
@@ -23,3 +24,30 @@ C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractic
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\Stealplayer.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Stealplayer.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\TextBox.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\TextBox.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\ResourceGlobal.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ResourceGlobal.obj
+=======
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\ButtonG.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ButtonG.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\cell.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\cell.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Cinematic.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Cinematic.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Client.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Client.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Economy.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Economy.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\fileio.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\fileio.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\GameEnd.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\GameEnd.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\GameMode.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\GameMode.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\HouseBuy.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\HouseBuy.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\IniciarPartida.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\IniciarPartida.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\IniciaUser.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\IniciaUser.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\main.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\main.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\menuP.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\menuP.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\MensageBox.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\MensageBox.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\MovePieces.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\MovePieces.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\nulo.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\nulo.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\ObjetosGlobal.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ObjetosGlobal.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\PieceSelector.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\PieceSelector.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\ResourceGame.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ResourceGame.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Ruleta.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Ruleta.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Scrollbar.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Scrollbar.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\SettingsManager.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\SettingsManager.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\Stealplayer.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Stealplayer.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\TextBox.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\TextBox.obj
+C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\ResourceGlobal.cpp;C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ResourceGlobal.obj
+>>>>>>> 53ae904ee1829d798e9ba8338d63ba4397c63a02
