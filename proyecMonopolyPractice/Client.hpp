@@ -58,6 +58,9 @@ public:
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
 	void casasX();
+	void EventoCasa();
+	void EventoRuleta();
+	void EventoImpuesto();
 	void invercionSegura();
 	void robarUser(int usuariorobao);
 	void casacomprada(int compra);
