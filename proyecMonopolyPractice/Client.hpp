@@ -18,7 +18,27 @@
 
 class Client {
 public:
+
+
+	struct Nodo {
+		std::string dato;
+		Nodo* siguiente;
+	};
+
+
+
+
+	void process();
+
+
+	void insertarCola(Nodo*& frente, Nodo*& fin, std::string n);
+
+
+
+	Nodo* frente = nullptr;
+	Nodo* fin = nullptr;
 	Client();
+	bool cola_vacia(Nodo* frente);
 	~Client();
 	void run();
 	bool initialize();
@@ -61,7 +81,7 @@ public:
 	void invercionSegura();
 	void robarUser(int usuariorobao);
 	void casacomprada(int compra);
-
+	void suprimirCola(Nodo*& frente, Nodo*& fin);
 	std::mutex mtxExisting;
 	std::condition_variable cvExisting;
 	bool accionCompra;
@@ -76,6 +96,7 @@ private:
 	std::vector<char> loadImage(const std::string& filename);
 
 	std::thread clientThread;
+	std::thread clientMensThread;
 
 };
 

@@ -15,6 +15,26 @@ std::string generateRoomCode() {
 	return code;
 }
 
+bool Client::cola_vacia(Nodo* frente) {
+	return (frente == nullptr) ? true : false;	
+}
+
+//Función para eliminar elementos de la cola
+void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
+	std::string n = frente->dato;
+	Nodo* aux = frente;
+	handleServerMessage(n);
+	if (frente == fin) {
+		frente = nullptr;
+		fin = nullptr;
+	}
+	else {
+		frente = frente->siguiente;
+	}
+	delete aux;
+}
+
+
 Client::~Client() {
 	disconnect();
 	if (client) {
@@ -48,6 +68,22 @@ bool Client::initialize() {
 	return true;
 }
 
+
+void Client::insertarCola(Nodo*& frente, Nodo*& fin, std::string n) {
+	Nodo* nuevo_nodo = new Nodo();
+
+	nuevo_nodo->dato = n;
+	nuevo_nodo->siguiente = NULL;
+
+	if (cola_vacia(frente)) {
+		frente = nuevo_nodo;
+	}
+	else {
+		fin->siguiente = nuevo_nodo;
+	}
+
+	fin = nuevo_nodo;
+}
 void Client::run() {
 	running = true;
 	while (running) {
@@ -56,7 +92,7 @@ void Client::run() {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
 				std::string message(reinterpret_cast<char*>(event.packet->data), event.packet->dataLength);
-				handleServerMessage(message);  // Manejar el mensaje recibido
+				insertarCola(frente, fin, message);
 				enet_packet_destroy(event.packet);
 				break;
 			}
@@ -69,6 +105,17 @@ void Client::run() {
 			}
 		}
 	}
+}
+void Client::process(){
+	while (running) {
+		if (frente != NULL) {
+			suprimirCola(frente, fin);
+		}
+
+	}
+
+
+
 }
 
 bool Client::connectToServer(const std::string& address, uint16_t port) {
@@ -99,6 +146,7 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 			////std::cout << "Connected to server!" << std::endl;
 			isConnected = true;
 			clientThread = std::thread(&Client::run, this);
+			clientMensThread = std::thread(&Client::process, this);
 			return true;
 		}
 	}
@@ -127,6 +175,10 @@ void Client::disconnect() {
 	if (client) {
 		enet_host_destroy(client);
 		client = nullptr;
+	}
+
+	if (clientMensThread.joinable()) {
+		clientMensThread.join();
 	}
 
 	isConnected = false;  // Actualizar estado de la conexión
