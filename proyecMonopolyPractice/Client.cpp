@@ -685,6 +685,11 @@ void Client::handleServerMessage(const std::string& message) {
 		
 
 		playerInfoNew.image = isimageStr;
+		playerGameNew.NamePlayer.setCharacterSize(17);
+		playerGameNew.NamePlayer.setFont(fontUserPerfil);
+		playerGameNew.NamePlayer.setFillColor(sf::Color::White);
+		playerGameNew.NamePlayer.setOutlineThickness(2);
+		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerInfoNew.username = username;
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
