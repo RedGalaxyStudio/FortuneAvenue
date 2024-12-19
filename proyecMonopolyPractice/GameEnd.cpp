@@ -103,7 +103,7 @@ void GameEnd::update() {
 				// Calcular origen tras escala
 				sf::FloatRect pieceSelectBounds = playersGame[i].PieceSelect.getGlobalBounds();
 				playersGame[i].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-				std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f<< "," << pieceSelectBounds.height / 2.0f;
+				//std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f<< "," << pieceSelectBounds.height / 2.0f;
 				// Posicionar el objeto centrado
 				playersGame[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), yPos + 240);
 			}

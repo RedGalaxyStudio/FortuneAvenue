@@ -45,16 +45,12 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			for (auto& segment : segments) {
 				segment.setFillColor(segmentColors[i % numSegments]);
 				i++;
-				//std::cout << "El rotationSpeed * deltaTime: " << rotationSpeed * deltaTime << std::endl;
 			}
 			turno = false;
 		
-			initialSpeed = client.initialSpeedActi;// static_cast<float>(rand() % 201 + 800); // 800 a 1000
-	
-			std::cout << "\nGIrooooooooooooooooooooooooooooooooooooooooo";
-			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
-			rotationSpeed = initialSpeed; // Usar initialSpeed directamente
-			//rotationSpeed = (isSpinning) ? 300.0f : 0.0f;
+			initialSpeed = client.initialSpeedActi;
+			decelerationRate = initialSpeed / 7.0f;
+			rotationSpeed = initialSpeed;			
 			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
 		}
 	}
@@ -72,132 +68,72 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				i++;
 			}
 			turno = false;
-			// Variables para variaciones aleatorias
-			
-			initialSpeed = client.initialSpeedActi;// static_cast<float>(rand() % 201 + 800); // 800 a 1000
-			//decelerationRate = client.decelerationRateActi;
-			std::cout << "\nGIrooooooooooooooooooooooooooooooooooooooooo";
+
+			initialSpeed = client.initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
 			rotationSpeed = initialSpeed;
-	
-			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
+			clock.restart();
 		}
 	}
 
 
 	deltaTime = clock.restart().asSeconds();
 
-	// Cambiar el estado de las luces cada 0.1 segundos
 	if (lightClock.getElapsedTime().asSeconds() > 0.1f) {
 		lightState = !lightState;
 		lightClock.restart();
 	}
-	if (isSpinning) {
-		// Actualizar rotación actual
 
-		std::cout << "\ncurrentRotation: " << currentRotation << " rotationSpeed:" << rotationSpeed;
+	if (isSpinning) {
+
 		currentRotation += rotationSpeed * deltaTime;
 		if (currentRotation >= 360.0f) {
 			currentRotation = fmod(currentRotation, 360.0f);
 		}
 
-
-		// Actualizar segmentos
 		for (auto& segment : segments) {
 			segment.setRotation(currentRotation);
 		}
 
-		// Actualizar íconos
 		for (int i = 0; i < numSegments; ++i) {
 			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));//float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + currentRotation * (M_PI / 180.0f));
 			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
 			icons[i].rotate(rotationSpeed * deltaTime);
 		}
 
-		
-		// Disminuir gradualmente la velocidad
 		rotationSpeed = std::max(rotationSpeed - decelerationRate * deltaTime, 0.0f);
 
-
-
-
-		// Verificar si la ruleta ha parado
 		if (rotationSpeed <= 0.0f) {
 			isSpinning = false;
-			std::cout << "¡Giro finalizado!\n";
-		
-			// Calcular el segmento seleccionado
+
 			float finalAngle = fmod(currentRotation, 360.0f);
 			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
-			std::cout << "Segmento seleccionado: " << currentSegment << "\n";
+			//std::cout << "Segmento seleccionado: " << currentSegment << "\n";
 		}
 	}
 
-	/* Rotar la ruleta
-	if (isSpinning) {
-		currentRotation += rotationSpeed * deltaTime;
+	float segmentAngle = 360.0f / numSegments; 
 
-		if (currentRotation >= 360.0f) {
-			currentRotation = fmod(currentRotation, 360.0f);
-		}
+	float pointerX = centerX; 
+	float pointerY = centerY - radius; 
 
-		// Rota cada segmento de la ruleta
-		for (auto& segment : segments) {
-			segment.rotate(rotationSpeed * deltaTime);
-		}
-
-		for (int i = 0; i < numSegments; ++i) {
-			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
-			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
-
-			if (rotationSpeed == 0.0f) {
-				isSpinning = false;
-			}
-			icons[i].rotate(rotationSpeed * deltaTime);
-		}
-
-		if (rotationSpeed < initialSpeed) {
-			rotationSpeed += 10.0f * deltaTime; // Aceleración inicial
-		}
-
-		// Disminuye gradualmente la velocidad con una tasa aleatoria en cada giro
-		rotationSpeed = std::max(rotationSpeed - decelerationRate * deltaTime, 0.0f);
-
-		// Verifica si el giro ha terminado y reinicia valores
-		if (rotationSpeed == 0.0f) {
-			isSpinning = false;
-		}
-
-	}*/
-
-	float segmentAngle = 360.0f / numSegments; // Cada segmento cubre este ángulo
-
-	// Coordenadas del pointer
-	float pointerX = centerX; // X del pointer
-	float pointerY = centerY - radius; // Y del pointer
-
-	// Calcular el ángulo usando atan2
+	// Calcular el ángulo 
 	float angle = atan2(pointerY - centerY, pointerX - centerX); // Radianes
 	float pointerAngle = static_cast<float>(angle * (180.0f / M_PI)); // Convertir a grados
 
-
-	// Asegurarse de que el ángulo esté en el rango de 0 a 360
 	if (pointerAngle < 0) {
 		pointerAngle += 360.0f;
 	}
 
 	pointerAngle = fmod(pointerAngle - currentRotation + 360.0f, 360.0f);
 
-	// Recorre cada segmento y verifica en cuál está el pointer
-	currentSegment = -1; // Segmento en el que está el pointer
+	currentSegment = -1; 
 	for (int i = 0; i < numSegments; ++i) {
-		float startAngle = i * segmentAngle; // Inicio del segmento
-		float endAngle = startAngle + segmentAngle; // Fin del segmento
+		float startAngle = i * segmentAngle; 
+		float endAngle = startAngle + segmentAngle; 
 
-		// Verificar si el ángulo del pointer está dentro del rango de este segmento
 		if (pointerAngle >= startAngle && pointerAngle < endAngle) {
-			currentSegment = i; // El pointer está en el segmento i
-			//std::cout << "El pointer está en el segmento: toy pegao carnal  " << currentSegment << std::endl;
+			currentSegment = i; 
 			break;
 		}
 	}
@@ -208,76 +144,48 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		currentSegment = numSegments - 1; // El pointer está en el último segmento
 	}
 
-	////std::cout << "El pointer está en el segmento: " << currentSegment << std::endl;
-
 	sf::Color currentSegmentColor;
 
 	if (!isSpinning && rotationSpeed == 0.0f && giro == true && currentSegment != -1) {
 
-
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		// Realiza las acciones según el segmento usando un switch
 		if(turn){
 			switch (currentSegment) {
-			case 0:
-				std::cout << "Segmento 0: Realizando acción específica para el segmento 0" << std::endl;
-				// Aquí realiza acciones específicas para el segmento 0
-				//pierdes un turno
+			case 0://pierdes un turno
 				client.turnopermitido -= 1;
-
 				break;
 
-			case 1:
-				std::cout << "Segmento 1: Realizando acción específica para el segmento 1" << std::endl;
-				// Acciones para el segmento 1
-				//robar a un jugador
+			case 1://robar a un jugador
 				event = 3;
-
 				break;
 
-			case 2:
-				std::cout << "Segmento 2: Realizando acción específica para el segmento 2" << std::endl;
-				// Acciones para el segmento 2
-				//Opcion de comprar una casa
+			case 2://Opcion de comprar una casa
 				event = 1;
 				break;
 
-			case 3:
-				std::cout << "Segmento 3: Realizando acción específica para el segmento 3" << std::endl;
-				// Acciones para el segmento 3
-				//todos pierden 30 y se les da a el jugador
+			case 3://todos pierden 30 y se les da a el jugador
 				client.todospierden();
-					break;
-				
+				break;
 
-			case 4:
-				std::cout << "Segmento 4: Realizando acción específica para el segmento 4" << std::endl;
-				// Acciones para el segmento 4
-				//ganas 150
+			case 4://ganas 150
 				client.ganas150();
 
 				break;
 
-			case 5:
-				std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
-				//paga impuestos
-				// Acciones para el segmento 5
+			case 5://paga impuestos
+
 				event = 2;
 				break;
 
-			case 6:
-				std::cout << "Segmento 5: Realizando acción específica para el segmento 5" << std::endl;
-				//inversion segura se te quitan 100 y 2 turnos despues se te dan 200
-				// Acciones para el segmento 5
+			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 
 				client.invercionSegura();
-
-
 				break;
 
 			default:
-				std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
+
+			//	std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
 				break;
 			}
 		}
@@ -298,7 +206,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 
 		window.draw(CentroCircule);
-		// //std::cout << "\nruleta icon2";
 		window.draw(iconsResul[currentSegment]);
 
 	}
@@ -316,7 +223,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		for (const auto& segment : segments) {
 
 			fillColor = segment.getFillColor();
-
 			window.draw(segment); // Dibuja el sprite con shader1
 
 		}
@@ -325,7 +231,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 
 		animacionRuleta = true;
-		//   //std::cout << "\nruleta icon1";
 		window.draw(iconsResul[currentSegment]);
 
 

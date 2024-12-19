@@ -1,18 +1,23 @@
 #include "ResourceGame.hpp"
 #include "ResourceGlobal.hpp"
 
+
+
+sf::Texture &textureBoxPerfil= textureBox;
+sf::Font &fontUserPerfil=fontUser ;
 std::vector<sf::Texture> avatarTextures;
 sf::Texture TextureFondoGame;
 sf::Texture TextureMarco;
 sf::Sprite spriteFondoGame;
 int NumPlayers;
 sf::SoundBuffer DiceBuffer;
-
+std::string nameUser;
 sf::Sound DiceSound;
 sf::View view; // Declarar la vista
 sf::Clock reloj;
 std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
+
 std::string Code;
 sf::Sprite SpriteArrowDer;
 bool animacionRuleta;
@@ -36,6 +41,9 @@ bool giroRule;
 int CplayerIndex;
 int Opcioncami;
 
+bool userRuleta;
+bool userImpuesto;
+bool userCasa;
 
 
 
@@ -61,25 +69,7 @@ void loadResourceGame(){
 	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("resource/texture/Avatars/MarcoTexture.png")) return;
 	spriteFondoGame.setTexture(TextureFondoGame);
-
-	playerInfos.resize(4);
-	playersGame.resize(4);
+	fontUserPerfil = fontUser;
 	espera=false;
-	for (int i = 0; i < 4; i++)
-	{
-		playersGame[i].boxPlayer.setTexture(textureBox);
-		playersGame[i].boxPlayer.setOrigin(125, 40);
-		playersGame[i].boxPlayer.setScale(0.9f, 0.9f);
-		playersGame[i].MarcoPlayer.setTexture(TextureMarco);
-		playersGame[i].NamePlayer.setCharacterSize(17);
-		playersGame[i].NamePlayer.setFont(fontUser);
-		playersGame[i].NamePlayer.setFillColor(sf::Color::White);
-		playersGame[i].NamePlayer.setOutlineThickness(2);
-		playersGame[i].NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
-		
-	}
-
-
-
 }
 void loadPieceGame(){}

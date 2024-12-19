@@ -50,8 +50,6 @@ void TextBox::setPosition(int XX ,int YY) {
 
 std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
  
-
-  
     if (event.type == sf::Event::TextEntered && nombre.empty()) {
         if (event.text.unicode < 128) {
             if (event.text.unicode == '\b' && !input.empty()) {
@@ -59,7 +57,12 @@ std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
             }
             
             else if (event.text.unicode != '\b' && input.size() < maxLength) {
-                input += static_cast<char>(event.text.unicode);
+                
+                char enteredChar = static_cast<char>(event.text.unicode);
+                // Verificar que el carácter ingresado no sea ':'
+                if (enteredChar != ':') {
+                    input += enteredChar;
+                }
             }
 
             text.setString(input);

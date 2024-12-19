@@ -170,7 +170,7 @@ public :
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
-		std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
+		//std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
 		if (turn_dado) {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
@@ -178,7 +178,7 @@ public :
 				DiceSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
-				std::cout << "turn_dado despues: " << std::boolalpha << turn_dado << "\n";
+			//	std::cout << "turn_dado despues: " << std::boolalpha << turn_dado << "\n";
 				client->rollDice();
 
 				mouseStart.x = rand() % 400 + 1;
@@ -192,7 +192,7 @@ public :
 				
 				faceIndex = client->lastRollResult;
 				client->lastRollResult = -1;
-				std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
+			//	std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 				espera = false;
 				
 			}
@@ -207,7 +207,7 @@ public :
 		
 		if (rolldiceJugador) {
 			std::unique_lock<std::mutex> lock(client->mtx);
-			std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
+			//std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
 			while (client->lastRollResult == -1) {
 				client->cv.wait(lock);
 			}
@@ -223,7 +223,7 @@ public :
 
 			faceIndex = client->lastRollResult;
 			client->lastRollResult = -1;
-			std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
+			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
 			rolldiceJugador = false;
 			otherturn = false;

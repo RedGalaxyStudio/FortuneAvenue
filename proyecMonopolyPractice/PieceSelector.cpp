@@ -14,7 +14,7 @@ PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 
 void PieceSelector::Resource() {
 
-	playerInfos[0].username = input1;
+	
 	int piecesCount = 19;  //Cantidad de piezas
 	pieces.resize(piecesCount);
 	shadow.resize(piecesCount);
@@ -73,10 +73,6 @@ void PieceSelector::Resource() {
 	}
 
 }
-
-
-
-// Display pieces for selection
 void PieceSelector::displayPieces() {
 	for (size_t i = 0; i < pieces.size(); ++i) {
 		window->draw(pieces[i]);  // Draw all pieces
@@ -84,9 +80,6 @@ void PieceSelector::displayPieces() {
 
 	}
 }
-
-
-// Update the selection based on user input
 void PieceSelector::updateSelection() {
 
 	sf::Clock clock;
@@ -132,9 +125,6 @@ void PieceSelector::updateSelection() {
 	float avatarYOffset = 0.0f;
 	 startX = 275;  // Posición inicial calculada en X
 	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
-	playersGame[0].NamePlayer.setString(playerInfos[0].username);
-	globalBounds = playersGame[0].NamePlayer.getGlobalBounds();
-	playersGame[0].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
@@ -149,26 +139,12 @@ void PieceSelector::updateSelection() {
 
 	// Finalmente, establece la posición
 	CODE.setPosition(640, 30);
-	ButtonG botonCheck1(Check[0], CheckTexturesOff[0], CheckTexturesOn[0]);
-	client.sendImage(TextureAvatarPath);
-
-	for (int i = 0; i < 4; ++i) {
-		// Asignar nombre al jugador actual
-		playersGame[i].NamePlayer.setString(playerInfos[i].username);
-		globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
-		playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-		playersGame[i].Activo = false;
-		// Posicionar el jugador y los elementos relacionados
-		playersGame[i].boxPlayer.setPosition(startX + i * (250 + 10), startY);
-		playersGame[i].NamePlayer.setPosition(startX + i * (250 + 10), startY);
-		playersGame[i].PieceSelect.setPosition(startX + i * (250 + 10), startY + 100);
-
-	}
+	ButtonG botonCheck1(Check[client.playerIndex], CheckTexturesOff[client.playerIndex], CheckTexturesOn[client.playerIndex]);
+	
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);
 	SelectingMusicFondo.play();
-	playersGame[0].Activo = false;
 	// Configurar perfiles
 	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
@@ -176,12 +152,7 @@ void PieceSelector::updateSelection() {
 	while (window->isOpen()&& !cierre) {
 
 		
-		for (int i = 0; i < NumPlayers; ++i) {
-			// Asignar nombre al jugador actual
-			playersGame[i].NamePlayer.setString(playerInfos[i].username);
-			globalBounds = playersGame[i].NamePlayer.getGlobalBounds();
-			playersGame[i].NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-		}
+
 
 
 
@@ -269,13 +240,13 @@ void PieceSelector::updateSelection() {
 							// Asigna la textura y ajusta la escala y el origen
 							newSelection = &pieces[i];
 							// Asigna la textura a PiecesSelect[0]
-							playersGame[0].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
-							playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
-							playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
-							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
-							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							playersGame[client.playerIndex].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+							playersGame[client.playerIndex].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
+							playersGame[client.playerIndex].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
+							playersGame[client.playerIndex].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playersGame[client.playerIndex].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							playerInfos[0].indexPiece = i;
+							playerInfos[client.playerIndex].indexPiece = i;
 							client.playerChangedPiece();
 							// Resaltar la nueva pieza
 							
@@ -287,14 +258,14 @@ void PieceSelector::updateSelection() {
 					}
 
 				}
-				if (Check[0].getGlobalBounds().contains(mousePosFloat)) {
+				if (Check[client.playerIndex].getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					const sf::Texture* texturePtr = playersGame[0].PieceSelect.getTexture();
+					const sf::Texture* texturePtr = playersGame[client.playerIndex].PieceSelect.getTexture();
 
 					if (texturePtr != nullptr&&UsuariosActivos.size()>0) {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
-						playerInfos[0].isSelectingPiece = true;
+						playerInfos[client.playerIndex].isSelectingPiece = true;
 						client.ReadyPlayer();
 						
 					}
@@ -302,6 +273,13 @@ void PieceSelector::updateSelection() {
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					cierre = true;
+					for (int i = 0; i < UsuariosActivos.size(); i++) {
+
+
+						playersGame[UsuariosActivos[i]].reset();
+						playerInfos[UsuariosActivos[i]].reset();
+						UsuariosActivos.resize(0);
+					}
 					client.disconnect();
 
 				}
@@ -313,25 +291,18 @@ void PieceSelector::updateSelection() {
 
 
 
-		for (int i = 0; i < 4; i++) {
+		
+		int totalPerfiles = UsuariosActivos.size(); 
+		std::cout << "\n"<< totalPerfiles;
+		if(!cierre){
 
-			if (!playerInfos[i].username.empty()&& !playersGame[i].Activo) {
-				std::cout << "\nusuarios " << i;
-				UsuariosActivos.push_back(i);
-				playersGame[i].Activo = true;
-				std::cout << "\n1";
-			}
+			//SelectingPiece = true;
 
 		}
-		int totalPerfiles = UsuariosActivos.size(); // Usar el número real de perfiles
-
-	
-		SelectingPiece = true;
-
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 
-			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece) {
+			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece  || UsuariosActivos.size()<2) {
 				SelectingPiece = false;
 
 				
@@ -348,22 +319,20 @@ void PieceSelector::updateSelection() {
 
 		window->setMouseCursor(*currentCursor);
 
-		if (CplayerIndex > 0 && CplayerIndex <= 3) {
+		if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
 			client.cvExisting.notify_all();
 		}
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < UsuariosActivos.size(); i++)
 		{
 			if (playerInfos[i].isSelectingPiece) {
 				Check[i].setTexture(CheckTexturesOn[i]);
 			}
 		}
 
-		if (playerInfos[0].isSelectingPiece && playerInfos[1].isSelectingPiece && playerInfos[2].isSelectingPiece && playerInfos[3].isSelectingPiece) {
 
-		}
 		window->clear();
 		window->draw(spriteFondoGame);
 		
