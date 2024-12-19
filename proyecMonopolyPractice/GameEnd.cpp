@@ -11,16 +11,17 @@ GameEnd::~GameEnd() {}
 
 
 void GameEnd::resource() {
-	fingame.setCharacterSize(40);
-	fingame.setFont(fontUser);
-	fingame.setFillColor(sf::Color::White);
-	fingame.setOutlineThickness(2);
-	fingame.setOutlineColor(sf::Color(135, 135, 135));
-	fingame.setString("Fin de la partida");
-	fingame.setPosition(640, 100);
-	sf::FloatRect globalBounds = fingame.getGlobalBounds();
-	fingame.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	fingame.setPosition(640, 100);
+	fingame12.setCharacterSize(40);
+	fingame12.setFont(fontUser);
+	fingame12.setFillColor(sf::Color::White);
+	fingame12.setOutlineThickness(2);
+	fingame12.setOutlineColor(sf::Color(135, 135, 135));
+	fingame12.setString("Fin de la partida");
+	//fingame12.setPosition(640,100);
+	//s//f::FloatRect globalBounds = fingame12.getGlobalBounds();
+	//fingame12.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	fingame12.setPosition(640, 100);
+
 }
 void GameEnd::update() {
 	while (window->isOpen()) {
@@ -102,7 +103,7 @@ void GameEnd::update() {
 				// Calcular origen tras escala
 				sf::FloatRect pieceSelectBounds = playersGame[i].PieceSelect.getGlobalBounds();
 				playersGame[i].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-				std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f<< "," << pieceSelectBounds.height / 2.0f;
+				//std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f<< "," << pieceSelectBounds.height / 2.0f;
 				// Posicionar el objeto centrado
 				playersGame[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), yPos + 240);
 			}
@@ -122,12 +123,10 @@ void GameEnd::update() {
 			window->draw(playersGame[i].AvatarPlayer);
 			window->draw(playersGame[i].MarcoPlayer);
 			window->draw(playersGame[i].Money);
-			window->draw(playersGame[i].PieceSelect);
+			window->draw(playersGame[i].PieceSelect);	
 		}
-
-		window->draw(fingame);
-
-
+		
+			
 		
 
 		window->display();

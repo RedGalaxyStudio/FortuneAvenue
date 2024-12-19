@@ -2,6 +2,7 @@
 #define CLIENT_HPP
 #define WIN32_LEAN_AND_MEAN
 #include "ResourceGame.hpp"
+//#include "ResourceGlobal.hpp"
 #include <winsock2.h>
 #include <windows.h>
 #include <enet/enet.h>
@@ -25,16 +26,8 @@ public:
 		Nodo* siguiente;
 	};
 
-
-
-
 	void process();
-
-
 	void insertarCola(Nodo*& frente, Nodo*& fin, std::string n);
-
-
-
 	Nodo* frente = nullptr;
 	Nodo* fin = nullptr;
 	Client();
@@ -42,10 +35,9 @@ public:
 	~Client();
 	void run();
 	bool initialize();
-	std::string createRoom(const std::string& username);
-	bool joinRoom(const std::string& roomCode, const std::string& username);
+	std::string createRoom(const std::string& username, const std::string& filename);
+	bool joinRoom(const std::string& roomCode, const std::string& username, const std::string& filename);
 	bool connectToServer(const std::string& address, uint16_t port);
-	bool sendImage(const std::string& filename);
 	void disconnect();
 	void rollDice();
 	void endTurn();
@@ -78,6 +70,9 @@ public:
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
 	void casasX();
+	void EventoCasa();
+	void EventoRuleta();
+	void EventoImpuesto();
 	void invercionSegura();
 	void robarUser(int usuariorobao);
 	void casacomprada(int compra);
@@ -86,13 +81,15 @@ public:
 	std::condition_variable cvExisting;
 	bool accionCompra;
 
-
+	void MONEYSALARIO(std::string message, int usuario);
 	std::mutex mtxx;
 	std::condition_variable cvv;
+	
+	int playerIndex;
 private:
 
-
-	int playerIndex;
+	sf::FloatRect globalBounds;
+	
 	std::vector<char> loadImage(const std::string& filename);
 
 	std::thread clientThread;

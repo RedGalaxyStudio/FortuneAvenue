@@ -17,7 +17,7 @@ HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
 void HouseBuy::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
 	index = indice;
-	std::cout << "\n\n" << index;
+	//std::cout << "\n\n" << index;
 }
 void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
@@ -108,19 +108,19 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	readData(pp, cc, "quad.vtk");
 	//std::cout << "\n2";
 	IndexCAsa += 1;
-	std::cout << "\n\n2";
-	std::cout << "\n\n" << IndexCAsa << "index" << index;
+	//std::cout << "\n\n2";
+	//std::cout << "\n\n" << IndexCAsa << "index" << index;
 	if (!TextureCasa[IndexCAsa].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(playerInfos[index].casasPorJugador[IndexCAsa]) + ".png")) {
 		std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
 	}
-	std::cout << "\n\n5";
+	//std::cout << "\n\n5";
 
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
 	for (int i = 0; i < 6; i++)
 		for (int j = 0; j < 4; j++)
 			q.at(i).push_back({ pp.at(cc.at(i).n[j]).x, pp.at(cc.at(i).n[j]).y, pp.at(cc.at(i).n[j]).z });
 
-	std::cout << "\n\n1";
+	//std::cout << "\n\n1";
 	//std::cout << "\n4";
 	std::vector<Cell> cellQua; // (0, Cell(q0, sf::Color::Green));
 	Cell c0(q.at(0), sf::Color(0, 255, 0, 255), posicionactuInicial); cellQua.push_back(c0);
@@ -133,13 +133,13 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 		if (TextureCasa[IndexCAsa].getSize().x == 0 || TextureCasa[IndexCAsa].getSize().y == 0) {
-			std::cout << "La textura " << IndexCAsa << " no tiene contenido." << std::endl;
+			//std::cout << "La textura " << IndexCAsa << " no tiene contenido." << std::endl;
 		}
 		else {
-			std::cout << "La textura " << IndexCAsa << " está cargada correctamente: "
-				<< TextureCasa[IndexCAsa].getSize().x << "x" << TextureCasa[IndexCAsa].getSize().y << std::endl;
+			//std::cout << "La textura " << IndexCAsa << " está cargada correctamente: "
+			//	<< TextureCasa[IndexCAsa].getSize().x << "x" << TextureCasa[IndexCAsa].getSize().y << std::endl;
 		}
-		std::cout << "\n\n2";
+		//std::cout << "\n\n2";
 
 
 	pp.clear();
@@ -147,7 +147,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 
 	Xc.setPosition(790,148);
-	std::cout << "\n55";
+	//std::cout << "\n55";
 
 	renderedSprite.setTexture(renderTexture.getTexture());
 
@@ -174,7 +174,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
-			std::cout << "\n\n12222222222222222222";
+			//std::cout << "\n\n12222222222222222222";
 
 			
 			if (event.type == sf::Event::Closed ||
@@ -221,7 +221,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 		window->setMouseCursor(*currentCursor);
 		// Obtener el tiempo transcurrido
-		std::cout << "\n\n45555555432";
+		//std::cout << "\n\n45555555432";
 		window->clear();
 		if (client.accionCompra) {
 

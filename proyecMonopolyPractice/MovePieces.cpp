@@ -12,9 +12,12 @@ void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	if (caminoActual + 1 > (*casillas).size() ) {
 
 		finalCamino = true;
-		std::cout << " caminoActual + 1" << caminoActual + 1 << "(*casillas).size()" << (*casillas).size();
+		//std::cout << " caminoActual + 1" << caminoActual + 1 << "(*casillas).size()" << (*casillas).size();
 		updateCAmbioCasilla();
 		posicionFinal = (*casillas)[caminoActual][casillaActual];
+		this->duracionMovimiento = duracion;
+		this->t = 0.0f;
+		this->enMovimiento = true;
 	}else if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
 
 		posicionInicial = sprite->getPosition();
@@ -31,10 +34,6 @@ int MovePieces::getcasillaActual() {
 	return casillaActual;
 }
 void MovePieces::actualizarMovimiento(float deltaTime) {
-
-
-
-
 
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
@@ -66,7 +65,8 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 			}
 			
-			std::cout << "\nRestantes::::"<<casillasRestantes;
+			//std::
+			// << "\nRestantes::::"<<casillasRestantes;
 			
 			if(casillasRestantes!=0){
 			posicionInicial = sprite->getPosition();

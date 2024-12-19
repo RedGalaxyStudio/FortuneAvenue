@@ -28,7 +28,8 @@ void IniciarPartida::resource() {
 	SpriteUnirsePartida.setOrigin(150, 59);
 	SpriteUnirsePartida.setPosition(640, 500);
 
-
+	nameUser = input1;
+	std::cout << "\nnameUser: "+ nameUser;
 	enunciado.setCharacterSize(40);
 	enunciado.setFont(fontUser);
 	enunciado.setFillColor(sf::Color::White);
@@ -38,7 +39,7 @@ void IniciarPartida::resource() {
 	enunciado.setPosition(640, 100);
 	sf::FloatRect globalBounds = enunciado.getGlobalBounds();
 	enunciado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	NumPlayers = 1;
+	//NumPlayers = 1;
 }
 
 
@@ -49,7 +50,9 @@ void IniciarPartida::update() {
 
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-	playerInfos[0].username = input1;
+	
+
+
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {
 		sf::Event event;
@@ -89,17 +92,7 @@ void IniciarPartida::update() {
 
 						client.initialize();
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
-							Code = client.createRoom(playerInfos[0].username);
-						//	
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// << Code;
+							Code = client.createRoom(nameUser, TextureAvatarPath);
 
 							pieceselector.Resource();
 							pieceselector.updateSelection();
@@ -195,7 +188,7 @@ void IniciarPartida::updatejoinRoom() {
 
 							if (true == client.connectToServer("208.68.36.50", 1234)) {
 
-								client.joinRoom(code, playerInfos[0].username);
+								client.joinRoom(code, nameUser, TextureAvatarPath);
 								Code = code;
 
 								pieceselector.Resource();
