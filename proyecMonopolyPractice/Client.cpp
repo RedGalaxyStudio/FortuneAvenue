@@ -680,17 +680,20 @@ void Client::handleServerMessage(const std::string& message) {
 		}
 
 		int index = std::stoi(indexStr);
+		PlayerInfo playerInfoNew;
+		PlayerGame playerGameNew;
 		
+
+		playerInfoNew.image = isimageStr;
+		playerInfoNew.username = username;
+		playerInfoNew.money = std::stoi(moneyStr);
+		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
+		playerInfoNew.isInGame = (isInGameStr == "true");
+		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
+		playerGameNew.NamePlayer.setString(playerInfoNew.username);
+		playersGame.push_back(playerGameNew);
+		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.push_back(index);
-
-		playerInfos[index].image = isimageStr;
-		playerInfos[index].username = username;
-		playerInfos[index].money = std::stoi(moneyStr);
-		playerInfos[index].isSelectingPiece = (isSelectingStr == "true");
-		playerInfos[index].isInGame = (isInGameStr == "true");
-		playersGame[index].textureAvatarPLayer.loadFromFile(playerInfos[index].image);
-		playersGame[index].NamePlayer.setString(playerInfos[index].username);
-
 	}
 	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
 
@@ -711,7 +714,7 @@ void Client::handleServerMessage(const std::string& message) {
 
 		int index = std::stoi(indexStr);
 
-		UsuariosActivos.push_back(index);
+		
 
 
 
@@ -729,7 +732,7 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		playerInfos.push_back(playerInfoNew);
 		playersGame.push_back(playerGameNew);
-
+		UsuariosActivos.push_back(index);
 
 		if (indexPiece >= 0) {
 			CplayerIndex = index;
