@@ -765,81 +765,6 @@ void GameMode::DrawGame() {
 			turn_impuesto = false;
 		}
 	}
-	else if (!turn) {
-
-		if (!eventoActivo) {
-			//	std::cout << "\n\nentro en eventos:" << "otherturn:" << otherturn << " turn_Moviendo:"<< turn_Moviendo<<"\nturn_casa: "<< turn_casa<<"turn_impuesto: "<< turn_impuesto;
-
-			if (turn_ruleta && giroRule && !otherturn && !turn_Moviendo) {
-
-				for (int i = 0; i < casillasRuleta.size(); i++)
-				{
-					//std::cout << "\nIndexTurn1:" << IndexTurn;
-					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
-					{
-						ruleta_draw = true;
-						turn_ruleta = false;
-						eventoActivo = true;
-
-						{
-							std::unique_lock<std::mutex> lock(client.ruletaMutex);
-							client.ruletaCondVar.wait(lock, [] { return client.ruletaMessageReceived; });
-
-							// Ahora, sabemos que el mensaje fue recibido, y podemos usar el ángulo
-							//std::cout << "Ángulo recibido: " << client.anguloActualrule << std::endl;
-
-							// Reiniciar el indicador para evitar problemas en la próxima espera
-							client.ruletaMessageReceived = false;
-						}
-
-						ruleta->trurntrue();
-					}
-				}
-				giroRule = false;
-				turn_ruleta = false;
-				//std::cout << "\n Antes del false turn_casa" << turn_casa << "otherturn" << otherturn << "turn_Moviendo" << turn_Moviendo;
-
-			}
-			//std::cout << "\nturn_casa1" << turn_casa << "otherturn" << otherturn << "turn_Moviendo" << turn_Moviendo;
-			if (turn_casa && !otherturn && !turn_Moviendo) {
-
-				for (int i = 0; i < caminocasa.size(); i++)
-				{
-					//std::cout << "\nIndexTurn2:" << IndexTurn;
-					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
-					{
-
-						casa_draw = true;
-						eventoActivo = true;
-						//std::cout << "\n\nCASAAAAAAAAAAAAAAAAAAAAAAAAA:";
-					}
-				}
-				turn_casa = false;
-			}
-			//std::cout << "\nturn_casa2" << turn_casa << "otherturn" << otherturn << "turn_Moviendo" << turn_Moviendo;
-			//std::cout << "\nturn_impuesto1" << turn_impuesto << "otherturn" << otherturn << "turn_Moviendo" << turn_Moviendo;
-			if (turn_impuesto && !otherturn && !turn_Moviendo) {
-				for (int i = 0; i < caminoimpuesto.size(); i++)
-				{
-					//std::cout << "\nIndexTurn3:" << IndexTurn;
-					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
-					{
-						impuesto_draw = true;
-						turn_impuesto = false;
-						eventoActivo = true;
-						animacionImpuesto = true;
-						//std::cout << "Impuestooooooooooooooooooooooooooooooooooooooo";
-					}
-				}
-				turn_impuesto = false;
-			}
-			//std::cout << "\nturn_impuesto2" << turn_impuesto << "otherturn" << otherturn << "turn_Moviendo" << turn_Moviendo;
-
-		}
-
-
-
-	}
 
 
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
@@ -849,12 +774,7 @@ void GameMode::DrawGame() {
 		//std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 
-
-
-
 	window->setView(window->getDefaultView());
-
-
 
 	window->clear();
 

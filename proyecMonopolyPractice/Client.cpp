@@ -15,6 +15,8 @@ std::string generateRoomCode() {
 	return code;
 }
 
+
+
 Client::~Client() {
 	disconnect();
 	if (client) {
@@ -235,6 +237,46 @@ void Client::casasX() {
 	}
 
 	std::string message = "XCASA";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+
+}
+
+void Client::EventoCasa() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "EventoCasa";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+
+}
+
+void Client::EventoImpuesto() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "EventoImpuest";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
+
+
+}
+
+void Client::EventoRuleta() {
+	if (!peer) {
+		std::cerr << "Client is not connected to a server!" << std::endl;
+	}
+
+	std::string message = "EventoRuleta";
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, packet);
 	enet_host_flush(client);
@@ -633,6 +675,9 @@ void Client::handleServerMessage(const std::string& message) {
 		float angulo = std::stof(message.substr(12));  // Convertir la parte del ángulo en float
 
 		//std::cout << "\n Llegooooooooooooooooooooooooooooooooooooooo";
+
+
+
 		{
 			std::lock_guard<std::mutex> lock(ruletaMutex);
 			anguloActualrule = angulo;

@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< HEAD
       <FullPath>C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe</FullPath>
-=======
-      <FullPath>C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe</FullPath>
->>>>>>> 53ae904ee1829d798e9ba8338d63ba4397c63a02
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
