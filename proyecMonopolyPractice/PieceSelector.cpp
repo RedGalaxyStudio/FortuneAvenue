@@ -5,6 +5,7 @@
 #include "ButtonG.hpp"
 #include "GameMode.hpp"
 #include "Scrollbar.hpp"
+#include <thread>
 
 // Constructor
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
@@ -81,6 +82,7 @@ void PieceSelector::displayPieces() {
 	}
 }
 void PieceSelector::updateSelection() {
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	sf::Clock clock;
 	float baseXPos = 92.0f;
