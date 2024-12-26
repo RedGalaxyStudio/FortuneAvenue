@@ -293,7 +293,10 @@ void menuP::eventoMenuO() {
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
             if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                musicSlider->saveSettings();
+                effectSlider->saveSettings();
                 playClickSound();
+
                 MenuPrincipal();
 
             }

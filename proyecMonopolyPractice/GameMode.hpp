@@ -27,7 +27,7 @@ public:
 
 
 
-	
+
 	bool turnoGiro;
 	GameMode(sf::RenderWindow& win);
 
@@ -38,7 +38,6 @@ public:
 	void DrawPieceMoviendo();
 	void DrawGame();
 	void DrawGameRuleta();
-	void DrawGameCasa();
 	void DrawGameImpuesto();
 	void InicioPartida();
 	void positionPefil();
@@ -84,16 +83,16 @@ private:
 		sf::Vector2f(621 , 677),
 		sf::Vector2f(694 ,582),
 		sf::Vector2f(413, 253),
-sf::Vector2f(444, 42),
-sf::Vector2f(320, 118),
-sf::Vector2f(869, 679),
-sf::Vector2f(428, 517),
-sf::Vector2f(835, 540),
-sf::Vector2f(805, 450),
-sf::Vector2f(925, 396),
-sf::Vector2f(808, 257),
-sf::Vector2f(882, 238),
-sf::Vector2f(773, 190),
+		sf::Vector2f(444, 42),
+		sf::Vector2f(320, 118),
+		sf::Vector2f(869, 679),
+		sf::Vector2f(428, 517),
+		sf::Vector2f(835, 540),
+		sf::Vector2f(805, 450),
+		sf::Vector2f(925, 396),
+		sf::Vector2f(808, 257),
+		sf::Vector2f(882, 238),
+		sf::Vector2f(773, 190),
 		sf::Vector2f(635, 37)
 
 
@@ -101,23 +100,23 @@ sf::Vector2f(773, 190),
 
 
 	std::vector<sf::Vector2f> caminocasa{
-	sf::Vector2f(807, 416),
-	sf::Vector2f(881, 312),
-	sf::Vector2f(842, 238),
-	sf::Vector2f(874, 132),
-	sf::Vector2f(819, 188),
-	sf::Vector2f(595, 175),
-	sf::Vector2f(505,586),
-	sf::Vector2f(568,636),
-	sf::Vector2f(694,636),
-	sf::Vector2f(368, 339),
-	sf::Vector2f(407, 98),
-	sf::Vector2f(764, 577),
-	sf::Vector2f(429, 566),
-	sf::Vector2f(955, 609),
-	sf::Vector2f(355, 40),
-	sf::Vector2f(323,629),
-	sf::Vector2f(394,678)
+		sf::Vector2f(807, 416),
+		sf::Vector2f(881, 312),
+		sf::Vector2f(842, 238),
+		sf::Vector2f(874, 132),
+		sf::Vector2f(819, 188),
+		sf::Vector2f(595, 175),
+		sf::Vector2f(505,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(694,636),
+		sf::Vector2f(368, 339),
+		sf::Vector2f(407, 98),
+		sf::Vector2f(764, 577),
+		sf::Vector2f(429, 566),
+		sf::Vector2f(955, 609),
+		sf::Vector2f(355, 40),
+		sf::Vector2f(323,629),
+		sf::Vector2f(394,678)
 
 	};
 
@@ -145,36 +144,23 @@ sf::Vector2f(773, 190),
 	Window Dado;
 	sf::Clock clock;
 
-
-	
 	bool animacionImpuesto;
 	bool animacionCasa;
-	Ruleta *ruleta;
-	
-
+	Ruleta* ruleta;
 	sf::View viewTablero;
-	sf::Sprite renderedSprite;
-
+	sf::Text Impuesto;
+	
 	sf::Texture TextureMapa;
-
-
 	sf::Texture SettingsOn;
 	sf::Texture SettingsOff;
-	sf::Sprite Settings;
-
-	sf::Text Impuesto;
-
 	sf::Texture TextureArrowDer;
-
-
 	sf::Texture TextureArrowIzq;
-
 	sf::Texture TextureArrowArriba;
-
 	sf::Texture TextureImpuesto;
+
 	sf::Sprite SpriteImpuesto;
-
-
+	sf::Sprite Settings;
+	sf::Sprite renderedSprite;
 
 };
 #endif

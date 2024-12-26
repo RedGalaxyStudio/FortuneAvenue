@@ -20,15 +20,11 @@ IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
 }
 IniciaUser::~IniciaUser() {
 }
-
-
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
 
     conteosuel = 0;
 }
-
-
 void IniciaUser::Update() {
 
     if (!std::filesystem::exists("perfil.json")) {
@@ -43,7 +39,6 @@ void IniciaUser::Update() {
     }
     
 }
-
 void IniciaUser::IniciAcion(){
     spriteCkeck.setPosition(850, 70);
 
@@ -240,9 +235,6 @@ void IniciaUser::IniciAcion(){
                 window.display();
     }
 }
-    
-
-
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
 
@@ -274,7 +266,6 @@ void IniciaUser::saveSelectedAvatar(){
         }
     }
 }
-
 void IniciaUser::loadSelectedAvatar() {
 
 

@@ -429,7 +429,7 @@ void Client::ruleteGame(float angulo) {
 	enet_packet_destroy(packet);
 }
 void Client::playerChangedPiece() {
-	std::string message = "SELECTING_PIECE:" + std::to_string(playerInfos[0].indexPiece);
+	std::string message = "SELECTING_PIECE:" + std::to_string(playerInfos[UsuariosActivos[0]].indexPiece);
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, packet);
 	enet_host_flush(client);
@@ -641,7 +641,7 @@ void Client::handleServerMessage(const std::string& message) {
 
 
 		playerIndex= std::stoi(message.substr(std::string("PLAYER_INDEX:").length()));		
-		UsuariosActivos.push_back(playerIndex);
+		
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
 		playerInfoNew.username = nameUser;
@@ -659,6 +659,7 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
 		playersGame.push_back(playerGameNew);
 		playerInfos.push_back(playerInfoNew);
+		UsuariosActivos.insert(UsuariosActivos.begin(), playerIndex);
 
 	}
 	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
@@ -691,11 +692,18 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.NamePlayer.setOutlineThickness(2);
 		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerInfoNew.username = username;
+
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
 		playerInfoNew.isInGame = (isInGameStr == "true");
 		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
+		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
+		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+		playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
+		playerGameNew.boxPlayer.setOrigin(125, 40);
+		playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
 		playersGame.push_back(playerGameNew);
 		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.push_back(index);
@@ -726,6 +734,11 @@ void Client::handleServerMessage(const std::string& message) {
 		std::unique_lock<std::mutex> lock(mtxExisting);
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
+		playerGameNew.NamePlayer.setCharacterSize(17);
+		playerGameNew.NamePlayer.setFont(fontUserPerfil);
+		playerGameNew.NamePlayer.setFillColor(sf::Color::White);
+		playerGameNew.NamePlayer.setOutlineThickness(2);
+		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerInfoNew.username = username;
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
@@ -735,14 +748,20 @@ void Client::handleServerMessage(const std::string& message) {
 
 		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
+		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
+		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+		playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
+		playerGameNew.boxPlayer.setOrigin(125, 40);
+		playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
 		playerInfos.push_back(playerInfoNew);
 		playersGame.push_back(playerGameNew);
 		UsuariosActivos.push_back(index);
 
 		if (indexPiece >= 0) {
-			CplayerIndex = index;
+			
+			std::cout << "\n pieza:" << indexPiece << " CplayerIndex:" << CplayerIndex;
 			playerInfos[index].indexPiece = indexPiece;
-
+			CplayerIndex = index;
 			cvExisting.wait(lock, [] { return CplayerIndex == -1; });
 		
 		}
@@ -765,10 +784,9 @@ void Client::handleServerMessage(const std::string& message) {
 		size_t secondColon = message.find(":", firstColon + 1); 
 
 		int Index = std::stoi(message.substr(firstColon + 1, secondColon - firstColon - 1));
-		
-		CplayerIndex = Index;
-
 		playerInfos[Index].indexPiece = std::stoi(message.substr(secondColon + 1));
+		CplayerIndex = Index;
+		
 
 	}
 	else if (message.rfind("PLAYER_READY:", 0) == 0) {
@@ -854,11 +872,14 @@ void Client::handleServerMessage(const std::string& message) {
 		userCasa = true;
 	}
 	else if (message.rfind("EVENTOIMPUEST", 0) == 0) {
-		userImpuesto = true;
+		if(IndexTurn!= playerIndex){
+		userImpuesto = true;}
 	}
 	else if (message.rfind("EVENTORULETA", 0) == 0) {
 
 		userRuleta = true;
 
 	}
+
+	std::cout << "\nmensaje final";
 }

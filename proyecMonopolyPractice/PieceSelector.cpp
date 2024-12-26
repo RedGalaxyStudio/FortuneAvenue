@@ -101,7 +101,6 @@ void PieceSelector::updateSelection() {
 	float widthSeparation = avatarWidth + avatarSeparation;
 	float heightSeparation = avatarHeight + avatarSeparation;
 
-	GameMode gamemode(*window);
 	
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -150,7 +149,9 @@ void PieceSelector::updateSelection() {
 	// Configurar perfiles
 	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
-	
+			std::cout << "\nwo";
+
+			
 	while (window->isOpen()&& !cierre) {
 
 		
@@ -260,14 +261,14 @@ void PieceSelector::updateSelection() {
 					}
 
 				}
-				if (Check[client.playerIndex].getGlobalBounds().contains(mousePosFloat)) {
+				if (Check[UsuariosActivos[0]].getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					const sf::Texture* texturePtr = playersGame[client.playerIndex].PieceSelect.getTexture();
+					const sf::Texture* texturePtr = playersGame[UsuariosActivos[0]].PieceSelect.getTexture();
 
 					if (texturePtr != nullptr&&UsuariosActivos.size()>0) {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
-						playerInfos[client.playerIndex].isSelectingPiece = true;
+						playerInfos[UsuariosActivos[0]].isSelectingPiece = true;
 						client.ReadyPlayer();
 						
 					}
@@ -295,12 +296,13 @@ void PieceSelector::updateSelection() {
 
 		
 		int totalPerfiles = UsuariosActivos.size(); 
-		std::cout << "\n"<< totalPerfiles;
+	//	std::cout << "\n"<< totalPerfiles;
 		if(!cierre){
 
-			//SelectingPiece = true;
+			SelectingPiece = true;
 
 		}
+
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 
@@ -310,8 +312,10 @@ void PieceSelector::updateSelection() {
 				
 			}
 		}
-
+	//	std::cout << "\n" << totalPerfiles;
 		if (SelectingPiece) {
+
+			GameMode gamemode(*window);
 			gamemode.update();
 		}
 
@@ -320,17 +324,18 @@ void PieceSelector::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-
+		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
 		if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
+
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
 			client.cvExisting.notify_all();
 		}
-
+	//	std::cout << "\nwi" ;
 		for (int i = 0; i < UsuariosActivos.size(); i++)
 		{
-			if (playerInfos[i].isSelectingPiece) {
-				Check[i].setTexture(CheckTexturesOn[i]);
+			if (playerInfos[UsuariosActivos[i]].isSelectingPiece) {
+				Check[UsuariosActivos[i]].setTexture(CheckTexturesOn[UsuariosActivos[i]]);
 			}
 		}
 
@@ -381,23 +386,16 @@ void PieceSelector::updateSelection() {
 }
 
 void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
-	// Suponiendo que `pieces` es un vector de sprites que contiene todas las piezas del juego
-	// y `playersGame` es un arreglo de estructuras que almacena la información de los jugadores.
+
 	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
-	// Primero, quita el resaltado de la pieza previamente seleccionada del jugador
-
-	// Ahora resaltar la nueva pieza seleccionada
 	pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
-
+	std::cout << "\nplayersGame" << playersGame.size();
 	// Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
 	playersGame[CplayerIndex].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
 	playersGame[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
 	playersGame[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
 	playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
 	playersGame[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
-	// Guardar el índice de la pieza seleccionada
-	//playerInfos[CplayerIndex].indexPiece = newPieceIndex;
 	previousSelectionIndex[CplayerIndex] = newPieceIndex;
-	// Asegúrate de que el nuevo sprite esté correctamente posicionado si es necesario
-	// playersGame[playerIndex].PieceSelect.setPosition(...);
+
 }

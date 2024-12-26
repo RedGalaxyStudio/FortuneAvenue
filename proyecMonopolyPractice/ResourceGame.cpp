@@ -38,7 +38,7 @@ std::vector<PlayerInfo> playerInfos;
 std::vector<PlayerGame> playersGame;
 bool espera;
 bool giroRule;
-int CplayerIndex;
+int CplayerIndex = -1;
 int Opcioncami;
 
 bool userRuleta;
