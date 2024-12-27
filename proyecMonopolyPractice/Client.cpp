@@ -150,6 +150,12 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 void Client::disconnect() {
 	if (!isConnected) return;  // Si no está conectado, no hace nada
 
+
+	std::string message = "DISCONNNECT";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(client);
+
 	// Desconectar y liberar recursos
 	if (peer) {
 		enet_peer_disconnect(peer, 0);
@@ -174,6 +180,8 @@ void Client::disconnect() {
 	isConnected = false;  // Actualizar estado de la conexión
 	//	//std::cout << "Disconnected from server!" << std::endl;
 }
+
+
 std::string Client::createRoom(const std::string& username,const std::string& filename) {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
@@ -879,6 +887,20 @@ void Client::handleServerMessage(const std::string& message) {
 
 		userRuleta = true;
 
+	}else if(message.rfind("PLAYER_DISCONNECTED", 0) == 0) {
+		int index = std::stoi(message.substr(20));
+		playerInfos.erase(playerInfos.begin() + index);
+		playersGame.erase(playersGame.begin() + index);
+		if (playerIndex == 0){
+			UsuariosActivos.erase(UsuariosActivos.begin() + index);
+		}
+		else if (playerIndex >= index ) {
+			UsuariosActivos.erase(UsuariosActivos.begin() + (index + 1));
+
+		}
+		else if (playerIndex < index) {
+			UsuariosActivos.erase(UsuariosActivos.begin() + index);
+		}
 	}
 
 	std::cout << "\nmensaje final";

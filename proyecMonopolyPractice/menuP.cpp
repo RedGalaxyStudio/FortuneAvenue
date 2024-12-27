@@ -2,19 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp"
-#include "IniciaUser.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
 #include "IniciarPartida.hpp"
 #include "PieceSelector.hpp"
-
+#include "IniciaUser.hpp"
 menuP::menuP() : window(nullptr), SesionValida(true){}
-
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
-
-
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/boton2.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
@@ -60,8 +56,8 @@ void menuP::Resource() {
 
     loadSounds();
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound,&girosSound,&DiceSound };
-    std::vector<sf::Music*> MusicPointers =  { &MenuMusicFondo,&GameMusicFondo };
-   
+    std::vector<sf::Music*> MusicPointers =  { &MenuMusicFondo,&GameMusicFondo,&SelectingMusicFondo };
+
     overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
    
@@ -102,7 +98,6 @@ void menuP::Resource() {
     window->setMouseCursor(normalCursor);
 
 }
-
 void menuP::MenuPrincipal() {
     window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
@@ -112,7 +107,12 @@ void menuP::MenuPrincipal() {
 
     selectedAvatarCopy.setPosition(84,74);
     selectedAvatarCopy.setScale(1,1);
+   
 
+    editorPerfil.setFillColor(sf::Color(22, 250, 0, 70));
+    editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));
+    editorPerfil.setPosition(16,0);
+    editorPerfil.setOrigin(0, 0);
     recua.setPosition(84,74);
     recua.setScale(1,1);
     Sesion.setCharacterSize(24);
@@ -162,6 +162,7 @@ void menuP::MenuPrincipal() {
         window->draw(SpriteBotonOpciones);
         window->draw(SpriteBotonSalir);
         window->draw(spriteAcercaDe);
+        window->draw(editorPerfil);
         window->display();
     }
 }
@@ -169,21 +170,12 @@ void menuP::MenuPrincipal() {
 void menuP::ValidarUser() {
 
     if (SesionValida) {
-     //   GetUserEmail();
 
         Sesion.setString(input1);
         sf::FloatRect globalBounds = Sesion.getGlobalBounds();
 
         // Ajustar la posición centrando el texto
         Sesion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-     /*   if (email.empty()) {
-            Sesion.setString("Iniciar Sesion");
-        }
-        else
-        {
-            Sesion.setString(email);
-        }
-     SesionValida = false;*/
     }
     
 }
@@ -243,6 +235,15 @@ void menuP::eventoMenuP() {
             if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
                 MenuAcercaDe();
+             
+            } 
+            
+            if (editorPerfil.getGlobalBounds().contains(mousePosFloat)) {
+                
+                playClickSound();
+                editPerfil();
+                ValidarUser();
+                
              
             }
 
@@ -311,14 +312,40 @@ void menuP::eventoMenuO() {
 
 
 void menuP::Inicializar() {
-
     IniciaUser iniciaUser(*window);
+    
 
     
     iniciaUser.Resource();
-
+    
     
     iniciaUser.Update();
+
+    iniciaUser.~IniciaUser();
+
+}
+
+void menuP::editPerfil() {
+    IniciaUser iniciaUserEdit(*window);
+
+
+
+    iniciaUserEdit.Resource();
+
+
+    iniciaUserEdit.UpdateEdit();
+
+
+    iniciaUserEdit.~IniciaUser();
+
+    selectedAvatarCopy.setPosition(84, 74);
+    selectedAvatarCopy.setScale(1, 1);
+    recua.setPosition(84, 74);
+    recua.setScale(1, 1);
+    Sesion.setCharacterSize(24);
+    Sesion.setPosition(273, 74 - 4);
+    box.setPosition(273, 74);
+    box.setScale(1, 1);
 
 }
 void menuP::MenuOpcion() {

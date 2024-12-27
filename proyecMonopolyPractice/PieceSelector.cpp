@@ -276,13 +276,13 @@ void PieceSelector::updateSelection() {
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					cierre = true;
-					for (int i = 0; i < UsuariosActivos.size(); i++) {
+				
 
-
-						playersGame[UsuariosActivos[i]].reset();
-						playerInfos[UsuariosActivos[i]].reset();
-						UsuariosActivos.resize(0);
-					}
+						playersGame.clear();
+						playerInfos.clear();
+						UsuariosActivos.clear();
+						std::cout<<"\n numero : "<<playersGame.size();
+				
 					client.disconnect();
 
 				}
