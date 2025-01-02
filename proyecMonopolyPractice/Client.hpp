@@ -86,6 +86,15 @@ public:
 	std::condition_variable cvv;
 	
 	int playerIndex;
+
+
+
+	std::mutex mtex;
+	std::condition_variable cvDis;
+	bool eventOccurred = false;
+
+	bool disconnecte;
+	bool disActiv;
 private:
 
 	sf::FloatRect globalBounds;

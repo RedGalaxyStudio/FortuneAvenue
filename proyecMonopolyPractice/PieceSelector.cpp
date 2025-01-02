@@ -3,7 +3,7 @@
 #include "ResourceGame.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ButtonG.hpp"
-#include "GameMode.hpp"
+#include "MultiplayerGame.hpp"
 #include "Scrollbar.hpp"
 #include <thread>
 
@@ -233,6 +233,9 @@ void PieceSelector::updateSelection() {
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
+
+
+				std::cout << "Cantidad de usuario: " << UsuariosActivos.size();
 				for (int i = 0; i < pieces.size(); ++i) {
 					// Verificar si el mouse está sobre la pieza
 					if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
@@ -295,6 +298,16 @@ void PieceSelector::updateSelection() {
 
 
 		
+		if(client.disconnecte==true){
+			client.disActiv = true;
+			{
+				std::unique_lock<std::mutex> lock(client.mtex);
+				client.cvDis.wait(lock, [] { return client.eventOccurred; }); // Espera a que `eventOccurred` sea true.
+			}
+			client.disconnecte = false;
+			client.disActiv = false;
+			client.eventOccurred = false;
+		}
 		int totalPerfiles = UsuariosActivos.size(); 
 	//	std::cout << "\n"<< totalPerfiles;
 		if(!cierre){
@@ -306,7 +319,7 @@ void PieceSelector::updateSelection() {
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 
-			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece  || UsuariosActivos.size()<2) {
+			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece ){// || UsuariosActivos.size()<2) {
 				SelectingPiece = false;
 
 				
@@ -315,8 +328,8 @@ void PieceSelector::updateSelection() {
 	//	std::cout << "\n" << totalPerfiles;
 		if (SelectingPiece) {
 
-			GameMode gamemode(*window);
-			gamemode.update();
+			MultiplayerGame mpGame(*window);
+			mpGame.update();
 		}
 
 		currentCursor = &normalCursor;

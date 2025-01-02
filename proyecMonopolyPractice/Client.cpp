@@ -14,15 +14,16 @@ std::string generateRoomCode() {
 	return code;
 }
 bool Client::cola_vacia(Nodo* frente) {
-	return (frente == nullptr) ? true : false;
+	return (frente == NULL) ? true : false;
 }
 void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
 	std::string n = frente->dato;
 	Nodo* aux = frente;
+	std::cout << "\n" << n;
 	handleServerMessage(n);
 	if (frente == fin) {
-		frente = nullptr;
-		fin = nullptr;
+		frente = NULL;
+		fin = NULL;
 	}
 	else {
 		frente = frente->siguiente;
@@ -83,8 +84,8 @@ void Client::run() {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
 				std::string message(reinterpret_cast<char*>(event.packet->data), event.packet->dataLength);
-				std::cout << "\nMensaje recibido: " << message << std::endl;
 				insertarCola(frente, fin, message);
+				std::cout << "\nMensaje recibido: " << message << std::endl;
 				enet_packet_destroy(event.packet);
 				break;
 			}
@@ -106,9 +107,6 @@ void Client::process() {
 		}
 
 	}
-
-
-
 }
 bool Client::connectToServer(const std::string& address, uint16_t port) {
 
@@ -180,8 +178,6 @@ void Client::disconnect() {
 	isConnected = false;  // Actualizar estado de la conexión
 	//	//std::cout << "Disconnected from server!" << std::endl;
 }
-
-
 std::string Client::createRoom(const std::string& username,const std::string& filename) {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
@@ -215,6 +211,7 @@ std::string Client::createRoom(const std::string& username,const std::string& fi
 	playerGameNew.NamePlayer.setOutlineThickness(2);
 	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
+	playerGameNew.CashSprite.setTexture(TextureCash);
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 	playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
@@ -659,6 +656,7 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.NamePlayer.setOutlineThickness(2);
 		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
+		playerGameNew.CashSprite.setTexture(TextureCash);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -668,6 +666,8 @@ void Client::handleServerMessage(const std::string& message) {
 		playersGame.push_back(playerGameNew);
 		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.insert(UsuariosActivos.begin(), playerIndex);
+
+		std::cout << "\nPLAYER_INDEX "<< playerIndex <<" UsuariosActivos:" << UsuariosActivos.size();
 
 	}
 	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
@@ -700,7 +700,7 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.NamePlayer.setOutlineThickness(2);
 		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerInfoNew.username = username;
-
+		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
 		playerInfoNew.isInGame = (isInGameStr == "true");
@@ -715,6 +715,8 @@ void Client::handleServerMessage(const std::string& message) {
 		playersGame.push_back(playerGameNew);
 		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.push_back(index);
+
+		std::cout << "\n NEW_PLAYER " << index << " UsuariosActivos:" << UsuariosActivos.size();
 	}
 	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
 
@@ -735,10 +737,6 @@ void Client::handleServerMessage(const std::string& message) {
 
 		int index = std::stoi(indexStr);
 
-		
-
-
-
 		std::unique_lock<std::mutex> lock(mtxExisting);
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
@@ -753,7 +751,7 @@ void Client::handleServerMessage(const std::string& message) {
 		playerInfoNew.isInGame = (isInGameStr == "true");
 		playerInfoNew.image = imagePath;
 		int indexPiece = std::stoi(indexPieceStr);
-
+		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
@@ -764,7 +762,8 @@ void Client::handleServerMessage(const std::string& message) {
 		playerInfos.push_back(playerInfoNew);
 		playersGame.push_back(playerGameNew);
 		UsuariosActivos.push_back(index);
-
+		std::cout << "\n EXISTING_PLAYER"<< index <<" UsuariosActivos:" << UsuariosActivos.size();
+		
 		if (indexPiece >= 0) {
 			
 			std::cout << "\n pieza:" << indexPiece << " CplayerIndex:" << CplayerIndex;
@@ -774,7 +773,7 @@ void Client::handleServerMessage(const std::string& message) {
 		
 		}
 
-		
+
 	}
 	else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
 
@@ -887,20 +886,68 @@ void Client::handleServerMessage(const std::string& message) {
 
 		userRuleta = true;
 
-	}else if(message.rfind("PLAYER_DISCONNECTED", 0) == 0) {
-		int index = std::stoi(message.substr(20));
-		playerInfos.erase(playerInfos.begin() + index);
-		playersGame.erase(playersGame.begin() + index);
-		if (playerIndex == 0){
-			UsuariosActivos.erase(UsuariosActivos.begin() + index);
-		}
-		else if (playerIndex >= index ) {
-			UsuariosActivos.erase(UsuariosActivos.begin() + (index + 1));
+	}
+	else if(message.rfind("PLAYER_DISCONNECTED", 0) == 0) {
 
+		disconnecte = true;
+
+		while (!disActiv) {
 		}
-		else if (playerIndex < index) {
-			UsuariosActivos.erase(UsuariosActivos.begin() + index);
+
+		{
+			std::lock_guard<std::mutex> lock(mtex);
+			int index = std::stoi(message.substr(20));
+
+			if (playerIndex == 0){
+
+				UsuariosActivos.erase(UsuariosActivos.begin() + index);
+				for (int i = index; i < UsuariosActivos.size(); i++) {
+
+
+					UsuariosActivos[i] -= 1;
+
+				}
+			}
+			else if (playerIndex >= index ) {
+
+				UsuariosActivos.erase(UsuariosActivos.begin() + (index + 1));
+				for (int i = index; i < UsuariosActivos.size(); i++) {
+
+
+					UsuariosActivos[i] -= 1;
+
+				}
+				playerIndex -= 1;
+			}
+			else if (playerIndex < index) {
+				UsuariosActivos.erase(UsuariosActivos.begin() + index);
+				for (int i = index; i < UsuariosActivos.size(); i++) {
+
+
+					UsuariosActivos[i] -= 1;
+
+				}
+			}	
+		
+			playerInfos.erase(playerInfos.begin() + index);
+			playersGame.erase(playersGame.begin() + index);
+
+
+
+			for (int i=0; i < UsuariosActivos.size(); i++) {
+
+				std::cout << "\n UsuariosActivos:" << UsuariosActivos[i]<< "\n Usuarios:"<<playerInfos.size();
+
+
+			}
+			eventOccurred = true;
 		}
+		cvDis.notify_one(); // Notifica al hilo principal que puede continuar.
+
+
+
+
+
 	}
 
 	std::cout << "\nmensaje final";

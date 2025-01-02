@@ -5,9 +5,9 @@
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp" 
 #include "ObjetosGlobal.hpp"
-#include "GameMode.hpp"
+#include "MultiplayerGame.hpp"
 
-class GameMode;
+class MultiplayerGame;
 
 
 class menuP : public SettingsManager {

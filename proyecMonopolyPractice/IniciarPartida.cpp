@@ -16,7 +16,7 @@ void IniciarPartida::resource() {
 
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
-
+	if (!TextureCash.loadFromFile("resource/texture/Game/cash.png")) return;
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);

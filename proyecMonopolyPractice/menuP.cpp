@@ -4,7 +4,7 @@
 #include "SettingsManager.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
-#include "IniciarPartida.hpp"
+#include "GameModeSelector.hpp"
 #include "PieceSelector.hpp"
 #include "IniciaUser.hpp"
 menuP::menuP() : window(nullptr), SesionValida(true){}
@@ -109,7 +109,7 @@ void menuP::MenuPrincipal() {
     selectedAvatarCopy.setScale(1,1);
    
 
-    editorPerfil.setFillColor(sf::Color(22, 250, 0, 70));
+    editorPerfil.setFillColor(sf::Color(0, 0, 0, 0));
     editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));
     editorPerfil.setPosition(16,0);
     editorPerfil.setOrigin(0, 0);
@@ -254,7 +254,7 @@ void menuP::eventoMenuP() {
 void menuP::MenuJugar() {
 
 
-   IniciarPartida inicial(*window);
+    GameModeSelector inicial(*window);
    inicial.update();
 
    box.setPosition(273, 74);

@@ -8,6 +8,7 @@
 
 
 extern sf::Texture TextureFondoGame;
+extern sf::Texture TextureCash;
 extern  sf::Texture TextureMarco;
 extern sf::Sprite spriteFondoGame;
 extern int NumPlayers;
@@ -91,6 +92,9 @@ struct PlayerGame {
 	sf::Sprite PieceSelect;
 	sf::Text Money;
 	bool Activo;
+
+	sf::Texture TextureCash;
+	sf::Sprite CashSprite;
 
 	void reset() {
 		textureAvatarPLayer = sf::Texture();  // Reasignar un objeto nuevo
