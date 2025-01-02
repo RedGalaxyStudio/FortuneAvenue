@@ -4,42 +4,41 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp" 
-#include <winsock2.h>
-#include <Windows.h>
 #include "ObjetosGlobal.hpp"
-#include "GameMode.hpp"
+#include "MultiplayerGame.hpp"
 
+class MultiplayerGame;
 
-class GameMode;
 
 class menuP : public SettingsManager {
 public:
 
     menuP();
-
-    void setWindow(sf::RenderWindow& windowRef);
- 
     void Resource();
+    void setWindow(sf::RenderWindow& windowRef);
+    void MenuPrincipal();
+    void MenuOpcion();
+
+    void MenuSalir();
+private:
+    
 
     void Inicializar();
+    void editPerfil();
     void MenuJugar();
 
 
-    void MenuPrincipal();
+  
 
     void eventoMenuP();
 
     void eventoMenuO();
-
-
-    void MenuOpcion();
+ 
     void instruccionesGame();
-    void MenuSalir();
+    
     void MenuAcercaDe();
     void ValidarUser();
-private:
-
-   
+    sf::RectangleShape editorPerfil;
 
     sf::RenderWindow* window;
 

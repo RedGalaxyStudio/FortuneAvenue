@@ -37,8 +37,10 @@ extern sf::Texture textureXOn;
 extern sf::Texture textureXOff;
 extern sf::Sprite spriteX;
 extern ButtonG* botonX;
-extern std::vector<sf::CircleShape> avatars;
+
+
 extern sf::CircleShape selectedAvatarCopy; 
+extern sf::Texture textselectedAvatarCopy;
 extern sf::Texture textureBox;
 extern sf::Sprite box;
 extern sf::Font fontUser;

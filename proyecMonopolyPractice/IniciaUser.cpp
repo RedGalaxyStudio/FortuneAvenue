@@ -5,7 +5,6 @@
 #include "Scrollbar.hpp"
 #include <string>
 #include "ResourceGlobal.hpp"
-#include "menuP.hpp"
 #include "ObjetosGlobal.hpp"
 #include <fstream>
 #include "nlohmann/json.hpp"
@@ -13,22 +12,16 @@
 using json = nlohmann::json;
 
 
-IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
-    : window(windowRef), currentIndex(0) {  
+IniciaUser::IniciaUser(sf::RenderWindow &windowRef)
+    : window(&windowRef), currentIndex(0) {
     Resource();
     loadAvatars();
 }
 IniciaUser::~IniciaUser() {
 }
-
-
 void IniciaUser::Resource() {
     SpriteFondoMenu.setTexture(TextureFondoMenu);
-
-    conteosuel = 0;
 }
-
-
 void IniciaUser::Update() {
 
     if (!std::filesystem::exists("perfil.json")) {
@@ -44,6 +37,22 @@ void IniciaUser::Update() {
     
 }
 
+void IniciaUser::UpdateEdit() {
+
+
+        if (!ckeck.loadFromFile("resource/texture/Avatars/cheeke2.png")) return;
+        spriteCkeck.setTexture(ckeck);
+        if (!TextureFondoMenuAvar.loadFromFile("resource/texture/Fondos/fondomenuAvar.png")) return;
+        SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
+        loadAvatars();
+ 
+        selectedAvatar = &selectedAvatarCopy;
+       // selectedAvatar = nullptr;
+        IniciAcion();
+    
+
+
+}
 void IniciaUser::IniciAcion(){
     spriteCkeck.setPosition(850, 70);
 
@@ -92,13 +101,19 @@ void IniciaUser::IniciAcion(){
      
     }
     float avatarYOffset = 0.0f; 
+    bool salir = false;
 
-    while (window.isOpen()) {
-        mousePosition = sf::Mouse::getPosition(window);
+
+
+
+
+
+    while (window->isOpen()&& !salir) {
+        mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window->pollEvent(event)) {
 
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -121,7 +136,7 @@ void IniciaUser::IniciAcion(){
                 Menup.MenuSalir();
             }
 
-            scrollbar.handleEvent(event, window);
+            scrollbar.handleEvent(event, *window);
             avatarYOffset = scrollbar.getScrollOffset();
            // scrollbar.evento(event);
             if (event.type == sf::Event::MouseWheelScrolled) {
@@ -174,7 +189,7 @@ void IniciaUser::IniciAcion(){
                 if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
                     saveSelectedAvatar();
-                    Menup.MenuPrincipal();
+                    salir = true;
                 }
 
 
@@ -205,8 +220,8 @@ void IniciaUser::IniciAcion(){
                         if (newSelection) {
                             newSelection->setOutlineColor(sf::Color::Black);  
                             newSelection->setOutlineThickness(4);
-                         
-                            selectedAvatarCopy.setTexture(newSelection->getTexture());  
+                            textselectedAvatarCopy = *newSelection->getTexture();
+                            selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
                         }
                         selectedAvatar = newSelection;
                     }
@@ -215,34 +230,31 @@ void IniciaUser::IniciAcion(){
                     
                     input1=textBox.handleInput(event,11);
         }
-        window.clear();
-        window.draw(SpriteFondoMenu);
+        window->clear();
+        window->draw(SpriteFondoMenu);
       
         for (int i = 0; i < avatars.size(); ++i) {
 
                     sf::Vector2f pos = avatars[i].getPosition();
 
-                    window.draw(avatars[i]);
+                    window->draw(avatars[i]);
         }
 
                
                
-                window.draw(SpriteFondoMenuAvar);
+                window->draw(SpriteFondoMenuAvar);
                 
                 if (selectedAvatar != nullptr) {
-                    window.draw(selectedAvatarCopy);  
+                    window->draw(selectedAvatarCopy);  
                 }  
-                textBox.draw(window);  
+                textBox.draw(*window);  
 
-                scrollbar.draw(window);
-                window.draw(recua);
-                window.draw(spriteCkeck);
-                window.display();
+                scrollbar.draw(*window);
+                window->draw(recua);
+                window->draw(spriteCkeck);
+                window->display();
     }
 }
-    
-
-
 void IniciaUser::saveSelectedAvatar(){
     if (selectedAvatar != nullptr) {
 
@@ -274,7 +286,6 @@ void IniciaUser::saveSelectedAvatar(){
         }
     }
 }
-
 void IniciaUser::loadSelectedAvatar() {
 
 
@@ -329,9 +340,13 @@ void IniciaUser::loadAvatars(){
     }
     if (!sharedTexture.loadFromFile("resource/texture/Avatars/Vacio.jpg")) return;
 
-    selectedAvatarCopy.setRadius(64);  
-    selectedAvatarCopy.setTexture(&sharedTexture);  
-    selectedAvatarCopy.setOrigin(64, 64);  
+   
+    if (selectedAvatarCopy.getTexture() == nullptr) { 
+        selectedAvatarCopy.setRadius(64);  
+        selectedAvatarCopy.setTexture(&sharedTexture);
+        selectedAvatarCopy.setOrigin(64, 64);  
+    }
+    
 
     Texrecua.loadFromFile("resource/texture/Avatars/recua.png");
     recua.setTexture(Texrecua);

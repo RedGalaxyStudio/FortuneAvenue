@@ -16,7 +16,7 @@ void IniciarPartida::resource() {
 
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
-
+	if (!TextureCash.loadFromFile("resource/texture/Game/cash.png")) return;
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);
@@ -28,7 +28,8 @@ void IniciarPartida::resource() {
 	SpriteUnirsePartida.setOrigin(150, 59);
 	SpriteUnirsePartida.setPosition(640, 500);
 
-
+	nameUser = input1;
+	std::cout << "\nnameUser: "+ nameUser;
 	enunciado.setCharacterSize(40);
 	enunciado.setFont(fontUser);
 	enunciado.setFillColor(sf::Color::White);
@@ -49,7 +50,9 @@ void IniciarPartida::update() {
 
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-	playerInfos[0].username = input1;
+	
+
+
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {
 		sf::Event event;
@@ -89,17 +92,7 @@ void IniciarPartida::update() {
 
 						client.initialize();
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
-							Code = client.createRoom(playerInfos[0].username);
-						//	
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// 
-						// << Code;
+							Code = client.createRoom(nameUser, TextureAvatarPath);
 
 							pieceselector.Resource();
 							pieceselector.updateSelection();
@@ -154,8 +147,8 @@ void IniciarPartida::update() {
 void IniciarPartida::updatejoinRoom() {
 	std::string code;
 	bool Valida1 = false;
-	TextBox textBoxRoom(1000, 80, "Ingresa el codigo: ");
-	textBoxRoom.setPosition(1000, 80);
+	TextBox textBoxRoom(640, 80, "Ingresa el codigo: ");
+	textBoxRoom.setPosition(505, 80);
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
 	MensageBox messageInvalido("Codigo invalido", fontUser, 12);
 
@@ -195,7 +188,7 @@ void IniciarPartida::updatejoinRoom() {
 
 							if (true == client.connectToServer("208.68.36.50", 1234)) {
 
-								client.joinRoom(code, playerInfos[0].username);
+								client.joinRoom(code, nameUser, TextureAvatarPath);
 								Code = code;
 
 								pieceselector.Resource();

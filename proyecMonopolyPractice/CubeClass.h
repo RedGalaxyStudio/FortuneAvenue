@@ -220,7 +220,7 @@ public :
 			rotate(static_cast<float>(- 90.0f * (M_PI / 180.0f)), 0.0f, 0.0f); // Rotar -90 grados en X
 			break;
 		default:
-			std::cout << "Face must be between 1 and 6." << std::endl;
+			//std::cout << "Face must be between 1 and 6." << std::endl;
 			break;
 		}
 		

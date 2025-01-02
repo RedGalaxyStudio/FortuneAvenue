@@ -2,6 +2,10 @@
 #include <iostream>
 #include "ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
+#include <fstream>
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), musicEnabled(true), effectsEnabled(true)
 {
@@ -17,6 +21,37 @@ SettingsManager::SettingsManager()
 SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>&  music, sf::RenderWindow& windowRef)
     : window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
 {
+    if (std::filesystem::exists("settings.json")) {
+
+        std::ifstream inFile("settings.json");
+        if (inFile.is_open()) {
+
+            json settingData;
+
+            inFile >> settingData;
+            inFile.close();
+
+            volume = settingData["Volumen_Music"];
+
+            thumbPosition.x = settingData["thumbPosition_Music"]["x"];
+            thumbPosition.y = settingData["thumbPosition_Music"]["y"];
+            thumb.setPosition(thumbPosition);
+            sizeFilledBar.x = settingData["sizeFilledBar_Music"]["x"];
+            sizeFilledBar.y = settingData["sizeFilledBar_Music"]["y"];
+            filledBar.setSize(sizeFilledBar);
+
+
+        }
+
+    }
+    else {
+
+        filledBar.setSize(sf::Vector2f(width, height));
+        thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
+    }
+
+
+
 
     for (auto* fondo : music) {
         if (fondo) {
@@ -30,7 +65,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     bar.setOutlineColor(sf::Color::Black);
     bar.setOutlineThickness(2.0f);
 
-    filledBar.setSize(sf::Vector2f(width, height));
+    
     filledBar.setPosition(x, y);
     filledBar.setFillColor(sf::Color(249, 108, 223));
     filledBar.setOutlineColor(sf::Color::Black);
@@ -40,7 +75,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     thumb.setFillColor(sf::Color(95, 179, 255));
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
-    thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
+
     if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
@@ -61,6 +96,37 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 
 SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef): window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
 {
+
+
+
+    if (std::filesystem::exists("settings.json")) {
+
+        std::ifstream inFile("settings.json");
+        if (inFile.is_open()) {
+
+            json settingData;
+
+            inFile >> settingData;
+            inFile.close();
+
+            volume = settingData["Volumen_Effects"];
+
+            thumbPosition.x = settingData["thumbPosition_Effects"]["x"];
+            thumbPosition.y = settingData["thumbPosition_Effects"]["y"];
+            thumb.setPosition(thumbPosition);
+            sizeFilledBar.x = settingData["sizeFilledBar_Effects"]["x"];
+            sizeFilledBar.y = settingData["sizeFilledBar_Effects"]["y"];
+            filledBar.setSize(sizeFilledBar);
+
+        }
+
+    }
+    else {
+
+        filledBar.setSize(sf::Vector2f(width, height));
+        thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
+    }
+
     for (auto* effect : effects) {
         if (effect) {
             effect->setVolume(volume);
@@ -73,7 +139,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     bar.setOutlineColor(sf::Color::Black);
     bar.setOutlineThickness(2.0f);
 
-    filledBar.setSize(sf::Vector2f(width, height));
+
     filledBar.setPosition(x, y);
     filledBar.setFillColor(sf::Color(249, 108, 223));
     filledBar.setOutlineColor(sf::Color::Black);
@@ -83,7 +149,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     thumb.setFillColor(sf::Color(95, 179, 255));
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
-    thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
+    
     if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
@@ -140,26 +206,31 @@ void SettingsManager::moveThumb(float mouseX) {
     mouseX = clamp(mouseX, barLeft, barRight);
 
     // Ajustar la posición del thumb para que se mueva hasta el borde final
-    thumb.setPosition(mouseX - thumb.getRadius(), thumb.getPosition().y);
+    thumbPosition = sf::Vector2f(mouseX - thumb.getRadius(), thumb.getPosition().y);
+    thumb.setPosition(thumbPosition);
 
     // Calcular el porcentaje del volumen basado en la posición del mouse
     float percentage = (mouseX - barLeft) / bar.getSize().x;
     volume = percentage * 100.0f;
 
     // Ajustar el tamaño de la barra llena
-    filledBar.setSize(sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y));
+    sizeFilledBar = sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y);
+    filledBar.setSize(sizeFilledBar);
 
     // Actualizar el volumen de la música si está presente
-  
-    for (auto* fondo : music) {
-        if (fondo) {
-            fondo->setVolume(volume);
+    if (!music.empty()) {
+        for (auto* fondo : music) {
+            if (fondo) {
+                fondo->setVolume(volume);
+            }
         }
     }
-    // Actualizar el volumen de los efectos
-    for (auto* effect : effects) {
-        if (effect) {
-            effect->setVolume(volume);
+    else if (!effects.empty()) {
+        // Actualizar el volumen de los efectos
+        for (auto* effect : effects) {
+            if (effect) {
+                effect->setVolume(volume);
+            }
         }
     }
 
@@ -239,4 +310,36 @@ void SettingsManager::updateVolumeText() {
 
 float SettingsManager::clamp(float value, float min, float max) const {
     return std::max(min, std::min(value, max));
+}
+
+void SettingsManager::saveSettings() {
+
+         json settingData;
+
+         std::ifstream inFile("settings.json");
+         if (inFile.is_open()) {
+             inFile >> settingData;  // Cargar el JSON existente
+             inFile.close();
+         }
+
+
+
+         if (!music.empty()) {
+             settingData["Volumen_Music"] = volume;
+             settingData["thumbPosition_Music"] = { {"x", thumbPosition.x}, {"y", thumbPosition.y} };
+             settingData["sizeFilledBar_Music"] = { {"x", sizeFilledBar.x}, {"y", sizeFilledBar.y} };
+         }
+         else if (!effects.empty()) {
+             settingData["Volumen_Effects"] = volume;
+             settingData["thumbPosition_Effects"] = { {"x", thumbPosition.x}, {"y", thumbPosition.y} };
+             settingData["sizeFilledBar_Effects"] = { {"x", sizeFilledBar.x}, {"y", sizeFilledBar.y} };
+
+         }
+        std::ofstream outFile("settings.json");
+
+        if (outFile.is_open()) {
+                 outFile << settingData.dump(4);
+                 outFile.close();
+        }
+
 }

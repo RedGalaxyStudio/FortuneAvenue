@@ -1,5 +1,5 @@
 #include "Economy.hpp"
-#include "GameMode.hpp"
+#include "MultiplayerGame.hpp"
 
 Economy::Economy(int* _dinero, int *_impuesto,int *_salario) : dinero(_dinero), impuesto(_impuesto), salario(_salario){}
 
