@@ -147,6 +147,7 @@ private:
 	sf::View viewTablero;
 	sf::Text Impuesto;
 	
+	sf::Texture TextureChat;
 	sf::Texture TextureMapa;
 	sf::Texture SettingsOn;
 	sf::Texture SettingsOff;
@@ -158,6 +159,7 @@ private:
 	sf::Sprite SpriteImpuesto;
 	sf::Sprite Settings;
 	sf::Sprite renderedSprite;
+	sf::Sprite SpriteChat;
 
 };
 #endif

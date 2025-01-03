@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Economy.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="card.h" />
     <ClInclude Include="cell.h" />
+    <ClInclude Include="Chat.hpp" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />

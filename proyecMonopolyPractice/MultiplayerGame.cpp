@@ -2,6 +2,7 @@
 #include <String>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
+#include "Chat.hpp"
 
 MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
@@ -10,7 +11,7 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(win
 	resource();
 }
 void MultiplayerGame::resource() {
-
+	if (!TextureChat.loadFromFile("window_13905854.png")) return;
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
@@ -37,7 +38,7 @@ void MultiplayerGame::resource() {
 	SpriteArrowArriba.setOrigin(350.0f, 350.0f);
 	SpriteArrowArriba.setPosition(370, 400);
 
-
+	SpriteChat.setTexture(TextureChat);
 
 	Settings.setTexture(SettingsOff);
 	Settings.setOrigin(25, 25);
@@ -563,6 +564,13 @@ void MultiplayerGame::Event() {
 					ruleta->trurntrue();
 					turnoGiro = false;
 				}
+
+				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					Chat iconochat(*window);
+					iconochat.update();
+				}
+
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
@@ -923,4 +931,5 @@ void MultiplayerGame::DrawGame() {
 
 	window->draw(Settings);
 	window->draw(Conteosuel);
+	window->draw(SpriteChat);
 }
