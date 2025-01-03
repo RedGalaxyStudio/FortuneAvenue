@@ -254,8 +254,8 @@ void menuP::eventoMenuP() {
 void menuP::MenuJugar() {
 
 
-    GameModeSelector inicial(*window);
-   inicial.update();
+    GameModeSelector GMSelector(*window);
+    GMSelector.update();
 
    box.setPosition(273, 74);
 

@@ -21,16 +21,15 @@ private:
     bool isWebViewOpen;
     bool sesionValida;
     bool Valida;
-    sf::Texture TextureCrearPartidaOff;
-    sf::Texture TextureCrearPartidaOn;
-    sf::Texture TextureUnirsePartidaOff;
-    sf::Texture TextureUnirsePartidaOn;
+    sf::Texture TextureOfflineOff;
+    sf::Texture TextureOfflineOn;
+    sf::Texture TextureOnlineOff;
+    sf::Texture TextureOnlineOn;
     sf::Texture TextureUnirse;
     sf::Clock LimTimeBotton;
     sf::Text enunciado;
-    sf::Sprite SpriteCrearPartida;
-    sf::Sprite SpriteUnirsePartida;
-    sf::Sprite SpriteUnirse;
+    sf::Sprite SpriteOffline;
+    sf::Sprite SpriteOnline;
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;

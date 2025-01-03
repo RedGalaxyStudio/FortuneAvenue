@@ -80,7 +80,6 @@ void IniciarPartida::update() {
 					playClickSound();
 					updatejoinRoom();
 					Valida = false;
-//					////////////////////////////////////////std::cout << "haaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
 				}
 
@@ -135,6 +134,10 @@ void IniciarPartida::update() {
 
 		window->clear();
 		window->draw(spriteFondoGame);
+		window->draw(box);
+		window->draw(Sesion);
+		window->draw(selectedAvatarCopy);
+		window->draw(recua);
 		window->draw(SpriteUnirsePartida);
 		window->draw(enunciado);
 		window->draw(spriteX);

@@ -559,6 +559,8 @@ void MultiplayerGame::Event() {
 					Menup.MenuOpcion();
 				}
 
+
+
 				if (ruleta_draw && turn && turnoGiro) {
 					ruleta->trurntrue();
 					turnoGiro = false;
@@ -835,10 +837,6 @@ void MultiplayerGame::DrawGame() {
 			std::unique_lock<std::mutex> lock(client.ruletaMutex);
 			client.ruletaCondVar.wait(lock, [] { return client.ruletaMessageReceived; });
 
-			// Ahora, sabemos que el mensaje fue recibido, y podemos usar el ángulo
-			//std::cout << "Ángulo recibido: " << client.anguloActualrule << std::endl;
-
-			// Reiniciar el indicador para evitar problemas en la próxima espera
 			client.ruletaMessageReceived = false;
 		}
 

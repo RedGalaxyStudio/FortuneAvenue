@@ -352,7 +352,7 @@ void PieceSelector::updateSelection() {
 			}
 		}
 
-
+	
 		window->clear();
 		window->draw(spriteFondoGame);
 		
