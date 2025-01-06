@@ -63,25 +63,50 @@ void Chat::resource() {
 	Fondo.setOutlineThickness(-10);
 	Fondo.setOutlineColor(sf::Color(50,50,50));
 
-	FondoChat.setOrigin(0, 0);
+
 	FondoChat.setSize(sf::Vector2f(100, 40));
 	FondoChat.setPosition(1040, 20);
 	FondoChat.setFillColor(sf::Color(50, 50, 50));
 
-	Caja.setOrigin(0, 0);
+	
 	Caja.setSize(sf::Vector2f(260, 40));
 	Caja.setPosition(940, 650);
 	Caja.setFillColor(sf::Color (50, 50, 50));
-	
-	Derecha.setOrigin(20, 20);
-	Derecha.setRadius(20);
-	Derecha.setFillColor(sf::Color (50,50,50));
-	Derecha.setPosition(1200, 670);
 
-	Izquierda.setOrigin(20, 20);
-	Izquierda.setRadius(20);
-	Izquierda.setFillColor(sf::Color (50, 50, 50));
-	Izquierda.setPosition(940, 670);
+
+	CajaI.setSize(sf::Vector2f(20,0));
+	CajaI.setPosition(940, 670);
+	CajaI.setFillColor(sf::Color(50, 50, 50));
+	CajaI.setOrigin(20,0);
+
+	
+
+
+	CajaD.setSize(sf::Vector2f(20,0));
+	CajaD.setPosition(1200, 670);
+	CajaD.setFillColor(sf::Color(50, 50, 50));
+	
+
+
+	ArriDerecha.setOrigin(20, 20);
+	ArriDerecha.setRadius(20);
+	ArriDerecha.setFillColor(sf::Color (50,50,50));
+	ArriDerecha.setPosition(1200, 670);
+
+	ArriIzquierda.setOrigin(20, 20);
+	ArriIzquierda.setRadius(20);
+	ArriIzquierda.setFillColor(sf::Color (50, 50, 50));
+	ArriIzquierda.setPosition(940, 670);
+
+	AbajDerecha.setOrigin(20, 20);
+	AbajDerecha.setRadius(20);
+	AbajDerecha.setFillColor(sf::Color(50, 50, 50));
+	AbajDerecha.setPosition(1200, 670);
+
+	AbajIzquierda.setOrigin(20, 20);
+	AbajIzquierda.setRadius(20);
+	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
+	AbajIzquierda.setPosition(940, 670);
 
 }
 
@@ -182,8 +207,21 @@ void Chat::update() {
 											Caja.setSize(sf::Vector2f(260, 40));
 
 											Caja.setPosition(940, 650);
-											Derecha.setRadius(20);
-											Izquierda.setRadius(20);
+
+											ArriDerecha.setPosition(sf::Vector2f(1200, 670));
+											ArriIzquierda.setPosition(sf::Vector2f(940, 670));
+
+											AbajDerecha.setPosition(1200, 670);
+											AbajIzquierda.setPosition(940, 670);
+
+
+											CajaD.setSize(sf::Vector2f(20, 0));
+											CajaD.setPosition(sf::Vector2f(1200, 670));
+
+											CajaI.setSize(sf::Vector2f(20, 0));
+											CajaI.setPosition(sf::Vector2f(940, 670));
+
+
 											indicacion.setPosition(940, 668);
 										}
 										else if (In > 1) {
@@ -194,11 +232,19 @@ void Chat::update() {
 
 											Caja.setSize(sf::Vector2f(260, altura.height + 22));
 
-
-											Derecha.setRadius(Caja.getGlobalBounds().height/2);
-											Izquierda.setRadius(Caja.getGlobalBounds().height / 2);
-
 											Caja.setPosition(sf::Vector2f(940, 690 - Caja.getGlobalBounds().height));
+											ArriDerecha.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+											ArriIzquierda.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
+
+											AbajDerecha.setPosition(1200, 670);
+											AbajIzquierda.setPosition(940, 670);
+
+											CajaD.setSize(sf::Vector2f(20, AbajDerecha.getPosition().y - ArriDerecha.getPosition().y));
+											CajaD.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+
+
+											CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
+											CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
 
 											indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
 										}
@@ -217,8 +263,21 @@ void Chat::update() {
 							Caja.setSize(sf::Vector2f(260, 40));
 
 							Caja.setPosition(940, 650);
-							Derecha.setRadius(20);
-							Izquierda.setRadius(20);
+
+
+							ArriDerecha.setPosition(sf::Vector2f(1200, 670));
+							ArriIzquierda.setPosition(sf::Vector2f(940, 670));
+
+							AbajDerecha.setPosition(1200, 670);
+							AbajIzquierda.setPosition(940, 670);
+						
+
+							CajaD.setSize(sf::Vector2f(20, 0));
+							CajaD.setPosition(sf::Vector2f(1200, 670));
+
+							CajaI.setSize(sf::Vector2f(20, 0));
+							CajaI.setPosition(sf::Vector2f(940, 670));
+
 							indicacion.setPosition(940, 668);
 						}
 						else if (In > 1) {
@@ -227,10 +286,21 @@ void Chat::update() {
 
 							Caja.setSize(sf::Vector2f(260, altura.height + 22));
 
-							Derecha.setRadius(Caja.getGlobalBounds().height / 2);
-							Izquierda.setRadius(Caja.getGlobalBounds().height / 2);
 
 							Caja.setPosition(sf::Vector2f(940,690 - Caja.getGlobalBounds().height));
+
+
+							ArriDerecha.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+							AbajDerecha.setPosition(1200, 670);	
+							CajaD.setSize(sf::Vector2f(20, AbajDerecha.getPosition().y -ArriDerecha.getPosition().y));
+							CajaD.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+
+
+							ArriIzquierda.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
+						    AbajIzquierda.setPosition(940, 670);
+
+							CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
+							CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
 
 							indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
 							std::cout << "\n Caja:" << Caja.getGlobalBounds().height << " Indicacion:" << indicacion.getGlobalBounds().height;
@@ -285,8 +355,12 @@ void Chat::update() {
 		window->draw(Caja);
 		window->draw(FondoChat);
 		window->draw(SpriteBotonEnviar);
-		window->draw(Derecha);
-		window->draw(Izquierda);
+		window->draw(ArriDerecha);
+		window->draw(ArriIzquierda);
+		window->draw(AbajDerecha);
+		window->draw(AbajIzquierda);
+		window->draw(CajaI);
+		window->draw(CajaD);
 		window->draw(enunciado);
 		window->draw(indicacion);
 		window->draw(spriteX);

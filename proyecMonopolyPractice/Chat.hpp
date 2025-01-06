@@ -20,8 +20,12 @@ private:
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
     sf::RectangleShape Caja;
-    sf::CircleShape Derecha;
-    sf::CircleShape Izquierda;
+    sf::RectangleShape CajaD;
+    sf::RectangleShape CajaI;
+    sf::CircleShape ArriDerecha;
+    sf::CircleShape ArriIzquierda;
+    sf::CircleShape AbajDerecha;
+    sf::CircleShape AbajIzquierda;
 
     sf::RenderWindow* window;
    
