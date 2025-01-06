@@ -18,6 +18,8 @@ void Chat::resource() {
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
 
+	if (!Fuentechat.loadFromFile("resource/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n";}
+
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);
@@ -49,13 +51,13 @@ void Chat::resource() {
 
 
 	indicacion.setCharacterSize(20);
-	indicacion.setFont(fontUser);
+	indicacion.setFont(Fuentechat);
 	indicacion.setFillColor(sf::Color::White);
 	indicacion.setOutlineThickness(2);
 	indicacion.setOutlineColor(sf::Color(135, 135, 135));
 	indicacion.setString("Ingrese texto.");
 	indicacion.setPosition(940, 668);
-	 globalBounds = indicacion.getGlobalBounds();
+	globalBounds = indicacion.getGlobalBounds();
 	indicacion.setOrigin(0, globalBounds.height / 2.0f);
 	
 	Fondo.setOrigin(0,0);
@@ -87,7 +89,27 @@ void Chat::resource() {
 
 }
 
+std::string insertarSaltoDeLinea(const std::string& mensaje) {
+	if (mensaje.empty()) {
+		return mensaje; // Si el mensaje está vacío, lo retornamos como está.
+	}
 
+	// Buscar el último espacio desde el final.
+	size_t ultimoEspacio = mensaje.find_last_of(' ');
+
+	if (ultimoEspacio != std::string::npos) {
+		// Si encontramos un espacio, insertamos el salto de línea en ese punto.
+		std::string resultado = mensaje;
+		resultado.replace(ultimoEspacio, 1, "\n"); // Reemplazar el espacio con un salto de línea.
+		return resultado;
+	}
+	else {
+		// Si no encontramos ningún espacio, insertamos el salto de línea antes del último carácter.
+		std::string resultado = mensaje;
+		resultado.insert(mensaje.size() - 1, "\n");
+		return resultado;
+	}
+}
 
 void Chat::update() {
 	Valida = false;
@@ -158,7 +180,31 @@ void Chat::update() {
 
 				}
 
+				
+				}
 
+			if (event.type == sf::Event::TextEntered ) {
+				if (event.text.unicode < 128) {
+					if (event.text.unicode == '\b' && !input.empty()) {
+						input.pop_back();
+					}
+
+					else if (event.text.unicode != '\b' && input.size() < maxLength) {
+						
+						char enteredChar = static_cast<char>(event.text.unicode);
+							input += enteredChar; 
+								if (indicacion.getGlobalBounds().width >= 260) {
+									insertarSaltoDeLinea(input);
+									Caja.setSize(sf::Vector2f(260, Caja.getGlobalBounds().height + 40));
+									Caja.setPosition(sf::Vector2f(940, Caja.getPosition().y - 40));
+									indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
+
+								}
+					}
+
+					indicacion.setString(input);
+					//std::cout << "Input Text: " << input << std::endl;
+				}
 			}
 		}
 
@@ -201,11 +247,11 @@ void Chat::update() {
 		window->draw(SpriteBotonEnviar);
 		window->draw(Derecha);
 		window->draw(Izquierda);
-		window->draw(SpriteUnirsePartida);
+		//window->draw(SpriteUnirsePartida);
 		window->draw(enunciado);
 		window->draw(indicacion);
 		window->draw(spriteX);
-		window->draw(SpriteCrearPartida);
+		//window->draw(SpriteCrearPartida);
 		window->display();
 
 

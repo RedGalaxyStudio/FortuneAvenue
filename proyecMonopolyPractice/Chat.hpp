@@ -15,6 +15,8 @@ public:
 
 private:
 
+    const size_t maxLength = 40;
+
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
     sf::RectangleShape Caja;
@@ -35,11 +37,15 @@ private:
     sf::Texture TextureUnirsePartidaOn;
     sf::Texture TextureUnirse;
 
+    sf::Font Fuentechat;
+
     sf::Clock LimTimeBotton;
 
     sf::Text indicacion;
     sf::Text mensaje;
     sf::Text enunciado;
+    
+    std::string input;
 
     sf::Sprite spriteFondo;
     sf::Sprite renderedSprite;
