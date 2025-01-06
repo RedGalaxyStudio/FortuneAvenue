@@ -9,27 +9,25 @@ Chat::Chat(sf::RenderWindow& win) : window(&win), pieceselector(window) {
 	resource();
 }
 
-void Chat::resource() {
-	TextureCrearPartidaOff.loadFromFile("resource/texture/Game/CrearPartidaOff.png");
-	TextureCrearPartidaOn.loadFromFile("resource/texture/Game/CrearPartidaOn.png");
-	TextureUnirse.loadFromFile("resource/texture/Game/unirse1encendido.png");
-	TextureBotonEviar.loadFromFile("envio2.png");
 
-	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
-	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
+int calcularNumeroDeLineas(const sf::Text& text) {
+	// Obtener el rectángulo delimitador (bounding box) del texto
+	sf::FloatRect bounds = text.getGlobalBounds();
+
+	// Dividir la altura del rectángulo entre la altura de la fuente
+	// Esto nos da el número de líneas
+	float alturaLinea = text.getCharacterSize();  // El tamaño de la fuente
+	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
+
+	return numeroDeLineas;
+}
+
+void Chat::resource() {
+
+	TextureBotonEviar.loadFromFile("envio2.png");
 
 	if (!Fuentechat.loadFromFile("resource/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n";}
 
-	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
-	SpriteUnirse.setTexture(TextureUnirse);
-	SpriteCrearPartida.setOrigin(150, 59);
-	SpriteUnirse.setOrigin(100, 100);
-	SpriteCrearPartida.setPosition(640, 300);
-	SpriteUnirse.setPosition(640, 500);
-
-	SpriteUnirsePartida.setTexture(TextureUnirsePartidaOff);
-	SpriteUnirsePartida.setOrigin(150, 59);
-	SpriteUnirsePartida.setPosition(640, 500);
 
 	SpriteBotonEnviar.setTexture(TextureBotonEviar);
 	SpriteBotonEnviar.setOrigin(20, 20);
@@ -37,8 +35,6 @@ void Chat::resource() {
 
 	spriteX.setPosition(1240, 35);
 
-	nameUser = input1;
-	std::cout << "\nnameUser: " + nameUser;
 	enunciado.setCharacterSize(20);
 	enunciado.setFont(fontUser);
 	enunciado.setFillColor(sf::Color::White);
@@ -89,36 +85,37 @@ void Chat::resource() {
 
 }
 
-std::string insertarSaltoDeLinea(const std::string& mensaje) {
-	if (mensaje.empty()) {
-		return mensaje; // Si el mensaje está vacío, lo retornamos como está.
-	}
+void Chat::insertarSaltoDeLinea() {
+	if (input.empty()) return;
 
-	// Buscar el último espacio desde el final.
-	size_t ultimoEspacio = mensaje.find_last_of(' ');
+	// Crear un texto temporal para medir cada segmento
+	sf::Text tempText;
+	tempText.setFont(Fuentechat);
+	tempText.setCharacterSize(indicacion.getCharacterSize());
+	tempText.setStyle(indicacion.getStyle());
 
-	if (ultimoEspacio != std::string::npos) {
-		// Si encontramos un espacio, insertamos el salto de línea en ese punto.
-		std::string resultado = mensaje;
-		resultado.replace(ultimoEspacio, 1, "\n"); // Reemplazar el espacio con un salto de línea.
-		return resultado;
-	}
-	else {
-		// Si no encontramos ningún espacio, insertamos el salto de línea antes del último carácter.
-		std::string resultado = mensaje;
-		resultado.insert(mensaje.size() - 1, "\n");
-		return resultado;
+	// Iterar sobre el texto y ajustar
+	size_t posicionUltimoEspacio = 0;
+	for (size_t i = 0; i < input.size(); ++i) {
+		tempText.setString(input.substr(0, i + 1));
+		if (tempText.getGlobalBounds().width > 260) {
+			if (posicionUltimoEspacio > 0) {
+				input[posicionUltimoEspacio] = '\n'; // Reemplazar el espacio con un salto de línea
+				posicionUltimoEspacio = 0;          // Reiniciar el último espacio
+			}
+			else {
+				input.insert(i, "\n"); // Insertar un salto de línea si no hay espacio disponible
+			}
+			break;
+		}
+		if (input[i] == ' ') {
+			posicionUltimoEspacio = i;
+		}
 	}
 }
 
 void Chat::update() {
 	Valida = false;
-	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-
-	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
-	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-
-
 
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {
@@ -144,35 +141,7 @@ void Chat::update() {
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				if (SpriteUnirsePartida.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-			
-					Valida = false;
-					//					////////////////////////////////////////std::cout << "haaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
-				}
-
-				if (SpriteCrearPartida.getGlobalBounds().contains(mousePosFloat)) {
-					if (LimTimeBotton.getElapsedTime().asSeconds() >= 1.0f) { // Verifica si ha pasado al menos 1 segundo
-						// Reinicia el reloj
-						LimTimeBotton.restart();
-						playClickSound();
-
-						client.initialize();
-						if (true == client.connectToServer("208.68.36.50", 1234)) {
-							Code = client.createRoom(nameUser, TextureAvatarPath);
-
-							pieceselector.Resource();
-							pieceselector.updateSelection();
-						}
-						else
-						{
-							message.showMessage();
-						}
-
-					}
-
-				}
 
 				if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 					playClickSound();
@@ -184,41 +153,113 @@ void Chat::update() {
 				}
 
 			if (event.type == sf::Event::TextEntered ) {
+
+
+				std::cout << "\n aqui es puede noo m3 lo d43o";
 				if (event.text.unicode < 128) {
 					if (event.text.unicode == '\b' && !input.empty()) {
 						input.pop_back();
+
+						indicacion.setString(input);
+
 					}
 
 					else if (event.text.unicode != '\b' && input.size() < maxLength) {
 						
 						char enteredChar = static_cast<char>(event.text.unicode);
 							input += enteredChar; 
-								if (indicacion.getGlobalBounds().width >= 260) {
-									insertarSaltoDeLinea(input);
-									Caja.setSize(sf::Vector2f(260, Caja.getGlobalBounds().height + 40));
-									Caja.setPosition(sf::Vector2f(940, Caja.getPosition().y - 40));
-									indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
 
-								}
+							indicacion.setString(input);
+
+							if (indicacion.getGlobalBounds().width > 260) {
+									insertarSaltoDeLinea();
+									indicacion.setString(input);
+
+									int In = calcularNumeroDeLineas(indicacion) + 1;
+								///	int Ca = Caja.getGlobalBounds().height / 40;
+								///	if (Ca > In && Ca) {
+										if (In == 1) {
+											Caja.setSize(sf::Vector2f(260, 40));
+
+											Caja.setPosition(940, 650);
+											Derecha.setRadius(20);
+											Izquierda.setRadius(20);
+											indicacion.setPosition(940, 668);
+										}
+										else if (In > 1) {
+
+											sf::FloatRect altura = indicacion.getGlobalBounds();
+
+
+
+											Caja.setSize(sf::Vector2f(260, altura.height + 22));
+
+
+											Derecha.setRadius(Caja.getGlobalBounds().height/2);
+											Izquierda.setRadius(Caja.getGlobalBounds().height / 2);
+
+											Caja.setPosition(sf::Vector2f(940, 690 - Caja.getGlobalBounds().height));
+
+											indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
+										}
+
+								///	}
+									
+							}
 					}
+					
+					
+				
+					int In = calcularNumeroDeLineas(indicacion)+1;
+				//	int Ca = Caja.getGlobalBounds().height / 40;
+					
+						if (In == 1) {
+							Caja.setSize(sf::Vector2f(260, 40));
 
-					indicacion.setString(input);
-					//std::cout << "Input Text: " << input << std::endl;
+							Caja.setPosition(940, 650);
+							Derecha.setRadius(20);
+							Izquierda.setRadius(20);
+							indicacion.setPosition(940, 668);
+						}
+						else if (In > 1) {
+
+							sf::FloatRect altura = indicacion.getGlobalBounds();
+
+							Caja.setSize(sf::Vector2f(260, altura.height + 22));
+
+							Derecha.setRadius(Caja.getGlobalBounds().height / 2);
+							Izquierda.setRadius(Caja.getGlobalBounds().height / 2);
+
+							Caja.setPosition(sf::Vector2f(940,690 - Caja.getGlobalBounds().height));
+
+							indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
+							std::cout << "\n Caja:" << Caja.getGlobalBounds().height << " Indicacion:" << indicacion.getGlobalBounds().height;
+						}
+
+					
+					std::cout << "Input Text: " << input << std::endl;
 				}
 			}
 		}
 
+
+
+		///sf::FloatRect textBounds = indicacion.getGlobalBounds();
+		///float newHeight = textBounds.height + 10; // Margen adicional de 10 px (5 arriba, 5 abajo)
+	///	Caja.setSize(sf::Vector2f(270, newHeight)); // Ancho fijo de 260 + 10 px de margen lateral
+
+		/// Ajustar la posición de la caja y el texto
+		///Caja.setPosition(sf::Vector2f(940, Caja.getPosition().y));
+		///indicacion.setPosition(sf::Vector2f(945, Caja.getPosition().y + 5));
+
 		Valida = true;
 
 		currentCursor = &normalCursor;
-		botonCrearPartida.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-		botonUnirsePartida.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
 
-
-		message.update();
 
 
 		renderTexture.clear();
@@ -238,7 +279,6 @@ void Chat::update() {
 
 		renderedSprite.setTexture(renderTexture.getTexture());
 
-
 		window->clear();
 		window->draw(renderedSprite);
 		window->draw(Fondo);
@@ -247,13 +287,10 @@ void Chat::update() {
 		window->draw(SpriteBotonEnviar);
 		window->draw(Derecha);
 		window->draw(Izquierda);
-		//window->draw(SpriteUnirsePartida);
 		window->draw(enunciado);
 		window->draw(indicacion);
 		window->draw(spriteX);
-		//window->draw(SpriteCrearPartida);
 		window->display();
-
 
 	}
 }

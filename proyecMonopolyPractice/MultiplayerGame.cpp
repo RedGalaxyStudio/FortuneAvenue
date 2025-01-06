@@ -407,9 +407,9 @@ void MultiplayerGame::update() {
 	robarjugador.resource();
 
 
-	GameEnd gameend(window);
-	gameend.resource();
-	gameend.update();
+	//GameEnd gameend(window);
+	//gameend.resource();
+	//gameend.update();
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;

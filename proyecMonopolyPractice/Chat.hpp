@@ -10,12 +10,12 @@ public:
 
     Chat(sf::RenderWindow& win);
     void resource();
-
+    void insertarSaltoDeLinea();
     void update();
 
 private:
 
-    const size_t maxLength = 40;
+    const size_t maxLength = 120;
 
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
