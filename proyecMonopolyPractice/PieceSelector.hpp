@@ -30,6 +30,7 @@ private:
 public:
     
     PieceSelector(sf::RenderWindow* windowRef);
+    ~PieceSelector();
     void Resource();
 
     void displayPieces();

@@ -222,7 +222,8 @@ void menuP::eventoMenuP() {
             
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                MenuOpcion();
+                MenuOpcion(true);
+                SpriteBotonOpciones.setPosition(640, 560);
         
             }
 
@@ -265,50 +266,7 @@ void menuP::MenuJugar() {
 };
 
 
-void menuP::eventoMenuO() {
 
-    sf::Event event;
-
-    while (window->pollEvent(event)) {
-       
-        if (event.type == sf::Event::Closed ||
-            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            renderTexture.clear();  
-            renderTexture.draw(SpriteFondoMenu);
-            renderTexture.draw(SpriteBotonOpciones);
-            renderTexture.draw(spriteX);
-            musicSlider->Printf();
-            effectSlider->Printf();
-            renderTexture.display();
-            MenuSalir();
-        }
-
-       
-
-        musicSlider->handleEvent(event, *window);
-        effectSlider->handleEvent(event, *window);
-
-        
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-            if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
-                musicSlider->saveSettings();
-                effectSlider->saveSettings();
-                playClickSound();
-
-                MenuPrincipal();
-
-            }
-            if (spriteInstrucciones.getGlobalBounds().contains(mousePosFloat)) {
-                playClickSound();
-                instruccionesGame();
-
-            }
-        }
-    }
-}
 
 
 void menuP::Inicializar() {
@@ -348,7 +306,7 @@ void menuP::editPerfil() {
     box.setScale(1, 1);
 
 }
-void menuP::MenuOpcion() {
+void menuP::MenuOpcion(bool fon) {
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
@@ -360,12 +318,56 @@ void menuP::MenuOpcion() {
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 
-        eventoMenuO();
-        
+        sf::Event event;
 
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear();
+                renderTexture.draw(SpriteFondoMenu);
+                renderTexture.draw(SpriteBotonOpciones);
+                renderTexture.draw(spriteX);
+                musicSlider->Printf();
+                effectSlider->Printf();
+                renderTexture.display();
+                MenuSalir();
+            }
+
+
+
+            musicSlider->handleEvent(event, *window);
+            effectSlider->handleEvent(event, *window);
+
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                    musicSlider->saveSettings();
+                    effectSlider->saveSettings();
+                    playClickSound();
+
+                    return;
+
+                }
+                if (spriteInstrucciones.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    instruccionesGame();
+
+                }
+            }
+        }
+        
        
         window->clear();
+        if(fon){
         window->draw(SpriteFondoMenu);
+        }
+        else {
+            window->draw(spriteFondoGame);
+        }
         window->draw(spriteX);
         window->draw(SpriteBotonOpciones);
         window->draw(spriteInstrucciones);
@@ -682,8 +684,47 @@ void menuP::MenuAcercaDe() {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+
+
+        sf::Event event;
+
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear();
+
+                renderTexture.draw(renderedSprite, &Blur);
+                renderTexture.draw(spriteX);
+
+                renderTexture.draw(overlay);
+
+
+                renderTexture.draw(TextAcercaDe);
+                renderTexture.draw(spriteX);
+                renderTexture.display();
+                MenuSalir();
+            }
+
+
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+
+                    playClickSound();
+
+                    return;
+
+                }
+
+            }
+        }
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-        eventoMenuO();
+        
         renderedSprite.setTexture(renderTexture.getTexture());
 
         window->clear();
@@ -697,7 +738,6 @@ void menuP::MenuAcercaDe() {
 
         window->draw(TextAcercaDe);
 
-        window->draw(TextAcercaDe);
         window->setMouseCursor(*currentCursor);
         window->display();
     }

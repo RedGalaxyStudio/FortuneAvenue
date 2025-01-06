@@ -2,8 +2,9 @@
 #include <String>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
+#include "Chat.hpp"
 
-MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)) {
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(),HouseBuy()) , impuestoCasa(0){
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	loadResourceGame();
@@ -11,6 +12,8 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(win
 }
 void MultiplayerGame::resource() {
 
+	
+	if (!TextureChat.loadFromFile("window_13905854.png")) return;
 	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
@@ -37,15 +40,25 @@ void MultiplayerGame::resource() {
 	SpriteArrowArriba.setOrigin(350.0f, 350.0f);
 	SpriteArrowArriba.setPosition(370, 400);
 
-
+	SpriteChat.setTexture(TextureChat);
+	SpriteChat.setOrigin(20, 20);
+	SpriteChat.setPosition(23, 100);
 
 	Settings.setTexture(SettingsOff);
-	Settings.setOrigin(25, 25);
-	Settings.setPosition(150, 30);
+	Settings.setPosition(130, 6);
 
 	spriteMapa.setTexture(TextureMapa);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
+
+	TextureCasa.resize(17);
+	for (int i = 0; i < 17; i++)
+	{   std::cout << "\ni";
+		if (!TextureCasa[i].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(i) + ".png")) {
+			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
+		}
+		
+	}
 
 
 	if (!DiceBuffer.loadFromFile("resource/sounds/Dicerolling.wav")) return;
@@ -60,10 +73,14 @@ void MultiplayerGame::resource() {
 
 	std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
-	casillas0.push_back(camino1);
-	casillas1.push_back(camino1);
-	casillas2.push_back(camino1);
-	casillas3.push_back(camino1);
+	casillas.resize(UsuariosActivos.size());
+
+	for (int i = 0; i < casillas.size(); i++)
+	{
+		casillas[i].push_back(camino1);
+
+	}
+
 
 	view.setSize(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y));
 	view.setCenter(playersGame[0].PieceSelect.getPosition()); // Centra la vista en la ficha
@@ -75,20 +92,42 @@ void MultiplayerGame::resource() {
 	Bienvenida.setOutlineColor(sf::Color(135, 135, 135));
 	Bienvenida.setString("Comienza el juego!");
 	Bienvenida.setPosition(640, 360);
-	sf::FloatRect globalBounds = Bienvenida.getGlobalBounds();
+	globalBounds = Bienvenida.getGlobalBounds();
 	Bienvenida.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	posicionActual = 0;
 
 
-	Impuesto.setCharacterSize(45);
-	Impuesto.setFont(fontUser);
-	Impuesto.setFillColor(sf::Color::White);
-	Impuesto.setOutlineThickness(2);
-	Impuesto.setOutlineColor(sf::Color(135, 135, 135));
 
-	Impuesto.setPosition(640, 360);
-	globalBounds = Impuesto.getGlobalBounds();
-	Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	Impuesto.setCharacterSize(20);
+	Impuesto.setFont(fontUser);
+	Impuesto.setFillColor(sf::Color::Red);
+	//Impuesto.setOutlineThickness(2);
+	//Impuesto.setOutlineColor(sf::Color(135, 135, 135));
+
+	Impuesto.setPosition(715, 434);
+
+
+	ImpuestoCasa.setCharacterSize(18);
+	ImpuestoCasa.setFont(fontUser);
+	ImpuestoCasa.setFillColor(sf::Color::Red);
+	//ImpuestoCasa.setOutlineThickness(-1);
+	//ImpuestoCasa.setOutlineColor(sf::Color(135, 135, 135));
+
+	ImpuestoCasa.setPosition(715, 382);
+
+
+
+
+
+	SpriteImpuesto.setTexture(TextureImpuesto);
+
+	SpriteImpuesto.setPosition(640, 360);
+	sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+	SpriteImpuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+
+
+
 	posicionActual = 0;
 
 	DescripDado.setCharacterSize(15);
@@ -116,7 +155,6 @@ void MultiplayerGame::resource() {
 void MultiplayerGame::positionPefil() {
 	if (UsuariosActivos.size() >= 1) { 
 
-	std::cout << "\nperrrrrrrrrrroooooooooooooooooooooo";
 	playersGame[UsuariosActivos[0]].NamePlayer.setPosition(188.65f, 62.5f);
 
 	playersGame[UsuariosActivos[0]].boxPlayer.setPosition(188.65f, 62.5f);
@@ -134,7 +172,23 @@ void MultiplayerGame::positionPefil() {
 	playersGame[UsuariosActivos[0]].Money.setFillColor(sf::Color::White);
 	playersGame[UsuariosActivos[0]].Money.setOutlineThickness(2);
 	playersGame[UsuariosActivos[0]].Money.setOutlineColor(sf::Color(135, 135, 135));
-	playersGame[UsuariosActivos[0]].Money.setPosition(170.65f, 95.5f);
+	playersGame[UsuariosActivos[0]].Money.setPosition(198.65f, 95.5f);
+
+	playersGame[UsuariosActivos[0]].CashSprite.setPosition(240.65f, 95.5f);
+
+
+	playersGame[UsuariosActivos[0]].CasasN.setCharacterSize(17);
+	playersGame[UsuariosActivos[0]].CasasN.setFont(fontUserPerfil);
+	playersGame[UsuariosActivos[0]].CasasN.setFillColor(sf::Color::White);
+	playersGame[UsuariosActivos[0]].CasasN.setOutlineThickness(2);
+	playersGame[UsuariosActivos[0]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
+	playersGame[UsuariosActivos[0]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[0]].numCasas));
+
+	playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 95.5f);
+	playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 93.5f);
+
+
+
 
 	playersGame[UsuariosActivos[0]].textureAvatarPLayer = *selectedAvatarCopy.getTexture();
 	playersGame[UsuariosActivos[0]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[0]].textureAvatarPLayer);
@@ -147,16 +201,12 @@ void MultiplayerGame::positionPefil() {
 	globalBounds = playersGame[UsuariosActivos[0]].PieceSelect.getGlobalBounds();
 	playersGame[UsuariosActivos[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	moverFichas[UsuariosActivos[0]].Inicializar(&playersGame[UsuariosActivos[0]].PieceSelect, &casillas0);
 
-
-	playersGame[UsuariosActivos[0]].CashSprite.setOrigin(20, 16);
-	playersGame[UsuariosActivos[0]].CashSprite.setPosition(245, 105);
-	playersGame[0].PieceSelect.setPosition(330, 439);
+	playersGame[0].origen = sf::Vector2f(330, 439);
+	playersGame[0].PieceSelect.setPosition(playersGame[0].origen);
 } else {
 		return;
 	}
-
 
 	//Perfil 2
 	if (UsuariosActivos.size() >= 2) {
@@ -190,20 +240,33 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[1]].Money.setFillColor(sf::Color::White);
 		playersGame[UsuariosActivos[1]].Money.setOutlineThickness(2);
 		playersGame[UsuariosActivos[1]].Money.setOutlineColor(sf::Color(135, 135, 135));
-		playersGame[UsuariosActivos[1]].Money.setPosition(1170.65f, 85.5f);
+		playersGame[UsuariosActivos[1]].Money.setPosition(1198.65f, 85.5f);
+
+		playersGame[UsuariosActivos[1]].CashSprite.setPosition(1240.65f, 85.5f);
+
+		playersGame[UsuariosActivos[1]].CasasN.setCharacterSize(17);
+	playersGame[UsuariosActivos[1]].CasasN.setFont(fontUserPerfil);
+	playersGame[UsuariosActivos[1]].CasasN.setFillColor(sf::Color::White);
+	playersGame[UsuariosActivos[1]].CasasN.setOutlineThickness(2);
+	playersGame[UsuariosActivos[1]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
+	playersGame[UsuariosActivos[1]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[1]].numCasas));
+
+	globalBounds = playersGame[UsuariosActivos[1]].CasasN.getGlobalBounds();
+	playersGame[UsuariosActivos[1]].CasasN.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	
+
+
+
+
 
 		playersGame[UsuariosActivos[1]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[1]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-		moverFichas[UsuariosActivos[1]].Inicializar(&playersGame[UsuariosActivos[1]].PieceSelect, &casillas2);
 
-		
-		playersGame[UsuariosActivos[1]].CashSprite.setOrigin(25, 20);
-		playersGame[UsuariosActivos[1]].CashSprite.setPosition(370, 400);
+		playersGame[1].origen = sf::Vector2f(354, 427);
+		playersGame[1].PieceSelect.setPosition(playersGame[1].origen);
 
-		playersGame[1].PieceSelect.setPosition(354, 427);
-	}
-	else {
+	} else {
 		return;
 	}
 
@@ -233,20 +296,30 @@ void MultiplayerGame::positionPefil() {
 			playersGame[UsuariosActivos[2]].Money.setFillColor(sf::Color::White);
 			playersGame[UsuariosActivos[2]].Money.setOutlineThickness(2);
 			playersGame[UsuariosActivos[2]].Money.setOutlineColor(sf::Color(135, 135, 135));
-			playersGame[UsuariosActivos[2]].Money.setPosition(170.65f, 585.5f);
+			playersGame[UsuariosActivos[2]].Money.setPosition(198.65f, 585.5f);
+
+			playersGame[UsuariosActivos[2]].CashSprite.setPosition(240.65f, 585.5f);
+
+			playersGame[UsuariosActivos[2]].CasasN.setCharacterSize(17);
+			playersGame[UsuariosActivos[2]].CasasN.setFont(fontUserPerfil);
+			playersGame[UsuariosActivos[2]].CasasN.setFillColor(sf::Color::White);
+			playersGame[UsuariosActivos[2]].CasasN.setOutlineThickness(2);
+			playersGame[UsuariosActivos[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
+			playersGame[UsuariosActivos[2]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[2]].numCasas));
+
+			globalBounds = playersGame[UsuariosActivos[2]].CasasN.getGlobalBounds();
+			playersGame[UsuariosActivos[2]].CasasN.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+
 
 			playersGame[UsuariosActivos[2]].PieceSelect.setScale(1, 1);
 			globalBounds = playersGame[UsuariosActivos[2]].PieceSelect.getGlobalBounds();
 			playersGame[UsuariosActivos[2]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-			moverFichas[UsuariosActivos[2]].Inicializar(&playersGame[UsuariosActivos[2]].PieceSelect, &casillas1);
+			playersGame[2].origen = sf::Vector2f(399, 427);
+			playersGame[2].PieceSelect.setPosition(playersGame[2].origen);
 
-
-			playersGame[UsuariosActivos[2]].CashSprite.setOrigin(25, 20);
-			playersGame[UsuariosActivos[2]].CashSprite.setPosition(370, 400);
-
-			playersGame[2].PieceSelect.setPosition(399, 427);
-		}else{
+		} else{
 			return;
 		}
 	//perfil 4
@@ -269,7 +342,21 @@ void MultiplayerGame::positionPefil() {
 			playersGame[UsuariosActivos[3]].Money.setFillColor(sf::Color::White);
 			playersGame[UsuariosActivos[3]].Money.setOutlineThickness(2);
 			playersGame[UsuariosActivos[3]].Money.setOutlineColor(sf::Color(135, 135, 135));
-			playersGame[UsuariosActivos[3]].Money.setPosition(1170.65f, 585.5f);
+			playersGame[UsuariosActivos[3]].Money.setPosition(1198.65f, 585.5f);
+
+			playersGame[UsuariosActivos[3]].CashSprite.setPosition(1240.65f, 585.5f);
+
+			playersGame[UsuariosActivos[3]].CasasN.setCharacterSize(17);
+			playersGame[UsuariosActivos[3]].CasasN.setFont(fontUserPerfil);
+			playersGame[UsuariosActivos[3]].CasasN.setFillColor(sf::Color::White);
+			playersGame[UsuariosActivos[3]].CasasN.setOutlineThickness(2);
+			playersGame[UsuariosActivos[3]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
+			playersGame[UsuariosActivos[3]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[3]].numCasas));
+
+			globalBounds = playersGame[UsuariosActivos[3]].CasasN.getGlobalBounds();
+			playersGame[UsuariosActivos[3]].CasasN.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+
 
 			playersGame[UsuariosActivos[3]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[3]].textureAvatarPLayer);
 			playersGame[UsuariosActivos[3]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[3]].textureAvatarPLayer.getSize().x / 2));
@@ -281,13 +368,11 @@ void MultiplayerGame::positionPefil() {
 			playersGame[UsuariosActivos[3]].PieceSelect.setScale(1, 1);
 			globalBounds = playersGame[UsuariosActivos[3]].PieceSelect.getGlobalBounds();
 			playersGame[UsuariosActivos[3]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-			moverFichas[UsuariosActivos[3]].Inicializar(&playersGame[UsuariosActivos[3]].PieceSelect, &casillas3);
 
 
-			playersGame[UsuariosActivos[3]].CashSprite.setOrigin(25, 20);
-			playersGame[UsuariosActivos[3]].CashSprite.setPosition(370, 400);
+			playersGame[3].origen = sf::Vector2f(428, 440);
+			playersGame[3].PieceSelect.setPosition(playersGame[3].origen);
 
-			playersGame[3].PieceSelect.setPosition(428, 440);
 		}
 }
 void MultiplayerGame::update() {
@@ -305,34 +390,35 @@ void MultiplayerGame::update() {
 	GameMusicFondo.play();
 	Nulo NUlO;
 	NUlO.setWindow(*window);
-	NUlO.Resource(&client);       
+	NUlO.Resource(&client);
 
 	float duracionMovimiento = 0.5f;
-
-	
-	std::vector<HouseBuy> house(UsuariosActivos.size());
 
 	for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 		house[i].setWindow(*window, i);
 		house[i].resource(&client);
 
+		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
+
 	}
 
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame);
 	robarjugador.resource();
 
+
+	GameEnd gameend(window);
+	gameend.resource();
+	gameend.update();
+
 	Dado.start(1280, 720);
 	int DadoResul = 0;
-	//GameEnd gameend(window);
-   // gameend.update();
 
 	animacionRuleta = false;
 	InicioPartida();
-	//std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
-	while (window->isOpen()) {
-		//ruleta_draw = true;
-		//impuesto_draw = true;
+
+	while (window->isOpen() && !client.juegoTerminado) {
+
 		Event();
 		Dado.loopP(&client);
 		// dado mecanica 
@@ -380,9 +466,7 @@ void MultiplayerGame::update() {
 
 		if (DadoResul != 0 && TempoAnimacion.getElapsedTime().asSeconds() >= 1.0f) {
 			turn_dado = false;
-			std::cout << "\n FUuyti: "<< IndexTurn;
 			moverFichas[IndexTurn].iniciarMovimiento(DadoResul, duracionMovimiento);
-			std::cout << "\n FUi";
 			DadoResul = 0;
 		}
 
@@ -407,11 +491,30 @@ void MultiplayerGame::update() {
 
 			case 2:
 
+				if (IndexTurn == client.playerIndex) {
+					client.EventoImpuesto();
+					impuesto_draw = true;
+					turn_impuesto = false;
+					eventoActivo = true;
+					animacionImpuesto = true;
+					{
+						std::unique_lock<std::mutex> lock(client.impuestoMutex);
+						client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
 
-				impuesto_draw = true;
-				turn_impuesto = false;
-				eventoActivo = true;
-				animacionImpuesto = true;
+						client.impuestoMessageReceived = false;
+					}
+					impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
+
+					Impuesto.setString(std::to_string(playerInfos[IndexTurn].impuesto));
+					globalBounds = Impuesto.getGlobalBounds();
+					Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+					ImpuestoCasa.setString(std::to_string(impuestoCasa));
+					globalBounds = ImpuestoCasa.getGlobalBounds();
+					ImpuestoCasa.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+				}
+
 				break;
 
 			case 3:
@@ -424,7 +527,7 @@ void MultiplayerGame::update() {
 		}
 
 
-		if (client.turnopermitido != 0 &&nular== false) {
+		if (client.turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteFondoGame);
 			renderTexture.draw(spriteMapa);
@@ -451,79 +554,84 @@ void MultiplayerGame::update() {
 			nular = true;
 		}
 		else if (moverFichas[IndexTurn].enMovimiento == true) {
-				std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
-				moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
-				DrawPieceMoviendo();
-				window->display();
+			std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
+			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
+			DrawPieceMoviendo();
+			window->display();
 		}
-			else if (ruleta_draw == true) {
+		else if (ruleta_draw == true) {
 
-				if (!ruletaVisible) {
+			if (!ruletaVisible) {
 
-					DrawGameRuleta();
-					ruletaVisible = true;
-					clock.restart();
+				DrawGameRuleta();
+				ruletaVisible = true;
+				clock.restart();
+
+			}
+			else {
+
+				if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
+					ruletaVisible = false;
 
 				}
 				else {
-
-					if (clock.getElapsedTime().asSeconds() > tiempoRuletaVisible) {
-						ruletaVisible = false;
-
-					}
-					else {
-						DrawGameRuleta();
-					}
-
-				}
-				window->display();
-
-			}
-			else if (casa_draw) {
-				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
-				renderTexture.draw(spriteMapa);
-
-
-				for (int i = 0; i < UsuariosActivos.size(); i++)
-				{
-					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].Money);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
-					renderTexture.draw(playersGame[UsuariosActivos[i]].CashSprite);
-
-
+					DrawGameRuleta();
 				}
 
-
-				renderTexture.draw(Settings);
-
-				renderTexture.display();
-				house[IndexTurn].update(playersGame[IndexTurn].PieceSelect.getPosition());
-				eventoActivo = false;
-				casa_draw = false;
-
 			}
-			else  if (impuesto_draw) {
+			window->display();
 
-				DrawGameImpuesto();
-				window->display();
-			}
-			else
+		}
+		else if (casa_draw) {
+			renderTexture.clear();
+			renderTexture.draw(spriteFondoGame);
+			renderTexture.draw(spriteMapa);
+
+
+			for (int i = 0; i < UsuariosActivos.size(); i++)
 			{
-				DrawGame();
-				window->display();
+				renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].Money);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
+				renderTexture.draw(playersGame[UsuariosActivos[i]].CashSprite);
+
+
 			}
+
+
+			renderTexture.draw(Settings);
+
+			renderTexture.display();
+			house[IndexTurn].update(playersGame[IndexTurn].PieceSelect.getPosition());
+			eventoActivo = false;
+			casa_draw = false;
+
+		}
+		else  if (impuesto_draw) {
+
+			DrawGameImpuesto();
+			window->display();
+		}
+		else
+		{
+			DrawGame();
+			window->display();
+		}
 
 
 
 
 
 	}
-
+	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
+	if (window->isOpen() && client.juegoTerminado){
+		GameEnd gameend(window);
+		gameend.resource();
+		gameend.update();
+	}
 }
 void MultiplayerGame::Event() {
 	sf::Event event;
@@ -556,7 +664,11 @@ void MultiplayerGame::Event() {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (Settings.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					Menup.MenuOpcion();
+					Menup.MenuOpcion(false);
+				}
+				if (playersGame[UsuariosActivos[0]].Home.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					house[UsuariosActivos[0]].ViewHouseBuys();
 				}
 
 
@@ -565,6 +677,13 @@ void MultiplayerGame::Event() {
 					ruleta->trurntrue();
 					turnoGiro = false;
 				}
+
+				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					Chat iconochat(*window);
+					iconochat.update();
+				}
+
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
@@ -624,7 +743,16 @@ void MultiplayerGame::DrawGameRuleta() {
 		renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].Money);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].CashSprite);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].CasasN);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].Home);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
+
 	}
+
+	renderTexture.draw(SpriteChat);
+	renderTexture.draw(Settings);
 	renderTexture.draw(overlay);
 
 	renderTexture.display();
@@ -633,7 +761,7 @@ void MultiplayerGame::DrawGameRuleta() {
 
 	window->draw(renderedSprite);
 	ruleta->draw(*window, deltaTime, client.giroActivo);
-	if (!client.giroActivo) {
+	if (!client.giroActivo&& turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		// Modificar el escalado
@@ -658,23 +786,10 @@ void MultiplayerGame::DrawGameRuleta() {
 		window->draw(DescripDado);
 	}
 }
-
 void MultiplayerGame::DrawGameImpuesto() {
 
 
-	int valor = 100;
-	int valortotal;
 
-	valortotal = valor - 50;
-
-	Impuesto.setFont(fontUser);
-	Impuesto.setString(std::to_string(valortotal));
-	Impuesto.setCharacterSize(24);
-	Impuesto.setFillColor(sf::Color::Red);
-
-	Impuesto.setPosition(695, 435);
-	globalBounds = Impuesto.getGlobalBounds();
-	Impuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	window->clear();
 
@@ -685,17 +800,19 @@ void MultiplayerGame::DrawGameImpuesto() {
 
 	for (int i = 0; i < UsuariosActivos.size(); i++)
 	{
+	
 		renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].Money);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].CashSprite);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].CasasN);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].Home);
+		renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
 	}
-	SpriteImpuesto.setTexture(TextureImpuesto);
-
-	SpriteImpuesto.setPosition(640, 360);
-	sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
-	SpriteImpuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
+	renderTexture.draw(SpriteChat);
+	renderTexture.draw(Settings);
 	renderTexture.draw(overlay);
 	renderTexture.display();
 	renderedSprite.setTexture(renderTexture.getTexture());
@@ -703,6 +820,7 @@ void MultiplayerGame::DrawGameImpuesto() {
 	window->draw(renderedSprite);
 	window->draw(SpriteImpuesto);
 	window->draw(Impuesto);
+	window->draw(ImpuestoCasa);
 
 }
 void MultiplayerGame::InicioPartida() {
@@ -758,13 +876,17 @@ void MultiplayerGame::InicioPartida() {
 			window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
 			window->draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
 			window->draw(playersGame[UsuariosActivos[i]].Money);
-			window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
 			window->draw(playersGame[UsuariosActivos[i]].CashSprite);
+			window->draw(playersGame[UsuariosActivos[i]].CasasN);
+			window->draw(playersGame[UsuariosActivos[i]].Home);
+			window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
+			
 		}
 
 
 
 		// Dibuja los settings (configuración) al final
+		window->draw(SpriteChat);
 		window->draw(Settings);
 		window->draw(overlay);
 		window->draw(Bienvenida);
@@ -810,7 +932,7 @@ void MultiplayerGame::DrawGame() {
 				}
 				turn_casa = false;
 			}
-		}
+
 
 		if (turn_impuesto && !turn_dado && !turn_Moviendo) {
 			for (int i = 0; i < caminoimpuesto.size(); i++)
@@ -822,9 +944,27 @@ void MultiplayerGame::DrawGame() {
 					turn_impuesto = false;
 					eventoActivo = true;
 					animacionImpuesto = true;
+					{
+						std::unique_lock<std::mutex> lock(client.impuestoMutex);
+						client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
+
+						client.impuestoMessageReceived = false;
+					}
+					impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
+
+					Impuesto.setString(std::to_string(playerInfos[IndexTurn].impuesto));
+					globalBounds = Impuesto.getGlobalBounds();
+					Impuesto.setOrigin(globalBounds.width , globalBounds.height / 2.0f);
+
+					ImpuestoCasa.setString(std::to_string(impuestoCasa));
+					globalBounds = ImpuestoCasa.getGlobalBounds();
+					ImpuestoCasa.setOrigin(globalBounds.width , globalBounds.height / 2.0f);
+
 				}
 			}
 			turn_impuesto = false;
+		}
+
 		}
 	}
 
@@ -858,10 +998,29 @@ void MultiplayerGame::DrawGame() {
 		eventoActivo = true;
 		animacionImpuesto = true;
 		userImpuesto = false;
+		impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
+
+		Impuesto.setString(std::to_string(playerInfos[IndexTurn].impuesto));
+		globalBounds = Impuesto.getGlobalBounds();
+		Impuesto.setOrigin(globalBounds.width , globalBounds.height / 2.0f);
+
+		ImpuestoCasa.setString(std::to_string(impuestoCasa));
+		globalBounds = ImpuestoCasa.getGlobalBounds();
+		ImpuestoCasa.setOrigin(globalBounds.width , globalBounds.height / 2.0f);
 
 	}
 
 
+	std::cout << "turn: " << turn << "\n";
+	std::cout << "turn_impuesto: " << turn_impuesto << "\n";
+	std::cout << "turn_casa: " << turn_casa << "\n";
+	std::cout << "turn_ruleta: " << turn_ruleta << "\n";
+	std::cout << "turn_dado: " << turn_dado << "\n";
+	std::cout << "turn_Moviendo: " << turn_Moviendo << "\n";
+	std::cout << "eventoActivo: " << eventoActivo << "\n";
+	std::cout << "impuesto_draw: " << impuesto_draw << "\n";
+	std::cout << "casa_draw: " << casa_draw << "\n";
+	std::cout << "ruleta_draw: " << ruleta_draw << "\n";
 
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
 
@@ -887,8 +1046,11 @@ void MultiplayerGame::DrawGame() {
 		window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
 		window->draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
 		window->draw(playersGame[UsuariosActivos[i]].Money);
-		window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
 		window->draw(playersGame[UsuariosActivos[i]].CashSprite);
+		window->draw(playersGame[UsuariosActivos[i]].CasasN);
+		window->draw(playersGame[UsuariosActivos[i]].Home);
+		window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
+		
 
 
 	}
@@ -920,5 +1082,8 @@ void MultiplayerGame::DrawGame() {
 
 
 	window->draw(Settings);
-	window->draw(Conteosuel);
+	//window->draw(Conteosuel);
+	window->draw(SpriteChat);
+
+	std::cout << "\nhola";
 }

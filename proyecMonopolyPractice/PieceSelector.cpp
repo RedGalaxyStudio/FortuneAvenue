@@ -13,6 +13,24 @@ PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 	loadResourceGame();
 }
 
+PieceSelector::~PieceSelector() {
+	// Restablecer los vectores a su estado inicial
+	pieces.clear();
+	shadow.clear();
+	Check.clear();
+	piecesTextures.clear();
+	CheckTexturesOn.clear();
+	CheckTexturesOff.clear();
+
+	// Liberar referencia al puntero de la ventana
+	window = nullptr;
+
+	// Poner los punteros a nullptr
+	newSelection = nullptr;
+
+	// Si hay algún otro recurso relacionado con SFML, se manejará automáticamente por la propia biblioteca
+}
+
 void PieceSelector::Resource() {
 
 	
@@ -235,7 +253,6 @@ void PieceSelector::updateSelection() {
 				static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
 
 
-				std::cout << "Cantidad de usuario: " << UsuariosActivos.size();
 				for (int i = 0; i < pieces.size(); ++i) {
 					// Verificar si el mouse está sobre la pieza
 					if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
@@ -296,8 +313,6 @@ void PieceSelector::updateSelection() {
 
 
 
-
-		
 		if(client.disconnecte==true){
 			client.disActiv = true;
 			{
@@ -308,7 +323,7 @@ void PieceSelector::updateSelection() {
 			client.disActiv = false;
 			client.eventOccurred = false;
 		}
-		int totalPerfiles = UsuariosActivos.size(); 
+		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
 	//	std::cout << "\n"<< totalPerfiles;
 		if(!cierre){
 
@@ -384,6 +399,8 @@ void PieceSelector::updateSelection() {
 				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
 				window->draw(Check[UsuariosActivos[i]]);
 			}
+
+
 		}
 		
 

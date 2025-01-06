@@ -1,6 +1,6 @@
 #ifndef MULTIPLAYERGAME_HPP
 #define MULTIPLAYERGAME_HPP
-#include "HouseBuy.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
@@ -16,8 +16,9 @@
 #include "PieceSelector.hpp"
 #include "ResourceGame.hpp"
 #include "nulo.hpp"
-
+#include "HouseBuy.hpp"
 class Ruleta;
+class HouseBuy;
 
 class MultiplayerGame {
 public:
@@ -52,13 +53,11 @@ private:
 	float maxScale = 1.2f;      // Tamaño máximo
 	float duration = 2.0f;      // Tiempo para hacer un ciclo completo (ampliar + reducir)
 	bool increasing = true;     // Indica si el escalado está aumentando
-
+	int impuestoCasa;
 	// Ventana de renderizado
 	sf::RenderWindow* window;
-	std::vector<std::vector<sf::Vector2f>> casillas0;
-	std::vector<std::vector<sf::Vector2f>> casillas1;
-	std::vector<std::vector<sf::Vector2f>> casillas2;
-	std::vector<std::vector<sf::Vector2f>> casillas3;
+	std::vector<std::vector<std::vector<sf::Vector2f>>> casillas;
+
 
 	std::vector<sf::Vector2f> casillasRuleta = {
 	sf::Vector2f(402, 157),
@@ -134,8 +133,8 @@ private:
 	sf::Sprite pieces;
 
 
-
 	std::vector<MovePieces> moverFichas;
+	std::vector<HouseBuy> house;
 	sf::Clock TempoAnimacion;
 	bool animacionIniciada;
 	Window Dado;
@@ -146,7 +145,9 @@ private:
 	Ruleta* ruleta;
 	sf::View viewTablero;
 	sf::Text Impuesto;
+	sf::Text ImpuestoCasa;
 	
+	sf::Texture TextureChat;
 	sf::Texture TextureMapa;
 	sf::Texture SettingsOn;
 	sf::Texture SettingsOff;
@@ -158,6 +159,7 @@ private:
 	sf::Sprite SpriteImpuesto;
 	sf::Sprite Settings;
 	sf::Sprite renderedSprite;
+	sf::Sprite SpriteChat;
 
 };
 #endif

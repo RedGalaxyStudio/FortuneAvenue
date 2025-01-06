@@ -146,12 +146,14 @@
   <ItemGroup>
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Economy.cpp" />
     <ClCompile Include="fileio.cpp" />
     <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="GameModeSelector.cpp" />
+    <ClCompile Include="GameOptions.cpp" />
     <ClCompile Include="MultiplayerGame.cpp" />
     <ClCompile Include="HouseBuy.cpp" />
     <ClCompile Include="IniciarPartida.cpp" />
@@ -175,6 +177,7 @@
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="card.h" />
     <ClInclude Include="cell.h" />
+    <ClInclude Include="Chat.hpp" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="fileio.h" />
     <ClInclude Include="GameEnd.hpp" />
     <ClInclude Include="GameModeSelector.hpp" />
+    <ClInclude Include="GameOptions.hpp" />
     <ClInclude Include="MultiplayerGame.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="HouseBuy.hpp" />

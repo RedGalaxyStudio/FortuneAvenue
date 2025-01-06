@@ -46,11 +46,11 @@ void Stealplayer::resource() {
 void Stealplayer::update() {
 
 
-
+    return;
     // Configurar perfiles
     float perfilWidth = 200.0f; // Ancho estimado de cada perfil
     float separacion = 20.0f;   // Espaciado entre perfiles
-    int totalPerfiles = UsuariosEleccion.size(); // Usar el número real de perfiles
+    int totalPerfiles = static_cast<int>(UsuariosEleccion.size()); // Usar el número real de perfiles
 
 
     if (totalPerfiles > 0) {
@@ -71,8 +71,6 @@ void Stealplayer::update() {
             PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
-           //std::cout << "\nMedida: " << PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.getRadius();
-           //std::cout << "\n xPos" << xPos << "startY" << startY;
             PlayersSteal[UsuariosEleccion[i]].MarcoPlayer.setPosition(xPos, startY);
             isMouseOver[i].setPosition(xPos, startY);
             if (PlayersSteal[UsuariosEleccion[i]].PieceSelect.getTexture() != nullptr) {

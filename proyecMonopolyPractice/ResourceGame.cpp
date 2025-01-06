@@ -5,8 +5,9 @@
 
 sf::Texture &textureBoxPerfil= textureBox;
 
-
+std::vector<sf::Texture> TextureCasa;
 sf::Texture TextureCash;
+sf::Texture TextureHome;
 sf::Font &fontUserPerfil=fontUser ;
 std::vector<sf::Texture> avatarTextures;
 sf::Texture TextureFondoGame;

@@ -1,5 +1,6 @@
 #include "GameModeSelector.hpp"
 #include "IniciarPartida.hpp"
+#include "GameOptions.hpp"
 #include "ObjetosGlobal.hpp"
 #include "ButtonG.hpp"
 #include "TextBox.hpp"
@@ -91,6 +92,12 @@ void GameModeSelector::update() {
 				}
 
 				if (SpriteOffline.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+
+					GameOptions partida(*window);
+					partida.update();
+
+					box.setPosition(273, 74);
 
 				}
 

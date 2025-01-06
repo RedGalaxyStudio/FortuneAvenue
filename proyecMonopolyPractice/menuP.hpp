@@ -17,7 +17,7 @@ public:
     void Resource();
     void setWindow(sf::RenderWindow& windowRef);
     void MenuPrincipal();
-    void MenuOpcion();
+    void MenuOpcion(bool fon);
 
     void MenuSalir();
 private:
@@ -32,8 +32,7 @@ private:
 
     void eventoMenuP();
 
-    void eventoMenuO();
- 
+
     void instruccionesGame();
     
     void MenuAcercaDe();

@@ -4,7 +4,7 @@
 #include "TextBox.hpp"
 #include "MensageBox.hpp"
 
-IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), pieceselector(window) {
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();
 	resource();
 }
@@ -17,6 +17,7 @@ void IniciarPartida::resource() {
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
 	if (!TextureCash.loadFromFile("resource/texture/Game/cash.png")) return;
+	if (!TextureHome.loadFromFile("resource/texture/Game/casa.png")) return;
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);
@@ -50,7 +51,15 @@ void IniciarPartida::update() {
 
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-	
+
+
+	int xPos=180;
+	int startY=120;
+
+	Sesion.setPosition(xPos, startY + 110);
+	box.setPosition(xPos, startY + 110);
+	selectedAvatarCopy.setPosition(xPos, startY);
+	recua.setPosition(xPos, startY);
 
 
 	bool valida2 = false;
@@ -93,8 +102,12 @@ void IniciarPartida::update() {
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
 							Code = client.createRoom(nameUser, TextureAvatarPath);
 
+							PieceSelector pieceselector(window);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
+
+							pieceselector.~PieceSelector();
+							
 						}
 						else
 						{
@@ -193,9 +206,11 @@ void IniciarPartida::updatejoinRoom() {
 
 								client.joinRoom(code, nameUser, TextureAvatarPath);
 								Code = code;
-
+								PieceSelector pieceselector(window);
 								pieceselector.Resource();
 								pieceselector.updateSelection();
+
+								pieceselector.~PieceSelector();
 
 							}
 							else {

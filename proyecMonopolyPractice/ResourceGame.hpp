@@ -6,9 +6,10 @@
 #include <string>
 #include <iostream>
 
-
+extern std::vector<sf::Texture> TextureCasa;
 extern sf::Texture TextureFondoGame;
 extern sf::Texture TextureCash;
+extern sf::Texture TextureHome;
 extern  sf::Texture TextureMarco;
 extern sf::Sprite spriteFondoGame;
 extern int NumPlayers;
@@ -41,12 +42,18 @@ extern std::string nameUser;
 struct PlayerInfo {
 	std::string username;
 	std::string image;
+	int numCasas=0;
 	int money = 200;
+	int impuesto = 50;
 	int roomconect;
+	int Posicion;
 	bool isSelectingPiece = false; 
 	bool isInGame = false;        
 	int indexPiece;
 	int casasPorJugador[17];
+	int Vueltas = 0;
+	bool final= false;
+	bool PiecUserme = false;
 	void reset() {
 		username.clear();                        // Vaciar el nombre de usuario
 		image.clear();                           // Vaciar la imagen
@@ -55,8 +62,7 @@ struct PlayerInfo {
 		isSelectingPiece = false;                // Reiniciar a falso
 		isInGame = false;                        // Reiniciar a falso
 		indexPiece = -1;                         // Usar -1 para indicar que no hay pieza seleccionada
-		//std::fill(std::begin(casasPorJugador),   // Reiniciar todas las casas a 0
-		//	std::end(casasPorJugador), 0);
+
 	}
 };
 
@@ -88,11 +94,13 @@ struct PlayerGame {
 	sf::CircleShape AvatarPlayer;  
 	sf::Sprite MarcoPlayer;
 	sf::Text NamePlayer;
+	sf::Text CasasN;
+	sf::Sprite Home;
 	sf::Sprite boxPlayer;
 	sf::Sprite PieceSelect;
 	sf::Text Money;
 	bool Activo;
-
+	sf::Vector2f origen;
 	sf::Texture TextureCash;
 	sf::Sprite CashSprite;
 
