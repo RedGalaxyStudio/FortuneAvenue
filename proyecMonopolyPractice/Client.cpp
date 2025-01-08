@@ -990,8 +990,9 @@ void Client::handleServerMessage(const std::string& message) {
 		}
 
 		//std::cout << "\nEJEcuto existen2";
-	}
-	else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
+	} 
+   
+    else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
 		//std::cout << "\nPLAYER_COUNT" << std::endl;
 		// Extraer la cantidad de jugadores de la mensaje
 		std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13

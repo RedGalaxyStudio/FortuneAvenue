@@ -235,9 +235,13 @@ void GameMode::update() {
 
 	Dado.start(1280, 720);
 	int DadoResul = 0;
-	 //GameEnd gameend(window);
-	// gameend.update();
-//	std::cout << "\n23333333siioooo";
+
+	 GameEnd gameend(window);
+	 gameend.resource();
+	 gameend.update();
+
+    //std::cout << "\n23333333siioooo";
+
 	animacionRuleta = false;
 	InicioPartida();
 	//std::cout << "\n4NOoooooooooooooooooooooooooooooooooooooooooooooooooooo";
@@ -724,6 +728,7 @@ void GameMode::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 					{
+						client.EventoRuleta();
 						ruleta_draw = true;
 						turn_ruleta = false;
 						eventoActivo = true;
@@ -743,6 +748,7 @@ void GameMode::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 					{
+						client.EventoCasa();
 						casa_draw = true;
 						eventoActivo = true;
 					}
@@ -756,6 +762,7 @@ void GameMode::DrawGame() {
 			{
 				if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
 				{
+					client.EventoImpuesto();
 					impuesto_draw = true;
 					turn_impuesto = false;
 					eventoActivo = true;
