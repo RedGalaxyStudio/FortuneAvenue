@@ -134,7 +134,7 @@ void Scrollbar::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
     auto mousePos = sf::Mouse::getPosition(window);
 
     if (event.type == sf::Event::MouseButtonPressed) {
-        if (scrollbarThumb.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+        if (scrollbarThumb.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
             dragging = true;
             dragOffset = mousePos.y - scrollbarThumb.getPosition().y;
         }

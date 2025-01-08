@@ -12,7 +12,7 @@ class MovePieces {
 public:
 	MovePieces(sf::RenderWindow& win);
 
-	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC);
+	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser);
 
 	
 	void iniciarMovimiento(int numeroCasillas, float duracion);
@@ -38,8 +38,11 @@ private:
 	int caminoActual;  
 	int casillaActual;  
 	int casillasRestantes;  
+	sf::Vector2f final;
+	int *vuelta;
+	bool* CsFinal;
 
-
+	bool PieceUser;
 	sf::Vector2f posicionInicial;  
 	sf::Vector2f posicionFinal;  // Posición final hacia la que se mueve el sprite
 	float duracionMovimiento;  // Duración de la transición entre casillas

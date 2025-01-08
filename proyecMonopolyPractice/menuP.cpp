@@ -2,19 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "SettingsManager.hpp"
-#include "IniciaUser.hpp"
 #include "ResourceGlobal.hpp"
 #include "ButtonG.hpp"
-#include "IniciarPartida.hpp"
+#include "GameModeSelector.hpp"
 #include "PieceSelector.hpp"
-
+#include "IniciaUser.hpp"
 menuP::menuP() : window(nullptr), SesionValida(true){}
-
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
-
-
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("resource/texture/Button/boton2.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("resource/texture/Logos/logojuego14.png")) return;
@@ -60,8 +56,8 @@ void menuP::Resource() {
 
     loadSounds();
     std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound,&girosSound,&DiceSound };
-    std::vector<sf::Music*> MusicPointers =  { &MenuMusicFondo,&GameMusicFondo };
-   
+    std::vector<sf::Music*> MusicPointers =  { &MenuMusicFondo,&GameMusicFondo,&SelectingMusicFondo };
+
     overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x),static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 150));
    
@@ -102,7 +98,6 @@ void menuP::Resource() {
     window->setMouseCursor(normalCursor);
 
 }
-
 void menuP::MenuPrincipal() {
     window->setMouseCursorVisible(true);
     MenuMusicFondo.setLoop(true);
@@ -112,7 +107,12 @@ void menuP::MenuPrincipal() {
 
     selectedAvatarCopy.setPosition(84,74);
     selectedAvatarCopy.setScale(1,1);
+   
 
+    editorPerfil.setFillColor(sf::Color(0, 0, 0, 0));
+    editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));
+    editorPerfil.setPosition(16,0);
+    editorPerfil.setOrigin(0, 0);
     recua.setPosition(84,74);
     recua.setScale(1,1);
     Sesion.setCharacterSize(24);
@@ -162,6 +162,7 @@ void menuP::MenuPrincipal() {
         window->draw(SpriteBotonOpciones);
         window->draw(SpriteBotonSalir);
         window->draw(spriteAcercaDe);
+        window->draw(editorPerfil);
         window->display();
     }
 }
@@ -169,21 +170,12 @@ void menuP::MenuPrincipal() {
 void menuP::ValidarUser() {
 
     if (SesionValida) {
-     //   GetUserEmail();
 
         Sesion.setString(input1);
         sf::FloatRect globalBounds = Sesion.getGlobalBounds();
 
         // Ajustar la posición centrando el texto
         Sesion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-     /*   if (email.empty()) {
-            Sesion.setString("Iniciar Sesion");
-        }
-        else
-        {
-            Sesion.setString(email);
-        }
-     SesionValida = false;*/
     }
     
 }
@@ -230,7 +222,8 @@ void menuP::eventoMenuP() {
             
             if (SpriteBotonOpciones.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                MenuOpcion();
+                MenuOpcion(true);
+                SpriteBotonOpciones.setPosition(640, 560);
         
             }
 
@@ -244,6 +237,15 @@ void menuP::eventoMenuP() {
                 playClickSound();
                 MenuAcercaDe();
              
+            } 
+            
+            if (editorPerfil.getGlobalBounds().contains(mousePosFloat)) {
+                
+                playClickSound();
+                editPerfil();
+                ValidarUser();
+                
+             
             }
 
         }
@@ -253,8 +255,8 @@ void menuP::eventoMenuP() {
 void menuP::MenuJugar() {
 
 
-   IniciarPartida inicial(*window);
-   inicial.update();
+    GameModeSelector GMSelector(*window);
+    GMSelector.update();
 
    box.setPosition(273, 74);
 
@@ -264,61 +266,47 @@ void menuP::MenuJugar() {
 };
 
 
-void menuP::eventoMenuO() {
 
-    sf::Event event;
-
-    while (window->pollEvent(event)) {
-       
-        if (event.type == sf::Event::Closed ||
-            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            renderTexture.clear();  
-            renderTexture.draw(SpriteFondoMenu);
-            renderTexture.draw(SpriteBotonOpciones);
-            renderTexture.draw(spriteX);
-            musicSlider->Printf();
-            effectSlider->Printf();
-            renderTexture.display();
-            MenuSalir();
-        }
-
-       
-
-        musicSlider->handleEvent(event, *window);
-        effectSlider->handleEvent(event, *window);
-
-        
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-            sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-            if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
-                playClickSound();
-                MenuPrincipal();
-
-            }
-            if (spriteInstrucciones.getGlobalBounds().contains(mousePosFloat)) {
-                playClickSound();
-                instruccionesGame();
-
-            }
-        }
-    }
-}
 
 
 void menuP::Inicializar() {
-
     IniciaUser iniciaUser(*window);
+    
 
     
     iniciaUser.Resource();
-
+    
     
     iniciaUser.Update();
 
+    iniciaUser.~IniciaUser();
+
 }
-void menuP::MenuOpcion() {
+
+void menuP::editPerfil() {
+    IniciaUser iniciaUserEdit(*window);
+
+
+
+    iniciaUserEdit.Resource();
+
+
+    iniciaUserEdit.UpdateEdit();
+
+
+    iniciaUserEdit.~IniciaUser();
+
+    selectedAvatarCopy.setPosition(84, 74);
+    selectedAvatarCopy.setScale(1, 1);
+    recua.setPosition(84, 74);
+    recua.setScale(1, 1);
+    Sesion.setCharacterSize(24);
+    Sesion.setPosition(273, 74 - 4);
+    box.setPosition(273, 74);
+    box.setScale(1, 1);
+
+}
+void menuP::MenuOpcion(bool fon) {
 
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
@@ -330,12 +318,56 @@ void menuP::MenuOpcion() {
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 
-        eventoMenuO();
-        
+        sf::Event event;
 
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear();
+                renderTexture.draw(SpriteFondoMenu);
+                renderTexture.draw(SpriteBotonOpciones);
+                renderTexture.draw(spriteX);
+                musicSlider->Printf();
+                effectSlider->Printf();
+                renderTexture.display();
+                MenuSalir();
+            }
+
+
+
+            musicSlider->handleEvent(event, *window);
+            effectSlider->handleEvent(event, *window);
+
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+                    musicSlider->saveSettings();
+                    effectSlider->saveSettings();
+                    playClickSound();
+
+                    return;
+
+                }
+                if (spriteInstrucciones.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    instruccionesGame();
+
+                }
+            }
+        }
+        
        
         window->clear();
+        if(fon){
         window->draw(SpriteFondoMenu);
+        }
+        else {
+            window->draw(spriteFondoGame);
+        }
         window->draw(spriteX);
         window->draw(SpriteBotonOpciones);
         window->draw(spriteInstrucciones);
@@ -652,8 +684,47 @@ void menuP::MenuAcercaDe() {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+
+
+        sf::Event event;
+
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear();
+
+                renderTexture.draw(renderedSprite, &Blur);
+                renderTexture.draw(spriteX);
+
+                renderTexture.draw(overlay);
+
+
+                renderTexture.draw(TextAcercaDe);
+                renderTexture.draw(spriteX);
+                renderTexture.display();
+                MenuSalir();
+            }
+
+
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+
+                    playClickSound();
+
+                    return;
+
+                }
+
+            }
+        }
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-        eventoMenuO();
+        
         renderedSprite.setTexture(renderTexture.getTexture());
 
         window->clear();
@@ -667,7 +738,6 @@ void menuP::MenuAcercaDe() {
 
         window->draw(TextAcercaDe);
 
-        window->draw(TextAcercaDe);
         window->setMouseCursor(*currentCursor);
         window->display();
     }

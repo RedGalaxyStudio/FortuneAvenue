@@ -22,10 +22,11 @@ public:
 
     void toggleMusic(bool enable);
     void toggleEffects(bool enable);
-
+    void saveSettings();
 private:
     sf::RenderWindow& window;
-
+    sf::Vector2f sizeFilledBar;
+    sf::Vector2f thumbPosition;
     float volume;
     bool isDragging;
     bool musicEnabled;

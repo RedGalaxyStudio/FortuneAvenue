@@ -48,10 +48,7 @@
     <ClCompile Include="Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PieceSelector.cpp">
+    <ClCompile Include="MultiplayerGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ResourceGame.cpp">
@@ -90,6 +87,15 @@
     <ClCompile Include="Stealplayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PieceSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModeSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Chat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cinematic.hpp">
@@ -125,7 +131,7 @@
     <ClInclude Include="Scrollbar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameMode.hpp">
+    <ClInclude Include="MultiplayerGame.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PieceSelector.hpp">
@@ -183,6 +189,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Stealplayer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModeSelector.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

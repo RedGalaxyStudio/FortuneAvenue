@@ -57,7 +57,7 @@ int i;
 
     (*this).cShape.setPointCount(sizeP);
     (*this).cShape.setFillColor(col);
-    (*this).cShape.scale(0.04,0.04);
+    (*this).cShape.scale(0.04f,0.04f);
     //(*this).cShape.setOutlineColor(sf::Color::Black);
    // (*this).cShape.setOutlineThickness(-1);
     (*this).cShape.setOrigin(199.0, 350.0);
@@ -100,13 +100,13 @@ int i;
     }//else_if
     else {}
 
-    float Sx = 0.5 * (p[1] * q[2] - p[2] * q[1]);
-    float Sy = 0.5 * (-p[0] * q[2] + p[2] * q[0]);
-    float Sz = 0.5 * (p[0] * q[1] - p[1] * q[0]);
-    float S = sqrt(Sx * Sx + Sy * Sy + Sz * Sz);
-    float nx = Sx / S;
-    float ny = Sy / S;
-    float nz = Sz / S;
+    float Sx = static_cast < float>(0.5 * (p[1] * q[2] - p[2] * q[1]));
+    float Sy = static_cast < float>(0.5 * (-p[0] * q[2] + p[2] * q[0]));
+    float Sz = static_cast < float>(0.5 * (p[0] * q[1] - p[1] * q[0]));
+    float S = static_cast<float>(sqrt(Sx * Sx + Sy * Sy + Sz * Sz));
+    float nx = static_cast<float>(Sx / S);
+    float ny = static_cast<float>(Sy / S);
+    float nz = static_cast<float>(Sz / S);
 
     (*this).setN(sf::Vector3f{nx, ny, nz});
 
@@ -144,7 +144,7 @@ int i;
 
     (*this).cShape.setPointCount(sizeP);
     (*this).cShape.setTexture(texcar);
-    (*this).cShape.scale(0.04,0.04);
+    (*this).cShape.scale(0.04f,0.04f);
     //(*this).cShape.setOutlineColor(sf::Color::Black);
     //(*this).cShape.setOutlineThickness(-1);
     (*this).cShape.setOrigin(199.0, 350.0);
@@ -187,13 +187,13 @@ int i;
     }//else_if
     else {}
 
-    float Sx = 0.5 * (p[1] * q[2] - p[2] * q[1]);
-    float Sy = 0.5 * (-p[0] * q[2] + p[2] * q[0]);
-    float Sz = 0.5 * (p[0] * q[1] - p[1] * q[0]);
-    float S = sqrt(Sx * Sx + Sy * Sy + Sz * Sz);
-    float nx = Sx / S;
-    float ny = Sy / S;
-    float nz = Sz / S;
+    float Sx = static_cast < float>(0.5 * (p[1] * q[2] - p[2] * q[1]));
+    float Sy = static_cast < float>(0.5 * (-p[0] * q[2] + p[2] * q[0]));
+    float Sz = static_cast < float>(0.5 * (p[0] * q[1] - p[1] * q[0]));
+    float S = static_cast<float>(sqrt(Sx * Sx + Sy * Sy + Sz * Sz));
+    float nx = static_cast<float>(Sx / S);
+    float ny = static_cast<float>(Sy / S);
+    float nz = static_cast<float>(Sz / S);
 
     (*this).setN(sf::Vector3f{nx, ny, nz});
 
@@ -276,8 +276,8 @@ void Cell::Rotate(sf::Vector3f O, sf::Vector3f W, float thetaY) {
         
         float thetaX = 0;
         // Convertir los ángulos a radianes
-        thetaX *= M_PI / 180.0f;
-        thetaY *= M_PI / 180.0f;
+        thetaX *= static_cast<float>(M_PI / 180.0f);
+        thetaY *= static_cast<float>(M_PI / 180.0f);
 
         // Crear matrices de rotación individuales para X e Y
         float RX[3][3] = {

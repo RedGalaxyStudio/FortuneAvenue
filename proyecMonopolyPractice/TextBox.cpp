@@ -42,16 +42,14 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
 
 // Posición del cuadro de texto
 void TextBox::setPosition(int XX ,int YY) {
-    box.setPosition(XX + 145, YY + 60);
-    text.setPosition(XX + 145, YY + 56);
-    textoPregunta.setPosition(XX, YY - 25);
+    box.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 60));
+    text.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 56));
+    textoPregunta.setPosition(static_cast<float>(XX), static_cast<float>(YY - 25));
 }
 
 
 std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
  
-
-  
     if (event.type == sf::Event::TextEntered && nombre.empty()) {
         if (event.text.unicode < 128) {
             if (event.text.unicode == '\b' && !input.empty()) {
@@ -59,7 +57,12 @@ std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
             }
             
             else if (event.text.unicode != '\b' && input.size() < maxLength) {
-                input += static_cast<char>(event.text.unicode);
+                
+                char enteredChar = static_cast<char>(event.text.unicode);
+                // Verificar que el carácter ingresado no sea ':'
+                if (enteredChar != ':') {
+                    input += enteredChar;
+                }
             }
 
             text.setString(input);

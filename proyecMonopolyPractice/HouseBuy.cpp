@@ -17,11 +17,11 @@ HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
 void HouseBuy::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
 	index = indice;
-	std::cout << "\n\n" << index;
+	//std::cout << "\n\n" << index;
 }
 void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
-	TextureCasa.resize(17);
+	
 	SpriteCasa.resize(17);
 	if (!TextureXcOFF.loadFromFile("resource/texture/Button/XOffC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
@@ -29,8 +29,6 @@ void HouseBuy::resource(Client* client) {
 	if (!TextureXcOn.loadFromFile("resource/texture/Button/XOnC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
-
-
 
 	Xc.setTexture(TextureXcOFF);
 
@@ -42,34 +40,28 @@ void HouseBuy::resource(Client* client) {
 	SpriteBotonComprar.setPosition(640, 545);
 	SpriteBotonComprar.setOrigin(101, 40);
 
-
-	
-		if (!ReversoCart.loadFromFile("resource/texture/Game/Casas/reversocart.png")) {
+	if (!ReversoCart.loadFromFile("resource/texture/Game/Casas/reversocart.png")) {
 			std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
-		}
+	}
 	// Crear el sprite para cada textura
 
 	std::ifstream file("resource/texture/Game/Casas/CasasInfo.json");
-	//std::cout << "3";
+
 	if (!file.is_open()) {
 		char error_message[256];
 		strerror_s(error_message, sizeof(error_message), errno);
 		std::cerr << "Error: No se pudo abrir el archivo. Motivo: " << error_message << std::endl;
 		return;
 	}
-
-	//std::cout << "4";
-	// Cargar el contenido del archivo en un objeto JSON
+	// Carga el contenido del archivo en un objeto JSON
 
 
 
 	json jsonData;
 	file >> jsonData;
-	//std::cout << "5";
+
 	// Vector para almacenar las casas
-	
-	//std::cout << "6";
-	// Iterar sobre las entradas del JSON
+
 	for (auto& [key, value] : jsonData.items()) {
 		houseInfo house;
 		//		house.nombre = value["nombre"];
@@ -82,14 +74,6 @@ void HouseBuy::resource(Client* client) {
 		// Agregar al vector
 		houses.push_back(house);
 	}
-	//std::cout << "7";
-	// Mostrar las casas cargadas
-	/*for (const auto& house : houses) {
-		std::cout << "Nombre: " << house.nombre
-			<< ", Salario: " << house.salario
-			<< ", Costo: " << house.costo
-			<< ", Impuesto: " << house.impuesto << std::endl;
-	}*/
 
 	sf::FloatRect globalBounds = Xc.getGlobalBounds();
 	Xc.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -102,61 +86,39 @@ void HouseBuy::resource(Client* client) {
 void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	float angle = 0.f;  // Ángulo de rotación
 	float rotationSpeed = 45.f;  // Velocidad de rotación en grados por segundo
-	//std::cout << "\n1";
+
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
 	readData(pp, cc, "quad.vtk");
-	//std::cout << "\n2";
+
 	IndexCAsa += 1;
-	std::cout << "\n\n2";
-	std::cout << "\n\n" << IndexCAsa << "index" << index;
-	if (!TextureCasa[IndexCAsa].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(playerInfos[index].casasPorJugador[IndexCAsa]) + ".png")) {
-		std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
-	}
-	std::cout << "\n\n5";
 
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
 	for (int i = 0; i < 6; i++)
 		for (int j = 0; j < 4; j++)
 			q.at(i).push_back({ pp.at(cc.at(i).n[j]).x, pp.at(cc.at(i).n[j]).y, pp.at(cc.at(i).n[j]).z });
 
-	std::cout << "\n\n1";
-	//std::cout << "\n4";
-	std::vector<Cell> cellQua; // (0, Cell(q0, sf::Color::Green));
+	std::vector<Cell> cellQua; 
 	Cell c0(q.at(0), sf::Color(0, 255, 0, 255), posicionactuInicial); cellQua.push_back(c0);
 	Cell c1(q.at(1), sf::Color(255, 0, 0, 255), posicionactuInicial); cellQua.push_back(c1);
 	Cell c2(q.at(2), sf::Color(0, 0, 255, 255), posicionactuInicial); cellQua.push_back(c2);
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
-	Cell c5(q.at(5), &TextureCasa[IndexCAsa], posicionactuInicial); cellQua.push_back(c5);
+	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 	std::cout << "\nIndexCAsa" << IndexCAsa;
 	
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
-		if (TextureCasa[IndexCAsa].getSize().x == 0 || TextureCasa[IndexCAsa].getSize().y == 0) {
-			std::cout << "La textura " << IndexCAsa << " no tiene contenido." << std::endl;
-		}
-		else {
-			std::cout << "La textura " << IndexCAsa << " está cargada correctamente: "
-				<< TextureCasa[IndexCAsa].getSize().x << "x" << TextureCasa[IndexCAsa].getSize().y << std::endl;
-		}
-		std::cout << "\n\n2";
-
 
 	pp.clear();
 	cc.clear();
 
 
 	Xc.setPosition(790,148);
-	std::cout << "\n55";
 
 	renderedSprite.setTexture(renderTexture.getTexture());
 
-
-
 	ITER(pp, i) { pp.at(i).x += 550.; pp.at(i).y += 100.; }
 
-
-	//std::cout << "\n122";
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 4;
 	settings.depthBits = 24;
@@ -174,7 +136,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
-			std::cout << "\n\n12222222222222222222";
+			//std::cout << "\n\n12222222222222222222";
 
 			
 			if (event.type == sf::Event::Closed ||
@@ -200,6 +162,14 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerInfos[0].money>= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
 						client.casacomprada(playerInfos[0].casasPorJugador[IndexCAsa]);
+
+						CasasCompradas CasasaCOMPRAR;
+						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
+						VCcompradas.push_back(CasasaCOMPRAR);
+						CsCmpdrsindex.push_back(IndexCAsa);
+
+						playerInfos[UsuariosActivos[0]].numCasas += 1;
+						playersGame[UsuariosActivos[0]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[0]].numCasas));
 						cierre = true;
 					}
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
@@ -221,7 +191,6 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 		window->setMouseCursor(*currentCursor);
 		// Obtener el tiempo transcurrido
-		std::cout << "\n\n45555555432";
 		window->clear();
 		if (client.accionCompra) {
 
@@ -237,8 +206,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 		ITER(cellQua, i)
 			if (cellQua.at(i).getN().z > 0.02) {
 				window->draw(cellQua.at(i).getCell());
-				//	sf::Vector2f posicionactu = cellQua.at(i).getCell().getPosition(); 
-
+			
 			}
 
 
@@ -264,3 +232,108 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 }
 
+void HouseBuy::ViewHouseBuys() {
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	CasasCompradas CasasaCOMPRAR;
+	//	CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[i]]);
+	//	VCcompradas.push_back(CasasaCOMPRAR);
+	//	CsCmpdrsindex.push_back(i);
+	//}
+	// Configurar perfiles
+	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
+	float separacion = 20.0f;   // Espaciado entre perfiles
+	int totalPerfiles = static_cast<int>(CsCmpdrsindex.size()); // Usar el número real de perfiles
+
+
+	if (totalPerfiles > 0) {
+		// Calcular ancho total ocupado por perfiles y separaciones
+		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+
+		// Calcular inicio X para centrar los perfiles horizontalmente
+		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
+
+		float startY = 360.0f; // Centrado verticalmente
+
+		for (int i = 0; i < totalPerfiles; i++) {
+			float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+			float yPos = startY;
+
+
+			sf::FloatRect globalBounds = VCcompradas[i].CsCmpdrsSprite.getGlobalBounds();
+			VCcompradas[i].CsCmpdrsSprite.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+			VCcompradas[i].CsCmpdrsSprite.setPosition(xPos, startY);
+			VCcompradas[i].ocultaCasa=sf::Vector2f(xPos, startY);
+			VCcompradas[i].mostrarCasa=sf::Vector2f(xPos-40, startY);
+			VCcompradas[i].CsCmpdrsSprite.setScale(0.7f,0.7f);
+
+		}
+	}
+	bool seleccionlista = false;
+	bool CartaActiva = false;
+	int indexMouseOver = -1;
+	int cartaActivaIndex = -1; // Índice de la carta activa, -1 si ninguna está activa
+
+	while (window->isOpen() && !seleccionlista) {
+		sf::Event event;
+		while (window->pollEvent(event)) {
+			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+			if (event.type == sf::Event::Closed ||
+				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+				renderTexture.clear();
+				renderTexture.draw(spriteFondoGame);
+
+				renderTexture.draw(spriteX);
+				renderTexture.draw(overlay);
+				Menup.MenuSalir();
+			}
+
+
+
+			// Resetear todas las cartas a su posición oculta al inicio del bucle
+			for (int i = 0; i < VCcompradas.size(); i++) {
+				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
+			}
+
+			// Verificar colisión en orden inverso y actualizar la carta activa
+			cartaActivaIndex = -1; // Reinicia la carta activa
+			for (int i = VCcompradas.size() - 1; i >= 0; i--) {
+				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
+					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
+					cartaActivaIndex = i; // Guarda el índice de la carta activa
+					break; // Termina el bucle una vez que encuentra una carta activa
+				}
+			}
+	
+
+
+
+
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+
+					playClickSound();
+					seleccionlista = true;
+
+				}
+
+
+			}
+
+
+		}
+		CartaActiva = false;
+		window->clear();
+
+		window->draw(spriteFondoGame);
+
+		for (int i = 0; i < VCcompradas.size(); i++) {
+			window->draw(VCcompradas[i].CsCmpdrsSprite);
+
+		}
+		window->draw(spriteX);
+		window->display();
+	}
+}

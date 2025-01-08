@@ -34,7 +34,7 @@ private:
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
-    PieceSelector pieceselector;
+
 };
 
 #endif 
