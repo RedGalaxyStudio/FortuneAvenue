@@ -219,10 +219,14 @@ std::string Client::createRoom(const std::string& username,const std::string& fi
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
 
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
+
+
 	playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
 	playerGameNew.boxPlayer.setOrigin(125, 40);
 	playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
+	playerGameNew.Check.setTexture(CheckTexturesOff);
+	playerGameNew.Check.setOrigin(50.0f, 46.5f);
 	playersGame.push_back(playerGameNew);
 	UsuariosActivos.push_back(0);
 
@@ -688,9 +692,9 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("PLAYER_INDEX:", 0) == 0) {
 
+			playerIndex = std::stoi(message.substr(std::string("PLAYER_INDEX:").length()));
+			agregardor = true;
 
-		playerIndex= std::stoi(message.substr(std::string("PLAYER_INDEX:").length()));		
-		
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
 		playerInfoNew.username = nameUser;
@@ -705,7 +709,8 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.Home.setTexture(TextureHome);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
+		playerGameNew.Check.setTexture(CheckTexturesOff);
+		playerGameNew.Check.setOrigin(50.0f, 46.5f);
 		playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
 		playerGameNew.boxPlayer.setOrigin(125, 40);
 		playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
@@ -755,7 +760,8 @@ void Client::handleServerMessage(const std::string& message) {
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
+		playerGameNew.Check.setTexture(CheckTexturesOff);
+		playerGameNew.Check.setOrigin(50.0f, 46.5f);
 		playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
 		playerGameNew.boxPlayer.setOrigin(125, 40);
 		playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
@@ -800,6 +806,8 @@ void Client::handleServerMessage(const std::string& message) {
 		int indexPiece = std::stoi(indexPieceStr);
 		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerGameNew.Home.setTexture(TextureHome);
+		playerGameNew.Check.setTexture(CheckTexturesOff);
+		playerGameNew.Check.setOrigin(50.0f, 46.5f);
 		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
@@ -810,15 +818,25 @@ void Client::handleServerMessage(const std::string& message) {
 		playerInfos.push_back(playerInfoNew);
 		playersGame.push_back(playerGameNew);
 		UsuariosActivos.push_back(index);
-		std::cout << "\n EXISTING_PLAYER"<< index <<" UsuariosActivos:" << UsuariosActivos.size();
-		
+
 		if (indexPiece >= 0) {
 			
 			std::cout << "\n pieza:" << indexPiece << " CplayerIndex:" << CplayerIndex;
 			playerInfos[index].indexPiece = indexPiece;
-			CplayerIndex = index;
-			cvExisting.wait(lock, [] { return CplayerIndex == -1; });
-		
+			int newPieceIndex = playerInfos[index].indexPiece;
+
+			pieces[previousSelectionIndex[index]].setColor(sf::Color::White); // Color original
+			pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
+			std::cout << "\nplayersGame" << playersGame.size();
+			// Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
+			playersGame[index].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
+			playersGame[index].PieceSelect.setScale(pieces[newPieceIndex].getScale());
+			playersGame[index].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
+			playersGame[index].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
+			previousSelectionIndex[index] = newPieceIndex;
+			CplayerIndex = -1;
+
+	
 		}
 
 

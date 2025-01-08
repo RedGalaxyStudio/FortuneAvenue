@@ -77,7 +77,7 @@ public:
 	std::condition_variable impuestoCondVar;
 	bool impuestoMessageReceived = false;
 
-
+	bool agregardor = false;
 	void casasX();
 	void EventoCasa();
 	void EventoRuleta();

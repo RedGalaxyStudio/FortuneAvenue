@@ -7,12 +7,8 @@
 
 class PieceSelector {
 private:
-    std::vector<sf::Sprite> pieces; 
+ 
     std::vector<sf::Sprite> shadow;  
-    std::vector<sf::Sprite> Check; 
-    std::vector<sf::Texture> piecesTextures;
-    std::vector<sf::Texture> CheckTexturesOn;
-    std::vector<sf::Texture> CheckTexturesOff;
     int selectedPiece;              
     sf::RenderWindow* window;       
     sf::Sprite* newSelection;  
@@ -21,7 +17,7 @@ private:
     sf::FloatRect globalBounds;
     sf::Sprite fondopiece;
     sf::Texture Textufondopiece;
-    int previousSelectionIndex[4];
+    
     sf::Text CODE;
     float startX;
     float startY;

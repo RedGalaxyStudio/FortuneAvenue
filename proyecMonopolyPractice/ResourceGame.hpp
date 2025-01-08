@@ -24,13 +24,13 @@ extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
 extern sf::Sprite SpriteArrowIzq;
 extern bool server;
-
+extern std::vector<sf::Sprite> pieces;
 extern sf::Sprite SpriteArrowArriba;
-
+extern int previousSelectionIndex[4];
 extern bool userRuleta;
 extern bool userImpuesto;
 extern bool userCasa;
-
+extern std::vector<sf::Texture> piecesTextures;
 extern sf::SoundBuffer girosBuffer;
 extern sf::Sound girosSound;
 extern int conteosuel;
@@ -39,6 +39,8 @@ extern std::string Code;
 extern int CplayerIndex;
 extern bool rolldiceJugador;
 extern std::string nameUser;
+extern sf::Texture CheckTexturesOn;
+extern sf::Texture CheckTexturesOff;
 struct PlayerInfo {
 	std::string username;
 	std::string image;
@@ -103,6 +105,7 @@ struct PlayerGame {
 	sf::Vector2f origen;
 	sf::Texture TextureCash;
 	sf::Sprite CashSprite;
+	sf::Sprite Check;
 
 	void reset() {
 		textureAvatarPLayer = sf::Texture();  // Reasignar un objeto nuevo

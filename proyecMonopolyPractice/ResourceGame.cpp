@@ -21,7 +21,11 @@ sf::View view; // Declarar la vista
 sf::Clock reloj;
 std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
-
+std::vector<sf::Sprite> pieces;
+int previousSelectionIndex[4];
+std::vector<sf::Texture> piecesTextures;
+sf::Texture CheckTexturesOn;
+sf::Texture CheckTexturesOff;
 std::string Code;
 sf::Sprite SpriteArrowDer;
 bool animacionRuleta;
