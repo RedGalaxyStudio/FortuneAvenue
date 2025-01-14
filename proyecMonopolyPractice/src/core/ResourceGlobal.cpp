@@ -59,13 +59,13 @@ sf::Sprite recua;
 
 // Función para cargar la textura del fondo del menú
 void loadTextures() {
-    if (!TextureFondoMenu.loadFromFile("../assets/Fondos/fondomenu.png")) return;
-    if (!textureXOn.loadFromFile("../assets/Button/XOn.png")) return;
-    if (!textureXOff.loadFromFile("../assets/Button/XOff.png")) return;
-    if (!TextureBotonSiOn.loadFromFile("../assets/Button/BotonSiOn.png")) return;
-    if (!TextureBotonSiOff.loadFromFile("../assets/Button/BotonSiOff.png")) return;
-    if (!TextureBotonNoOn.loadFromFile("../assets/Button/BotonNoOn.png")) return;
-    if (!TextureBotonNoOff.loadFromFile("../assets/Button/BotonNoOff.png")) return;
+    if (!TextureFondoMenu.loadFromFile("../../assets/Fondos/fondomenu.png")) return;
+    if (!textureXOn.loadFromFile("../../assets/Button/XOn.png")) return;
+    if (!textureXOff.loadFromFile("../../assets/Button/XOff.png")) return;
+    if (!TextureBotonSiOn.loadFromFile("../../assets/Button/BotonSiOn.png")) return;
+    if (!TextureBotonSiOff.loadFromFile("../../assets/Button/BotonSiOff.png")) return;
+    if (!TextureBotonNoOn.loadFromFile("../../assets/Button/BotonNoOn.png")) return;
+    if (!TextureBotonNoOff.loadFromFile("../../assets/Button/BotonNoOff.png")) return;
     spriteX.setTexture(textureXOff);
     SpriteBotonNo.setTexture(TextureBotonNoOff);   
     SpriteBotonSi.setTexture(TextureBotonSiOff);
@@ -74,7 +74,7 @@ void loadTextures() {
     if (!fontUser.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
         std::cerr << "Error loading font\n";
     }
-    if (!textureBox.loadFromFile("../assets/Button/rectanguloEncendido.png")) return;
+    if (!textureBox.loadFromFile("../../assets/Button/rectanguloEncendido.png")) return;
     box.setTexture(textureBox);
     box.setOrigin(125,40);
     
