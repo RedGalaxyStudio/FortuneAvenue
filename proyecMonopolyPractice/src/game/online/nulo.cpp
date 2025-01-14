@@ -17,7 +17,7 @@ void Nulo::setWindow(sf::RenderWindow& win) {
 
 void Nulo::Resource(Client* client) {
     
-    if (!TextureBotonNulo.loadFromFile("resource/texture/Button/nulo.png")) {
+    if (!TextureBotonNulo.loadFromFile("../assets/Button/nulo.png")) {
         std::cerr << "Error al cargar el botón de confirmación.\n";
     }
     SpriteBotonNulo.setTexture(TextureBotonNulo);

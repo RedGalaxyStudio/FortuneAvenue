@@ -17,6 +17,10 @@ std::string generateRoomCode() {
 
 	return code;
 }
+
+
+
+
 bool Client::cola_vacia(Nodo* frente) {
 	return (frente == NULL) ? true : false;
 }
@@ -34,6 +38,7 @@ void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
 	}
 	delete aux;
 }
+
 Client::~Client() {
 	disconnect();
 	if (client) {
@@ -401,6 +406,12 @@ void Client::handleServerMessage(const std::string& message) {
 	else if (message.rfind("RULETE_GAME:", 0) == 0) {
 		float angulo = std::stof(message.substr(12));
 
+
+		//std::cout << "\n Llegooooooooooooooooooooooooooooooooooooooo";
+
+
+
+
 		{
 			std::lock_guard<std::mutex> lock(ruletaMutex);
 			anguloActualrule = angulo;
@@ -636,8 +647,6 @@ void Client::handleServerMessage(const std::string& message) {
 	
 		}
 
-
-<<<<<<< HEAD
 			std::unique_lock<std::mutex> lock(mtxExisting);
 			// Actualizar la información del jugador en la posición correspondiente
 			playerInfos[index].username = username;
@@ -669,19 +678,13 @@ void Client::handleServerMessage(const std::string& message) {
 
 		//std::cout << "\nEJEcuto existen2";
 	} 
-   
+   }
     else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
 		//std::cout << "\nPLAYER_COUNT" << std::endl;
 		// Extraer la cantidad de jugadores de la mensaje
 		std::string playerCountStr = message.substr(13); // "PLAYER_COUNT:".length() == 13
 		int playerCount = std::stoi(playerCountStr);
 		NumPlayers = playerCount;
-=======
-	}
-	else if (message.rfind("PLAYER_COUNT:", 0) == 0) {
-
-		NumPlayers = std::stoi(message.substr(13));
->>>>>>> 927bd6e3d061d02a234dbea96553d5e97d8df742
 
 	}
 	else if (message.rfind("XCASA:", 0) == 0) {

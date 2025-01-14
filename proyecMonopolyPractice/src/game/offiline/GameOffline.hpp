@@ -1,4 +1,4 @@
-#ifndef GAMEOFFLINE_HPP
+/*#ifndef GAMEOFFLINE_HPP
 #define GAMEOFFLINE_HPP
 
 #include <SFML/Graphics.hpp>
@@ -7,10 +7,10 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include "ObjetosGlobal.hpp"
-#include "WindowClass.h"
-#include "Ruleta.hpp"
-#include "MovePieces.hpp"
+//#include "ObjetosGlobal.hpp"
+//#include "WindowClass.h"
+//#include "Ruleta.hpp"
+//#include "MovePieces.hpp"
 #include "ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
 #include "ResourceGame.hpp"
@@ -156,4 +156,4 @@ private:
 	sf::Sprite SpriteChat;
 
 };
-#endif
+#endif*/
