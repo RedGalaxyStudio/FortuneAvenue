@@ -59,13 +59,13 @@ sf::Sprite recua;
 
 // Función para cargar la textura del fondo del menú
 void loadTextures() {
-    if (!TextureFondoMenu.loadFromFile("resource/texture/Fondos/fondomenu.png")) return;
-    if (!textureXOn.loadFromFile("resource/texture/Button/XOn.png")) return;
-    if (!textureXOff.loadFromFile("resource/texture/Button/XOff.png")) return;
-    if (!TextureBotonSiOn.loadFromFile("resource/texture/Button/BotonSiOn.png")) return;
-    if (!TextureBotonSiOff.loadFromFile("resource/texture/Button/BotonSiOff.png")) return;
-    if (!TextureBotonNoOn.loadFromFile("resource/texture/Button/BotonNoOn.png")) return;
-    if (!TextureBotonNoOff.loadFromFile("resource/texture/Button/BotonNoOff.png")) return;
+    if (!TextureFondoMenu.loadFromFile("../assets/Fondos/fondomenu.png")) return;
+    if (!textureXOn.loadFromFile("../assets/Button/XOn.png")) return;
+    if (!textureXOff.loadFromFile("../assets/Button/XOff.png")) return;
+    if (!TextureBotonSiOn.loadFromFile("../assets/Button/BotonSiOn.png")) return;
+    if (!TextureBotonSiOff.loadFromFile("../assets/Button/BotonSiOff.png")) return;
+    if (!TextureBotonNoOn.loadFromFile("../assets/Button/BotonNoOn.png")) return;
+    if (!TextureBotonNoOff.loadFromFile("../assets/Button/BotonNoOff.png")) return;
     spriteX.setTexture(textureXOff);
     SpriteBotonNo.setTexture(TextureBotonNoOff);   
     SpriteBotonSi.setTexture(TextureBotonSiOff);
@@ -74,7 +74,7 @@ void loadTextures() {
     if (!fontUser.loadFromFile("resource/fonts/ARCADEPI.ttf")) {
         std::cerr << "Error loading font\n";
     }
-    if (!textureBox.loadFromFile("resource/texture/Button/rectanguloEncendido.png")) return;
+    if (!textureBox.loadFromFile("../assets/Button/rectanguloEncendido.png")) return;
     box.setTexture(textureBox);
     box.setOrigin(125,40);
     
@@ -92,25 +92,25 @@ void loadSounds(){
 
 void loadVolumenIcon() {
 
-    if (!TextureMuted.loadFromFile("resource/texture/Button/VolumeMuted.png")) return;
-    if (!TextureMedium.loadFromFile("resource/texture/Button/VolumeMedium.png")) return;
-    if (!TextureHigh.loadFromFile("resource/texture/Button/VolumeHigh.png")) return;
+    if (!TextureMuted.loadFromFile("../assets/Button/VolumeMuted.png")) return;
+    if (!TextureMedium.loadFromFile("../assets/Button/VolumeMedium.png")) return;
+    if (!TextureHigh.loadFromFile("../assets/Button/VolumeHigh.png")) return;
 }
 
 
 // Función para cargar los cursores desde una imagen o textura
 void loadCursors() {
     sf::Image cursorNormal;
-    if (!cursorNormal.loadFromFile("resource/texture/Cursor/normal-select-0.png")) return;
+    if (!cursorNormal.loadFromFile("../assets/Cursor/normal-select-0.png")) return;
 
     sf::Image cursorLink;
-    if (!cursorLink.loadFromFile("resource/texture/Cursor/link-select-0.png")) return;
+    if (!cursorLink.loadFromFile("../assets/Cursor/link-select-0.png")) return;
 
     sf::Image cursorText;
-    if (!cursorText.loadFromFile("resource/texture/Cursor/text-select-0.png")) return;
+    if (!cursorText.loadFromFile("../assets/Cursor/text-select-0.png")) return;
 
     sf::Image cursorMove;
-    if (!cursorMove.loadFromFile("resource/texture/Cursor/move-0.png")) return;
+    if (!cursorMove.loadFromFile("../assets/Cursor/move-0.png")) return;
 
     // Tamaño de cada cursor (por ejemplo 32x32)
     sf::Vector2u cursorSize(32, 32);
