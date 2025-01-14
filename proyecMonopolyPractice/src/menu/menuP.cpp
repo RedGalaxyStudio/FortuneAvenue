@@ -1,11 +1,11 @@
 #include "menuP.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "SettingsManager.hpp"
-#include "ResourceGlobal.hpp"
-#include "ButtonG.hpp"
+#include "../settings/SettingsManager.hpp"
+#include "../core/ResourceGlobal.hpp"
+#include "../ui/ButtonG.hpp"
 #include "GameModeSelector.hpp"
-#include "PieceSelector.hpp"
+#include "../game/online/PieceSelector.hpp"
 #include "IniciaUser.hpp"
 menuP::menuP() : window(nullptr), SesionValida(true){}
 void menuP::setWindow(sf::RenderWindow& win) {

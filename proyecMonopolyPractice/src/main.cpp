@@ -4,11 +4,10 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-#include "Cinematic.hpp"
-#include "ObjetosGlobal.hpp"
-#include "ResourceGlobal.hpp"
-#include "IniciaUser.hpp"
-#include "Globals.hpp"
+#include "Cinematic/Cinematic.hpp"
+#include "core/ObjetosGlobal.hpp"
+#include "core/ResourceGlobal.hpp"
+#include "menu/IniciaUser.hpp"
 
 std::atomic<bool> running(true); 
 const unsigned short PORT = 53000; 

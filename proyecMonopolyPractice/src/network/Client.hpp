@@ -1,7 +1,7 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 #define WIN32_LEAN_AND_MEAN
-#include "ResourceGame.hpp"
+#include "../game/online/ResourceGame.hpp"
 //#include "ResourceGlobal.hpp"
 #include <winsock2.h>
 #include "NetworkMessage.hpp"
