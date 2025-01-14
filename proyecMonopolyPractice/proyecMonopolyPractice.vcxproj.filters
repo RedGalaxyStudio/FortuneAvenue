@@ -130,6 +130,33 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\offiline\GameEnd.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\HouseBuy.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\MovePieces.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\MultiplayerGame.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\nulo.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\PieceSelector.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\ResourceGame.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\Ruleta.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\Stealplayer.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\ButtonG.hpp">
@@ -233,6 +260,39 @@
     </ClInclude>
     <ClInclude Include="libs\nlohmann\json_fwd.hpp">
       <Filter>libs\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\CubeClass.h">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameEnd.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\HouseBuy.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\MovePieces.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\MultiplayerGame.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\nulo.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\PieceSelector.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\ResourceGame.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\Ruleta.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\Stealplayer.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\WindowClass.h">
+      <Filter>src\game\offline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

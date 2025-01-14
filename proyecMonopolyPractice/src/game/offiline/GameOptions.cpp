@@ -171,7 +171,12 @@ void GameOptions::update() {
 
 			}
 
-			if(SpriteMapa1.getGlobal)
+			if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+				playClickSound();
+				PieceSelector.
+
+
+			}
 
 
 		}
