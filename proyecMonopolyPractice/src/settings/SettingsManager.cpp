@@ -76,7 +76,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
 
-    if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
+    if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
     volumeText.setFont(font);
@@ -150,7 +150,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     thumb.setOutlineColor(sf::Color::Black);
     thumb.setOutlineThickness(2.0f);
     
-    if (!font.loadFromFile("resource/fonts/Pixel Times Bold.ttf")) {
+    if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
     volumeText.setFont(font);

@@ -24,9 +24,9 @@ int main() {
 
 
 
-   Cinematic cinematic(window);
-   cinematic.Resource();
-   cinematic.Update();
+   //Cinematic cinematic(window);
+  // cinematic.Resource();
+   //cinematic.Update();
 
    //Cinematic cinematic(window);
    //cinematic.Resource();

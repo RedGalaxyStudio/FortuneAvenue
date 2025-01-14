@@ -13,7 +13,7 @@ void menuP::setWindow(sf::RenderWindow& win) {
 }
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("assets/image/Button/boton2.png")) return;
-    if (!textureLogoFortuneAvenue.loadFromFile("assets/Logos/logojuego14.png")) return;
+    if (!textureLogoFortuneAvenue.loadFromFile("assets/image/Logos/logojuego14.png")) return;
     if (!TextureBotonJugarOff.loadFromFile("assets/image/Button/BotonJugarOff.png")) return;
     if (!TextureBotonJugarOn.loadFromFile("assets/image/Button/BotonJugarOn.png")) return;
     if (!TextureBotonOpcionesOff.loadFromFile("assets/image/Button/BotonOpcionesOff.png")) return;
