@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "ResourceGame.hpp"
-#include "ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 #include <vector>
 #include <algorithm>
 #include <iostream>

@@ -5,8 +5,8 @@
 #include <string>
 #include "ResourceGame.hpp"
 #include <vector>
-#include "ResourceGlobal.hpp"
-#include "Client.hpp"
+#include "../../core/ResourceGlobal.hpp"
+#include "../../network/Client.hpp"
 
 class Nulo {
 

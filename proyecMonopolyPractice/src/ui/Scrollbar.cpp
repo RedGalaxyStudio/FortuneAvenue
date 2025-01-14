@@ -1,5 +1,5 @@
 #include "Scrollbar.hpp"
-#include "ResourceGlobal.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <iostream>
 
 // Constructor

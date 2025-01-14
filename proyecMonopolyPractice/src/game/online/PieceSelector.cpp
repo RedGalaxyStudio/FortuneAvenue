@@ -1,10 +1,10 @@
 #include "PieceSelector.hpp"
-#include "ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 #include "ResourceGame.hpp"
-#include "ObjetosGlobal.hpp"
-#include "ButtonG.hpp"
+#include "../../core/ObjetosGlobal.hpp"
+#include "../../ui/ButtonG.hpp"
 #include "MultiplayerGame.hpp"
-#include "Scrollbar.hpp"
+#include "../../ui/Scrollbar.hpp"
 #include <thread>
 
 // Constructor

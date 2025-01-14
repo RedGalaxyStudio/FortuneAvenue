@@ -1,7 +1,7 @@
 #ifndef CHAT_HPP
 #define CHAT_HPP
 #include "ResourceGame.hpp"
-#include "ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 #include "PieceSelector.hpp"
 

@@ -1,9 +1,9 @@
 #include "SettingsManager.hpp"
 #include <iostream>
-#include "ResourceGlobal.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include "nlohmann/json.hpp"
+#include "../../libs/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 

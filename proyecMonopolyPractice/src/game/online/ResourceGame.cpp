@@ -1,5 +1,5 @@
 #include "ResourceGame.hpp"
-#include "ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 
 
 

@@ -1,5 +1,5 @@
 #include "ButtonG.hpp"
-#include "ResourceGlobal.hpp"
+#include ".././core/ResourceGlobal.hpp"
 // Inicializar el puntero estático
 sf::Sprite* ButtonG::lastHoveredButton = nullptr;
 

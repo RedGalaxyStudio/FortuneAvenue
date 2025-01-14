@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-#include "Particles.h"
+#include "../../ui/Particles.h"
 #include <random>
-#include "ObjetosGlobal.hpp"
+#include "../../core/ObjetosGlobal.hpp"
 #define M_PI 3.14159265358979323846
 
 class Ruleta {

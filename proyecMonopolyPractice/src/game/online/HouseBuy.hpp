@@ -5,11 +5,11 @@
 #include <string>
 #include "ResourceGame.hpp"
 #include <vector>
-#include "ResourceGlobal.hpp"
-#include "Client.hpp"
-#include "ButtonG.hpp"
-#include "cell.h"
-#include "fileio.h"
+#include "../../core/ResourceGlobal.hpp"
+#include "../../network/Client.hpp"
+#include "../../ui/ButtonG.hpp"
+#include "../../ui/cell.h"
+#include "../../ui/fileio.h"
 
 
 class HouseBuy {

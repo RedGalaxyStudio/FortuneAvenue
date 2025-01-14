@@ -1,13 +1,13 @@
 #include "HouseBuy.hpp"
 #include <sstream>
-#include "nlohmann/json.hpp"
+#include "../../libs/nlohmann/json.hpp"
 //#include "card.h"
 #include <filesystem>
 #include <cstring>
 #include <fstream>
-#include "cell.h"
+#include "../../ui/cell.h"
 
-#include "ButtonG.hpp"
+#include "../../ui/ButtonG.hpp"
 
 using json = nlohmann::json;
 

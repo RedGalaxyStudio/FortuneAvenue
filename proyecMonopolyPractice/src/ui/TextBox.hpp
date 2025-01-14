@@ -1,6 +1,6 @@
 #ifndef TEXTBOX_HPP
 #define TEXTBOX_HPP
-#include "ResourceGlobal.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>

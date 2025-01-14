@@ -1,11 +1,11 @@
 #include "nulo.hpp"
 #include <sstream>
-#include "nlohmann/json.hpp"
+#include "../../libs/nlohmann/json.hpp"
 #include <filesystem>
 #include <cstring>
 #include <fstream>
-#include "cell.h"
-#include "fileio.h"
+#include "../../ui/cell.h"
+#include "../../ui/fileio.h"
 
 using json = nlohmann::json;
 

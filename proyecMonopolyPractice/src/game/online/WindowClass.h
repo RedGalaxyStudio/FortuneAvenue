@@ -4,7 +4,7 @@
 #include "ResourceGame.hpp"
 #include <cstdlib>
 #include <ctime>
-#include "Client.hpp"
+#include "../../network/Client.hpp"
 
 class Window {
 

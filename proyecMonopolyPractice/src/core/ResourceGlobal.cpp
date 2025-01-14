@@ -1,6 +1,6 @@
 #include "ResourceGlobal.hpp"
 #include <fstream>
-#include  "nlohmann/json.hpp"
+#include  "../../libs/nlohmann/json.hpp"
 // Definir las texturas y cursores
 
 using json = nlohmann::json;

@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "ResourceGame.hpp"
-#include "ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 
 class Stealplayer {
 private:
