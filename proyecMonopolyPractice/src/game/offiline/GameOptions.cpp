@@ -20,10 +20,10 @@ void GameOptions::resource() {
 	TPlayers.setPosition(640, 190);
 	sf::FloatRect globalBounds = TPlayers.getGlobalBounds();
 	TPlayers.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	if (!TextureflecDerecha.loadFromFile("../assets/Button/flechaOpcder.png")) return;
-	if (!TextureflecIzquier.loadFromFile("../assets/Button/flechaOpcizq.png")) return;
-	if (!TextureMapaS.loadFromFile("../assets/Game/mapaSop.png")) return;
-	if (!TextureMapaSM.loadFromFile("../assets/Game/mapaSopM.png")) return;
+	if (!TextureflecDerecha.loadFromFile("../assets/image/Button/flechaOpcder.png")) return;
+	if (!TextureflecIzquier.loadFromFile("../assets/image/Button/flechaOpcizq.png")) return;
+	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png")) return;
+	if (!TextureMapaSM.loadFromFile("assets/image/Game/mapaSopM.png")) return;
 	SpriteMapaS.setTexture(TextureMapaS);
 	globalBounds = SpriteMapaS.getGlobalBounds();
 	SpriteMapaS.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -32,8 +32,8 @@ void GameOptions::resource() {
 	SpriteflecDerecha.setTexture(TextureflecDerecha);
 	SpriteflecIzquier.setTexture(TextureflecIzquier);
 	
-	if (!TextureMapa22.loadFromFile("../assets/Game/mapa22m.png")) return;
-	if (!TextureMapa22M.loadFromFile("../assets/Game/mapa22mM.png")) return;
+	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
+	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
 	SpriteMapa22.setTexture(TextureMapa22);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa22.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -65,8 +65,8 @@ void GameOptions::resource() {
 	globalBounds = borde3.getGlobalBounds();
 	borde3.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	if (!TextureMapa1.loadFromFile("../assets/Game/mapa1.png")) return;
-	if (!TextureMapa1M.loadFromFile("../assets/Game/mapa1M.png")) return;
+	if (!TextureMapa1.loadFromFile("assets/image/Game/mapa1.png")) return;
+	if (!TextureMapa1M.loadFromFile("assets/image/Game/mapa1M.png")) return;
 	SpriteMapa1.setTexture(TextureMapa1);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa1.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);

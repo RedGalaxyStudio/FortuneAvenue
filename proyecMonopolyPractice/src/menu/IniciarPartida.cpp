@@ -10,16 +10,16 @@ IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
 }
 
 void IniciarPartida::resource() {
-	TextureCrearPartidaOff.loadFromFile("../assets/Game/CrearPartidaOff.png");
-	TextureCrearPartidaOn.loadFromFile("../assets/Game/CrearPartidaOn.png");
-	TextureUnirse.loadFromFile("../assets/Game/unirse1encendido.png");
-	if (!CheckTexturesOn.loadFromFile("../assets/Game/check1on.png")) return;
-	if (!CheckTexturesOff.loadFromFile("../assets/Game/check1off.png")) return;
+	TextureCrearPartidaOff.loadFromFile("assets/Game/CrearPartidaOff.png");
+	TextureCrearPartidaOn.loadFromFile("..7assets/image/Game/CrearPartidaOn.png");
+	TextureUnirse.loadFromFile("assets/Game/unirse1encendido.png");
+	if (!CheckTexturesOn.loadFromFile("assets/Game/check1on.png")) return;
+	if (!CheckTexturesOff.loadFromFile("assets/Game/check1off.png")) return;
 
-	TextureUnirsePartidaOff.loadFromFile("../assets/Game/UnirsePartidaOff.png");
-	TextureUnirsePartidaOn.loadFromFile("../assets/Game/UnirsePartidaOn.png");
-	if (!TextureCash.loadFromFile("../assets/Game/cash.png")) return;
-	if (!TextureHome.loadFromFile("../assets/Game/casa.png")) return;
+	TextureUnirsePartidaOff.loadFromFile("assets/Game/UnirsePartidaOff.png");
+	TextureUnirsePartidaOn.loadFromFile("assets/Game/UnirsePartidaOn.png");
+	if (!TextureCash.loadFromFile("assets/Game/cash.png")) return;
+	if (!TextureHome.loadFromFile("assets/Game/casa.png")) return;
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);

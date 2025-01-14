@@ -2,7 +2,19 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD:proyecMonopolyPractice/x64/Debug/proyecMonopolyPractice.exe.recipe
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <FullPath>C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe</FullPath>
+=======
+      <FullPath>C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\proyecMonopolyPractice.exe</FullPath>
+>>>>>>> 927bd6e3d061d02a234dbea96553d5e97d8df742
+=======
+      <FullPath>C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\proyecMonopolyPractice.exe</FullPath>
+>>>>>>> 696a7825034968df2e554d3407b8c3c645bfe9a5
+=======
       <FullPath>C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Release\proyecMonopolyPractice.exe</FullPath>
+>>>>>>> 9cc7363bb34cd27074ac34b1b803be3d52b3a615:proyecMonopolyPractice/src/sin funcion aparaente/x64/Release/proyecMonopolyPractice.exe.recipe
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
