@@ -3,11 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "ButtonG.hpp"
-#include "menuP.hpp"
+#include "../ui/ButtonG.hpp"
+#include "../menu/menuP.hpp"
 #include <string>
 #include <iostream>
-#include <curl/curl.h>
+#include <../../libs/curl/include/curl/curl.h>
 
 extern sf::Music MenuMusicFondo;
 extern sf::Music GameMusicFondo;
