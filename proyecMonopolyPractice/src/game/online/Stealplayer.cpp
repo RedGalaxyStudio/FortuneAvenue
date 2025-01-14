@@ -37,7 +37,7 @@ void Stealplayer::resource() {
    //std::cout << "\n7";
 
 
-    if(!texturebottonRobar.loadFromFile("resource/texture/Button/robar.png")) return;
+    if(!texturebottonRobar.loadFromFile("../assets/Button/robar.png")) return;
     SpritebottonRobar.setTexture(texturebottonRobar);
     SpritebottonRobar.setOrigin(95, 38);
 

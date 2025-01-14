@@ -12,11 +12,11 @@ GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win), pieces
 }
 
 void GameModeSelector::resource() {
-	TextureOfflineOff.loadFromFile("resource/texture/offline400.png");
-	TextureOfflineOn.loadFromFile("resource/texture/offline400X.png");
+	TextureOfflineOff.loadFromFile("../assets/offline400.png");
+	TextureOfflineOn.loadFromFile("../assets/offline400X.png");
 
-	TextureOnlineOff.loadFromFile("resource/texture/online500.png");
-	TextureOnlineOn.loadFromFile("resource/texture/online500X.png");
+	TextureOnlineOff.loadFromFile("../assets/online500.png");
+	TextureOnlineOn.loadFromFile("../assets/online500X.png");
 
 	SpriteOffline.setTexture(TextureOfflineOff);
 	SpriteOffline.setOrigin(194.f, 233.5f);
