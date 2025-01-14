@@ -17,10 +17,6 @@ std::string generateRoomCode() {
 
 	return code;
 }
-
-
-
-
 bool Client::cola_vacia(Nodo* frente) {
 	return (frente == NULL) ? true : false;
 }
@@ -38,7 +34,6 @@ void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
 	}
 	delete aux;
 }
-
 Client::~Client() {
 	disconnect();
 	if (client) {
@@ -263,214 +258,6 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 
 	return true;
 }
-<<<<<<< HEAD:proyecMonopolyPractice/Client.cpp
-void Client::invercionSegura() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "INVERCIONSEGURA";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-}
-void Client::casasX() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "XCASA";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-}
-
-
-void Client::EventoCasa() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "EVENTOCASA";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-}
-void Client::EventoImpuesto() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "EVENTOIMPUEST";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-
-}
-void Client::EventoRuleta() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "EVENTORULETA";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-}
-void Client::robarUser(int usuariorobao) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-	if (playerIndex != 0) {
-
-		usuariorobao = (usuariorobao - playerIndex + 4) % 4;
-
-	}
-
-	std::string message = "ROBARPLAYER:" + std::to_string(usuariorobao);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-void Client::casacomprada(int compra) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "CASACOMPRA:" + std::to_string(compra);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-std::vector<char> Client::loadImage(const std::string& filename) {
-	std::ifstream file(filename, std::ios::binary);
-	if (!file.is_open()) {
-		std::cerr << "Failed to open the image file!" << std::endl;
-		return {};
-	}
-
-	std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-	file.close();
-	return buffer;
-}
-void Client::rollDice() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-	//std::cout << "\nUYYYyy";
-	std::string message = "ROLL_DICE";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-	//std::cout << "\neYYYyy";
-}
-void Client::opcionCaminoenvio(int opcionCami) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "OPCION_CAMINO:" + std::to_string(opcionCami);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-void Client::endTurn() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-	//std::cout << "\nTurno de " << IndexTurn << "finalizo";
-	std::string message = "END_TURN";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-void Client::startSpin() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-		return;
-	}
-
-	std::string message = "START_SPIN";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-	////std::cout << "Spin initiated!" << std::endl;
-}
-void Client::todospierden() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-		return;
-	}
-
-	std::string message = "TODOSPIERDEN";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-	////std::cout << "Spin initiated!" << std::endl;
-}
-void Client::ganas150() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-		return;
-	}
-
-	std::string message = "GANAS150";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-	////std::cout << "Spin initiated!" << std::endl;
-}
-void Client::ruleteGame(float angulo) {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-		return;
-	}
-
-	std::string message = "RULETE_GAME:" + std::to_string(angulo);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-
-	//std::cout << "Spin initiated!" << std::endl;
-	enet_packet_destroy(packet);
-}
-void Client::playerChangedPiece() {
-	std::string message = "SELECTING_PIECE:" + std::to_string(playerInfos[UsuariosActivos[0]].indexPiece);
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-}
-void Client::ReadyPlayer() {
-	if (!peer) {
-		std::cerr << "Client is not connected to a server!" << std::endl;
-	}
-
-	std::string message = "PLAYER_READY";
-	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(client);
-
-}
-=======
->>>>>>> 9cc7363bb34cd27074ac34b1b803be3d52b3a615:proyecMonopolyPractice/src/network/Client.cpp
 void Client::moneyActu(int money) {
 	std::string message = "MONEY_ACTU:" + std::to_string(money);
 
@@ -613,12 +400,6 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("RULETE_GAME:", 0) == 0) {
 		float angulo = std::stof(message.substr(12));
-
-
-		//std::cout << "\n Llegooooooooooooooooooooooooooooooooooooooo";
-
-
-
 
 		{
 			std::lock_guard<std::mutex> lock(ruletaMutex);

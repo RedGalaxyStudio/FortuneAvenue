@@ -12,25 +12,25 @@ void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
 void menuP::Resource() {
-    if (!TextureConfirmarSalir.loadFromFile("../../assets/Button/boton2.png")) return;
-    if (!textureLogoFortuneAvenue.loadFromFile("../../assets/Logos/logojuego14.png")) return;
-    if (!TextureBotonJugarOff.loadFromFile("../../assets/Button/BotonJugarOff.png")) return;
-    if (!TextureBotonJugarOn.loadFromFile("../../assets/Button/BotonJugarOn.png")) return;
-    if (!TextureBotonOpcionesOff.loadFromFile("../../assets/Button/BotonOpcionesOff.png")) return;
-    if (!TextureBotonOpcionesOn.loadFromFile("../../assets/Button/BotonOpcionesOn.png")) return;
-    if (!TextureBotonSalirOff.loadFromFile("../../assets/Button/BotonSalirOff.png")) return;
-    if (!TextureBotonSalirOn.loadFromFile("../../assets/Button/BotonSalirOn.png")) return;
-    if (!textureAcercaDeOn.loadFromFile("../../assets/Button/AcercaDeOn.png")) return;
-    if (!textureAcercaDeOff.loadFromFile("../../assets/Button/AcercaDeOff.png")) return;
+    if (!TextureConfirmarSalir.loadFromFile("assets/image/Button/boton2.png")) return;
+    if (!textureLogoFortuneAvenue.loadFromFile("assets/image/Logos/logojuego14.png")) return;
+    if (!TextureBotonJugarOff.loadFromFile("assets/image/Button/BotonJugarOff.png")) return;
+    if (!TextureBotonJugarOn.loadFromFile("assets/image/Button/BotonJugarOn.png")) return;
+    if (!TextureBotonOpcionesOff.loadFromFile("assets/image/Button/BotonOpcionesOff.png")) return;
+    if (!TextureBotonOpcionesOn.loadFromFile("assets/image/Button/BotonOpcionesOn.png")) return;
+    if (!TextureBotonSalirOff.loadFromFile("assets/image/Button/BotonSalirOff.png")) return;
+    if (!TextureBotonSalirOn.loadFromFile("assets/image/Button/BotonSalirOn.png")) return;
+    if (!textureAcercaDeOn.loadFromFile("assets/image/Button/AcercaDeOn.png")) return;
+    if (!textureAcercaDeOff.loadFromFile("assets/image/Button/AcercaDeOff.png")) return;
 
-    if (!Textureflechainstder.loadFromFile("../../assets/Button/flechapagder.png")) return;
-    if (!Textureflechainstizq.loadFromFile("../../assets/Button/flechapagizq.png")) return;
-    if (!textureInstruccionesOn.loadFromFile("../../assets/Button/instruccionesencendido.png")) return;
-    if (!textureInstruccionesOff.loadFromFile("../../assets/Button/instruccionesapagado.png")) return;
-    if (!MenuMusicFondo.openFromFile("../../assets/sounds/MenuB.wav")) return;
-    if (!Blur.loadFromFile("../../assets/Shaders/blur.frag", sf::Shader::Fragment)) return;
+    if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
+    if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
+    if (!textureInstruccionesOn.loadFromFile("assets/image/Button/instruccionesencendido.png")) return;
+    if (!textureInstruccionesOff.loadFromFile("assets/image/Button/instruccionesapagado.png")) return;
+    if (!MenuMusicFondo.openFromFile("assets/sounds/MenuB.wav")) return;
+    if (!Blur.loadFromFile("assets/Shaders/blur.frag", sf::Shader::Fragment)) return;
     if (!renderTexture.create(window->getSize().x, window->getSize().y)) return;
-    if (!SelectingMusicFondo.openFromFile("../../assets/sounds/SelectingPieces.wav")) return;
+    if (!SelectingMusicFondo.openFromFile("assets/sounds/SelectingPieces.wav")) return;
 
 
 
@@ -468,7 +468,7 @@ void menuP::instruccionesGame() {
     overlay.setFillColor(sf::Color(0, 0, 0, 100));
 
     sf::Font Fuente;
-    if (!Fuente.loadFromFile("../../assets/fonts/ARCADEPI.ttf")) {
+    if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
         return;
     }
 
@@ -647,7 +647,7 @@ void menuP::MenuAcercaDe() {
     overlay.setFillColor(sf::Color(0, 0, 0, 100));  
 
     sf::Font Fuente;
-    if (!Fuente.loadFromFile("../../assets/fonts/ARCADEPI.ttf")) {
+    if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
         return;
     }
 

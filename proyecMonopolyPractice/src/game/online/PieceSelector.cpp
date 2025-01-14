@@ -45,13 +45,13 @@ void PieceSelector::Resource() {
 	turn_impuesto= false;
 	rolldiceJugador = false;
 	std::cout << "\nwo";
-	if (!Textufondopiece.loadFromFile("../assets/Game/FondoGameScroll.png")) return;
+	if (!Textufondopiece.loadFromFile("assets/image/Game/FondoGameScroll.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
 
 	std::cout << "\nwo";
 	for (int i = 0; i < piecesCount; i++) {
-		if (!piecesTextures[i].loadFromFile("../assets/Game/pieces/piece" + std::to_string(i) + ".png"))
+		if (!piecesTextures[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
 			return;
 
 		float radio = piecesTextures[i].getSize().x / 2.0f;
