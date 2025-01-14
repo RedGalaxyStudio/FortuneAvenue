@@ -180,6 +180,14 @@ void Chat::update() {
 					PlantillaMensajeE.SMSEnviado.setString(input);
 					input = "";
 					indicacion.setString(input);
+					float aux = indicacion.getGlobalBounds().height;
+
+					for (int i = 0; i < Mensajes.size(); i++)
+					{
+						Mensajes[i].ContenidoEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
+						Mensajes[i].SMSEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+
+					}
 					Mensajes.push_back(PlantillaMensajeE);
 
 				}
