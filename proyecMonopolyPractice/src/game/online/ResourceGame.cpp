@@ -74,8 +74,8 @@ bool casa_draw;
 
 void loadResourceGame(){
 
-	if (!TextureFondoGame.loadFromFile("resource/texture/Game/FondoGame2.jpg")) return;
-	if (!TextureMarco.loadFromFile("resource/texture/Avatars/MarcoTexture.png")) return;
+	if (!TextureFondoGame.loadFromFile("../assets/Game/FondoGame2.jpg")) return;
+	if (!TextureMarco.loadFromFile("../assets/Avatars/MarcoTexture.png")) return;
 	spriteFondoGame.setTexture(TextureFondoGame);
 	fontUserPerfil = fontUser;
 	espera=false;

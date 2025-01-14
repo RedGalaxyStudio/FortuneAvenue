@@ -18,7 +18,7 @@ int main() {
 
   
     sf::Image icono;
-    if (!icono.loadFromFile("resource/texture/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
+    if (!icono.loadFromFile("../assets/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
     window.setMouseCursorVisible(false);
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 

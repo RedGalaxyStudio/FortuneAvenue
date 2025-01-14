@@ -14,17 +14,17 @@ void MultiplayerGame::resource() {
 
 
 	if (!TextureChat.loadFromFile("window_13905854.png")) return;
-	if (!TextureMapa.loadFromFile("resource/texture/Game/mapa+S+++.png")) return;
-	if (!SettingsOff.loadFromFile("resource/texture/Game/settingOff.png")) return;
-	if (!SettingsOn.loadFromFile("resource/texture/Game/settingOn.png")) return;
+	if (!TextureMapa.loadFromFile("../assets/Game/mapa+S+++.png")) return;
+	if (!SettingsOff.loadFromFile("../assets/Game/settingOff.png")) return;
+	if (!SettingsOn.loadFromFile("../assets/Game/settingOn.png")) return;
 
 	if (!GameMusicFondo.openFromFile("resource/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
 	//Cargar Texturas de Flechas
-	if (!TextureArrowIzq.loadFromFile("resource/texture/Game/Izq.png")) return;
-	if (!TextureArrowDer.loadFromFile("resource/texture/Game/Der.png")) return;
-	if (!TextureArrowArriba.loadFromFile("resource/texture/Game/Arriba.png")) return;
-	if (!TextureImpuesto.loadFromFile("resource/texture/Game/Impuesto.png")) return;
+	if (!TextureArrowIzq.loadFromFile("../assets/Game/Izq.png")) return;
+	if (!TextureArrowDer.loadFromFile("../assets/Game/Der.png")) return;
+	if (!TextureArrowArriba.loadFromFile("../assets/Game/Arriba.png")) return;
+	if (!TextureImpuesto.loadFromFile("../assets/Game/Impuesto.png")) return;
 
 	//posicin y tamanio de flechas
 	SpriteArrowIzq.setTexture(TextureArrowIzq);
@@ -54,7 +54,7 @@ void MultiplayerGame::resource() {
 	for (int i = 0; i < 17; i++)
 	{
 		std::cout << "\ni";
-		if (!TextureCasa[i].loadFromFile("resource/texture/Game/Casas/Casa" + std::to_string(i) + ".png")) {
+		if (!TextureCasa[i].loadFromFile("../assets/Game/Casas/Casa" + std::to_string(i) + ".png")) {
 			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
 		}
 
