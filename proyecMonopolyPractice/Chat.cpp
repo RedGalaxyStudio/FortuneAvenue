@@ -27,7 +27,7 @@ void Chat::resource() {
 	TextureBotonEviar.loadFromFile("envio2.png");
 
 	if (!Fuentechat.loadFromFile("resource/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n";}
-
+	if (!FuenteMensaje.loadFromFile("resource/fonts/Poppins-Light.ttf")) { std::cerr << "Error loading font/n"; }
 
 	SpriteBotonEnviar.setTexture(TextureBotonEviar);
 	SpriteBotonEnviar.setOrigin(20, 20);
@@ -73,21 +73,15 @@ void Chat::resource() {
 	Caja.setPosition(940, 650);
 	Caja.setFillColor(sf::Color (50, 50, 50));
 
-
 	CajaI.setSize(sf::Vector2f(20,0));
 	CajaI.setPosition(940, 670);
 	CajaI.setFillColor(sf::Color(50, 50, 50));
 	CajaI.setOrigin(20,0);
 
-	
-
-
 	CajaD.setSize(sf::Vector2f(20,0));
 	CajaD.setPosition(1200, 670);
 	CajaD.setFillColor(sf::Color(50, 50, 50));
 	
-
-
 	ArriDerecha.setOrigin(20, 20);
 	ArriDerecha.setRadius(20);
 	ArriDerecha.setFillColor(sf::Color (50,50,50));
@@ -108,6 +102,36 @@ void Chat::resource() {
 	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
 	AbajIzquierda.setPosition(940, 670);
 
+
+	PlantillaMensajeE.SMSEnviado.setCharacterSize(20);
+	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
+	PlantillaMensajeE.SMSEnviado.setFillColor(sf::Color::White);
+	PlantillaMensajeE.SMSEnviado.setOutlineThickness(1);
+	PlantillaMensajeE.SMSEnviado.setOutlineColor(sf::Color(117, 220, 255));
+	PlantillaMensajeE.SMSEnviado.setString("MensajeEnviado");
+	PlantillaMensajeE.SMSEnviado.setPosition(940, 618);
+	globalBounds = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+	PlantillaMensajeE.SMSEnviado.setOrigin(0, globalBounds.height / 2.0f);
+
+	PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
+	PlantillaMensajeE.ContenidoEnviado.setPosition(940, 600);
+	PlantillaMensajeE.ContenidoEnviado.setFillColor(sf::Color(0, 104, 167));
+
+
+
+	PlantillaMensajeR.SMSRecibido.setCharacterSize(20);
+	PlantillaMensajeR.SMSRecibido.setFont(FuenteMensaje);
+	PlantillaMensajeR.SMSRecibido.setFillColor(sf::Color::White);
+	PlantillaMensajeR.SMSRecibido.setOutlineThickness(1);
+	PlantillaMensajeR.SMSRecibido.setOutlineColor(sf::Color(255, 168, 214));
+	PlantillaMensajeR.SMSRecibido.setString("MensajeRecibido");
+	PlantillaMensajeR.SMSRecibido.setPosition(940, 568);
+	globalBounds = PlantillaMensajeR.SMSRecibido.getGlobalBounds();
+	PlantillaMensajeR.SMSRecibido.setOrigin(0, globalBounds.height / 2.0f);
+
+	PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(260, 40));
+	PlantillaMensajeR.ContenidoRecibido.setPosition(940, 550);
+	PlantillaMensajeR.ContenidoRecibido.setFillColor(sf::Color(239, 39, 133));
 }
 
 void Chat::insertarSaltoDeLinea() {
@@ -149,6 +173,19 @@ void Chat::update() {
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
+
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					PlantillaMensajeE.SMSEnviado.setString(input);
+					input = "";
+					indicacion.setString(input);
+					Mensajes.push_back(PlantillaMensajeE);
+
+				}
+			}
+
+
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
@@ -173,9 +210,7 @@ void Chat::update() {
 					valida2 = true;
 
 				}
-
-				
-				}
+			}
 
 			if (event.type == sf::Event::TextEntered ) {
 
@@ -248,9 +283,7 @@ void Chat::update() {
 
 											indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
 										}
-
-								///	}
-									
+		
 							}
 					}
 					
@@ -364,6 +397,16 @@ void Chat::update() {
 		window->draw(enunciado);
 		window->draw(indicacion);
 		window->draw(spriteX);
+		//window->draw(PlantillaMensajeE.ContenidoEnviado);
+		//window->draw(PlantillaMensajeE.SMSEnviado);
+		//window->draw(PlantillaMensajeR.ContenidoRecibido);
+		//window->draw(PlantillaMensajeR.SMSRecibido);
+
+		for (int i = 0; i < Mensajes.size(); i++)
+		{
+			window->draw(Mensajes[i].ContenidoEnviado);
+			window->draw(Mensajes[i].SMSEnviado);
+		}
 		window->display();
 
 	}

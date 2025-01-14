@@ -17,6 +17,32 @@ private:
 
     const size_t maxLength = 120;
 
+    struct MensajeRecibido{
+        sf::Sprite AvatarRecibido;
+        sf::Text SMSRecibido;
+        sf::RectangleShape ContenidoRecibido;
+
+        /*void Draw() {
+            window.draw(ContenidoRecibido);
+            window.draw(SMSRecibido);
+            window.draw(AvatarRecibido);
+        }*/
+
+    };
+
+    struct MensajeEnviado{
+        sf::Sprite AvatarEnviado;
+        sf::Text SMSEnviado;
+        sf::RectangleShape ContenidoEnviado;
+
+        /*void Draw() {
+            window.draw(ContenidoEnviado);
+            window.draw(SMSEnviado);
+            window.draw(AvatarEnviado);
+        }*/
+
+    };
+
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
     sf::RectangleShape Caja;
@@ -42,6 +68,7 @@ private:
     sf::Texture TextureUnirse;
 
     sf::Font Fuentechat;
+    sf::Font FuenteMensaje;
 
     sf::Clock LimTimeBotton;
 
@@ -58,9 +85,14 @@ private:
     sf::Sprite SpriteUnirsePartida;
     sf::Sprite SpriteUnirse;
 
+    std::vector <MensajeEnviado> Mensajes;
+
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
     PieceSelector pieceselector;
+
+    MensajeEnviado PlantillaMensajeE;
+    MensajeRecibido PlantillaMensajeR;
 };
 
 #endif 
