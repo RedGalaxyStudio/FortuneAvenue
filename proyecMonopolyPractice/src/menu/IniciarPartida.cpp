@@ -2,6 +2,7 @@
 #include "../core/ObjetosGlobal.hpp"
 #include "../ui/ButtonG.hpp"
 #include "../ui/TextBox.hpp"
+#include "../game/online/Chat.hpp"
 #include "../ui/MensageBox.hpp"
 
 IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
@@ -99,6 +100,10 @@ void IniciarPartida::update() {
 						// Reinicia el reloj
 						LimTimeBotton.restart();
 						playClickSound();
+
+						Chat CHat(*window);
+						CHat.update();
+
 
 						client.initialize();
 						if (true == client.connectToServer("208.68.36.50", 1234)) {

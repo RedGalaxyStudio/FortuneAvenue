@@ -24,10 +24,10 @@ int calcularNumeroDeLineas(const sf::Text& text) {
 
 void Chat::resource() {
 
-	TextureBotonEviar.loadFromFile("envio2.png");
+	TextureBotonEviar.loadFromFile("assets/image/envio2.png");
 
-	if (!Fuentechat.loadFromFile("resource/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n";}
-	if (!FuenteMensaje.loadFromFile("resource/fonts/Poppins-Light.ttf")) { std::cerr << "Error loading font/n"; }
+	if (!Fuentechat.loadFromFile("assets/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n";}
+	if (!FuenteMensaje.loadFromFile("assets/fonts/Poppins-Light.ttf")) { std::cerr << "Error loading font/n"; }
 
 	SpriteBotonEnviar.setTexture(TextureBotonEviar);
 	SpriteBotonEnviar.setOrigin(20, 20);
@@ -178,17 +178,50 @@ void Chat::update() {
 				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					PlantillaMensajeE.SMSEnviado.setString(input);
+					PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 10,
+						PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
+
 					input = "";
 					indicacion.setString(input);
-					float aux = indicacion.getGlobalBounds().height;
+					float aux = PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height;
 
-					for (int i = 0; i < Mensajes.size(); i++)
+
+					int In = calcularNumeroDeLineas(PlantillaMensajeE.SMSEnviado) + 1;
+					///	int Ca = Caja.getGlobalBounds().height / 40;
+					///	if (Ca > In && Ca) {
+					if (In == 1) {
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
+
+						PlantillaMensajeE.ContenidoEnviado.setPosition(1080, 600);
+
+						PlantillaMensajeE.SMSEnviado.setPosition(1080, 618);
+					}
+					else if (In > 1) {
+
+						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+
+
+
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, altura.height + 22));
+
+						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(940, 690 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
+					
+					
+						PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(940, PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
+					}
+
+
+
+
+					aux += 20;
+					Mensajes.push_back(PlantillaMensajeE);
+					for (int i = 0; i < Mensajes.size()-1; i++)
 					{
 						Mensajes[i].ContenidoEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
-						Mensajes[i].SMSEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+						Mensajes[i].SMSEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y +12);
 
 					}
-					Mensajes.push_back(PlantillaMensajeE);
+					
 
 				}
 			}
