@@ -42,9 +42,9 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
 
 // Posición del cuadro de texto
 void TextBox::setPosition(int XX ,int YY) {
-    box.setPosition(XX + 145, YY + 60);
-    text.setPosition(XX + 145, YY + 56);
-    textoPregunta.setPosition(XX, YY - 25);
+    box.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 60));
+    text.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 56));
+    textoPregunta.setPosition(static_cast<float>(XX), static_cast<float>(YY - 25));
 }
 
 

@@ -74,6 +74,10 @@
     <IncludePath>\SFML\include;$(ProjectDir)curl\include;$(IncludePath)</IncludePath>
     <LibraryPath>\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);\SFML\include;$(ProjectDir)curl\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -127,23 +131,30 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)libs\include;$(ProjectDir)curl\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;flac.lib;freetype.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;vorbisfile.lib;enet.lib;ws2_32.lib;winmm.lib;libcurl.a;libcurl.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)libs\lib;$(ProjectDir)curl\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ButtonG.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Cinematic.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Economy.cpp" />
     <ClCompile Include="fileio.cpp" />
     <ClCompile Include="GameEnd.cpp" />
-    <ClCompile Include="GameMode.cpp" />
+    <ClCompile Include="GameModeSelector.cpp" />
+    <ClCompile Include="GameOptions.cpp" />
+    <ClCompile Include="MultiplayerGame.cpp" />
     <ClCompile Include="HouseBuy.cpp" />
     <ClCompile Include="IniciarPartida.cpp" />
     <ClCompile Include="IniciaUser.cpp" />
@@ -166,13 +177,16 @@
     <ClInclude Include="ButtonG.hpp" />
     <ClInclude Include="card.h" />
     <ClInclude Include="cell.h" />
+    <ClInclude Include="Chat.hpp" />
     <ClInclude Include="Cinematic.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="CubeClass.h" />
     <ClInclude Include="Economy.hpp" />
     <ClInclude Include="fileio.h" />
     <ClInclude Include="GameEnd.hpp" />
-    <ClInclude Include="GameMode.hpp" />
+    <ClInclude Include="GameModeSelector.hpp" />
+    <ClInclude Include="GameOptions.hpp" />
+    <ClInclude Include="MultiplayerGame.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="HouseBuy.hpp" />
     <ClInclude Include="IniciarPartida.hpp" />

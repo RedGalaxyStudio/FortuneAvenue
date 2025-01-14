@@ -4,7 +4,7 @@
 #include "TextBox.hpp"
 #include "MensageBox.hpp"
 
-IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), pieceselector(window) {
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();
 	resource();
 }
@@ -16,7 +16,8 @@ void IniciarPartida::resource() {
 
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");
-
+	if (!TextureCash.loadFromFile("resource/texture/Game/cash.png")) return;
+	if (!TextureHome.loadFromFile("resource/texture/Game/casa.png")) return;
 	SpriteCrearPartida.setTexture(TextureCrearPartidaOff);
 	SpriteUnirse.setTexture(TextureUnirse);
 	SpriteCrearPartida.setOrigin(150, 59);
@@ -50,7 +51,15 @@ void IniciarPartida::update() {
 
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-	
+
+
+	int xPos=180;
+	int startY=120;
+
+	Sesion.setPosition(xPos, startY + 110);
+	box.setPosition(xPos, startY + 110);
+	selectedAvatarCopy.setPosition(xPos, startY);
+	recua.setPosition(xPos, startY);
 
 
 	bool valida2 = false;
@@ -80,7 +89,6 @@ void IniciarPartida::update() {
 					playClickSound();
 					updatejoinRoom();
 					Valida = false;
-//					////////////////////////////////////////std::cout << "haaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
 				}
 
@@ -94,8 +102,12 @@ void IniciarPartida::update() {
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
 							Code = client.createRoom(nameUser, TextureAvatarPath);
 
+							PieceSelector pieceselector(window);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
+
+							pieceselector.~PieceSelector();
+							
 						}
 						else
 						{
@@ -135,6 +147,10 @@ void IniciarPartida::update() {
 
 		window->clear();
 		window->draw(spriteFondoGame);
+		window->draw(box);
+		window->draw(Sesion);
+		window->draw(selectedAvatarCopy);
+		window->draw(recua);
 		window->draw(SpriteUnirsePartida);
 		window->draw(enunciado);
 		window->draw(spriteX);
@@ -147,8 +163,8 @@ void IniciarPartida::update() {
 void IniciarPartida::updatejoinRoom() {
 	std::string code;
 	bool Valida1 = false;
-	TextBox textBoxRoom(1000, 80, "Ingresa el codigo: ");
-	textBoxRoom.setPosition(1000, 80);
+	TextBox textBoxRoom(640, 80, "Ingresa el codigo: ");
+	textBoxRoom.setPosition(505, 80);
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
 	MensageBox messageInvalido("Codigo invalido", fontUser, 12);
 
@@ -190,9 +206,11 @@ void IniciarPartida::updatejoinRoom() {
 
 								client.joinRoom(code, nameUser, TextureAvatarPath);
 								Code = code;
-
+								PieceSelector pieceselector(window);
 								pieceselector.Resource();
 								pieceselector.updateSelection();
+
+								pieceselector.~PieceSelector();
 
 							}
 							else {

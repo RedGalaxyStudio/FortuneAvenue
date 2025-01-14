@@ -28,11 +28,10 @@ sf::RenderTexture renderTexture;
 sf::Texture textureXOn;
 sf::Texture textureXOff;
 sf::Sprite spriteX;
-std::vector<sf::CircleShape> avatars;
 
 
 sf::CircleShape selectedAvatarCopy; // Copia del avatar seleccionado
-
+sf::Texture textselectedAvatarCopy;
 sf::Texture textureBox;
 sf::Sprite box;
 sf::Font fontUser;

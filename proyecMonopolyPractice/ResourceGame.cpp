@@ -4,6 +4,10 @@
 
 
 sf::Texture &textureBoxPerfil= textureBox;
+
+std::vector<sf::Texture> TextureCasa;
+sf::Texture TextureCash;
+sf::Texture TextureHome;
 sf::Font &fontUserPerfil=fontUser ;
 std::vector<sf::Texture> avatarTextures;
 sf::Texture TextureFondoGame;
@@ -38,7 +42,7 @@ std::vector<PlayerInfo> playerInfos;
 std::vector<PlayerGame> playersGame;
 bool espera;
 bool giroRule;
-int CplayerIndex;
+int CplayerIndex = -1;
 int Opcioncami;
 
 bool userRuleta;

@@ -12,36 +12,28 @@
 
 body {
     font-family: "Arcadepix Plus Regular", sans-serif;
-    color: #0028f2;
+    color: #f200ff;
     background-color: #000000;
     width: 100%;
     height: 100%;
 } 
 .Principal{
 
-
-
     width: 100%;
     height:100%;
-   background-image: url('Kosas para el proyekto/FondoGame2.jpg') ;
+    background-image: url('Kosas para el proyekto/FondoGame2.jpg') ;
     background-size: cover;
     background-repeat: no-repeat;
-   background-position: center;
-
-
-
+    background-position: center;
 
 }
 .logo{
 
-
-
     width: 30%;
     height: 30%;
-    
-  
 
 }
+
 
 
 
@@ -59,31 +51,51 @@ hr {
 
 /* Degradado de texto para todo el contenido */
 p {
-    font-family:sans-serif;
+    font-family:Poppins;
   /*  background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
-  background-color: #ffffff;
+    background-color: #ffffff;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 2em;
+    font-size: 15px;
 }
 
 h1 {
+    font-family:BigBlueTermPlus Nerd Font Propo;
     font-size: 4em; /* Tamaño del título */
     margin-bottom: 20px; /* Espaciado */
     color: #fff; /* Texto blanco */
     text-shadow: 
-        0 0 2px #fff, 
-        0 0 7px #fff, 
-        0 0 3px rgba(255, 255, 255, 0.5); /* Efecto de neón más suave */
+        0 0 1px #fff, 
+        0 0 5px #fff, 
+        0 0 2px rgba(255, 255, 255, 0.3); /* Efecto de neón más suave */
 }
 
 
 h2 { 
-    background-image: linear-gradient(to right, #0028f0, #f72b8e); /* Degradado de azul a rosa */
+    font-family:BigBlueTermPlus Nerd Font Propo;
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+h3 { 
+    font-family:BigBlueTermPlus Nerd Font Propo;
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 24.2758px;
+}
+
+h4 { 
+    font-family:BigBlueTermPlus Nerd Font Propo;
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 18.2758px;
 }
 
 
@@ -99,7 +111,7 @@ header {
 }
 
 .barra-lateral {
-    position: absolute;
+    position: fixed;
     top: 0; /* Mantiene la barra lateral en la parte superior */
     right: 0; /* Mueve la barra lateral a la derecha */
     background: rgba(0, 0, 0, 0.5); /* Fondo oscuro, puedes ajustar la opacidad */
@@ -118,7 +130,7 @@ nav ul li {
 }
 
 nav ul li a {
-    background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a verde */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -156,8 +168,9 @@ nav ul li a:hover {
 }
 
 section {
-    text-align: center;
-    padding: 100px 20px;
+        text-align: center;
+        padding: 25px 3px;
+        box-sizing: border-box;
 }
 
 h1 {
@@ -195,7 +208,13 @@ h2 {
 }
 
 .seccion {
-    padding: 200px 50px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+.SeccionMeca{
+    padding: 5px 20px;
+    box-sizing: border-box;
 }
 
 .grid {
@@ -207,10 +226,10 @@ h2 {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
-    width: 30%;
+    width: 23%;
 }
 
-.card h3 {
+.card h4 {
     margin-bottom: 10px;
 }
 
@@ -251,3 +270,174 @@ footer {
     background-clip: text;
     color: transparent;
 }
+
+.caja {
+    border: 2px solid #ffffff; /* Borde de la caja */
+    padding: 20px; /* Espaciado interior */
+    margin: 20px 500px; /* Espaciado exterior */
+    background-color: #000000; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    box-sizing: border-box;
+    right: 0;
+    
+    }
+
+    .contenedor {
+        display: flex; /* Activa flexbox */
+        justify-content: space-between; /* Distribuye el contenido con espacio entre los elementos */
+        align-items: center; /* Alinea los elementos verticalmente al centro */
+        gap: 20px; /* Espacio entre la imagen y el texto */
+        padding: 20px; /* Espaciado interno */
+    }
+
+
+    * Aseguramos que solo los elementos dentro de la sección #Mecanica1 se vean afectados */
+#Mecanica1 .contenedor {
+  display: flex; /* Usamos Flexbox para alinear los elementos */
+  align-items: flex-start; /* Alinea verticalmente los elementos al principio (superior) */
+  gap: 20px; /* Añadimos un espacio entre la imagen y el texto */
+}
+
+#Mecanica1 .texto {
+    flex: 1;
+}
+
+#Mecanica1 h2, #Mecanica1 p {
+    margin: 0 50px;
+    padding: 0; 
+    line-height: 1.5; 
+}
+
+
+#Mecanica1 .texto h2,
+#Mecanica1 .texto p {
+    text-align: left; 
+}
+
+
+#Mecanica1 .imagen img {
+    width: 600px; 
+    height: auto; 
+    margin: 30px; 
+}
+
+
+    #Mecanica2 .contenedor {
+        display: flex; 
+        flex-direction: row-reverse; 
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    #Mecanica2 .texto {
+        flex: 1; 
+    }
+
+    #Mecanica2 h2, #Mecanica2 p {
+        margin: 0 50px; 
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica2 .texto h2,
+        #Mecanica2 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica2 .imagen img {
+        width: 600px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Mecanica3 .contenedor {
+        display: flex; /* Usamos Flexbox para alinear los elementos */
+        align-items: center; /* Alinea verticalmente los elementos al principio (superior) */
+        gap: 20px; /* Añadimos un espacio entre la imagen y el texto */
+    }
+    
+    #Mecanica3 .texto {
+        flex: 1;
+    }
+    
+    #Mecanica3 h2, #Mecanica3 p {
+        margin: 0 50px;
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica3 .texto h2,
+    #Mecanica3 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica3 .imagen img {
+        width: 600px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Mecanica4 .contenedor {
+        display: flex; 
+        flex-direction: row-reverse; 
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    #Mecanica4 .texto {
+        flex: 1; 
+    }
+
+    #Mecanica4 h2, #Mecanica4 p {
+        margin: 0 50px; 
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica4 .texto h2,
+        #Mecanica4 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica4 .imagen img {
+        width: 600px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Team img {
+        width: 900px;  /* Ajusta este valor según lo que necesites */
+        height: auto;  /* Mantiene la proporción de la imagen */
+    }
+
+    #miembros .grid .card img {
+        width: 150px; /* Establece un tamaño fijo para la imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        margin-bottom: 10px; /* Opcional: espacio debajo de la imagen */
+    }
+    #miembros {
+        line-height: 1.6;
+        margin: 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+    }
+
+    #miembros h2 {
+        text-align: center;
+        font-size: 2em;
+
+    }
+    
+    #miembros p {
+        font-size: 1.1em;
+
+        margin-bottom: 1em;
+    }
+    
+    #miembros h3 {
+        font-size: 1.5em;
+        margin-top: 1px;
+
+    }

@@ -66,9 +66,18 @@ public:
 	float decelerationRateActi;
 	bool giroActivo;
 	int turnopermitido;
+
+
+
 	std::mutex ruletaMutex;
 	std::condition_variable ruletaCondVar;
 	bool ruletaMessageReceived = false;
+
+	std::mutex impuestoMutex;
+	std::condition_variable impuestoCondVar;
+	bool impuestoMessageReceived = false;
+
+
 	void casasX();
 	void EventoCasa();
 	void EventoRuleta();
@@ -80,12 +89,24 @@ public:
 	std::mutex mtxExisting;
 	std::condition_variable cvExisting;
 	bool accionCompra;
-
+	void llegadaFinal();
 	void MONEYSALARIO(std::string message, int usuario);
 	std::mutex mtxx;
 	std::condition_variable cvv;
 	
 	int playerIndex;
+
+
+
+	std::mutex mtex;
+	std::condition_variable cvDis;
+	bool eventOccurred = false;
+
+	bool disconnecte;
+	bool disActiv;
+
+
+	bool juegoTerminado = false;
 private:
 
 	sf::FloatRect globalBounds;

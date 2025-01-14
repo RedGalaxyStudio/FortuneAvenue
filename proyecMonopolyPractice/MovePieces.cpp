@@ -2,9 +2,14 @@
 #include "ResourceGlobal.hpp"
 
 MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
-void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC) {
+void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
+	this->vuelta = vuel;
+	this->final = fin;
+	this->CsFinal = CsFin;
+	PieceUser = PiecUser;
+	*vuelta = 2;
 }
 void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
@@ -34,11 +39,11 @@ int MovePieces::getcasillaActual() {
 	return casillaActual;
 }
 void MovePieces::actualizarMovimiento(float deltaTime) {
-
+	std::cout << "\n Peinci" ;
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
-
-		while (t > 1.0f && casillasRestantes > 0) {
+		std::cout <<"\n"<< *CsFinal;
+		while (t > 1.0f && casillasRestantes > 0 && !*CsFinal) {
 			t -= 1.0f;
 
 			sprite->setPosition(posicionFinal);
@@ -48,48 +53,107 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			casillasRestantes--;
 
 
-			//std::cout << "\nCasi casi csio";
+			if (*vuelta < 3) {
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
-				
+
 				//std::cout << "\nCasi caso";
-				if (caminoActual + 1 >= (*casillas).size() && casillasRestantes!=0) {
+				if (caminoActual + 1 == 7 && casillasRestantes != 0) {
+					*vuelta += 1;
 
-					finalCamino = true;
+					if (*vuelta > 3) {
+						*vuelta = 3;
+					}
 
-					updateCAmbioCasilla();
+					if (*vuelta == 3) {
+
+
+						posicionFinal = final;
+						casillasRestantes = 1;
+
+
+					}
+					else {
+						(*casillas).resize(1);
+						caminoActual = -1;
+
+
+					}
+
+
 				}
+				else
+					if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+
+						finalCamino = true;
+
+						updateCAmbioCasilla();
+					}
 				caminoActual++;
 
 
 
 			}
-			
-			//std::
-			// << "\nRestantes::::"<<casillasRestantes;
-			
+		}
+		
 			if(casillasRestantes!=0){
 			posicionInicial = sprite->getPosition();
+			if (*vuelta != 3) {
 			posicionFinal = (*casillas)[caminoActual][casillaActual];}
+			}
 		}
 
-		if (enMovimiento && casillasRestantes > 0) {
+		if (enMovimiento && casillasRestantes > 0 && !*CsFinal) {
 
 			 
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
+
+			if (*vuelta == 3&& sprite->getPosition()== final){
+
+				*CsFinal = true;
+				casillasRestantes = 0;
+
+				enMovimiento = false;
+				turn_Moviendo = false;
+				giroRule = true;
+
+
+				if (PieceUser) {
+
+					client.llegadaFinal();
+					
+				}
+			}
 		}
-		else {
+		else {		
+			
 			enMovimiento = false;
 			turn_Moviendo = false;
 			giroRule = true;
+			if (*vuelta == 3) {
+
+				*CsFinal = true;
+			
+
+
+				if (PieceUser) {
+
+					client.llegadaFinal();
+
+				}
+			}
+
+
 		}
 		if (casillasRestantes != 0) {
 			animacionRebote(posicionFinal, deltaTime);
 		}
 
-	}
 
+
+	}
+	std::cout << "\n Peinci11111111111";
 }
 void MovePieces::updateCAmbioCasilla() {
 

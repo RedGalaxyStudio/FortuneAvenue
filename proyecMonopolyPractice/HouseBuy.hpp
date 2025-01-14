@@ -20,8 +20,17 @@ sf::Texture TextureXcOFF;
 sf::Texture TextureXcOn;
 sf::Sprite Xc;
 
+struct CasasCompradas{
 
-std::vector<sf::Texture> TextureCasa;
+     sf::Sprite CsCmpdrsSprite;
+     sf::Vector2f mostrarCasa;
+     sf::Vector2f ocultaCasa;
+
+};
+
+std::vector<CasasCompradas> VCcompradas;
+std::vector<int> CsCmpdrsindex;
+
 std::vector<sf::Sprite> SpriteCasa;
 
 sf::Clock tempoCarta;
@@ -43,6 +52,7 @@ public:
     void setWindow(sf::RenderWindow& win,int indice);
     void resource(Client* client);
     void update(sf::Vector2f posicionactuInicial);
+    void ViewHouseBuys();
     int index;
    
 

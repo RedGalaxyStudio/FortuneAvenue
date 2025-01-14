@@ -10,18 +10,19 @@
 
 class IniciaUser {
 public:
-    IniciaUser(sf::RenderWindow& windowRef);
+    IniciaUser(sf::RenderWindow &windowRef);
     ~IniciaUser();
 
     void Resource();       
-    void Update();         
+    void Update();       
+    void UpdateEdit();
     void IniciAcion();
     void saveSelectedAvatar();
     void loadSelectedAvatar();
     void loadAvatars();
 private:
-    sf::RenderWindow& window;
-
+    sf::RenderWindow *window;
+    std::vector<sf::CircleShape> avatars;
     std::vector<sf::Texture> avatarTextures;
     std::vector<std::string> textureAvatarsFilePath;
     // Texturas y sprites
