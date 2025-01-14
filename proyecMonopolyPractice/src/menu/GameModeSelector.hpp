@@ -1,9 +1,9 @@
 #ifndef GAMEMODESELECTOR_HPP
 #define GAMEMODESELECTOR_HPP
-#include "ResourceGame.hpp"
-#include "ResourceGlobal.hpp"
+#include "../game/online/ResourceGame.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
-#include "PieceSelector.hpp"
+#include "../game/online/PieceSelector.hpp"
 
 class GameModeSelector  {
 public:

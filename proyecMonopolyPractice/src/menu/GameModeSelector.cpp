@@ -1,10 +1,10 @@
 #include "GameModeSelector.hpp"
 #include "IniciarPartida.hpp"
-#include "GameOptions.hpp"
-#include "ObjetosGlobal.hpp"
-#include "ButtonG.hpp"
-#include "TextBox.hpp"
-#include "MensageBox.hpp"
+#include "../game/offiline/GameOptions.hpp"
+#include "../core/ObjetosGlobal.hpp"
+#include "../ui/ButtonG.hpp"
+#include "../ui/TextBox.hpp"
+#include "../ui/MensageBox.hpp"
 
 GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win), pieceselector(window) {
 	loadResourceGame();

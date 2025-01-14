@@ -5,8 +5,8 @@
 #include <SFML/Audio.hpp>
 #include <thread>
 #include <vector>
-#include "TextBox.hpp"
-#include "ResourceGlobal.hpp"
+#include "../ui/TextBox.hpp"
+#include "../core/ResourceGlobal.hpp"
 
 class IniciaUser {
 public:

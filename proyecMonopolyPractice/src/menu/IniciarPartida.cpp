@@ -1,8 +1,8 @@
 #include "IniciarPartida.hpp"
-#include "ObjetosGlobal.hpp"
-#include "ButtonG.hpp"
-#include "TextBox.hpp"
-#include "MensageBox.hpp"
+#include "../core/ObjetosGlobal.hpp"
+#include "../ui/ButtonG.hpp"
+#include "../ui/TextBox.hpp"
+#include "../ui/MensageBox.hpp"
 
 IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();

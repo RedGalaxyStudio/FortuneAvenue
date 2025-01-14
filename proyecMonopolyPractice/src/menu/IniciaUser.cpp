@@ -1,13 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "IniciaUser.hpp"
-#include "TextBox.hpp"
+#include "../ui/TextBox.hpp"
 #include <SFML/Audio.hpp>
-#include "Scrollbar.hpp"
+#include "../ui/Scrollbar.hpp"
 #include <string>
-#include "ResourceGlobal.hpp"
-#include "ObjetosGlobal.hpp"
+#include "../core/ResourceGlobal.hpp"
+#include "../core/ObjetosGlobal.hpp"
 #include <fstream>
-#include "nlohmann/json.hpp"
+#include "../../libs/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
