@@ -1,4 +1,4 @@
-#include "GameOffline.hpp"
+/*#include "GameOffline.hpp"
 #include <String>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
@@ -1080,4 +1080,4 @@ void GameOffline::DrawGame() {
 	window->draw(SpriteChat);
 
 	std::cout << "\nhola";
-}
+}*/
