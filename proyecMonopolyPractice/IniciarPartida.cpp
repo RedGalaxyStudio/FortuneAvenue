@@ -13,6 +13,8 @@ void IniciarPartida::resource() {
 	TextureCrearPartidaOff.loadFromFile("resource/texture/Game/CrearPartidaOff.png");
 	TextureCrearPartidaOn.loadFromFile("resource/texture/Game/CrearPartidaOn.png");
 	TextureUnirse.loadFromFile("resource/texture/Game/unirse1encendido.png");
+	if (!CheckTexturesOn.loadFromFile("resource/texture/Game/check1on.png")) return;
+	if (!CheckTexturesOff.loadFromFile("resource/texture/Game/check1off.png")) return;
 
 	TextureUnirsePartidaOff.loadFromFile("resource/texture/Game/UnirsePartidaOff.png");
 	TextureUnirsePartidaOn.loadFromFile("resource/texture/Game/UnirsePartidaOn.png");

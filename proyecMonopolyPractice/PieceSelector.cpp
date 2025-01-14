@@ -17,10 +17,9 @@ PieceSelector::~PieceSelector() {
 	// Restablecer los vectores a su estado inicial
 	pieces.clear();
 	shadow.clear();
-	Check.clear();
+
 	piecesTextures.clear();
-	CheckTexturesOn.clear();
-	CheckTexturesOff.clear();
+
 
 	// Liberar referencia al puntero de la ventana
 	window = nullptr;
@@ -32,35 +31,25 @@ PieceSelector::~PieceSelector() {
 }
 
 void PieceSelector::Resource() {
-
+	std::cout << "\nwo";
 	
 	int piecesCount = 19;  //Cantidad de piezas
 	pieces.resize(piecesCount);
 	shadow.resize(piecesCount);
 	piecesTextures.resize(piecesCount);
-	Check.resize(4);
-	CheckTexturesOn.resize(4);
-	CheckTexturesOff.resize(4);
+
 	turn_dado = false;
 	turn = false;
 	turn_ruleta=false;
 	turn_casa= false;
 	turn_impuesto= false;
 	rolldiceJugador = false;
-
+	std::cout << "\nwo";
 	if (!Textufondopiece.loadFromFile("resource/texture/Game/FondoGameScroll.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
-	for (int i = 0; i < 4; i++) {
-		if (!CheckTexturesOn[i].loadFromFile("resource/texture/Game/check1on.png")) return;
-		if (!CheckTexturesOff[i].loadFromFile("resource/texture/Game/check1off.png")) return;
 
-		
-		Check[i].setTexture(CheckTexturesOff[i]);
-		Check[i].setOrigin(50.0f, 46.5f);
-
-	}
-
+	std::cout << "\nwo";
 	for (int i = 0; i < piecesCount; i++) {
 		if (!piecesTextures[i].loadFromFile("resource/texture/Game/pieces/piece" + std::to_string(i) + ".png"))
 			return;
@@ -73,6 +62,7 @@ void PieceSelector::Resource() {
 		shadow[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	}
+	std::cout << "\nwo";
 
 	for (int i = 0; i < pieces.size(); i++) {
 		int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
@@ -100,12 +90,13 @@ void PieceSelector::displayPieces() {
 	}
 }
 void PieceSelector::updateSelection() {
+	std::cout << "\nwo";
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-
+	std::cout << "\nwo";
 
 
 	float deltaScroll = 0.0f;
@@ -128,7 +119,7 @@ void PieceSelector::updateSelection() {
 	const float totalContentHeight = 880.0f;
 	const float scrollbarHeight = 340.0f;
 
-
+	std::cout << "\nwo";
 	float proportion = visibleAreaHeight / totalContentHeight;
 	float thumbHeight = scrollbarHeight * proportion;
 
@@ -136,7 +127,7 @@ void PieceSelector::updateSelection() {
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
 
-
+	std::cout << "\nwo1111";
 	Scrollbar scrollbarPiece(340, thumbHeight, 14);
 
 	scrollbarPiece.setPosition(1260, 340);
@@ -145,6 +136,7 @@ void PieceSelector::updateSelection() {
 	 startX = 275;  // Posición inicial calculada en X
 	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
 
+	 std::cout << "\nwo22222";
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
 	CODE.setString("CODIGO: " + Code);
@@ -152,14 +144,16 @@ void PieceSelector::updateSelection() {
 	CODE.setOutlineThickness(2);
 	CODE.setOutlineColor(sf::Color(135, 135, 135));
 	bool cierre = false;
+
+
+	std::cout << "\nwo33333333";
 	// Ahora calcula los límites y centra
 	globalBounds = CODE.getGlobalBounds();
 	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	// Finalmente, establece la posición
 	CODE.setPosition(640, 30);
-	ButtonG botonCheck1(Check[client.playerIndex], CheckTexturesOff[client.playerIndex], CheckTexturesOn[client.playerIndex]);
-	
+	std::cout << "\nwo";
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);
@@ -167,15 +161,9 @@ void PieceSelector::updateSelection() {
 	// Configurar perfiles
 	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
-			std::cout << "\nwo";
-
-			
+	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
+	bool Agregado = false;
 	while (window->isOpen()&& !cierre) {
-
-		
-
-
-
 
 
 		sf::Event event;
@@ -192,7 +180,7 @@ void PieceSelector::updateSelection() {
 					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
 					renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
 					renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
-					renderTexture.draw(Check[UsuariosActivos[i]]);
+					renderTexture.draw(playersGame[UsuariosActivos[i]].Check);
 				}
 				
 				renderTexture.draw(spriteX);
@@ -281,7 +269,7 @@ void PieceSelector::updateSelection() {
 					}
 
 				}
-				if (Check[UsuariosActivos[0]].getGlobalBounds().contains(mousePosFloat)) {
+				if (playersGame[UsuariosActivos[0]].Check.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					const sf::Texture* texturePtr = playersGame[UsuariosActivos[0]].PieceSelect.getTexture();
 
@@ -310,7 +298,12 @@ void PieceSelector::updateSelection() {
 			}
 
 		}
+		if (client.agregardor) {
+			botonCheck1.spriteAsig(playersGame[UsuariosActivos[0]].Check);
+			client.agregardor = false;
+			Agregado = true;
 
+		}
 
 
 		if(client.disconnecte==true){
@@ -324,7 +317,7 @@ void PieceSelector::updateSelection() {
 			client.eventOccurred = false;
 		}
 		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
-	//	std::cout << "\n"<< totalPerfiles;
+	
 		if(!cierre){
 
 			SelectingPiece = true;
@@ -340,7 +333,7 @@ void PieceSelector::updateSelection() {
 				
 			}
 		}
-	//	std::cout << "\n" << totalPerfiles;
+
 		if (SelectingPiece) {
 
 			MultiplayerGame mpGame(*window);
@@ -348,22 +341,28 @@ void PieceSelector::updateSelection() {
 		}
 
 		currentCursor = &normalCursor;
+		if(Agregado){
 		botonCheck1.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+		}
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
 		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
 		if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
 
+
+			std::cout << "\nentro";
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
 			client.cvExisting.notify_all();
+
+			std::cout << "\nSalio";
 		}
-	//	std::cout << "\nwi" ;
+	
 		for (int i = 0; i < UsuariosActivos.size(); i++)
 		{
 			if (playerInfos[UsuariosActivos[i]].isSelectingPiece) {
-				Check[UsuariosActivos[i]].setTexture(CheckTexturesOn[UsuariosActivos[i]]);
+				playersGame[UsuariosActivos[i]].Check.setTexture(CheckTexturesOn);
 			}
 		}
 
@@ -393,11 +392,11 @@ void PieceSelector::updateSelection() {
 				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY );
 				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY );
 				playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos, startY + 100);
-				Check[UsuariosActivos[i]].setPosition(xPos, yPos + 200);
+				playersGame[UsuariosActivos[i]].Check.setPosition(xPos, yPos + 200);
 				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
 				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
 				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
-				window->draw(Check[UsuariosActivos[i]]);
+				window->draw(playersGame[UsuariosActivos[i]].Check);
 			}
 
 
