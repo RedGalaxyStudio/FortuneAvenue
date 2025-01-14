@@ -316,7 +316,7 @@ void IniciaUser::loadAvatars(){
 
     for (int i = 0; i < avatarCount; i++) {
 
-        textureAvatarsFilePath[i] = "assets/Avatars/avatar" + std::to_string(i) + ".png";
+        textureAvatarsFilePath[i] = "assets/image/Avatars/avatar" + std::to_string(i) + ".png";
 
         if (!avatarTextures[i].loadFromFile(textureAvatarsFilePath[i]))
             return;
@@ -348,7 +348,7 @@ void IniciaUser::loadAvatars(){
     }
     
 
-    Texrecua.loadFromFile("assets/Avatars/recua.png");
+    Texrecua.loadFromFile("assets/image/Avatars/recua.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
 }
