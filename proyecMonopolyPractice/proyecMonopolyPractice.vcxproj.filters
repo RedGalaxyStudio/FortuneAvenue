@@ -1,204 +1,244 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{a1df1c87-44c0-4d79-88f8-f64b455bfdd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="src\game">
+      <UniqueIdentifier>{97b7aed3-5319-4283-a2f1-845bd5a5e48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\offline">
+      <UniqueIdentifier>{fc1d5357-aea0-43bb-aeb7-18eadfee08c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\online">
+      <UniqueIdentifier>{144702ef-2533-4b0d-b700-1c6577dafb77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cinematic">
+      <UniqueIdentifier>{78a694f4-318f-4079-aed7-01720a5f8ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{0da7fe27-c3e2-4d7e-8f3d-2c7be51cd0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\menu">
+      <UniqueIdentifier>{6a3d0bd6-8840-435d-87bf-9706f986eb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\settings">
+      <UniqueIdentifier>{68d0c698-1079-43bf-ad1c-8fc45f74b7f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\network">
+      <UniqueIdentifier>{c1afc1bb-09e9-4544-b392-c946f2b796a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{52b9adb4-d80d-482e-adde-115067af7339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\nlohmann">
+      <UniqueIdentifier>{6287986e-9c37-4f1c-a040-88cbc60eff6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\ButtonG.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="Cinematic.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\cell.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="menuP.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\Cube.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\fileio.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="IniciaUser.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\MensageBox.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="TextBox.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\Scrollbar.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceGlobal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\ui\TextBox.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonG.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\Chat.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="ObjetosGlobal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\GameEnd.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="Scrollbar.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\HouseBuy.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\MovePieces.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="MultiplayerGame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\MultiplayerGame.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceGame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\nulo.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="Ruleta.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\PieceSelector.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="MovePieces.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\ResourceGame.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="IniciarPartida.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\Ruleta.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="MensageBox.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\online\Stealplayer.cpp">
+      <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="Economy.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\offiline\GameOffline.cpp">
+      <Filter>src\game\offline</Filter>
     </ClCompile>
-    <ClCompile Include="GameEnd.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\game\offiline\GameOptions.cpp">
+      <Filter>src\game\offline</Filter>
     </ClCompile>
-    <ClCompile Include="HouseBuy.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cinematic\Cinematic.cpp">
+      <Filter>src\cinematic</Filter>
     </ClCompile>
-    <ClCompile Include="cell.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\ObjetosGlobal.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="fileio.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\ResourceGlobal.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="nulo.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\menu\GameModeSelector.cpp">
+      <Filter>src\menu</Filter>
     </ClCompile>
-    <ClCompile Include="Stealplayer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\menu\IniciarPartida.cpp">
+      <Filter>src\menu</Filter>
     </ClCompile>
-    <ClCompile Include="PieceSelector.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\menu\IniciaUser.cpp">
+      <Filter>src\menu</Filter>
     </ClCompile>
-    <ClCompile Include="GameModeSelector.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\menu\menuP.cpp">
+      <Filter>src\menu</Filter>
     </ClCompile>
-    <ClCompile Include="Chat.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\settings\SettingsManager.cpp">
+      <Filter>src\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\Client.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\NetworkMessage.cpp">
+      <Filter>src\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cinematic.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\ButtonG.hpp">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="menuP.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\cell.h">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsManager.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\Cube.hpp">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="TextBox.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\fileio.h">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="IniciaUser.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\MensageBox.hpp">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceGlobal.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\Particles.h">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonG.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\Scrollbar.hpp">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="nlohmann\json.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ui\TextBox.hpp">
+      <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="nlohmann\json_fwd.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\Chat.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="ObjetosGlobal.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\CubeClass.h">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="Scrollbar.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\GameEnd.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="MultiplayerGame.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\HouseBuy.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="PieceSelector.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\MovePieces.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceGame.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\MultiplayerGame.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="Client.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\nulo.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="Globals.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\PieceSelector.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="CubeClass.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\ResourceGame.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="WindowClass.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\Ruleta.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="MovePieces.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\Stealplayer.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="Ruleta.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\online\WindowClass.h">
+      <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="IniciarPartida.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\offiline\GameOffline.hpp">
+      <Filter>src\game\offline</Filter>
     </ClInclude>
-    <ClInclude Include="MensageBox.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\game\offiline\GameOptions.hpp">
+      <Filter>src\game\offline</Filter>
     </ClInclude>
-    <ClInclude Include="Particles.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\cinematic\Cinematic.hpp">
+      <Filter>src\cinematic</Filter>
     </ClInclude>
-    <ClInclude Include="Economy.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\ObjetosGlobal.hpp">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="GameEnd.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\ResourceGlobal.hpp">
+      <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="HouseBuy.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\menu\GameModeSelector.hpp">
+      <Filter>src\menu</Filter>
     </ClInclude>
-    <ClInclude Include="card.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\menu\IniciarPartida.hpp">
+      <Filter>src\menu</Filter>
     </ClInclude>
-    <ClInclude Include="cell.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\menu\IniciaUser.hpp">
+      <Filter>src\menu</Filter>
     </ClInclude>
-    <ClInclude Include="fileio.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\menu\menuP.hpp">
+      <Filter>src\menu</Filter>
     </ClInclude>
-    <ClInclude Include="nulo.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\settings\SettingsManager.hpp">
+      <Filter>src\settings</Filter>
     </ClInclude>
-    <ClInclude Include="Stealplayer.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\network\Client.hpp">
+      <Filter>src\network</Filter>
     </ClInclude>
-    <ClInclude Include="GameModeSelector.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\network\NetworkMessage.hpp">
+      <Filter>src\network</Filter>
     </ClInclude>
-    <ClInclude Include="Chat.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="libs\nlohmann\json.hpp">
+      <Filter>libs\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\nlohmann\json_fwd.hpp">
+      <Filter>libs\nlohmann</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\ui\quad.vtk">
+      <Filter>src\ui</Filter>
+    </None>
   </ItemGroup>
 </Project>
