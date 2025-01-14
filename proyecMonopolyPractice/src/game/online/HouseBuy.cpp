@@ -23,29 +23,29 @@ void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
-	if (!TextureXcOFF.loadFromFile("../assets/Button/XOffC.png")) {
+	if (!TextureXcOFF.loadFromFile("../assets/image/Button/XOffC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
-	if (!TextureXcOn.loadFromFile("../assets/Button/XOnC.png")) {
+	if (!TextureXcOn.loadFromFile("../assets/image/Button/XOnC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
 	// Cargar la textura para el botón de confirmación de salida
-	if (!TextureBotonComprar.loadFromFile("../assets/Button/comprarcasa.png")) {
+	if (!TextureBotonComprar.loadFromFile("../assets/image/Button/comprarcasa.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);
 	SpriteBotonComprar.setPosition(640, 545);
 	SpriteBotonComprar.setOrigin(101, 40);
 
-	if (!ReversoCart.loadFromFile("../assets/Game/Casas/reversocart.png")) {
+	if (!ReversoCart.loadFromFile("assets/image/Game/Casas/reversocart.png")) {
 			std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
 	}
 	// Crear el sprite para cada textura
 
-	std::ifstream file("../assets/Game/Casas/CasasInfo.json");
+	std::ifstream file("assets/image/Game/Casas/CasasInfo.json");
 
 	if (!file.is_open()) {
 		char error_message[256];

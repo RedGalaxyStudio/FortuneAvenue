@@ -222,12 +222,9 @@ void Chat::update() {
 
 			if (event.type == sf::Event::TextEntered ) {
 
-
-				std::cout << "\n aqui es puede noo m3 lo d43o";
 				if (event.text.unicode < 128) {
 					if (event.text.unicode == '\b' && !input.empty()) {
 						input.pop_back();
-
 						indicacion.setString(input);
 
 					}

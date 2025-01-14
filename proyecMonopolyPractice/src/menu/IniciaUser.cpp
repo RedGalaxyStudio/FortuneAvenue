@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+ #include <SFML/Graphics.hpp>
 #include "IniciaUser.hpp"
 #include "../ui/TextBox.hpp"
 #include <SFML/Audio.hpp>
@@ -25,9 +25,9 @@ void IniciaUser::Resource() {
 void IniciaUser::Update() {
 
     if (!std::filesystem::exists("perfil.json")) {
-        if (!ckeck.loadFromFile("../assets/Avatars/cheeke2.png")) return;
+        if (!ckeck.loadFromFile("assets/image/Avatars/cheeke2.png")) return;
         spriteCkeck.setTexture(ckeck);
-        if (!TextureFondoMenuAvar.loadFromFile("../assets/Fondos/fondomenuAvar.png")) return;
+        if (!TextureFondoMenuAvar.loadFromFile("assets/image/Fondos/fondomenuAvar.png")) return;
         SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
         loadAvatars();
         IniciAcion();
@@ -40,9 +40,9 @@ void IniciaUser::Update() {
 void IniciaUser::UpdateEdit() {
 
 
-        if (!ckeck.loadFromFile("../assets/Avatars/cheeke2.png")) return;
+        if (!ckeck.loadFromFile("assets/image/Avatars/cheeke2.png")) return;
         spriteCkeck.setTexture(ckeck);
-        if (!TextureFondoMenuAvar.loadFromFile("../assets/Fondos/fondomenuAvar.png")) return;
+        if (!TextureFondoMenuAvar.loadFromFile("assets/image/Fondos/fondomenuAvar.png")) return;
         SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
         loadAvatars();
  
@@ -316,7 +316,7 @@ void IniciaUser::loadAvatars(){
 
     for (int i = 0; i < avatarCount; i++) {
 
-        textureAvatarsFilePath[i] = "../assets/Avatars/avatar" + std::to_string(i) + ".png";
+        textureAvatarsFilePath[i] = "assets/Avatars/avatar" + std::to_string(i) + ".png";
 
         if (!avatarTextures[i].loadFromFile(textureAvatarsFilePath[i]))
             return;
@@ -338,7 +338,7 @@ void IniciaUser::loadAvatars(){
       
         avatars[i].setPosition(x, y);
     }
-    if (!sharedTexture.loadFromFile("../assets/Avatars/Vacio.jpg")) return;
+    if (!sharedTexture.loadFromFile("assets/image/Avatars/Vacio.jpg")) return;
 
    
     if (selectedAvatarCopy.getTexture() == nullptr) { 
@@ -348,7 +348,7 @@ void IniciaUser::loadAvatars(){
     }
     
 
-    Texrecua.loadFromFile("../assets/Avatars/recua.png");
+    Texrecua.loadFromFile("assets/Avatars/recua.png");
     recua.setTexture(Texrecua);
     recua.setOrigin(65, 65);
 }

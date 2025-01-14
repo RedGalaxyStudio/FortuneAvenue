@@ -16,7 +16,7 @@ Cinematic::~Cinematic() {
 void Cinematic::loadTexturesInBackground() {
     for (int i = 0; i < 6; ++i) {
         sf::Texture texture;
-        if (!texture.loadFromFile("../assets/Fondos/part" + std::to_string(i) + ".jpg")) {
+        if (!texture.loadFromFile("assets/image/Fondos/part" + std::to_string(i) + ".jpg")) {
           //   std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
         }
         textures[i] = texture;
@@ -24,7 +24,7 @@ void Cinematic::loadTexturesInBackground() {
     SpriteFondoLogo.setTexture(textures[currentTextureIndex]);
     frameRect = sf::IntRect(0, 0, 1280, 720);
 
-    if (!FondoBuffer.loadFromFile("resource/sounds/IntroA.wav")) {
+    if (!FondoBuffer.loadFromFile("assets/sounds/IntroA.wav")) {
         // std::cerr << "Error al cargar el sonido A" << std::endl;
         return;
     }
@@ -39,9 +39,9 @@ void Cinematic::loadTexturesInBackground() {
 void Cinematic::Resource() {
 
 
-    if (!textureLogoStudio.loadFromFile("../assets/Logos/imagelogopresa.png")) return;
+    if (!textureLogoStudio.loadFromFile("assets/image/Logos/imagelogopresa.png")) return;
 
-    if (!textureLogoJuego.loadFromFile("../assets/Logos/logojuego14.png")) return;
+    if (!textureLogoJuego.loadFromFile("assets/image/Logos/logojuego14.png")) return;
 
     spriteLogoStudio.setTexture(textureLogoStudio);
     spriteLogoStudio.setOrigin(500, 238.5f);
