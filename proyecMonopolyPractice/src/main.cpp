@@ -13,7 +13,7 @@ std::atomic<bool> running(true);
 const unsigned short PORT = 53000; 
 //int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Juego en Pantalla Completa");
     window.setFramerateLimit(60);
 
   
