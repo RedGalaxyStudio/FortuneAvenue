@@ -7,12 +7,12 @@
 #include <thread>
 
 // Constructor
-PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
+PieceSelector1::PieceSelector1(sf::RenderWindow* windowRef)
 	: window(windowRef), selectedPiece(-1) {
 	loadResourceGame();
 }
 
-PieceSelector::~PieceSelector() {
+PieceSelector1::~PieceSelector1() {
 	// Restablecer los vectores a su estado inicial
 	pieces.clear();
 	shadow.clear();
@@ -29,7 +29,7 @@ PieceSelector::~PieceSelector() {
 	// Si hay algún otro recurso relacionado con SFML, se manejará automáticamente por la propia biblioteca
 }
 
-void PieceSelector::Resource() {
+void PieceSelector1::Resource() {
 	std::cout << "\nwo";
 	
 	int piecesCount = 19;  //Cantidad de piezas
@@ -81,14 +81,14 @@ void PieceSelector::Resource() {
 	}
 
 }
-void PieceSelector::displayPieces() {
+void PieceSelector1::displayPieces() {
 	for (size_t i = 0; i < pieces.size(); ++i) {
 		window->draw(pieces[i]);  // Draw all pieces
 		window->draw(shadow[i]);  // Draw all pieces
 
 	}
 }
-void PieceSelector::updateSelection() {
+void PieceSelector1::updateSelection() {
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
@@ -415,7 +415,7 @@ void PieceSelector::updateSelection() {
 
 }
 
-void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
+void PieceSelector1::updatePlayerPieceSelection(int newPieceIndex) {
 
 	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
 	pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
