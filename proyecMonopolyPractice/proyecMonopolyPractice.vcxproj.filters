@@ -91,12 +91,6 @@
     <ClCompile Include="src\game\online\Stealplayer.cpp">
       <Filter>src\game\online</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\offiline\GameOffline.cpp">
-      <Filter>src\game\offline</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\offiline\GameOptions.cpp">
-      <Filter>src\game\offline</Filter>
-    </ClCompile>
     <ClCompile Include="src\cinematic\Cinematic.cpp">
       <Filter>src\cinematic</Filter>
     </ClCompile>
@@ -129,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameOptionsO.cpp">
+      <Filter>src\game\offline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,10 +189,7 @@
     <ClInclude Include="src\game\online\WindowClass.h">
       <Filter>src\game\online</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\offiline\GameOffline.hpp">
-      <Filter>src\game\offline</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\offiline\GameOptions.hpp">
+    <ClInclude Include="src\game\offiline\GameOptionsO.hpp">
       <Filter>src\game\offline</Filter>
     </ClInclude>
     <ClInclude Include="src\cinematic\Cinematic.hpp">

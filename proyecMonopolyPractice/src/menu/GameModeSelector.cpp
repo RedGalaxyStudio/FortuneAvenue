@@ -1,6 +1,6 @@
 #include "GameModeSelector.hpp"
 #include "IniciarPartida.hpp"
-#include "../game/offiline/GameOptions.hpp"
+#include "../game/offiline/GameOptionsO.hpp"
 #include "../core/ObjetosGlobal.hpp"
 #include "../ui/ButtonG.hpp"
 #include "../ui/TextBox.hpp"

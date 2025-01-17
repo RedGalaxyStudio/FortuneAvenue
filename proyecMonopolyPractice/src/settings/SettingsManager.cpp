@@ -21,6 +21,13 @@ SettingsManager::SettingsManager()
 SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>&  music, sf::RenderWindow& windowRef)
     : window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
 {
+
+    thumb.setRadius((height + 5) / 2 + 5.f);
+    thumb.setFillColor(sf::Color(95, 179, 255));
+    thumb.setOutlineColor(sf::Color::Black);
+    thumb.setOutlineThickness(2.0f);
+
+
     if (std::filesystem::exists("settings.json")) {
 
         std::ifstream inFile("settings.json");
@@ -71,10 +78,6 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     filledBar.setOutlineColor(sf::Color::Black);
     filledBar.setOutlineThickness(2.0f);
 
-    thumb.setRadius((height + 5) / 2 + 5.f);
-    thumb.setFillColor(sf::Color(95, 179, 255));
-    thumb.setOutlineColor(sf::Color::Black);
-    thumb.setOutlineThickness(2.0f);
 
     if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
@@ -98,6 +101,10 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 {
 
 
+    thumb.setRadius((height + 5) / 2 + 5.f);
+    thumb.setFillColor(sf::Color(95, 179, 255));
+    thumb.setOutlineColor(sf::Color::Black);
+    thumb.setOutlineThickness(2.0f);
 
     if (std::filesystem::exists("settings.json")) {
 
@@ -145,11 +152,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     filledBar.setOutlineColor(sf::Color::Black);
     filledBar.setOutlineThickness(2.0f);
 
-    thumb.setRadius((height+ 5) / 2 + 5.f);
-    thumb.setFillColor(sf::Color(95, 179, 255));
-    thumb.setOutlineColor(sf::Color::Black);
-    thumb.setOutlineThickness(2.0f);
-    
+
     if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
         std::cerr << "Error loading font!" << std::endl;
     }
