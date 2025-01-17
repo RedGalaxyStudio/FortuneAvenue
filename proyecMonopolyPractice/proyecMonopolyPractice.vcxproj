@@ -147,8 +147,7 @@
     <ClCompile Include="src\cinematic\Cinematic.cpp" />
     <ClCompile Include="src\core\ObjetosGlobal.cpp" />
     <ClCompile Include="src\core\ResourceGlobal.cpp" />
-    <ClCompile Include="src\game\offiline\GameOffline.cpp" />
-    <ClCompile Include="src\game\offiline\GameOptions.cpp" />
+    <ClCompile Include="src\game\offiline\GameOptionsO.cpp" />
     <ClCompile Include="src\game\online\Chat.cpp" />
     <ClCompile Include="src\game\online\GameEnd.cpp" />
     <ClCompile Include="src\game\online\HouseBuy.cpp" />
@@ -181,8 +180,7 @@
     <ClInclude Include="src\cinematic\Cinematic.hpp" />
     <ClInclude Include="src\core\ObjetosGlobal.hpp" />
     <ClInclude Include="src\core\ResourceGlobal.hpp" />
-    <ClInclude Include="src\game\offiline\GameOffline.hpp" />
-    <ClInclude Include="src\game\offiline\GameOptions.hpp" />
+    <ClInclude Include="src\game\offiline\GameOptionsO.hpp" />
     <ClInclude Include="src\game\online\Chat.hpp" />
     <ClInclude Include="src\game\online\CubeClass.h" />
     <ClInclude Include="src\game\online\GameEnd.hpp" />

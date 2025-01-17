@@ -10,6 +10,317 @@ GameEnd::GameEnd(sf::RenderWindow* window) : window(window) {
 GameEnd::~GameEnd() {}
 
 
+
+sf::Vector2i previousMousePosition;
+sf::Vector2i currentMousePosition;
+
+class SpiralConfetti {
+public:
+    SpiralConfetti(sf::Vector2f position, sf::Color color)
+        : position(position), color(color) {
+        generateSpiral();
+    }
+
+    void update(float deltaTime) {
+        position.y += velocity * deltaTime;  // Baja el confeti
+        angle += rotationSpeed * deltaTime; // Rota la espiral
+
+        // Resetea la posición si sale de la ventana
+        if (position.y > windowHeight) {
+            position.y = -50;
+            position.x = static_cast<float>(rand() % windowWidth);
+        }
+    }
+
+    void draw(sf::RenderWindow& window) {
+        sf::Transform transform;
+        transform.translate(position);   // Traslada a la posición del confeti
+        transform.rotate(angle);        // Aplica rotación a la espiral
+        window.draw(spiral, transform); // Dibuja con transformación
+    }
+
+private:
+    sf::Vector2f position;
+    sf::Color color;
+    float angle = 0;                   // Ángulo de rotación
+    float rotationSpeed = 50;          // Velocidad de rotación
+    float velocity = 100;              // Velocidad de caída
+    sf::ConvexShape spiral;            // Forma convexa para la espiral
+
+    const int windowWidth = 800;       // Ancho de la ventana
+    const int windowHeight = 600;      // Alto de la ventana
+
+    void generateSpiral() {
+        const int points = 10;         // Número de puntos en la espiral
+        const float radiusStep = 2.0f; // Incremento del radio
+        const float angleStep = 0.5f;  // Incremento del ángulo en radianes
+
+        std::vector<sf::Vector2f> vertices;
+        float radius = 0;
+        float theta = 0;
+
+        for (int i = 0; i < points; ++i) {
+            // Calcula coordenadas polares
+            float x = radius * std::cos(theta);
+            float y = radius * std::sin(theta);
+            vertices.emplace_back(x, y);
+
+            // Incrementa el radio y el ángulo
+            radius += radiusStep;
+            theta += angleStep;
+        }
+
+        // Configura la forma convexa
+        spiral.setPointCount(vertices.size());
+        for (size_t i = 0; i < vertices.size(); ++i) {
+            spiral.setPoint(i, vertices[i]);
+        }
+
+        spiral.setFillColor(color);
+    }
+};
+
+
+class Confetti {
+public:
+    Confetti(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
+        : position(startPosition), size(size), color(color) {
+
+        rect.setSize(size);
+        angle = static_cast<float>(rand() % 360);  // Ángulo inicial
+        rotationSpeed = (rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50); // Velocidad de rotación
+        velocity.y = static_cast<float>(rand() % 80 + 20);  // Velocidad vertical aleatoria
+        velocity.x = 0;
+        if (rand() % 30 == 0) {  // Genera un número entre 0 y 29, 1/30 probabilidad de ser 0
+            rotateangle = -1;  // Asegura que el ángulo sea negativo
+        }
+        else {
+
+            rotateangle = 1;
+        }
+    }
+
+
+    int rotateangle;
+
+    void update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
+
+
+        // Movimiento hacia el mouse cuando colisiona con él
+        if (rect.getGlobalBounds().contains(mousePositionn.x, mousePositionn.y)) {
+
+
+            if (colision) {
+                position.y += velocity.y * deltaTime;  // Actualiza posición en Y
+                position.x += velocity.x * deltaTime;  // Actualiza posición en X
+                angle += (rotationSpeed * deltaTime) * rotateangle;  // Actualiza el ángulo de rotación
+
+                // Si colisiona con los bordes, cambia de dirección (reflexión)
+                if (position.y > screenHeight) {
+                    position.y = screenHeight;  // Límite inferior
+                    velocity.y = -velocity.y * 0.8f;  // Inversión y desaceleración
+                }
+                if (position.x > screenWidth || position.x < 0) {
+                    position.x = std::clamp(position.x, 0.f, screenWidth);  // Evita que se salga
+                    velocity.x = -velocity.x * 0.8f;  // Inversión y desaceleración
+                }
+
+                // Simula un aumento o disminución en la velocidad del confeti por la gravedad o la resistencia al aire
+                velocity.y += 20.f * deltaTime;  // Aceleración vertical debido a la gravedad
+
+
+
+
+            }
+            else {
+                sf::Vector2f rectCenter(rect.getPosition().x + rect.getSize().x / 2, rect.getPosition().y + rect.getSize().y / 2);
+                sf::Vector2f mouseDirection(mousePositionn.x - rectCenter.x, mousePositionn.y - rectCenter.y);
+
+                // Calcula el ángulo hacia el mouse y ajusta la velocidad en esa dirección
+                float angleToMouse = std::atan2(mouseDirection.y, mouseDirection.x);
+                velocity.x = std::cos(angleToMouse) * 150.f;  // velocidad en X
+                velocity.y = std::sin(angleToMouse) * 150.f;  // velocidad en Y
+                colision = true;
+                // Reduce la velocidad progresivamente para simular fricción
+                velocity.x *= 0.98f;
+                velocity.y *= 0.98f;
+
+            }
+
+
+        }
+        else if (!rect.getGlobalBounds().contains(mousePositionn.x, mousePositionn.y)) {
+            position.y += velocity.y * deltaTime;  // Actualiza posición en Y
+            position.x += velocity.x * deltaTime;  // Actualiza posición en X
+            angle += (rotationSpeed * deltaTime) * rotateangle;  // Actualiza el ángulo de rotación
+            colision = false;
+            // Si colisiona con los bordes, cambia de dirección (reflexión)
+            if (position.y > screenHeight) {
+                position.y = screenHeight;  // Límite inferior
+                velocity.y = -velocity.y * 0.8f;  // Inversión y desaceleración
+            }
+            if (position.x > screenWidth || position.x < 0) {
+                position.x = std::clamp(position.x, 0.f, screenWidth);  // Evita que se salga
+                velocity.x = -velocity.x * 0.8f;  // Inversión y desaceleración
+            }
+
+            // Simula un aumento o disminución en la velocidad del confeti por la gravedad o la resistencia al aire
+            velocity.y += 20.f * deltaTime;  // Aceleración vertical debido a la gravedad
+        }
+
+        if (position.y > screenHeight) {
+            position.y = -size.y;  // Reaparece arriba
+            position.x = static_cast<float>(rand() % static_cast<int>(screenWidth));
+        }
+    }
+
+    void draw(sf::RenderWindow& window) {
+
+        rect.setPosition(position);
+        rect.setFillColor(color);
+
+
+
+        // Aplica rotación
+       // rect.setOrigin(size.x / 2, size.y / 2);  // Establece el origen al centro del rectángulo
+        rect.setRotation(angle);
+
+        window.draw(rect);
+    }
+
+private:
+    sf::RectangleShape rect;
+    bool colision = false;
+    sf::Vector2f position;   // Posición del confeti
+    sf::Vector2f size;       // Tamaño del confeti
+    sf::Vector2f velocity;   // Velocidad
+    sf::Color color;         // Color del confeti
+    float angle;             // Ángulo de rotación
+    float rotationSpeed;     // Velocidad de rotación
+};
+
+class ConfettiRain {
+public:
+    ConfettiRain(size_t confettiCount, float screenWidth, float screenHeight) {
+        for (size_t i = 0; i < confettiCount; ++i) {
+            // Posición aleatoria inicial
+            sf::Vector2f startPosition(
+                static_cast<float>(rand() % static_cast<int>(screenWidth)),
+                static_cast<float>(rand() % static_cast<int>(screenHeight))
+            );
+
+            // Tamaño aleatorio
+            sf::Vector2f size(
+                static_cast<float>(rand() % 15 + 5),  // Ancho entre 5 y 20
+                static_cast<float>(rand() % 15 + 5)   // Alto entre 5 y 20
+            );
+
+            // Color aleatorio
+            sf::Color color(
+                rand() % 256,
+                rand() % 256,
+                rand() % 256
+            );
+
+            confettiList.emplace_back(startPosition, size, color);
+        }
+    }
+
+    void update(float deltaTime, float screenWidth, float screenHeight, sf::RenderWindow& window) {
+
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+        for (auto& confetti : confettiList) {
+            confetti.update(deltaTime, screenHeight, screenWidth, mousePosition);
+        }
+    }
+
+    void draw(sf::RenderWindow& window) {
+        for (auto& confetti : confettiList) {
+            confetti.draw(window);
+        }
+    }
+
+private:
+    std::vector<Confetti> confettiList;  // Lista de confetis
+};
+
+/*int main() {
+    srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
+
+    // Configuración de la ventana
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Lluvia de Confeti en SFML");
+    window.setFramerateLimit(60);
+
+    // Dimensiones del lienzo
+    float screenWidth = window.getSize().x;
+    float screenHeight = window.getSize().y;
+
+    // Crea una lluvia de confeti
+    size_t confettiCount = 400;  // Número de confetis
+    ConfettiRain confettiRain(confettiCount, screenWidth, screenHeight);
+    std::vector<SpiralConfetti> confettiListt;
+    for (int i = 0; i < 50; ++i) {
+        sf::Vector2f pos(rand() % 800, rand() % 600);
+        sf::Color color(rand() % 256, rand() % 256, rand() % 256);
+        confettiListt.emplace_back(pos, color);
+    }
+
+
+
+
+    sf::Clock clock;  // Reloj para deltaTime
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+
+        float deltaTime = clock.restart().asSeconds() * 1.5;
+
+        for (auto& confetti : confettiListt) {
+            confetti.update(deltaTime);
+        }
+
+        // Actualización
+
+        previousMousePosition = currentMousePosition;
+        currentMousePosition = sf::Mouse::getPosition(window);
+
+        sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
+        float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+
+        confettiRain.update(deltaTime, screenWidth, screenHeight, window);
+
+
+        // Renderizado
+
+
+
+        window.clear(sf::Color::Black);
+
+
+        for (auto& confetti : confettiListt) {
+            confetti.draw(window);
+        }
+        confettiRain.draw(window);
+        window.display();
+    }
+
+    return 0;
+}
+
+*/
+
+
+
+
+
+
+
 void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& positions) {
 	// Crear un vector de índices
 	std::vector<size_t> indices(players.size());

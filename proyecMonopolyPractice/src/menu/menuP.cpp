@@ -107,7 +107,9 @@ void menuP::MenuPrincipal() {
 
     selectedAvatarCopy.setPosition(84,74);
     selectedAvatarCopy.setScale(1,1);
-   
+    sf::CircleShape hola;
+
+    
 
     editorPerfil.setFillColor(sf::Color(0, 0, 0, 0));
     editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));
