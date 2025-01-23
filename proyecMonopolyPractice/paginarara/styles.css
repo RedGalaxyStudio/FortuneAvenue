@@ -20,7 +20,7 @@ body {
 .Principal{
 
     width: 100%;
-    height:100%;
+    height:100vh;
     background-image: url('Kosas para el proyekto/FondoGame2.jpg') ;
     background-size: cover;
     background-repeat: no-repeat;
