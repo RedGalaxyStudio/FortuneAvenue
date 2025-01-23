@@ -63,7 +63,7 @@ p {
 h1 {
     font-family:BigBlueTermPlus Nerd Font Propo;
     font-size: 4em; /* Tamaño del título */
-    margin-bottom: 20px; /* Espaciado */
+    margin-bottom: 1.25rem; /* Espaciado */
     color: #fff; /* Texto blanco */
     text-shadow: 
         0 0 1px #fff, 
