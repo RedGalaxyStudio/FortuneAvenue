@@ -35,13 +35,13 @@ void Chat::resource() {
 
 	spriteX.setPosition(1240, 35);
 
-	enunciado.setCharacterSize(20);
+	enunciado.setCharacterSize(28);
 	enunciado.setFont(fontUser);
 	enunciado.setFillColor(sf::Color::White);
 	enunciado.setOutlineThickness(2);
 	enunciado.setOutlineColor(sf::Color(135, 135, 135));
 	enunciado.setString("CHAT");
-	enunciado.setPosition(1090, 35);
+	enunciado.setPosition(1090, 30);
 	sf::FloatRect globalBounds = enunciado.getGlobalBounds();
 	enunciado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -57,15 +57,15 @@ void Chat::resource() {
 	indicacion.setOrigin(0, globalBounds.height / 2.0f);
 	
 	Fondo.setOrigin(0,0);
-	Fondo.setSize( sf::Vector2f  (380, 720));
+	Fondo.setSize( sf::Vector2f(380, 720));
 	Fondo.setPosition(900, 0);
 	Fondo.setFillColor(sf::Color(60,60,60));
 	Fondo.setOutlineThickness(-10);
 	Fondo.setOutlineColor(sf::Color(50,50,50));
 
 
-	FondoChat.setSize(sf::Vector2f(100, 40));
-	FondoChat.setPosition(1040, 20);
+	FondoChat.setSize(sf::Vector2f(380, 60));
+	FondoChat.setPosition(900, 0);
 	FondoChat.setFillColor(sf::Color(50, 50, 50));
 
 	
@@ -103,7 +103,7 @@ void Chat::resource() {
 	AbajIzquierda.setPosition(940, 670);
 
 
-	PlantillaMensajeE.SMSEnviado.setCharacterSize(20);
+	PlantillaMensajeE.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
 	PlantillaMensajeE.SMSEnviado.setFillColor(sf::Color::White);
 	PlantillaMensajeE.SMSEnviado.setOutlineThickness(1);
@@ -136,7 +136,7 @@ void Chat::resource() {
 
 void Chat::insertarSaltoDeLinea() {
 	if (input.empty()) return;
-
+	std::string aux = input;
 	// Crear un texto temporal para medir cada segmento
 	sf::Text tempText;
 	tempText.setFont(Fuentechat);
@@ -153,7 +153,21 @@ void Chat::insertarSaltoDeLinea() {
 				posicionUltimoEspacio = 0;          // Reiniciar el último espacio
 			}
 			else {
-				input.insert(i, "\n"); // Insertar un salto de línea si no hay espacio disponible
+				aux.pop_back();
+				tempText.setString(aux);
+
+				if (tempText.getGlobalBounds().width > 260) {
+					input.insert(i-1, "\n"); // Insertar un salto de línea si no hay espacio disponible
+
+
+				}
+				else {
+
+			    input.insert(i, "\n"); // Insertar un salto de línea si no hay espacio disponible
+
+				}
+
+	
 			}
 			break;
 		}
@@ -175,14 +189,23 @@ void Chat::update() {
 		while (window->pollEvent(event)) {
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat)) {
+				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat) && !input.empty()) {
 					playClickSound();
 					PlantillaMensajeE.SMSEnviado.setString(input);
 					PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 10,
-						PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
+					PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
 					input = "";
 					indicacion.setString(input);
+
+
+					for (int i = 0; i < Mensajes.size(); i++) {
+
+						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
+						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
+					}
+
+					Aumento = 0;
 					float aux = PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height;
 
 
@@ -190,36 +213,55 @@ void Chat::update() {
 					///	int Ca = Caja.getGlobalBounds().height / 40;
 					///	if (Ca > In && Ca) {
 					if (In == 1) {
-						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
+						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 10, 40));
 
 						PlantillaMensajeE.ContenidoEnviado.setPosition(1080, 600);
 
-						PlantillaMensajeE.SMSEnviado.setPosition(1080, 618);
+
+						PlantillaMensajeE.SMSEnviado.setPosition(1090, 618);
+
+						PlantillaMensajeE.positionContenidoEnviado = sf::Vector2f(1080, 600);
+						PlantillaMensajeE.positionSMSEnviado = sf::Vector2f(1090, 618);
 					}
 					else if (In > 1) {
+						indicacion.setPosition(940, 668);
+						Caja.setSize(sf::Vector2f(260, 40));
+						Caja.setPosition(940, 650);
+						CajaI.setSize(sf::Vector2f(20, 0));
+						CajaI.setPosition(940, 670);
+						CajaD.setSize(sf::Vector2f(20, 0));
+						CajaD.setPosition(1200, 670);
+						ArriDerecha.setPosition(1200, 670);
+						ArriIzquierda.setPosition(940, 670);
+						AbajDerecha.setPosition(1200, 670);
+						AbajIzquierda.setPosition(940, 670);
+
 
 						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+		
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 10, altura.height + 22));
 
-
-
-						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, altura.height + 22));
-
-						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(940, 690 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
+						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1080, 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
 					
-					
-						PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(940, PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
+						PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1085, PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
+
+						PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
+						PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 					}
-
-
-
 
 					aux += 20;
 					Mensajes.push_back(PlantillaMensajeE);
 					for (int i = 0; i < Mensajes.size()-1; i++)
 					{
-						Mensajes[i].ContenidoEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
-						Mensajes[i].SMSEnviado.setPosition(940, Mensajes[i].ContenidoEnviado.getPosition().y +12);
+						Mensajes[i].ContenidoEnviado.setPosition(1080, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
+						Mensajes[i].SMSEnviado.setPosition(1090, Mensajes[i].ContenidoEnviado.getPosition().y +20);
 
+
+
+						Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
+						Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 					}
 					
 
@@ -260,10 +302,71 @@ void Chat::update() {
 						input.pop_back();
 						indicacion.setString(input);
 
+						int In = calcularNumeroDeLineas(indicacion) + 1;
+						if (In == 1) {
+							Caja.setSize(sf::Vector2f(260, 40));
+
+							Caja.setPosition(940, 650);
+
+							ArriDerecha.setPosition(sf::Vector2f(1200, 670));
+							ArriIzquierda.setPosition(sf::Vector2f(940, 670));
+
+							AbajDerecha.setPosition(1200, 670);
+							AbajIzquierda.setPosition(940, 670);
+
+
+							CajaD.setSize(sf::Vector2f(20, 0));
+							CajaD.setPosition(sf::Vector2f(1200, 670));
+
+							CajaI.setSize(sf::Vector2f(20, 0));
+							CajaI.setPosition(sf::Vector2f(940, 670));
+
+							for (int i = 0; i < Mensajes.size(); i++) {
+
+								Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
+								Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+							}
+
+							Aumento = 0;
+							indicacion.setPosition(940, 668);
+						}
+						else if (In > 1) {
+
+							sf::FloatRect altura = indicacion.getGlobalBounds();
+
+
+
+							Caja.setSize(sf::Vector2f(260, altura.height + 22));
+
+							Caja.setPosition(sf::Vector2f(940, 690 - Caja.getGlobalBounds().height));
+							ArriDerecha.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+							ArriIzquierda.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
+
+							AbajDerecha.setPosition(1200, 670);
+							AbajIzquierda.setPosition(940, 670);
+
+							CajaD.setSize(sf::Vector2f(20, AbajDerecha.getPosition().y - ArriDerecha.getPosition().y));
+							CajaD.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
+
+
+							CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
+							CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
+							Aumento = altura.height - 8;
+
+
+							for (int i = 0; i < Mensajes.size(); i++) {
+
+								Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
+								Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+							}
+
+							indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
+						}
+
 					}
 
 					else if (event.text.unicode != '\b' && input.size() < maxLength) {
-						
+					
 						char enteredChar = static_cast<char>(event.text.unicode);
 							input += enteredChar; 
 
@@ -272,7 +375,7 @@ void Chat::update() {
 							if (indicacion.getGlobalBounds().width > 260) {
 									insertarSaltoDeLinea();
 									indicacion.setString(input);
-
+                              	std::cout << "Holamundo:" << indicacion.getGlobalBounds().width << std::endl;
 									int In = calcularNumeroDeLineas(indicacion) + 1;
 								///	int Ca = Caja.getGlobalBounds().height / 40;
 								///	if (Ca > In && Ca) {
@@ -293,6 +396,12 @@ void Chat::update() {
 
 											CajaI.setSize(sf::Vector2f(20, 0));
 											CajaI.setPosition(sf::Vector2f(940, 670));
+											for (int i = 0; i < Mensajes.size(); i++) {
+
+												Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
+												Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
+											}
+											Aumento = 0;
 
 
 											indicacion.setPosition(940, 668);
@@ -319,63 +428,26 @@ void Chat::update() {
 											CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
 											CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
 
+											Aumento = altura.height - 8;
+
+
+											for (int i = 0; i < Mensajes.size(); i++){
+
+												Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
+												Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+											}
+
 											indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
 										}
+
+
+
 		
 							}
 					}
 					
 					
 				
-					int In = calcularNumeroDeLineas(indicacion)+1;
-				//	int Ca = Caja.getGlobalBounds().height / 40;
-					
-						if (In == 1) {
-							Caja.setSize(sf::Vector2f(260, 40));
-
-							Caja.setPosition(940, 650);
-
-
-							ArriDerecha.setPosition(sf::Vector2f(1200, 670));
-							ArriIzquierda.setPosition(sf::Vector2f(940, 670));
-
-							AbajDerecha.setPosition(1200, 670);
-							AbajIzquierda.setPosition(940, 670);
-						
-
-							CajaD.setSize(sf::Vector2f(20, 0));
-							CajaD.setPosition(sf::Vector2f(1200, 670));
-
-							CajaI.setSize(sf::Vector2f(20, 0));
-							CajaI.setPosition(sf::Vector2f(940, 670));
-
-							indicacion.setPosition(940, 668);
-						}
-						else if (In > 1) {
-
-							sf::FloatRect altura = indicacion.getGlobalBounds();
-
-							Caja.setSize(sf::Vector2f(260, altura.height + 22));
-
-
-							Caja.setPosition(sf::Vector2f(940,690 - Caja.getGlobalBounds().height));
-
-
-							ArriDerecha.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
-							AbajDerecha.setPosition(1200, 670);	
-							CajaD.setSize(sf::Vector2f(20, AbajDerecha.getPosition().y -ArriDerecha.getPosition().y));
-							CajaD.setPosition(sf::Vector2f(1200, 710 - Caja.getGlobalBounds().height));
-
-
-							ArriIzquierda.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
-						    AbajIzquierda.setPosition(940, 670);
-
-							CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
-							CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
-
-							indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
-							std::cout << "\n Caja:" << Caja.getGlobalBounds().height << " Indicacion:" << indicacion.getGlobalBounds().height;
-						}
 
 					
 					std::cout << "Input Text: " << input << std::endl;
