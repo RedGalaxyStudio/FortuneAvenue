@@ -490,3 +490,130 @@ footer {
         margin-top: 1px;
 
     }
+
+    .barra-lateral {
+    position: fixed;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 1000; /* Para asegurarse de que esté encima del contenido */
+}
+
+.barra-lateral ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.barra-lateral ul li {
+    padding: 10px 15px;
+}
+
+.barra-lateral ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.barra-lateral.open {
+    left: 0; /* Cuando se añade la clase 'open', la barra lateral se muestra */
+}
+
+.toggle-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+}
+
+.barra-lateral.open .close-btn {
+    display: block; /* Mostrar el botón de cerrar cuando la barra está abierta */
+}
+
+/* Estilo para el botón 'Menú' */
+.toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000; /* Asegura que esté por encima de la barra lateral */
+}
+
+/* Estilo de la barra lateral */
+.barra-lateral {
+    position: fixed;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 999; /* Para que esté debajo del botón 'Menú' */
+}
+
+/* Estilo de la lista de la barra lateral */
+.barra-lateral ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.barra-lateral ul li {
+    padding: 10px 15px;
+}
+
+.barra-lateral ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Mostrar la barra lateral cuando se añade la clase 'open' */
+.barra-lateral.open {
+    left: 0;
+}
+
+/* Estilo del botón de cierre 'X' */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+}
+
+/* Muestra el botón de cierre 'X' cuando la barra lateral está abierta */
+.barra-lateral.open .close-btn {
+    display: block;
+}
+
+/* Esconde el botón 'Menú' cuando la barra lateral está abierta */
+.barra-lateral.open ~ .toggle-btn {
+    display: none;
+}

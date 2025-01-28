@@ -192,7 +192,7 @@ void Chat::update() {
 				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat) && !input.empty()) {
 					playClickSound();
 					PlantillaMensajeE.SMSEnviado.setString(input);
-					PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 10,
+					PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 					PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
 					input = "";
@@ -215,10 +215,9 @@ void Chat::update() {
 					if (In == 1) {
 						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 
-						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 10, 40));
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
 
 						PlantillaMensajeE.ContenidoEnviado.setPosition(1080, 600);
-
 
 						PlantillaMensajeE.SMSEnviado.setPosition(1090, 618);
 
@@ -241,7 +240,7 @@ void Chat::update() {
 
 						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 		
-						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 10, altura.height + 22));
+						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 
 						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1080, 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
 					
