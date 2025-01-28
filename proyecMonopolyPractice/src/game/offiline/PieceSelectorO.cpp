@@ -147,12 +147,13 @@ void PieceSelector1::updateSelection() {
 
 	std::cout << "\nwo33333333";
 	// Ahora calcula los límites y centra
-	globalBounds = CODE.getGlobalBounds();
+	/*globalBounds = CODE.getGlobalBounds();
 	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	// Finalmente, establece la posición
 	CODE.setPosition(640, 30);
-	std::cout << "\nwo";
+	std::cout << "\nwo";*/
+
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);
@@ -349,7 +350,7 @@ void PieceSelector1::updateSelection() {
 
 		window->setMouseCursor(*currentCursor);
 		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
-		if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
+		/*if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
 
 
 			std::cout << "\nentro";
@@ -358,7 +359,7 @@ void PieceSelector1::updateSelection() {
 			client.cvExisting.notify_all();
 
 			std::cout << "\nSalio";
-		}
+		}*/
 	
 		for (int i = 0; i < UsuariosActivos.size(); i++)
 		{

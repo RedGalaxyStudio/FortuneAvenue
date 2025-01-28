@@ -3,6 +3,7 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
+#include "PieceSelectorO.hpp"
 
 GameOptions::GameOptions(sf::RenderWindow& win) : window(&win), pieceselector(window) {
 	loadResourceGame();
@@ -173,7 +174,8 @@ void GameOptions::update() {
 
 			if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 				playClickSound();
-				//PieceSelector.
+				PieceSelector1 
+
 
 
 			}
