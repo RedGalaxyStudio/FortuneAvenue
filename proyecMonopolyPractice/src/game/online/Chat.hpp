@@ -15,7 +15,7 @@ public:
 
 private:
 
-    const size_t maxLength = 120;
+    const size_t maxLength = 60;
 
     struct MensajeRecibido{
         sf::Sprite AvatarRecibido;
@@ -35,6 +35,8 @@ private:
         sf::Text SMSEnviado;
         sf::RectangleShape ContenidoEnviado;
 
+        sf::Vector2f positionSMSEnviado;
+        sf::Vector2f positionContenidoEnviado;
         /*void Draw() {
             window.draw(ContenidoEnviado);
             window.draw(SMSEnviado);
@@ -84,6 +86,8 @@ private:
     sf::Sprite SpriteCrearPartida;
     sf::Sprite SpriteUnirsePartida;
     sf::Sprite SpriteUnirse;
+
+    int Aumento = 0;
 
     std::vector <MensajeEnviado> Mensajes;
 
