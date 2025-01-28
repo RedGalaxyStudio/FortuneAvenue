@@ -159,7 +159,6 @@ void Chat::insertarSaltoDeLinea() {
 				if (tempText.getGlobalBounds().width > 260) {
 					input.insert(i-1, "\n"); // Insertar un salto de línea si no hay espacio disponible
 
-
 				}
 				else {
 
@@ -216,14 +215,18 @@ void Chat::update() {
 						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 
 						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
+						PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
+						PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+						PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
+						PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 
-						PlantillaMensajeE.ContenidoEnviado.setPosition(1080, 600);
-
-						PlantillaMensajeE.SMSEnviado.setPosition(1090, 618);
-
-						PlantillaMensajeE.positionContenidoEnviado = sf::Vector2f(1080, 600);
-						PlantillaMensajeE.positionSMSEnviado = sf::Vector2f(1090, 618);
+						PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(altura.width + 20, 40));
+						PlantillaMensajeR.ContenidoRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 20), 600);
+						PlantillaMensajeR.SMSRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 10), 618);
+						PlantillaMensajeR.positionContenidoRecibido = PlantillaMensajeR.ContenidoRecibido.getPosition();;
+						PlantillaMensajeR.positionSMSRecibido = PlantillaMensajeR.SMSRecibido.getPosition();
 					}
+
 					else if (In > 1) {
 						indicacion.setPosition(940, 668);
 						Caja.setSize(sf::Vector2f(260, 40));
@@ -241,26 +244,33 @@ void Chat::update() {
 						sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 		
 						PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
-
-						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1080, 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
-					
-						PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1085, PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
-
+						PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
+						PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
 						PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
 						PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
+
+
+						PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
+						PlantillaMensajeR.ContenidoRecibido.setPosition(sf::Vector2f(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 20), 640 - PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().height));
+						PlantillaMensajeR.SMSRecibido.setPosition(sf::Vector2f(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 10), PlantillaMensajeR.ContenidoRecibido.getPosition().y + 18));
+						PlantillaMensajeR.positionContenidoRecibido = PlantillaMensajeR.ContenidoRecibido.getPosition();
+						PlantillaMensajeR.positionSMSRecibido = PlantillaMensajeR.SMSRecibido.getPosition();
 					}
 
 					aux += 20;
 					Mensajes.push_back(PlantillaMensajeE);
 					for (int i = 0; i < Mensajes.size()-1; i++)
 					{
-						Mensajes[i].ContenidoEnviado.setPosition(1080, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
-						Mensajes[i].SMSEnviado.setPosition(1090, Mensajes[i].ContenidoEnviado.getPosition().y +20);
-
-
-
+						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
+						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y +20);
 						Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 						Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+
+						Mensajes[i].c.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux );
+						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y +20);
+						Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
+						Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+
 					}
 					
 
