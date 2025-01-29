@@ -648,6 +648,15 @@ void Client::handleServerMessage(const std::string& message) {
 		accionCompra = true;
 
 	}
+	else if (message.rfind("MSG", 0) == 0) {
+
+		int num = message[3] - '0';  // Convertir el 4to carácter a int
+		std::string rest = message.substr(4);  // Obtener el resto del string
+		playersGame[num].plantillaMsg.SMSEnviado.setString(rest);
+
+		Mensajes.push_back(playersGame[num].plantillaMsg);
+
+	}
 	else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
 
 	 	size_t firstColon = message.find(":", 20);   

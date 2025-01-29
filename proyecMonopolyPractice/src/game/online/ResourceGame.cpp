@@ -4,6 +4,7 @@
 
 
 sf::Texture &textureBoxPerfil= textureBox;
+std::vector <MensajeMSG> Mensajes;
 
 std::vector<sf::Texture> TextureCasa;
 sf::Texture TextureCash;

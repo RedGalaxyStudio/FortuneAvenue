@@ -90,6 +90,26 @@ extern bool turn_impuesto;
 extern bool turn_Moviendo;
 extern bool eventoActivo;
 
+
+struct MensajeMSG {
+	sf::Sprite AvatarEnviado;
+	sf::Text SMSEnviado;
+	sf::RectangleShape ContenidoEnviado;
+
+	sf::Vector2f positionSMSEnviado;
+	sf::Vector2f positionContenidoEnviado;
+	/*void Draw() {
+		window.draw(ContenidoEnviado);
+		window.draw(SMSEnviado);
+		window.draw(AvatarEnviado);
+	}*/
+
+};
+
+extern std::vector <MensajeMSG> Mensajes;
+
+
+
 struct PlayerGame {
 
 	sf::Texture textureAvatarPLayer;
@@ -106,7 +126,7 @@ struct PlayerGame {
 	sf::Texture TextureCash;
 	sf::Sprite CashSprite;
 	sf::Sprite Check;
-
+	MensajeMSG plantillaMsg;
 	void reset() {
 		textureAvatarPLayer = sf::Texture();  // Reasignar un objeto nuevo
 		AvatarPlayer = sf::CircleShape();    // Reasignar un objeto nuevo

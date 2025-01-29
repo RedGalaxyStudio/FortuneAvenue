@@ -108,7 +108,7 @@ void Chat::resource() {
 	PlantillaMensajeE.SMSEnviado.setFillColor(sf::Color::White);
 	PlantillaMensajeE.SMSEnviado.setOutlineThickness(1);
 	PlantillaMensajeE.SMSEnviado.setOutlineColor(sf::Color(117, 220, 255));
-	PlantillaMensajeE.SMSEnviado.setString("MensajeEnviado");
+	PlantillaMensajeE.SMSEnviado.setString("MensajeMSG");
 	PlantillaMensajeE.SMSEnviado.setPosition(940, 618);
 	globalBounds = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 	PlantillaMensajeE.SMSEnviado.setOrigin(0, globalBounds.height / 2.0f);
@@ -191,6 +191,7 @@ void Chat::update() {
 				if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat) && !input.empty()) {
 					playClickSound();
 					PlantillaMensajeE.SMSEnviado.setString(input);
+					client.networkMessage.sendSmg(std::to_string(UsuariosActivos[0]) + input);
 					PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 					PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
@@ -223,8 +224,6 @@ void Chat::update() {
 						PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(altura.width + 20, 40));
 						PlantillaMensajeR.ContenidoRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 20), 600);
 						PlantillaMensajeR.SMSRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 10), 618);
-						PlantillaMensajeR.positionContenidoRecibido = PlantillaMensajeR.ContenidoRecibido.getPosition();;
-						PlantillaMensajeR.positionSMSRecibido = PlantillaMensajeR.SMSRecibido.getPosition();
 					}
 
 					else if (In > 1) {
