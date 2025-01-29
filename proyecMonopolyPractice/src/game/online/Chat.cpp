@@ -119,19 +119,19 @@ void Chat::resource() {
 
 
 
-	PlantillaMensajeR.SMSRecibido.setCharacterSize(20);
-	PlantillaMensajeR.SMSRecibido.setFont(FuenteMensaje);
-	PlantillaMensajeR.SMSRecibido.setFillColor(sf::Color::White);
-	PlantillaMensajeR.SMSRecibido.setOutlineThickness(1);
-	PlantillaMensajeR.SMSRecibido.setOutlineColor(sf::Color(255, 168, 214));
-	PlantillaMensajeR.SMSRecibido.setString("MensajeRecibido");
-	PlantillaMensajeR.SMSRecibido.setPosition(940, 568);
-	globalBounds = PlantillaMensajeR.SMSRecibido.getGlobalBounds();
-	PlantillaMensajeR.SMSRecibido.setOrigin(0, globalBounds.height / 2.0f);
+	PlantillaMensajeR.SMSEnviado.setCharacterSize(20);
+	PlantillaMensajeR.SMSEnviado.setFont(FuenteMensaje);
+	PlantillaMensajeR.SMSEnviado.setFillColor(sf::Color::White);
+	PlantillaMensajeR.SMSEnviado.setOutlineThickness(1);
+	PlantillaMensajeR.SMSEnviado.setOutlineColor(sf::Color(255, 168, 214));
+	PlantillaMensajeR.SMSEnviado.setString("MensajeRecibido");
+	PlantillaMensajeR.SMSEnviado.setPosition(940, 568);
+	globalBounds = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
+	PlantillaMensajeR.SMSEnviado.setOrigin(0, globalBounds.height / 2.0f);
 
-	PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(260, 40));
-	PlantillaMensajeR.ContenidoRecibido.setPosition(940, 550);
-	PlantillaMensajeR.ContenidoRecibido.setFillColor(sf::Color(239, 39, 133));
+	PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
+	PlantillaMensajeR.ContenidoEnviado.setPosition(940, 550);
+	PlantillaMensajeR.ContenidoEnviado.setFillColor(sf::Color(239, 39, 133));
 }
 
 void Chat::insertarSaltoDeLinea() {
@@ -220,11 +220,6 @@ void Chat::update() {
 						PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
 						PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 
-						PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(altura.width + 20, 40));
-						PlantillaMensajeR.ContenidoRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 20), 600);
-						PlantillaMensajeR.SMSRecibido.setPosition(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 10), 618);
-						PlantillaMensajeR.positionContenidoRecibido = PlantillaMensajeR.ContenidoRecibido.getPosition();;
-						PlantillaMensajeR.positionSMSRecibido = PlantillaMensajeR.SMSRecibido.getPosition();
 					}
 
 					else if (In > 1) {
@@ -249,12 +244,6 @@ void Chat::update() {
 						PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
 						PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 
-
-						PlantillaMensajeR.ContenidoRecibido.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
-						PlantillaMensajeR.ContenidoRecibido.setPosition(sf::Vector2f(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 20), 640 - PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().height));
-						PlantillaMensajeR.SMSRecibido.setPosition(sf::Vector2f(1280 - (PlantillaMensajeR.ContenidoRecibido.getGlobalBounds().width + 10), PlantillaMensajeR.ContenidoRecibido.getPosition().y + 18));
-						PlantillaMensajeR.positionContenidoRecibido = PlantillaMensajeR.ContenidoRecibido.getPosition();
-						PlantillaMensajeR.positionSMSRecibido = PlantillaMensajeR.SMSRecibido.getPosition();
 					}
 
 					aux += 20;

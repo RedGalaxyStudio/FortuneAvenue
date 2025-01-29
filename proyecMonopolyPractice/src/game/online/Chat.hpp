@@ -17,19 +17,6 @@ private:
 
     const size_t maxLength = 60;
 
-    struct MensajeRecibido{
-        sf::Sprite AvatarRecibido;
-        sf::Text SMSRecibido;
-        sf::RectangleShape ContenidoRecibido;
-
-        /*void Draw() {
-            window.draw(ContenidoRecibido);
-            window.draw(SMSRecibido);
-            window.draw(AvatarRecibido);
-        }*/
-
-    };
-
     struct MensajeEnviado{
         sf::Sprite AvatarEnviado;
         sf::Text SMSEnviado;
@@ -37,6 +24,7 @@ private:
 
         sf::Vector2f positionSMSEnviado;
         sf::Vector2f positionContenidoEnviado;
+
         /*void Draw() {
             window.draw(ContenidoEnviado);
             window.draw(SMSEnviado);
@@ -96,7 +84,7 @@ private:
     PieceSelector pieceselector;
 
     MensajeEnviado PlantillaMensajeE;
-    MensajeRecibido PlantillaMensajeR;
+    MensajeEnviado PlantillaMensajeR;
 };
 
 #endif 
