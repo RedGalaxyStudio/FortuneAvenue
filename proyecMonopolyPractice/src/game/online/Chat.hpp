@@ -17,21 +17,6 @@ private:
 
     const size_t maxLength = 60;
 
-    struct MensajeEnviado{
-        sf::Sprite AvatarEnviado;
-        sf::Text SMSEnviado;
-        sf::RectangleShape ContenidoEnviado;
-
-        sf::Vector2f positionSMSEnviado;
-        sf::Vector2f positionContenidoEnviado;
-
-        /*void Draw() {
-            window.draw(ContenidoEnviado);
-            window.draw(SMSEnviado);
-            window.draw(AvatarEnviado);
-        }*/
-
-    };
 
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
@@ -77,14 +62,13 @@ private:
 
     int Aumento = 0;
 
-    std::vector <MensajeEnviado> Mensajes;
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
-    PieceSelector pieceselector;
 
-    MensajeEnviado PlantillaMensajeE;
-    MensajeEnviado PlantillaMensajeR;
+
+    MensajeMSG PlantillaMensajeE;
+
 };
 
 #endif 

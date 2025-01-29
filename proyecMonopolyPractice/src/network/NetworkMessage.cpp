@@ -20,6 +20,11 @@ void NetworkMessage::Enetpeer(ENetPeer* Peer) {
         sendMessage(peer, message);
     }
 
+
+     void NetworkMessage::sendSmg(std::string mensaje) {
+         std::string message = "SMG" + mensaje;
+         sendMessage(peer, message);
+     }
      void NetworkMessage::sendXHouse() {
         std::string message = "XCASA";
         sendMessage(peer, message);

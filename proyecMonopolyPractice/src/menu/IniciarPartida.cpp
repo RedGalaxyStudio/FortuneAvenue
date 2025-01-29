@@ -102,13 +102,15 @@ void IniciarPartida::update() {
 						playClickSound();
 
 						Chat CHat(*window);
-						CHat.update();
+			
 
 
 						client.initialize();
 						if (true == client.connectToServer("208.68.36.50", 1234)) {
 							Code = client.createRoom(nameUser, TextureAvatarPath);
 
+
+							CHat.update();
 							PieceSelector pieceselector(window);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
