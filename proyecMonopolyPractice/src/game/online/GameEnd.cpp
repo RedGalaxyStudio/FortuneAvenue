@@ -249,7 +249,7 @@ private:
     srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
 
     // Configuración de la ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Lluvia de Confeti en SFML");
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Juego en Pantalla Completa", sf::Style::Fullscreen); "Lluvia de Confeti en SFML");
     window.setFramerateLimit(60);
 
     // Dimensiones del lienzo
