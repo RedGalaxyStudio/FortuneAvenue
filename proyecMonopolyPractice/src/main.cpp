@@ -14,6 +14,7 @@ const unsigned short PORT = 53000;
 //int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 int main() {
     sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+
     window.setFramerateLimit(60);
 
   

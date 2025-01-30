@@ -1,4 +1,16 @@
-/* Estilos básicos y reset */ 
+/* Estilos básicos y reset */
+
+
+@font-face {
+    font-family: "BigBlueTermPlus Nerd Font Propo";
+    src: url("./fonts/BigBlueTermPlusNerdFontPropo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("./fonts/Poppins-Regular.ttf") format("truetype");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,12 +31,9 @@ body {
 } 
 .Principal{
 
-    width: 100%;
-    height:100%;
-    background-image: url('Kosas para el proyekto/FondoGame2.jpg') ;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 100vw;
+    height:100vh;
+
 
 }
 .logo{
@@ -45,13 +54,44 @@ hr {
     margin: 10px 0;      /* Espacio superior e inferior */
 }
 
+.BoxTop {
 
+    margin-top: 4em; /* Espacio hacia arriba */
+  
+}
 
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1; /* Envía el canvas al fondo */
+}
 
+.BoxTop2 {
+
+    margin-top: 2em; /* Espacio hacia arriba */
+  
+}
+
+.BoxOpp2 {
+
+    margin-bottom:2em; /* Espacio hacia arriba */
+  
+}
+
+.BoxOpp {
+
+    margin-bottom:2.5em; /* Espacio hacia arriba */
+  
+}
 
 /* Degradado de texto para todo el contenido */
 p {
-    font-family:Poppins;
+    font-family:"Poppins";
+    font-size: 1.5em !important; /* Tamaño del título */
+ 
   /*  background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
     background-color: #ffffff;
     -webkit-background-clip: text;
@@ -60,10 +100,11 @@ p {
     font-size: 15px;
 }
 
+
 h1 {
-    font-family:BigBlueTermPlus Nerd Font Propo;
-    font-size: 4em; /* Tamaño del título */
-    margin-bottom: 1.25rem; /* Espaciado */
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+    font-size: 8em !important; /* Tamaño del título */
+    margin-bottom: 20px; /* Espaciado */
     color: #fff; /* Texto blanco */
     text-shadow: 
         0 0 1px #fff, 
@@ -73,7 +114,10 @@ h1 {
 
 
 h2 { 
-    font-family:BigBlueTermPlus Nerd Font Propo;
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+
+    font-size: 3em !important; /* Tamaño del título */
+
     background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
     -webkit-background-clip: text;
     background-clip: text;
@@ -81,21 +125,24 @@ h2 {
 }
 
 h3 { 
-    font-family:BigBlueTermPlus Nerd Font Propo;
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+
     background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 24.2758px;
+
 }
 
 h4 { 
-    font-family:BigBlueTermPlus Nerd Font Propo;
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+    font-size: 1.5em !important; /* Tamaño del título */
+   
     background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 18.2758px;
+
 }
 
 
@@ -168,6 +215,7 @@ nav ul li a:hover {
 }
 
 section {
+    
         text-align: center;
         padding: 25px 3px;
         box-sizing: border-box;
@@ -227,6 +275,7 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     width: 23%;
+    height: 25%;
 }
 
 .card h4 {
