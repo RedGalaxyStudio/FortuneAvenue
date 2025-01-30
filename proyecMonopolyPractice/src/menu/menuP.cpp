@@ -13,6 +13,8 @@ void menuP::setWindow(sf::RenderWindow& win) {
 }
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("assets/image/Button/boton2.png")) return;
+    if (!TextureConfirmarSalirSala.loadFromFile("assets/image/Button/ExitSala.png")) return;
+    if (!TextureConfirmarSalirPartida.loadFromFile("assets/image/Button/boton2.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("assets/image/Logos/logojuego14.png")) return;
     if (!TextureBotonJugarOff.loadFromFile("assets/image/Button/BotonJugarOff.png")) return;
     if (!TextureBotonJugarOn.loadFromFile("assets/image/Button/BotonJugarOn.png")) return;
@@ -387,8 +389,10 @@ void menuP::MenuSalir() {
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
+        SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
+        
    
-    SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
+  
     SpriteConfirmarSalir.setPosition(660, 370);
     SpriteConfirmarSalir.setOrigin(340, 240);
 
@@ -443,8 +447,7 @@ void menuP::MenuSalir() {
             renderedSprite.setTexture(renderTexture.getTexture());
        window->clear();
        window->draw(renderedSprite, &Blur); 
-  
-
+       
         window->draw(SpriteConfirmarSalir);  
         window->draw(SpriteBotonSi);        
         window->draw(SpriteBotonNo);       
