@@ -32,6 +32,7 @@ std::string Code;
 sf::Sprite SpriteArrowDer;
 bool animacionRuleta;
 sf::Sprite SpriteArrowArriba;
+sf::Sprite SpriteArrowAbajo;
 bool server;
 bool rolldiceJugador;
 std::string username;
