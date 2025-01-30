@@ -833,11 +833,6 @@ void MultiplayerGame::InicioPartida() {
 	while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
 
 
-
-
-
-
-
 		float deltaTime = deltaClock.restart().asSeconds();
 		elapsedTime += deltaTime;
 

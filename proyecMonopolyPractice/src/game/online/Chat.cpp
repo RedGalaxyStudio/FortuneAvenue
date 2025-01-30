@@ -16,7 +16,7 @@ int calcularNumeroDeLineas(const sf::Text& text) {
 
 	// Dividir la altura del rectángulo entre la altura de la fuente
 	// Esto nos da el número de líneas
-	float alturaLinea = text.getCharacterSize();  // El tamaño de la fuente
+	float alturaLinea = static_cast<float>(text.getCharacterSize());  // El tamaño de la fuente
 	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
 
 	return numeroDeLineas;
@@ -348,7 +348,7 @@ void Chat::update() {
 
 							CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
 							CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
-							Aumento = altura.height - 8;
+							Aumento = static_cast<int> (altura.height) - 8;
 
 
 							for (int i = 0; i < Mensajes.size(); i++) {
@@ -425,7 +425,7 @@ void Chat::update() {
 											CajaI.setSize(sf::Vector2f(20, AbajIzquierda.getPosition().y - ArriIzquierda.getPosition().y));
 											CajaI.setPosition(sf::Vector2f(940, 710 - Caja.getGlobalBounds().height));
 
-											Aumento = altura.height - 8;
+											Aumento = static_cast<int>(altura.height) - 8;
 
 
 											for (int i = 0; i < Mensajes.size(); i++){
@@ -451,16 +451,6 @@ void Chat::update() {
 				}
 			}
 		}
-
-
-
-		///sf::FloatRect textBounds = indicacion.getGlobalBounds();
-		///float newHeight = textBounds.height + 10; // Margen adicional de 10 px (5 arriba, 5 abajo)
-	///	Caja.setSize(sf::Vector2f(270, newHeight)); // Ancho fijo de 260 + 10 px de margen lateral
-
-		/// Ajustar la posición de la caja y el texto
-		///Caja.setPosition(sf::Vector2f(940, Caja.getPosition().y));
-		///indicacion.setPosition(sf::Vector2f(945, Caja.getPosition().y + 5));
 
 		Valida = true;
 
@@ -504,11 +494,6 @@ void Chat::update() {
 		window->draw(enunciado);
 		window->draw(indicacion);
 		window->draw(spriteX);
-		//window->draw(PlantillaMensajeE.ContenidoEnviado);
-		//window->draw(PlantillaMensajeE.SMSEnviado);
-		//window->draw(PlantillaMensajeR.ContenidoRecibido);
-		//window->draw(PlantillaMensajeR.SMSRecibido);
-
 		for (int i = 0; i < Mensajes.size(); i++)
 		{
 			window->draw(Mensajes[i].ContenidoEnviado);

@@ -299,7 +299,7 @@ void HouseBuy::ViewHouseBuys() {
 
 			// Verificar colisión en orden inverso y actualizar la carta activa
 			cartaActivaIndex = -1; // Reinicia la carta activa
-			for (int i = VCcompradas.size() - 1; i >= 0; i--) {
+			for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
 				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
 					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
 					cartaActivaIndex = i; // Guarda el índice de la carta activa
