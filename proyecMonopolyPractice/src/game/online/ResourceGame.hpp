@@ -23,6 +23,7 @@ extern sf::View view;
 extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
 extern sf::Sprite SpriteArrowIzq;
+extern sf::Sprite SpriteArrowAbajo;
 extern bool server;
 extern std::vector<sf::Sprite> pieces;
 extern sf::Sprite SpriteArrowArriba;

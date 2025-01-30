@@ -13,16 +13,20 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(win
 void MultiplayerGame::resource() {
 
 
-	if (!TextureChat.loadFromFile("window_13905854.png")) return;
+	if (!TextureChat.loadFromFile("assets/image/window_13905854.png")) return;
 	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
+	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png")) return;
+	if (!TextureMapa3.loadFromFile("assets/image/Game/mapa22l.png")) return;
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
 
-	if (!GameMusicFondo.openFromFile("resource/sounds/gamemusic.wav")) return;
+	if (!GameMusicFondo.openFromFile("assets/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
+
 	//Cargar Texturas de Flechas
 	if (!TextureArrowIzq.loadFromFile("assets/image/Game/Izq.png")) return;
 	if (!TextureArrowDer.loadFromFile("assets/image/Game/Der.png")) return;
+	if (!TextureArrowAbajo.loadFromFile("assets/image/Game/Abajo.png")) return;
 	if (!TextureArrowArriba.loadFromFile("assets/image/Game/Arriba.png")) return;
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
 
@@ -39,6 +43,10 @@ void MultiplayerGame::resource() {
 	SpriteArrowArriba.setOrigin(350.0f, 350.0f);
 	SpriteArrowArriba.setPosition(370, 400);
 
+	SpriteArrowAbajo.setTexture(TextureArrowAbajo);
+	SpriteArrowAbajo.setOrigin(350.0f, 350.0f);
+	SpriteArrowAbajo.setPosition(370, 400);
+
 	SpriteChat.setTexture(TextureChat);
 	SpriteChat.setOrigin(20, 20);
 	SpriteChat.setPosition(23, 100);
@@ -46,24 +54,45 @@ void MultiplayerGame::resource() {
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
 
-	spriteMapa.setTexture(TextureMapa);
+	spriteMapa.setTexture(TextureMapa2);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
 
+	/*if (MapaSelector == 1)
+	{
+		spriteMapa.setTexture(TextureMapa);
+		spriteMapa.setOrigin(360, 360);
+		spriteMapa.setPosition(640, 360);
+
+	}
+	else if (MapaSelector == 2)
+	{
+		spriteMapa.setTexture(TextureMapa2);
+		spriteMapa.setOrigin(360, 360);
+		spriteMapa.setPosition(640, 360);
+
+	}
+	else if (MapaSelector == 2)
+	{
+		spriteMapa.setTexture(TextureMapa3);
+		spriteMapa.setOrigin(360, 360);
+		spriteMapa.setPosition(640, 360);
+	}*/
+	
 	TextureCasa.resize(17);
 	for (int i = 0; i < 17; i++)
 	{
 		std::cout << "\ni";
-		if (!TextureCasa[i].loadFromFile("../assets/image/Game/Casas/Casa" + std::to_string(i) + ".png")) {
+		if (!TextureCasa[i].loadFromFile("assets/image/Game/Casas/Casa" + std::to_string(i) + ".png")) {
 			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
 		}
 
 	}
 
 
-	if (!DiceBuffer.loadFromFile("resource/sounds/Dicerolling.wav")) return;
+	if (!DiceBuffer.loadFromFile("assets/sounds/Dicerolling.wav")) return;
 
-	if (!girosBuffer.loadFromFile("resource/sounds/ruleta.wav")) return;
+	if (!girosBuffer.loadFromFile("assets/sounds/ruleta.wav")) return;
 	nular = true;
 	girosSound.setBuffer(girosBuffer);
 
@@ -391,6 +420,7 @@ void MultiplayerGame::update() {
 		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
 
 	}
+	std::cout << "hola";
 
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame);
 	robarjugador.resource();

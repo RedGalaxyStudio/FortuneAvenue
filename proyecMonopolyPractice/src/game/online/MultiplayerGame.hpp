@@ -148,11 +148,14 @@ private:
 	
 	sf::Texture TextureChat;
 	sf::Texture TextureMapa;
+	sf::Texture TextureMapa2;
+	sf::Texture TextureMapa3;
 	sf::Texture SettingsOn;
 	sf::Texture SettingsOff;
 	sf::Texture TextureArrowDer;
 	sf::Texture TextureArrowIzq;
 	sf::Texture TextureArrowArriba;
+	sf::Texture TextureArrowAbajo;
 	sf::Texture TextureImpuesto;
 
 	sf::Sprite SpriteImpuesto;
