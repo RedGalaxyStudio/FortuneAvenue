@@ -351,6 +351,7 @@ void PieceSelector::updateSelection() {
 		if (SelectingPiece) {
 
 			MultiplayerGame mpGame(*window);
+		
 			mpGame.update();
 		}
 

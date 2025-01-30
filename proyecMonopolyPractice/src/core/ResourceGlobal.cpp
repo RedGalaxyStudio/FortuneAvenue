@@ -59,6 +59,7 @@ sf::Sprite recua;
 
 // Función para cargar la textura del fondo del menú
 void loadTextures() {
+
     if (!TextureFondoMenu.loadFromFile("assets/image/Fondos/fondomenu.png")) return;
     if (!textureXOn.loadFromFile("assets/image/Button/XOn.png")) return;
     if (!textureXOff.loadFromFile("assets/image/Button/XOff.png")) return;

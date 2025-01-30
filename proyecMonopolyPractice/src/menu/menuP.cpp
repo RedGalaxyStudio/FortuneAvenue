@@ -24,6 +24,7 @@ void menuP::Resource() {
     if (!TextureBotonSalirOn.loadFromFile("assets/image/Button/BotonSalirOn.png")) return;
     if (!textureAcercaDeOn.loadFromFile("assets/image/Button/AcercaDeOn.png")) return;
     if (!textureAcercaDeOff.loadFromFile("assets/image/Button/AcercaDeOff.png")) return;
+    
 
     if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
     if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
@@ -315,13 +316,21 @@ void menuP::MenuOpcion(bool fon) {
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
 
+    SpriteBotonSi.setPosition(800, 350);
+
+
+    SpriteBotonNo.setPosition(1000, 350);
+
+    ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
+    ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
+
     while (window->isOpen()) {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
-
+  
         sf::Event event;
 
         while (window->pollEvent(event)) {
@@ -347,6 +356,18 @@ void menuP::MenuOpcion(bool fon) {
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
                 sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
+                    window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+                    playClickSound();
+                    
+                }
+
+                if (SpriteBotonNo.getGlobalBounds().contains(mousePosFloat)) {
+                    window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa");
+
+                    playClickSound();
+                }
 
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
                     musicSlider->saveSettings();
@@ -378,6 +399,8 @@ void menuP::MenuOpcion(bool fon) {
         musicSlider->draw(*window);
         effectSlider->draw(*window);
         window->setMouseCursor(*currentCursor);
+        window->draw(SpriteBotonSi);
+        window->draw(SpriteBotonNo);
         window->display();
     }
 

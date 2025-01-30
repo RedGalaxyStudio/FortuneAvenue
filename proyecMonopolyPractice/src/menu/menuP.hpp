@@ -66,6 +66,7 @@ private:
     sf::Sprite spriteAcercaDe;
 
 
+
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;

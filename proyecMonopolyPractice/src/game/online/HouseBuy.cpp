@@ -23,17 +23,17 @@ void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
-	if (!TextureXcOFF.loadFromFile("../assets/image/Button/XOffC.png")) {
+	if (!TextureXcOFF.loadFromFile("assets/image/Button/XOffC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
-	if (!TextureXcOn.loadFromFile("../assets/image/Button/XOnC.png")) {
+	if (!TextureXcOn.loadFromFile("assets/image/Button/XOnC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
 	// Cargar la textura para el botón de confirmación de salida
-	if (!TextureBotonComprar.loadFromFile("../assets/image/Button/comprarcasa.png")) {
+	if (!TextureBotonComprar.loadFromFile("assets/image/Button/comprarcasa.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);
