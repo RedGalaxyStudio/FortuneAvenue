@@ -83,13 +83,12 @@ private:
 
     sf::Clock clock;
 
-
-
-    
-
     sf::Texture TextureConfirmarSalir;
+
     sf::Texture TextureConfirmarSalirSala;
+
     sf::Texture TextureConfirmarSalirPartida;
+
     sf::Sprite SpriteConfirmarSalir;
 
 

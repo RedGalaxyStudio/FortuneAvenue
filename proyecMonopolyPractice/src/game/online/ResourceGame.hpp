@@ -144,7 +144,7 @@ extern std::vector<PlayerInfo> playerInfos;
 extern std::vector<PlayerGame> playersGame;
 
 void loadResourceGame();
-void loadPieceGame();
+bool salirX(sf::Texture Pregunta,sf::RenderWindow* window);
 
 
 #endif 

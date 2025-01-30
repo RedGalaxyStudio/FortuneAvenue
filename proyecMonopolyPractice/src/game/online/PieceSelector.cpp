@@ -46,6 +46,7 @@ void PieceSelector::Resource() {
 	rolldiceJugador = false;
 	std::cout << "\nwo";
 	if (!Textufondopiece.loadFromFile("assets/image/Game/FondoGameScroll.png")) return;
+	if (!Preguntasalir.loadFromFile("assets/image/Button/ExitSala.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
 
@@ -283,15 +284,28 @@ void PieceSelector::updateSelection() {
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					cierre = true;
-				
+					renderTexture.clear();
+					renderTexture.draw(spriteFondoGame);
+					for (int i = 0; i < UsuariosActivos.size(); i++) {
 
+						renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
+						renderTexture.draw(playersGame[UsuariosActivos[i]].boxPlayer);
+						renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
+						renderTexture.draw(playersGame[UsuariosActivos[i]].Check);
+					}
+
+					renderTexture.draw(spriteX);
+					renderTexture.draw(overlay);
+					renderTexture.display();
+					cierre = salirX(Preguntasalir,window);
+				
+					if(cierre){
 						playersGame.clear();
 						playerInfos.clear();
 						UsuariosActivos.clear();
 						std::cout<<"\n numero : "<<playersGame.size();
 				
-					client.disconnect();
+					client.disconnect();}
 
 				}
 
