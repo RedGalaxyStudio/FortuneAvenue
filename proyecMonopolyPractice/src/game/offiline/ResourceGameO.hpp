@@ -6,44 +6,44 @@
 #include <string>
 #include <iostream>
 
-extern std::vector<sf::Texture> TextureCasa;
-extern sf::Texture TextureFondoGame;
-extern sf::Texture TextureCash;
-extern sf::Texture TextureHome;
-extern  sf::Texture TextureMarco;
-extern sf::Sprite spriteFondoGame;
-extern int NumPlayers;
-extern sf::SoundBuffer DiceBuffer;
-extern sf::Sound DiceSound;
-extern sf::Font &fontUserPerfil;
-extern sf::Texture &textureBoxPerfil;
-extern sf::Sprite spriteMapa;
-extern sf::Clock reloj;
-extern sf::View view; 
-extern sf::Sprite SpriteArrowDer;
-extern std::vector<sf::Sprite> rastro;
-extern sf::Sprite SpriteArrowIzq;
-extern bool server;
-extern std::vector<sf::Sprite> pieces;
-extern sf::Sprite SpriteArrowArriba;
-extern int previousSelectionIndex[4];
-extern bool userRuleta;
-extern bool userImpuesto;
-extern bool userCasa;
-extern std::vector<sf::Texture> piecesTextures;
-extern sf::SoundBuffer girosBuffer;
-extern sf::Sound girosSound;
-extern int conteosuel;
-extern bool nular;
-extern std::string Code;
-extern int CplayerIndex;
-extern bool rolldiceJugador;
-extern std::string nameUser;
-extern sf::Texture CheckTexturesOn;
-extern sf::Texture CheckTexturesOff;
-struct PlayerInfo {
-	std::string username;
-	std::string image;
+extern std::vector<sf::Texture> TextureHouse; //texturecasa
+extern sf::Texture TextureBackground; //textureFondoGame
+extern sf::Texture TextureMoney1; //TextureCash
+extern sf::Texture TextureBuilding; //TextureHome
+extern  sf::Texture TextureFrame; //TextureMarco
+extern sf::Sprite spriteBackground; //spriteFondoGame
+extern int NumberPlayers; // numplayers
+extern sf::SoundBuffer DiceSoundBuffer; //DiceBuffer
+extern sf::Sound DicesSound; //DiceSound
+extern sf::Font &fontUserProfile; //&fontUserPerfil
+extern sf::Texture &textureBoxPerfil; 
+extern sf::Sprite MapSprite; //spriteMapa
+extern sf::Clock watch; //reloj
+extern sf::View vision; //view 
+extern sf::Sprite RightArrow; //SpriteArrowDer
+extern std::vector<sf::Sprite> trace; //rastro
+extern sf::Sprite LeftArrow; //SpriteArrowIzq
+extern bool plataform; //server
+extern std::vector<sf::Sprite> piece; //pieces
+extern sf::Sprite SpriteUpArrow; //SpriteArrowArriba
+//extern int previousSelectionIndex[4];
+extern bool userRulette; //userRuleta
+extern bool userTax; //userImpuesto
+extern bool userHouse; //userCasa
+extern std::vector<sf::Texture> pieceShape; //piecesTextures
+extern sf::SoundBuffer turnBuffer; //girosBuffer
+extern sf::Sound turnSound; //girosSound
+extern int countsalary; //conteosuel
+extern bool zero; //nular
+extern std::string Code1; //Code
+extern int CplayerIndex1; //CplayerIndex1
+extern bool rolldicePlayer; //rolldiceJugador
+extern std::string namePlayer; //nameUser
+extern sf::Texture CheckOn; //CheckTexturesOn
+extern sf::Texture CheckOff; //CheckTexturesOff
+struct PlayerInformation {
+	std::string playerName; //username
+	std::string image1; //image
 	int numCasas=0;
 	int money = 200;
 	int impuesto = 50;
@@ -57,8 +57,8 @@ struct PlayerInfo {
 	bool final= false;
 	bool PiecUserme = false;
 	void reset() {
-		username.clear();                        // Vaciar el nombre de usuario
-		image.clear();                           // Vaciar la imagen
+		playerName.clear();                        // Vaciar el nombre de usuario
+		image1.clear();                           // Vaciar la imagen
 		money = 200;                             // Restablecer dinero al valor inicial
 		roomconect = 0;                          // Restablecer a 0 (o el valor que desees)
 		isSelectingPiece = false;                // Reiniciar a falso
@@ -68,27 +68,27 @@ struct PlayerInfo {
 	}
 };
 
-extern int Opcioncami;
-extern bool espera;
-extern bool giroRule;
-extern bool SelectingPiece; 
-extern bool Game;        
-extern bool animacionRuleta;        
+extern int RoadOption; //Opcioncami
+extern bool wait; //espera
+extern bool turnRule; //giroRule
+extern bool SelectorPieces; //SelectingPiece 
+extern bool GamePlay; //Game     
+extern bool rouletteAnimation; //animacionRuleta  
 
-extern int IndexTurn;
+extern int IndexTurn1; //IndexTurn
 
-extern bool ruleta_draw;
-extern bool impuesto_draw;
-extern bool casa_draw;
-extern std::vector<int> UsuariosActivos;
-extern bool turn;        
-extern bool otherturn;        
-extern bool turn_dado;
-extern bool turn_ruleta;
-extern bool turn_casa;
-extern bool turn_impuesto;
-extern bool turn_Moviendo;
-extern bool eventoActivo;
+extern bool draw_roulette; //ruleta_draw
+extern bool draw_tax; //impuesto_draw
+extern bool draw_house; //casa_draw
+extern std::vector<int> ActiveUsers; //UsuariosActivos
+extern bool firstTurn; // turn       
+extern bool secondTurn; //otherturn    
+extern bool turn_dice; //turn_dado
+extern bool turn_roulette; //turn_ruleta
+extern bool turn_house; //turn_casa
+extern bool turn_Tax; //turn_impuesto
+extern bool turn_Move; //turn_Moviendo
+extern bool activeEvent; //eventoActivo
 
 struct PlayerGame {
 
@@ -120,8 +120,8 @@ struct PlayerGame {
 
 };
 
-extern std::vector<PlayerInfo> playerInfos;
-extern std::vector<PlayerGame> playersGame;
+extern std::vector<PlayerInformation> playerGameInfo; //playersInfo
+extern std::vector<PlayerGame> playerGame; //playersGame
 
 void loadResourceGame();
 void loadPieceGame();

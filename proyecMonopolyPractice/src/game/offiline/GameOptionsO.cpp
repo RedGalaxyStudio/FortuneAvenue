@@ -84,6 +84,11 @@ void GameOptions::resource() {
 	SpriteflecDerecha.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
+	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
+	SpriteCrear.setTexture(TextureCrear);
+	SpriteCrear.setOrigin(640, 545);
+    SpriteCrear.setPosition(920, 550);
+	
 
 	TMapas.setCharacterSize(30);
 	TMapas.setFont(fontUser);
@@ -172,9 +177,13 @@ void GameOptions::update() {
 
 			}
 
-			if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+			if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 				playClickSound();
-				PieceSelector1 
+				PieceSelectOff pieceselectoff(window);
+				pieceselectoff.Resource();
+				pieceselectoff.updateSelection();
+
+				pieceselectoff.~PieceSelectOff();
 
 
 
