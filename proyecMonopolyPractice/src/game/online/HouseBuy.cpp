@@ -23,17 +23,17 @@ void HouseBuy::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
-	if (!TextureXcOFF.loadFromFile("../assets/image/Button/XOffC.png")) {
+	if (!TextureXcOFF.loadFromFile("assets/image/Button/XOffC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
-	if (!TextureXcOn.loadFromFile("../assets/image/Button/XOnC.png")) {
+	if (!TextureXcOn.loadFromFile("assets/image/Button/XOnC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
 	// Cargar la textura para el botón de confirmación de salida
-	if (!TextureBotonComprar.loadFromFile("../assets/image/Button/comprarcasa.png")) {
+	if (!TextureBotonComprar.loadFromFile("assets/image/Button/comprarcasa.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);
@@ -299,7 +299,7 @@ void HouseBuy::ViewHouseBuys() {
 
 			// Verificar colisión en orden inverso y actualizar la carta activa
 			cartaActivaIndex = -1; // Reinicia la carta activa
-			for (int i = VCcompradas.size() - 1; i >= 0; i--) {
+			for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
 				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
 					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
 					cartaActivaIndex = i; // Guarda el índice de la carta activa

@@ -88,7 +88,7 @@ public:
 
         rect.setSize(size);
         angle = static_cast<float>(rand() % 360);  // Ángulo inicial
-        rotationSpeed = (rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50); // Velocidad de rotación
+        rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50)); // Velocidad de rotación
         velocity.y = static_cast<float>(rand() % 80 + 20);  // Velocidad vertical aleatoria
         velocity.x = 0;
         if (rand() % 30 == 0) {  // Genera un número entre 0 y 29, 1/30 probabilidad de ser 0
@@ -107,7 +107,7 @@ public:
 
 
         // Movimiento hacia el mouse cuando colisiona con él
-        if (rect.getGlobalBounds().contains(mousePositionn.x, mousePositionn.y)) {
+        if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
 
 
             if (colision) {
@@ -149,7 +149,7 @@ public:
 
 
         }
-        else if (!rect.getGlobalBounds().contains(mousePositionn.x, mousePositionn.y)) {
+        else if (!rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
             position.y += velocity.y * deltaTime;  // Actualiza posición en Y
             position.x += velocity.x * deltaTime;  // Actualiza posición en X
             angle += (rotationSpeed * deltaTime) * rotateangle;  // Actualiza el ángulo de rotación
@@ -249,7 +249,7 @@ private:
     srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
 
     // Configuración de la ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Lluvia de Confeti en SFML");
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Juego en Pantalla Completa", sf::Style::Fullscreen); "Lluvia de Confeti en SFML");
     window.setFramerateLimit(60);
 
     // Dimensiones del lienzo
@@ -403,7 +403,7 @@ void GameEnd::update() {
 
 	float perfilWidth = 200.0f; // Ancho estimado para cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
-	int totalPerfiles = UsuariosActivos.size();      // Número total de perfiles
+	int totalPerfiles = static_cast<int>(UsuariosActivos.size());      // Número total de perfiles
 
 	if (totalPerfiles > 0) {
 		// Calcular ancho total ocupado por perfiles y separaciones
@@ -515,7 +515,7 @@ void GameEnd::update() {
 
 		float perfilWidth = 200.0f; // Ancho estimado para cada perfil
 		float separacion = 20.0f;   // Espaciado entre perfiles
-		int totalPerfiles = UsuariosActivos.size();      // Número total de perfiles
+		int totalPerfiles = static_cast<int>(UsuariosActivos.size());      // Número total de perfiles
 
 		// Ancho total ocupado por los perfiles y separaciones
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);

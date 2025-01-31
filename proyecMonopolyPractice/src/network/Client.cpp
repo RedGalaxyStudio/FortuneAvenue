@@ -5,6 +5,20 @@ lastRollResult(0), turnopermitido(0), conteoturn(0), accionCompra(false),
 anguloActualrule(0.f), casasCargadas(false), decelerationRateActi(0.f),
 disActiv(false), disconnecte(false), giroActivo(false), initialSpeedActi(0.f),
 isConnected(false),playerIndex(-1) {}
+
+int Client::calcularNumeroDeLineas(const sf::Text& text) {
+	// Obtener el rectángulo delimitador (bounding box) del texto
+	sf::FloatRect bounds = text.getGlobalBounds();
+
+	// Dividir la altura del rectángulo entre la altura de la fuente
+	// Esto nos da el número de líneas
+	float alturaLinea = text.getCharacterSize();  // El tamaño de la fuente
+	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
+
+	return numeroDeLineas;
+}
+
+
 std::string generateRoomCode() {
 	std::string code;
 	std::random_device rd;
@@ -647,6 +661,57 @@ void Client::handleServerMessage(const std::string& message) {
 
 		accionCompra = true;
 
+	}
+	else if (message.rfind("SMG", 0) == 0) {
+	
+		int num = message[3] - '0';  // Convertir el 4to carácter a int
+		std::string rest = message.substr(4);  // Obtener el resto del string
+		PlantillaMensajeR.SMSEnviado.setString(rest);
+
+		int In = calcularNumeroDeLineas(PlantillaMensajeR.SMSEnviado) + 1;
+
+		if (In == 1) {
+			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
+
+			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
+			PlantillaMensajeR.ContenidoEnviado.setPosition(1015 - (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 20), 600);
+			PlantillaMensajeR.SMSEnviado.setPosition(1016- (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
+			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
+
+		}
+
+		else if (In > 1) {
+
+			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
+
+			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
+			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(1015, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
+			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(1016, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
+			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
+
+		}
+
+		PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
+		PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
+
+		Mensajes.push_back(PlantillaMensajeR);
+		float aux = PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height;
+
+		 aux += 20;
+
+		for (int i = 0; i < Mensajes.size() - 1; i++)
+		{
+			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
+			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
+			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+
+
+
+		}
+		std::cout << "uuuuu: " << Mensajes.size();
 	}
 	else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
 

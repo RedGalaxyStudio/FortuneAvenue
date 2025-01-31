@@ -66,6 +66,7 @@ private:
     sf::Sprite spriteAcercaDe;
 
 
+
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;
     sf::Sprite SpriteBotonJugar;
@@ -83,11 +84,12 @@ private:
 
     sf::Clock clock;
 
-
-
-    
-
     sf::Texture TextureConfirmarSalir;
+
+    sf::Texture TextureConfirmarSalirSala;
+
+    sf::Texture TextureConfirmarSalirPartida;
+
     sf::Sprite SpriteConfirmarSalir;
 
 

@@ -17,6 +17,7 @@ private:
     sf::FloatRect globalBounds;
     sf::Sprite fondopiece;
     sf::Texture Textufondopiece;
+    sf::Texture Preguntasalir;
     
     sf::Text CODE;
     float startX;

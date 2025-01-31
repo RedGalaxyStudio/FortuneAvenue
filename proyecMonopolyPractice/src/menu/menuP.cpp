@@ -13,6 +13,8 @@ void menuP::setWindow(sf::RenderWindow& win) {
 }
 void menuP::Resource() {
     if (!TextureConfirmarSalir.loadFromFile("assets/image/Button/boton2.png")) return;
+    if (!TextureConfirmarSalirSala.loadFromFile("assets/image/Button/ExitSala.png")) return;
+    if (!TextureConfirmarSalirPartida.loadFromFile("assets/image/Button/boton2.png")) return;
     if (!textureLogoFortuneAvenue.loadFromFile("assets/image/Logos/logojuego14.png")) return;
     if (!TextureBotonJugarOff.loadFromFile("assets/image/Button/BotonJugarOff.png")) return;
     if (!TextureBotonJugarOn.loadFromFile("assets/image/Button/BotonJugarOn.png")) return;
@@ -22,6 +24,7 @@ void menuP::Resource() {
     if (!TextureBotonSalirOn.loadFromFile("assets/image/Button/BotonSalirOn.png")) return;
     if (!textureAcercaDeOn.loadFromFile("assets/image/Button/AcercaDeOn.png")) return;
     if (!textureAcercaDeOff.loadFromFile("assets/image/Button/AcercaDeOff.png")) return;
+    
 
     if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
     if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
@@ -313,13 +316,21 @@ void menuP::MenuOpcion(bool fon) {
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
 
+    SpriteBotonSi.setPosition(800, 350);
+
+
+    SpriteBotonNo.setPosition(1000, 350);
+
+    ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
+    ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
+
     while (window->isOpen()) {
         currentCursor = &normalCursor;
         mousePosition = sf::Mouse::getPosition(*window);
         mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
         botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
-
+  
         sf::Event event;
 
         while (window->pollEvent(event)) {
@@ -345,6 +356,18 @@ void menuP::MenuOpcion(bool fon) {
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
                 sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+                if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
+                    window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+                    playClickSound();
+                    
+                }
+
+                if (SpriteBotonNo.getGlobalBounds().contains(mousePosFloat)) {
+                    window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa");
+
+                    playClickSound();
+                }
 
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
                     musicSlider->saveSettings();
@@ -376,6 +399,8 @@ void menuP::MenuOpcion(bool fon) {
         musicSlider->draw(*window);
         effectSlider->draw(*window);
         window->setMouseCursor(*currentCursor);
+        window->draw(SpriteBotonSi);
+        window->draw(SpriteBotonNo);
         window->display();
     }
 
@@ -387,8 +412,10 @@ void menuP::MenuSalir() {
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
     overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
+        SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
+        
    
-    SpriteConfirmarSalir.setTexture(TextureConfirmarSalir);
+  
     SpriteConfirmarSalir.setPosition(660, 370);
     SpriteConfirmarSalir.setOrigin(340, 240);
 
@@ -443,8 +470,7 @@ void menuP::MenuSalir() {
             renderedSprite.setTexture(renderTexture.getTexture());
        window->clear();
        window->draw(renderedSprite, &Blur); 
-  
-
+       
         window->draw(SpriteConfirmarSalir);  
         window->draw(SpriteBotonSi);        
         window->draw(SpriteBotonNo);       
