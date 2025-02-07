@@ -101,7 +101,7 @@ public :
 
 		cube = new Cube(100);
 		Cube3D.setPrimitiveType(sf::Quads);
-		cube->move(static_cast<float>(Width), static_cast<float>(Height), -200.0f);
+		cube->move(static_cast<float>(Width), static_cast<float>(Height), -100.0f);
 		cube->draw(static_cast<float>(Width), static_cast<float>(Height), static_cast<float>(posz));
 		srand(static_cast<unsigned int>(time(0))); 
 
