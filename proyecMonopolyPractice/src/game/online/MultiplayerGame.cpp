@@ -277,8 +277,6 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);//-60
 		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);//-40
 
-
-
 		playersGame[UsuariosActivos[1]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[1]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -623,8 +621,6 @@ void MultiplayerGame::update() {
 
 			}
 
-
-
 			renderTexture.draw(SpriteChat);
 			renderTexture.draw(Settings);
 
@@ -650,7 +646,7 @@ void MultiplayerGame::update() {
 
 
 	}
-	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
+
 	if (window->isOpen() && client.juegoTerminado) {
 		GameEnd gameend(window);
 		gameend.resource();
