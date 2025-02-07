@@ -1,11 +1,11 @@
-#ifndef PIECESELECTOR1_HPP
-#define PIECESELECTOR1_HPP
+#ifndef PIECESELECTOFF_HPP
+#define PIECESELECTOFF_HPP
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
 
-class PieceSelector1 {
+class PieceSelectOff {
 private:
  
     std::vector<sf::Sprite> shadow;  
@@ -25,8 +25,8 @@ private:
 
 public:
     
-    PieceSelector1(sf::RenderWindow* windowRef);
-    ~PieceSelector1();
+    PieceSelectOff(sf::RenderWindow* windowRef);
+    ~PieceSelectOff();
     void Resource();
 
     void displayPieces();

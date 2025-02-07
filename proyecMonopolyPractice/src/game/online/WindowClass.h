@@ -1,15 +1,15 @@
 #pragma once
+
 #include "CubeClass.h"
 #include <SFML/Graphics.hpp>
-#include "ResourceGame.hpp"
 #include <cstdlib>
 #include <ctime>
 #include "../../network/Client.hpp"
-
+#include "ResourceGame.hpp"
 class Window {
 
 	std::vector<int> textureIndices; 
-
+	
 	float posz = 0;
 	
 	sf::Vector2i mouseStart;
@@ -101,8 +101,8 @@ public :
 
 		cube = new Cube(100);
 		Cube3D.setPrimitiveType(sf::Quads);
-		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
-		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
+		cube->move(static_cast<float>(Width), static_cast<float>(Height), -200.0f);
+		cube->draw(static_cast<float>(Width), static_cast<float>(Height), static_cast<float>(posz));
 		srand(static_cast<unsigned int>(time(0))); 
 
 		
@@ -166,7 +166,7 @@ public :
 
 	void loop(sf::Event event, Client* client)
 	{
-
+		
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
@@ -268,5 +268,3 @@ public :
 		}else{ return 0; }
 	};
 };
-
-

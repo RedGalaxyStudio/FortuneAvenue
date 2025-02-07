@@ -54,7 +54,7 @@ void MultiplayerGame::resource() {
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
 
-	spriteMapa.setTexture(TextureMapa2);
+	spriteMapa.setTexture(TextureMapa3);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
 
@@ -430,7 +430,7 @@ void MultiplayerGame::update() {
 	//gameend.resource();
 	//gameend.update();
 
-	Dado.start(1280, 720);
+	Dado.start(610, 360);
 	int DadoResul = 0;
 
 	animacionRuleta = false;

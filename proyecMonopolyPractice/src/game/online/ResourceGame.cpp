@@ -56,9 +56,6 @@ bool userRuleta;
 bool userImpuesto;
 bool userCasa;
 
-
-
-
 std::vector<int> UsuariosActivos;
 
 bool turn;
@@ -112,9 +109,6 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window){
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window->close();
-            }
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);

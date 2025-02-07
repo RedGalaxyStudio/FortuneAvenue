@@ -44,6 +44,10 @@ private:
     sf::Texture TextureMapa1M;
     sf::Sprite SpriteMapa1;
 
+
+    sf::Texture TextureCrear;
+    sf::Sprite SpriteCrear;
+
     sf::RectangleShape borde1;
     sf::RectangleShape borde2;
     sf::RectangleShape borde3;

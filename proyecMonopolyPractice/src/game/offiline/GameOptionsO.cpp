@@ -3,6 +3,7 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
+#include "PieceSelectorO.hpp"
 
 GameOptions::GameOptions(sf::RenderWindow& win) : window(&win), pieceselector(window) {
 	loadResourceGame();
@@ -83,6 +84,11 @@ void GameOptions::resource() {
 	SpriteflecDerecha.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
+	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
+	SpriteCrear.setTexture(TextureCrear);
+	SpriteCrear.setOrigin(640, 545);
+    SpriteCrear.setPosition(920, 550);
+	
 
 	TMapas.setCharacterSize(30);
 	TMapas.setFont(fontUser);
@@ -171,9 +177,14 @@ void GameOptions::update() {
 
 			}
 
-			if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+			if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 				playClickSound();
-				//PieceSelector.
+				PieceSelectOff pieceselectoff(window);
+				pieceselectoff.Resource();
+				pieceselectoff.updateSelection();
+
+				pieceselectoff.~PieceSelectOff();
+
 
 
 			}
