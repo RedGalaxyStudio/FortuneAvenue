@@ -54,7 +54,7 @@ void MultiplayerGame::resource() {
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
 
-	spriteMapa.setTexture(TextureMapa3);
+	spriteMapa.setTexture(TextureMapa);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
 
