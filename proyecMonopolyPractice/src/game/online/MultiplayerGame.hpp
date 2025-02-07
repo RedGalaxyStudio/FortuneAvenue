@@ -8,12 +8,13 @@
 #include <atomic>
 #include <winsock2.h>
 #include "../../core/ObjetosGlobal.hpp"
+#include "ResourceGame.hpp"
 #include "WindowClass.h"
 #include "Ruleta.hpp"
 #include "MovePieces.hpp"
 #include "../../core/ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
-#include "ResourceGame.hpp"
+
 #include "nulo.hpp"
 #include "HouseBuy.hpp"
 class Ruleta;

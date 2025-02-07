@@ -1,15 +1,15 @@
 #pragma once
+
 #include "CubeClass.h"
 #include <SFML/Graphics.hpp>
-#include "ResourceGame.hpp"
 #include <cstdlib>
 #include <ctime>
 #include "../../network/Client.hpp"
-
+#include "ResourceGame.hpp"
 class Window {
 
 	std::vector<int> textureIndices; 
-
+	
 	float posz = 0;
 	
 	sf::Vector2i mouseStart;
@@ -166,7 +166,7 @@ public :
 
 	void loop(sf::Event event, Client* client)
 	{
-
+		
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
@@ -268,5 +268,3 @@ public :
 		}else{ return 0; }
 	};
 };
-
-

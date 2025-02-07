@@ -3,29 +3,29 @@
 
 
 
-sf::Texture &textureBoxPerfil= textureBox;
+sf::Texture &textureBoxPerfilOff= textureBox;
 
 std::vector<sf::Texture> TextureHouse; //texturecasa
 sf::Texture TextureMoney1; //texturecash
 sf::Texture TextureBuilding; //texturehome
 sf::Font &fontUserProfile =fontUser ; //&fontUserPerfil
-std::vector<sf::Texture> avatarTextures; 
-sf::Texture TextureFondoGame; //TextureFondoGame
+std::vector<sf::Texture> avatarTexturesOff; 
+sf::Texture TextureBackground; //TextureFondoGame
 sf::Texture TextureFrame; //textureMarco
 sf::Sprite spriteBackground;
 int NumberPlayers;
 sf::SoundBuffer DiceSoundBuffer;
-std::string namePlayer;
+std::string namePlayer; 
 sf::Sound DicesSound;
 sf::View vision; // Declarar la vista //view
 sf::Clock watch; //reloj
 std::vector<sf::Sprite> trace;
 sf::Sprite MapSprite;
-std::vector<sf::Sprite> pieces;
+std::vector<sf::Sprite> piecesOff;
 //int previousSelectionIndex[4];
 std::vector<sf::Texture> pieceShape;
 sf::Texture CheckOn;
-sf::Texture CheckOff;
+sf::Texture CheckOff; 
 std::string Code1; //code
 sf::Sprite RightArrow;
 bool rouletteAnimation; //animacionRuleta
@@ -55,7 +55,6 @@ bool userHouse;
 
 
 
-
 std::vector<int> ActiveUsers;
 
 bool firstTurn;
@@ -66,7 +65,7 @@ bool turn_house;
 bool turn_Tax;
 bool turn_Move;
 bool activeEvent;
-bool isSpinning; //no cambie esta variable porque es parte de ruleta.hpp
+bool isSpinningOff; //no cambie esta variable porque es parte de ruleta.hpp
 int IndexTurn1;
 bool draw_roulette;
 bool draw_tax;
@@ -74,9 +73,9 @@ bool draw_house;
 
 void loadResourceGameO(){
 
-	if (!TextureFondoGame.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
+	if (!TextureBackground.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureFrame.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
-	spriteBackground.setTexture(TextureFondoGame);
+	spriteBackground.setTexture(TextureBackground);
 	fontUserProfile = fontUser;
 	wait=false;
 }

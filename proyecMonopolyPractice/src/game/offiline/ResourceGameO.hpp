@@ -1,5 +1,5 @@
-#ifndef RESOURCEGAME_HPP
-#define RESOURCEGAME_HPP
+#ifndef RESOURCEGAMEO_HPP
+#define RESOURCEGAMEO_HPP
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -9,6 +9,7 @@
 extern std::vector<sf::Texture> TextureHouse; //texturecasa
 extern sf::Texture TextureBackground; //textureFondoGame
 extern sf::Texture TextureMoney1; //TextureCash
+
 extern sf::Texture TextureBuilding; //TextureHome
 extern  sf::Texture TextureFrame; //TextureMarco
 extern sf::Sprite spriteBackground; //spriteFondoGame
@@ -16,7 +17,7 @@ extern int NumberPlayers; // numplayers
 extern sf::SoundBuffer DiceSoundBuffer; //DiceBuffer
 extern sf::Sound DicesSound; //DiceSound
 extern sf::Font &fontUserProfile; //&fontUserPerfil
-extern sf::Texture &textureBoxPerfil; 
+extern sf::Texture &textureBoxPerfilOff; 
 extern sf::Sprite MapSprite; //spriteMapa
 extern sf::Clock watch; //reloj
 extern sf::View vision; //view 
@@ -24,7 +25,7 @@ extern sf::Sprite RightArrow; //SpriteArrowDer
 extern std::vector<sf::Sprite> trace; //rastro
 extern sf::Sprite LeftArrow; //SpriteArrowIzq
 extern bool plataform; //server
-extern std::vector<sf::Sprite> piece; //pieces
+extern std::vector<sf::Sprite> piecesOff; //pieces
 extern sf::Sprite SpriteUpArrow; //SpriteArrowArriba
 //extern int previousSelectionIndex[4];
 extern bool userRulette; //userRuleta
@@ -67,7 +68,6 @@ struct PlayerInformation {
 
 	}
 };
-
 extern int RoadOption; //Opcioncami
 extern bool wait; //espera
 extern bool turnRule; //giroRule
@@ -90,7 +90,7 @@ extern bool turn_Tax; //turn_impuesto
 extern bool turn_Move; //turn_Moviendo
 extern bool activeEvent; //eventoActivo
 
-struct PlayerGame {
+struct PlayerGameOff {
 
 	sf::Texture textureAvatarPLayer;
 	sf::CircleShape AvatarPlayer;  
@@ -121,7 +121,7 @@ struct PlayerGame {
 };
 
 extern std::vector<PlayerInformation> playerGameInfo; //playersInfo
-extern std::vector<PlayerGame> playerGame; //playersGame
+extern std::vector<PlayerGameOff> playerGameOff; //playersGame
 
 void loadResourceGame();
 void loadPieceGame();
