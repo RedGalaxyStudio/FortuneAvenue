@@ -84,20 +84,27 @@ void HouseBuy::resource(Client* client) {
 
 
 void HouseBuy::update(sf::Vector2f posicionactuInicial) {
+	std::cout << "\nHola no";
 	float angle = 0.f;  // Ángulo de rotación
 	float rotationSpeed = 45.f;  // Velocidad de rotación en grados por segundo
 
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
-	readData(pp, cc, "quad.vtk");
-
+	readData(pp, cc, "src/ui/quad.vtk");
+	std::cout << "\nHola no";
 	IndexCAsa += 1;
-
+	
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
-	for (int i = 0; i < 6; i++)
-		for (int j = 0; j < 4; j++)
+	std::cout << "\nHola no";
+	std::cout << "\nHOLA: " << q.size();
+	for (int i = 0; i < 6; i++) {
+		std::cout << "\nHola no";
+		for (int j = 0; j < 4; j++) {
+			std::cout << "\nHola no";
 			q.at(i).push_back({ pp.at(cc.at(i).n[j]).x, pp.at(cc.at(i).n[j]).y, pp.at(cc.at(i).n[j]).z });
-
+		}
+	}
+	std::cout << "\nHola no";
 	std::vector<Cell> cellQua; 
 	Cell c0(q.at(0), sf::Color(0, 255, 0, 255), posicionactuInicial); cellQua.push_back(c0);
 	Cell c1(q.at(1), sf::Color(255, 0, 0, 255), posicionactuInicial); cellQua.push_back(c1);
@@ -111,7 +118,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 	pp.clear();
 	cc.clear();
-
+	std::cout << "\nHola no";
 
 	Xc.setPosition(790,148);
 
@@ -123,7 +130,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	settings.antialiasingLevel = 4;
 	settings.depthBits = 24;
 	settings.stencilBits = 8;
-
+	std::cout << "\nHola no";
 	bool cierre = false;
 	const sf::Vector3f Wquad = { 1., 1., -1. }; // rotation vector components
 	const sf::Vector3f Oquad = { 199., 350., -187.5 }; // rotation vector origin

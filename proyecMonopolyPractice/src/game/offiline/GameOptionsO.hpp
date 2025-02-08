@@ -54,6 +54,9 @@ private:
     sf::Texture TextureCrear;
     sf::Sprite SpriteCrear;
 
+    sf::Texture TextureRectangle;
+    sf::Sprite SpriteRectangle;
+
     sf::RectangleShape borde1;
     sf::RectangleShape borde2;
     sf::RectangleShape borde3;
