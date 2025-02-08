@@ -36,6 +36,8 @@ void PieceSelectOff::Resource() {
 	if (!Textufondopiece.loadFromFile("assets/image/Game/FondoGameScroll.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
+	if (!CheckTexturesOn.loadFromFile("assets/image/Game/check1on.png")) return;
+	if (!CheckTexturesOff.loadFromFile("assets/image/Game/check1off.png")) return;
 
 	std::cout << "\nwo";
 	for (int i = 0; i < piecesCount; i++) {
@@ -79,10 +81,41 @@ void PieceSelectOff::displayPieces() {
 }
 void PieceSelectOff::updateSelection() {
 
+	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	std::cout << "\naqui";
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
+	std::cout << "\nnword";
 
+	PlayerInfo playerInfoNew;
+	PlayerGame playerGameNew;
+	playerInfoNew.username = nameUser;
+	playerInfoNew.PiecUserme = true;
+	playerInfos.push_back(playerInfoNew);
+	std::cout << "\n" << playerInfos[0].username;
+
+
+	playerGameNew.CashSprite.setTexture(TextureCash);
+	playerGameNew.Home.setTexture(TextureHome);
+	playerGameNew.NamePlayer.setCharacterSize(17);
+	playerGameNew.NamePlayer.setFont(fontUserPerfil);
+	playerGameNew.NamePlayer.setFillColor(sf::Color::White);
+	playerGameNew.NamePlayer.setOutlineThickness(2);
+	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
+	playerGameNew.NamePlayer.setString(playerInfos[0].username);
+
+	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
+
+
+	playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
+	playerGameNew.boxPlayer.setOrigin(125, 40);
+	playerGameNew.boxPlayer.setScale(0.9f, 0.9f);
+	playerGameNew.Check.setTexture(CheckTexturesOff);
+	playerGameNew.Check.setOrigin(50.0f, 46.5f);
+	playersGame.push_back(playerGameNew);
+	UsuariosActivos.push_back(0);
 	float deltaScroll = 0.0f;
 	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
 	const float avatarWidth = 128.0f;
@@ -127,6 +160,7 @@ void PieceSelectOff::updateSelection() {
 	float separacion = 20.0f;   // Espaciado entre perfiles
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
+	std::cout << "\naqui";
 	while (window->isOpen()&& !cierre) {
 
 		sf::Event event;
@@ -211,22 +245,27 @@ void PieceSelectOff::updateSelection() {
 							}
 							// Asigna la textura y ajusta la escala y el origen
 							newSelection = &pieces[i];
-							// Asigna la textura a PiecesSelect[0]
-
+							std::cout << "\nHola";
 
 							playersGame[0].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+							std::cout << "\nHola";
 							playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
+							std::cout << "\nHola";
 							playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
+							std::cout << "\nHola";
 							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							std::cout << "\nHola";
 							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							std::cout << "\nHola";
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							playerInfos[i].indexPiece = i;
-							//client.networkMessage.playerChangedPiece(i);
-							// Resaltar la nueva pieza
-							
+							std::cout << "\nHola";
+							playerInfos[0].indexPiece = i;
+					
+							std::cout << "\nHola";
 							pieces[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
 							previousSelection = &pieces[i];  // Actualizar la selección anterior
+							std::cout << "\nHola";
 						}
 						break;
 					}
@@ -243,6 +282,7 @@ void PieceSelectOff::updateSelection() {
 						//client.networkMessage.playerReady();
 						
 					}
+
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -261,12 +301,6 @@ void PieceSelectOff::updateSelection() {
 			}
 
 		}
-		/*if (client.agregardor) {
-			botonCheck1.spriteAsig(playersGame[UsuariosActivos[0]].Check);
-			client.agregardor = false;
-			Agregado = true;
-
-		}
 
 
 		if(client.disconnecte==true){
@@ -279,13 +313,7 @@ void PieceSelectOff::updateSelection() {
 			client.disActiv = false;
 			client.eventOccurred = false;
 		}
-		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
-	
-		if(!cierre){
 
-			SelectingPiece = true;
-
-		}
 
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
 
@@ -295,12 +323,9 @@ void PieceSelectOff::updateSelection() {
 
 				
 			}
-		}*/
 
-		if (SelectingPiece) {
-
-			
 		}
+
 
 		currentCursor = &normalCursor;
 		if(Agregado){
@@ -337,7 +362,7 @@ void PieceSelectOff::updateSelection() {
 
 
 	
-		float totalPerfiles = 0;
+		float totalPerfiles = 1;
 		if (4 > 0) {
 			// Calcular ancho total ocupado por perfiles y separaciones
 			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
