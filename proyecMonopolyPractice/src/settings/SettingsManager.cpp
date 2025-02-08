@@ -60,6 +60,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 
 
 
+
     for (auto* fondo : music) {
         if (fondo) {
             fondo->setVolume(volume);
@@ -95,6 +96,17 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     ImgVolumen.setOrigin(25, 25);
     ImgVolumen.setPosition(width + 310, y + 7);
     updateVolumeText();
+
+    sf::Text TextpantallaCompleta;
+
+
+    TextpantallaCompleta.setString("Pantalla Completa");
+    TextpantallaCompleta.setFont(font);
+    TextpantallaCompleta.setCharacterSize(30);
+    TextpantallaCompleta.setFillColor(sf::Color::White);
+    TextpantallaCompleta.setPosition(795, 270);
+
+   
 }
 
 SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef): window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
@@ -170,6 +182,8 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     ImgVolumen.setPosition(width + 310, y + 7);
     updateVolumeText();
 }
+
+
 
 SettingsManager::~SettingsManager()
 {
@@ -255,6 +269,8 @@ void SettingsManager::draw(sf::RenderWindow& window) const {
     window.draw(volumeText);
     window.draw(IdenVolumen);
     window.draw(ImgVolumen);
+    window.draw(TextpantallaCompleta);
+    
 }
 
 void SettingsManager::Printf() const {

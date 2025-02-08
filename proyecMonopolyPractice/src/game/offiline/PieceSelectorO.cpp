@@ -220,7 +220,7 @@ void PieceSelectOff::updateSelection() {
 							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
 							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							playerInfos[0].indexPiece = i;
+							playerInfos[i].indexPiece = i;
 							//client.networkMessage.playerChangedPiece(i);
 							// Resaltar la nueva pieza
 							
@@ -239,7 +239,7 @@ void PieceSelectOff::updateSelection() {
 					if (texturePtr != nullptr&&UsuariosActivos.size()>0) {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
-						//playerInfos[UsuariosActivos[0]].isSelectingPiece = true;
+						playerInfos[UsuariosActivos[0]].isSelectingPiece = true;
 						//client.networkMessage.playerReady();
 						
 					}
