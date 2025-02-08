@@ -3,11 +3,17 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
+#include "PieceSelectorO.hpp"
+
 
 GameOptions::GameOptions(sf::RenderWindow& win) : window(&win), pieceselector(window) {
 	loadResourceGame();
 	resource();
 }
+
+
+
+
 
 void GameOptions::resource() {
 
@@ -24,6 +30,9 @@ void GameOptions::resource() {
 	if (!TextureflecIzquier.loadFromFile("assets/image/Button/flechaOpcizq.png")) return;
 	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png")) return;
 	if (!TextureMapaSM.loadFromFile("assets/image/Game/mapaSopM.png")) return;
+	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
+	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png")) return;
+	if (!TextureMapa3.loadFromFile("assets/image/Game/mapa22l.png")) return;
 	SpriteMapaS.setTexture(TextureMapaS);
 	globalBounds = SpriteMapaS.getGlobalBounds();
 	SpriteMapaS.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -83,6 +92,14 @@ void GameOptions::resource() {
 	SpriteflecDerecha.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
+
+
+
+	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
+	SpriteCrear.setTexture(TextureCrear);
+	SpriteCrear.setOrigin(640, 545);
+    SpriteCrear.setPosition(920, 550);
+	
 
 	TMapas.setCharacterSize(30);
 	TMapas.setFont(fontUser);
@@ -144,10 +161,13 @@ void GameOptions::update() {
 				Menup.MenuSalir();
 			}
 
+			
+
+
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-			
+
 					if (CantNum > 2) {
 						CantNum -= 1;
 						cantUser.setString(std::to_string(CantNum));
@@ -163,17 +183,76 @@ void GameOptions::update() {
 					}
 				}
 
-				if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
-					playClickSound();
-					valida2 = true;
-
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+					if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+						playClickSound();
+						selectedMap = 0;
+					}
+					else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+						playClickSound();
+						selectedMap = 1;
+					}
+					else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
+						playClickSound();
+						selectedMap = 2;
+					}
 				}
 
-			}
 
-			if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+					if (selectedMap == 0) {
+
+						spriteMapa.setTexture(TextureMapa);
+						spriteMapa.setOrigin(360, 360);
+						spriteMapa.setPosition(640, 360);
+
+
+						window->draw(spriteMapa);
+					}
+
+					if (selectedMap == 1) {
+
+						spriteMapa.setTexture(TextureMapa2);
+						spriteMapa.setOrigin(360, 360);
+						spriteMapa.setPosition(640, 360);
+
+						window->draw(spriteMapa);
+					}
+
+					if (selectedMap == 2) {
+
+						spriteMapa.setTexture(TextureMapa3);
+						spriteMapa.setOrigin(360, 360);
+						spriteMapa.setPosition(640, 360);
+
+						window->draw(spriteMapa);
+
+					} 
+				
+			
+			
+
+					if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+
+
+
+
+						if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+							playClickSound();
+							valida2 = true;
+
+					}
+				}
+			
+		}
+
+			if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 				playClickSound();
-				//PieceSelector.
+				PieceSelectOff pieceselectoff(window);
+				pieceselectoff.Resource();
+				pieceselectoff.updateSelection();
+
+				pieceselectoff.~PieceSelectOff();
+
 
 
 			}

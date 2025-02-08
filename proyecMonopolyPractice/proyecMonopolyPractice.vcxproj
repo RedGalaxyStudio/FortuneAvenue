@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -148,6 +148,8 @@
     <ClCompile Include="src\core\ObjetosGlobal.cpp" />
     <ClCompile Include="src\core\ResourceGlobal.cpp" />
     <ClCompile Include="src\game\offiline\GameOptionsO.cpp" />
+    <ClCompile Include="src\game\offiline\PieceSelectorO.cpp" />
+    <ClCompile Include="src\game\offiline\ResourceGameO.cpp" />
     <ClCompile Include="src\game\online\Chat.cpp" />
     <ClCompile Include="src\game\online\GameEnd.cpp" />
     <ClCompile Include="src\game\online\HouseBuy.cpp" />
@@ -181,6 +183,8 @@
     <ClInclude Include="src\core\ObjetosGlobal.hpp" />
     <ClInclude Include="src\core\ResourceGlobal.hpp" />
     <ClInclude Include="src\game\offiline\GameOptionsO.hpp" />
+    <ClInclude Include="src\game\offiline\PieceSelectorO.hpp" />
+    <ClInclude Include="src\game\offiline\ResourceGameO.hpp" />
     <ClInclude Include="src\game\online\Chat.hpp" />
     <ClInclude Include="src\game\online\CubeClass.h" />
     <ClInclude Include="src\game\online\GameEnd.hpp" />
