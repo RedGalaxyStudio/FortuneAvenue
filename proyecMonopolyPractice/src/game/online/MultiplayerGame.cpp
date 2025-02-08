@@ -1102,6 +1102,6 @@ void MultiplayerGame::DrawGame() {
 	window->draw(Settings);
 	//window->draw(Conteosuel);
 	window->draw(SpriteChat);
-
+	
 	std::cout << "\nhola";
 }
