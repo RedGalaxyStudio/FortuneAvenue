@@ -6,7 +6,8 @@
 #include "MultiplayerGame.hpp"
 #include "../../ui/Scrollbar.hpp"
 #include <thread>
-
+#include <atomic>
+#include "Chat.hpp"
 // Constructor
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
 	: window(windowRef), selectedPiece(-1) {
@@ -93,7 +94,7 @@ void PieceSelector::displayPieces() {
 void PieceSelector::updateSelection() {
 	std::cout << "\nwo";
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
+	Chat chat(*window);
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
@@ -350,7 +351,7 @@ void PieceSelector::updateSelection() {
 
 		if (SelectingPiece) {
 
-			MultiplayerGame mpGame(*window);
+			MultiplayerGame mpGame(*window,chat);
 		
 			mpGame.update();
 		}
@@ -442,4 +443,18 @@ void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 	playersGame[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
 	previousSelectionIndex[CplayerIndex] = newPieceIndex;
 
+}
+
+std::atomic<bool> chatActivo(true);  // Variable para cerrar el chat
+
+void chat() {
+	std::string mensaje;
+	while (chatActivo) {
+		std::getline(std::cin, mensaje);
+		if (mensaje == "/salir") {
+			chatActivo = false;
+			break;
+		}
+		std::cout << "Jugador: " << mensaje << std::endl;
+	}
 }

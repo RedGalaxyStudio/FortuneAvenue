@@ -6,29 +6,18 @@
 #include "../../ui/Scrollbar.hpp"
 #include <thread>
 
-// Constructor
+
 PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef)
 	: window(windowRef), selectedPiece(-1) {
 	loadResourceGame();
 }
-
 PieceSelectOff::~PieceSelectOff() {
-	// Restablecer los vectores a su estado inicial
 	pieces.clear();
 	shadow.clear();
-
 	piecesTextures.clear();
-
-
-	// Liberar referencia al puntero de la ventana
 	window = nullptr;
-
-	// Poner los punteros a nullptr
 	newSelection = nullptr;
-
-	// Si hay algún otro recurso relacionado con SFML, se manejará automáticamente por la propia biblioteca
 }
-
 void PieceSelectOff::Resource() {
 	std::cout << "\nwo";
 	
@@ -90,13 +79,9 @@ void PieceSelectOff::displayPieces() {
 }
 void PieceSelectOff::updateSelection() {
 
-	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-	std::cout << "\nnword";
-
 
 	float deltaScroll = 0.0f;
 	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
@@ -113,15 +98,11 @@ void PieceSelectOff::updateSelection() {
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-
-
 	const float totalContentHeight = 880.0f;
 	const float scrollbarHeight = 340.0f;
 
-	std::cout << "\nwo";
 	float proportion = visibleAreaHeight / totalContentHeight;
 	float thumbHeight = scrollbarHeight * proportion;
-
 
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
@@ -135,24 +116,7 @@ void PieceSelectOff::updateSelection() {
 	 startX = 275;  // Posición inicial calculada en X
 	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
 
-	/* std::cout << "\nwo22222";
-	CODE.setFont(fontUser);
-	CODE.setCharacterSize(20);
-	CODE.setString("CODIGO: " + Code);
-	CODE.setFillColor(sf::Color::White);
-	CODE.setOutlineThickness(2);
-	CODE.setOutlineColor(sf::Color(135, 135, 135));*/
 	bool cierre = false;
-
-
-	std::cout << "\nwo33333333";
-	// Ahora calcula los límites y centra
-	/*globalBounds = CODE.getGlobalBounds();
-	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
-	// Finalmente, establece la posición
-	CODE.setPosition(640, 30);
-	std::cout << "\nwo";*/
 
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
@@ -165,12 +129,10 @@ void PieceSelectOff::updateSelection() {
 	bool Agregado = false;
 	while (window->isOpen()&& !cierre) {
 
-
 		sf::Event event;
 		while (window->pollEvent(event)) {
 
 			mousePosFloat = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -188,10 +150,9 @@ void PieceSelectOff::updateSelection() {
 				Menup.MenuSalir();
 			}
 
-
 			scrollbarPiece.handleEvent(event, *window);
 			avatarYOffset = scrollbarPiece.getScrollOffset();
-			// scrollbar.evento(event);
+
 			if (event.type == sf::Event::MouseWheelScrolled) {
 
 				scrollbarPiece.update(event.mouseWheelScroll.delta);
@@ -338,8 +299,7 @@ void PieceSelectOff::updateSelection() {
 
 		if (SelectingPiece) {
 
-			MultiplayerGame mpGame(*window);
-			mpGame.update();
+			
 		}
 
 		currentCursor = &normalCursor;
@@ -415,7 +375,6 @@ void PieceSelectOff::updateSelection() {
 	}
 
 }
-
 void PieceSelectOff::updatePlayerPieceSelection(int newPieceIndex) {
 
 	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
