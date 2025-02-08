@@ -32,9 +32,15 @@ private:
     int CantNum=4;
     sf::Text cantUser;
 
+    int selectedMap = -1;
+
     sf::Texture TextureMapa22;
     sf::Texture TextureMapa22M;
     sf::Sprite SpriteMapa22;
+
+    sf::Texture TextureMapa;
+    sf::Texture TextureMapa2;
+    sf::Texture TextureMapa3;
 
     sf::Vector2f Maximo;
     sf::Vector2f Minimo;

@@ -2,9 +2,8 @@
 #include <String>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
-#include "Chat.hpp"
 
-MultiplayerGame::MultiplayerGame(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat) : window(&win), Dado(window),chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	loadResourceGame();
@@ -650,7 +649,7 @@ void MultiplayerGame::update() {
 
 
 	}
-	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
+
 	if (window->isOpen() && client.juegoTerminado) {
 		GameEnd gameend(window);
 		gameend.resource();
@@ -704,8 +703,8 @@ void MultiplayerGame::Event() {
 
 				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					Chat iconochat(*window);
-					iconochat.update();
+					
+					chats->update();
 				}
 
 			}
@@ -924,9 +923,9 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 					{
-						client.networkMessage.sendEventTax();
+						client.networkMessage.sendEventSpin();
 						ruleta_draw = true;
-						turn_ruleta = false;
+						turn_ruleta = false; 
 						eventoActivo = true;
 						turnoGiro = true;
 						ruleta->enviarestado();

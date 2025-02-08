@@ -14,11 +14,13 @@
 #include "MovePieces.hpp"
 #include "../../core/ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
+#include "Chat.hpp"
 
 #include "nulo.hpp"
 #include "HouseBuy.hpp"
 class Ruleta;
 class HouseBuy;
+class Chat;
 
 class MultiplayerGame {
 public:
@@ -30,7 +32,7 @@ public:
 
 
 	bool turnoGiro;
-	MultiplayerGame(sf::RenderWindow& win);
+	MultiplayerGame(sf::RenderWindow& win, Chat& chat);
 
 	void resource();
 
@@ -46,7 +48,7 @@ public:
 private:
 	sf::Text Conteosuel;
 
-
+	Chat *chats; 
 	sf::Clock clockMensaje;  // Reloj para medir el tiempo
 	float currentScale = 1.0f;  // Escalado inicial
 	float minScale = 0.8f;      // Tamaño mínimo
