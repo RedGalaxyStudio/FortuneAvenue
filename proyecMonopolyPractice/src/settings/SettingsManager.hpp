@@ -39,6 +39,7 @@ private:
     sf::Vector2i mousePos;
     std::vector <sf::Music*> music;
     std::vector<sf::Sound*> effects;
+    sf::Text TextpantallaCompleta;
 
     sf::Text IdenVolumen;
     sf::Sprite ImgVolumen;

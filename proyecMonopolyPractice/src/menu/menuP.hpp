@@ -1,4 +1,4 @@
-#ifndef MENUP_HPP
+ #ifndef MENUP_HPP
 #define MENUP_HPP
 
 #include <SFML/Graphics.hpp>
@@ -75,6 +75,14 @@ private:
     sf::Texture TextureBotonOpcionesOff;
     sf::Texture TextureBotonOpcionesOn;
     sf::Sprite SpriteBotonOpciones;
+
+    sf::Texture TextureBotonSiOff;
+    sf::Texture TextureBotonSiOn; 
+    sf::Sprite SpriteBotonSi;
+
+    sf::Texture TextureBotonNoOff;
+    sf::Texture TextureBotonNoOn;
+    sf::Sprite SpriteBotonNo;
 
     sf::Texture TextureBotonSalirOff;
     sf::Texture TextureBotonSalirOn;

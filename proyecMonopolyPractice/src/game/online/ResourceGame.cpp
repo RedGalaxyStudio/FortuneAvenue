@@ -72,6 +72,8 @@ bool ruleta_draw;
 bool impuesto_draw;
 bool casa_draw;
 
+bool ChatOn = false;
+
 void loadResourceGame(){
 
 	if (!TextureFondoGame.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;

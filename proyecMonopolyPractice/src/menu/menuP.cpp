@@ -25,6 +25,11 @@ void menuP::Resource() {
     if (!textureAcercaDeOn.loadFromFile("assets/image/Button/AcercaDeOn.png")) return;
     if (!textureAcercaDeOff.loadFromFile("assets/image/Button/AcercaDeOff.png")) return;
     
+    if (!TextureBotonNoOff.loadFromFile("assets/image/Button/BotonNoOff.png"))return;
+    if (!TextureBotonNoOn.loadFromFile("assets/image/Button/BotonNoOn.png"))return;
+    if (!TextureBotonSiOff.loadFromFile("assets/image/Button/BotonSiOff.png"))return;
+    if (!TextureBotonSiOn.loadFromFile("assets/image/Button/BotonSiOn.png"))return;
+
 
     if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
     if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
@@ -316,10 +321,38 @@ void menuP::MenuOpcion(bool fon) {
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
     SpriteBotonOpciones.setPosition(640, 100);
 
+    SpriteBotonSi.setTexture(TextureBotonSiOn);
     SpriteBotonSi.setPosition(800, 350);
-
-
+    
+    
+    SpriteBotonNo.setTexture(TextureBotonNoOff);
     SpriteBotonNo.setPosition(1000, 350);
+
+
+
+    
+
+
+    
+    if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
+        return;
+    }
+
+    
+    sf::Text TextpantallaCompleta;
+    
+
+    TextpantallaCompleta.setString("Pantalla Completa");
+    TextpantallaCompleta.setFont(Fuente);
+    TextpantallaCompleta.setCharacterSize(30);
+    TextpantallaCompleta.setFillColor(sf::Color::White);
+    TextpantallaCompleta.setPosition(795, 270);
+    
+    bool cierre = false;
+    window->setMouseCursorVisible(true);
+    
+
+
 
     ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
     ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
@@ -360,6 +393,16 @@ void menuP::MenuOpcion(bool fon) {
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
                     playClickSound();
+
+                    SpriteBotonNo.setTexture(TextureBotonNoOff);
+                    SpriteBotonNo.setPosition(1000, 350);
+
+                    SpriteBotonSi.setTexture(TextureBotonSiOn);
+                    SpriteBotonSi.setPosition(800, 350);
+
+                    spriteX.setTexture(textureXOff);
+                spriteX.setOrigin(20, 20);
+                spriteX.setPosition(1200.5f, 50);
                     
                 }
 
@@ -367,6 +410,12 @@ void menuP::MenuOpcion(bool fon) {
                     window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa");
 
                     playClickSound();
+
+                    SpriteBotonNo.setTexture(TextureBotonNoOn);
+                    SpriteBotonNo.setPosition(1000, 350);
+
+                    SpriteBotonSi.setTexture(TextureBotonSiOff);
+                    SpriteBotonSi.setPosition(800, 350);
                 }
 
                 if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
@@ -386,9 +435,10 @@ void menuP::MenuOpcion(bool fon) {
         }
         
        
+        // Dibujo de elementos en la ventana
         window->clear();
-        if(fon){
-        window->draw(SpriteFondoMenu);
+        if (fon) {
+            window->draw(SpriteFondoMenu);
         }
         else {
             window->draw(spriteFondoGame);
@@ -401,7 +451,11 @@ void menuP::MenuOpcion(bool fon) {
         window->setMouseCursor(*currentCursor);
         window->draw(SpriteBotonSi);
         window->draw(SpriteBotonNo);
-        window->display();
+
+        window->draw(TextpantallaCompleta);
+
+        window->display(); 
+
     }
 
 }

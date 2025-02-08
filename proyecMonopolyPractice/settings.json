@@ -1,4 +1,22 @@
 {
+<<<<<<< HEAD
+    "Volumen_Effects": 25.5,
+    "Volumen_Music": 0.0,
+    "sizeFilledBar_Effects": {
+        "x": 51.0,
+        "y": 10.0
+    },
+    "sizeFilledBar_Music": {
+        "x": 0.0,
+        "y": 10.0
+    },
+    "thumbPosition_Effects": {
+        "x": 238.5,
+        "y": 392.5
+    },
+    "thumbPosition_Music": {
+        "x": 187.5,
+=======
     "Volumen_Effects": 18.5,
     "Volumen_Music": 26.499998092651367,
     "sizeFilledBar_Effects": {
@@ -15,6 +33,7 @@
     },
     "thumbPosition_Music": {
         "x": 240.5,
+>>>>>>> 1d70125f03965b3222cba8c49bbcbee19ad0d141
         "y": 292.5
     }
 }
