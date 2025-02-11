@@ -1,5 +1,5 @@
-#ifndef MOVEPIECES_HPP
-#define MOVEPIECES_HPP
+#ifndef MOVEPIECESO_HPP
+#define MOVEPIECESO_HPP
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -8,9 +8,9 @@
 #include <algorithm>
 #include "ResourceGameO.hpp"
 
-class MovePieces {
+class MovePiecesO {
 public:
-	MovePieces(sf::RenderWindow& win);
+	MovePiecesO(sf::RenderWindow& win);
 
 	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser);
 

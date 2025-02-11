@@ -11,15 +11,15 @@
 
 using json = nlohmann::json;
 
-HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
+HouseBuyO::HouseBuyO():window(nullptr), IndexCAsa(-1){}
 
 
-void HouseBuy::setWindow(sf::RenderWindow& win,int indice) {
+void HouseBuyO::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
 	index = indice;
 	//std::cout << "\n\n" << index;
 }
-void HouseBuy::resource(Client* client) {
+void HouseBuyO::resource(Client* client) {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
@@ -83,7 +83,7 @@ void HouseBuy::resource(Client* client) {
 
 
 
-void HouseBuy::update(sf::Vector2f posicionactuInicial) {
+void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	float angle = 0.f;  // Ángulo de rotación
 	float rotationSpeed = 45.f;  // Velocidad de rotación en grados por segundo
 
@@ -232,7 +232,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 }
 
-void HouseBuy::ViewHouseBuys() {
+void HouseBuyO::ViewHouseBuys() {
 	//for (int i = 0; i < 6; i++)
 	//{
 	//	CasasCompradas CasasaCOMPRAR;

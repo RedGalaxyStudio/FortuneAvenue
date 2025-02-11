@@ -6,7 +6,6 @@
 #include "ResourceGameO.hpp"
 #include <vector>
 #include "../../core/ResourceGlobal.hpp"
-#include "../../network/Client.hpp"
 
 class Nulo {
 

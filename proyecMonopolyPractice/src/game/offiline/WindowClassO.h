@@ -93,7 +93,7 @@ public :
 
 	sf::RenderWindow* window;
 
-	Window(sf::RenderWindow* windowRef) : window(windowRef) {}
+	WindowO(sf::RenderWindow* windowRef) : window(windowRef) {}
 
 
 	void start(unsigned int Width, unsigned int Height){

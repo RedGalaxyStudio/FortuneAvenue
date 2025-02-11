@@ -2,12 +2,12 @@
 #include <iostream>
 
 // Constructor
-GameEnd::GameEnd(sf::RenderWindow* window) : window(window) {
+GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 
 }
 
 // Destructor
-GameEnd::~GameEnd() {}
+GameEndO::~GameEndO() {}
 
 
 void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& positions) {
@@ -43,7 +43,7 @@ void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& p
 }
 
 
-void GameEnd::resource() {
+void GameEndO::resource() {
 	fingame12.setCharacterSize(40);
 	fingame12.setFont(fontUser);
 	fingame12.setFillColor(sf::Color::White);
@@ -85,7 +85,7 @@ void GameEnd::resource() {
 	}
 }
 
-void GameEnd::update() {
+void GameEndO::update() {
 
 
 

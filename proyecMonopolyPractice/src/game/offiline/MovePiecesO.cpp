@@ -1,8 +1,8 @@
 #include "MovePiecesO.hpp"
 #include "../../core/ResourceGlobal.hpp"
 
-MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
-void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
+MovePiecesO::MovePiecesO(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
+void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
 	this->vuelta = vuel;
@@ -11,7 +11,7 @@ void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Ve
 	PieceUser = PiecUser;
 	*vuelta = 2;
 }
-void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
+void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
 
 	if (caminoActual + 1 > (*casillas).size() ) {
@@ -32,13 +32,13 @@ void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 		this->enMovimiento = true;
 	}
 }
-int MovePieces::getCaminoActual() {
+int MovePiecesO::getCaminoActual() {
 	return caminoActual;
 }
-int MovePieces::getcasillaActual() {
+int MovePiecesO::getcasillaActual() {
 	return casillaActual;
 }
-void MovePieces::actualizarMovimiento(float deltaTime) {
+void MovePiecesO::actualizarMovimiento(float deltaTime) {
 	std::cout << "\n Peinci" ;
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
@@ -155,7 +155,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 	}
 	std::cout << "\n Peinci11111111111";
 }
-void MovePieces::updateCAmbioCasilla() {
+void MovePiecesO::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
 //	std::cout << "\nturn:" << turn;
@@ -379,7 +379,7 @@ void MovePieces::updateCAmbioCasilla() {
 
 	}
 }
-void MovePieces::seleccionarCaminoIzq() {
+void MovePiecesO::seleccionarCaminoIzq() {
 
 	if ((*casillas).size() == 1) {
 
@@ -430,7 +430,7 @@ void MovePieces::seleccionarCaminoIzq() {
 	}
 
 }
-void MovePieces::seleccionarCaminoDer() {
+void MovePiecesO::seleccionarCaminoDer() {
 
 	if ((*casillas).size() == 1) {
 		std::vector<sf::Vector2f> camino2_2{
@@ -495,7 +495,7 @@ void MovePieces::seleccionarCaminoDer() {
 	}
 
 }
-void MovePieces::animacionRastro(float deltaTime) {
+void MovePiecesO::animacionRastro(float deltaTime) {
 	static float tiempoAcumulado = 0.0f;
 	float intervalo = 0.1f;
 
@@ -522,7 +522,7 @@ void MovePieces::animacionRastro(float deltaTime) {
 		return s.getColor().a <= 0;
 		}), rastro.end());
 }
-void MovePieces::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
+void MovePiecesO::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 
 	float distancia = static_cast<float>(std::sqrt(std::pow(posicionFinal.x - sprite->getPosition().x, 2) + std::pow(posicionFinal.y - sprite->getPosition().y, 2)));
 	if (distancia < 5.0f) {
@@ -530,7 +530,7 @@ void MovePieces::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 		sprite->move(0, 4);
 	}
 }
-void MovePieces::animacionRotacion(float deltaTime) {
+void MovePiecesO::animacionRotacion(float deltaTime) {
 	timer += deltaTime;
 
 	const float rotacionDerecha = 20.0f;
@@ -560,7 +560,7 @@ void MovePieces::animacionRotacion(float deltaTime) {
 		rotacionActual = 0.0f;
 	}
 }
-void MovePieces::animacionEscala(float deltaTime) {
+void MovePiecesO::animacionEscala(float deltaTime) {
 	float escalaMaxima = 1.1f;
 	float escalaMinima = 1.0f;
 	float velocidadEscala = 2.0f;

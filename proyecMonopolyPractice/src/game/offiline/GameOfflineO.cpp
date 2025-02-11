@@ -4,7 +4,7 @@
 #include "StealplayerO.hpp"
 
 
-GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePiecesO(win)), house(UsuariosActivos.size(), HouseBuyO()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	loadResourceGame();
@@ -481,7 +481,7 @@ void GameOffline::update() {
 			case 2:
 
 				if (IndexTurn == client.playerIndex) {
-					client.EventoImpuesto();
+					//client.EventoImpuesto();
 					impuesto_draw = true;
 					turn_impuesto = false;
 					eventoActivo = true;
@@ -622,7 +622,7 @@ void GameOffline::update() {
 	}
 	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
 	if (window->isOpen() && client.juegoTerminado) {
-		GameEnd gameend(window);
+		GameEndO gameend(window);
 		gameend.resource();
 		gameend.update();
 	}
@@ -684,7 +684,7 @@ void GameOffline::Event() {
 
 				if (ruleta_draw && turn && turnoGiro) {
 
-					client.startSpin();
+					//client.startSpin();
 					ruleta->trurntrue();
 					turnoGiro = false;
 				}
@@ -888,6 +888,19 @@ void GameOffline::InicioPartida() {
 		window->display();
 	}
 }
+
+void EndTurn()	{
+	
+	index + 1;
+
+	if (index == UsuariosActivos.size())
+	{
+		index = 0;
+
+	}
+
+}
+
 void GameOffline::DrawGame() {
 
 	if (turn) {
@@ -899,7 +912,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 					{
-						client.EventoRuleta();
+						//client.EventoRuleta();
 						ruleta_draw = true;
 						turn_ruleta = false;
 						eventoActivo = true;
@@ -919,7 +932,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 					{
-						client.EventoCasa();
+						//client.EventoCasa();
 						casa_draw = true;
 						eventoActivo = true;
 					}
@@ -933,7 +946,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
-						client.EventoImpuesto();
+						//client.EventoImpuesto();
 						impuesto_draw = true;
 						turn_impuesto = false;
 						eventoActivo = true;
@@ -1018,7 +1031,7 @@ void GameOffline::DrawGame() {
 
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
 
-		client.endTurn();
+		//client.endTurn();
 		turn = false;
 		//std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
