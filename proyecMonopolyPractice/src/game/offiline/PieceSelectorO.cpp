@@ -1,6 +1,7 @@
 #include "PieceSelectorO.hpp"
 #include "../../core/ResourceGlobal.hpp"
 #include "ResourceGameO.hpp"
+#include "GameOffline.hpp"
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/Scrollbar.hpp"
@@ -282,6 +283,8 @@ void PieceSelectOff::updateSelection() {
 						//client.networkMessage.playerReady();
 						
 					}
+
+					GameOffline gameOff(*window);
 
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {

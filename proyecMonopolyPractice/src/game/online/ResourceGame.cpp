@@ -37,7 +37,7 @@ bool server;
 bool rolldiceJugador;
 std::string username;
 std::vector<char> image; // Store image data directly.
-
+bool chatOn = false;
  sf::SoundBuffer girosBuffer;
  sf::Sound girosSound;
  bool nular;

@@ -424,11 +424,6 @@ void MultiplayerGame::update() {
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame);
 	robarjugador.resource();
 
-
-	//GameEnd gameend(window);
-	//gameend.resource();
-	//gameend.update();
-
 	Dado.start(610, 360);
 	int DadoResul = 0;
 
@@ -438,6 +433,7 @@ void MultiplayerGame::update() {
 	while (window->isOpen() && !client.juegoTerminado) {
 
 		Event();
+		
 		Dado.loopP(&client);
 		// dado mecanica 
 		resultadoDado = Dado.logica();
@@ -475,7 +471,7 @@ void MultiplayerGame::update() {
 			animacionIniciada = false;
 			animacionImpuesto = false;
 		}
-
+		chats->update();
 		currentCursor = &normalCursor;
 
 		window->setMouseCursor(*currentCursor);
@@ -543,7 +539,7 @@ void MultiplayerGame::update() {
 			ruleta->event = 0;
 
 		}
-
+	
 
 		if (client.turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
@@ -658,13 +654,13 @@ void MultiplayerGame::update() {
 }
 void MultiplayerGame::Event() {
 	sf::Event event;
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+	sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-	do {
-		if (window->pollEvent(event)) {
+	while (window->pollEvent(event)) {
+	
 			Dado.loop(event, &client);
-
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+			chats->Event(event);
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -704,7 +700,7 @@ void MultiplayerGame::Event() {
 				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					
-					chats->update();
+					chatOn = true;
 				}
 
 			}
@@ -718,9 +714,9 @@ void MultiplayerGame::Event() {
 					turnoGiro = false;
 				}
 			}
-		}
+		
 
-	} while (window->pollEvent(event));
+	}
 }
 void MultiplayerGame::DrawPieceMoviendo() {
 
@@ -747,7 +743,11 @@ void MultiplayerGame::DrawPieceMoviendo() {
 	}
 	window->setView(window->getDefaultView());
 
+	if (chatOn)
+	{
 
+		chats->draw();
+	}
 
 }
 void MultiplayerGame::DrawGameRuleta() {
@@ -807,12 +807,17 @@ void MultiplayerGame::DrawGameRuleta() {
 		DescripDado.setScale(currentScale, currentScale);
 
 		window->draw(DescripDado);
+
+
+
+	}
+	if (chatOn)
+	{
+
+		chats->draw();
 	}
 }
 void MultiplayerGame::DrawGameImpuesto() {
-
-
-
 
 	window->clear();
 
@@ -834,7 +839,7 @@ void MultiplayerGame::DrawGameImpuesto() {
 		renderTexture.draw(playersGame[UsuariosActivos[i]].Home);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
 	}
-	renderTexture.draw(SpriteChat);
+	
 	renderTexture.draw(Settings);
 	renderTexture.draw(overlay);
 	renderTexture.display();
@@ -844,6 +849,15 @@ void MultiplayerGame::DrawGameImpuesto() {
 	window->draw(SpriteImpuesto);
 	window->draw(Impuesto);
 	window->draw(ImpuestoCasa);
+	if (!chatOn)
+	{
+		window->draw(SpriteChat);
+	}
+	else {
+
+		chats->draw();
+	}
+
 
 }
 void MultiplayerGame::InicioPartida() {
@@ -1101,7 +1115,14 @@ void MultiplayerGame::DrawGame() {
 
 	window->draw(Settings);
 	//window->draw(Conteosuel);
-	window->draw(SpriteChat);
+	if (!chatOn)
+	{
+		window->draw(SpriteChat);
+	}
+	else {
+
+		chats->draw();
+	}
 	
-	std::cout << "\nhola";
+
 }

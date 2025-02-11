@@ -1,5 +1,5 @@
-/*#ifndef GAMEOFFLINE_HPP
-#define GAMEOFFLINE_HPP
+#ifndef GAMEOFFLINEO_HPP
+#define GAMEOFFLINEO_HPP
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -7,15 +7,15 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
-//#include "ObjetosGlobal.hpp"
-//#include "WindowClass.h"
-//#include "Ruleta.hpp"
-//#include "MovePieces.hpp"
-#include "ResourceGlobal.hpp"
-#include "PieceSelector.hpp"
-#include "ResourceGame.hpp"
-#include "nulo.hpp"
-#include "HouseBuy.hpp"
+#include "../../core/ObjetosGlobal.hpp"
+#include "WindowClassO.h"
+#include "RuletaO.hpp"
+#include "MovePiecesO.hpp"
+#include "ResourceGlobalO.hpp"
+#include "PieceSelectorO.hpp"
+#include "ResourceGameO.hpp"
+#include "nuloO.hpp"
+#include "HouseBuyO.hpp"
 class Ruleta;
 class HouseBuy;
 
@@ -156,4 +156,4 @@ private:
 	sf::Sprite SpriteChat;
 
 };
-#endif*/
+#endif
