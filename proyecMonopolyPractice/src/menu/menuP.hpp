@@ -10,7 +10,7 @@
 class MultiplayerGame;
 
 
-class menuP : public SettingsManager {
+class menuP{
 public:
 
     menuP();

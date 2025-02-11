@@ -29,8 +29,7 @@ void menuP::Resource() {
     if (!TextureBotonNoOn.loadFromFile("assets/image/Button/BotonNoOn.png"))return;
     if (!TextureBotonSiOff.loadFromFile("assets/image/Button/BotonSiOff.png"))return;
     if (!TextureBotonSiOn.loadFromFile("assets/image/Button/BotonSiOn.png"))return;
-
-
+    
     if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
     if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
     if (!textureInstruccionesOn.loadFromFile("assets/image/Button/instruccionesencendido.png")) return;
@@ -39,8 +38,6 @@ void menuP::Resource() {
     if (!Blur.loadFromFile("assets/Shaders/blur.frag", sf::Shader::Fragment)) return;
     if (!renderTexture.create(window->getSize().x, window->getSize().y)) return;
     if (!SelectingMusicFondo.openFromFile("assets/sounds/SelectingPieces.wav")) return;
-
-
 
     flechainstder.setTexture(Textureflechainstder);
     flechainstder.setPosition(1180,600);
@@ -54,8 +51,6 @@ void menuP::Resource() {
     spriteInstrucciones.setTexture(textureInstruccionesOff);
     spriteInstrucciones.setPosition(400,500);
     spriteInstrucciones.setOrigin(103.5f, 36.5f);
-
-
 
     Blur.setUniform("resolution", sf::Glsl::Vec2(
         static_cast<float>(window->getSize().x),
@@ -77,7 +72,7 @@ void menuP::Resource() {
     spriteLogoFortuneAvenue.setTexture(textureLogoFortuneAvenue);
     spriteLogoFortuneAvenue.setOrigin(256.5f, 209.4f);
     spriteLogoFortuneAvenue.setPosition(640, 260);
-
+    
     SpriteBotonJugar.setTexture(TextureBotonJugarOff);
     SpriteBotonJugar.setOrigin(103.5f, 40);
     SpriteBotonJugar.setPosition(383, 560);
@@ -98,11 +93,13 @@ void menuP::Resource() {
     spriteAcercaDe.setOrigin(64.5f, 25);
     spriteAcercaDe.setPosition(1200.5f, 680);
     SpriteFondoMenu.setTexture(TextureFondoMenu);
-
+ 
     musicSlider = new SettingsManager(200, 300, 200, 10,MusicPointers,*window);
+    std::cout << "\nHOla";
     effectSlider = new SettingsManager(200, 400, 200, 10,effectPointers,*window); 
+    std::cout << "\nHOla";
     loadCursors();
-
+    std::cout << "\nHOla";
     window->setMouseCursor(normalCursor);
 
 }
@@ -117,7 +114,7 @@ void menuP::MenuPrincipal() {
     selectedAvatarCopy.setScale(1,1);
     sf::CircleShape hola;
 
-    
+
 
     editorPerfil.setFillColor(sf::Color(0, 0, 0, 0));
     editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));

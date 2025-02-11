@@ -6,7 +6,7 @@
 
 #define M_PI 3.14159265358979323846
 
-class Cube {
+class CubeO {
 	float CDis = 0;
 
 	
@@ -132,7 +132,7 @@ public :
     Vector3D*                     C3D;
     float                         Dist[8];
 	std::vector<std::vector<int>> show;
-	Cube(float _size)
+	CubeO(float _size)
 	{
 		CDis      = _size / 2;
 		C3D       = new Vector3D[8];

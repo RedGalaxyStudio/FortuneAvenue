@@ -1,12 +1,11 @@
 #pragma once
-#include "CubeClass.h"
+#include "CubeClassO.h"
 #include <SFML/Graphics.hpp>
-#include "ResourceGame.hpp"
+#include "ResourceGameO.hpp"
 #include <cstdlib>
 #include <ctime>
-#include "../../network/Client.hpp"
 
-class Window {
+class WindowO {
 
 	std::vector<int> textureIndices; 
 

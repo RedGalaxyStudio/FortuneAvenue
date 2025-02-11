@@ -36,8 +36,9 @@ int main() {
 
     loadTextures();
     cargue();
-    Menup.setWindow(window);
-    Menup.Resource();
+  
+    Menup.setWindow(window);  
+    Menup.Resource();   
     Menup.MenuPrincipal();
 
     CoUninitialize();

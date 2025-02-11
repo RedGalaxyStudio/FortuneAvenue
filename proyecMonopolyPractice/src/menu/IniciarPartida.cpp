@@ -110,7 +110,7 @@ void IniciarPartida::update() {
 							Code = client.createRoom(nameUser, TextureAvatarPath);
 
 
-							CHat.update();
+						
 							PieceSelector pieceselector(window);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
