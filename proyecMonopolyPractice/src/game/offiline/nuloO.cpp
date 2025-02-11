@@ -9,13 +9,13 @@
 
 using json = nlohmann::json;
 
-Nulo::Nulo() : window(nullptr), IndexCAsa(-1) {}
+NuloO::NuloO() : window(nullptr), IndexCAsa(-1) {}
 
-void Nulo::setWindow(sf::RenderWindow& win) {
+void NuloO::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
 
-void Nulo::Resource(Client* client) {
+void NuloO::Resource(Client* client) {
     
     if (!TextureBotonNulo.loadFromFile("../assets/image/Button/nulo.png")) {
         std::cerr << "Error al cargar el botón de confirmación.\n";
@@ -27,7 +27,7 @@ void Nulo::Resource(Client* client) {
     }
 
 
-void Nulo::Update() {
+void NuloO::Update() {
   
 
     renderedSprite.setTexture(renderTexture.getTexture());

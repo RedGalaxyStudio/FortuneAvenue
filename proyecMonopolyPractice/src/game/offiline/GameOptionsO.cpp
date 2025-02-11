@@ -292,4 +292,4 @@ void GameOptions::update() {
 
 		window->display();
 	}
-}
+

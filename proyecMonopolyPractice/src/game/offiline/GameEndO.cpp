@@ -10,7 +10,7 @@ GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 GameEndO::~GameEndO() {}
 
 
-void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& positions) {
+void assignPositions(const std::vector<PlayerInformation>& players, std::vector<int>& positions) {
 	// Crear un vector de índices
 	std::vector<size_t> indices(players.size());
 	for (size_t i = 0; i < players.size(); ++i) {
@@ -64,7 +64,7 @@ void GameEndO::resource() {
 
 	posicionesGanadores.resize(UsuariosActivos.size());
 
-	assignPositions(playerInfos, posiGndrs);
+	assignPositions(playerGameInfo, posiGndrs);
 
 	for (int i = 0; i < posicionesGanadores.size(); i++) {
 
