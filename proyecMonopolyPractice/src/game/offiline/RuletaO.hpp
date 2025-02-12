@@ -1,5 +1,5 @@
-#ifndef RUELTA_HPP
-#define RUELTA_HPP
+#ifndef RUELTAO_HPP
+#define RUELTAO_HPP
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -9,9 +9,9 @@
 #include "../../core/ObjetosGlobal.hpp"
 #define M_PI 3.14159265358979323846
 
-class Ruleta {
+class RuletaO {
 public:
-    Ruleta(float width, float height, float centerX, float centerY);
+    RuletaO(float width, float height, float centerX, float centerY);
     void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
     void update(float deltaTime);
     void trurntrue();

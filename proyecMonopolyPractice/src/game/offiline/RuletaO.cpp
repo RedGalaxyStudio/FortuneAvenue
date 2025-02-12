@@ -3,7 +3,7 @@
 #include <cstdlib> // Para rand() y RAND_MAX
 
 
-Ruleta::Ruleta(float width, float height, float centerX, float centerY)
+RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
 	// Inicializar shaders
 
@@ -31,7 +31,7 @@ Ruleta::Ruleta(float width, float height, float centerX, float centerY)
 	createPointer();
 }
 
-void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
+void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 	if (turn) {
 		if (giroActivo&& turno) {
@@ -262,14 +262,14 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 }
 
 
-void Ruleta::trurntrue() {
+void RuletaO::trurntrue() {
 
 	turno = true;
 	resultado = false;
 
 }
 
-void Ruleta::enviarestado() {
+void RuletaO::enviarestado() {
 
 
 	float anguloactualrule;
@@ -284,14 +284,14 @@ void Ruleta::enviarestado() {
 	client.networkMessage.sendRouletteGame(anguloactualrule);
 }
 
-void Ruleta::update(float deltaTime) {
+void RuletaO::update(float deltaTime) {
 	blinkTimer += deltaTime;
 	if (blinkTimer >= blinkDuration) {
 		blinkTimer = 0.0f; // Reiniciar el temporizador
 	}
 }
 
-void Ruleta::createSegments() {
+void RuletaO::createSegments() {
 	float angleStep = static_cast<float>(2 * M_PI / numSegments);
 	for (int i = 0; i < numSegments; ++i) {
 		sf::ConvexShape segment;
@@ -324,7 +324,7 @@ void Ruleta::createSegments() {
 
 }
 
-void Ruleta::loadIconTextures() {
+void RuletaO::loadIconTextures() {
 	iconTextures.resize(numSegments);
 	std::string iconPaths[] = {
 		"icono11.png", "icon2.png", "icono333.png",
@@ -338,7 +338,7 @@ void Ruleta::loadIconTextures() {
 	}
 }
 
-void Ruleta::setupIcons() {
+void RuletaO::setupIcons() {
 
 	icons.resize(numSegments);
 	iconsResul.resize(numSegments);
@@ -361,7 +361,7 @@ void Ruleta::setupIcons() {
 	}
 }
 
-void Ruleta::setupLights() {
+void RuletaO::setupLights() {
 
 	int numLuces = 14;
 	float radioLuces = (radius * 0.04f) + radius;  // Ajusta las luces al radio
@@ -378,7 +378,7 @@ void Ruleta::setupLights() {
 	}
 }
 
-void Ruleta::drawLights(sf::RenderWindow& window, float deltaTime) {
+void RuletaO::drawLights(sf::RenderWindow& window, float deltaTime) {
 	float brightness = static_cast<float>((sin(blinkTimer * (2 * M_PI / blinkDuration)) + 1) * 127.5);
 
 	for (size_t i = 0; i < luces.size(); ++i) {
@@ -396,7 +396,7 @@ void Ruleta::drawLights(sf::RenderWindow& window, float deltaTime) {
 	}
 }
 
-void Ruleta::setupBase() {
+void RuletaO::setupBase() {
 
 
 
@@ -424,7 +424,7 @@ void Ruleta::setupBase() {
 
 }
 
-void Ruleta::createPointer() {
+void RuletaO::createPointer() {
 	pointer.setPointCount(5);
 	pointer.setPoint(0, sf::Vector2f(10, 0));
 	pointer.setPoint(1, sf::Vector2f(20, 20));
@@ -438,7 +438,7 @@ void Ruleta::createPointer() {
 
 }
 
-void Ruleta::animatePointer() {
+void RuletaO::animatePointer() {
 	static float bounce = 0.0f;
 	if (!isSpinning) {
 		bounce += 0.1f; // Incrementar para el efecto de rebote
