@@ -10,7 +10,7 @@
 #include <iostream>
 
 
-class GameEnd {
+class GameEndO {
 private:
     sf::RenderWindow* window;                 // Ventana principal para dibujar
     sf::Text fingame12;
@@ -18,8 +18,8 @@ private:
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
 public:
-    GameEnd(sf::RenderWindow* window);        // Constructor que toma la ventana principal
-    ~GameEnd();                               // Destructor
+    GameEndO(sf::RenderWindow* window);        // Constructor que toma la ventana principal
+    ~GameEndO();                               // Destructor
     void resource();
     void update();
 

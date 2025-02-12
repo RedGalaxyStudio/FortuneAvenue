@@ -2,15 +2,15 @@
 #include <iostream>
 
 // Constructor
-GameEnd::GameEnd(sf::RenderWindow* window) : window(window) {
+GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 
 }
 
 // Destructor
-GameEnd::~GameEnd() {}
+GameEndO::~GameEndO() {}
 
 
-void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& positions) {
+void assignPositions(const std::vector<PlayerInformation>& players, std::vector<int>& positions) {
 	// Crear un vector de índices
 	std::vector<size_t> indices(players.size());
 	for (size_t i = 0; i < players.size(); ++i) {
@@ -43,7 +43,7 @@ void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& p
 }
 
 
-void GameEnd::resource() {
+void GameEndO::resource() {
 	fingame12.setCharacterSize(40);
 	fingame12.setFont(fontUser);
 	fingame12.setFillColor(sf::Color::White);
@@ -64,7 +64,7 @@ void GameEnd::resource() {
 
 	posicionesGanadores.resize(UsuariosActivos.size());
 
-	assignPositions(playerInfos, posiGndrs);
+	assignPositions(playerGameInfo, posiGndrs);
 
 	for (int i = 0; i < posicionesGanadores.size(); i++) {
 
@@ -85,7 +85,7 @@ void GameEnd::resource() {
 	}
 }
 
-void GameEnd::update() {
+void GameEndO::update() {
 
 
 

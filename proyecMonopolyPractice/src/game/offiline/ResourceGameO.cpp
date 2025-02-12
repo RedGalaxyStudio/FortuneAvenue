@@ -54,7 +54,7 @@ bool userTax;
 bool userHouse;
 
 
-
+int index = 0;
 std::vector<int> ActiveUsers;
 
 bool firstTurn;

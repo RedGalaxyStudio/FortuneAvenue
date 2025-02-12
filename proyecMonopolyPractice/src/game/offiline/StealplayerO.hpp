@@ -6,7 +6,7 @@
 #include "ResourceGameO.hpp"
 #include "../../core/ResourceGlobal.hpp"
 
-class Stealplayer {
+class StealplayerO {
 private:
     sf::RenderWindow* window;                 // Ventana principal para dibujar
     sf::Text SlectingPlayer;
@@ -19,8 +19,8 @@ private:
     
     
 public:
-    Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal);        // Constructor que toma la ventana principal
-    ~Stealplayer();                               // Destructor
+    StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal);        // Constructor que toma la ventana principal
+    ~StealplayerO();                               // Destructor
     void resource();
     void update();
 

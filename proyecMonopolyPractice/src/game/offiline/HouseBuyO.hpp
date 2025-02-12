@@ -6,13 +6,12 @@
 #include "ResourceGameO.hpp"
 #include <vector>
 #include "../../core/ResourceGlobal.hpp"
-#include "../../network/Client.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/cell.h"
 #include "../../ui/fileio.h"
 
 
-class HouseBuy {
+class HouseBuyO {
 
 private:
 sf::RenderWindow * window;
@@ -50,14 +49,14 @@ struct houseInfo {
 
 
 public:
-    HouseBuy();   // Constructor que inicializa con el precio y fondos del jugador
+    HouseBuyO();   // Constructor que inicializa con el precio y fondos del jugador
     int IndexCAsa;
     std::vector<houseInfo> houses;
     void setWindow(sf::RenderWindow& win,int indice);
     void resource(Client* client);
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuys();
-    int index;
+    int indexX;
    
 
 };

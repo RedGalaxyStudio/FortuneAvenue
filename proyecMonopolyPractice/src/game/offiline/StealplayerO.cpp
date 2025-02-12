@@ -2,15 +2,15 @@
 #include <iostream>
 
 // Constructor
-Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
 
 // Destructor
-Stealplayer::~Stealplayer() {}
+StealplayerO::~StealplayerO() {}
 
  
-void Stealplayer::resource() {
+void StealplayerO::resource() {
 	SlectingPlayer.setCharacterSize(40);
 	SlectingPlayer.setFont(fontUser);
 	SlectingPlayer.setFillColor(sf::Color::White);
@@ -43,7 +43,7 @@ void Stealplayer::resource() {
 
 
 }
-void Stealplayer::update() {
+void StealplayerO::update() {
 
 
     return;

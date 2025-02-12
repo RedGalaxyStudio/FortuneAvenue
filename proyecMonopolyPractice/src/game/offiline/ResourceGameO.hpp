@@ -10,6 +10,8 @@ extern std::vector<sf::Texture> TextureHouse; //texturecasa
 extern sf::Texture TextureBackground; //textureFondoGame
 extern sf::Texture TextureMoney1; //TextureCash
 
+extern int index;
+
 extern sf::Texture TextureBuilding; //TextureHome
 extern  sf::Texture TextureFrame; //TextureMarco
 extern sf::Sprite spriteBackground; //spriteFondoGame

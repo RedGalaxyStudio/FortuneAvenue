@@ -203,7 +203,6 @@ void GameOptions::update() {
 				}
 
 
-
 					if (selectedMap == 0) {
 
 						spriteMapa.setTexture(TextureMapa);
@@ -256,14 +255,6 @@ void GameOptions::update() {
 				pieceselectoff.Resource();
 				pieceselectoff.updateSelection();
 
-				pieceselectoff.~PieceSelectOff();
-
-				if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
-					playClickSound();
-					PieceSelectOff pieceselectoff(window);
-					pieceselectoff.Resource();
-					pieceselectoff.updateSelection();
-
 					pieceselectoff.~PieceSelectOff();
 				}
 
@@ -301,4 +292,4 @@ void GameOptions::update() {
 
 		window->display();
 	}
-}
+

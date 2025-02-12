@@ -6,9 +6,8 @@
 #include "ResourceGameO.hpp"
 #include <vector>
 #include "../../core/ResourceGlobal.hpp"
-#include "../../network/Client.hpp"
 
-class Nulo {
+class NuloO {
 
 private:
     sf::RenderWindow* window;
@@ -22,7 +21,7 @@ private:
     sf::Sprite renderedSprite;
 
 public:
-    Nulo(); // Constructor por defecto
+    NuloO(); // Constructor por defecto
     int IndexCAsa;
 
     void setWindow(sf::RenderWindow& win);

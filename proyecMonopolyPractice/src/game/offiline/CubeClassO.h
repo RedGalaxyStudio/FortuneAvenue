@@ -157,10 +157,10 @@ public :
 		updateDistances(Vector3D(x, y, z));
 		for (int face = 0; face < 6; face++)
 		{
-			int index = 0;
+			int indexFuncion = 0;
 			for (int corner = 0; corner < 4; corner++)
-				index += static_cast<int>(faces[face][corner] - (distances[faces[face][corner]] - 1));
-			if (index == 0)show.push_back(faces[face]);
+				indexFuncion += static_cast<int>(faces[face][corner] - (distances[faces[face][corner]] - 1));
+			if (indexFuncion == 0)show.push_back(faces[face]);
 		}
 
 	}

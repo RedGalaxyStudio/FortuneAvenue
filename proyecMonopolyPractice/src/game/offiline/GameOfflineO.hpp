@@ -11,7 +11,7 @@
 #include "WindowClassO.h"
 #include "RuletaO.hpp"
 #include "MovePiecesO.hpp"
-#include "ResourceGlobalO.hpp"
+#include "../../core/ResourceGlobal.hpp"
 #include "PieceSelectorO.hpp"
 #include "ResourceGameO.hpp"
 #include "nuloO.hpp"
@@ -36,7 +36,8 @@ public:
 	void DrawGameImpuesto();
 	void InicioPartida();
 	void positionPefil();
-
+	void EndTurn();
+	
 private:
 	sf::Text Conteosuel;
 
@@ -127,8 +128,8 @@ private:
 	sf::Sprite pieces;
 
 
-	std::vector<MovePieces> moverFichas;
-	std::vector<HouseBuy> house;
+	std::vector<MovePiecesO> moverFichas;
+	std::vector<HouseBuyO> house;
 	sf::Clock TempoAnimacion;
 	bool animacionIniciada;
 	Window Dado;
