@@ -12,6 +12,8 @@ public:
     void resource();
     void insertarSaltoDeLinea();
     void update();
+    void Event(sf::Event event);
+    void draw();
 
 private:
 

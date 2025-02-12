@@ -128,8 +128,6 @@ void PieceSelector::updateSelection() {
 
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
-
-	std::cout << "\nwo1111";
 	Scrollbar scrollbarPiece(340, thumbHeight, 14);
 
 	scrollbarPiece.setPosition(1260, 340);
@@ -137,8 +135,6 @@ void PieceSelector::updateSelection() {
 	float avatarYOffset = 0.0f;
 	 startX = 275;  // Posición inicial calculada en X
 	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
-
-	 std::cout << "\nwo22222";
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
 	CODE.setString("CODIGO: " + Code);
@@ -147,15 +143,12 @@ void PieceSelector::updateSelection() {
 	CODE.setOutlineColor(sf::Color(135, 135, 135));
 	bool cierre = false;
 
-
-	std::cout << "\nwo33333333";
 	// Ahora calcula los límites y centra
 	globalBounds = CODE.getGlobalBounds();
 	CODE.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	// Finalmente, establece la posición
 	CODE.setPosition(640, 30);
-	std::cout << "\nwo";
 	MenuMusicFondo.stop();
 	sf::sleep(sf::seconds(0.5)); // Silencio breve
 	SelectingMusicFondo.setLoop(true);

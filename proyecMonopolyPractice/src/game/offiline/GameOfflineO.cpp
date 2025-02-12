@@ -1,8 +1,8 @@
-/*#include "GameOffline.hpp"
+#include "GameOfflineO.hpp"
 #include <String>
-#include "GameEnd.hpp"
-#include "Stealplayer.hpp"
-#include "Chat.hpp"
+#include "GameEndO.hpp"
+#include "StealplayerO.hpp"
+
 
 GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
@@ -1080,4 +1080,4 @@ void GameOffline::DrawGame() {
 	window->draw(SpriteChat);
 
 	std::cout << "\nhola";
-}*/
+}

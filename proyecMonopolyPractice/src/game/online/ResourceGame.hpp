@@ -42,6 +42,8 @@ extern bool rolldiceJugador;
 extern std::string nameUser;
 extern sf::Texture CheckTexturesOn;
 extern sf::Texture CheckTexturesOff;
+
+extern bool chatOn;
 struct PlayerInfo {
 	std::string username;
 	std::string image;
