@@ -11,10 +11,6 @@ GameOptions::GameOptions(sf::RenderWindow& win) : window(&win), pieceselector(wi
 	resource();
 }
 
-
-
-
-
 void GameOptions::resource() {
 
 	TPlayers.setCharacterSize(26);
@@ -26,13 +22,13 @@ void GameOptions::resource() {
 	TPlayers.setPosition(640, 136);
 	sf::FloatRect globalBounds = TPlayers.getGlobalBounds();
 	TPlayers.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	if (!TextureflecDerecha.loadFromFile("assets/image/Button/flechaOpcder.png")) return;
-	if (!TextureflecIzquier.loadFromFile("assets/image/Button/flechaOpcizq.png")) return;
-	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png")) return;
-	if (!TextureMapaSM.loadFromFile("assets/image/Game/mapaSopM.png")) return;
-	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
-	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png")) return;
-	if (!TextureMapa3.loadFromFile("assets/image/Game/mapa22l.png")) return;
+	if (!TextureflecDerecha.loadFromFile("assets/image/Button/flechaOpcder.png")) std::cout<<"\n me jodi";
+	if (!TextureflecIzquier.loadFromFile("assets/image/Button/flechaOpcizq.png")) std::cout<<"\n me jodi";
+	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png")) std::cout<<"\n me jodi";
+	if (!TextureMapaSM.loadFromFile("assets/image/Game/mapaSopM.png")) std::cout<<"\n me jodi";
+	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) std::cout<<"\n me jodi";
+	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png")) std::cout<<"\n me jodi";;
+	if (!TextureMapa3.loadFromFile("assets/image/Game/mapa22l.png")) std::cout<<"\n me jodi";
 	SpriteMapaS.setTexture(TextureMapaS);
 	globalBounds = SpriteMapaS.getGlobalBounds();
 	SpriteMapaS.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -41,8 +37,8 @@ void GameOptions::resource() {
 	SpriteflecDerecha.setTexture(TextureflecDerecha);
 	SpriteflecIzquier.setTexture(TextureflecIzquier);
 	
-	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
-	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
+	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) std::cout<<"\n me jodi";
+	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) std::cout<<"\n me jodi";
 	SpriteMapa22.setTexture(TextureMapa22);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa22.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -74,8 +70,8 @@ void GameOptions::resource() {
 	globalBounds = borde3.getGlobalBounds();
 	borde3.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	if (!TextureMapa1.loadFromFile("assets/image/Game/mapa1.png")) return;
-	if (!TextureMapa1M.loadFromFile("assets/image/Game/mapa1M.png")) return;
+	if (!TextureMapa1.loadFromFile("assets/image/Game/mapa1.png")) std::cout<<"\n me jodi";
+	if (!TextureMapa1M.loadFromFile("assets/image/Game/mapa1M.png")) std::cout<<"\n me jodi";
 	SpriteMapa1.setTexture(TextureMapa1);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa1.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -91,16 +87,12 @@ void GameOptions::resource() {
 	globalBounds = SpriteflecDerecha.getGlobalBounds();
 	SpriteflecDerecha.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
-
-
-
-	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
+	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) std::cout<<"\n me jodi";
 	SpriteCrear.setTexture(TextureCrear);
 	SpriteCrear.setOrigin(640, 545);
     SpriteCrear.setPosition(1170, 1153);
 	
-	if (!TextureRectangle.loadFromFile("assets/image/Button/rectanguloEncendido.png")) return;
+	if (!TextureRectangle.loadFromFile("assets/image/Button/rectanguloEncendido.png")) std::cout<<"\n me jodi";
 	SpriteRectangle.setTexture(TextureRectangle);
 	SpriteRectangle.setOrigin(640, 545);
 	SpriteRectangle.setPosition(1153, 568);
@@ -135,7 +127,7 @@ void GameOptions::resource() {
 	TOpcion.setPosition(640, 60);
 	 globalBounds = TOpcion.getGlobalBounds();
 	TOpcion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	
+	std::cout << "\n no estamos odi";
 }
 
 
@@ -155,23 +147,22 @@ void GameOptions::update() {
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
+			
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteFondoGame);	
 				renderTexture.draw(TOpcion);
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 				Menup.MenuSalir();
 			}
 
-			
-
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-
 					if (CantNum > 2) {
 						CantNum -= 1;
 						cantUser.setString(std::to_string(CantNum));
@@ -181,6 +172,7 @@ void GameOptions::update() {
 
 				if (SpriteflecDerecha.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
+					std::cout << "Holamundo9:";
 					if (CantNum < 4) {
 						CantNum += 1;
 						cantUser.setString(std::to_string(CantNum));
@@ -188,6 +180,7 @@ void GameOptions::update() {
 				}
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+					std::cout << "Holamundo8:";
 					if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						selectedMap = 0;
@@ -202,68 +195,35 @@ void GameOptions::update() {
 					}
 				}
 
-
-					if (selectedMap == 0) {
-
-						spriteMapa.setTexture(TextureMapa);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
-
-
-						window->draw(spriteMapa);
-					}
-
-					if (selectedMap == 1) {
-
-						spriteMapa.setTexture(TextureMapa2);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
-
-						window->draw(spriteMapa);
-					}
-
-					if (selectedMap == 2) {
-
-						spriteMapa.setTexture(TextureMapa3);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
-
-						window->draw(spriteMapa);
-
-					} 
-				
-			
-			
-
+					
 					if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-
-
-
-
+						std::cout << "Holamundo10:";
 						if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 							playClickSound();
 							valida2 = true;
 
+						}
 					}
-				}
 			
-		}
+			}
 
 			if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+				std::cout << "Holamundo12:";
 				playClickSound();
 				PieceSelectOff pieceselectoff(window);
 				pieceselectoff.Resource();
 				pieceselectoff.updateSelection();
 
-					pieceselectoff.~PieceSelectOff();
-				}
-
+				pieceselectoff.~PieceSelectOff();
 			}
 
 		}
 
+		std::cout << "\n me jodi";
 		Valida = true;
+	}
 
+	
 		currentCursor = &normalCursor;
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 		MapaS.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -291,5 +251,5 @@ void GameOptions::update() {
 		window->draw(SpriteRectangle);
 
 		window->display();
-	}
+}
 
