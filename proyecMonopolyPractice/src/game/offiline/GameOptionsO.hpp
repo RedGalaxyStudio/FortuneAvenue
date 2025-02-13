@@ -29,7 +29,7 @@ private:
     sf::Texture TextureMapaSM;
     sf::Sprite SpriteMapaS;
 
-    int CantNum=4;
+    int CantNum=2;
     sf::Text cantUser;
 
     int selectedMap = -1;
