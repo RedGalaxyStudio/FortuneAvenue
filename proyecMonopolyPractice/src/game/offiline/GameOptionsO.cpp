@@ -40,7 +40,7 @@ void GameOptions::resource() {
 	SpriteMapaS.setPosition(640, 460);
 	SpriteflecDerecha.setTexture(TextureflecDerecha);
 	SpriteflecIzquier.setTexture(TextureflecIzquier);
-	
+
 	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
 	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
 	SpriteMapa22.setTexture(TextureMapa22);
@@ -59,11 +59,11 @@ void GameOptions::resource() {
 	borde3.setOutlineThickness(6);
 
 	Maximo = sf::Vector2f(280.f, 280.f);
-	Minimo=sf::Vector2f(240.f, 240.f);
+	Minimo = sf::Vector2f(240.f, 240.f);
 	borde1.setSize(Minimo);
 	borde2.setSize(Minimo);
 	borde3.setSize(Minimo);
-	
+
 
 	globalBounds = borde1.getGlobalBounds();
 	borde1.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -98,8 +98,8 @@ void GameOptions::resource() {
 	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
 	SpriteCrear.setTexture(TextureCrear);
 	SpriteCrear.setOrigin(640, 545);
-    SpriteCrear.setPosition(1170, 1153);
-	
+	SpriteCrear.setPosition(1170, 1153);
+
 	if (!TextureRectangle.loadFromFile("assets/image/Button/rectanguloEncendido.png")) return;
 	SpriteRectangle.setTexture(TextureRectangle);
 	SpriteRectangle.setOrigin(640, 545);
@@ -133,9 +133,9 @@ void GameOptions::resource() {
 	TOpcion.setOutlineColor(sf::Color(135, 135, 135));
 	TOpcion.setString("Opciones");
 	TOpcion.setPosition(640, 60);
-	 globalBounds = TOpcion.getGlobalBounds();
+	globalBounds = TOpcion.getGlobalBounds();
 	TOpcion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-	
+
 }
 
 
@@ -144,17 +144,19 @@ void GameOptions::update() {
 	Valida = false;
 
 	bool valida2 = false;
+	
 
-
-	ButtonG MapaS(SpriteMapaS,TextureMapaS,TextureMapaSM,borde2,Minimo,Maximo);
+	ButtonG MapaS(SpriteMapaS, TextureMapaS, TextureMapaSM, borde2, Minimo, Maximo);
 	ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M, borde1, Minimo, Maximo);
 	ButtonG Mapa1(SpriteMapa1, TextureMapa1, TextureMapa1M, borde3, Minimo, Maximo);
+
 	while (window->isOpen() && !valida2) {
 		sf::Event event;
 		mousePosition = sf::Mouse::getPosition(*window);
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
+	
 		while (window->pollEvent(event)) {
+			
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
@@ -165,9 +167,8 @@ void GameOptions::update() {
 				Menup.MenuSalir();
 			}
 
-			
 
-
+		
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -203,51 +204,51 @@ void GameOptions::update() {
 				}
 
 
-					if (selectedMap == 0) {
+				if (selectedMap == 0) {
 
-						spriteMapa.setTexture(TextureMapa);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
+					spriteMapa.setTexture(TextureMapa);
+					spriteMapa.setOrigin(360, 360);
+					spriteMapa.setPosition(640, 360);
 
 
-						window->draw(spriteMapa);
-					}
+					window->draw(spriteMapa);
+				}
 
-					if (selectedMap == 1) {
+				if (selectedMap == 1) {
 
-						spriteMapa.setTexture(TextureMapa2);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
+					spriteMapa.setTexture(TextureMapa2);
+					spriteMapa.setOrigin(360, 360);
+					spriteMapa.setPosition(640, 360);
 
-						window->draw(spriteMapa);
-					}
+					window->draw(spriteMapa);
+				}
 
-					if (selectedMap == 2) {
+				if (selectedMap == 2) {
 
-						spriteMapa.setTexture(TextureMapa3);
-						spriteMapa.setOrigin(360, 360);
-						spriteMapa.setPosition(640, 360);
+					spriteMapa.setTexture(TextureMapa3);
+					spriteMapa.setOrigin(360, 360);
+					spriteMapa.setPosition(640, 360);
 
-						window->draw(spriteMapa);
+					window->draw(spriteMapa);
 
-					} 
-				
-			
-			
-
-					if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				}
 
 
 
 
-						if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
-							playClickSound();
-							valida2 = true;
+				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+
+
+
+
+					if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+						playClickSound();
+						valida2 = true;
 
 					}
 				}
-			
-		}
+
+			}
 
 			if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
 				playClickSound();
@@ -255,41 +256,42 @@ void GameOptions::update() {
 				pieceselectoff.Resource();
 				pieceselectoff.updateSelection();
 
-					pieceselectoff.~PieceSelectOff();
-				}
-
+				pieceselectoff.~PieceSelectOff();
 			}
 
 		}
+	std::cout << "\nyuwheddhwid";
 
-		Valida = true;
+	Valida = true;
+	
+	currentCursor = &normalCursor;
+	botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+	MapaS.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+	Mapa22.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+	Mapa1.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+	
+	window->setMouseCursor(*currentCursor);
 
-		currentCursor = &normalCursor;
-		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-		MapaS.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-		Mapa22.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-		Mapa1.Update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-
-		window->setMouseCursor(*currentCursor);
-
-		window->clear();
-		window->draw(spriteFondoGame);
-		window->draw(TOpcion);
-		window->draw(spriteX);
-		window->draw(SpriteflecDerecha);
-		window->draw(SpriteflecIzquier);
-		window->draw(cantUser);
-		window->draw(TPlayers);
-		window->draw(TMapas);
-		window->draw(SpriteMapaS);
-		window->draw(SpriteMapa22);
-		window->draw(SpriteMapa1);
-		window->draw(borde1);
-		window->draw(borde2);
-		window->draw(borde3);
-		window->draw(SpriteCrear);
-		window->draw(SpriteRectangle);
-
-		window->display();
+	window->clear();
+	window->draw(spriteFondoGame);
+	window->draw(TOpcion);
+	window->draw(spriteX);
+	window->draw(SpriteflecDerecha);
+	window->draw(SpriteflecIzquier);
+	window->draw(cantUser);
+	window->draw(TPlayers);
+	window->draw(TMapas);
+	window->draw(SpriteMapaS);
+	window->draw(SpriteMapa22);
+	window->draw(SpriteMapa1);
+	window->draw(borde1);
+	window->draw(borde2);
+	window->draw(borde3);
+	window->draw(SpriteCrear);
+	window->draw(SpriteRectangle);
+	window->display();
 	}
+
+
+}
 

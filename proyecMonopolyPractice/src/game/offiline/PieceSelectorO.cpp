@@ -285,6 +285,7 @@ void PieceSelectOff::updateSelection() {
 					}
 
 					GameOffline gameOff(*window);
+					gameOff.update();
 
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
