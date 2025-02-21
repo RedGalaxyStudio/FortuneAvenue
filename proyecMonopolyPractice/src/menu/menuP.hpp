@@ -65,7 +65,8 @@ private:
     sf::Texture textureAcercaDeOff;
     sf::Sprite spriteAcercaDe;
 
-
+    sf::Texture TextureEditButton;
+    sf::Sprite spriteEditButton;
 
     sf::Texture TextureBotonJugarOff;
     sf::Texture TextureBotonJugarOn;

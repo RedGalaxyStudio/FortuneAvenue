@@ -147,7 +147,6 @@ void GameOptions::update() {
     Valida = false;
     bool valida2 = false;
 
-<<<<<<< HEAD
 	bool valida2 = false;
 
 
@@ -172,27 +171,7 @@ void GameOptions::update() {
 				renderTexture.draw(overlay);
 				Menup.MenuSalir();
 			}
-=======
-    ButtonG MapaS(SpriteMapaS, TextureMapaS, TextureMapaSM, borde2, Minimo, Maximo);
-    ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M, borde1, Minimo, Maximo);
-    ButtonG Mapa1(SpriteMapa1, TextureMapa1, TextureMapa1M, borde3, Minimo, Maximo);
 
-    while (window->isOpen() && !valida2) {
-        sf::Event event;
-        mousePosition = sf::Mouse::getPosition(*window);
-        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-        while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed ||
-                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-                renderTexture.clear();
-                renderTexture.draw(spriteFondoGame);
-                renderTexture.draw(TOpcion);
-                renderTexture.draw(spriteX);
-                renderTexture.draw(overlay);
-                Menup.MenuSalir();
-            }
->>>>>>> d747571ddf14788297ac14a9bbe1371dc9576902
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
@@ -203,20 +182,11 @@ void GameOptions::update() {
                     }
                 }
 
-<<<<<<< HEAD
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-=======
-                if (SpriteflecDerecha.getGlobalBounds().contains(mousePosFloat)) {
-                    playClickSound();
-                    if (CantNum < 4) {
-                        CantNum += 1;
-                        cantUser.setString(std::to_string(CantNum));
-                    }
-                }
->>>>>>> d747571ddf14788297ac14a9bbe1371dc9576902
+
 
                 if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
