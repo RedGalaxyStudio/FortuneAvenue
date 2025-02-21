@@ -29,6 +29,8 @@ void menuP::Resource() {
     if (!TextureBotonNoOn.loadFromFile("assets/image/Button/BotonNoOn.png"))return;
     if (!TextureBotonSiOff.loadFromFile("assets/image/Button/BotonSiOff.png"))return;
     if (!TextureBotonSiOn.loadFromFile("assets/image/Button/BotonSiOn.png"))return;
+
+    if (!TextureEditButton.loadFromFile("assets/image/Nueva carpeta/edit22.png"))return;
     
     if (!Textureflechainstder.loadFromFile("assets/image/Button/flechapagder.png")) return;
     if (!Textureflechainstizq.loadFromFile("assets/image/Button/flechapagizq.png")) return;
@@ -80,6 +82,10 @@ void menuP::Resource() {
     SpriteBotonOpciones.setTexture(TextureBotonOpcionesOff);
     SpriteBotonOpciones.setOrigin(103.5f, 40);
     SpriteBotonOpciones.setPosition(640, 560);
+
+    spriteEditButton.setTexture(TextureEditButton);
+    spriteEditButton.setOrigin(256.5f, 209.4f);
+    spriteEditButton.setPosition(384, 315);
 
     SpriteBotonSalir.setTexture(TextureBotonSalirOff);
     SpriteBotonSalir.setOrigin(103.5f, 40);
@@ -170,6 +176,7 @@ void menuP::MenuPrincipal() {
         window->draw(SpriteBotonSalir);
         window->draw(spriteAcercaDe);
         window->draw(editorPerfil);
+        window->draw(spriteEditButton);
         window->display();
     }
 }
@@ -204,6 +211,7 @@ void menuP::eventoMenuP() {
             renderTexture.draw(SpriteBotonOpciones);
             renderTexture.draw(SpriteBotonSalir);
             renderTexture.draw(spriteAcercaDe);
+            renderTexture.draw(spriteEditButton);
             renderTexture.draw(overlay);
             renderTexture.display();
         if (event.type == sf::Event::Closed ||
