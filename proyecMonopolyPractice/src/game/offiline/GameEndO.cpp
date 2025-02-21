@@ -165,7 +165,7 @@ void GameEndO::update() {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {

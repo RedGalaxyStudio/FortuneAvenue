@@ -15,6 +15,7 @@ public:
     void update();
 
 private:
+    Client client;
     sf::RenderWindow* window; 
     sf::Texture texturaFondo; 
     sf::Sprite spriteFondo; 

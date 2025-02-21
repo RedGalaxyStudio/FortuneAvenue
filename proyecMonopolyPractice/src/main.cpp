@@ -24,7 +24,7 @@ int main() {
     window.setMouseCursorVisible(false);
     window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
-
+    Client* client;
 
    //Cinematic cinematic(window);
   // cinematic.Resource();

@@ -14,12 +14,13 @@ using json = nlohmann::json;
 HouseBuyO::HouseBuyO():window(nullptr), IndexCAsa(-1){}
 
 
-void HouseBuyO::setWindow(sf::RenderWindow& win,int indice) {
+void HouseBuyO::setWindow(sf::RenderWindow& win,int indice,Client& clienT) {
 	window = &win;
 	index = indice;
+	client = &clienT;
 	//std::cout << "\n\n" << index;
 }
-void HouseBuyO::resource(Client* client) {
+void HouseBuyO::resource() {
 	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
@@ -153,7 +154,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 			}
 
 			if (turn) {
@@ -287,7 +288,7 @@ void HouseBuyO::ViewHouseBuys() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 			}
 
 

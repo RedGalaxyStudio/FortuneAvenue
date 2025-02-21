@@ -9,8 +9,8 @@
 #include <atomic>
 #include "Chat.hpp"
 // Constructor
-PieceSelector::PieceSelector(sf::RenderWindow* windowRef)
-	: window(windowRef), selectedPiece(-1) {
+PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
+	: window(windowRef),client(clientRef), selectedPiece(-1) {
 	loadResourceGame();
 }
 
@@ -180,7 +180,7 @@ void PieceSelector::updateSelection() {
 				
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(*Client);
 			}
 
 
@@ -246,14 +246,14 @@ void PieceSelector::updateSelection() {
 							// Asigna la textura y ajusta la escala y el origen
 							newSelection = &pieces[i];
 							// Asigna la textura a PiecesSelect[0]
-							playersGame[client.playerIndex].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
-							playersGame[client.playerIndex].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
-							playersGame[client.playerIndex].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
-							playersGame[client.playerIndex].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
-							playersGame[client.playerIndex].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							playersGame[client->playerIndex].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+							playersGame[client->playerIndex].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
+							playersGame[client->playerIndex].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
+							playersGame[client->playerIndex].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playersGame[client->playerIndex].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							playerInfos[client.playerIndex].indexPiece = i;
-							client.networkMessage.playerChangedPiece(i);
+							playerInfos[client->playerIndex].indexPiece = i;
+							client->networkMessage.playerChangedPiece(i);
 							// Resaltar la nueva pieza
 							
 							pieces[i].setColor(sf::Color(248, 134, 255));
@@ -272,7 +272,7 @@ void PieceSelector::updateSelection() {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
 						playerInfos[UsuariosActivos[0]].isSelectingPiece = true;
-						client.networkMessage.playerReady();
+						client->networkMessage.playerReady();
 						
 					}
 				}
@@ -299,30 +299,30 @@ void PieceSelector::updateSelection() {
 						UsuariosActivos.clear();
 						std::cout<<"\n numero : "<<playersGame.size();
 				
-					client.disconnect();}
+					client->disconnect();}
 
 				}
 
 			}
 
 		}
-		if (client.agregardor) {
+		if (client->agregardor) {
 			botonCheck1.spriteAsig(playersGame[UsuariosActivos[0]].Check);
-			client.agregardor = false;
+			client->agregardor = false;
 			Agregado = true;
 
 		}
 
 
-		if(client.disconnecte==true){
-			client.disActiv = true;
+		if(client->disconnecte==true){
+			client->disActiv = true;
 			{
-				std::unique_lock<std::mutex> lock(client.mtex);
-				client.cvDis.wait(lock, [] { return client.eventOccurred; }); // Espera a que `eventOccurred` sea true.
+				std::unique_lock<std::mutex> lock(client->mtex);
+				client->cvDis.wait(lock, [] { return client->eventOccurred; }); // Espera a que `eventOccurred` sea true.
 			}
-			client.disconnecte = false;
-			client.disActiv = false;
-			client.eventOccurred = false;
+			client->disconnecte = false;
+			client->disActiv = false;
+			client->eventOccurred = false;
 		}
 		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
 	
@@ -356,14 +356,14 @@ void PieceSelector::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
-		if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
+		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client->playerIndex:"<< client->playerIndex;
+		if (CplayerIndex != client->playerIndex && CplayerIndex != -1) {
 
 
 			std::cout << "\nentro";
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
-			client.cvExisting.notify_all();
+			client->cvExisting.notify_all();
 
 			std::cout << "\nSalio";
 		}

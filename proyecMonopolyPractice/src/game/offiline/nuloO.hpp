@@ -25,7 +25,7 @@ public:
     int IndexCAsa;
 
     void setWindow(sf::RenderWindow& win);
-    void Resource(Client* client);       // Cargar recursos para la carta de "nulo"
+    void Resource();       // Cargar recursos para la carta de "nulo"
     void Update(); // Actualizar la animación de "nulo"
 };
 

@@ -15,7 +15,7 @@ void NuloO::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
 
-void NuloO::Resource(Client* client) {
+void NuloO::Resource() {
     
     if (!TextureBotonNulo.loadFromFile("../assets/image/Button/nulo.png")) {
         std::cerr << "Error al cargar el botón de confirmación.\n";
@@ -55,7 +55,7 @@ void NuloO::Update() {
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
-                Menup.MenuSalir();
+                Menup.MenuSalir(nullptr);
             }
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {

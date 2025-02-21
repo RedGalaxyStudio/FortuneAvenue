@@ -28,6 +28,7 @@ private:
     // Texturas y sprites
     sf::Texture ckeck;
     sf::Sprite spriteCkeck;
+
     sf::CircleShape* selectedAvatar = nullptr; 
     sf::Sprite SpriteFondoMenu;
     sf::Sprite SpriteFondoMenuAvar;

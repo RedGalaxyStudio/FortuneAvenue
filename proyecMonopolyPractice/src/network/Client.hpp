@@ -86,6 +86,7 @@ public:
 	NetworkMessage networkMessage;
 	int calcularNumeroDeLineas(const sf::Text& text);
 private:
+	
 	sf::FloatRect globalBounds;
 	std::thread clientThread;
 	std::thread clientMensThread;

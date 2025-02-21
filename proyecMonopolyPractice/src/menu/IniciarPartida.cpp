@@ -6,6 +6,7 @@
 #include "../ui/MensageBox.hpp"
 
 IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
+	
 	loadResourceGame();
 	resource();
 }
@@ -46,12 +47,10 @@ void IniciarPartida::resource() {
 	//NumPlayers = 1;
 }
 
-
-
 void IniciarPartida::update() {
 	Valida = false;
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-
+	Client client;
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
 
@@ -64,7 +63,7 @@ void IniciarPartida::update() {
 	selectedAvatarCopy.setPosition(xPos, startY);
 	recua.setPosition(xPos, startY);
 
-
+	
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {
 		sf::Event event;
@@ -84,7 +83,7 @@ void IniciarPartida::update() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(*client);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -194,7 +193,7 @@ void IniciarPartida::updatejoinRoom() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 
 
 

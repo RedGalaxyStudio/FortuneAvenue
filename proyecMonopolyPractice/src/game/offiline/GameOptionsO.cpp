@@ -169,7 +169,7 @@ void GameOptions::update() {
 				renderTexture.draw(TOpcion);
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 			}
 
 

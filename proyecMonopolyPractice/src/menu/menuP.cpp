@@ -7,7 +7,7 @@
 #include "GameModeSelector.hpp"
 #include "../game/online/PieceSelector.hpp"
 #include "IniciaUser.hpp"
-menuP::menuP() : window(nullptr), SesionValida(true){}
+menuP::menuP() : window(nullptr), SesionValida(true) {}
 void menuP::setWindow(sf::RenderWindow& win) {
     window = &win;
 }
@@ -217,7 +217,7 @@ void menuP::eventoMenuP() {
         if (event.type == sf::Event::Closed ||
             (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
-            MenuSalir();
+            MenuSalir(nullptr);
         }
 
         
@@ -279,10 +279,6 @@ void menuP::MenuJugar() {
 
 
 };
-
-
-
-
 
 void menuP::Inicializar() {
     IniciaUser iniciaUser(*window);
@@ -465,7 +461,7 @@ void menuP::MenuOpcion(bool fon) {
 
 }
 
-void menuP::MenuSalir() {
+void menuP::MenuSalir(Client* client) {
 
     
     sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
@@ -501,8 +497,8 @@ void menuP::MenuSalir() {
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
 
-                    if (client.running && client.peer != nullptr) {
-                        client.disconnect();
+                    if (client->running && client->peer != nullptr) {
+                        client->disconnect();
                     }
 
                     window->close();  

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
+#include "../../network/Client.hpp"
 
 class PieceSelector {
 private:
@@ -18,7 +19,7 @@ private:
     sf::Sprite fondopiece;
     sf::Texture Textufondopiece;
     sf::Texture Preguntasalir;
-    
+    Client* client;
     sf::Text CODE;
     float startX;
     float startY;

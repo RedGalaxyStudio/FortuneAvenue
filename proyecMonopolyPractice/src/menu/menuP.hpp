@@ -19,7 +19,7 @@ public:
     void MenuPrincipal();
     void MenuOpcion(bool fon);
 
-    void MenuSalir();
+    void MenuSalir(Client* client);
 private:
     
 
@@ -45,7 +45,6 @@ private:
     bool SesionValida;
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
-
 
     sf::Texture textureLogoFortuneAvenue;
     sf::Sprite spriteLogoFortuneAvenue;

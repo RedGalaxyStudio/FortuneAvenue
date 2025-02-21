@@ -17,6 +17,7 @@ HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
 void HouseBuy::setWindow(sf::RenderWindow& win,int indice, Client* client) {
 	window = &win;
 	index = indice;
+
 	//std::cout << "\n\n" << index;
 }
 void HouseBuy::resource() {

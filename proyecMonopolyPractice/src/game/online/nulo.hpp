@@ -20,12 +20,13 @@ private:
 
     sf::Clock tempoCarta;
     sf::Sprite renderedSprite;
+    Client* client;
 
 public:
     Nulo(); // Constructor por defecto
     int IndexCAsa;
 
-    void setWindow(sf::RenderWindow& win);
+    void setWindow(sf::RenderWindow& win, Client& clienT);
     void Resource(Client* client);       // Cargar recursos para la carta de "nulo"
     void Update(); // Actualizar la animación de "nulo"
 };
