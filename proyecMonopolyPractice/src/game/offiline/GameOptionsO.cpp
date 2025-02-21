@@ -11,10 +11,6 @@ GameOptions::GameOptions(sf::RenderWindow& win) : window(&win), pieceselector(wi
 	resource();
 }
 
-
-
-
-
 void GameOptions::resource() {
 
 	TPlayers.setCharacterSize(26);
@@ -28,10 +24,10 @@ void GameOptions::resource() {
 	TPlayers.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	if (!TextureflecDerecha.loadFromFile("assets/image/Button/flechaOpcder.png")) return;
 	if (!TextureflecIzquier.loadFromFile("assets/image/Button/flechaOpcizq.png")) return;
-	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png")) return;
+	if (!TextureMapaS.loadFromFile("assets/image/Game/mapaSop.png"))return;
 	if (!TextureMapaSM.loadFromFile("assets/image/Game/mapaSopM.png")) return;
 	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
-	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png")) return;
+	if (!TextureMapa2.loadFromFile("assets/image/Game/mapa1L.png"))return;
 	if (!TextureMapa3.loadFromFile("assets/image/Game/mapa22l.png")) return;
 	SpriteMapaS.setTexture(TextureMapaS);
 	globalBounds = SpriteMapaS.getGlobalBounds();
@@ -43,6 +39,11 @@ void GameOptions::resource() {
 
 	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
 	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
+
+
+	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
+	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
+
 	SpriteMapa22.setTexture(TextureMapa22);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa22.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -75,8 +76,8 @@ void GameOptions::resource() {
 	borde3.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	if (!TextureMapa1.loadFromFile("assets/image/Game/mapa1.png")) return;
-	if (!TextureMapa1M.loadFromFile("assets/image/Game/mapa1M.png")) return;
-	SpriteMapa1.setTexture(TextureMapa1);
+	if (!TextureMapa1M.loadFromFile("assets/image/Game/mapa1M.png")) return
+		SpriteMapa1.setTexture(TextureMapa1);
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa1.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -91,16 +92,17 @@ void GameOptions::resource() {
 	globalBounds = SpriteflecDerecha.getGlobalBounds();
 	SpriteflecDerecha.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
-
-
-
 	if (!TextureCrear.loadFromFile("assets/image/Button/crearchiquito.png")) return;
 	SpriteCrear.setTexture(TextureCrear);
 	SpriteCrear.setOrigin(640, 545);
 	SpriteCrear.setPosition(1170, 1153);
 
 	if (!TextureRectangle.loadFromFile("assets/image/Button/rectanguloEncendido.png")) return;
+
+	SpriteCrear.setPosition(1170, 1153);
+
+	if (!TextureRectangle.loadFromFile("assets/image/Button/rectanguloEncendido.png")) return;
+
 	SpriteRectangle.setTexture(TextureRectangle);
 	SpriteRectangle.setOrigin(640, 545);
 	SpriteRectangle.setPosition(1153, 568);
@@ -136,13 +138,16 @@ void GameOptions::resource() {
 	globalBounds = TOpcion.getGlobalBounds();
 	TOpcion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
+
 }
 
 
 
 void GameOptions::update() {
-	Valida = false;
+    Valida = false;
+    bool valida2 = false;
 
+<<<<<<< HEAD
 	bool valida2 = false;
 
 
@@ -167,27 +172,73 @@ void GameOptions::update() {
 				renderTexture.draw(overlay);
 				Menup.MenuSalir();
 			}
+=======
+    ButtonG MapaS(SpriteMapaS, TextureMapaS, TextureMapaSM, borde2, Minimo, Maximo);
+    ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M, borde1, Minimo, Maximo);
+    ButtonG Mapa1(SpriteMapa1, TextureMapa1, TextureMapa1M, borde3, Minimo, Maximo);
 
+    while (window->isOpen() && !valida2) {
+        sf::Event event;
+        mousePosition = sf::Mouse::getPosition(*window);
+        mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
+        while (window->pollEvent(event)) {
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                renderTexture.clear();
+                renderTexture.draw(spriteFondoGame);
+                renderTexture.draw(TOpcion);
+                renderTexture.draw(spriteX);
+                renderTexture.draw(overlay);
+                Menup.MenuSalir();
+            }
+>>>>>>> d747571ddf14788297ac14a9bbe1371dc9576902
+
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    if (CantNum > 2) {
+                        CantNum -= 1;
+                        cantUser.setString(std::to_string(CantNum));
+                    }
+                }
+
+<<<<<<< HEAD
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
+=======
+                if (SpriteflecDerecha.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    if (CantNum < 4) {
+                        CantNum += 1;
+                        cantUser.setString(std::to_string(CantNum));
+                    }
+                }
+>>>>>>> d747571ddf14788297ac14a9bbe1371dc9576902
 
-					if (CantNum > 2) {
-						CantNum -= 1;
-						cantUser.setString(std::to_string(CantNum));
-					}
+                if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    selectedMap = 0;
+                }
+                else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    selectedMap = 1;
+                }
+                else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
+                    playClickSound();
+                    selectedMap = 2;
+                }
 
-				}
+                if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+                    SpriteMapaS.setTexture(TextureMapaSM);
+                }
 
-				if (SpriteflecDerecha.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-					if (CantNum < 4) {
-						CantNum += 1;
-						cantUser.setString(std::to_string(CantNum));
-					}
-				}
+                if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+                    SpriteMapa22.setTexture(TextureMapa22M);
+                }
+
 
 				if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -215,16 +266,40 @@ void GameOptions::update() {
 				}
 
 
+                if (selectedMap == 0) {
+                    spriteMapa.setTexture(TextureMapa);
+                    spriteMapa.setOrigin(360, 360);
+                    spriteMapa.setPosition(640, 360);
+                    window->draw(spriteMapa);
+                }
+
+
 				/*
 				if (Mapa1) {
 
-					spriteMapa.setTexture(TextureMapa);
-					spriteMapa.setOrigin(360, 360);
-					spriteMapa.setPosition(640, 360);
 
+                if (selectedMap == 2) {
+                    spriteMapa.setTexture(TextureMapa3);
+                    spriteMapa.setOrigin(360, 360);
+                    spriteMapa.setPosition(640, 360);
+                    window->draw(spriteMapa);
+                }
 
-					window->draw(spriteMapa);
-				}
+                if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+                    playClickSound();
+                    valida2 = true;
+                }
+
+                if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+                    playClickSound();
+                    PieceSelectOff pieceselectoff(window);
+                    pieceselectoff.Resource();
+                    pieceselectoff.updateSelection();
+                    pieceselectoff.~PieceSelectOff();
+                }
+            }
+        }
+
 
 				if (Mapa2) {
 
@@ -302,6 +377,5 @@ void GameOptions::update() {
 		window->display();
 	}
 
-
+    }
 }
-

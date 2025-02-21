@@ -459,6 +459,4 @@ void Chat::draw() {
 		window->draw(Mensajes[i].SMSEnviado);
 	}
 
-
-
 }

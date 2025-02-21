@@ -13,6 +13,7 @@ GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), mo
 }
 void GameOffline::resource() {
 
+
 	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
@@ -38,9 +39,9 @@ void GameOffline::resource() {
 	SpriteArrowArriba.setOrigin(350.0f, 350.0f);
 	SpriteArrowArriba.setPosition(370, 400);
 
-	SpriteChat.setTexture(TextureChat);
+	/*SpriteChat.setTexture(TextureChat);
 	SpriteChat.setOrigin(20, 20);
-	SpriteChat.setPosition(23, 100);
+	SpriteChat.setPosition(23, 100);*/
 
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
@@ -58,7 +59,7 @@ void GameOffline::resource() {
 		}
 
 	}
-
+	std::cout << "hola2" << std::endl;
 
 	if (!DiceBuffer.loadFromFile("assets/sounds/Dicerolling.wav")) return;
 
@@ -121,7 +122,7 @@ void GameOffline::resource() {
 	SpriteImpuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-
+	std::cout << "hola3" << std::endl;
 
 	posicionActual = 0;
 
@@ -364,7 +365,7 @@ void GameOffline::positionPefil() {
 	}
 }
 void GameOffline::update() {
-
+	std::cout << "hola4" << std::endl;
 	positionPefil();
 
 	sf::Clock clock;
@@ -534,7 +535,7 @@ void GameOffline::update() {
 
 			}
 
-
+			std::cout << "hola5" << std::endl;
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
@@ -594,7 +595,7 @@ void GameOffline::update() {
 
 
 
-			renderTexture.draw(SpriteChat);
+			//renderTexture.draw(SpriteChat);
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
@@ -615,7 +616,7 @@ void GameOffline::update() {
 		}
 
 
-
+		std::cout << "hola8" << std::endl;
 
 
 	}
@@ -721,7 +722,7 @@ void GameOffline::DrawPieceMoviendo() {
 
 }
 void GameOffline::DrawGameRuleta() {
-
+	std::cout << "hola7" << std::endl;
 	float deltaTime = clock.restart().asSeconds();
 
 	window->clear();
@@ -744,7 +745,7 @@ void GameOffline::DrawGameRuleta() {
 
 	}
 
-	renderTexture.draw(SpriteChat);
+	//renderTexture.draw(SpriteChat);
 	renderTexture.draw(Settings);
 	renderTexture.draw(overlay);
 
@@ -804,7 +805,7 @@ void GameOffline::DrawGameImpuesto() {
 		renderTexture.draw(playersGame[UsuariosActivos[i]].Home);
 		renderTexture.draw(playersGame[UsuariosActivos[i]].PieceSelect);
 	}
-	renderTexture.draw(SpriteChat);
+	//renderTexture.draw(SpriteChat);
 	renderTexture.draw(Settings);
 	renderTexture.draw(overlay);
 	renderTexture.display();
@@ -831,7 +832,7 @@ void GameOffline::InicioPartida() {
 	// El bucle solo se ejecutará durante 5 segundos
 	while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
 
-
+		std::cout << "hola8" << std::endl;
 
 
 
@@ -879,7 +880,7 @@ void GameOffline::InicioPartida() {
 
 
 		// Dibuja los settings (configuración) al final
-		window->draw(SpriteChat);
+		//window->draw(SpriteChat);
 		window->draw(Settings);
 		window->draw(overlay);
 		window->draw(Bienvenida);
@@ -1074,11 +1075,11 @@ void GameOffline::DrawGame() {
 		window->draw(DescripDado);
 	}
 
-
+	std::cout << "hola9" << std::endl;
 
 	window->draw(Settings);
 	//window->draw(Conteosuel);
-	window->draw(SpriteChat);
+	//window->draw(SpriteChat);
 
 	std::cout << "\nhola";
 }
