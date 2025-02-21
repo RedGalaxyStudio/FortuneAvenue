@@ -4,6 +4,7 @@
 #include "StealplayerO.hpp"
 
 
+
 GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePiecesO(win)), house(UsuariosActivos.size(), HouseBuyO()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
@@ -12,13 +13,11 @@ GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), mo
 }
 void GameOffline::resource() {
 
-
-	if (!TextureChat.loadFromFile("window_13905854.png")) return;
 	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
 
-	if (!GameMusicFondo.openFromFile("resource/sounds/gamemusic.wav")) return;
+	if (!GameMusicFondo.openFromFile("assets/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
 	//Cargar Texturas de Flechas
 	if (!TextureArrowIzq.loadFromFile("assets/image/Game/Izq.png")) return;
@@ -61,9 +60,9 @@ void GameOffline::resource() {
 	}
 
 
-	if (!DiceBuffer.loadFromFile("resource/sounds/Dicerolling.wav")) return;
+	if (!DiceBuffer.loadFromFile("assets/sounds/Dicerolling.wav")) return;
 
-	if (!girosBuffer.loadFromFile("resource/sounds/ruleta.wav")) return;
+	if (!girosBuffer.loadFromFile("assets/sounds/ruleta.wav")) return;
 	nular = true;
 	girosSound.setBuffer(girosBuffer);
 
@@ -405,7 +404,7 @@ void GameOffline::update() {
 
 	animacionRuleta = false;
 	InicioPartida();
-
+	startGame();
 	while (window->isOpen() && !client.juegoTerminado) {
 
 		Event();
@@ -423,7 +422,7 @@ void GameOffline::update() {
 			animacionIniciada = true;
 		}
 		// mecanica ruleta
-		if (client.giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+		if (client.giroActivo == true && animacionRuleta == true && draw_roulette && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
 			client.giroActivo = false;
 			ruleta_draw = false;
 			eventoActivo = false;
@@ -667,7 +666,7 @@ void GameOffline::Event() {
 
 
 
-				if (ruleta_draw && turn && turnoGiro) {
+				if (draw_roulette && turn && turnoGiro) {
 					ruleta->trurntrue();
 					turnoGiro = false;
 				}
@@ -682,7 +681,7 @@ void GameOffline::Event() {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 
-				if (ruleta_draw && turn && turnoGiro) {
+				if (draw_roulette && firstTurn && turnoGiro) {
 
 					//client.startSpin();
 					ruleta->trurntrue();
@@ -889,17 +888,6 @@ void GameOffline::InicioPartida() {
 	}
 }
 
-void EndTurn()	{
-	
-	index + 1;
-
-	if (index == UsuariosActivos.size())
-	{
-		index = 0;
-
-	}
-
-}
 
 void GameOffline::DrawGame() {
 
@@ -913,7 +901,7 @@ void GameOffline::DrawGame() {
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 					{
 						//client.EventoRuleta();
-						ruleta_draw = true;
+						draw_roulette = true;
 						turn_ruleta = false;
 						eventoActivo = true;
 						turnoGiro = true;
@@ -976,7 +964,7 @@ void GameOffline::DrawGame() {
 	}
 
 	if (userRuleta) {
-		ruleta_draw = true;
+		draw_roulette = true;
 		turn_ruleta = false;
 		eventoActivo = true;
 
@@ -1027,9 +1015,9 @@ void GameOffline::DrawGame() {
 	std::cout << "eventoActivo: " << eventoActivo << "\n";
 	std::cout << "impuesto_draw: " << impuesto_draw << "\n";
 	std::cout << "casa_draw: " << casa_draw << "\n";
-	std::cout << "ruleta_draw: " << ruleta_draw << "\n";
+	std::cout << "draw_roulette: " << draw_roulette << "\n";
 
-	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
+	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !draw_roulette) {
 
 		//client.endTurn();
 		turn = false;

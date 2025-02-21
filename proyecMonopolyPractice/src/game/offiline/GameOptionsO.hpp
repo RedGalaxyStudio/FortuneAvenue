@@ -1,9 +1,9 @@
 #ifndef GAMEOPTIONS_HPP
 #define GAMEOPTIONS_HPP
-#include "../online/ResourceGame.hpp"
+#include "ResourceGameO.hpp"
 #include "../../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
-#include "../online/PieceSelector.hpp"
+#include "PieceSelectorO.hpp"
 
 class GameOptions {
 public:

@@ -7,7 +7,7 @@
 class menuP;
 
 extern menuP Menup;
-extern Client client;
+
 
 
 void cargue();

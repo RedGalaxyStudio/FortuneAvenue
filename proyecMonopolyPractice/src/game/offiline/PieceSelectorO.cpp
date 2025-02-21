@@ -2,7 +2,6 @@
 #include "../../core/ResourceGlobal.hpp"
 #include "ResourceGameO.hpp"
 #include "GameOfflineO.hpp"
-#include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/Scrollbar.hpp"
 #include <thread>

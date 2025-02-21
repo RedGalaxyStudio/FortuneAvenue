@@ -154,6 +154,12 @@
     <ClCompile Include="src\game\offiline\StealplayerO.cpp">
       <Filter>src\game\offline</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\offiline\Bot.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameManager.cpp">
+      <Filter>src\game\offline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\ButtonG.hpp">
@@ -286,6 +292,12 @@
       <Filter>src\game\offline</Filter>
     </ClInclude>
     <ClInclude Include="src\game\offiline\WindowClassO.h">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\Bot.hpp">
+      <Filter>src\game\offline</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameManager.hpp">
       <Filter>src\game\offline</Filter>
     </ClInclude>
   </ItemGroup>

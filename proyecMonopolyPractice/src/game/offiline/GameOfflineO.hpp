@@ -6,20 +6,19 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
-#include <winsock2.h>
 #include "../../core/ObjetosGlobal.hpp"
 #include "WindowClassO.h"
 #include "RuletaO.hpp"
 #include "MovePiecesO.hpp"
-#include "../../core/ResourceGlobal.hpp"
 #include "PieceSelectorO.hpp"
 #include "ResourceGameO.hpp"
+#include "GameManager.hpp"
 #include "nuloO.hpp"
 #include "HouseBuyO.hpp"
 class Ruleta;
 class HouseBuy;
 
-class GameOffline{
+class GameOffline:public GameManager {
 public:
 
 
@@ -36,7 +35,7 @@ public:
 	void DrawGameImpuesto();
 	void InicioPartida();
 	void positionPefil();
-	void EndTurn();
+
 	
 private:
 	sf::Text Conteosuel;

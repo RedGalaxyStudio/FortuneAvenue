@@ -2,5 +2,5 @@
 
 menuP Menup;
 
-Client client;
+
 void cargue(){}

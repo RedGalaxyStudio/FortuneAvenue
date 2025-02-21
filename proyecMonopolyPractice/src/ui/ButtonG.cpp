@@ -34,7 +34,14 @@ void ButtonG::update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, s
     }
 }
 
-void ButtonG::Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor) {
+void ButtonG::Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor, bool Selec) {
+
+
+    if (Selec) {
+        return;
+    }
+
+
     if (sprite->getGlobalBounds().contains(mousePos)) {
         sprite->setTexture(textureHover);
         Borde->setSize(VectorMax);

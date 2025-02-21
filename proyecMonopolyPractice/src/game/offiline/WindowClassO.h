@@ -4,7 +4,7 @@
 #include "ResourceGameO.hpp"
 #include <cstdlib>
 #include <ctime>
-
+#include <random>
 class WindowO {
 
 	std::vector<int> textureIndices; 
@@ -169,30 +169,27 @@ public :
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
-		//std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
-		if (turn_dado) {
+
+		if (turn_dice) {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-				turn_dado = false;
+				turn_dice = false;
 				DiceSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
-			//	std::cout << "turn_dado despues: " << std::boolalpha << turn_dado << "\n";
-				client->networkMessage.rollDice();
-
+	
+	
 				mouseStart.x = rand() % 400 + 1;
 				mouseStart.y = rand() % 600 + 1;
 				ok = 1;
 				clock.restart();
-				
-				std::unique_lock<std::mutex> lock(client->mtx);
-				client->cv.wait(lock, [] { return espera; }); 
-
-				
-				faceIndex = client->lastRollResult;
-				client->lastRollResult = -1;
-			//	std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
-				espera = false;
+	
+				std::random_device rd;
+				std::mt19937 gen(rd());
+				std::uniform_int_distribution<> dis(1, 6);
+				faceIndex =dis(gen);
+					
+			
 				
 			}
 		}
@@ -206,7 +203,7 @@ public :
 		
 		if (rolldiceJugador) {
 			std::unique_lock<std::mutex> lock(client->mtx);
-			//std::cout << "turn_dado antes: " << std::boolalpha << turn_dado << "\n";
+
 			while (client->lastRollResult == -1) {
 				client->cv.wait(lock);
 			}

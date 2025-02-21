@@ -82,7 +82,7 @@ void loadResourceGame(){
 	fontUserPerfil = fontUser;
 	espera=false;
 }
-bool salirX(sf::Texture Pregunta, sf::RenderWindow* window){
+bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client client){
     sf::Sprite renderedSprite;
 
     sf::Sprite SpriteConfirmarSalir;

@@ -147,7 +147,9 @@
     <ClCompile Include="src\cinematic\Cinematic.cpp" />
     <ClCompile Include="src\core\ObjetosGlobal.cpp" />
     <ClCompile Include="src\core\ResourceGlobal.cpp" />
+    <ClCompile Include="src\game\offiline\Bot.cpp" />
     <ClCompile Include="src\game\offiline\GameEndO.cpp" />
+    <ClCompile Include="src\game\offiline\GameManager.cpp" />
     <ClCompile Include="src\game\offiline\GameOfflineO.cpp" />
     <ClCompile Include="src\game\offiline\GameOptionsO.cpp" />
     <ClCompile Include="src\game\offiline\HouseBuyO.cpp" />
@@ -189,8 +191,10 @@
     <ClInclude Include="src\cinematic\Cinematic.hpp" />
     <ClInclude Include="src\core\ObjetosGlobal.hpp" />
     <ClInclude Include="src\core\ResourceGlobal.hpp" />
+    <ClInclude Include="src\game\offiline\Bot.hpp" />
     <ClInclude Include="src\game\offiline\CubeClassO.h" />
     <ClInclude Include="src\game\offiline\GameEndO.hpp" />
+    <ClInclude Include="src\game\offiline\GameManager.hpp" />
     <ClInclude Include="src\game\offiline\GameOfflineO.hpp" />
     <ClInclude Include="src\game\offiline\GameOptionsO.hpp" />
     <ClInclude Include="src\game\offiline\HouseBuyO.hpp" />

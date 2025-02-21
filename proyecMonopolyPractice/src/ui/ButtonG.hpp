@@ -11,7 +11,7 @@ public:
     ButtonG( sf::Texture& textureNormal, sf::Texture& textureHover);
 
     void update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor);
-    void Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor);
+    void Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor,bool Selec);
     void handleHover(sf::Sprite& currentButton);
     void resetLastHoveredButton();
     void handleHover();
