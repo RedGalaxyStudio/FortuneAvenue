@@ -291,7 +291,7 @@ void PieceSelector::updateSelection() {
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
 					renderTexture.display();
-					cierre = salirX(Preguntasalir,window);
+					cierre = salirX(Preguntasalir,window,client);
 				
 					if(cierre){
 						playersGame.clear();

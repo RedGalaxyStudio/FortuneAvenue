@@ -82,7 +82,7 @@ void loadResourceGame(){
 	fontUserPerfil = fontUser;
 	espera=false;
 }
-bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client client){
+bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
     sf::Sprite renderedSprite;
 
     sf::Sprite SpriteConfirmarSalir;
@@ -120,8 +120,8 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client client){
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
 
-                    if (client.running && client.peer != nullptr) {
-                        client.disconnect();
+                    if (cliente->running && cliente->peer != nullptr) {
+                        cliente->disconnect();
                     }
 
                     return true;

@@ -5,6 +5,9 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <iostream>
+#include "../../network/Client.hpp"
+
+class Client;
 
 extern std::vector<sf::Texture> TextureCasa;
 extern sf::Texture TextureFondoGame;
@@ -149,7 +152,7 @@ extern std::vector<PlayerInfo> playerInfos;
 extern std::vector<PlayerGame> playersGame;
 
 void loadResourceGame();
-bool salirX(sf::Texture Pregunta,sf::RenderWindow* window);
+bool salirX(sf::Texture Pregunta,sf::RenderWindow* window, Client* cliente);
 
 
 #endif 

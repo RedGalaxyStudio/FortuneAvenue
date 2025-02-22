@@ -43,7 +43,7 @@ sf::Sprite LeftArrow;
 bool SelectorPieces = false; // Inicialmente en selección de pieza
 bool GamePlay = false;        // No en juego al principio
 std::vector<PlayerInformation> playerGameInfo;
-std::vector<PlayerGame> playerGame;
+std::vector<PlayerGameOff> playerGameOff;
 bool wait;
 bool turnRule;
 int CplayerIndex1 = -1;
