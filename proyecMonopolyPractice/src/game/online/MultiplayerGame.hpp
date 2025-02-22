@@ -7,6 +7,8 @@
 #include <thread>
 #include <atomic>
 #include <winsock2.h>
+#include <string>
+#include "../../network/Client.hpp"
 #include "../../core/ObjetosGlobal.hpp"
 #include "ResourceGame.hpp"
 #include "WindowClass.h"
@@ -32,7 +34,7 @@ public:
 
 
 	bool turnoGiro;
-	MultiplayerGame(sf::RenderWindow& win, Chat& chat);
+	MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT);
 
 	void resource();
 
@@ -48,7 +50,8 @@ public:
 private:
 	sf::Text Conteosuel;
 
-	Chat *chats; 
+	Chat *chats;
+	Client* client;
 	sf::Clock clockMensaje;  // Reloj para medir el tiempo
 	float currentScale = 1.0f;  // Escalado inicial
 	float minScale = 0.8f;      // Tamaño mínimo

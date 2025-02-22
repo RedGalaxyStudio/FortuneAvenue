@@ -94,7 +94,7 @@ void PieceSelector::displayPieces() {
 void PieceSelector::updateSelection() {
 	std::cout << "\nwo";
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	Chat chat(*window);
+	Chat chat(window,client);
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
@@ -180,7 +180,7 @@ void PieceSelector::updateSelection() {
 				
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir(*Client);
+				Menup.MenuSalir(client);
 			}
 
 
@@ -318,7 +318,7 @@ void PieceSelector::updateSelection() {
 			client->disActiv = true;
 			{
 				std::unique_lock<std::mutex> lock(client->mtex);
-				client->cvDis.wait(lock, [] { return client->eventOccurred; }); // Espera a que `eventOccurred` sea true.
+				client->cvDis.wait(lock, [this] { return client->eventOccurred; }); // Espera a que `eventOccurred` sea true.
 			}
 			client->disconnecte = false;
 			client->disActiv = false;
@@ -344,7 +344,7 @@ void PieceSelector::updateSelection() {
 
 		if (SelectingPiece) {
 
-			MultiplayerGame mpGame(*window,chat);
+			MultiplayerGame mpGame(*window,chat,client);
 		
 			mpGame.update();
 		}

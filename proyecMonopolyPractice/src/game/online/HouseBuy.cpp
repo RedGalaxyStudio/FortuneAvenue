@@ -14,10 +14,10 @@ using json = nlohmann::json;
 HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1){}
 
 
-void HouseBuy::setWindow(sf::RenderWindow& win,int indice, Client* client) {
+void HouseBuy::setWindow(sf::RenderWindow& win,int indice, Client& clienT) {
 	window = &win;
 	index = indice;
-
+	client = &clienT;
 	//std::cout << "\n\n" << index;
 }
 void HouseBuy::resource() {
@@ -160,7 +160,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 			}
 
 			if (turn) {
@@ -168,7 +168,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerInfos[0].money>= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						client.networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
+						client->networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
@@ -182,7 +182,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						cierre = true;
-						client.networkMessage.sendXHouse();
+						client->networkMessage.sendXHouse();
 					}
 				}
 			}
@@ -199,11 +199,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 		window->setMouseCursor(*currentCursor);
 		// Obtener el tiempo transcurrido
 		window->clear();
-		if (client.accionCompra) {
+		if (client->accionCompra) {
 
 			playClickSound();
 			cierre = true;
-			client.accionCompra = false;
+			client->accionCompra = false;
 		}
 		window->draw(renderedSprite);
 
@@ -294,7 +294,7 @@ void HouseBuy::ViewHouseBuys() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 			}
 
 

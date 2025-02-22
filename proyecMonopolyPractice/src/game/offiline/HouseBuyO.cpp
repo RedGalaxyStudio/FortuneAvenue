@@ -14,10 +14,10 @@ using json = nlohmann::json;
 HouseBuyO::HouseBuyO():window(nullptr), IndexCAsa(-1){}
 
 
-void HouseBuyO::setWindow(sf::RenderWindow& win,int indice,Client& clienT) {
+void HouseBuyO::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
 	index = indice;
-	client = &clienT;
+
 	//std::cout << "\n\n" << index;
 }
 void HouseBuyO::resource() {
@@ -78,7 +78,6 @@ void HouseBuyO::resource() {
 
 	sf::FloatRect globalBounds = Xc.getGlobalBounds();
 	Xc.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
 
 }
 
@@ -154,7 +153,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir(client);
+				Menup.MenuSalir(nullptr);
 			}
 
 			if (turn) {
@@ -162,7 +161,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerInfos[0].money>= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						client.networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
+						//client.networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
@@ -176,7 +175,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						cierre = true;
-						client.networkMessage.sendXHouse();
+						//client.networkMessage.sendXHouse();
 					}
 				}
 			}
@@ -193,12 +192,12 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 		window->setMouseCursor(*currentCursor);
 		// Obtener el tiempo transcurrido
 		window->clear();
-		if (client.accionCompra) {
-
-			playClickSound();
-			cierre = true;
-			client.accionCompra = false;
-		}
+		//if (client.accionCompra) {
+		//
+		//	playClickSound();
+		//	cierre = true;
+		//	client.accionCompra = false;
+		//}
 		window->draw(renderedSprite);
 
 		ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 5.);

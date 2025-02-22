@@ -4,11 +4,12 @@
 #include "../../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 #include "PieceSelector.hpp"
+#include "../../network/Client.hpp"
 
 class Chat {
 public:
 
-    Chat(sf::RenderWindow& win);
+    Chat(sf::RenderWindow* win, Client* clienT);
     void resource();
     void insertarSaltoDeLinea();
     void update();
@@ -19,7 +20,7 @@ private:
 
     const size_t maxLength = 60;
 
-
+    Client* client;
     sf::RectangleShape FondoChat;
     sf::RectangleShape Fondo;
     sf::RectangleShape Caja;

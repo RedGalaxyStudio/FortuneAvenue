@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "../../network/Client.hpp"
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -10,7 +11,7 @@
 
 class MovePieces {
 public:
-	MovePieces(sf::RenderWindow& win);
+	MovePieces(sf::RenderWindow& win, Client* clienT);
 
 	void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser);
 
@@ -41,7 +42,7 @@ private:
 	sf::Vector2f final;
 	int *vuelta;
 	bool* CsFinal;
-
+	Client* client;
 	bool PieceUser;
 	sf::Vector2f posicionInicial;  
 	sf::Vector2f posicionFinal;  // Posición final hacia la que se mueve el sprite

@@ -245,7 +245,7 @@ void menuP::eventoMenuP() {
            
             if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
                 playClickSound();
-                MenuSalir(); 
+                MenuSalir(nullptr); 
 
             }
             if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
@@ -378,7 +378,7 @@ void menuP::MenuOpcion(bool fon) {
                 musicSlider->Printf();
                 effectSlider->Printf();
                 renderTexture.display();
-                MenuSalir();
+                MenuSalir(nullptr);
             }
 
 
@@ -645,7 +645,7 @@ void menuP::instruccionesGame() {
                 musicSlider->Printf();
                 effectSlider->Printf();
                 renderTexture.display();
-                MenuSalir();
+                MenuSalir(nullptr);
             }
 
 
@@ -787,7 +787,7 @@ void menuP::MenuAcercaDe() {
                 renderTexture.draw(TextAcercaDe);
                 renderTexture.draw(spriteX);
                 renderTexture.display();
-                MenuSalir();
+                MenuSalir(nullptr);
             }
 
 

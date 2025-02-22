@@ -181,7 +181,7 @@ void PieceSelectOff::updateSelection() {
 				
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 			}
 
 			scrollbarPiece.handleEvent(event, *window);

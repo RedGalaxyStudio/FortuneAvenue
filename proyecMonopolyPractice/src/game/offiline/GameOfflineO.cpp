@@ -6,7 +6,7 @@
 
 
 GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePiecesO(win)), house(UsuariosActivos.size(), HouseBuyO()), impuestoCasa(0) {
-	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
+	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	loadResourceGame();
 	resource();
@@ -377,16 +377,16 @@ void GameOffline::update() {
 	SelectingMusicFondo.stop();
 	GameMusicFondo.setLoop(true);
 	GameMusicFondo.play();
-	Nulo NUlO;
-	NUlO.setWindow(*window);
-	NUlO.Resource(&client);
+	NuloO NUlOO;
+	NUlOO.setWindow(*window);
+	NUlOO.Resource();
 
 	float duracionMovimiento = 0.5f;
 
 	for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 		house[i].setWindow(*window, i);
-		house[i].resource(&client);
+		house[i].resource();
 
 		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
 
@@ -406,10 +406,10 @@ void GameOffline::update() {
 	animacionRuleta = false;
 	InicioPartida();
 	startGame();
-	while (window->isOpen() && !client.juegoTerminado) {
+	while (window->isOpen() ) {
 
 		Event();
-		Dado.loopP(&client);
+	
 		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
@@ -423,8 +423,8 @@ void GameOffline::update() {
 			animacionIniciada = true;
 		}
 		// mecanica ruleta
-		if (client.giroActivo == true && animacionRuleta == true && draw_roulette && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
-			client.giroActivo = false;
+		if ( animacionRuleta == true && draw_roulette && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			
 			ruleta_draw = false;
 			eventoActivo = false;
 			animacionIniciada = false;
@@ -480,18 +480,18 @@ void GameOffline::update() {
 
 			case 2:
 
-				if (IndexTurn == client.playerIndex) {
+				if (IndexTurn == 0) {
 					//client.EventoImpuesto();
 					impuesto_draw = true;
 					turn_impuesto = false;
 					eventoActivo = true;
 					animacionImpuesto = true;
-					{
-						std::unique_lock<std::mutex> lock(client.impuestoMutex);
-						client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
+				//	{
+					//	std::unique_lock<std::mutex> lock(client.impuestoMutex);
+					//	client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
 					
-						client.impuestoMessageReceived = false;
-					}
+			//			client.impuestoMessageReceived = false;
+				//	}
 					impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
 					Impuesto.setString(std::to_string(playerInfos[IndexTurn].impuesto));
@@ -516,7 +516,7 @@ void GameOffline::update() {
 		}
 
 
-		if (client.turnopermitido != 0 && nular == false) {
+		if (turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteFondoGame);
 			renderTexture.draw(spriteMapa);
@@ -539,7 +539,7 @@ void GameOffline::update() {
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
-			NUlO.Update();
+			NUlOO.Update();
 			nular = true;
 		}
 		else if (moverFichas[IndexTurn].enMovimiento == true) {
@@ -593,9 +593,6 @@ void GameOffline::update() {
 
 			}
 
-
-
-			//renderTexture.draw(SpriteChat);
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
@@ -621,7 +618,7 @@ void GameOffline::update() {
 
 	}
 	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
-	if (window->isOpen() && client.juegoTerminado) {
+	if (window->isOpen() && juegoTerminado) {
 		GameEndO gameend(window);
 		gameend.resource();
 		gameend.update();
@@ -632,7 +629,7 @@ void GameOffline::Event() {
 
 	do {
 		if (window->pollEvent(event)) {
-			Dado.loop(event, &client);
+			Dado.loop(event);
 
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -652,7 +649,7 @@ void GameOffline::Event() {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -674,7 +671,7 @@ void GameOffline::Event() {
 
 				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					Chat iconochat(*window);
+					Chat iconochat(*window,client);
 					iconochat.update();
 				}
 
@@ -754,8 +751,8 @@ void GameOffline::DrawGameRuleta() {
 	renderedSprite.setTexture(renderTexture.getTexture());
 
 	window->draw(renderedSprite);
-	ruleta->draw(*window, deltaTime, client.giroActivo);
-	if (!client.giroActivo && turn) {
+	ruleta->draw(*window, deltaTime, giroActivo);
+	if (giroActivo && turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		// Modificar el escalado
@@ -940,12 +937,12 @@ void GameOffline::DrawGame() {
 						turn_impuesto = false;
 						eventoActivo = true;
 						animacionImpuesto = true;
-						{
-							std::unique_lock<std::mutex> lock(client.impuestoMutex);
-							client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
+						//{
+						//	std::unique_lock<std::mutex> lock(client.impuestoMutex);
+						//	client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
 
-							client.impuestoMessageReceived = false;
-						}
+						//	client.impuestoMessageReceived = false;
+						//}
 						impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
 						Impuesto.setString(std::to_string(playerInfos[IndexTurn].impuesto));
@@ -969,12 +966,12 @@ void GameOffline::DrawGame() {
 		turn_ruleta = false;
 		eventoActivo = true;
 
-		{
-			std::unique_lock<std::mutex> lock(client.ruletaMutex);
-			client.ruletaCondVar.wait(lock, [] { return client.ruletaMessageReceived; });
+		//{
+		//	std::unique_lock<std::mutex> lock(client.ruletaMutex);
+		//	client.ruletaCondVar.wait(lock, [] { return clientruletaMessageReceived; });
 
-			client.ruletaMessageReceived = false;
-		}
+//			client.ruletaMessageReceived = false;
+	//	}
 
 		ruleta->trurntrue();
 		giroRule = false;
@@ -1007,16 +1004,6 @@ void GameOffline::DrawGame() {
 	}
 
 
-	std::cout << "turn: " << turn << "\n";
-	std::cout << "turn_impuesto: " << turn_impuesto << "\n";
-	std::cout << "turn_casa: " << turn_casa << "\n";
-	std::cout << "turn_ruleta: " << turn_ruleta << "\n";
-	std::cout << "turn_dado: " << turn_dado << "\n";
-	std::cout << "turn_Moviendo: " << turn_Moviendo << "\n";
-	std::cout << "eventoActivo: " << eventoActivo << "\n";
-	std::cout << "impuesto_draw: " << impuesto_draw << "\n";
-	std::cout << "casa_draw: " << casa_draw << "\n";
-	std::cout << "draw_roulette: " << draw_roulette << "\n";
 
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !draw_roulette) {
 

@@ -133,7 +133,7 @@ void IniciaUser::IniciAcion(){
                 renderTexture.draw(spriteCkeck);
                 renderTexture.draw(overlay);
                 renderTexture.display();
-                Menup.MenuSalir();
+                Menup.MenuSalir(nullptr);
             }
 
             scrollbar.handleEvent(event, *window);

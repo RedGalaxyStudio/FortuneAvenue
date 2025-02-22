@@ -5,7 +5,7 @@
 #include "../game/online/Chat.hpp"
 #include "../ui/MensageBox.hpp"
 
-IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win) {
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client() {
 	
 	loadResourceGame();
 	resource();
@@ -50,7 +50,7 @@ void IniciarPartida::resource() {
 void IniciarPartida::update() {
 	Valida = false;
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-	Client client;
+	
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
 
@@ -83,7 +83,7 @@ void IniciarPartida::update() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir(*client);
+				Menup.MenuSalir(nullptr);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -100,17 +100,18 @@ void IniciarPartida::update() {
 						LimTimeBotton.restart();
 						playClickSound();
 
-						Chat CHat(*window);
+
+
+						client->initialize();
+						Chat CHat(window,client);
 			
 
-
-						client.initialize();
-						if (true == client.connectToServer("208.68.36.50", 1234)) {
-							Code = client.createRoom(nameUser, TextureAvatarPath);
+						if (true == client->connectToServer("208.68.36.50", 1234)) {
+							Code = client->createRoom(nameUser, TextureAvatarPath);
 
 
 						
-							PieceSelector pieceselector(window);
+							PieceSelector pieceselector(window, client);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
 
@@ -208,13 +209,13 @@ void IniciarPartida::updatejoinRoom() {
 						code = textBoxRoom.Actu();
 						if (code.length() == 5) {
 							// Tiene exactamente 5 caracteres
-							client.initialize();
+							client->initialize();
 
-							if (true == client.connectToServer("208.68.36.50", 1234)) {
+							if (true == client->connectToServer("208.68.36.50", 1234)) {
 
-								client.joinRoom(code, nameUser, TextureAvatarPath);
+								client->joinRoom(code, nameUser, TextureAvatarPath);
 								Code = code;
-								PieceSelector pieceselector(window);
+								PieceSelector pieceselector(window,client);
 								pieceselector.Resource();
 								pieceselector.updateSelection();
 

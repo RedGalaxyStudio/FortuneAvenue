@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructor
-GameEnd::GameEnd(sf::RenderWindow* window) : window(window) {
+GameEnd::GameEnd(sf::RenderWindow* window, Client* clienT) : window(window),client(clienT) {
 
 }
 
@@ -476,7 +476,7 @@ void GameEnd::update() {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {

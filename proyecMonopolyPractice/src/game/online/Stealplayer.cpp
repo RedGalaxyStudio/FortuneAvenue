@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructor
-Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal, Client* clienT) : window(window),client(clienT), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
 
@@ -108,7 +108,7 @@ void Stealplayer::update() {
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
-                Menup.MenuSalir();
+                Menup.MenuSalir(client);
             }
             indexMouseOver = -1;
             for (int i = 0; i < UsuariosEleccion.size(); i++) {
@@ -125,7 +125,7 @@ void Stealplayer::update() {
                 if (SpritebottonRobar.getGlobalBounds().contains(mousePosFloat)) {
 
                     playClickSound();
-                    client.networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
+                    client->networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
                     seleccionlista = true;
 
                 }

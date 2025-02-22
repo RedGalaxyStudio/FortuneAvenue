@@ -68,7 +68,6 @@ private:
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
-    PieceSelector pieceselector;
 
     sf::Text TOpcion, TPlayers, TMapas;
 };

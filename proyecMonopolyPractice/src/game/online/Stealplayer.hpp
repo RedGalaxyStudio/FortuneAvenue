@@ -5,6 +5,7 @@
 #include <string>
 #include "ResourceGame.hpp"
 #include "../../core/ResourceGlobal.hpp"
+#include "../../network/Client.hpp"
 
 class Stealplayer {
 private:
@@ -17,9 +18,9 @@ private:
     sf::Sprite SpritebottonRobar;
     std::vector<PlayerGame> PlayersSteal;
     
-    
+    Client* client;
 public:
-    Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal);        // Constructor que toma la ventana principal
+    Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal, Client* clienT);        // Constructor que toma la ventana principal
     ~Stealplayer();                               // Destructor
     void resource();
     void update();

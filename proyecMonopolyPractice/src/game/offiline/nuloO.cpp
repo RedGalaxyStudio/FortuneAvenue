@@ -75,8 +75,8 @@ void NuloO::Update() {
 
         window->display();
     }
-    client.turnopermitido++;
-    client.networkMessage.endTurn();
+    //client.turnopermitido++;
+    //client.networkMessage.endTurn();
     nular = true;
   
 

@@ -4,7 +4,7 @@
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
 
-Chat::Chat(sf::RenderWindow& win) : window(&win) {
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win),client(clienT) {
 	loadResourceGame();
 	resource();
 }
@@ -201,7 +201,7 @@ void Chat::Event(sf::Event event) {
 		if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat) && !input.empty()) {
 			playClickSound();
 			PlantillaMensajeE.SMSEnviado.setString(input);
-			client.networkMessage.sendSmg(std::to_string(0) + input);
+			client->networkMessage.sendSmg(std::to_string(0) + input);
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 				PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 

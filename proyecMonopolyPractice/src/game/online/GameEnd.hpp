@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include "../../network/Client.hpp"
 
 
 class GameEnd {
@@ -17,8 +18,9 @@ private:
     sf::Text funciona;
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
+    Client* client;
 public:
-    GameEnd(sf::RenderWindow* window);        // Constructor que toma la ventana principal
+    GameEnd(sf::RenderWindow* window, Client* clienT);        // Constructor que toma la ventana principal
     ~GameEnd();                               // Destructor
     void resource();
     void update();

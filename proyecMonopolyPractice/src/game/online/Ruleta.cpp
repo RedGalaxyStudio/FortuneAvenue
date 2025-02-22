@@ -3,8 +3,8 @@
 #include <cstdlib> // Para rand() y RAND_MAX
 
 
-Ruleta::Ruleta(float width, float height, float centerX, float centerY)
-	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
+Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
+	: width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
 	// Inicializar shaders
 
 	currentSegment = -1;
@@ -48,7 +48,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			}
 			turno = false;
 		
-			initialSpeed = client.initialSpeedActi;
+			initialSpeed = client->initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
 			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
@@ -69,7 +69,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			}
 			turno = false;
 
-			initialSpeed = client.initialSpeedActi;
+			initialSpeed = client->initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
 			rotationSpeed = initialSpeed;
 			clock.restart();
@@ -153,7 +153,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		if(turn){
 			switch (currentSegment) {
 			case 0://pierdes un turno
-				client.turnopermitido -= 1;
+				client->turnopermitido -= 1;
 				break;
 
 			case 1://robar a un jugador
@@ -165,11 +165,11 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			case 3://todos pierden 30 y se les da a el jugador
-				client.networkMessage.everyoneLoses();
+				client->networkMessage.everyoneLoses();
 				break;
 
 			case 4://ganas 150
-				client.networkMessage.win150();
+				client->networkMessage.win150();
 
 				break;
 
@@ -180,7 +180,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 
-				client.networkMessage.sendSafeInvestment();
+				client->networkMessage.sendSafeInvestment();
 				break;
 
 			default:
@@ -281,7 +281,7 @@ void Ruleta::enviarestado() {
 
 	}
 
-	client.networkMessage.sendRouletteGame(anguloactualrule);
+	client->networkMessage.sendRouletteGame(anguloactualrule);
 }
 
 void Ruleta::update(float deltaTime) {

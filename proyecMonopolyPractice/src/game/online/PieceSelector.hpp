@@ -27,7 +27,7 @@ private:
 
 public:
     
-    PieceSelector(sf::RenderWindow* windowRef);
+    PieceSelector(sf::RenderWindow* windowRef, Client* clientRef);
     ~PieceSelector();
     void Resource();
 

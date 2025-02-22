@@ -1,5 +1,5 @@
-#ifndef NULO_HPP
-#define NULO_HPP
+#ifndef NULOO_HPP
+#define NULOO_HPP
 
 #include <SFML/Graphics.hpp>
 #include <string>

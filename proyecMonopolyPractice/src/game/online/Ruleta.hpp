@@ -6,12 +6,14 @@
 #include <iostream>
 #include "../../ui/Particles.h"
 #include <random>
-#include "../../core/ObjetosGlobal.hpp"
+#include <string>
+#include "../../network/Client.hpp"
+
 #define M_PI 3.14159265358979323846
 
 class Ruleta {
 public:
-    Ruleta(float width, float height, float centerX, float centerY);
+    Ruleta(float width, float height, float centerX, float centerY, Client* clienT);
     void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
     void update(float deltaTime);
     void trurntrue();
@@ -20,7 +22,7 @@ public:
 
 private:
     sf::Color fillColor;
-
+    Client* client;
 
     bool turno;
     float initialSpeed;

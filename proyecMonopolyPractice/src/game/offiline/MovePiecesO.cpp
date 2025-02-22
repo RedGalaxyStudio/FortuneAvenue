@@ -210,7 +210,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
 					renderTexture.display();
-					Menup.MenuSalir();
+					Menup.MenuSalir(nullptr);
 
 				}
 
@@ -222,7 +222,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+						//	client.networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 							
 						}
@@ -230,7 +230,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+						//	client.networkMessage.sendPathOption(1);
 							seleccionarCaminoDer();
 						}
 
@@ -239,7 +239,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+							//client.networkMessage.sendPathOption(0);
 							seleccionarCaminoDer();
 							
 						}
@@ -247,7 +247,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+							//client.networkMessage.sendPathOption(1);
 							seleccionarCaminoIzq();
 						}
 					}
@@ -255,14 +255,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+							//client.networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 						}
 
 						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+						//	client.networkMessage.sendPathOption(1);
 							seleccionarCaminoDer();
 						}
 					}

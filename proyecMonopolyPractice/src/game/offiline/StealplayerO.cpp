@@ -108,7 +108,7 @@ void StealplayerO::update() {
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
-                Menup.MenuSalir();
+                Menup.MenuSalir(nullptr);
             }
             indexMouseOver = -1;
             for (int i = 0; i < UsuariosEleccion.size(); i++) {
@@ -125,7 +125,7 @@ void StealplayerO::update() {
                 if (SpritebottonRobar.getGlobalBounds().contains(mousePosFloat)) {
 
                     playClickSound();
-                    client.networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
+                    //client.networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
                     seleccionlista = true;
 
                 }

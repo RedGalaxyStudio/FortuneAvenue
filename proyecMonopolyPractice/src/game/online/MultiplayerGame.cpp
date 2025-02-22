@@ -3,8 +3,8 @@
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
 
-MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat) : window(&win), Dado(window),chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
-	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); // Inicialización del puntero
 
 	loadResourceGame();
 	resource();
@@ -404,22 +404,22 @@ void MultiplayerGame::update() {
 	GameMusicFondo.setLoop(true);
 	GameMusicFondo.play();
 	Nulo NUlO;
-	NUlO.setWindow(*window);
-	NUlO.Resource(&client);
+	NUlO.setWindow(*window,*client);
+	NUlO.Resource();
 
 	float duracionMovimiento = 0.5f;
 
 	for (int i = 0; i < UsuariosActivos.size(); i++) {
 
-		house[i].setWindow(*window, i);
-		house[i].resource(&client);
+		house[i].setWindow(*window, i,*client);
+		house[i].resource();
 
 		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
 
 	}
 	std::cout << "hola";
 
-	Stealplayer robarjugador(window, UsuariosActivos, playersGame);
+	Stealplayer robarjugador(window, UsuariosActivos, playersGame,client);
 	robarjugador.resource();
 
 	Dado.start(610, 360);
@@ -428,11 +428,11 @@ void MultiplayerGame::update() {
 	animacionRuleta = false;
 	InicioPartida();
 
-	while (window->isOpen() && !client.juegoTerminado) {
+	while (window->isOpen() && !client->juegoTerminado) {
 
 		Event();
 		
-		Dado.loopP(&client);
+		Dado.loopP(client);
 		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
@@ -446,8 +446,8 @@ void MultiplayerGame::update() {
 			animacionIniciada = true;
 		}
 		// mecanica ruleta
-		if (client.giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
-			client.giroActivo = false;
+		if (client->giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			client->giroActivo = false;
 			ruleta_draw = false;
 			eventoActivo = false;
 			animacionIniciada = false;
@@ -503,17 +503,17 @@ void MultiplayerGame::update() {
 
 			case 2:
 
-				if (IndexTurn == client.playerIndex) {
-					client.networkMessage.sendEventTax();
+				if (IndexTurn == client->playerIndex) {
+					client->networkMessage.sendEventTax();
 					impuesto_draw = true;
 					turn_impuesto = false;
 					eventoActivo = true;
 					animacionImpuesto = true;
 					{
-						std::unique_lock<std::mutex> lock(client.impuestoMutex);
-						client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
+						std::unique_lock<std::mutex> lock(client->impuestoMutex);
+						client->impuestoCondVar.wait(lock, [this] { return client->impuestoMessageReceived; });
 
-						client.impuestoMessageReceived = false;
+						client->impuestoMessageReceived = false;
 					}
 					impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
@@ -539,7 +539,7 @@ void MultiplayerGame::update() {
 		}
 	
 
-		if (client.turnopermitido != 0 && nular == false) {
+		if (client->turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteFondoGame);
 			renderTexture.draw(spriteMapa);
@@ -642,8 +642,8 @@ void MultiplayerGame::update() {
 
 	}
 
-	if (window->isOpen() && client.juegoTerminado) {
-		GameEnd gameend(window);
+	if (window->isOpen() && client->juegoTerminado) {
+		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
 	}
@@ -655,7 +655,7 @@ void MultiplayerGame::Event() {
 
 	while (window->pollEvent(event)) {
 	
-			Dado.loop(event, &client);
+			Dado.loop(event, client);
 			chats->Event(event);
 
 			if (event.type == sf::Event::Closed ||
@@ -673,7 +673,7 @@ void MultiplayerGame::Event() {
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
-				Menup.MenuSalir();
+				Menup.MenuSalir(client);
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -705,7 +705,7 @@ void MultiplayerGame::Event() {
 
 				if (ruleta_draw && turn && turnoGiro) {
 
-					client.networkMessage.startSpin();
+					client->networkMessage.startSpin();
 					ruleta->trurntrue();
 					turnoGiro = false;
 				}
@@ -779,8 +779,8 @@ void MultiplayerGame::DrawGameRuleta() {
 	renderedSprite.setTexture(renderTexture.getTexture());
 
 	window->draw(renderedSprite);
-	ruleta->draw(*window, deltaTime, client.giroActivo);
-	if (!client.giroActivo && turn) {
+	ruleta->draw(*window, deltaTime, client->giroActivo);
+	if (!client->giroActivo && turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		// Modificar el escalado
@@ -933,7 +933,7 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == casillasRuleta[i])
 					{
-						client.networkMessage.sendEventSpin();
+						client->networkMessage.sendEventSpin();
 						ruleta_draw = true;
 						turn_ruleta = false; 
 						eventoActivo = true;
@@ -953,7 +953,7 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 					{
-						client.networkMessage.sendEventHouse();
+						client->networkMessage.sendEventHouse();
 						casa_draw = true;
 						eventoActivo = true;
 					}
@@ -967,16 +967,16 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
-						client.networkMessage.sendEventTax();
+						client->networkMessage.sendEventTax();
 						impuesto_draw = true;
 						turn_impuesto = false;
 						eventoActivo = true;
 						animacionImpuesto = true;
 						{
-							std::unique_lock<std::mutex> lock(client.impuestoMutex);
-							client.impuestoCondVar.wait(lock, [] { return client.impuestoMessageReceived; });
+							std::unique_lock<std::mutex> lock(client->impuestoMutex);
+							client->impuestoCondVar.wait(lock, [this] { return client->impuestoMessageReceived; });
 
-							client.impuestoMessageReceived = false;
+							client->impuestoMessageReceived = false;
 						}
 						impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
@@ -1002,10 +1002,10 @@ void MultiplayerGame::DrawGame() {
 		eventoActivo = true;
 
 		{
-			std::unique_lock<std::mutex> lock(client.ruletaMutex);
-			client.ruletaCondVar.wait(lock, [] { return client.ruletaMessageReceived; });
+			std::unique_lock<std::mutex> lock(client->ruletaMutex);
+			client->ruletaCondVar.wait(lock, [this] { return client->ruletaMessageReceived; });
 
-			client.ruletaMessageReceived = false;
+			client->ruletaMessageReceived = false;
 		}
 
 		ruleta->trurntrue();
@@ -1052,7 +1052,7 @@ void MultiplayerGame::DrawGame() {
 
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
 
-		client.networkMessage.endTurn();
+		client->networkMessage.endTurn();
 		turn = false;
 		//std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}

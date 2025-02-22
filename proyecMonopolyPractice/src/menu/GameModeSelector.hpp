@@ -3,7 +3,6 @@
 #include "../game/online/ResourceGame.hpp"
 #include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
-#include "../game/online/PieceSelector.hpp"
 
 class GameModeSelector  {
 public:
@@ -33,7 +32,7 @@ private:
 
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
-    PieceSelector pieceselector;
+
 };
 
 #endif 

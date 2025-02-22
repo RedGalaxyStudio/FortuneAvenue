@@ -7,16 +7,16 @@
 #include <random>
 class WindowO {
 
-	std::vector<int> textureIndices; 
+	std::vector<int> textureIndices;
 
 	float posz = 0;
-	
+
 	sf::Vector2i mouseStart;
 	sf::Vector2i mouseEnd;
 	sf::Mouse mouse;
 	sf::VertexArray Cube3D;
 	Cube* cube;
-	
+
 
 	float calcdis(sf::Vector2i p1, sf::Vector2i p2)
 	{
@@ -24,91 +24,79 @@ class WindowO {
 		float ycb = (static_cast<float>(p2.y) - static_cast<float>(p1.y)) * (static_cast<float>(p2.y) - static_cast<float>(p1.y));
 		return sqrt(xcb + ycb);
 	}
-
-
-
-
-
 	void updateDraw() {
-		textureIndices.clear();  
+		textureIndices.clear();
 
 		for (int i = 0; i < cube->show.size(); i++) {
 			std::vector<int> faceid = cube->show[i];
-			sf::Vertex* face = &Cube3D[i * 4];  
+			sf::Vertex* face = &Cube3D[i * 4];
 
-			
+
 			int textureIndex = -1;
 			for (int j = 0; j < 6; j++) {
 				if (cube->faces[j] == faceid) {
-					textureIndex = j;  
+					textureIndex = j;
 					break;
 				}
 			}
 
-			if (textureIndex == -1) continue;  
+			if (textureIndex == -1) continue;
 
-			textureIndices.push_back(textureIndex); 
+			textureIndices.push_back(textureIndex);
 
 			for (int j = 0; j < 4; j++) {
-				
-				face[j].position = sf::Vector2f(cube->C3D[faceid[j]].x, cube->C3D[faceid[j]].y);
-				face[j].color = sf::Color::White; 
 
-				
+				face[j].position = sf::Vector2f(cube->C3D[faceid[j]].x, cube->C3D[faceid[j]].y);
+				face[j].color = sf::Color::White;
+
+
 				if (j == 0)
-					face[j].texCoords = sf::Vector2f(0, 0);  
+					face[j].texCoords = sf::Vector2f(0, 0);
 				else if (j == 1)
-					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x), 0);  
+					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x), 0);
 				else if (j == 2)
 					face[j].texCoords = sf::Vector2f(static_cast<float>(cube->textures[textureIndex].getSize().x),
-						static_cast<float>(cube->textures[textureIndex].getSize().y));  
+						static_cast<float>(cube->textures[textureIndex].getSize().y));
 				else if (j == 3)
-					face[j].texCoords = sf::Vector2f(0, static_cast<float>(cube->textures[textureIndex].getSize().y));  
+					face[j].texCoords = sf::Vector2f(0, static_cast<float>(cube->textures[textureIndex].getSize().y));
 
 			}
 		}
 	}
 
 	bool isDiceInUse = false;
-
-
 	void updateDiceAppearance() {
 
 		if (!isDiceInUse) {
 			shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y));
-			window->draw(shadowOverlay);                   
+			window->draw(shadowOverlay);
 		}
 	}
-
-
 	bool ok = 0;
-	
-
-
-public :
-	sf::Clock clock;  
-	bool eventStarted = false;  
+public:
+	sf::Clock clock;
+	bool eventStarted = false;
 	sf::RectangleShape shadowOverlay;
 	int faceIndex;
 
 	sf::RenderWindow* window;
 
-	WindowO(sf::RenderWindow* windowRef) : window(windowRef) {}
+	WindowO(sf::RenderWindow* windowRef) : window(windowRef), cube(nullptr) {}
 
 
-	void start(unsigned int Width, unsigned int Height){
+	void start(unsigned int Width, unsigned int Height) {
 
 		cube = new Cube(100);
 		Cube3D.setPrimitiveType(sf::Quads);
 		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
 		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
-		srand(static_cast<unsigned int>(time(0))); 
+		srand(static_cast<unsigned int>(time(0)));
 
-		
-		shadowOverlay.setSize(sf::Vector2f(100, 100)); 
-		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); 
+
+		shadowOverlay.setSize(sf::Vector2f(100, 100));
+		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100));
 		sf::Vector2f size = shadowOverlay.getSize();
-		shadowOverlay.setOrigin(size.x / 2, size.y / 2); 
+		shadowOverlay.setOrigin(size.x / 2, size.y / 2);
 
 		Cube3D.resize(cube->show.size() * 4);
 
@@ -117,27 +105,27 @@ public :
 
 
 	void update() {
-		
+
 		shadowOverlay.setPosition(sf::Vector2f(cube->getPosition().x, cube->getPosition().y));
-		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100)); 
+		shadowOverlay.setFillColor(sf::Color(0, 0, 0, 100));
 
 		updateDraw();
 
 
-		sf::VertexArray shadow(sf::Quads, cube->show.size() * 4); 
+		sf::VertexArray shadow(sf::Quads, cube->show.size() * 4);
 
 
 		for (int i = 0; i < cube->show.size(); i++) {
-			sf::Vertex* face = &Cube3D[i * 4];  
+			sf::Vertex* face = &Cube3D[i * 4];
 
-			
-			sf::Color shadowColor(0, 0, 0, 150); 
 
-			
+			sf::Color shadowColor(0, 0, 0, 150);
+
+
 			for (int j = 0; j < 4; j++) {
-				sf::Vector2f shadowPosition = face[j].position + sf::Vector2f(5.0f, 5.0f); 
+				sf::Vector2f shadowPosition = face[j].position + sf::Vector2f(5.0f, 5.0f);
 
-				
+
 				shadow[i * 4 + j].position = shadowPosition;
 				shadow[i * 4 + j].color = shadowColor;
 			}
@@ -148,22 +136,22 @@ public :
 
 		for (int i = 0; i < cube->show.size(); i++) {
 			sf::RenderStates states;
-			if (i < textureIndices.size()) {  
-				int textureIndex = textureIndices[i];  
-				if (textureIndex == -1) continue;  
+			if (i < textureIndices.size()) {
+				int textureIndex = textureIndices[i];
+				if (textureIndex == -1) continue;
 
-				states.texture = &cube->textures[textureIndex];  
+				states.texture = &cube->textures[textureIndex];
 
-				
-				sf::Vertex* face = &Cube3D[i * 4];  
-				window->draw(face, 4, sf::TrianglesFan, states);  
+
+				sf::Vertex* face = &Cube3D[i * 4];
+				window->draw(face, 4, sf::TrianglesFan, states);
 			}
 		}
 
 	}
 
 
-	void loop(sf::Event event, Client* client)
+	void loop(sf::Event event)
 	{
 
 		if (event.type == sf::Event::Closed) {
@@ -177,36 +165,36 @@ public :
 				DiceSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
-	
-	
+
+
 				mouseStart.x = rand() % 400 + 1;
 				mouseStart.y = rand() % 600 + 1;
 				ok = 1;
 				clock.restart();
-	
+
 				std::random_device rd;
 				std::mt19937 gen(rd());
 				std::uniform_int_distribution<> dis(1, 6);
-				faceIndex =dis(gen);
-					
-			
-				
+				faceIndex = dis(gen);
+
+
+
 			}
 		}
 
-		
+
 
 	};
-		void loopP(Client* client)
-	    {
+	void loopP()
+	{
 
-		
+
 		if (rolldiceJugador) {
-			std::unique_lock<std::mutex> lock(client->mtx);
+			//std::unique_lock<std::mutex> lock(client->mtx);
 
-			while (client->lastRollResult == -1) {
-				client->cv.wait(lock);
-			}
+			//while (client->lastRollResult == -1) {
+			//	client->cv.wait(lock);
+			//}
 
 			DiceSound.play();
 			updateDiceAppearance();
@@ -217,8 +205,8 @@ public :
 			ok = 1;
 			clock.restart();
 
-			faceIndex = client->lastRollResult;
-			client->lastRollResult = -1;
+			faceIndex = 1;//client->lastRollResult;
+			//client->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
 			rolldiceJugador = false;
@@ -227,13 +215,13 @@ public :
 	};
 
 
-	int logica(){
+	int logica() {
 		if (eventStarted) {
-			sf::Time elapsed = clock.getElapsedTime(); 
+			sf::Time elapsed = clock.getElapsedTime();
 
-			if (elapsed.asSeconds() < 1.0f) { 
-				mouseEnd.x = rand() % 400 + 1; 
-				mouseEnd.y = rand() % 600 + 1;  
+			if (elapsed.asSeconds() < 1.0f) {
+				mouseEnd.x = rand() % 400 + 1;
+				mouseEnd.y = rand() % 600 + 1;
 
 				float dx = static_cast<float>(mouseEnd.x - mouseStart.x);
 				float dy = static_cast<float>(mouseEnd.y - mouseStart.y);
@@ -247,21 +235,22 @@ public :
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
-				ok = 0; 
+				ok = 0;
 				return 0;
 			}
 			else {
-				
+
 				cube->resetPosition(faceIndex);
 
 				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
-				
+
 				return faceIndex;
 			}
 
-		}else{ return 0; }
+		}
+		else { return 0; }
 	};
 };
 

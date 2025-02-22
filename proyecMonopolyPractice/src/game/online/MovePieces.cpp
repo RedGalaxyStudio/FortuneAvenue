@@ -1,7 +1,7 @@
 #include "MovePieces.hpp"
 #include "../../core/ResourceGlobal.hpp"
 
-MovePieces::MovePieces(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
 void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
@@ -121,7 +121,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 				if (PieceUser) {
 
-					client.llegadaFinal();
+					client->llegadaFinal();
 					
 				}
 			}
@@ -139,7 +139,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 				if (PieceUser) {
 
-					client.llegadaFinal();
+					client->llegadaFinal();
 
 				}
 			}
@@ -210,7 +210,7 @@ void MovePieces::updateCAmbioCasilla() {
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
 					renderTexture.display();
-					Menup.MenuSalir();
+					Menup.MenuSalir(nullptr);
 
 				}
 
@@ -222,7 +222,7 @@ void MovePieces::updateCAmbioCasilla() {
 						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+							client->networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 							
 						}
@@ -230,7 +230,7 @@ void MovePieces::updateCAmbioCasilla() {
 						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+							client->networkMessage.sendPathOption(1);
 							seleccionarCaminoDer();
 						}
 
@@ -239,7 +239,7 @@ void MovePieces::updateCAmbioCasilla() {
 						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+							client->networkMessage.sendPathOption(0);
 							seleccionarCaminoDer();
 							
 						}
@@ -247,7 +247,7 @@ void MovePieces::updateCAmbioCasilla() {
 						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+							client->networkMessage.sendPathOption(1);
 							seleccionarCaminoIzq();
 						}
 					}
@@ -255,14 +255,14 @@ void MovePieces::updateCAmbioCasilla() {
 						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(0);
+							client->networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 						}
 
 						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
-							client.networkMessage.sendPathOption(1);
+							client->networkMessage.sendPathOption(1);
 							seleccionarCaminoDer();
 						}
 					}

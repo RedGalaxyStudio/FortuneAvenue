@@ -46,14 +46,13 @@ struct houseInfo {
     int costo;
     int impuesto;
 };
-Client* client;
 
 
 public:
     HouseBuyO();   // Constructor que inicializa con el precio y fondos del jugador
     int IndexCAsa;
     std::vector<houseInfo> houses;
-    void setWindow(sf::RenderWindow& win,int indice,  Client& clienT);
+    void setWindow(sf::RenderWindow& win,int indice);
     void resource();
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuys();

@@ -15,8 +15,8 @@
 #include "GameManager.hpp"
 #include "nuloO.hpp"
 #include "HouseBuyO.hpp"
-class Ruleta;
-class HouseBuy;
+class RuletaO;
+class HouseBuyO;
 
 class GameOffline:public GameManager {
 public:
@@ -40,7 +40,7 @@ public:
 private:
 	sf::Text Conteosuel;
 
-
+	Client* client;
 	sf::Clock clockMensaje;  // Reloj para medir el tiempo
 	float currentScale = 1.0f;  // Escalado inicial
 	float minScale = 0.8f;      // Tamaño mínimo
@@ -131,12 +131,12 @@ private:
 	std::vector<HouseBuyO> house;
 	sf::Clock TempoAnimacion;
 	bool animacionIniciada;
-	Window Dado;
+	WindowO Dado;
 	sf::Clock clock;
 
 	bool animacionImpuesto;
 	bool animacionCasa;
-	Ruleta* ruleta;
+	RuletaO* ruleta;
 	sf::View viewTablero;
 	sf::Text Impuesto;
 	sf::Text ImpuestoCasa;

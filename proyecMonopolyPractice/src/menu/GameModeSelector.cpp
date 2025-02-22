@@ -6,7 +6,7 @@
 #include "../ui/TextBox.hpp"
 #include "../ui/MensageBox.hpp"
 
-GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win), pieceselector(window) {
+GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();
 	resource();
 }
@@ -159,7 +159,7 @@ void GameModeSelector::updatejoinRoom() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir();
+				Menup.MenuSalir(nullptr);
 
 
 
