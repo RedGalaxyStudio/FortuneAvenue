@@ -5,7 +5,7 @@
 #include "../game/online/Chat.hpp"
 #include "../ui/MensageBox.hpp"
 
-IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client() {
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client(new Client()) {
 	
 	loadResourceGame();
 	resource();
@@ -95,22 +95,25 @@ void IniciarPartida::update() {
 				}
 
 				if (SpriteCrearPartida.getGlobalBounds().contains(mousePosFloat)) {
+					std::cout << "\nque mierda";
 					if (LimTimeBotton.getElapsedTime().asSeconds() >= 1.0f) { // Verifica si ha pasado al menos 1 segundo
-						// Reinicia el reloj
+						std::cout << "\nque mierda";
+						// Rcia el reloj
 						LimTimeBotton.restart();
+						std::cout << "\nque mierda2";
 						playClickSound();
-
+						std::cout << "\nque mierda3";
 
 
 						client->initialize();
+						std::cout << "\nque mierda4";
 						Chat CHat(window,client);
-			
-
+						std::cout << "\nque mierda5";
 						if (true == client->connectToServer("208.68.36.50", 1234)) {
 							Code = client->createRoom(nameUser, TextureAvatarPath);
 
 
-						
+							std::cout << "\nque mierda";
 							PieceSelector pieceselector(window, client);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
