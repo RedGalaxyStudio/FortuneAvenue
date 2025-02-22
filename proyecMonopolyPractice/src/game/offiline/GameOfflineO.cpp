@@ -405,7 +405,7 @@ void GameOffline::update() {
 
 	animacionRuleta = false;
 	InicioPartida();
-	startGame();
+	GM.startGame();
 	while (window->isOpen() ) {
 
 		Event();
@@ -516,7 +516,7 @@ void GameOffline::update() {
 		}
 
 
-		if (turnopermitido != 0 && nular == false) {
+		if (GM.turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteFondoGame);
 			renderTexture.draw(spriteMapa);
@@ -612,13 +612,9 @@ void GameOffline::update() {
 			window->display();
 		}
 
-
-		std::cout << "hola8" << std::endl;
-
-
 	}
-	std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHHHHHH";
-	if (window->isOpen() && juegoTerminado) {
+
+	if (window->isOpen() && GM.juegoTerminado) {
 		GameEndO gameend(window);
 		gameend.resource();
 		gameend.update();
@@ -745,8 +741,8 @@ void GameOffline::DrawGameRuleta() {
 	renderedSprite.setTexture(renderTexture.getTexture());
 
 	window->draw(renderedSprite);
-	ruleta->draw(*window, deltaTime, giroActivo);
-	if (giroActivo && turn) {
+	ruleta->draw(*window, deltaTime, GM.giroActivo);
+	if (GM.giroActivo && turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		// Modificar el escalado
@@ -897,7 +893,6 @@ void GameOffline::DrawGame() {
 						turn_ruleta = false;
 						eventoActivo = true;
 						turnoGiro = true;
-						ruleta->enviarestado();
 						ruleta->trurntrue();
 					}
 				}

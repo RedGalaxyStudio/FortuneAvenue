@@ -161,9 +161,10 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
 		if(turn){
+			int totalRestado = 0;
 			switch (currentSegment) {
 			case 0://pierdes un turno
-				client.turnopermitido -= 1;
+				GM.turnopermitido -= 1;
 				break;
 
 			case 1://robar a un jugador
@@ -177,7 +178,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			case 3://todos pierden 30 y se les da a el jugador
 				
 				// Recorre a todos los jugadores en la partida
-				int totalRestado = 0;
+		
 
 				for (size_t i = 0; i < ActiveUsers.size();i++) {  // Reemplaza salaJugadores por rooms[roomCode]
 					// Excluir al jugador que envió el mensaje (comparando el puntero ENetPeer)
@@ -198,7 +199,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 				for (size_t i = 0; i < ActiveUsers.size(); i++) {
 
-					playerGame[i].Money.setString(std::to_string(playerGameInfo[i].money));
+					playerGameOff[i].Money.setString(std::to_string(playerGameInfo[i].money));
 
 					
 				}
@@ -207,7 +208,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			case 4://ganas 150
 				
 				playerGameInfo[IndexTurn1].money += 150;
-				playerGame[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 				break;
 
 			case 5://paga impuestos
@@ -306,20 +307,6 @@ void RuletaO::trurntrue() {
 
 }
 
-void RuletaO::enviarestado() {
-
-
-	float anguloactualrule;
-	// Variables para variaciones aleatorias
-	for (auto& segment : segments) {
-		anguloactualrule = segment.getRotation();
-
-
-
-	}
-
-	client.networkMessage.sendRouletteGame(anguloactualrule);
-}
 
 void RuletaO::update(float deltaTime) {
 	blinkTimer += deltaTime;

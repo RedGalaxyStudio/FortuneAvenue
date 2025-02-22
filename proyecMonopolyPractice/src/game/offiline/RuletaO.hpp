@@ -15,7 +15,6 @@ public:
     void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
     void update(float deltaTime);
     void trurntrue();
-    void enviarestado();
     int event;
 
 private:

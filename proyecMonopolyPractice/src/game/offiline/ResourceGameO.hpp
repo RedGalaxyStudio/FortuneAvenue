@@ -1,11 +1,18 @@
 #ifndef RESOURCEGAMEO_HPP
 #define RESOURCEGAMEO_HPP
 
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
 #include <iostream>
+#include "GameManager.hpp"
 
+class GameManager;
+
+
+
+extern GameManager GM;
 extern std::vector<sf::Texture> TextureHouse; //texturecasa
 extern sf::Texture TextureBackground; //textureFondoGame
 extern sf::Texture TextureMoney1; //TextureCash
@@ -91,6 +98,7 @@ extern bool turn_house; //turn_casa
 extern bool turn_Tax; //turn_impuesto
 extern bool turn_Move; //turn_Moviendo
 extern bool activeEvent; //eventoActivo
+
 
 struct PlayerGameOff {
 

@@ -18,7 +18,7 @@
 class RuletaO;
 class HouseBuyO;
 
-class GameOffline:public GameManager {
+class GameOffline {
 public:
 
 
