@@ -1,5 +1,6 @@
 #include "RuletaO.hpp"
 #include "ResourceGameO.hpp"
+#include <random>
 #include <cstdlib> // Para rand() y RAND_MAX
 
 
@@ -47,8 +48,13 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				i++;
 			}
 			turno = false;
-		
-			initialSpeed = client.initialSpeedActi;
+			std::random_device rd; // Entropía del sistema
+			std::mt19937 gen(rd()); // Generador basado en Mersenne Twister
+
+			// Ajustar los límites del rango para que incluyan 500
+			std::uniform_int_distribution<> initialSpeedDist(400, 1000); // Rango: 400 a 500
+
+			initialSpeed = static_cast<float>(initialSpeedDist(gen));
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
 			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
@@ -68,8 +74,12 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				i++;
 			}
 			turno = false;
+			std::random_device rd; // Entropía del sistema
+			std::mt19937 gen(rd()); // Generador basado en Mersenne Twister
 
-			initialSpeed = client.initialSpeedActi;
+			std::uniform_int_distribution<> initialSpeedDist(400, 1000); // Rango: 400 a 500
+
+			initialSpeed = static_cast<float>(initialSpeedDist(gen));
 			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
 			rotationSpeed = initialSpeed;
 			clock.restart();
@@ -165,12 +175,39 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			case 3://todos pierden 30 y se les da a el jugador
-				client.networkMessage.everyoneLoses();
+				
+				// Recorre a todos los jugadores en la partida
+				int totalRestado = 0;
+
+				for (size_t i = 0; i < ActiveUsers.size();i++) {  // Reemplaza salaJugadores por rooms[roomCode]
+					// Excluir al jugador que envió el mensaje (comparando el puntero ENetPeer)
+					if (i != IndexTurn1) {
+
+						// Resta 30 al dinero del jugador
+						playerGameInfo[i].money -= 30;
+						// Actualiza el texto del dinero del jugador
+
+						// Suma los 30 al total restado
+						totalRestado += 30;
+
+					}
+				}
+				// Suma el total restado al jugador con turno actual
+				playerGameInfo[IndexTurn1].money += totalRestado;
+
+
+				for (size_t i = 0; i < ActiveUsers.size(); i++) {
+
+					playerGame[i].Money.setString(std::to_string(playerGameInfo[i].money));
+
+					
+				}
 				break;
 
 			case 4://ganas 150
-				client.networkMessage.win150();
-
+				
+				playerGameInfo[IndexTurn1].money += 150;
+				playerGame[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 				break;
 
 			case 5://paga impuestos
@@ -180,7 +217,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 
-				client.networkMessage.sendSafeInvestment();
+				//client.networkMessage.sendSafeInvestment();
 				break;
 
 			default:

@@ -121,7 +121,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 				if (PieceUser) {
 
-					client.llegadaFinal();
+					//client.llegadaFinal();
 					
 				}
 			}
@@ -139,7 +139,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 				if (PieceUser) {
 
-					client.llegadaFinal();
+					//client.llegadaFinal();
 
 				}
 			}

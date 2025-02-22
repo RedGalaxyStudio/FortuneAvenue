@@ -669,12 +669,6 @@ void GameOffline::Event() {
 					turnoGiro = false;
 				}
 
-				if (SpriteChat.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-					Chat iconochat(*window,client);
-					iconochat.update();
-				}
-
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
