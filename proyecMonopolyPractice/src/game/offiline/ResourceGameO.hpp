@@ -1,6 +1,7 @@
 #ifndef RESOURCEGAMEO_HPP
 #define RESOURCEGAMEO_HPP
 
+#include "GameManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
@@ -91,6 +92,8 @@ extern bool turn_house; //turn_casa
 extern bool turn_Tax; //turn_impuesto
 extern bool turn_Move; //turn_Moviendo
 extern bool activeEvent; //eventoActivo
+
+extern GameManager GM;
 
 struct PlayerGameOff {
 

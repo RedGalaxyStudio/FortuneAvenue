@@ -71,6 +71,8 @@ bool draw_roulette;
 bool draw_tax;
 bool draw_house;
 
+GameManager GM;
+
 void loadResourceGameO(){
 
 	if (!TextureBackground.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
