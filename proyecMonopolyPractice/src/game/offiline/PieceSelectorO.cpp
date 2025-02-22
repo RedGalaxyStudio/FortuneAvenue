@@ -88,6 +88,9 @@ void PieceSelectOff::updateSelection() {
 	float baseYPos = 472.0f;
 	std::cout << "\nnword";
 
+	
+	
+	
 	PlayerInfo playerInfoNew;
 	PlayerGame playerGameNew;
 	playerInfoNew.username = nameUser;
@@ -306,16 +309,7 @@ void PieceSelectOff::updateSelection() {
 		}
 
 
-		if(client.disconnecte==true){
-			client.disActiv = true;
-			{
-				std::unique_lock<std::mutex> lock(client.mtex);
-				client.cvDis.wait(lock, [] { return client.eventOccurred; }); // Espera a que `eventOccurred` sea true.
-			}
-			client.disconnecte = false;
-			client.disActiv = false;
-			client.eventOccurred = false;
-		}
+		
 
 
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
