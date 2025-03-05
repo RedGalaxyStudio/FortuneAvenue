@@ -5,7 +5,7 @@
 
 
 
-GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), moverFichas(UsuariosActivos.size(), MovePiecesO(win)), house(UsuariosActivos.size(), HouseBuyO()), impuestoCasa(0) {
+GameOffline::GameOffline(sf::RenderWindow& win,int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(UsuariosActivos.size(), MovePiecesO(win)), house(UsuariosActivos.size(), HouseBuyO()), impuestoCasa(0) {
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	loadResourceGame();
@@ -13,8 +13,19 @@ GameOffline::GameOffline(sf::RenderWindow& win) : window(&win), Dado(window), mo
 }
 void GameOffline::resource() {
 
+	if(NMapa==1){
+		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
+	}
+	else if (NMapa == 2) {
 
-	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
+		if (!TextureMapa.loadFromFile("assets/image/Game/mapa22l.png")) return;
+
+	}
+	else if (NMapa == 3) {
+
+		if (!TextureMapa.loadFromFile("assets/image/Game/mapa1l.png")) return;
+
+	}
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
 

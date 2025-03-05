@@ -1,46 +1,42 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
 #include <iostream>
-#include <thread>
-#include <atomic>
-#include <winsock2.h>
 #include "Cinematic/Cinematic.hpp"
 #include "core/ObjetosGlobal.hpp"
 #include "core/ResourceGlobal.hpp"
-#include "menu/IniciaUser.hpp"
+#define _CRTDBG_MAP_ALLOC  
 
-std::atomic<bool> running(true); 
-const unsigned short PORT = 53000; 
+
+//std::atomic<bool> running(true); 
+//const unsigned short PORT = 53000; 
 //int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 int main() {
-    
-    sf::RenderWindow window(sf::VideoMode (1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    sf::err().rdbuf(std::cout.rdbuf()); // Redirige los errores de SFML a la consola
 
-    window.setFramerateLimit(60);
+    sf::ContextSettings settings;
+    settings.attributeFlags = sf::ContextSettings::Debug;  // Activa depuración OpenGL
+
+    std::unique_ptr<sf::RenderWindow> window = std::make_unique<sf::RenderWindow>(
+        sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen, settings);
+
+    window->setFramerateLimit(60);
 
   
     sf::Image icono;
     if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
-    window.setMouseCursorVisible(false);
-    window.setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
-    Client* client;
-
+    window->setMouseCursorVisible(false);
+    window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
    //Cinematic cinematic(window);
-  // cinematic.Resource();
+   //cinematic.Resource();
    //cinematic.Update();
 
    //Cinematic cinematic(window);
    //cinematic.Resource();
    //cinematic.Update();
-
-    loadTextures();
-    cargue();
-  
-    Menup.setWindow(window);  
+    printMemoryUsage();
+    Sleep(1000); // Mide cada 1 segundo
+    Menup.setWindow(*window);  
     Menup.Resource();   
     Menup.MenuPrincipal();
-
-    CoUninitialize();
     return EXIT_SUCCESS;
 }

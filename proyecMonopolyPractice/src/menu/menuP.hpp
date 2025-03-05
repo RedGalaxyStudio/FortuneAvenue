@@ -4,16 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../settings/SettingsManager.hpp" 
-#include "../core/ObjetosGlobal.hpp"
-#include "../game/online/MultiplayerGame.hpp"
-
-class MultiplayerGame;
-
-
+#include "../network/Client.hpp"
+class Client;
 class menuP{
 public:
 
     menuP();
+    ~menuP();
     void Resource();
     void setWindow(sf::RenderWindow& windowRef);
     void MenuPrincipal();

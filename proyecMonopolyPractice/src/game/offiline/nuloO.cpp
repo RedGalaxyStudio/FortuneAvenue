@@ -6,7 +6,8 @@
 #include <fstream>
 #include "../../ui/cell.h"
 #include "../../ui/fileio.h"
-
+#include "../../core/ObjetosGlobal.hpp"
+#include "../../core/ObjetosGlobal.hpp"
 using json = nlohmann::json;
 
 NuloO::NuloO() : window(nullptr), IndexCAsa(-1) {}

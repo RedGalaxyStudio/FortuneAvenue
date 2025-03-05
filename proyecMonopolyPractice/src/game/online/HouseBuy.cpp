@@ -6,7 +6,7 @@
 #include <cstring>
 #include <fstream>
 #include "../../ui/cell.h"
-
+#include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 
 using json = nlohmann::json;

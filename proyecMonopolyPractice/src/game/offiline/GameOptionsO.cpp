@@ -127,7 +127,7 @@ void GameOptions::resource() {
 	globalBounds = cantUser.getGlobalBounds();
 	cantUser.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	nameUser = input1;
+	namePlayer = input1;
 	TOpcion.setCharacterSize(30);
 	TOpcion.setFont(fontUser);
 	TOpcion.setFillColor(sf::Color::White);
@@ -140,9 +140,6 @@ void GameOptions::resource() {
 
 
 }
-
-
-
 void GameOptions::update() {
 	Valida = false;
 	bool valida2 = false;
@@ -151,7 +148,7 @@ void GameOptions::update() {
 	ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M, borde1, Minimo, Maximo);
 	ButtonG Mapa11(SpriteMapa1, TextureMapa1, TextureMapa1M, borde3, Minimo, Maximo);
 	bool Mapa1{ false }, Mapa2{ false }, Mapa3{ false };
-
+	int Map=-1;
 	while (window->isOpen() && !valida2) {
 		sf::Event event;
 		mousePosition = sf::Mouse::getPosition(*window);
@@ -162,7 +159,7 @@ void GameOptions::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 				renderTexture.draw(TOpcion);
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -174,68 +171,131 @@ void GameOptions::update() {
 				if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					if (CantNum > 2) {
-						CantNum -= 1;
+						CantNum --;
+						cantUser.setString(std::to_string(CantNum));
+					}
+				}
+				if (SpriteflecDerecha.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					if (CantNum < 4) {
+						CantNum ++;
 						cantUser.setString(std::to_string(CantNum));
 					}
 				}
 
+				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					valida2 = true;
+				}
 
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-					if (SpriteflecIzquier.getGlobalBounds().contains(mousePosFloat)) {
-						playClickSound();
+				if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					SpriteMapaS.setTexture(TextureMapaSM);
+					std::cout << "hola entre";
+
+					Mapa1 = true;
+					Mapa2 = false;
+					Mapa3 = false;
+					Map = 1;
+
+				}
+				else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					SpriteMapa22.setTexture(TextureMapa22M);
+					Mapa1 = false;
+					Mapa2 = true;
+					Mapa3 = false;
+					Map = 2;
+				}
+				else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					SpriteMapa1.setTexture(TextureMapa1M);
+					Mapa1 = false;
+					Mapa2 = false;
+					Mapa3 = true;
+					Map = 3;
+				}
+
+				if (SpriteCrear.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					PieceSelectOff pieceselectoff(window, CantNum,Map);
+					pieceselectoff.Resource();
+					pieceselectoff.updateSelection();
+
+					pieceselectoff.~PieceSelectOff();
+				}
+
+			}
+		}
+
+		currentCursor = &normalCursor;
+		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+		MapaS.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa1);
+		Mapa22.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa2);
+		Mapa11.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa3);
+
+		window->setMouseCursor(*currentCursor);
+
+		window->clear();
+		window->draw(spriteBackground);
+		window->draw(TOpcion);
+		window->draw(spriteX);
+		window->draw(SpriteflecDerecha);
+		window->draw(SpriteflecIzquier);
+		window->draw(cantUser);
+		window->draw(TPlayers);
+		window->draw(TMapas);
+		window->draw(SpriteMapaS);
+		window->draw(SpriteMapa22);
+		window->draw(SpriteMapa1);
+		window->draw(borde1);
+		window->draw(borde2);
+		window->draw(borde3);
+		window->draw(SpriteCrear);
+		window->draw(SpriteRectangle);
+		window->display();
 
 
-						if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							selectedMap = 0;
-						}
-						else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							selectedMap = 1;
-						}
-						else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							selectedMap = 2;
-						}
 
-						if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
-							SpriteMapaS.setTexture(TextureMapaSM);
-						}
-
-						if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
-							SpriteMapa22.setTexture(TextureMapa22M);
-						}
-
-
-						if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							SpriteMapaS.setTexture(TextureMapaSM);
-							std::cout << "hola entre";
-
-							Mapa1 = true;
-							Mapa2 = false;
-							Mapa3 = false;
-
-						}
-						else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							SpriteMapa22.setTexture(TextureMapa22M);
-							Mapa1 = false;
-							Mapa2 = true;
-							Mapa3 = false;
-						}
-						else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							SpriteMapa1.setTexture(TextureMapa1M);
-							Mapa1 = false;
-							Mapa2 = false;
-							Mapa3 = true;
-						}
+	}
+}
 
 
 
 
-						/*
+/*
+* 
+* 
+
+
+				if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
+					playClickSound();
+					valida2 = true;
+
+				}
+* 
+* 
+				if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					selectedMap = 0;
+				}
+				else if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					selectedMap = 1;
+				}
+				else if (SpriteMapa1.getGlobalBounds().contains(mousePosFloat)) {
+					playClickSound();
+					selectedMap = 2;
+				}
+
+				if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
+					SpriteMapaS.setTexture(TextureMapaSM);
+				}
+
+				if (SpriteMapa22.getGlobalBounds().contains(mousePosFloat)) {
+					SpriteMapa22.setTexture(TextureMapa22M);
+				}
+
 						if (selectedMap == 0) {
 							spriteMapa.setTexture(TextureMapa);
 							spriteMapa.setOrigin(360, 360);
@@ -286,64 +346,3 @@ void GameOptions::update() {
 							window->draw(spriteMapa);
 
 						}*/
-
-
-
-
-
-
-						if (spriteX.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
-							playClickSound();
-							valida2 = true;
-
-						}
-
-
-						if (SpriteCrear.getGlobalBounds().contains(mousePosFloat) && Valida == true) {
-							playClickSound();
-							PieceSelectOff pieceselectoff(window);
-							pieceselectoff.Resource();
-							pieceselectoff.updateSelection();
-
-							pieceselectoff.~PieceSelectOff();
-						}
-
-
-					}
-
-
-				}
-			}
-			Valida = true;
-
-			currentCursor = &normalCursor;
-			botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-			MapaS.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa1);
-			Mapa22.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa2);
-			Mapa11.Update(mousePosFloat, currentCursor, linkCursor, normalCursor, Mapa3);
-
-			window->setMouseCursor(*currentCursor);
-
-			window->clear();
-			window->draw(spriteFondoGame);
-			window->draw(TOpcion);
-			window->draw(spriteX);
-			window->draw(SpriteflecDerecha);
-			window->draw(SpriteflecIzquier);
-			window->draw(cantUser);
-			window->draw(TPlayers);
-			window->draw(TMapas);
-			window->draw(SpriteMapaS);
-			window->draw(SpriteMapa22);
-			window->draw(SpriteMapa1);
-			window->draw(borde1);
-			window->draw(borde2);
-			window->draw(borde3);
-			window->draw(SpriteCrear);
-			window->draw(SpriteRectangle);
-			window->display();
-		}
-
-
-	}
-}
