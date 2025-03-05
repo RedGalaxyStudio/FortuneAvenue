@@ -83,7 +83,6 @@ extern bool turnRule; //giroRule
 extern bool SelectorPieces; //SelectingPiece 
 extern bool GamePlay; //Game     
 extern bool rouletteAnimation; //animacionRuleta  
-
 extern int IndexTurn1; //IndexTurn
 
 extern bool draw_roulette; //ruleta_draw
@@ -98,8 +97,6 @@ extern bool turn_house; //turn_casa
 extern bool turn_Tax; //turn_impuesto
 extern bool turn_Move; //turn_Moviendo
 extern bool activeEvent; //eventoActivo
-
-
 struct PlayerGameOff {
 
 	sf::Texture textureAvatarPLayer;
