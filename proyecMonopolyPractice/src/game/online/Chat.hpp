@@ -32,11 +32,11 @@ private:
     sf::CircleShape AbajIzquierda;
 
     sf::RenderWindow* window;
-   
+
     bool isWebViewOpen;
     bool sesionValida;
     bool Valida;
-        
+
     sf::Texture TextureBotonEviar;
     sf::Texture texturaFondo;
     sf::Texture TextureCrearPartidaOff;
@@ -44,6 +44,7 @@ private:
     sf::Texture TextureUnirsePartidaOff;
     sf::Texture TextureUnirsePartidaOn;
     sf::Texture TextureUnirse;
+    sf::Texture TexturePerfil;
 
     sf::Font Fuentechat;
     sf::Font FuenteMensaje;
@@ -53,7 +54,7 @@ private:
     sf::Text indicacion;
     sf::Text mensaje;
     sf::Text enunciado;
-    
+
     std::string input;
 
     sf::Sprite spriteFondo;
@@ -62,6 +63,8 @@ private:
     sf::Sprite SpriteCrearPartida;
     sf::Sprite SpriteUnirsePartida;
     sf::Sprite SpriteUnirse;
+    sf::Sprite SpritePerfil;
+
 
     int Aumento = 0;
 

@@ -26,6 +26,7 @@ void Chat::resource() {
 
 	TextureBotonEviar.loadFromFile("assets/image/envio2.png");
 
+
 	if (!Fuentechat.loadFromFile("assets/fonts/Poppins-MediumItalic.ttf")) { std::cerr << "Error loading font/n"; }
 	if (!FuenteMensaje.loadFromFile("assets/fonts/Poppins-Light.ttf")) { std::cerr << "Error loading font/n"; }
 
@@ -102,7 +103,8 @@ void Chat::resource() {
 	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
 	AbajIzquierda.setPosition(940, 670);
 
-
+	PlantillaMensajeE.AvatarEnviado.setTexture(playersGame[client->playerIndex].textureAvatarPLayer);
+	
 	PlantillaMensajeE.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
 	PlantillaMensajeE.SMSEnviado.setFillColor(sf::Color::White);
@@ -130,7 +132,6 @@ void Chat::resource() {
 	PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
 	PlantillaMensajeR.ContenidoEnviado.setPosition(915, 600);
 	PlantillaMensajeR.ContenidoEnviado.setFillColor(sf::Color(239, 39, 133));
-
 
 }
 
@@ -165,8 +166,6 @@ void Chat::insertarSaltoDeLinea() {
 					input.insert(i, "\n"); // Insertar un salto de línea si no hay espacio disponible
 
 				}
-
-
 			}
 			break;
 		}
@@ -266,10 +265,7 @@ void Chat::Event(sf::Event event) {
 				Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 				Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 
-
-
 			}
-
 
 		}
 	}
@@ -453,6 +449,7 @@ void Chat::draw() {
 	window->draw(enunciado);
 	window->draw(indicacion);
 	window->draw(spriteX);
+
 	for (int i = 0; i < Mensajes.size(); i++)
 	{
 		window->draw(Mensajes[i].ContenidoEnviado);
