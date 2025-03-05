@@ -47,12 +47,12 @@ void NuloO::Update() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
-                renderTexture.draw(spriteFondoGame);
+                renderTexture.draw(spriteBackground);
                 for (int i = 0; i < 4; i++) {
-                    renderTexture.draw(playersGame[i].NamePlayer);
-                    renderTexture.draw(playersGame[i].boxPlayer);
-                    renderTexture.draw(playersGame[i].MarcoPlayer);
-                    renderTexture.draw(playersGame[i].AvatarPlayer);
+                    renderTexture.draw(playerGameOff[i].NamePlayer);
+                    renderTexture.draw(playerGameOff[i].boxPlayer);
+                    renderTexture.draw(playerGameOff[i].MarcoPlayer);
+                    renderTexture.draw(playerGameOff[i].AvatarPlayer);
                 }
                 renderTexture.draw(spriteX);
                 renderTexture.draw(overlay);
@@ -78,7 +78,7 @@ void NuloO::Update() {
     }
     //client.turnopermitido++;
     //client.networkMessage.endTurn();
-    nular = true;
+    zero = true;
   
 
 }

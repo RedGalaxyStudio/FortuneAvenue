@@ -60,7 +60,7 @@ void GameModeSelector::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 				renderTexture.draw(SpriteOffline);
 				renderTexture.draw(SpriteOnline);
 				renderTexture.draw(enunciado);
@@ -124,7 +124,7 @@ void GameModeSelector::update() {
 
 
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackground);
 		window->draw(SpriteOnline);
 		window->draw(enunciado);
 		window->draw(spriteX);
@@ -152,7 +152,7 @@ void GameModeSelector::updatejoinRoom() {
 				(event1.type == sf::Event::KeyPressed && event1.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 			
 				textBoxRoom.Prinf();
 
@@ -184,7 +184,7 @@ void GameModeSelector::updatejoinRoom() {
 		window->setMouseCursor(*currentCursor);
 
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackground);
 		window->draw(spriteX);
 ;
 		textBoxRoom.draw(*window);

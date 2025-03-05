@@ -34,10 +34,10 @@ RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 
 void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
-	if (turn) {
+	if (firstTurn) {
 		if (giroActivo&& turno) {
 			isSpinning = !isSpinning;
-			girosSound.play();
+			turnSound.play();
 			giro = true;
 			resultado = true;
 			isSpinning = true;
@@ -61,10 +61,10 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 	}
 	
-	if (!turn) {
+	if (!firstTurn) {
 		if (giroActivo && turno) {
 			isSpinning = !isSpinning;
-			girosSound.play();
+			turnSound.play();
 			giro = true;
 			resultado = true;
 			isSpinning = true;
@@ -160,7 +160,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		if(turn){
+		if(firstTurn){
 			int totalRestado = 0;
 			switch (currentSegment) {
 			case 0://pierdes un turno
@@ -268,7 +268,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		window.draw(CentroCircule);
 
 
-		animacionRuleta = true;
+		rouletteAnimation = true;
 		window.draw(iconsResul[currentSegment]);
 
 

@@ -157,7 +157,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				Menup.MenuSalir(nullptr);
 			}
 
-			if (turn) {
+			if (firstTurn) {
 				
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerGameInfo[0].money>= houses[playerGameInfo[0].casasPorJugador[IndexCAsa]].costo) {
