@@ -103,7 +103,7 @@ void Chat::resource() {
 	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
 	AbajIzquierda.setPosition(940, 670);
 
-	PlantillaMensajeE.AvatarEnviado.setTexture(playersGame[client->playerIndex].textureAvatarPLayer);
+	PlantillaMensajeE.AvatarEnviado.setTexture(&playersGame[client->playerIndex].textureAvatarPLayer);
 	
 	PlantillaMensajeE.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
@@ -453,6 +453,7 @@ void Chat::draw() {
 	for (int i = 0; i < Mensajes.size(); i++)
 	{
 		window->draw(Mensajes[i].ContenidoEnviado);
+		window->draw(Mensajes[i].AvatarEnviado);
 		window->draw(Mensajes[i].SMSEnviado);
 	}
 
