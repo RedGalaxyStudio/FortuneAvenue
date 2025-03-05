@@ -62,7 +62,7 @@ void GameEndO::resource() {
 	fingame12.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-	posicionesGanadores.resize(UsuariosActivos.size());
+	posicionesGanadores.resize(ActiveUsers.size());
 
 	assignPositions(playerGameInfo, posiGndrs);
 
@@ -92,7 +92,7 @@ void GameEndO::update() {
 
 	float perfilWidth = 200.0f; // Ancho estimado para cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
-	int totalPerfiles = UsuariosActivos.size();      // Número total de perfiles
+	int totalPerfiles = ActiveUsers.size();      // Número total de perfiles
 
 	if (totalPerfiles > 0) {
 		// Calcular ancho total ocupado por perfiles y separaciones
@@ -107,20 +107,20 @@ void GameEndO::update() {
 			float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
 			float yPos = startY;
 			posicionesGanadores[i].setPosition(xPos, startY- 90);
-			playersGame[i].NamePlayer.setPosition(xPos, startY + 70);
-			playersGame[i].boxPlayer.setPosition(xPos, startY + 70);
-			playersGame[i].AvatarPlayer.setPosition(xPos, startY);
-			playersGame[i].MarcoPlayer.setPosition(xPos, startY);
-			if (playersGame[i].PieceSelect.getTexture() != nullptr) {
-				playersGame[i].PieceSelect.setScale(2.0f, 2.0f);
-				sf::FloatRect pieceSelectBounds = playersGame[i].PieceSelect.getGlobalBounds();
-				playersGame[i].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-				playersGame[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 220);
+			playerGameOff[i].NamePlayer.setPosition(xPos, startY + 70);
+			playerGameOff[i].boxPlayer.setPosition(xPos, startY + 70);
+			playerGameOff[i].AvatarPlayer.setPosition(xPos, startY);
+			playerGameOff[i].MarcoPlayer.setPosition(xPos, startY);
+			if (playerGameOff[i].PieceSelect.getTexture() != nullptr) {
+				playerGameOff[i].PieceSelect.setScale(2.0f, 2.0f);
+				sf::FloatRect pieceSelectBounds = playerGameOff[i].PieceSelect.getGlobalBounds();
+				playerGameOff[i].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+				playerGameOff[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 220);
 			}
 
-			sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
-			playersGame[i].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
-			playersGame[i].Money.setPosition(xPos, startY + 120);
+			sf::FloatRect moneyBounds = playerGameOff[i].Money.getGlobalBounds();
+			playerGameOff[i].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
+			playerGameOff[i].Money.setPosition(xPos, startY + 120);
 
 
 		}
@@ -140,12 +140,12 @@ void GameEndO::update() {
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 					renderTexture.clear();
-					renderTexture.draw(spriteFondoGame);
-					for (int i = 0; i < UsuariosActivos.size(); i++) {
-						renderTexture.draw(playersGame[i].NamePlayer);
-						renderTexture.draw(playersGame[i].boxPlayer);
-						renderTexture.draw(playersGame[i].MarcoPlayer);
-						renderTexture.draw(playersGame[i].AvatarPlayer);
+					renderTexture.draw(spriteBackground);
+					for (int i = 0; i < ActiveUsers.size(); i++) {
+						renderTexture.draw(playerGameOff[i].NamePlayer);
+						renderTexture.draw(playerGameOff[i].boxPlayer);
+						renderTexture.draw(playerGameOff[i].MarcoPlayer);
+						renderTexture.draw(playerGameOff[i].AvatarPlayer);
 					}
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
@@ -155,12 +155,12 @@ void GameEndO::update() {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 				for (int i = 0; i < 4; i++) {
-					renderTexture.draw(playersGame[i].NamePlayer);
-					renderTexture.draw(playersGame[i].boxPlayer);
-					renderTexture.draw(playersGame[i].MarcoPlayer);
-					renderTexture.draw(playersGame[i].AvatarPlayer);
+					renderTexture.draw(playerGameOff[i].NamePlayer);
+					renderTexture.draw(playerGameOff[i].boxPlayer);
+					renderTexture.draw(playerGameOff[i].MarcoPlayer);
+					renderTexture.draw(playerGameOff[i].AvatarPlayer);
 				}
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -194,7 +194,7 @@ void GameEndO::update() {
 
 		window->clear();
 
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackground);
 
 
 		window->draw(fingame12);
@@ -204,7 +204,7 @@ void GameEndO::update() {
 
 		float perfilWidth = 200.0f; // Ancho estimado para cada perfil
 		float separacion = 20.0f;   // Espaciado entre perfiles
-		int totalPerfiles = UsuariosActivos.size();      // Número total de perfiles
+		int totalPerfiles = ActiveUsers.size();      // Número total de perfiles
 
 		// Ancho total ocupado por los perfiles y separaciones
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
@@ -231,57 +231,57 @@ void GameEndO::update() {
 				float yPos = startY;
 
 				// Posicionar elementos
-				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY+170);
-				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY+170);
-				//playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
-				playersGame[UsuariosActivos[i]].AvatarPlayer.setPosition(xPos, yPos+100);
-				playersGame[UsuariosActivos[i]].AvatarPlayer.setScale(1,1);
-				playersGame[UsuariosActivos[i]].MarcoPlayer.setPosition(xPos, yPos+100);
+				playerGameOff[ActiveUsers[i]].NamePlayer.setPosition(xPos, startY+170);
+				playerGameOff[ActiveUsers[i]].boxPlayer.setPosition(xPos, startY+170);
+				//playerGameOff[ActiveUsers[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
+				playerGameOff[ActiveUsers[i]].AvatarPlayer.setPosition(xPos, yPos+100);
+				playerGameOff[ActiveUsers[i]].AvatarPlayer.setScale(1,1);
+				playerGameOff[ActiveUsers[i]].MarcoPlayer.setPosition(xPos, yPos+100);
 
-				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
-					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
-					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
-					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-					playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 310);
+				if (playerGameOff[ActiveUsers[i]].PieceSelect.getTexture() != nullptr) {
+					playerGameOff[ActiveUsers[i]].PieceSelect.setScale(2.0f, 2.0f);
+					sf::FloatRect pieceSelectBounds = playerGameOff[ActiveUsers[i]].PieceSelect.getGlobalBounds();
+					playerGameOff[ActiveUsers[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+					playerGameOff[ActiveUsers[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 310);
 				}
 
 				// Centrar Money
-				sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
-				playersGame[UsuariosActivos[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
-				playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 210);
+				sf::FloatRect moneyBounds = playerGameOff[i].Money.getGlobalBounds();
+				playerGameOff[ActiveUsers[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
+				playerGameOff[ActiveUsers[i]].Money.setPosition(xPos, yPos + 210);
 
-				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
+				if (playerGameOff[ActiveUsers[i]].PieceSelect.getTexture() != nullptr) {
 					// Configurar escala primero
-					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
+					playerGameOff[ActiveUsers[i]].PieceSelect.setScale(2.0f, 2.0f);
 
 					// Calcular origen tras escala
-					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
-					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+					sf::FloatRect pieceSelectBounds = playerGameOff[ActiveUsers[i]].PieceSelect.getGlobalBounds();
+					playerGameOff[ActiveUsers[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
 					std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f << "," << pieceSelectBounds.height / 2.0f;
 					// Posicionar el objeto centrado
 					
 				}
 				
 				// Dibujar los elementos en la ventana
-				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
-				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
-				window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
-				window->draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
-				window->draw(playersGame[UsuariosActivos[i]].Money);
-				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
+				window->draw(playerGameOff[ActiveUsers[i]].NamePlayer);
+				window->draw(playerGameOff[ActiveUsers[i]].boxPlayer);
+				window->draw(playerGameOff[ActiveUsers[i]].AvatarPlayer);
+				window->draw(playerGameOff[ActiveUsers[i]].MarcoPlayer);
+				window->draw(playerGameOff[ActiveUsers[i]].Money);
+				window->draw(playerGameOff[ActiveUsers[i]].PieceSelect);
 			}
 		}
 
 
 		
-		for(int i=0;i<UsuariosActivos.size();i++){
+		for(int i=0;i<ActiveUsers.size();i++){
 		// Dibujar los elementos en la ventana
-		window->draw(playersGame[i].NamePlayer);
-		window->draw(playersGame[i].boxPlayer);
-		window->draw(playersGame[i].AvatarPlayer);
-		window->draw(playersGame[i].MarcoPlayer);
-		window->draw(playersGame[i].Money);
-		window->draw(playersGame[i].PieceSelect);
+		window->draw(playerGameOff[i].NamePlayer);
+		window->draw(playerGameOff[i].boxPlayer);
+		window->draw(playerGameOff[i].AvatarPlayer);
+		window->draw(playerGameOff[i].MarcoPlayer);
+		window->draw(playerGameOff[i].Money);
+		window->draw(playerGameOff[i].PieceSelect);
 		window->draw(posicionesGanadores[i]);
 		}
 			

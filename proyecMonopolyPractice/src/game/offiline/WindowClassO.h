@@ -162,7 +162,7 @@ public:
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				turn_dice = false;
-				DiceSound.play();
+				DicesSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
 
@@ -189,14 +189,14 @@ public:
 	{
 
 
-		if (rolldiceJugador) {
+		if (rolldicePlayer) {
 			//std::unique_lock<std::mutex> lock(client->mtx);
 
 			//while (client->lastRollResult == -1) {
 			//	client->cv.wait(lock);
 			//}
 
-			DiceSound.play();
+			DicesSound.play();
 			updateDiceAppearance();
 			eventStarted = true;
 
@@ -208,9 +208,9 @@ public:
 			faceIndex = 1;//client->lastRollResult;
 			//client->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
-			espera = false;
-			rolldiceJugador = false;
-			otherturn = false;
+			wait = false;
+			rolldicePlayer = false;
+			secondTurn = false;
 		}
 	};
 

@@ -12,7 +12,7 @@ PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
 	loadResourceGame();
 }
 PieceSelectOff::~PieceSelectOff() {
-	pieces.clear();
+	piecesOff.clear();
 	shadow.clear();
 	pieceShape.clear();
 	window = nullptr;
@@ -92,7 +92,7 @@ void PieceSelectOff::updateSelection() {
 	playerInfoNew.playerName = namePlayer;
 	playerInfoNew.PiecUserme = true;
 	playerGameInfo.push_back(playerInfoNew);
-	playerGameNew.CashSprite.setTexture(TextureCash);
+	playerGameNew.CashSprite.setTexture(TextureMoney1);
 	playerGameNew.Home.setTexture(TextureBuilding);
 	playerGameNew.NamePlayer.setCharacterSize(17);
 	playerGameNew.NamePlayer.setFont(fontUserProfile);
@@ -169,10 +169,10 @@ void PieceSelectOff::updateSelection() {
 				renderTexture.draw(spriteBackground);
 				for (int i = 0; i < ActiveUsers.size(); i++) {
 				
-					renderTexture.draw(playersGame[ActiveUsers[i]].NamePlayer);
-					renderTexture.draw(playersGame[ActiveUsers[i]].boxPlayer);
-					renderTexture.draw(playersGame[ActiveUsers[i]].PieceSelect);
-					renderTexture.draw(playersGame[ActiveUsers[i]].Check);
+					renderTexture.draw(playerGameOff[ActiveUsers[i]].NamePlayer);
+					renderTexture.draw(playerGameOff[ActiveUsers[i]].boxPlayer);
+					renderTexture.draw(playerGameOff[ActiveUsers[i]].PieceSelect);
+					renderTexture.draw(playerGameOff[ActiveUsers[i]].Check);
 				}
 				
 				renderTexture.draw(spriteX);
@@ -212,8 +212,8 @@ void PieceSelectOff::updateSelection() {
 			}
 
 			if (avatarYOffset != 0) {
-				std::vector<sf::FloatRect> avatarBounds(pieces.size());
-				for (int i = 0; i < pieces.size(); ++i) {
+				std::vector<sf::FloatRect> avatarBounds(piecesOff.size());
+				for (int i = 0; i < piecesOff.size(); ++i) {
 					int column = i % 8;
 					int row = i / 8;
 
@@ -247,7 +247,7 @@ void PieceSelectOff::updateSelection() {
 							playerGameOff[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
 							playerGameOff[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							piecesOff[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							playerInfos[0].indexPiece = i;
+							playerGameInfo[0].indexPiece = i;
 							piecesOff[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
 							previousSelection = &piecesOff[i];  // Actualizar la selección anterior
@@ -256,14 +256,14 @@ void PieceSelectOff::updateSelection() {
 					}
 
 				}
-				if (playersGame[ActiveUsers[0]].Check.getGlobalBounds().contains(mousePosFloat)) {
+				if (playerGameOff[ActiveUsers[0]].Check.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					const sf::Texture* texturePtr = playersGame[ActiveUsers[0]].PieceSelect.getTexture();
+					const sf::Texture* texturePtr = playerGameOff[ActiveUsers[0]].PieceSelect.getTexture();
 
-					if (texturePtr != nullptr&&UsuariosActivos.size()>0) {
+					if (texturePtr != nullptr&& ActiveUsers.size()>0) {
 						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
 
-						playerInfos[ActiveUsers[0]].isSelectingPiece = true;
+						playerGameInfo[ActiveUsers[0]].isSelectingPiece = true;
 						//client.networkMessage.playerReady();
 						
 					}

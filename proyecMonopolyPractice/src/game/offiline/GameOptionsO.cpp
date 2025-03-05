@@ -127,7 +127,7 @@ void GameOptions::resource() {
 	globalBounds = cantUser.getGlobalBounds();
 	cantUser.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	nameUser = input1;
+	namePlayer = input1;
 	TOpcion.setCharacterSize(30);
 	TOpcion.setFont(fontUser);
 	TOpcion.setFillColor(sf::Color::White);
@@ -159,7 +159,7 @@ void GameOptions::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 				renderTexture.draw(TOpcion);
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -237,7 +237,7 @@ void GameOptions::update() {
 		window->setMouseCursor(*currentCursor);
 
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackground);
 		window->draw(TOpcion);
 		window->draw(spriteX);
 		window->draw(SpriteflecDerecha);

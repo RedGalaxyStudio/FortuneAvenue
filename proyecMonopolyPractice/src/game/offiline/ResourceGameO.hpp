@@ -47,7 +47,7 @@ extern int countsalary; //conteosuel
 extern bool zero; //nular
 extern std::string Code1; //Code
 extern int CplayerIndex1; //CplayerIndex1
-extern bool rolldicePlayer; //rolldiceJugador
+extern bool rolldicePlayer; //rolldicePlayer
 extern std::string namePlayer; //nameUser
 extern sf::Texture CheckOn; //CheckTexturesOn
 extern sf::Texture CheckOff; //CheckTexturesOff
