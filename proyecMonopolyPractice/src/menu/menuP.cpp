@@ -123,7 +123,7 @@ void menuP::Resource() {
 	HoverSound.setBuffer(HoverBuffer);
 	ClickSound.setBuffer(ClickBuffer);
 
-	std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound,&girosSound,&DiceSound };
+	std::vector<sf::Sound*> effectPointers = { &HoverSound, &ClickSound,&turnSound,&DicesSound };
 	std::vector<sf::Music*> MusicPointers = { &MenuMusicFondo,&GameMusicFondo,&SelectingMusicFondo };
 
 	overlay.setSize(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
@@ -516,7 +516,7 @@ void menuP::MenuOpcion(bool fon) {
 			window->draw(SpriteFondoMenu);
 		}
 		else {
-			window->draw(spriteFondoGame);
+			window->draw(spriteBackground);
 		}
 		window->draw(spriteX);
 		window->draw(SpriteBotonOpciones);

@@ -160,6 +160,9 @@
     <ClCompile Include="src\game\offiline\GameManager.cpp">
       <Filter>src\game\offline</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\ButtonG.hpp">
@@ -300,6 +303,7 @@
     <ClInclude Include="src\game\offiline\GameManager.hpp">
       <Filter>src\game\offline</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

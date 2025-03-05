@@ -100,7 +100,7 @@ void StealplayerO::update() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
-                renderTexture.draw(spriteFondoGame);
+                renderTexture.draw(spriteBackground);
                 for (int i = 0; i < UsuariosEleccion.size(); i++) {
                     renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);
                     renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].boxPlayer);
@@ -138,7 +138,7 @@ void StealplayerO::update() {
         }
 
         window->clear();
-        window->draw(spriteFondoGame);
+        window->draw(spriteBackground);
 
         for (int i = 0; i < UsuariosEleccion.size(); i++) {
             window->draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);
