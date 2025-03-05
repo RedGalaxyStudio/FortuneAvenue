@@ -3,6 +3,8 @@
 #define WIN32_LEAN_AND_MEAN
 
 //#include "ResourceGlobal.hpp"
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <winsock2.h>
 #include "NetworkMessage.hpp"
 #include <windows.h>

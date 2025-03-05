@@ -1,7 +1,7 @@
 #include "MovePiecesO.hpp"
-//#include "../../core/ResourceGlobal.hpp"
+#include "../../core/ResourceGlobal.hpp"
 #include "../../core/ObjetosGlobal.hpp"
-#include "../network/Client.hpp"
+
 MovePiecesO::MovePiecesO(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
 void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
@@ -116,8 +116,8 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				casillasRestantes = 0;
 
 				enMovimiento = false;
-				turn_Moviendo = false;
-				giroRule = true;
+				turn_Move = false;
+				turnRule = true;
 
 
 				if (PieceUser) {
@@ -130,8 +130,8 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 		else {		
 			
 			enMovimiento = false;
-			turn_Moviendo = false;
-			giroRule = true;
+			turn_Move = false;
+			turnRule = true;
 			if (*vuelta == 3) {
 
 				*CsFinal = true;
@@ -162,20 +162,20 @@ void MovePiecesO::updateCAmbioCasilla() {
 //	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
-		SpriteArrowArriba.setPosition(370, 400);
+		SpriteUpArrow.setPosition(370, 400);
 
-		SpriteArrowDer.setPosition(900, 400);
+		RightArrow.setPosition(900, 400);
 
 	}
 	else if (tan == 5) {
-		SpriteArrowArriba.setPosition(900, 400);
+		SpriteUpArrow.setPosition(900, 400);
 
-		SpriteArrowIzq.setPosition(370, 400);
+		LeftArrow.setPosition(370, 400);
 	}
 	else if (tan == 1) {
-		SpriteArrowIzq.setPosition(370, 400);
+		LeftArrow.setPosition(370, 400);
 
-		SpriteArrowDer.setPosition(900, 400);
+		RightArrow.setPosition(900, 400);
 	}
 
 	if (caminoActual >= 6) {
@@ -194,19 +194,19 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		while (window->pollEvent(event)) {
 
-			if (turn) {
+			if (firstTurn) {
 				if (event.type == sf::Event::Closed ||
 					(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 					renderTexture.clear();
-					renderTexture.draw(spriteFondoGame);
-					renderTexture.draw(spriteMapa);
+					renderTexture.draw(spriteBackground);
+					renderTexture.draw(MapSprite);
 					for (int i = 0; i < 4; i++)
 					{
-						renderTexture.draw(playersGame[i].NamePlayer);
-						renderTexture.draw(playersGame[i].boxPlayer);
-						renderTexture.draw(playersGame[i].MarcoPlayer);
-						renderTexture.draw(playersGame[i].AvatarPlayer);
+						renderTexture.draw(playerGameOff[i].NamePlayer);
+						renderTexture.draw(playerGameOff[i].boxPlayer);
+						renderTexture.draw(playerGameOff[i].MarcoPlayer);
+						renderTexture.draw(playerGameOff[i].AvatarPlayer);
 					}
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
@@ -220,7 +220,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
 					if (tan == 3) {
-						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 						//	client.networkMessage.sendPathOption(0);
@@ -228,7 +228,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 							
 						}
 
-						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 						//	client.networkMessage.sendPathOption(1);
@@ -237,7 +237,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 					}
 					else if (tan == 5) {
-						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							//client.networkMessage.sendPathOption(0);
@@ -245,7 +245,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 							
 						}
 
-						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							//client.networkMessage.sendPathOption(1);
@@ -253,14 +253,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 						}
 					}
 					else if (tan == 1) {
-						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							//client.networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 						}
 
-						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 						//	client.networkMessage.sendPathOption(1);
@@ -277,53 +277,53 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 
 
-		if (!turn) {
+		if (!firstTurn) {
 
-		//	std::cout << "\nOpcioncami:" << Opcioncami;
+		//	std::cout << "\nRoadOption:" << RoadOption;
 			if (tan == 3) {
-				if (Opcioncami == 0) {
+				if (RoadOption == 0) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoIzq();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 
-				if (Opcioncami == 1) {
+				if (RoadOption == 1) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoDer();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 
 			}
 			else if (tan == 5) {
-				if (Opcioncami == 0) {
+				if (RoadOption == 0) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoDer();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 
-				if (Opcioncami == 1) {
+				if (RoadOption == 1) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoIzq();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 			}
 			else if (tan == 1) {
-				if (Opcioncami == 0) {
+				if (RoadOption == 0) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoIzq();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 
-				if (Opcioncami == 1) {
+				if (RoadOption == 1) {
 					playClickSound();
 					finalCamino = false;
 					seleccionarCaminoDer();
-					Opcioncami = -1;
+					RoadOption = -1;
 				}
 			}
 		}
@@ -331,7 +331,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		window->setMouseCursor(*currentCursor);
 
-		float deltaTime = reloj.restart().asSeconds();
+		float deltaTime = watch.restart().asSeconds();
 		animacionRastro(deltaTime);
 
 		sf::Vector2f fichaPos = sprite->getPosition();
@@ -341,15 +341,15 @@ void MovePiecesO::updateCAmbioCasilla() {
 		if (viewY > 540) viewY = 540;
 		if (viewX < 320) viewX = 320;
 		if (viewY < 180) viewY = 180;
-		view.setCenter(viewX, viewY);
+		vision.setCenter(viewX, viewY);
 
-		view.setSize(1280 * 0.5, 720 * 0.5);
+		vision.setSize(1280 * 0.5, 720 * 0.5);
 
-		window->setView(view);
+		window->setView(vision);
 		window->clear();
 
-		window->draw(spriteFondoGame);
-		window->draw(spriteMapa);
+		window->draw(spriteBackground);
+		window->draw(MapSprite);
 		window->draw(*sprite);
 		window->setView(window->getDefaultView());
 
@@ -357,21 +357,21 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 
 		if (tan == 3) {
-			window->draw(SpriteArrowArriba);
+			window->draw(SpriteUpArrow);
 
 
-			window->draw(SpriteArrowDer);
+			window->draw(RightArrow);
 
 		}
 		else if (tan == 5) {
-			window->draw(SpriteArrowArriba);
+			window->draw(SpriteUpArrow);
 
-			window->draw(SpriteArrowIzq);
+			window->draw(LeftArrow);
 		}
 		else if (tan == 1) {
-			window->draw(SpriteArrowIzq);
+			window->draw(LeftArrow);
 
-			window->draw(SpriteArrowDer);
+			window->draw(RightArrow);
 		}
 
 
@@ -506,12 +506,12 @@ void MovePiecesO::animacionRastro(float deltaTime) {
 	if (tiempoAcumulado >= intervalo) {
 		sf::Sprite copia = *sprite;
 		copia.setColor(sf::Color(255, 255, 255, 50));
-		rastro.push_back(copia);
+		trace.push_back(copia);
 		tiempoAcumulado = 0.0f;
 	}
 
 	
-	for (auto& s : rastro) {
+	for (auto& s : trace) {
 		sf::Color color = s.getColor();
 		if (color.a > 0) {
 			color.a -= static_cast<sf::Uint8>(30 * deltaTime);
@@ -519,9 +519,9 @@ void MovePiecesO::animacionRastro(float deltaTime) {
 		}
 	}
 
-	rastro.erase(std::remove_if(rastro.begin(), rastro.end(), [](const sf::Sprite& s) {
+	trace.erase(std::remove_if(trace.begin(), trace.end(), [](const sf::Sprite& s) {
 		return s.getColor().a <= 0;
-		}), rastro.end());
+		}), trace.end());
 }
 void MovePiecesO::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 

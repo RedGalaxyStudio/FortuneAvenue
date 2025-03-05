@@ -16,9 +16,8 @@ sf::Texture TextureFondoGame;
 sf::Texture TextureMarco;
 sf::Sprite spriteFondoGame;
 int NumPlayers;
-sf::SoundBuffer DiceBuffer;
+
 std::string nameUser;
-sf::Sound DiceSound;
 sf::View view; // Declarar la vista
 sf::Clock reloj;
 std::vector<sf::Sprite> rastro;
@@ -38,8 +37,7 @@ bool rolldiceJugador;
 std::string username;
 std::vector<char> image; // Store image data directly.
 bool chatOn = false;
- sf::SoundBuffer girosBuffer;
- sf::Sound girosSound;
+
  bool nular;
 int conteosuel;
 sf::Sprite SpriteArrowIzq;
