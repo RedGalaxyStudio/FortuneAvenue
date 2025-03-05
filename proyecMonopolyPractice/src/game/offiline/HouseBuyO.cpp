@@ -2,6 +2,7 @@
 #include <sstream>
 #include "../../libs/nlohmann/json.hpp"
 //#include "card.h"
+#include "../../core/ObjetosGlobal.hpp"
 #include <filesystem>
 #include <cstring>
 #include <fstream>
@@ -104,7 +105,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	Cell c2(q.at(2), sf::Color(0, 0, 255, 255), posicionactuInicial); cellQua.push_back(c2);
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
-	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
+	Cell c5(q.at(5), &TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 	std::cout << "\nIndexCAsa" << IndexCAsa;
 	
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
@@ -143,12 +144,12 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 				for (int i = 0; i < 4; i++) {
-					renderTexture.draw(playersGame[i].NamePlayer);
-					renderTexture.draw(playersGame[i].boxPlayer);
-					renderTexture.draw(playersGame[i].MarcoPlayer);
-					renderTexture.draw(playersGame[i].AvatarPlayer);
+					renderTexture.draw(playerGameOff[i].NamePlayer);
+					renderTexture.draw(playerGameOff[i].boxPlayer);
+					renderTexture.draw(playerGameOff[i].MarcoPlayer);
+					renderTexture.draw(playerGameOff[i].AvatarPlayer);
 				}
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -159,17 +160,17 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 			if (turn) {
 				
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
-					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerInfos[0].money>= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
+					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerGameInfo[0].money>= houses[playerGameInfo[0].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						//client.networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
+						//client.networkMessage.buyHouse(playerGameInfo[0].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
-						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
+						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]]);
 						VCcompradas.push_back(CasasaCOMPRAR);
 						CsCmpdrsindex.push_back(IndexCAsa);
 
-						playerInfos[UsuariosActivos[0]].numCasas += 1;
-						playersGame[UsuariosActivos[0]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[0]].numCasas));
+						playerGameInfo[ActiveUsers[0]].numCasas += 1;
+						playerGameOff[ActiveUsers[0]].CasasN.setString(std::to_string(playerGameInfo[ActiveUsers[0]].numCasas));
 						cierre = true;
 					}
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
@@ -236,7 +237,7 @@ void HouseBuyO::ViewHouseBuys() {
 	//for (int i = 0; i < 6; i++)
 	//{
 	//	CasasCompradas CasasaCOMPRAR;
-	//	CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[i]]);
+	//	CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[index].casasPorJugador[i]]);
 	//	VCcompradas.push_back(CasasaCOMPRAR);
 	//	CsCmpdrsindex.push_back(i);
 	//}
@@ -283,7 +284,7 @@ void HouseBuyO::ViewHouseBuys() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackground);
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -327,7 +328,7 @@ void HouseBuyO::ViewHouseBuys() {
 		CartaActiva = false;
 		window->clear();
 
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackground);
 
 		for (int i = 0; i < VCcompradas.size(); i++) {
 			window->draw(VCcompradas[i].CsCmpdrsSprite);

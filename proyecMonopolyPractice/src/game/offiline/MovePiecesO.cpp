@@ -1,6 +1,7 @@
 #include "MovePiecesO.hpp"
-#include "../../core/ResourceGlobal.hpp"
-
+//#include "../../core/ResourceGlobal.hpp"
+#include "../../core/ObjetosGlobal.hpp"
+#include "../network/Client.hpp"
 MovePiecesO::MovePiecesO(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
 void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
@@ -153,7 +154,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 	}
-	std::cout << "\n Peinci11111111111";
+	//std::cout << "\n Peinci11111111111";
 }
 void MovePiecesO::updateCAmbioCasilla() {
 

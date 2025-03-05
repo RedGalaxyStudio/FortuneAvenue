@@ -22,10 +22,10 @@ private:
     float startX;
     float startY;
 
-
+    int Nmap;
 public:
     
-    PieceSelectOff(sf::RenderWindow* windowRef);
+    PieceSelectOff(sf::RenderWindow* windowRef,int UsersN,int Map);
     ~PieceSelectOff();
     void Resource();
 

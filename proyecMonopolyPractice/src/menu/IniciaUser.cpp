@@ -312,7 +312,7 @@ void IniciaUser::loadAvatars(){
     avatarTextures.resize(avatarCount);
     textureAvatarsFilePath.resize(avatarCount);
 
-
+    printMemoryUsage();
 
     for (int i = 0; i < avatarCount; i++) {
 

@@ -23,7 +23,7 @@ public:
 
 
 	bool turnoGiro;
-	GameOffline(sf::RenderWindow& win);
+	GameOffline(sf::RenderWindow& win, int NumMapa);
 
 	void resource();
 
@@ -90,7 +90,7 @@ private:
 
 
 	};
-
+	int NMapa;
 
 	std::vector<sf::Vector2f> caminocasa{
 		sf::Vector2f(807, 416),

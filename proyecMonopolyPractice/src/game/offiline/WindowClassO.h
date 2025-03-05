@@ -15,7 +15,7 @@ class WindowO {
 	sf::Vector2i mouseEnd;
 	sf::Mouse mouse;
 	sf::VertexArray Cube3D;
-	Cube* cube;
+	CubeO* cube;
 
 
 	float calcdis(sf::Vector2i p1, sf::Vector2i p2)
@@ -86,7 +86,7 @@ public:
 
 	void start(unsigned int Width, unsigned int Height) {
 
-		cube = new Cube(100);
+		cube = new CubeO(100);
 		Cube3D.setPrimitiveType(sf::Quads);
 		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
 		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
@@ -162,7 +162,7 @@ public:
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				turn_dice = false;
-				DiceSound.play();
+				DicesSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
 
@@ -189,14 +189,14 @@ public:
 	{
 
 
-		if (rolldiceJugador) {
+		if (rolldicePlayer) {
 			//std::unique_lock<std::mutex> lock(client->mtx);
 
 			//while (client->lastRollResult == -1) {
 			//	client->cv.wait(lock);
 			//}
 
-			DiceSound.play();
+			DicesSound.play();
 			updateDiceAppearance();
 			eventStarted = true;
 
@@ -208,9 +208,9 @@ public:
 			faceIndex = 1;//client->lastRollResult;
 			//client->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
-			espera = false;
-			rolldiceJugador = false;
-			otherturn = false;
+			wait = false;
+			rolldicePlayer = false;
+			secondTurn = false;
 		}
 	};
 

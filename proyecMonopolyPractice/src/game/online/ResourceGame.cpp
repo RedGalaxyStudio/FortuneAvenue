@@ -91,6 +91,10 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
 
     SpriteConfirmarSalir.setTexture(Pregunta);
     sf::Shader Blur;
+    TextureBotonSiOn.loadFromFile("assets/image/Button/BotonSiOn.png");
+    TextureBotonSiOff.loadFromFile("assets/image/Button/BotonSiOff.png");
+    TextureBotonNoOn.loadFromFile("assets/image/Button/BotonNoOn.png");
+    TextureBotonNoOff.loadFromFile("assets/image/Button/BotonNoOff.png");
     Blur.loadFromFile("assets/Shaders/blur.frag", sf::Shader::Fragment);
     Blur.setUniform("resolution", sf::Glsl::Vec2(
         static_cast<float>(window->getSize().x),

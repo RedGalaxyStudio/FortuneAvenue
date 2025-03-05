@@ -638,7 +638,7 @@ void MultiplayerGame::update() {
 
 
 
-
+		std::cout << "\n HOLa:" << client->juegoTerminado;
 
 	}
 
@@ -1013,12 +1013,15 @@ void MultiplayerGame::DrawGame() {
 		turn_ruleta = false;
 		userRuleta = false;
 	}
+	std::cout << "probando" << std::endl;
 	if (userCasa) {
 		casa_draw = true;
 		eventoActivo = true;
+		std::cout << "probando2" << std::endl;
 		userCasa = false;
 		turn_casa = false;
 	}
+	std::cout << "probando3" << std::endl;
 	if (userImpuesto) {
 
 		impuesto_draw = true;
@@ -1039,7 +1042,7 @@ void MultiplayerGame::DrawGame() {
 	}
 
 
-	std::cout << "turn: " << turn << "\n";
+/*	std::cout << "turn: " << turn << "\n";
 	std::cout << "turn_impuesto: " << turn_impuesto << "\n";
 	std::cout << "turn_casa: " << turn_casa << "\n";
 	std::cout << "turn_ruleta: " << turn_ruleta << "\n";
@@ -1049,7 +1052,7 @@ void MultiplayerGame::DrawGame() {
 	std::cout << "impuesto_draw: " << impuesto_draw << "\n";
 	std::cout << "casa_draw: " << casa_draw << "\n";
 	std::cout << "ruleta_draw: " << ruleta_draw << "\n";
-
+*/
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
 
 		client->networkMessage.endTurn();

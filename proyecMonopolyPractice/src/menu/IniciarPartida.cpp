@@ -12,6 +12,7 @@ IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client(new
 }
 
 void IniciarPartida::resource() {
+	printMemoryUsage();
 	TextureCrearPartidaOff.loadFromFile("assets/image/Game/CrearPartidaOff.png");
 	TextureCrearPartidaOn.loadFromFile("assets/image/Game/CrearPartidaOn.png");
 	TextureUnirse.loadFromFile("assets/image/Game/unirse1encendido.png");
@@ -62,7 +63,7 @@ void IniciarPartida::update() {
 	box.setPosition(xPos, startY + 110);
 	selectedAvatarCopy.setPosition(xPos, startY);
 	recua.setPosition(xPos, startY);
-
+	printMemoryUsage();
 	
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {

@@ -7,14 +7,14 @@
 #include <thread>
 
 
-PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef)
-	: window(windowRef), selectedPiece(-1) {
+PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
+	: window(windowRef), selectedPiece(-1),Nmap(Map) {
 	loadResourceGame();
 }
 PieceSelectOff::~PieceSelectOff() {
 	pieces.clear();
 	shadow.clear();
-	piecesTextures.clear();
+	pieceShape.clear();
 	window = nullptr;
 	newSelection = nullptr;
 }
@@ -22,39 +22,41 @@ void PieceSelectOff::Resource() {
 	std::cout << "\nwo";
 	
 	int piecesCount = 19;  //Cantidad de piezas
-	pieces.resize(piecesCount);
+	piecesOff.resize(piecesCount);
 	shadow.resize(piecesCount);
-	piecesTextures.resize(piecesCount);
+	pieceShape.resize(piecesCount);
 
-	turn_dado = false;
-	turn = false;
-	turn_ruleta=false;
-	turn_casa= false;
-	turn_impuesto= false;
-	rolldiceJugador = false;
+
+
+	turn_dice = false;
+	firstTurn = false;
+	turn_roulette =false;
+	turn_house = false;
+	turn_Tax = false;
+	rolldicePlayer = false;
 	std::cout << "\nwo";
 	if (!Textufondopiece.loadFromFile("assets/image/Game/FondoGameScroll.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
-	if (!CheckTexturesOn.loadFromFile("assets/image/Game/check1on.png")) return;
-	if (!CheckTexturesOff.loadFromFile("assets/image/Game/check1off.png")) return;
+	if (!CheckOn.loadFromFile("assets/image/Game/check1on.png")) return;
+	if (!CheckOff.loadFromFile("assets/image/Game/check1off.png")) return;
 
 	std::cout << "\nwo";
 	for (int i = 0; i < piecesCount; i++) {
-		if (!piecesTextures[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
+		if (!pieceShape[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
 			return;
 
-		float radio = piecesTextures[i].getSize().x / 2.0f;
-		pieces[i].setTexture(piecesTextures[i]);
-		shadow[i].setTexture(piecesTextures[i]);
-		globalBounds = pieces[i].getGlobalBounds();
-		pieces[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+		float radio = pieceShape[i].getSize().x / 2.0f;
+		piecesOff[i].setTexture(pieceShape[i]);
+		shadow[i].setTexture(pieceShape[i]);
+		globalBounds = piecesOff[i].getGlobalBounds();
+		piecesOff[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		shadow[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	}
 	std::cout << "\nwo";
 
-	for (int i = 0; i < pieces.size(); i++) {
+	for (int i = 0; i < piecesOff.size(); i++) {
 		int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
 		int col = i % 8;  // Determina la columna (0 a 7)
 
@@ -62,47 +64,41 @@ void PieceSelectOff::Resource() {
 		float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
 		//std::cout << i << "  X :" << x << "y :" << y << std::endl;
 
-		pieces[i].setPosition(x, y);
+		piecesOff[i].setPosition(x, y);
 
 		shadow[i].setPosition(x, y);
 		shadow[i].setScale(2.0f, 2.0f);
-		pieces[i].setScale(2.0f, 2.0f);
+		piecesOff[i].setScale(2.0f, 2.0f);
 		shadow[i].setColor(sf::Color(0, 5, 100, 40)); // Aplicar un color negro semi-transparente
 
 	}
 
 }
 void PieceSelectOff::displayPieces() {
-	for (size_t i = 0; i < pieces.size(); ++i) {
-		window->draw(pieces[i]);  // Draw all pieces
+	for (size_t i = 0; i < piecesOff.size(); ++i) {
+		window->draw(piecesOff[i]);  // Draw all pieces
 		window->draw(shadow[i]);  // Draw all pieces
 
 	}
 }
 void PieceSelectOff::updateSelection() {
 
-	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	std::cout << "\naqui";
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-	std::cout << "\nnword";
 
-	
-	
-	
-	PlayerInfo playerInfoNew;
-	PlayerGame playerGameNew;
-	playerInfoNew.username = nameUser;
+	PlayerInformation playerInfoNew;
+	PlayerGameOff playerGameNew;
+	playerInfoNew.playerName = namePlayer;
 	playerInfoNew.PiecUserme = true;
-	playerInfos.push_back(playerInfoNew);
-	std::cout << "\n" << playerInfos[0].username;
+	playerGameInfo.push_back(playerInfoNew);
+	std::cout << "\n" << playerGameInfo[0].playerName;
 
 
 	playerGameNew.CashSprite.setTexture(TextureCash);
-	playerGameNew.Home.setTexture(TextureHome);
+	playerGameNew.Home.setTexture(TextureBuilding);
 	playerGameNew.NamePlayer.setCharacterSize(17);
-	playerGameNew.NamePlayer.setFont(fontUserPerfil);
+	playerGameNew.NamePlayer.setFont(fontUserProfile);
 	playerGameNew.NamePlayer.setFillColor(sf::Color::White);
 	playerGameNew.NamePlayer.setOutlineThickness(2);
 	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
@@ -230,7 +226,7 @@ void PieceSelectOff::updateSelection() {
 
 					avatarBounds[i] = sf::FloatRect(xPos, yPos, pieces[i].getGlobalBounds().width, pieces[i].getGlobalBounds().height);
 
-					pieces[i].setPosition(xPos, yPos);
+					piecesOff[i].setPosition(xPos, yPos);
 					shadow[i].setPosition(xPos, yPos);
 				}
 			}
@@ -239,36 +235,25 @@ void PieceSelectOff::updateSelection() {
 				static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
 
 
-				for (int i = 0; i < pieces.size(); ++i) {
+				for (int i = 0; i < piecesOff.size(); ++i) {
 					// Verificar si el mouse está sobre la pieza
-					if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
-						if (previousSelection != &pieces[i]) {  // Evitar resaltado si es la misma pieza
+					if (piecesOff[i].getGlobalBounds().contains(mousePosFloat)) {
+						if (previousSelection != &piecesOff[i]) {  // Evitar resaltado si es la misma pieza
 							if (previousSelection != nullptr) {
 								previousSelection->setColor(sf::Color::White);  // Quitar el efecto de la anterior
 							}
 							// Asigna la textura y ajusta la escala y el origen
-							newSelection = &pieces[i];
-							std::cout << "\nHola";
-
-							playersGame[0].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
-							std::cout << "\nHola";
-							playersGame[0].PieceSelect.setScale(pieces[i].getScale());  // Ajustar la escala
-							std::cout << "\nHola";
-							playersGame[0].PieceSelect.setOrigin(pieces[i].getOrigin());  // Ajustar el origen
-							std::cout << "\nHola";
-							playersGame[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
-							std::cout << "\nHola";
-							playersGame[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
-							std::cout << "\nHola";
-							pieces[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
-							std::cout << "\nHola";
+							newSelection = &piecesOff[i];
+							playerGameOff[0].PieceSelect.setTexture(piecesTextures[i], true);  // Reajustar rectángulo de la textura
+							playerGameOff[0].PieceSelect.setScale(piecesOff[i].getScale());  // Ajustar la escala
+							playerGameOff[0].PieceSelect.setOrigin(piecesOff[i].getOrigin());  // Ajustar el origen
+							playerGameOff[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playerGameOff[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							piecesOff[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerInfos[0].indexPiece = i;
-					
-							std::cout << "\nHola";
-							pieces[i].setColor(sf::Color(248, 134, 255));
+							piecesOff[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
-							previousSelection = &pieces[i];  // Actualizar la selección anterior
-							std::cout << "\nHola";
+							previousSelection = &piecesOff[i];  // Actualizar la selección anterior
 						}
 						break;
 					}
@@ -286,7 +271,7 @@ void PieceSelectOff::updateSelection() {
 						
 					}
 
-					GameOffline gameOff(*window);
+					GameOffline gameOff(*window, Nmap);
 					gameOff.update();
 
 				}
@@ -298,9 +283,6 @@ void PieceSelectOff::updateSelection() {
 						playersGame.clear();
 						playerInfos.clear();
 						UsuariosActivos.clear();
-						std::cout<<"\n numero : "<<playersGame.size();
-				
-					//client.disconnect();
 
 				}
 
@@ -373,14 +355,14 @@ void PieceSelectOff::updateSelection() {
 				float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
 				float yPos = startY;
 				// Posicionar elementos
-				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY );
-				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY );
-				playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos, startY + 100);
-				playersGame[UsuariosActivos[i]].Check.setPosition(xPos, yPos + 200);
-				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
-				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
-				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
-				window->draw(playersGame[UsuariosActivos[i]].Check);
+				playerGameOff[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY );
+				playerGameOff[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY );
+				playerGameOff[UsuariosActivos[i]].PieceSelect.setPosition(xPos, startY + 100);
+				playerGameOff[UsuariosActivos[i]].Check.setPosition(xPos, yPos + 200);
+				window->draw(playerGameOff[UsuariosActivos[i]].NamePlayer);
+				window->draw(playerGameOff[UsuariosActivos[i]].boxPlayer);
+				window->draw(playerGameOff[UsuariosActivos[i]].PieceSelect);
+				window->draw(playerGameOff[UsuariosActivos[i]].Check);
 			}
 
 
@@ -397,17 +379,18 @@ void PieceSelectOff::updateSelection() {
 	}
 
 }
+
 void PieceSelectOff::updatePlayerPieceSelection(int newPieceIndex) {
 
 	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
 	pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
 	std::cout << "\nplayersGame" << playersGame.size();
 	// Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
-	playersGame[CplayerIndex].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
-	playersGame[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
-	playersGame[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
-	playersGame[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
-	playersGame[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
+	playerGameOff[CplayerIndex].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
+	playerGameOff[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
+	playerGameOff[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
+	playerGameOff[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
+	playerGameOff[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
 	previousSelectionIndex[CplayerIndex] = newPieceIndex;
 
 }
