@@ -4,7 +4,9 @@ Client::Client() : client(nullptr),peer(nullptr), running(false),
 lastRollResult(0), turnopermitido(0), conteoturn(0), accionCompra(false),
 anguloActualrule(0.f), casasCargadas(false), decelerationRateActi(0.f),
 disActiv(false), disconnecte(false), giroActivo(false), initialSpeedActi(0.f),
-isConnected(false),playerIndex(-1) {}
+isConnected(false),playerIndex(-1) {
+	std::cout << "\n[DEBUG] Constructor: Dirección de client: " << std::hex << reinterpret_cast<uintptr_t>(client);
+}
 
 int Client::calcularNumeroDeLineas(const sf::Text& text) {
 	// Obtener el rectángulo delimitador (bounding box) del texto
@@ -56,27 +58,42 @@ Client::~Client() {
 	enet_deinitialize();
 }
 bool Client::initialize() {
+	std::cout << "\n[DEBUG] Dirección de client al inicio de initialize: " << std::hex << reinterpret_cast<uintptr_t>(client);
 
 	//std:: << "\nInicia";
+	std::cout << "\nHola";
 	static bool enetInitialized = false;
 	if (!enetInitialized) {
+		std::cout << "\nHola1";
 		if (enet_initialize() != 0) {
 			std::cerr << "Error initializing ENet!" << std::endl;
+			std::cout << "\nHola11";
 			return false;
 		}
 		enetInitialized = true;
+		std::cout << "\nHola111";
 	}
 
 	// Solo crear cliente si no existe
+	std::cout << "\nHola32422222222222";
+	std::cout << "\nValor de client antes del if: " << client;
+	if (reinterpret_cast<uintptr_t>(client) < 0x1000) {  // Detectar valores raros
+		std::cout << "\nClient tiene un valor inesperado, reiniciándolo...";
+		client = nullptr;
+	}
 	if (!client) {
+		std::cout << "\nHola324";
 		client = enet_host_create(nullptr, 1, 2, 0, 0);
+		std::cout << "\nHola3224";
 		if (!client) {
 			std::cerr << "Error creating ENet client!" << std::endl;
+			std::cout << "\nHo2la";
 			return false;
 		}
 	}
 
 	//std:: << "\nInicia0";
+	std::cout << "\nHola";
 	return true;
 }
 void Client::insertarCola(Nodo*& frente, Nodo*& fin, std::string n) {

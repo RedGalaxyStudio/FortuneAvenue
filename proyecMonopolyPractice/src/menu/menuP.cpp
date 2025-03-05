@@ -122,10 +122,7 @@ void menuP::MenuPrincipal() {
 
 
 
-    editorPerfil.setFillColor(sf::Color(0, 0, 0, 0));
-    editorPerfil.setSize(sf::Vector2f( 380.0f,145.0f));
-    editorPerfil.setPosition(16,0);
-    editorPerfil.setOrigin(0, 0);
+ 
     recua.setPosition(84,74);
     recua.setScale(1,1);
     Sesion.setCharacterSize(24);
@@ -175,7 +172,6 @@ void menuP::MenuPrincipal() {
         window->draw(SpriteBotonOpciones);
         window->draw(SpriteBotonSalir);
         window->draw(spriteAcercaDe);
-        window->draw(editorPerfil);
         window->draw(spriteEditButton);
         window->display();
     }
@@ -254,7 +250,7 @@ void menuP::eventoMenuP() {
              
             } 
             
-            if (editorPerfil.getGlobalBounds().contains(mousePosFloat)) {
+            if (spriteEditButton.getGlobalBounds().contains(mousePosFloat)) {
                 
                 playClickSound();
                 editPerfil();

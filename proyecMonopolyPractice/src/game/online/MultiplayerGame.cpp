@@ -1013,12 +1013,15 @@ void MultiplayerGame::DrawGame() {
 		turn_ruleta = false;
 		userRuleta = false;
 	}
+	std::cout << "probando" << std::endl;
 	if (userCasa) {
 		casa_draw = true;
 		eventoActivo = true;
+		std::cout << "probando2" << std::endl;
 		userCasa = false;
 		turn_casa = false;
 	}
+	std::cout << "probando3" << std::endl;
 	if (userImpuesto) {
 
 		impuesto_draw = true;
