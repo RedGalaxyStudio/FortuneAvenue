@@ -1,7 +1,7 @@
 #include "Ruleta.hpp"
 #include "ResourceGame.hpp"
 #include <cstdlib> // Para rand() y RAND_MAX
-
+#include "../../ui/Sound.hpp"
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
 	: width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {

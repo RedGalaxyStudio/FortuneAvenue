@@ -250,7 +250,7 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[1]].CashSprite.setPosition(1240.65f, 95.5f);
 
 		playerGameOff[ActiveUsers[1]].CasasN.setCharacterSize(17);
-		playerGameOff[ActiveUsers[1]].CasasN.setFont(playerGameInfo);
+		playerGameOff[ActiveUsers[1]].CasasN.setFont(fontUser);
 		playerGameOff[ActiveUsers[1]].CasasN.setFillColor(sf::Color::White);
 		playerGameOff[ActiveUsers[1]].CasasN.setOutlineThickness(2);
 		playerGameOff[ActiveUsers[1]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
@@ -304,7 +304,7 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[2]].CashSprite.setPosition(240.65f, 595.5f);
 
 		playerGameOff[ActiveUsers[2]].CasasN.setCharacterSize(17);
-		playerGameOff[ActiveUsers[2]].CasasN.setFont(playerGameInfo);
+		playerGameOff[ActiveUsers[2]].CasasN.setFont(fontUser);
 		playerGameOff[ActiveUsers[2]].CasasN.setFillColor(sf::Color::White);
 		playerGameOff[ActiveUsers[2]].CasasN.setOutlineThickness(2);
 		playerGameOff[ActiveUsers[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));

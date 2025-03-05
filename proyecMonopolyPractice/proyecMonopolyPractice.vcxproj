@@ -183,6 +183,7 @@
     <ClCompile Include="src\ui\fileio.cpp" />
     <ClCompile Include="src\ui\MensageBox.cpp" />
     <ClCompile Include="src\ui\Scrollbar.cpp" />
+    <ClCompile Include="src\ui\Sound.cpp" />
     <ClCompile Include="src\ui\TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +232,7 @@
     <ClInclude Include="src\ui\MensageBox.hpp" />
     <ClInclude Include="src\ui\Particles.h" />
     <ClInclude Include="src\ui\Scrollbar.hpp" />
+    <ClInclude Include="src\ui\Sound.hpp" />
     <ClInclude Include="src\ui\TextBox.hpp" />
   </ItemGroup>
   <ItemGroup>
