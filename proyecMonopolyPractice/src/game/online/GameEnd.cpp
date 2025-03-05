@@ -1,5 +1,6 @@
 #include "GameEnd.hpp"
 #include <iostream>
+#include "../../core/ObjetosGlobal.hpp"
 
 // Constructor
 GameEnd::GameEnd(sf::RenderWindow* window, Client* clienT) : window(window),client(clienT) {
@@ -568,7 +569,7 @@ void GameEnd::update() {
 					// Calcular origen tras escala
 					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
 					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-					std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f << "," << pieceSelectBounds.height / 2.0f;
+					//std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f << "," << pieceSelectBounds.height / 2.0f;
 					// Posicionar el objeto centrado
 					
 				}

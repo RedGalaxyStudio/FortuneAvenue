@@ -66,7 +66,11 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
             fondo->setVolume(volume);
         }
     }
-    loadVolumenIcon();
+
+    if (!TextureMuted.loadFromFile("assets/image/Button/VolumeMuted.png")) return;
+    if (!TextureMedium.loadFromFile("assets/image/Button/VolumeMedium.png")) return;
+    if (!TextureHigh.loadFromFile("assets/image/Button/VolumeHigh.png")) return;
+
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));
@@ -151,7 +155,12 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
             effect->setVolume(volume);
         }
     }
-    loadVolumenIcon();
+    
+    if (!TextureMuted.loadFromFile("assets/image/Button/VolumeMuted.png")) return;
+    if (!TextureMedium.loadFromFile("assets/image/Button/VolumeMedium.png")) return;
+    if (!TextureHigh.loadFromFile("assets/image/Button/VolumeHigh.png")) return;
+
+
     bar.setSize(sf::Vector2f(width, height));
     bar.setPosition(x, y);
     bar.setFillColor(sf::Color(50, 50, 50));

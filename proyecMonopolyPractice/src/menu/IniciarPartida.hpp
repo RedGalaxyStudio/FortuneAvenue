@@ -1,6 +1,6 @@
 #ifndef INICIARPARTIDA_HPP
 #define INICIARPARTIDA_HPP
-#include "../game/online/ResourceGame.hpp"
+//#include "../game/online/ResourceGame.hpp"
 #include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 #include "../game/online/PieceSelector.hpp"

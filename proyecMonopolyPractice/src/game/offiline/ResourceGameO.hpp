@@ -36,7 +36,7 @@ extern sf::Sprite LeftArrow; //SpriteArrowIzq
 extern bool plataform; //server
 extern std::vector<sf::Sprite> piecesOff; //pieces
 extern sf::Sprite SpriteUpArrow; //SpriteArrowArriba
-//extern int previousSelectionIndex[4];
+extern int previousSelectionIndex[4];
 extern bool userRulette; //userRuleta
 extern bool userTax; //userImpuesto
 extern bool userHouse; //userCasa
@@ -53,7 +53,7 @@ extern sf::Texture CheckOn; //CheckTexturesOn
 extern sf::Texture CheckOff; //CheckTexturesOff
 struct PlayerInformation {
 	std::string playerName; //username
-	std::string image1; //image
+	std::string image; //image
 	int numCasas=0;
 	int money = 200;
 	int impuesto = 50;
@@ -68,7 +68,7 @@ struct PlayerInformation {
 	bool PiecUserme = false;
 	void reset() {
 		playerName.clear();                        // Vaciar el nombre de usuario
-		image1.clear();                           // Vaciar la imagen
+		image.clear();                           // Vaciar la imagen
 		money = 200;                             // Restablecer dinero al valor inicial
 		roomconect = 0;                          // Restablecer a 0 (o el valor que desees)
 		isSelectingPiece = false;                // Reiniciar a falso

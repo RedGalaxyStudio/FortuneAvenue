@@ -1,6 +1,6 @@
 #ifndef GAMEMODESELECTOR_HPP
 #define GAMEMODESELECTOR_HPP
-#include "../game/online/ResourceGame.hpp"
+
 #include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 

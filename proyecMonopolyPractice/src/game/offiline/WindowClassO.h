@@ -15,7 +15,7 @@ class WindowO {
 	sf::Vector2i mouseEnd;
 	sf::Mouse mouse;
 	sf::VertexArray Cube3D;
-	Cube* cube;
+	CubeO* cube;
 
 
 	float calcdis(sf::Vector2i p1, sf::Vector2i p2)
@@ -86,7 +86,7 @@ public:
 
 	void start(unsigned int Width, unsigned int Height) {
 
-		cube = new Cube(100);
+		cube = new CubeO(100);
 		Cube3D.setPrimitiveType(sf::Quads);
 		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
 		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));

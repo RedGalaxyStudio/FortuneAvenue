@@ -33,6 +33,7 @@ PieceSelector::~PieceSelector() {
 
 void PieceSelector::Resource() {
 	std::cout << "\nwo";
+	printMemoryUsage();
 	
 	int piecesCount = 19;  //Cantidad de piezas
 	pieces.resize(piecesCount);
@@ -52,6 +53,8 @@ void PieceSelector::Resource() {
 
 
 	std::cout << "\nwo";
+	printMemoryUsage();
+	std::cout << "\nwo desues";
 	for (int i = 0; i < piecesCount; i++) {
 		if (!piecesTextures[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
 			return;
@@ -65,7 +68,7 @@ void PieceSelector::Resource() {
 
 	}
 	std::cout << "\nwo";
-
+	printMemoryUsage();
 	for (int i = 0; i < pieces.size(); i++) {
 		int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
 		int col = i % 8;  // Determina la columna (0 a 7)
@@ -158,6 +161,7 @@ void PieceSelector::updateSelection() {
 	float separacion = 20.0f;   // Espaciado entre perfiles
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
+	printMemoryUsage();
 	while (window->isOpen()&& !cierre) {
 
 

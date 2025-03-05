@@ -1,4 +1,5 @@
 #include "Client.hpp"
+#include "../game/online/ResourceGame.hpp"
 
 Client::Client() : client(nullptr),peer(nullptr), running(false),
 lastRollResult(0), turnopermitido(0), conteoturn(0), accionCompra(false),
@@ -19,8 +20,6 @@ int Client::calcularNumeroDeLineas(const sf::Text& text) {
 
 	return numeroDeLineas;
 }
-
-
 std::string generateRoomCode() {
 	std::string code;
 	std::random_device rd;
@@ -478,16 +477,17 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("INVERCIONSEGURA", 0) == 0) {
 		
-		std::string data = message.substr(17);
+		std::string data = message.substr(15 + 1);
+		std::cout << "\n entra en inversion:"<<data;
 		std::istringstream iss(data);
 		std::string  indexStr, moneyStr;
-
+		std::cout << "\n entra en inversion";
 		if (!(std::getline(iss, indexStr, ':') &&
 			std::getline(iss, moneyStr, ':'))
 			) {
 			return;
 		}
-		std::cout << "\nindexStr:" << indexStr << " moneyStr:" << moneyStr;
+		std::cout << "\nindexStr:" << indexStr << " moneyStr:" << moneyStr<<".:.";
 		int indext = std::stoi(indexStr);
 		playerInfos[indext].money = std::stoi(moneyStr);
 

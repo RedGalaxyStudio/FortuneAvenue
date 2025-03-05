@@ -2,6 +2,7 @@
 #include <sstream>
 #include "../../libs/nlohmann/json.hpp"
 //#include "card.h"
+#include "../../core/ObjetosGlobal.hpp"
 #include <filesystem>
 #include <cstring>
 #include <fstream>

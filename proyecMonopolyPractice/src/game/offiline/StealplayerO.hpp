@@ -15,11 +15,11 @@ private:
     std::vector<sf::Vector2f> PosIsMouseOver;
     sf::Texture texturebottonRobar;
     sf::Sprite SpritebottonRobar;
-    std::vector<PlayerGame> PlayersSteal;
+    std::vector<PlayerGameOff> PlayersSteal;
     
     
 public:
-    StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGame> PSteal);        // Constructor que toma la ventana principal
+    StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGameOff> PSteal);        // Constructor que toma la ventana principal
     ~StealplayerO();                               // Destructor
     void resource();
     void update();

@@ -1,6 +1,6 @@
 #include "GameEndO.hpp"
 #include <iostream>
-
+#include "../../core/ObjetosGlobal.hpp"
 // Constructor
 GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 

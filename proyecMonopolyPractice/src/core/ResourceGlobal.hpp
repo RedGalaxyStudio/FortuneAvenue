@@ -7,8 +7,6 @@
 #include "../menu/menuP.hpp"
 #include <string>
 #include <iostream>
-#include <../../libs/curl/include/curl/curl.h>
-
 extern sf::Music MenuMusicFondo;
 extern sf::Music GameMusicFondo;
 extern sf::Music SelectingMusicFondo;
@@ -59,13 +57,7 @@ extern sf::Texture TextureBotonNoOff;
 extern sf::Sprite SpriteBotonNo;
 
 
-
+void printMemoryUsage();
 void playClickSound();
-void loadVolumenIcon();
-void loadSounds();
-void loadTextures();
-void loadCursors();
-void GetUserEmail();
-size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
 
 #endif 

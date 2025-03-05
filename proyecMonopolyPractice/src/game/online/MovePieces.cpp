@@ -1,5 +1,6 @@
 #include "MovePieces.hpp"
 #include "../../core/ResourceGlobal.hpp"
+#include "../../core/ObjetosGlobal.hpp"
 
 MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
 void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
@@ -9,7 +10,7 @@ void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Ve
 	this->final = fin;
 	this->CsFinal = CsFin;
 	PieceUser = PiecUser;
-	*vuelta = 2;
+	*vuelta = 0;
 }
 void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
@@ -110,7 +111,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			sprite->setPosition(nuevaPosicion);
 
 			if (*vuelta == 3&& sprite->getPosition()== final){
-
+				std::cout << "\nvuelta:" << *vuelta << ".Sprite:" << sprite->getPosition().x << ";" << sprite->getPosition().y << " Final:" << final.x << ";" << final.y;
 				*CsFinal = true;
 				casillasRestantes = 0;
 
@@ -127,12 +128,13 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			}
 		}
 		else {		
-			
+			std::cout << "\nvuelta2:" << *vuelta << ".Sprite:" << sprite->getPosition().x << ";" << sprite->getPosition().y << " Final:" << final.x << ";" << final.y;
+
 			enMovimiento = false;
 			turn_Moviendo = false;
 			giroRule = true;
 			if (*vuelta == 3) {
-
+				std::cout << "\nvuelta2:" << *vuelta;
 				*CsFinal = true;
 			
 
@@ -153,7 +155,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 
 	}
-	std::cout << "\n Peinci11111111111";
+	//std::cout << "\n Peinci11111111111";
 }
 void MovePieces::updateCAmbioCasilla() {
 
@@ -176,7 +178,6 @@ void MovePieces::updateCAmbioCasilla() {
 
 		SpriteArrowDer.setPosition(900, 400);
 	}
-
 	if (caminoActual >= 6) {
 		caminoActual = 0;
 		casillas->resize(1);

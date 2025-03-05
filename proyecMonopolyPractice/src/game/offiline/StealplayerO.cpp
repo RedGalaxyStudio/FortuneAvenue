@@ -1,8 +1,9 @@
 #include "StealplayerO.hpp"
 #include <iostream>
+#include "../../core/ObjetosGlobal.hpp"
 
 // Constructor
-StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGameOff> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
 
