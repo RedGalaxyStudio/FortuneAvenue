@@ -37,7 +37,7 @@ private:
     
     void MenuAcercaDe();
     void ValidarUser();
-    sf::RectangleShape editorPerfil;
+
 
     sf::RenderWindow* window;
 
