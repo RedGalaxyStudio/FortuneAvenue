@@ -10,14 +10,12 @@
 class Client;
 
 extern std::vector<sf::Texture> TextureCasa;
-extern sf::Texture TextureFondoGame;
+
 extern sf::Texture TextureCash;
 extern sf::Texture TextureHome;
 extern  sf::Texture TextureMarco;
-extern sf::Sprite spriteFondoGame;
+
 extern int NumPlayers;
-extern sf::SoundBuffer DiceBuffer;
-extern sf::Sound DiceSound;
 extern sf::Font &fontUserPerfil;
 extern sf::Texture &textureBoxPerfil;
 extern sf::Sprite spriteMapa;
@@ -35,8 +33,6 @@ extern bool userRuleta;
 extern bool userImpuesto;
 extern bool userCasa;
 extern std::vector<sf::Texture> piecesTextures;
-extern sf::SoundBuffer girosBuffer;
-extern sf::Sound girosSound;
 extern int conteosuel;
 extern bool nular;
 extern std::string Code;
@@ -98,7 +94,6 @@ extern bool turn_impuesto;
 extern bool turn_Moviendo;
 extern bool eventoActivo;
 
-
 struct MensajeMSG {
 	sf::Sprite AvatarEnviado;
 	sf::Text SMSEnviado;
@@ -115,8 +110,6 @@ struct MensajeMSG {
 };
 extern MensajeMSG PlantillaMensajeR;
 extern std::vector <MensajeMSG> Mensajes;
-
-
 
 struct PlayerGame {
 

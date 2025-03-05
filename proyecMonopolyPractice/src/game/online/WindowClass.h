@@ -6,6 +6,7 @@
 #include <ctime>
 #include "../../network/Client.hpp"
 #include "ResourceGame.hpp"
+#include "../../ui/Sound.hpp"
 class Window {
 
 	std::vector<int> textureIndices; 

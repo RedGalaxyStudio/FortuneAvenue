@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ResourceGeneral.cpp" />
     <ClCompile Include="src\cinematic\Cinematic.cpp" />
     <ClCompile Include="src\core\ObjetosGlobal.cpp" />
     <ClCompile Include="src\core\ResourceGlobal.cpp" />
@@ -183,11 +184,13 @@
     <ClCompile Include="src\ui\fileio.cpp" />
     <ClCompile Include="src\ui\MensageBox.cpp" />
     <ClCompile Include="src\ui\Scrollbar.cpp" />
+    <ClCompile Include="src\ui\Sound.cpp" />
     <ClCompile Include="src\ui\TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\nlohmann\json.hpp" />
     <ClInclude Include="libs\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="ResourceGeneral.hpp" />
     <ClInclude Include="src\cinematic\Cinematic.hpp" />
     <ClInclude Include="src\core\ObjetosGlobal.hpp" />
     <ClInclude Include="src\core\ResourceGlobal.hpp" />
@@ -231,6 +234,7 @@
     <ClInclude Include="src\ui\MensageBox.hpp" />
     <ClInclude Include="src\ui\Particles.h" />
     <ClInclude Include="src\ui\Scrollbar.hpp" />
+    <ClInclude Include="src\ui\Sound.hpp" />
     <ClInclude Include="src\ui\TextBox.hpp" />
   </ItemGroup>
   <ItemGroup>

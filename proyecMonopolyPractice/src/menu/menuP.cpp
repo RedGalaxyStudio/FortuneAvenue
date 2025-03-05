@@ -7,7 +7,7 @@
 #include "../game/online/ResourceGame.hpp"
 #include "GameModeSelector.hpp"
 #include "IniciaUser.hpp"
-
+#include "../ui/Sound.hpp"
 menuP::menuP() : window(nullptr), SesionValida(true) {}
 menuP::~menuP() {
 	if (musicSlider) {
