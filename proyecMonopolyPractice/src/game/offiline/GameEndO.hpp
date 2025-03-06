@@ -12,17 +12,17 @@
 
 class GameEndO {
 private:
-    sf::RenderWindow* window;                 // Ventana principal para dibujar
+    sf::RenderWindow* window;          
     sf::Text fingame12;
     sf::Text funciona;
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
 public:
-    GameEndO(sf::RenderWindow* window);        // Constructor que toma la ventana principal
-    ~GameEndO();                               // Destructor
+    GameEndO(sf::RenderWindow* window);       
+    ~GameEndO();                              
     void resource();
     void update();
 
 };
 
-#endif // GAMEEND_HPP
+#endif 

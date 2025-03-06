@@ -49,7 +49,7 @@ struct houseInfo {
 
 
 public:
-    HouseBuyO();   // Constructor que inicializa con el precio y fondos del jugador
+    HouseBuyO(); 
     int IndexCAsa;
     std::vector<houseInfo> houses;
     void setWindow(sf::RenderWindow& win,int indice);
@@ -59,4 +59,4 @@ public:
     int indexX;
     
 };
-#endif // HOUSEBUY_HPP
+#endif 

@@ -183,13 +183,10 @@ public :
 	}
 
 	void resetPosition(int dadoIndex) {
-		// Restablecer la posición del centro a su posición inicial
 		center = Vector3D(640, 360, -100);
 
-		// Restablecer el tamaño del cubo (distancia entre centro y vértices)
-		CDis = 50.0f;  // Asegúrate de que CDis tenga un valor adecuado, o el cubo puede colapsar en un punto
+		CDis = 50.0f;  
 
-		// Restablecer las posiciones originales de los vértices
 		vertex[0] = Vector3D(-1, -1, 1);
 		vertex[1] = Vector3D(1, -1, 1);
 		vertex[2] = Vector3D(1, -1, -1);
@@ -201,32 +198,28 @@ public :
 
 
 		switch (dadoIndex) {
-		case 1: // Mostrar cara 1
-			rotate(0.0f, 0.0f, 0.0f); // No rotar
+		case 1: 
+			rotate(0.0f, 0.0f, 0.0f);
 			break;
-		case 2: // Mostrar cara 2
-			rotate(0.0f,static_cast<float>(90.0 * (M_PI / 180.0)), 0.0f); // Rotar 90 grados en Y  
+		case 2:
+			rotate(0.0f,static_cast<float>(90.0 * (M_PI / 180.0)), 0.0f);  
 			break;
-		case 3: // Mostrar cara 3
-			rotate(0.0f, static_cast<float>( 180.0 * (M_PI / 180.0)), 0.0f); // Rotar 180 grados en Y
+		case 3:
+			rotate(0.0f, static_cast<float>( 180.0 * (M_PI / 180.0)), 0.0f); 
 			break;
-		case 4: // Mostrar cara 4
-			rotate(0, static_cast<float>(270 * (M_PI / 180.0f)), 0.0f); // Rotar 270 grados en Y
+		case 4: 
+			rotate(0, static_cast<float>(270 * (M_PI / 180.0f)), 0.0f);
 			break;
-		case 5: // Mostrar cara 5
-			rotate(static_cast<float>(90.0f * (M_PI / 180.0f)), 0.0f, 0.0f); // Rotar 90 grados en X
+		case 5: 
+			rotate(static_cast<float>(90.0f * (M_PI / 180.0f)), 0.0f, 0.0f); 
 			break;
-		case 6: // Mostrar cara 6
-			rotate(static_cast<float>(- 90.0f * (M_PI / 180.0f)), 0.0f, 0.0f); // Rotar -90 grados en X
+		case 6: 
+			rotate(static_cast<float>(- 90.0f * (M_PI / 180.0f)), 0.0f, 0.0f);
 			break;
 		default:
-			//std::cout << "Face must be between 1 and 6." << std::endl;
 			break;
 		}
 		
-		//quiero que aqui este un switch para elegir que cara va estar en el frente , osea quiero que el cubo gire y que la cara que quede en el frente sea la que yo digo de 1 al 6 
-
-		// Llamar a move() para actualizar las posiciones de los vértices
 		move();
 
 
