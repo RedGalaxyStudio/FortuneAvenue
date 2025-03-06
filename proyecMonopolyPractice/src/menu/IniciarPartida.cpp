@@ -107,9 +107,6 @@ void IniciarPartida::update() {
 
 
 						client->initialize();
-						std::cout << "\nque mierda4";
-						
-						std::cout << "\nque mierda5";
 						if (true == client->connectToServer("208.68.36.50", 1234)) {
 							Code = client->createRoom(nameUser, TextureAvatarPath);
 
