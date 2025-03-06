@@ -10,7 +10,7 @@ class SettingsManager
 public:
     SettingsManager(sf::RenderWindow& windowRef);
     ~SettingsManager();
-    SettingsManager(); // Constructor por defecto
+    SettingsManager();
 
     SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>& music, sf::RenderWindow& windowRef);
     SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef);

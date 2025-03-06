@@ -13,10 +13,7 @@ SettingsManager::SettingsManager(sf::RenderWindow& windowRef) : window(windowRef
 
 SettingsManager::SettingsManager()
     : window(*(new sf::RenderWindow())), volume(100.0f), isDragging(false), musicEnabled(true), effectsEnabled(true)
-{
-    // Inicializa los miembros según sea necesario
-    // Quizás quieras manejar la limpieza de la ventana de renderizado de marcador de posición si se usa
-}
+{}
 
 SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>&  music, sf::RenderWindow& windowRef)
     : window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
@@ -56,10 +53,6 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
         filledBar.setSize(sf::Vector2f(width, height));
         thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
     }
-
-
-
-
 
     for (auto* fondo : music) {
         if (fondo) {
@@ -175,7 +168,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 
 
     if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
-        std::cerr << "Error loading font!" << std::endl;
+        std::cerr << "Error en cargar la fuente" << std::endl;
     }
     volumeText.setFont(font);
     volumeText.setCharacterSize(20);
@@ -228,22 +221,17 @@ void SettingsManager::moveThumb(float mouseX) {
     float barLeft = bar.getPosition().x;
     float barRight = barLeft + bar.getSize().x;
  
-    // Limitar la posición del mouse entre el principio y el final de la barra
     mouseX = clamp(mouseX, barLeft, barRight);
 
-    // Ajustar la posición del thumb para que se mueva hasta el borde final
     thumbPosition = sf::Vector2f(mouseX - thumb.getRadius(), thumb.getPosition().y);
     thumb.setPosition(thumbPosition);
 
-    // Calcular el porcentaje del volumen basado en la posición del mouse
     float percentage = (mouseX - barLeft) / bar.getSize().x;
     volume = percentage * 100.0f;
 
-    // Ajustar el tamaño de la barra llena
     sizeFilledBar = sf::Vector2f(percentage * bar.getSize().x, bar.getSize().y);
     filledBar.setSize(sizeFilledBar);
 
-    // Actualizar el volumen de la música si está presente
     if (!music.empty()) {
         for (auto* fondo : music) {
             if (fondo) {
@@ -252,7 +240,6 @@ void SettingsManager::moveThumb(float mouseX) {
         }
     }
     else if (!effects.empty()) {
-        // Actualizar el volumen de los efectos
         for (auto* effect : effects) {
             if (effect) {
                 effect->setVolume(volume);
@@ -286,7 +273,7 @@ void SettingsManager::Printf() const {
     sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
     if (thumb.getGlobalBounds().contains(mousePosF)) {
-        if (currentCursor == &normalCursor) { // Solo cambiar si es el cursor normal
+        if (currentCursor == &normalCursor) {
             currentCursor = &linkCursor;
         }
     }
