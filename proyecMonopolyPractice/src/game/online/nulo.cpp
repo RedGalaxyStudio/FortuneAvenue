@@ -7,7 +7,7 @@
 #include "../../ui/cell.h"
 #include "../../ui/fileio.h"
 #include "../../core/ObjetosGlobal.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 using json = nlohmann::json;
 
 Nulo::Nulo() : window(nullptr), client(nullptr), IndexCAsa(-1) {}
@@ -48,7 +48,7 @@ void Nulo::Update() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
-                renderTexture.draw(spriteFondoGame);
+                renderTexture.draw(spriteBackgroundG);
                 for (int i = 0; i < 4; i++) {
                     renderTexture.draw(playersGame[i].NamePlayer);
                     renderTexture.draw(playersGame[i].boxPlayer);

@@ -8,6 +8,7 @@
 #include "../../ui/cell.h"
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
+#include "../../ui/ResourceGeneral.hpp"
 
 using json = nlohmann::json;
 
@@ -150,7 +151,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < 4; i++) {
 					renderTexture.draw(playersGame[i].NamePlayer);
 					renderTexture.draw(playersGame[i].boxPlayer);
@@ -290,7 +291,7 @@ void HouseBuy::ViewHouseBuys() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -334,7 +335,7 @@ void HouseBuy::ViewHouseBuys() {
 		CartaActiva = false;
 		window->clear();
 
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 
 		for (int i = 0; i < VCcompradas.size(); i++) {
 			window->draw(VCcompradas[i].CsCmpdrsSprite);

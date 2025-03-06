@@ -5,6 +5,7 @@
 #include "../ui/ButtonG.hpp"
 #include "../ui/TextBox.hpp"
 #include "../ui/MensageBox.hpp"
+#include "../ui/ResourceGeneral.hpp"
 
 GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();
@@ -60,7 +61,7 @@ void GameModeSelector::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(SpriteOffline);
 				renderTexture.draw(SpriteOnline);
 				renderTexture.draw(enunciado);
@@ -124,7 +125,7 @@ void GameModeSelector::update() {
 
 
 		window->clear();
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 		window->draw(SpriteOnline);
 		window->draw(enunciado);
 		window->draw(spriteX);
@@ -152,7 +153,7 @@ void GameModeSelector::updatejoinRoom() {
 				(event1.type == sf::Event::KeyPressed && event1.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 			
 				textBoxRoom.Prinf();
 
@@ -184,7 +185,7 @@ void GameModeSelector::updatejoinRoom() {
 		window->setMouseCursor(*currentCursor);
 
 		window->clear();
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 		window->draw(spriteX);
 ;
 		textBoxRoom.draw(*window);

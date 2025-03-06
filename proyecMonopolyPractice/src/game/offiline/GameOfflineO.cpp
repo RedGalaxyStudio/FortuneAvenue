@@ -2,7 +2,7 @@
 #include <String>
 #include "GameEndO.hpp"
 #include "StealplayerO.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 
 
 GameOffline::GameOffline(sf::RenderWindow& win,int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
@@ -529,7 +529,7 @@ void GameOffline::update() {
 
 		if (GM.turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
-			renderTexture.draw(spriteBackground);
+			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);
 
 
@@ -584,7 +584,7 @@ void GameOffline::update() {
 		}
 		else if (draw_house) {
 			renderTexture.clear();
-			renderTexture.draw(spriteBackground);
+			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);
 
 
@@ -645,7 +645,7 @@ void GameOffline::Event() {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(MapSprite);
 				for (int i = 0; i < ActiveUsers.size(); i++) {
 					renderTexture.draw(playerGameOff[ActiveUsers[i]].NamePlayer);
@@ -709,7 +709,7 @@ void GameOffline::DrawPieceMoviendo() {
 	window->setView(vision);
 	window->clear();
 
-	window->draw(spriteBackground);
+	window->draw(spriteBackgroundG);
 	window->draw(MapSprite);
 	for (int i = 0; i < ActiveUsers.size(); i++) {
 		window->draw(playerGameOff[i].PieceSelect);
@@ -727,7 +727,7 @@ void GameOffline::DrawGameRuleta() {
 
 	renderTexture.clear();
 
-	renderTexture.draw(spriteBackground);
+	renderTexture.draw(spriteBackgroundG);
 	renderTexture.draw(MapSprite);
 	for (int i = 0; i < ActiveUsers.size(); i++)
 	{
@@ -787,7 +787,7 @@ void GameOffline::DrawGameImpuesto() {
 
 	renderTexture.clear();
 
-	renderTexture.draw(spriteBackground);
+	renderTexture.draw(spriteBackgroundG);
 	renderTexture.draw(MapSprite);
 
 	for (int i = 0; i < ActiveUsers.size(); i++)
@@ -855,7 +855,7 @@ void GameOffline::InicioPartida() {
 		window->clear();  // Limpia la ventana para dibujar la siguiente pantalla
 
 		// Dibuja los elementos de fondo y mapa
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 		window->draw(MapSprite);
 
 		// Actualiza el dado y calcula el tiempo transcurrido
@@ -1016,7 +1016,7 @@ void GameOffline::DrawGame() {
 
 	window->clear();
 
-	window->draw(spriteBackground);
+	window->draw(spriteBackgroundG);
 	window->draw(MapSprite);
 
 	Dado.update();

@@ -4,7 +4,7 @@
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
 #include "PieceSelectorO.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 
 GameOptions::GameOptions(sf::RenderWindow& win) : window(&win) {
 	loadResourceGame();
@@ -159,7 +159,7 @@ void GameOptions::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(TOpcion);
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -237,7 +237,7 @@ void GameOptions::update() {
 		window->setMouseCursor(*currentCursor);
 
 		window->clear();
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 		window->draw(TOpcion);
 		window->draw(spriteX);
 		window->draw(SpriteflecDerecha);

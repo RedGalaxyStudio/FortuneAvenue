@@ -1,8 +1,11 @@
 #ifndef RESOURCEGENERAL_HPP
 #define RESOURCEGENERAL_HPP
 
+
+#include <SFML/Graphics.hpp>
+
 extern sf::Texture TextureFondoGame;
-extern sf::Sprite spriteFondoGame;
+extern sf::Sprite spriteBackgroundG;
 
 
 

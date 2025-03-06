@@ -4,7 +4,7 @@
 #include "../ui/TextBox.hpp"
 #include "../game/online/Chat.hpp"
 #include "../ui/MensageBox.hpp"
-
+#include "../ui/ResourceGeneral.hpp"
 IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client(new Client()) {
 	
 	loadResourceGame();
@@ -75,7 +75,7 @@ void IniciarPartida::update() {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(SpriteCrearPartida);
 				renderTexture.draw(SpriteUnirsePartida);
 				renderTexture.draw(enunciado);
@@ -108,7 +108,7 @@ void IniciarPartida::update() {
 
 						client->initialize();
 						std::cout << "\nque mierda4";
-						Chat CHat(window,client);
+						
 						std::cout << "\nque mierda5";
 						if (true == client->connectToServer("208.68.36.50", 1234)) {
 							Code = client->createRoom(nameUser, TextureAvatarPath);
@@ -159,7 +159,7 @@ void IniciarPartida::update() {
 
 
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 		window->draw(box);
 		window->draw(Sesion);
 		window->draw(selectedAvatarCopy);
@@ -191,7 +191,7 @@ void IniciarPartida::updatejoinRoom() {
 				(event1.type == sf::Event::KeyPressed && event1.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(SpriteUnirse);
 				textBoxRoom.Prinf(); 
 
@@ -256,7 +256,7 @@ void IniciarPartida::updatejoinRoom() {
 		window->setMouseCursor(*currentCursor);
 
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 		window->draw(spriteX);
 
 		window->draw(SpriteUnirse);

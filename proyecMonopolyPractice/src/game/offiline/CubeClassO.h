@@ -139,12 +139,12 @@ public :
 		distances = new float[9];
 
 		// Cargar texturas
-		textures[0].loadFromFile("number1.png");//lista
-		textures[2].loadFromFile("number3.png");
-		textures[1].loadFromFile("number4.png");
-		textures[3].loadFromFile("number2.png");
-		textures[4].loadFromFile("number6.png");//lista
-		textures[5].loadFromFile("number5.png");//lista
+		textures[0].loadFromFile("assets/image/Dice/number1.png");
+		textures[2].loadFromFile("assets/image/Dice/number3.png");
+		textures[1].loadFromFile("assets/image/Dice/number4.png");
+		textures[3].loadFromFile("assets/image/Dice/number2.png");
+		textures[4].loadFromFile("assets/image/Dice/number6.png");
+		textures[5].loadFromFile("assets/image/Dice/number5.png");
 
 		move();
 

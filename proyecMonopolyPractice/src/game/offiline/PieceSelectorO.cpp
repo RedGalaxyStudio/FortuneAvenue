@@ -5,7 +5,7 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/Scrollbar.hpp"
 #include <thread>
-
+#include "../../ui/ResourceGeneral.hpp"
 
 PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
 	: window(windowRef), selectedPiece(-1),Nmap(Map) {
@@ -166,7 +166,7 @@ void PieceSelectOff::updateSelection() {
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < ActiveUsers.size(); i++) {
 				
 					renderTexture.draw(playerGameOff[ActiveUsers[i]].NamePlayer);
@@ -328,7 +328,7 @@ void PieceSelectOff::updateSelection() {
 
 	
 		window->clear();
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 		
 		displayPieces();
 		window->draw(fondopiece);

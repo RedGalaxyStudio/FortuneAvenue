@@ -1,6 +1,6 @@
 #include "ResourceGame.hpp"
 #include "../../core/ResourceGlobal.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 
 
 sf::Texture &textureBoxPerfil= textureBox;
@@ -75,7 +75,7 @@ void loadResourceGame(){
 
 	if (!TextureFondoGame.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
-	spriteFondoGame.setTexture(TextureFondoGame);
+	spriteBackgroundG.setTexture(TextureFondoGame);
 	fontUserPerfil = fontUser;
 	espera=false;
 }

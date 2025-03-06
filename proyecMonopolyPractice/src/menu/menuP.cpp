@@ -5,6 +5,7 @@
 #include "../core/ResourceGlobal.hpp"
 #include "../ui/ButtonG.hpp"
 #include "../game/online/ResourceGame.hpp"
+#include "../ui/ResourceGeneral.hpp"
 #include "GameModeSelector.hpp"
 #include "IniciaUser.hpp"
 #include "../ui/Sound.hpp"
@@ -517,7 +518,7 @@ void menuP::MenuOpcion(bool fon) {
 			window->draw(SpriteFondoMenu);
 		}
 		else {
-			window->draw(spriteFondoGame);
+			window->draw(spriteBackgroundG);
 		}
 		window->draw(spriteX);
 		window->draw(SpriteBotonOpciones);

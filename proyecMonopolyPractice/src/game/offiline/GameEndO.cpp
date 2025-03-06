@@ -1,6 +1,7 @@
 #include "GameEndO.hpp"
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
+#include "../../ui/ResourceGeneral.hpp"
 // Constructor
 GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 
@@ -87,9 +88,6 @@ void GameEndO::resource() {
 
 void GameEndO::update() {
 
-
-
-
 	float perfilWidth = 200.0f; // Ancho estimado para cada perfil
 	float separacion = 20.0f;   // Espaciado entre perfiles
 	int totalPerfiles = ActiveUsers.size();      // Número total de perfiles
@@ -140,7 +138,7 @@ void GameEndO::update() {
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 					renderTexture.clear();
-					renderTexture.draw(spriteBackground);
+					renderTexture.draw(spriteBackgroundG);
 					for (int i = 0; i < ActiveUsers.size(); i++) {
 						renderTexture.draw(playerGameOff[i].NamePlayer);
 						renderTexture.draw(playerGameOff[i].boxPlayer);
@@ -155,7 +153,7 @@ void GameEndO::update() {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteBackground);
+				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < 4; i++) {
 					renderTexture.draw(playerGameOff[i].NamePlayer);
 					renderTexture.draw(playerGameOff[i].boxPlayer);
@@ -194,7 +192,7 @@ void GameEndO::update() {
 
 		window->clear();
 
-		window->draw(spriteBackground);
+		window->draw(spriteBackgroundG);
 
 
 		window->draw(fingame12);

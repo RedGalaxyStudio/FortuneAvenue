@@ -1,7 +1,7 @@
 #include "StealplayerO.hpp"
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 // Constructor
 StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGameOff> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
@@ -100,7 +100,7 @@ void StealplayerO::update() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
-                renderTexture.draw(spriteBackground);
+                renderTexture.draw(spriteBackgroundG);
                 for (int i = 0; i < UsuariosEleccion.size(); i++) {
                     renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);
                     renderTexture.draw(PlayersSteal[UsuariosEleccion[i]].boxPlayer);
@@ -138,7 +138,7 @@ void StealplayerO::update() {
         }
 
         window->clear();
-        window->draw(spriteBackground);
+        window->draw(spriteBackgroundG);
 
         for (int i = 0; i < UsuariosEleccion.size(); i++) {
             window->draw(PlayersSteal[UsuariosEleccion[i]].NamePlayer);

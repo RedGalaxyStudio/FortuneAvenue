@@ -1,6 +1,7 @@
 #include "PieceSelector.hpp"
 #include "../../core/ResourceGlobal.hpp"
 #include "ResourceGame.hpp"
+#include "../../ui/ResourceGeneral.hpp"
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "MultiplayerGame.hpp"
@@ -95,15 +96,11 @@ void PieceSelector::displayPieces() {
 	}
 }
 void PieceSelector::updateSelection() {
-	std::cout << "\nwo";
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	Chat chat(window,client);
 	sf::Clock clock;
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-	std::cout << "\nwo";
-
-
 	float deltaScroll = 0.0f;
 	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
 	const float avatarWidth = 128.0f;
@@ -123,8 +120,6 @@ void PieceSelector::updateSelection() {
 
 	const float totalContentHeight = 880.0f;
 	const float scrollbarHeight = 340.0f;
-
-	std::cout << "\nwo";
 	float proportion = visibleAreaHeight / totalContentHeight;
 	float thumbHeight = scrollbarHeight * proportion;
 
@@ -173,7 +168,7 @@ void PieceSelector::updateSelection() {
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < UsuariosActivos.size(); i++) {
 				
 					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
@@ -283,7 +278,7 @@ void PieceSelector::updateSelection() {
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					renderTexture.clear();
-					renderTexture.draw(spriteFondoGame);
+					renderTexture.draw(spriteBackgroundG);
 					for (int i = 0; i < UsuariosActivos.size(); i++) {
 
 						renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
@@ -381,7 +376,7 @@ void PieceSelector::updateSelection() {
 
 	
 		window->clear();
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 		
 		displayPieces();
 		window->draw(fondopiece);

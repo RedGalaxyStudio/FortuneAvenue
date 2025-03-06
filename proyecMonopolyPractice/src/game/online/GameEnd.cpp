@@ -1,7 +1,7 @@
 #include "GameEnd.hpp"
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 // Constructor
 GameEnd::GameEnd(sf::RenderWindow* window, Client* clienT) : window(window),client(clienT) {
 
@@ -452,7 +452,7 @@ void GameEnd::update() {
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 					renderTexture.clear();
-					renderTexture.draw(spriteFondoGame);
+					renderTexture.draw(spriteBackgroundG);
 					for (int i = 0; i < UsuariosActivos.size(); i++) {
 						renderTexture.draw(playersGame[i].NamePlayer);
 						renderTexture.draw(playersGame[i].boxPlayer);
@@ -467,7 +467,7 @@ void GameEnd::update() {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < 4; i++) {
 					renderTexture.draw(playersGame[i].NamePlayer);
 					renderTexture.draw(playersGame[i].boxPlayer);
@@ -506,7 +506,7 @@ void GameEnd::update() {
 
 		window->clear();
 
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 
 
 		window->draw(fingame12);

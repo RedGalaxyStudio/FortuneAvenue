@@ -95,7 +95,7 @@ extern bool turn_Moviendo;
 extern bool eventoActivo;
 
 struct MensajeMSG {
-	sf::Sprite AvatarEnviado;
+	sf::CircleShape AvatarEnviado;
 	sf::Text SMSEnviado;
 	sf::RectangleShape ContenidoEnviado;
 

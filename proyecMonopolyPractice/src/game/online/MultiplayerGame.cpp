@@ -2,7 +2,7 @@
 #include <String>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
-
+#include "../../ui/ResourceGeneral.hpp"
 MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); // Inicialización del puntero
 
@@ -541,7 +541,7 @@ void MultiplayerGame::update() {
 
 		if (client->turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
-			renderTexture.draw(spriteFondoGame);
+			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(spriteMapa);
 
 
@@ -596,7 +596,7 @@ void MultiplayerGame::update() {
 		}
 		else if (casa_draw) {
 			renderTexture.clear();
-			renderTexture.draw(spriteFondoGame);
+			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(spriteMapa);
 
 
@@ -662,7 +662,7 @@ void MultiplayerGame::Event() {
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
-				renderTexture.draw(spriteFondoGame);
+				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(spriteMapa);
 				for (int i = 0; i < UsuariosActivos.size(); i++) {
 					renderTexture.draw(playersGame[UsuariosActivos[i]].NamePlayer);
@@ -732,7 +732,7 @@ void MultiplayerGame::DrawPieceMoviendo() {
 	window->setView(view);
 	window->clear();
 
-	window->draw(spriteFondoGame);
+	window->draw(spriteBackgroundG);
 	window->draw(spriteMapa);
 	for (int i = 0; i < UsuariosActivos.size(); i++) {
 		window->draw(playersGame[i].PieceSelect);
@@ -754,7 +754,7 @@ void MultiplayerGame::DrawGameRuleta() {
 
 	renderTexture.clear();
 
-	renderTexture.draw(spriteFondoGame);
+	renderTexture.draw(spriteBackgroundG);
 	renderTexture.draw(spriteMapa);
 	for (int i = 0; i < UsuariosActivos.size(); i++)
 	{
@@ -819,7 +819,7 @@ void MultiplayerGame::DrawGameImpuesto() {
 
 	renderTexture.clear();
 
-	renderTexture.draw(spriteFondoGame);
+	renderTexture.draw(spriteBackgroundG);
 	renderTexture.draw(spriteMapa);
 
 	for (int i = 0; i < UsuariosActivos.size(); i++)
@@ -891,7 +891,7 @@ void MultiplayerGame::InicioPartida() {
 		window->clear();  // Limpia la ventana para dibujar la siguiente pantalla
 
 		// Dibuja los elementos de fondo y mapa
-		window->draw(spriteFondoGame);
+		window->draw(spriteBackgroundG);
 		window->draw(spriteMapa);
 
 		// Actualiza el dado y calcula el tiempo transcurrido
@@ -1064,7 +1064,7 @@ void MultiplayerGame::DrawGame() {
 
 	window->clear();
 
-	window->draw(spriteFondoGame);
+	window->draw(spriteBackgroundG);
 	window->draw(spriteMapa);
 
 	Dado.update();
