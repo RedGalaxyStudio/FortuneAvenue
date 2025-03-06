@@ -45,13 +45,10 @@ menuP::~menuP() {
 	TextureConfirmarSalirPartida = sf::Texture();
 	std::cout << "Texturas liberadas correctamente." << std::endl;
 }
-
 void menuP::setWindow(sf::RenderWindow& win) {
 	window = &win;
 }
 void menuP::Resource() {
-
-
 
 	if (!TextureFondoMenu.loadFromFile("assets/image/Fondos/fondomenu.png")) return;
 	if (!textureXOn.loadFromFile("assets/image/Button/XOn.png")) return;
@@ -312,6 +309,14 @@ void menuP::eventoMenuP() {
 				playClickSound();
 				MenuJugar();
 
+				selectedAvatarCopy.setPosition(84, 74);
+				selectedAvatarCopy.setScale(1, 1);
+				recua.setPosition(84, 74);
+				recua.setScale(1, 1);
+				Sesion.setCharacterSize(24);
+				Sesion.setPosition(273, 74 - 4);
+				box.setPosition(273, 74);
+				box.setScale(1, 1);
 
 			}
 

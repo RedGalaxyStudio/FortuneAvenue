@@ -670,7 +670,6 @@ void MultiplayerGame::Event() {
 					renderTexture.draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
 					renderTexture.draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
 				}
-				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
 
 				Menup.MenuSalir(client);

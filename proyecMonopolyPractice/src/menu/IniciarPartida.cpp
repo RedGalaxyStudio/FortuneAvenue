@@ -92,6 +92,7 @@ void IniciarPartida::update() {
 					playClickSound();
 					updatejoinRoom();
 					Valida = false;
+					box.setPosition(xPos, startY + 110);
 
 				}
 
