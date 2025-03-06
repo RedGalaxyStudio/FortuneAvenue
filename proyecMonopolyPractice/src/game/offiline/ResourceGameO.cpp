@@ -65,7 +65,7 @@ bool turn_house;
 bool turn_Tax;
 bool turn_Move;
 bool activeEvent;
-bool isSpinningOff; //no cambie esta variable porque es parte de ruleta.hpp
+bool isSpinningOff; 
 int IndexTurn1;
 bool draw_roulette;
 bool draw_tax;

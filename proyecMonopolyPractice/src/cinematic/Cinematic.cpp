@@ -17,7 +17,6 @@ void Cinematic::loadTexturesInBackground() {
     for (int i = 0; i < 6; ++i) {
         sf::Texture texture;
         if (!texture.loadFromFile("assets/image/Fondos/part" + std::to_string(i) + ".jpg")) {
-          //   std::cerr << "Error al cargar la textura del spritesheet, parte " << i << std::endl;
         }
         textures[i] = texture;
     }
@@ -25,7 +24,6 @@ void Cinematic::loadTexturesInBackground() {
     frameRect = sf::IntRect(0, 0, 1280, 720);
 
     if (!FondoBuffer.loadFromFile("assets/sounds/IntroA.wav")) {
-        // std::cerr << "Error al cargar el sonido A" << std::endl;
         return;
     }
 

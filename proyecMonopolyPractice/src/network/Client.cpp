@@ -59,8 +59,6 @@ Client::~Client() {
 bool Client::initialize() {
 	std::cout << "\n[DEBUG] Dirección de client al inicio de initialize: " << std::hex << reinterpret_cast<uintptr_t>(client);
 
-	//std:: << "\nInicia";
-	std::cout << "\nHola";
 	static bool enetInitialized = false;
 	if (!enetInitialized) {
 		std::cout << "\nHola1";
@@ -73,7 +71,7 @@ bool Client::initialize() {
 		std::cout << "\nHola111";
 	}
 
-	// Solo crear cliente si no existe
+	// crea cliente solo si no existe
 	std::cout << "\nHola32422222222222";
 	std::cout << "\nValor de client antes del if: " << client;
 	if (reinterpret_cast<uintptr_t>(client) < 0x1000) {  // Detectar valores raros
@@ -91,8 +89,7 @@ bool Client::initialize() {
 		}
 	}
 
-	//std:: << "\nInicia0";
-	std::cout << "\nHola";
+
 	return true;
 }
 void Client::insertarCola(Nodo*& frente, Nodo*& fin, std::string n) {
@@ -124,7 +121,6 @@ void Client::run() {
 				break;
 			}
 			case ENET_EVENT_TYPE_DISCONNECT:
-				//      //std::cout << "Disconnected from server!" << std::endl;
 				running = false;
 				break;
 			default:
@@ -149,19 +145,19 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 		return false;
 	}
 
-	// Configurar dirección
+	// introduce direccion
 	ENetAddress enetAddress;
 	enet_address_set_host(&enetAddress, address.c_str());
 	enetAddress.port = port;
 
-	// Intentar conexión
+	// intenta conectarse
 	peer = enet_host_connect(client, &enetAddress, 2, 0);
 	if (!peer) {
 		std::cerr << "No available peers for initiating an ENet connection!" << std::endl;
 		return false;
 	}
 
-	// Esperar respuesta del servidor
+	// Espera respuesta del servidor
 	ENetEvent event;
 	const int maxRetries = 50;
 	const int retryDelay = 50;
@@ -180,8 +176,10 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 	enet_peer_reset(peer);
 	return false;
 }
+
+// Si no se conecta no hace nada
 void Client::disconnect() {
-	if (!isConnected) return;  // Si no está conectado, no hace nada
+	if (!isConnected) return;
 
 
 	std::string message = "DISCONNNECT";
@@ -189,18 +187,18 @@ void Client::disconnect() {
 	enet_peer_send(peer, 0, packet);
 	enet_host_flush(client);
 
-	// Desconectar y liberar recursos
+
 	if (peer) {
 		enet_peer_disconnect(peer, 0);
 		peer = nullptr;
 	}
 
-	running = false;  // Detener el hilo de ejecución
+	running = false; 
 	if (clientThread.joinable()) {
-		clientThread.join();  // Esperar a que termine el hilo
+		clientThread.join();  
 	}
 
-	// Destruir el cliente y liberar recursos
+	// destruye cliente y libera los recursos
 	if (client) {
 		enet_host_destroy(client);
 		client = nullptr;
@@ -210,27 +208,23 @@ void Client::disconnect() {
 		clientMensThread.join();
 	}
 
-	isConnected = false;  // Actualizar estado de la conexión
-	//	//std::cout << "Disconnected from server!" << std::endl;
+	isConnected = false; 
+	
 }
 std::string Client::createRoom(const std::string& username,const std::string& filename) {
 	if (!peer) {
 		std::cerr << "Client is not connected to a server!" << std::endl;
-		return ""; // Retornar una cadena vacía en caso de error
+		return "";
 	}
 
-	// Generar el código de la sala
+	
 	std::string roomCode = generateRoomCode();
-	////std::cout << "Room created with code: " << roomCode << std::endl;
 
-	// Establecer el índice del jugador como 0 (creador)
 	playerIndex = 0;
 
-	// Crear el mensaje para el paquete
 	std::string message = "CREATE_ROOM:" + roomCode + ":" + username + ":"+ filename;
 
 
-	// Crear y enviar el paquete ENet
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, packet);
 	PlayerInfo playerInfoNew;
@@ -261,9 +255,6 @@ std::string Client::createRoom(const std::string& username,const std::string& fi
 	playersGame.push_back(playerGameNew);
 	UsuariosActivos.push_back(0);
 
-
-
-	// Asegurar que el paquete se envíe inmediatamente
 	enet_host_flush(client);
 
 	return roomCode;
@@ -465,10 +456,6 @@ void Client::handleServerMessage(const std::string& message) {
 		if (firstColon != std::string::npos && secondColon != std::string::npos) {
 
 			int indexjugador = std::stoi(message.substr(firstColon + 1, secondColon - firstColon - 1));
-			//if (playerIndex != 0) {
-			//	indexjugador = (indexjugador - playerIndex + 4) % 4;
-			//}
-
 			playerInfos[indexjugador].money = std::stoi(message.substr(secondColon + 1));
 			playersGame[indexjugador].Money.setString(std::to_string(playerInfos[indexjugador].money));
 
@@ -681,8 +668,8 @@ void Client::handleServerMessage(const std::string& message) {
 	}
 	else if (message.rfind("SMG", 0) == 0) {
 	
-		int num = message[3] - '0';  // Convertir el 4to carácter a int
-		std::string rest = message.substr(4);  // Obtener el resto del string
+		int num = message[3] - '0';  
+		std::string rest = message.substr(4);  //
 		PlantillaMensajeR.SMSEnviado.setString(rest);
 
 		int In = calcularNumeroDeLineas(PlantillaMensajeR.SMSEnviado) + 1;
@@ -691,23 +678,25 @@ void Client::handleServerMessage(const std::string& message) {
 			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
 
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
-			PlantillaMensajeR.ContenidoEnviado.setPosition(1015 - (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 20), 600);
-			PlantillaMensajeR.SMSEnviado.setPosition(1016- (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeR.ContenidoEnviado.setPosition(970, 600);
+			PlantillaMensajeR.SMSEnviado.setPosition(970 + 10, 618);
+			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
+			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
 
 		}
 
 		else if (In > 1) {
 
 			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
-
+			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
-			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(1015, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
-			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(1016, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(970, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
+			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(970 + 10, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
-
+			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
 		}
 
 		PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
@@ -721,11 +710,13 @@ void Client::handleServerMessage(const std::string& message) {
 		for (int i = 0; i < Mensajes.size() - 1; i++)
 		{
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
 			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
 
-
+		
 
 		}
 		std::cout << "uuuuu: " << Mensajes.size();
@@ -771,13 +762,12 @@ void Client::handleServerMessage(const std::string& message) {
 
 				}
 				else {
-					// Convertimos los números de casas
 					try {
 						int casa = std::stoi(palabra);
-						casasPorJugador.back().push_back(casa); // Añadimos al último jugador
+						casasPorJugador.back().push_back(casa);
 					}
 					catch (...) {
-						// Ignoramos los caracteres que no son números (por ejemplo, ";")
+			
 					}
 				}
 
@@ -926,5 +916,4 @@ void Client::handleServerMessage(const std::string& message) {
 
 	}
 
-	std::cout << "\nmensaje final";
 }

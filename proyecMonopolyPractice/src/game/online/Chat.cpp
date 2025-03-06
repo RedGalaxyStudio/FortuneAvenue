@@ -102,9 +102,6 @@ void Chat::resource() {
 	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
 	AbajIzquierda.setPosition(940, 670);
 
-	PlantillaMensajeE.AvatarEnviado.setTexture(&playersGame[0].textureAvatarPLayer);
-	PlantillaMensajeE.AvatarEnviado.setRadius(40);
-	PlantillaMensajeE.AvatarEnviado.setPosition(500,300);
 	std::cout << "\nBiwnnn nose";
 	PlantillaMensajeE.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
@@ -120,6 +117,9 @@ void Chat::resource() {
 	PlantillaMensajeE.ContenidoEnviado.setPosition(940, 600);
 	PlantillaMensajeE.ContenidoEnviado.setFillColor(sf::Color(0, 104, 167));
 
+	PlantillaMensajeR.AvatarEnviado.setTexture(&playersGame[0].textureAvatarPLayer);
+	PlantillaMensajeR.AvatarEnviado.setRadius(18);
+	PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 	PlantillaMensajeR.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeR.SMSEnviado.setFont(FuenteMensaje);
 	PlantillaMensajeR.SMSEnviado.setFillColor(sf::Color::White);
@@ -213,6 +213,7 @@ void Chat::Event(sf::Event event) {
 
 				Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
 				Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
+				Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
 			}
 
 			Aumento = 0;
@@ -231,7 +232,7 @@ void Chat::Event(sf::Event event) {
 				PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 
 			}
-
+				
 			else if (In > 1) {
 
 				indicacion.setPosition(940, 668);
@@ -245,8 +246,6 @@ void Chat::Event(sf::Event event) {
 				ArriIzquierda.setPosition(940, 670);
 				AbajDerecha.setPosition(1200, 670);
 				AbajIzquierda.setPosition(940, 670);
-
-
 				sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 
 				PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
@@ -263,9 +262,10 @@ void Chat::Event(sf::Event event) {
 			{
 				Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
 				Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
+				Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
 				Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 				Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
-
+				Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
 			}
 
 		}
@@ -311,6 +311,8 @@ void Chat::Event(sf::Event event) {
 
 						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+						Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
+
 					}
 
 					Aumento = 0;
@@ -344,6 +346,7 @@ void Chat::Event(sf::Event event) {
 
 						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+						Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
 					}
 
 					indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
@@ -384,6 +387,8 @@ void Chat::Event(sf::Event event) {
 
 							Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
 							Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
+							Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
+
 						}
 						Aumento = 0;
 
@@ -419,6 +424,7 @@ void Chat::Event(sf::Event event) {
 
 							Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 							Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
+							Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
 						}
 
 						indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
@@ -438,8 +444,17 @@ void Chat::draw() {
 
 
 	window->draw(Fondo);
+
+
+	for (int i = 0; i < Mensajes.size(); i++)
+	{
+		window->draw(Mensajes[i].ContenidoEnviado);
+		window->draw(Mensajes[i].AvatarEnviado);
+		window->draw(Mensajes[i].SMSEnviado);
+	}
 	window->draw(Caja);
 	window->draw(FondoChat);
+
 	window->draw(SpriteBotonEnviar);
 	window->draw(ArriDerecha);
 	window->draw(ArriIzquierda);
@@ -450,12 +465,4 @@ void Chat::draw() {
 	window->draw(enunciado);
 	window->draw(indicacion);
 	window->draw(spriteX);
-
-	for (int i = 0; i < Mensajes.size(); i++)
-	{
-		window->draw(Mensajes[i].ContenidoEnviado);
-		window->draw(Mensajes[i].AvatarEnviado);
-		window->draw(Mensajes[i].SMSEnviado);
-	}
-
 }

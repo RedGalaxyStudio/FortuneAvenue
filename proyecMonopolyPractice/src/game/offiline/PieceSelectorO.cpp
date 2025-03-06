@@ -21,7 +21,7 @@ PieceSelectOff::~PieceSelectOff() {
 void PieceSelectOff::Resource() {
 	std::cout << "\nwo";
 	
-	int piecesCount = 19;  //Cantidad de piezas
+	int piecesCount = 19; 
 	piecesOff.resize(piecesCount);
 	shadow.resize(piecesCount);
 	pieceShape.resize(piecesCount);
@@ -57,12 +57,12 @@ void PieceSelectOff::Resource() {
 	std::cout << "\nwo";
 
 	for (int i = 0; i < piecesOff.size(); i++) {
-		int row = i / 8;  // Determina la fila (0 para la primera, 1 para la segunda, etc.)
-		int col = i % 8;  // Determina la columna (0 a 7)
+		int row = i / 8; 
+		int col = i % 8;  
 
-		float x = 92.0f + col * 156.0f;  // 28 es la posición inicial en x, 156 es la separación entre columnas
-		float y = 472.0f + row * 156.0f;  // 500 es la posición inicial en y, y 156 es la separación entre filas
-		//std::cout << i << "  X :" << x << "y :" << y << std::endl;
+		float x = 92.0f + col * 156.0f; 
+		float y = 472.0f + row * 156.0f; 
+	
 
 		piecesOff[i].setPosition(x, y);
 
@@ -122,7 +122,7 @@ void PieceSelectOff::updateSelection() {
 	playerGameOff.push_back(playerGameNew);
 	ActiveUsers.push_back(0);
 	float deltaScroll = 0.0f;
-	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
+	float scrollStep = 10.0f;
 	const float avatarWidth = 128.0f;
 	const float avatarHeight = 128.0f;
 	const float avatarSeparation = 28.0f;
@@ -151,18 +151,18 @@ void PieceSelectOff::updateSelection() {
 	scrollbarPiece.setPosition(1260, 340);
 
 	float avatarYOffset = 0.0f;
-	 startX = 275;  // Posición inicial calculada en X
-	 startY = 100;  // Posición calculada en Y (centrado verticalmente)
+	 startX = 275; 
+	 startY = 100;  
 
 	bool cierre = false;
 
 	MenuMusicFondo.stop();
-	sf::sleep(sf::seconds(0.5)); // Silencio breve
+	sf::sleep(sf::seconds(0.5)); 
 	SelectingMusicFondo.setLoop(true);
 	SelectingMusicFondo.play();
 	// Configurar perfiles
-	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
-	float separacion = 20.0f;   // Espaciado entre perfiles
+	float perfilWidth = 200.0f; 
+	float separacion = 20.0f;  
 	ButtonG botonCheck1(CheckOff, CheckOn);
 	bool Agregado = false;
 	std::cout << "\naqui";
@@ -238,28 +238,28 @@ void PieceSelectOff::updateSelection() {
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				static sf::Sprite* previousSelection = nullptr;  // Almacena la pieza previamente seleccionada
+				static sf::Sprite* previousSelection = nullptr; 
 
 
 				for (int i = 0; i < piecesOff.size(); ++i) {
 					// Verificar si el mouse está sobre la pieza
 					if (piecesOff[i].getGlobalBounds().contains(mousePosFloat)) {
-						if (previousSelection != &piecesOff[i]) {  // Evitar resaltado si es la misma pieza
+						if (previousSelection != &piecesOff[i]) { 
 							if (previousSelection != nullptr) {
-								previousSelection->setColor(sf::Color::White);  // Quitar el efecto de la anterior
+								previousSelection->setColor(sf::Color::White); 
 							}
-							// Asigna la textura y ajusta la escala y el origen
+							
 							newSelection = &piecesOff[i];
-							playerGameOff[0].PieceSelect.setTexture(pieceShape[i], true);  // Reajustar rectángulo de la textura
-							playerGameOff[0].PieceSelect.setScale(piecesOff[i].getScale());  // Ajustar la escala
-							playerGameOff[0].PieceSelect.setOrigin(piecesOff[i].getOrigin());  // Ajustar el origen
-							playerGameOff[0].PieceSelect.setColor(sf::Color::White);  // Asegurar color correcto
+							playerGameOff[0].PieceSelect.setTexture(pieceShape[i], true); 
+							playerGameOff[0].PieceSelect.setScale(piecesOff[i].getScale()); 
+							playerGameOff[0].PieceSelect.setOrigin(piecesOff[i].getOrigin()); 
+							playerGameOff[0].PieceSelect.setColor(sf::Color::White); 
 							playerGameOff[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							piecesOff[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerGameInfo[0].indexPiece = i;
 							piecesOff[i].setColor(sf::Color(248, 134, 255));
 							playClickSound();
-							previousSelection = &piecesOff[i];  // Actualizar la selección anterior
+							previousSelection = &piecesOff[i]; 
 						}
 						break;
 					}
@@ -270,7 +270,7 @@ void PieceSelectOff::updateSelection() {
 					const sf::Texture* texturePtr = playerGameOff[ActiveUsers[0]].PieceSelect.getTexture();
 
 					if (texturePtr != nullptr&& ActiveUsers.size()>0) {
-						sf::Texture textureSelec = *texturePtr;  // Desreferenciar el puntero
+						sf::Texture textureSelec = *texturePtr; 
 
 						playerGameInfo[ActiveUsers[0]].isSelectingPiece = true;
 						//client.networkMessage.playerReady();
@@ -296,10 +296,6 @@ void PieceSelectOff::updateSelection() {
 
 		}
 
-
-		
-
-
 		for (int i = 0; i < ActiveUsers.size(); i++) {
 
 			if (!playerGameInfo[ActiveUsers[i]].isSelectingPiece ){// || UsuariosActivos.size()<2) {
@@ -307,7 +303,6 @@ void PieceSelectOff::updateSelection() {
 			}
 
 		}
-
 
 		currentCursor = &normalCursor;
 		if(Agregado){
@@ -319,13 +314,10 @@ void PieceSelectOff::updateSelection() {
 		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
 		/*if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
 
-
-			std::cout << "\nentro";
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
 			client.cvExisting.notify_all();
 
-			std::cout << "\nSalio";
 		}*/
 	
 		for (int i = 0; i < ActiveUsers.size(); i++)
@@ -335,29 +327,24 @@ void PieceSelectOff::updateSelection() {
 			}
 		}
 
-	
 		window->clear();
 		window->draw(spriteBackgroundG);
 		
 		displayPieces();
 		window->draw(fondopiece);
 
-
-	
 		float totalPerfiles = 1;
 		if (4 > 0) {
-			// Calcular ancho total ocupado por perfiles y separaciones
+			
 			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
 
-			// Calcular inicio X para centrar los perfiles horizontalmente
-			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
-
-			float startY = 100.0f; // Centrado verticalmente
+			float startY = 100.0f; 
 
 			for (int i = 0; i < totalPerfiles; i++) {
 				float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
 				float yPos = startY;
-				// Posicionar elementos
+				
 				playerGameOff[ActiveUsers[i]].NamePlayer.setPosition(xPos, startY );
 				playerGameOff[ActiveUsers[i]].boxPlayer.setPosition(xPos, startY );
 				playerGameOff[ActiveUsers[i]].PieceSelect.setPosition(xPos, startY + 100);
@@ -370,14 +357,12 @@ void PieceSelectOff::updateSelection() {
 
 
 		}
-		
 
 		window->draw(CODE);
 		window->draw(spriteX);
 
 		scrollbarPiece.draw(*window);
 		window->display();
-
 
 	}
 

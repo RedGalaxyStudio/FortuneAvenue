@@ -41,14 +41,14 @@ private:
 	sf::Text Conteosuel;
 
 	Client* client;
-	sf::Clock clockMensaje;  // Reloj para medir el tiempo
-	float currentScale = 1.0f;  // Escalado inicial
-	float minScale = 0.8f;      // Tamaño mínimo
-	float maxScale = 1.2f;      // Tamaño máximo
-	float duration = 2.0f;      // Tiempo para hacer un ciclo completo (ampliar + reducir)
-	bool increasing = true;     // Indica si el escalado está aumentando
+	sf::Clock clockMensaje; 
+	float currentScale = 1.0f; 
+	float minScale = 0.8f;      
+	float maxScale = 1.2f;    
+	float duration = 2.0f;      
+	bool increasing = true;    
 	int impuestoCasa;
-	// Ventana de renderizado
+	
 	sf::RenderWindow* window;
 	std::vector<std::vector<std::vector<sf::Vector2f>>> casillas;
 
@@ -119,7 +119,7 @@ private:
 
 	sf::FloatRect globalBounds;
 	int posicionActual;
-	int vectorActual;    // Índice del vector actual
+	int vectorActual; 
 	sf::Vector2i mousePosition;
 	sf::Vector2f mousePosFloat;
 	int resultadoDado;
