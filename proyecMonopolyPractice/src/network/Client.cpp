@@ -691,23 +691,25 @@ void Client::handleServerMessage(const std::string& message) {
 			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
 
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
-			PlantillaMensajeR.ContenidoEnviado.setPosition(1015 - (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 20), 600);
-			PlantillaMensajeR.SMSEnviado.setPosition(1016- (PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeR.ContenidoEnviado.setPosition(970, 600);
+			PlantillaMensajeR.SMSEnviado.setPosition(970 + 10, 618);
+			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
+			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
 
 		}
 
 		else if (In > 1) {
 
 			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
-
+			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
-			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(1015, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
-			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(1016, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(970, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
+			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(970 + 10, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
-
+			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
 		}
 
 		PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
@@ -721,11 +723,13 @@ void Client::handleServerMessage(const std::string& message) {
 		for (int i = 0; i < Mensajes.size() - 1; i++)
 		{
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
 			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
 
-
+		
 
 		}
 		std::cout << "uuuuu: " << Mensajes.size();

@@ -101,6 +101,7 @@ struct MensajeMSG {
 
 	sf::Vector2f positionSMSEnviado;
 	sf::Vector2f positionContenidoEnviado;
+	sf::Vector2f positionAvatarEnviado;
 	/*void Draw() {
 		window.draw(ContenidoEnviado);
 		window.draw(SMSEnviado);
