@@ -17,7 +17,7 @@ extern std::vector<sf::Texture> TextureHouse; //texturecasa
 extern sf::Texture TextureMoney1; //TextureCash
 extern int index;
 extern sf::Texture TextureBuilding; //TextureHome
-extern  sf::Texture TextureFrame; //TextureMarco
+extern sf::Texture TextureFrame; //TextureMarco
 extern int NumberPlayers; // numplayers
 extern sf::SoundBuffer DiceSoundBuffer; //DiceBuffer
 extern sf::Sound DicesSound; //DiceSound

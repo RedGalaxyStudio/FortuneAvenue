@@ -73,11 +73,20 @@ bool draw_house;
 
 GameManager GM;
 
-void loadResourceGameO(){
+void loadResourceGameO() {
 
 	if (!TextureBackground.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureFrame.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
 	spriteBackground.setTexture(TextureBackground);
 	fontUserProfile = fontUser;
-	wait=false;
+	wait = false;
+	
+	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.jpg")) return;
+	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.jpg")) return;
+	if (!CheckOn.loadFromFile("assets/imagen/Game/check1on.jpg")) return;
+	if (!CheckOff.loadFromFile("assets/imagen/Game/check1off.jpg")) return;
+
 }
+
+
+
