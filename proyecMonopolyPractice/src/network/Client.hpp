@@ -51,7 +51,7 @@ public:
 	ENetHost* client;
 	std::mutex mtx;
 	std::condition_variable cv;
-	std::mutex casasMutex;        // Para proteger el acceso a las casas
+	std::mutex casasMutex;        // Protege el acceso a las casas
 	bool casasCargadas;
 	int conteoturn;
 	float anguloActualrule;

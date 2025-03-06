@@ -19,13 +19,13 @@ void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	if (caminoActual + 1 > (*casillas).size() ) {
 
 		finalCamino = true;
-		//std::cout << " caminoActual + 1" << caminoActual + 1 << "(*casillas).size()" << (*casillas).size();
 		updateCAmbioCasilla();
 		posicionFinal = (*casillas)[caminoActual][casillaActual];
 		this->duracionMovimiento = duracion;
 		this->t = 0.0f;
 		this->enMovimiento = true;
-	}else if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
+	}
+	else if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
 
 		posicionInicial = sprite->getPosition();
 		posicionFinal = (*casillas)[caminoActual][casillaActual];
@@ -41,10 +41,8 @@ int MovePiecesO::getcasillaActual() {
 	return casillaActual;
 }
 void MovePiecesO::actualizarMovimiento(float deltaTime) {
-	std::cout << "\n Peinci" ;
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
-		std::cout <<"\n"<< *CsFinal;
 		while (t > 1.0f && casillasRestantes > 0 && !*CsFinal) {
 			t -= 1.0f;
 
@@ -155,12 +153,10 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 	}
-	//std::cout << "\n Peinci11111111111";
 }
 void MovePiecesO::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
-//	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
 		SpriteUpArrow.setPosition(370, 400);
@@ -280,7 +276,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		if (!firstTurn) {
 
-		//	std::cout << "\nRoadOption:" << RoadOption;
 			if (tan == 3) {
 				if (RoadOption == 0) {
 					playClickSound();
@@ -442,11 +437,8 @@ void MovePiecesO::seleccionarCaminoDer() {
 	 sf::Vector2f(425, 654)
 		};
 
-	
 		std::vector<sf::Vector2f> caminoimpuesto2_2 = {  };
 		std::vector<sf::Vector2f> caminocasa2_2 = {  };
-
-		
 
 		casillas->push_back(camino2_2);
 		casillas->push_back(camino3);

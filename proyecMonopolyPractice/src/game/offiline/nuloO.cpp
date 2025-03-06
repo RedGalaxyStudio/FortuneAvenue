@@ -35,9 +35,8 @@ void NuloO::Update() {
     renderedSprite.setTexture(renderTexture.getTexture());
   
   
-    sf::Clock clocks;  // Inicia el temporizador
+    sf::Clock clocks;
 
-    // El bucle solo se ejecutará durante 5 segundos
     while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
     
         sf::Event event;

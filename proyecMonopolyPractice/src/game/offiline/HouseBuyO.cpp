@@ -18,11 +18,8 @@ HouseBuyO::HouseBuyO():window(nullptr), IndexCAsa(-1){}
 void HouseBuyO::setWindow(sf::RenderWindow& win,int indice) {
 	window = &win;
 	index = indice;
-
-	//std::cout << "\n\n" << index;
 }
 void HouseBuyO::resource() {
-	// Redimensionar los vectores para almacenar 17 texturas y sprites
 	
 	SpriteCasa.resize(17);
 	if (!TextureXcOFF.loadFromFile("../assets/image/Button/XOffC.png")) {
@@ -34,7 +31,6 @@ void HouseBuyO::resource() {
 
 	Xc.setTexture(TextureXcOFF);
 
-	// Cargar la textura para el botón de confirmación de salida
 	if (!TextureBotonComprar.loadFromFile("../assets/image/Button/comprarcasa.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
@@ -45,35 +41,27 @@ void HouseBuyO::resource() {
 	if (!ReversoCart.loadFromFile("assets/image/Game/Casas/reversocart.png")) {
 			std::cerr << "Error al cargar la textura de la casa " << IndexCAsa << "\n";
 	}
-	// Crear el sprite para cada textura
 
 	std::ifstream file("assets/image/Game/Casas/CasasInfo.json");
 
 	if (!file.is_open()) {
 		char error_message[256];
 		strerror_s(error_message, sizeof(error_message), errno);
-		std::cerr << "Error: No se pudo abrir el archivo. Motivo: " << error_message << std::endl;
+		std::cerr << "Error: No se pudo abrir el archivo: " << error_message << std::endl;
 		return;
 	}
-	// Carga el contenido del archivo en un objeto JSON
-
-
 
 	json jsonData;
 	file >> jsonData;
-
-	// Vector para almacenar las casas
 
 	for (auto& [key, value] : jsonData.items()) {
 		houseInfo house;
 		//		house.nombre = value["nombre"];
 
-		// Eliminar el símbolo '$' y convertir a entero
 		house.salario = std::stoi(value["salario"].get<std::string>().substr(0, value["salario"].get<std::string>().size() - 1));
 		house.costo = std::stoi(value["costo"].get<std::string>().substr(0, value["costo"].get<std::string>().size() - 1));
 		house.impuesto = std::stoi(value["impuesto"].get<std::string>().substr(0, value["impuesto"].get<std::string>().size() - 1));
 
-		// Agregar al vector
 		houses.push_back(house);
 	}
 
@@ -83,10 +71,9 @@ void HouseBuyO::resource() {
 }
 
 
-
 void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
-	float angle = 0.f;  // Ángulo de rotación
-	float rotationSpeed = 45.f;  // Velocidad de rotación en grados por segundo
+	float angle = 0.f;
+	float rotationSpeed = 45.f;
 
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
@@ -137,8 +124,6 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
-			//std::cout << "\n\n12222222222222222222";
-
 			
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
@@ -162,7 +147,6 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left&& cellQua[0].finAnimacion == true) {
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat)&&playerGameInfo[0].money>= houses[playerGameInfo[0].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						//client.networkMessage.buyHouse(playerGameInfo[0].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]]);
@@ -181,17 +165,13 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 				}
 			}
 			
-
-			
-
-		}   // Asegura que el bucle se repita mientras haya eventos pendientes
+		}
 
 		
 		currentCursor = &normalCursor;
 		botonXc.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		// Obtener el tiempo transcurrido
 		window->clear();
 		//if (client.accionCompra) {
 		//
@@ -241,20 +221,17 @@ void HouseBuyO::ViewHouseBuys() {
 	//	VCcompradas.push_back(CasasaCOMPRAR);
 	//	CsCmpdrsindex.push_back(i);
 	//}
-	// Configurar perfiles
-	float perfilWidth = 200.0f; // Ancho estimado de cada perfil
-	float separacion = 20.0f;   // Espaciado entre perfiles
-	int totalPerfiles = static_cast<int>(CsCmpdrsindex.size()); // Usar el número real de perfiles
+	
+	float perfilWidth = 200.0f; 
+	float separacion = 20.0f;  
+	int totalPerfiles = static_cast<int>(CsCmpdrsindex.size());
 
 
 	if (totalPerfiles > 0) {
-		// Calcular ancho total ocupado por perfiles y separaciones
+
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
-
-		// Calcular inicio X para centrar los perfiles horizontalmente
-		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
-
-		float startY = 360.0f; // Centrado verticalmente
+		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+		float startY = 360.0f;
 
 		for (int i = 0; i < totalPerfiles; i++) {
 			float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
@@ -270,10 +247,11 @@ void HouseBuyO::ViewHouseBuys() {
 
 		}
 	}
+
 	bool seleccionlista = false;
 	bool CartaActiva = false;
 	int indexMouseOver = -1;
-	int cartaActivaIndex = -1; // Índice de la carta activa, -1 si ninguna está activa
+	int cartaActivaIndex = -1;
 
 	while (window->isOpen() && !seleccionlista) {
 		sf::Event event;
@@ -292,26 +270,18 @@ void HouseBuyO::ViewHouseBuys() {
 			}
 
 
-
-			// Resetear todas las cartas a su posición oculta al inicio del bucle
 			for (int i = 0; i < VCcompradas.size(); i++) {
 				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
 			}
 
-			// Verificar colisión en orden inverso y actualizar la carta activa
 			cartaActivaIndex = -1; // Reinicia la carta activa
 			for (int i = VCcompradas.size() - 1; i >= 0; i--) {
 				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
 					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
-					cartaActivaIndex = i; // Guarda el índice de la carta activa
-					break; // Termina el bucle una vez que encuentra una carta activa
-				}
+					cartaActivaIndex = i; 
+					break; 
 			}
 	
-
-
-
-
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 
@@ -320,9 +290,7 @@ void HouseBuyO::ViewHouseBuys() {
 
 				}
 
-
 			}
-
 
 		}
 		CartaActiva = false;

@@ -52,7 +52,7 @@ std::string TextureAvatarPath;
 sf::Texture Texrecua;
 sf::Sprite recua;
 
-// Función para cargar los cursores desde una imagen o textura
+// carga los cursores desde una imagen o textura
 void printMemoryUsage() {
     PROCESS_MEMORY_COUNTERS memInfo;
     if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {

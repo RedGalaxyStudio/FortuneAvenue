@@ -6,7 +6,6 @@
 
 RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
-	// Inicializar shaders
 
 	currentSegment = -1;
 
@@ -14,21 +13,16 @@ RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	isSpinning = false;
 	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
 
-	// Crear segmentos
 	createSegments();
 
-	// Cargar texturas para los íconos
 	loadIconTextures();
 
-	// Configurar íconos
 	setupIcons();
 
-	// Agregar luces alrededor de la ruleta
 	setupLights();
 
 	setupBase();
 
-	// Inicializar pointer
 	createPointer();
 }
 
@@ -51,13 +45,12 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			std::random_device rd; // Entropía del sistema
 			std::mt19937 gen(rd()); // Generador basado en Mersenne Twister
 
-			// Ajustar los límites del rango para que incluyan 500
-			std::uniform_int_distribution<> initialSpeedDist(400, 1000); // Rango: 400 a 500
+			std::uniform_int_distribution<> initialSpeedDist(400, 1000);
 
 			initialSpeed = static_cast<float>(initialSpeedDist(gen));
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
-			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
+			clock.restart();
 		}
 	}
 	
@@ -74,13 +67,13 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				i++;
 			}
 			turno = false;
-			std::random_device rd; // Entropía del sistema
-			std::mt19937 gen(rd()); // Generador basado en Mersenne Twister
+			std::random_device rd; 
+			std::mt19937 gen(rd()); 
 
-			std::uniform_int_distribution<> initialSpeedDist(400, 1000); // Rango: 400 a 500
+			std::uniform_int_distribution<> initialSpeedDist(400, 1000); 
 
 			initialSpeed = static_cast<float>(initialSpeedDist(gen));
-			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
+			decelerationRate = initialSpeed / 7.0f; 
 			rotationSpeed = initialSpeed;
 			clock.restart();
 		}
@@ -106,7 +99,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 
 		for (int i = 0; i < numSegments; ++i) {
-			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));//float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + currentRotation * (M_PI / 180.0f));
+			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f)); 
 			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
 			icons[i].rotate(rotationSpeed * deltaTime);
 		}
@@ -118,7 +111,6 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			float finalAngle = fmod(currentRotation, 360.0f);
 			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
-			//std::cout << "Segmento seleccionado: " << currentSegment << "\n";
 		}
 	}
 
@@ -127,9 +119,8 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 	float pointerX = centerX; 
 	float pointerY = centerY - radius; 
 
-	// Calcular el ángulo 
-	float angle = atan2(pointerY - centerY, pointerX - centerX); // Radianes
-	float pointerAngle = static_cast<float>(angle * (180.0f / M_PI)); // Convertir a grados
+	float angle = atan2(pointerY - centerY, pointerX - centerX);
+	float pointerAngle = static_cast<float>(angle * (180.0f / M_PI));
 
 	if (pointerAngle < 0) {
 		pointerAngle += 360.0f;
@@ -148,10 +139,9 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 	}
 
-	// Manejar el caso del último segmento
 	if (currentSegment == -1 && pointerAngle >= (numSegments - 1) * segmentAngle) {
 
-		currentSegment = numSegments - 1; // El pointer está en el último segmento
+		currentSegment = numSegments - 1;
 	}
 
 	sf::Color currentSegmentColor;
@@ -167,7 +157,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				GM.turnopermitido -= 1;
 				break;
 
-			case 1://robar a un jugador
+			case 1://roba a un jugador
 				event = 3;
 				break;
 
@@ -176,12 +166,8 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			case 3://todos pierden 30 y se les da a el jugador
-				
-				// Recorre a todos los jugadores en la partida
-		
 
-				for (size_t i = 0; i < ActiveUsers.size();i++) {  // Reemplaza salaJugadores por rooms[roomCode]
-					// Excluir al jugador que envió el mensaje (comparando el puntero ENetPeer)
+				for (size_t i = 0; i < ActiveUsers.size();i++) {  
 					if (i != IndexTurn1) {
 
 						// Resta 30 al dinero del jugador
