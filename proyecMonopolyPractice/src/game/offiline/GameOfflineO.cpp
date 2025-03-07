@@ -8,7 +8,6 @@
 GameOffline::GameOffline(sf::RenderWindow& win,int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
-	loadResourceGame();
 	resource();
 }
 void GameOffline::resource() {
@@ -141,7 +140,7 @@ void GameOffline::resource() {
 }
 void GameOffline::positionPefil() {
 	if (ActiveUsers.size() >= 1) {
-
+		std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHH";
 		playerGameOff[ActiveUsers[0]].NamePlayer.setPosition(188.65f, 62.5f);
 
 		playerGameOff[ActiveUsers[0]].boxPlayer.setPosition(188.65f, 62.5f);

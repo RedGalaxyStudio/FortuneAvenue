@@ -671,7 +671,7 @@ void Client::handleServerMessage(const std::string& message) {
 		int num = message[3] - '0';  
 		std::string rest = message.substr(4);  //
 		PlantillaMensajeR.SMSEnviado.setString(rest);
-
+		PlantillaMensajeR.AvatarEnviado.setTexture(&playersGame[num].textureAvatarPLayer);
 		int In = calcularNumeroDeLineas(PlantillaMensajeR.SMSEnviado) + 1;
 		Nmsg = true;
 		if (In == 1) {

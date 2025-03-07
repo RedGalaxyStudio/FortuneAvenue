@@ -22,16 +22,16 @@ void HouseBuyO::setWindow(sf::RenderWindow& win, int indice) {
 void HouseBuyO::resource() {
 
 	SpriteCasa.resize(17);
-	if (!TextureXcOFF.loadFromFile("../assets/image/Button/XOffC.png")) {
+	if (!TextureXcOFF.loadFromFile("assets/image/Button/XOffC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
-	if (!TextureXcOn.loadFromFile("../assets/image/Button/XOnC.png")) {
+	if (!TextureXcOn.loadFromFile("assets/image/Button/XOnC.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
-	if (!TextureBotonComprar.loadFromFile("../assets/image/Button/comprarcasa.png")) {
+	if (!TextureBotonComprar.loadFromFile("assets/image/Button/comprarcasa.png")) {
 		std::cerr << "Error al cargar el botón de confirmación.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);

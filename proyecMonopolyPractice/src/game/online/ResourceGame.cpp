@@ -73,9 +73,8 @@ bool ChatOn = false;
 
 void loadResourceGame(){
 
-	if (!TextureFondoGame.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
-	spriteBackgroundG.setTexture(TextureFondoGame);
+
 	fontUserPerfil = fontUser;
 	espera=false;
 }
