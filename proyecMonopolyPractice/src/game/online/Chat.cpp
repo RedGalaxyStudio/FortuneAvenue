@@ -13,7 +13,7 @@ int calcularNumeroDeLineas(const sf::Text& text) {
 	
 	sf::FloatRect bounds = text.getGlobalBounds();
 
-	float alturaLinea = static_cast<float>(text.getCharacterSize());  // El tamaño de la fuente
+	float alturaLinea = static_cast<float>(text.getCharacterSize());
 	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
 
 	return numeroDeLineas;
@@ -42,7 +42,6 @@ void Chat::resource() {
 	enunciado.setPosition(1090, 30);
 	sf::FloatRect globalBounds = enunciado.getGlobalBounds();
 	enunciado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
 
 	indicacion.setCharacterSize(20);
 	indicacion.setFont(Fuentechat);
@@ -112,7 +111,6 @@ void Chat::resource() {
 	PlantillaMensajeE.ContenidoEnviado.setPosition(940, 600);
 	PlantillaMensajeE.ContenidoEnviado.setFillColor(sf::Color(0, 104, 167));
 
-	PlantillaMensajeR.AvatarEnviado.setTexture(&playersGame[0].textureAvatarPLayer);
 	PlantillaMensajeR.AvatarEnviado.setRadius(18);
 	PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 	PlantillaMensajeR.SMSEnviado.setCharacterSize(15);
@@ -196,7 +194,7 @@ void Chat::Event(sf::Event event) {
 
 		playClickSound();
 		PlantillaMensajeE.SMSEnviado.setString(input);
-		client->networkMessage.sendSmg(std::to_string(0) + input);
+		client->networkMessage.sendSmg(std::to_string(client->playerIndex) + input);
 		PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 			PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
@@ -358,7 +356,7 @@ void Chat::Event(sf::Event event) {
 				if (indicacion.getGlobalBounds().width > 260) {
 					insertarSaltoDeLinea();
 					indicacion.setString(input);
-					std::cout << "Holamundo:" << indicacion.getGlobalBounds().width << std::endl;
+					std::cout << "salto de linea" << indicacion.getGlobalBounds().width << std::endl;
 					int In = calcularNumeroDeLineas(indicacion) + 1;
 
 					if (In == 1) {

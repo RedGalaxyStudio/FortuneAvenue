@@ -19,7 +19,6 @@ void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	if (caminoActual + 1 > (*casillas).size() ) {
 
 		finalCamino = true;
-		//std::cout << " caminoActual + 1" << caminoActual + 1 << "(*casillas).size()" << (*casillas).size();
 		updateCAmbioCasilla();
 		posicionFinal = (*casillas)[caminoActual][casillaActual];
 		this->duracionMovimiento = duracion;
@@ -41,15 +40,12 @@ int MovePieces::getcasillaActual() {
 	return casillaActual;
 }
 void MovePieces::actualizarMovimiento(float deltaTime) {
-	std::cout << "\n Peinci" ;
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
-		std::cout <<"\n"<< *CsFinal;
 		while (t > 1.0f && casillasRestantes > 0 && !*CsFinal) {
 			t -= 1.0f;
 
 			sprite->setPosition(posicionFinal);
-
 
 			casillaActual++;
 			casillasRestantes--;
@@ -59,7 +55,6 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			if (casillaActual >= (*casillas)[caminoActual].size()) {
 				casillaActual = 0;
 
-				//std::cout << "\nCasi caso";
 				if (caminoActual + 1 == 7 && casillasRestantes != 0) {
 					*vuelta += 1;
 
@@ -82,7 +77,6 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 					}
 
-
 				}
 				else
 					if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
@@ -92,8 +86,6 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 						updateCAmbioCasilla();
 					}
 				caminoActual++;
-
-
 
 			}
 		}
@@ -112,8 +104,6 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			sprite->setPosition(nuevaPosicion);
 
 			if (*vuelta == 3&& sprite->getPosition()== final){
-				std::cout << "\nvuelta:" << *vuelta << ".Sprite:" << sprite->getPosition().x << ";" << sprite->getPosition().y << " Final:" << final.x << ";" << final.y;
-				*CsFinal = true;
 				casillasRestantes = 0;
 
 				enMovimiento = false;
@@ -129,13 +119,10 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			}
 		}
 		else {		
-			std::cout << "\nvuelta2:" << *vuelta << ".Sprite:" << sprite->getPosition().x << ";" << sprite->getPosition().y << " Final:" << final.x << ";" << final.y;
-
 			enMovimiento = false;
 			turn_Moviendo = false;
 			giroRule = true;
 			if (*vuelta == 3) {
-				std::cout << "\nvuelta2:" << *vuelta;
 				*CsFinal = true;
 			
 
@@ -156,12 +143,10 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 
 
 	}
-	//std::cout << "\n Peinci11111111111";
 }
 void MovePieces::updateCAmbioCasilla() {
 
 	int tan = static_cast<int>((*casillas).size());
-//	std::cout << "\nturn:" << turn;
 
 	if (tan == 3) {
 		SpriteArrowArriba.setPosition(370, 400);
@@ -280,7 +265,6 @@ void MovePieces::updateCAmbioCasilla() {
 
 		if (!turn) {
 
-		//	std::cout << "\nOpcioncami:" << Opcioncami;
 			if (tan == 3) {
 				if (Opcioncami == 0) {
 					playClickSound();
@@ -394,8 +378,6 @@ void MovePieces::seleccionarCaminoIzq() {
 			sf::Vector2f(425,654)
 		};
 
-
-
 		std::vector<sf::Vector2f> caminocasa2_1 = {  };
 
 		casillas->push_back(camino2_1);
@@ -420,7 +402,6 @@ void MovePieces::seleccionarCaminoIzq() {
 	}
 	else if ((*casillas).size() == 5) {
 
-
 		std::vector<sf::Vector2f> camino6_1{
 			sf::Vector2f(407, 98),
 		};
@@ -436,10 +417,10 @@ void MovePieces::seleccionarCaminoDer() {
 
 	if ((*casillas).size() == 1) {
 		std::vector<sf::Vector2f> camino2_2{
-	 sf::Vector2f(428, 517),
-	 sf::Vector2f(429, 566),
-	 sf::Vector2f(429, 612),
-	 sf::Vector2f(425, 654)
+			sf::Vector2f(428, 517),
+			sf::Vector2f(429, 566),
+			sf::Vector2f(429, 612),
+			sf::Vector2f(425, 654)
 		};
 
 	
@@ -488,8 +469,6 @@ void MovePieces::seleccionarCaminoDer() {
 	
 		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(790, 539),sf::Vector2f(444, 42), sf::Vector2f(320, 118),sf::Vector2f(869, 679),sf::Vector2f(428, 517) };
 		std::vector<sf::Vector2f> caminocasa6_2 = {  };
-
-
 
 		casillas->push_back(camino6_2);
 		casillas->push_back(camino7);

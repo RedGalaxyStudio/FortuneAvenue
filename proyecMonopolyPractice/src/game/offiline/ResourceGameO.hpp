@@ -126,7 +126,7 @@ struct PlayerGameOff {
 extern std::vector<PlayerInformation> playerGameInfo; //playersInfo
 extern std::vector<PlayerGameOff> playerGameOff; //playersGame
 
-void loadResourceGame();
+void loadResourceGameO();
 void loadPieceGame();
 
 

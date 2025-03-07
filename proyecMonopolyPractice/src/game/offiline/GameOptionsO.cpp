@@ -7,7 +7,6 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 GameOptions::GameOptions(sf::RenderWindow& win) : window(&win) {
-	loadResourceGame();
 	resource();
 }
 

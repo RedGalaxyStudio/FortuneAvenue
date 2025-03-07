@@ -17,7 +17,7 @@ sf::Texture TextureMarco;
 int NumPlayers;
 
 std::string nameUser;
-sf::View view; // Declarar la vista
+sf::View view; 
 sf::Clock reloj;
 std::vector<sf::Sprite> rastro;
 sf::Sprite spriteMapa;
@@ -34,14 +34,14 @@ sf::Sprite SpriteArrowAbajo;
 bool server;
 bool rolldiceJugador;
 std::string username;
-std::vector<char> image; // Store image data directly.
+std::vector<char> image;
 bool chatOn = false;
 
  bool nular;
 int conteosuel;
 sf::Sprite SpriteArrowIzq;
-bool SelectingPiece = false; // Inicialmente en selección de pieza
-bool Game = false;        // No en juego al principio
+bool SelectingPiece = false; 
+bool Game = false;     
 std::vector<PlayerInfo> playerInfos;
 std::vector<PlayerGame> playersGame;
 bool espera;
@@ -73,9 +73,8 @@ bool ChatOn = false;
 
 void loadResourceGame(){
 
-	if (!TextureFondoGame.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureMarco.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
-	spriteBackgroundG.setTexture(TextureFondoGame);
+
 	fontUserPerfil = fontUser;
 	espera=false;
 }

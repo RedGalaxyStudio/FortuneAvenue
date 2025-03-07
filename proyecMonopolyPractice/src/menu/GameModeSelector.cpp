@@ -8,11 +8,14 @@
 #include "../ui/ResourceGeneral.hpp"
 
 GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
-	loadResourceGame();
 	resource();
 }
 
 void GameModeSelector::resource() {
+
+
+	if (!TextureBackgroundG.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
+	spriteBackgroundG.setTexture(TextureBackgroundG);
 	TextureOfflineOff.loadFromFile("assets/image/MenuSelector/offline400.png");
 	TextureOfflineOn.loadFromFile("assets/image/MenuSelector/offline400X.png");
 

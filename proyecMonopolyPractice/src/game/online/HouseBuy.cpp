@@ -99,7 +99,6 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
 	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
-	std::cout << "\nIndexCAsa" << IndexCAsa;
 	
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 
@@ -271,20 +270,16 @@ void HouseBuy::ViewHouseBuys() {
 			}
 
 
-
-			// Resetear todas las cartas a su posición oculta al inicio del bucle
 			for (int i = 0; i < VCcompradas.size(); i++) {
 				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
 			}
 
-			// Verificar colisión en orden inverso y actualizar la carta activa
-			cartaActivaIndex = -1; // Reinicia la carta activa
+			cartaActivaIndex = -1;
 			for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
 				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
 					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
-					cartaActivaIndex = i; // Guarda el índice de la carta activa
-					break; // Termina el bucle una vez que encuentra una carta activa
-				}
+					cartaActivaIndex = i;
+					break; 
 			}
 	
 

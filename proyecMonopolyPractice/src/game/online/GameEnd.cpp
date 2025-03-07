@@ -173,7 +173,6 @@ public:
 
         rect.setPosition(position);
         rect.setFillColor(color);
-
         rect.setRotation(angle);
 
         window.draw(rect);
@@ -317,27 +316,23 @@ void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& p
 		indices[i] = i;
 	}
 
-	// Ordenar los índices según el puntaje de los jugadores
 	std::sort(indices.begin(), indices.end(), [&players](size_t a, size_t b) {
 		return players[a].money > players[b].money;
 		});
 
-	// Asignar posiciones respetando los empates
-	int currentRank = 1; // El puesto actual
-	int playersInSameRank = 0; // Cuántos jugadores están en el mismo puesto
+	int currentRank = 1; 
+	int playersInSameRank = 0; 
 	positions.resize(players.size(), 0);
 
 	for (size_t i = 0; i < indices.size(); ++i) {
 		if (i > 0 && players[indices[i]].money == players[indices[i - 1]].money) {
-			// Si el puntaje es igual al anterior, comparten el mismo puesto
 			positions[indices[i]] = currentRank;
 			playersInSameRank++;
 		}
 		else {
-			// Si no hay empate, asignar el nuevo puesto
 			currentRank += playersInSameRank;
 			positions[indices[i]] = currentRank;
-			playersInSameRank = 1; // Reiniciar el contador de empates
+			playersInSameRank = 1; 
 		}
 	}
 }
@@ -380,31 +375,23 @@ void GameEnd::resource() {
 		sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
 		posicionesGanadores[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
-
 	}
 }
 
 void GameEnd::update() {
 
-
-
-
-	float perfilWidth = 200.0f; // Ancho estimado para cada perfil
-	float separacion = 20.0f;   // Espaciado entre perfiles
-	int totalPerfiles = static_cast<int>(UsuariosActivos.size());      // Número total de perfiles
+	float perfilWidth = 200.0f; 
+	float separacion = 20.0f;   
+	int totalPerfiles = static_cast<int>(UsuariosActivos.size());      
 
 	if (totalPerfiles > 0) {
-		// Calcular ancho total ocupado por perfiles y separaciones
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
 
-		// Calcular inicio X para centrar los perfiles horizontalmente
-		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
-
-		float startY = 290.f; // Centrado verticalmente
+		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+        float startY = 290.f;
 
 		for (int i = 0; i < totalPerfiles; i++) {
-			float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+			float xPos = startX + i * (perfilWidth + separacion); 
 			float yPos = startY;
 			posicionesGanadores[i].setPosition(xPos, startY- 90);
 			playersGame[i].NamePlayer.setPosition(xPos, startY + 70);
@@ -487,7 +474,7 @@ void GameEnd::update() {
 			
 
 
-		}   // Asegura que el bucle se repita mientras haya eventos pendientes
+		}  
 
 		window->setMouseCursor(*currentCursor);
 
@@ -502,35 +489,29 @@ void GameEnd::update() {
 
 
 
-		float perfilWidth = 200.0f; // Ancho estimado para cada perfil
-		float separacion = 20.0f;   // Espaciado entre perfiles
-		int totalPerfiles = static_cast<int>(UsuariosActivos.size());      // Número total de perfiles
+		float perfilWidth = 200.0f; 
+		float separacion = 20.0f;   
+		int totalPerfiles = static_cast<int>(UsuariosActivos.size()); 
 
-		// Ancho total ocupado por los perfiles y separaciones
+	
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
 
-		// Calcular el punto inicial en X para centrar los perfiles horizontalmente
+		
 		float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
-
-		// Posición Y fija para centrar verticalmente
-		float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f; // Ajusta según las alturas estimadas
-
-
+		float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
 
 		if (totalPerfiles > 0) {
-			// Calcular ancho total ocupado por perfiles y separaciones
+			
 			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
 
-			// Calcular inicio X para centrar los perfiles horizontalmente
-			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
-
-			float startY = 100.0f; // Centrado verticalmente
+			
+			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); 
+			float startY = 100.0f; 
 
 			for (int i = 0; i < totalPerfiles; i++) {
-				float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+				float xPos = startX + i * (perfilWidth + separacion); 
 				float yPos = startY;
 
-				// Posicionar elementos
 				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY+170);
 				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY+170);
 				//playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
@@ -545,24 +526,19 @@ void GameEnd::update() {
 					playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 310);
 				}
 
-				// Centrar Money
 				sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
 				playersGame[UsuariosActivos[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
 				playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 210);
 
 				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
-					// Configurar escala primero
+		
 					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
 
-					// Calcular origen tras escala
 					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
 					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-					//std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f << "," << pieceSelectBounds.height / 2.0f;
-					// Posicionar el objeto centrado
 					
 				}
 				
-				// Dibujar los elementos en la ventana
 				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
 				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
 				window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
@@ -575,7 +551,7 @@ void GameEnd::update() {
 
 		
 		for(int i=0;i<UsuariosActivos.size();i++){
-		// Dibujar los elementos en la ventana
+
 		window->draw(playersGame[i].NamePlayer);
 		window->draw(playersGame[i].boxPlayer);
 		window->draw(playersGame[i].AvatarPlayer);

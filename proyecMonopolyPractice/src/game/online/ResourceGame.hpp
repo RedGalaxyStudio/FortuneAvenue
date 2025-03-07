@@ -59,13 +59,13 @@ struct PlayerInfo {
 	bool final= false;
 	bool PiecUserme = false;
 	void reset() {
-		username.clear();                        // Vaciar el nombre de usuario
-		image.clear();                           // Vaciar la imagen
-		money = 200;                             // Restablecer dinero al valor inicial
-		roomconect = 0;                          // Restablecer a 0 (o el valor que desees)
-		isSelectingPiece = false;                // Reiniciar a falso
-		isInGame = false;                        // Reiniciar a falso
-		indexPiece = -1;                         // Usar -1 para indicar que no hay pieza seleccionada
+		username.clear();                     
+		image.clear();                           
+		money = 200;                            
+		roomconect = 0;                       
+		isSelectingPiece = false;             
+		isInGame = false;                       
+		indexPiece = -1;                         
 
 	}
 };
@@ -102,12 +102,7 @@ struct MensajeMSG {
 	sf::Vector2f positionSMSEnviado;
 	sf::Vector2f positionContenidoEnviado;
 	sf::Vector2f positionAvatarEnviado;
-	/*void Draw() {
-		window.draw(ContenidoEnviado);
-		window.draw(SMSEnviado);
-		window.draw(AvatarEnviado);
-	}*/
-
+	
 };
 extern MensajeMSG PlantillaMensajeR;
 extern std::vector <MensajeMSG> Mensajes;
@@ -130,14 +125,14 @@ struct PlayerGame {
 	sf::Sprite Check;
 	MensajeMSG plantillaMsg;
 	void reset() {
-		textureAvatarPLayer = sf::Texture();  // Reasignar un objeto nuevo
-		AvatarPlayer = sf::CircleShape();    // Reasignar un objeto nuevo
-		//MarcoPlayer = sf::Sprite();          // Reasignar un objeto nuevo
-		NamePlayer = sf::Text();             // Reasignar un objeto nuevo
-		//boxPlayer = sf::Sprite();            // Reasignar un objeto nuevo
-		PieceSelect = sf::Sprite();          // Reasignar un objeto nuevo
-		Money = sf::Text();                  // Reasignar un objeto nuevo
-		Activo = false;                      // Restablecer a falso
+		textureAvatarPLayer = sf::Texture();  
+		AvatarPlayer = sf::CircleShape();    
+		//MarcoPlayer = sf::Sprite();         
+		NamePlayer = sf::Text();             
+		//boxPlayer = sf::Sprite();            
+		PieceSelect = sf::Sprite();         
+		Money = sf::Text();                  
+		Activo = false;                      
 	}
 
 };
