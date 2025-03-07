@@ -45,17 +45,17 @@ private:
 	Client* client;
 	bool PieceUser;
 	sf::Vector2f posicionInicial;  
-	sf::Vector2f posicionFinal;  // Posición final hacia la que se mueve el sprite
-	float duracionMovimiento;  // Duración de la transición entre casillas
-	float t;  // Valor de interpolación entre 0 y 1
+	sf::Vector2f posicionFinal; 
+	float duracionMovimiento; 
+	float t;  
 
 
-	float rotacionActual; // Rotación actual en grados
-	float rotacionMaxima; // Máximo en grados a girar a la izquierda o derecha
-	float velocidadRotacion; // Grados por segundo
-	bool girarIzquierda; // Estado de dirección de rotación
-	float tiempoCambio; // Tiempo para cambiar de dirección
-	float timer; // Timer para rastrear el tiempo
+	float rotacionActual; 
+	float rotacionMaxima;
+	float velocidadRotacion; 
+	bool girarIzquierda; 
+	float tiempoCambio; 
+	float timer; 
 
 
 	std::vector<sf::Vector2f> camino3 = {
@@ -78,10 +78,6 @@ private:
 		sf::Vector2f(725,668),
 		sf::Vector2f(772,666)
 	};
-
-
-
-
 
 
 	std::vector<sf::Vector2f> camino5{
@@ -149,7 +145,6 @@ private:
 
 
 	std::vector<sf::Vector2f> camino7{
-		// sf::Vector2f(407, 98),
 		 sf::Vector2f(402, 157),
 		 sf::Vector2f(442, 209),
 		 sf::Vector2f(413, 253),

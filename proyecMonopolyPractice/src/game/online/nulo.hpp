@@ -12,23 +12,23 @@ class Nulo {
 
 private:
     sf::RenderWindow* window;
-    sf::Texture TextureBotonNulo;  // Botón para la carta de "nulo"
+    sf::Texture TextureBotonNulo; 
     sf::Sprite SpriteBotonNulo;
     
-    std::vector<sf::Texture> TextureNulo;  // Texturas para la carta de "nulo"
-    std::vector<sf::Sprite> SpriteNulo;    // Sprites para la carta de "nulo"
+    std::vector<sf::Texture> TextureNulo;  
+    std::vector<sf::Sprite> SpriteNulo;  
 
     sf::Clock tempoCarta;
     sf::Sprite renderedSprite;
     Client* client;
 
 public:
-    Nulo(); // Constructor por defecto
+    Nulo();
     int IndexCAsa;
 
     void setWindow(sf::RenderWindow& win, Client& clienT);
-    void Resource();       // Cargar recursos para la carta de "nulo"
-    void Update(); // Actualizar la animación de "nulo"
+    void Resource();    
+    void Update();
 };
 
-#endif // NULO_HPP
+#endif

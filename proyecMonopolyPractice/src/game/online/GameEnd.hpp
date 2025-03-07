@@ -13,18 +13,18 @@
 
 class GameEnd {
 private:
-    sf::RenderWindow* window;                 // Ventana principal para dibujar
+    sf::RenderWindow* window;                 
     sf::Text fingame12;
     sf::Text funciona;
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
     Client* client;
 public:
-    GameEnd(sf::RenderWindow* window, Client* clienT);        // Constructor que toma la ventana principal
-    ~GameEnd();                               // Destructor
+    GameEnd(sf::RenderWindow* window, Client* clienT);        
+    ~GameEnd();                               
     void resource();
     void update();
 
 };
 
-#endif // GAMEEND_HPP
+#endif

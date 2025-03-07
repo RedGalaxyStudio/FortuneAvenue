@@ -5,29 +5,18 @@
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
 	: width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
-	// Inicializar shaders
 
 	currentSegment = -1;
 
 
 	isSpinning = false;
-	radius = std::min(width, height) / 2.0f - 20.0f;  // Deja un margen de 20 píxeles
+	radius = std::min(width, height) / 2.0f - 20.0f;  
 
-	// Crear segmentos
 	createSegments();
-
-	// Cargar texturas para los íconos
 	loadIconTextures();
-
-	// Configurar íconos
 	setupIcons();
-
-	// Agregar luces alrededor de la ruleta
 	setupLights();
-
 	setupBase();
-
-	// Inicializar pointer
 	createPointer();
 }
 
@@ -51,7 +40,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			initialSpeed = client->initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
-			clock.restart();  // Reiniciar el reloj para calcular el tiempo desde el inicio de la rotación
+			clock.restart(); 
 		}
 	}
 	
@@ -70,7 +59,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			turno = false;
 
 			initialSpeed = client->initialSpeedActi;
-			decelerationRate = initialSpeed / 7.0f; // Detener en 7 segundos
+			decelerationRate = initialSpeed / 7.0f; 
 			rotationSpeed = initialSpeed;
 			clock.restart();
 		}
@@ -96,7 +85,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 
 		for (int i = 0; i < numSegments; ++i) {
-			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));//float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + currentRotation * (M_PI / 180.0f));
+			float iconAngle = static_cast<float>(i * 2 * M_PI / numSegments + M_PI / numSegments + currentRotation * (M_PI / 180.0f));
 			icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));
 			icons[i].rotate(rotationSpeed * deltaTime);
 		}
@@ -108,7 +97,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			float finalAngle = fmod(currentRotation, 360.0f);
 			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
-			//std::cout << "Segmento seleccionado: " << currentSegment << "\n";
 		}
 	}
 
@@ -117,7 +105,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 	float pointerX = centerX; 
 	float pointerY = centerY - radius; 
 
-	// Calcular el ángulo 
 	float angle = atan2(pointerY - centerY, pointerX - centerX); // Radianes
 	float pointerAngle = static_cast<float>(angle * (180.0f / M_PI)); // Convertir a grados
 
@@ -138,7 +125,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 	}
 
-	// Manejar el caso del último segmento
 	if (currentSegment == -1 && pointerAngle >= (numSegments - 1) * segmentAngle) {
 
 		currentSegment = numSegments - 1; // El pointer está en el último segmento
@@ -184,8 +170,6 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			default:
-
-			//	std::cout << "Segmento desconocido: No se realiza ninguna acción" << std::endl;
 				break;
 			}
 		}
@@ -200,7 +184,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			fillColor = segment.getFillColor();
 
-			window.draw(segment); // Dibuja el sprite con shader1
+			window.draw(segment); 
 
 
 		}
@@ -223,7 +207,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		for (const auto& segment : segments) {
 
 			fillColor = segment.getFillColor();
-			window.draw(segment); // Dibuja el sprite con shader1
+			window.draw(segment); 
 
 		}
 
@@ -243,13 +227,13 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		for (int i = 0; i < 7; i++) {
 			segments[i].setFillColor(segmentColors[i]);
 			segments[i].setOutlineColor(sf::Color::Black);
-			window.draw(segments[i]); // Dibuja el segmento después de configurarlo
+			window.draw(segments[i]);
 		}
 
 		window.draw(CentroCircule);
 
 		for (std::size_t i = 0; i < icons.size(); ++i) {
-			window.draw(icons[i]); // Dibujar el ícono en su posición original
+			window.draw(icons[i]); 
 		}
 
 	}
@@ -273,7 +257,6 @@ void Ruleta::enviarestado() {
 
 
 	float anguloactualrule;
-	// Variables para variaciones aleatorias
 	for (auto& segment : segments) {
 		anguloactualrule = segment.getRotation();
 
@@ -287,7 +270,7 @@ void Ruleta::enviarestado() {
 void Ruleta::update(float deltaTime) {
 	blinkTimer += deltaTime;
 	if (blinkTimer >= blinkDuration) {
-		blinkTimer = 0.0f; // Reiniciar el temporizador
+		blinkTimer = 0.0f;
 	}
 }
 
@@ -297,19 +280,14 @@ void Ruleta::createSegments() {
 		sf::ConvexShape segment;
 		segment.setPointCount(13);
 
-		// Vértice del triángulo (punto inferior)
 		segment.setPoint(0, sf::Vector2f(0, 0));
-
-		// Primer punto en la base del triángulo
 		segment.setPoint(1, sf::Vector2f(radius * cos(i * angleStep), radius * sin(i * angleStep)));
 
-		// Puntos del semicírculo
 		for (int j = 0; j <= 10; ++j) {
 			float angle = i * angleStep + (j / 10.0f) * angleStep;
 			segment.setPoint(j + 2, sf::Vector2f(radius * cos(angle), radius * sin(angle)));
 		}
 
-		// Segundo punto en la base del triángulo
 		segment.setPoint(12, sf::Vector2f(radius * cos((i + 1) * angleStep), radius * sin((i + 1) * angleStep)));
 
 		segment.setFillColor(segmentColors[i % numSegments]);
@@ -348,7 +326,6 @@ void Ruleta::setupIcons() {
 		icons[i].setTexture(iconTextures[i]);
 		icons[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
 
-		// Posición del ícono, escalada al radio de la ruleta
 		float iconAngle = i * angleStep + angleStep / 2;
 		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
 
@@ -356,7 +333,7 @@ void Ruleta::setupIcons() {
 
 		iconsResul[i].setTexture(iconTextures[i]);
 		iconsResul[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
-		iconsResul[i].setPosition(centerX, centerY);  // 50 es un margen
+		iconsResul[i].setPosition(centerX, centerY); 
 
 	}
 }
@@ -364,7 +341,7 @@ void Ruleta::setupIcons() {
 void Ruleta::setupLights() {
 
 	int numLuces = 14;
-	float radioLuces = (radius * 0.04f) + radius;  // Ajusta las luces al radio
+	float radioLuces = (radius * 0.04f) + radius; 
 
 	for (int i = 0; i < numLuces; ++i) {
 		sf::CircleShape luz(4);
@@ -405,22 +382,21 @@ void Ruleta::setupBase() {
 	CentroCircule.setPosition(centerX, centerY);
 	CentroCircule.setFillColor(sf::Color(248, 249, 249));
 	CentroCircule.setOutlineThickness(radius * 0.015f);
-	CentroCircule.setOutlineColor(sf::Color::Black);  // Glow effect en el borde
+	CentroCircule.setOutlineColor(sf::Color::Black); 
 
 	borde.setRadius(radius);
 	borde.setOrigin(radius, radius);
 	borde.setPosition(centerX, centerY);
-	borde.setFillColor(sf::Color(0, 0, 0, 0));  // Fondo oscuro para mejor contraste
+	borde.setFillColor(sf::Color(0, 0, 0, 0)); 
 	borde.setOutlineThickness(radius * 0.08f);
-	borde.setOutlineColor(sf::Color(255, 194, 10));  // Glow effect en el borde
+	borde.setOutlineColor(sf::Color(255, 194, 10)); 
 
 	ruletaBase.setRadius(radius);
 	ruletaBase.setOrigin(radius, radius);
 	ruletaBase.setPosition(centerX, centerY);
-	ruletaBase.setFillColor(sf::Color(50, 50, 50));  // Fondo oscuro para mejor contraste
+	ruletaBase.setFillColor(sf::Color(50, 50, 50)); 
 	ruletaBase.setOutlineThickness(radius * 0.02f);
-	ruletaBase.setOutlineColor(sf::Color(255, 255, 255));  // Glow effect en el borde
-
+	ruletaBase.setOutlineColor(sf::Color(255, 255, 255)); 
 
 }
 
@@ -434,14 +410,14 @@ void Ruleta::createPointer() {
 	pointer.setFillColor(sf::Color::Red);
 	pointer.setOrigin(10, 28);
 	pointer.setPosition(centerX, centerY - radius);
-	pointer.setRotation(180);  // Para que apunte hacia abajo
+	pointer.setRotation(180);
 
 }
 
 void Ruleta::animatePointer() {
 	static float bounce = 0.0f;
 	if (!isSpinning) {
-		bounce += 0.1f; // Incrementar para el efecto de rebote
+		bounce += 0.1f;
 		pointer.setPosition(centerX, centerY - radius + std::sin(bounce) * 5.0f);
 	}
 	else {

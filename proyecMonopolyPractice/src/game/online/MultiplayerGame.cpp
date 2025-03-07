@@ -4,7 +4,7 @@
 #include "Stealplayer.hpp"
 #include "../../ui/ResourceGeneral.hpp"
 MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
-	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); // Inicialización del puntero
+	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); 
 
 	loadResourceGame();
 	resource();
@@ -27,14 +27,12 @@ void MultiplayerGame::resource() {
 	if (!GameMusicFondo.openFromFile("assets/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
 
-	//Cargar Texturas de Flechas
 	if (!TextureArrowIzq.loadFromFile("assets/image/Game/Izq.png")) return;
 	if (!TextureArrowDer.loadFromFile("assets/image/Game/Der.png")) return;
 	if (!TextureArrowAbajo.loadFromFile("assets/image/Game/Abajo.png")) return;
 	if (!TextureArrowArriba.loadFromFile("assets/image/Game/Arriba.png")) return;
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
 
-	//posicin y tamanio de flechas
 	SpriteArrowIzq.setTexture(TextureArrowIzq);
 	SpriteArrowIzq.setOrigin(350.0f, 350.0f);
 	SpriteArrowIzq.setPosition(370, 400);
@@ -108,22 +106,15 @@ void MultiplayerGame::resource() {
 	posicionActual = 0;
 
 
-
 	Impuesto.setCharacterSize(20);
 	Impuesto.setFont(fontUser);
 	Impuesto.setFillColor(sf::Color::Red);
-	//Impuesto.setOutlineThickness(2);
-	//Impuesto.setOutlineColor(sf::Color(135, 135, 135));
-
 	Impuesto.setPosition(715, 434);
 
 
 	ImpuestoCasa.setCharacterSize(18);
 	ImpuestoCasa.setFont(fontUser);
 	ImpuestoCasa.setFillColor(sf::Color::Red);
-	//ImpuestoCasa.setOutlineThickness(-1);
-	//ImpuestoCasa.setOutlineColor(sf::Color(135, 135, 135));
-
 	ImpuestoCasa.setPosition(715, 382);
 
 	SpriteImpuesto.setTexture(TextureImpuesto);
@@ -131,9 +122,6 @@ void MultiplayerGame::resource() {
 	SpriteImpuesto.setPosition(640, 360);
 	sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
 	SpriteImpuesto.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
-
-
 
 	posicionActual = 0;
 
@@ -205,7 +193,9 @@ void MultiplayerGame::positionPefil() {
 		globalBounds = playersGame[UsuariosActivos[0]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
+
 		std::cout << "\n\n\nsi pasa por casa\n\n\n\n";
+
 		playersGame[0].origen = sf::Vector2f(330, 439);
 		playersGame[0].PieceSelect.setPosition(playersGame[0].origen);
 	}
@@ -213,7 +203,7 @@ void MultiplayerGame::positionPefil() {
 		return;
 	}
 
-	//Perfil 2
+	//perfil 2
 	if (UsuariosActivos.size() >= 2) {
 
 		globalBounds = playersGame[UsuariosActivos[1]].NamePlayer.getGlobalBounds();
@@ -252,6 +242,11 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[1]].CasasN.setOutlineThickness(2);
 		playersGame[UsuariosActivos[1]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[1]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[1]].numCasas));
+
+
+		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);
+		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);
+
 
 		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);//-60
 		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);//-40
@@ -305,8 +300,12 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[2]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[2]].numCasas));
 
+		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 595.5f);
+		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 595.5f);
+
 		playersGame[UsuariosActivos[2]].CasasN.setPosition(138.65f, 595.5f);//-60
 		playersGame[UsuariosActivos[2]].Home.setPosition(158.65f, 595.5f);//-40
+
 
 		playersGame[UsuariosActivos[2]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[2]].PieceSelect.getGlobalBounds();
@@ -319,8 +318,8 @@ void MultiplayerGame::positionPefil() {
 	else {
 		return;
 	}
-	//perfil 4
 
+	//perfil 4
 	if (UsuariosActivos.size() >= 4) {
 		playersGame[UsuariosActivos[3]].NamePlayer.setPosition(1188.65f, 552.5f)
 			;
@@ -349,9 +348,15 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[3]].CasasN.setOutlineThickness(2);
 		playersGame[UsuariosActivos[3]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[3]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[3]].numCasas));
+
+
+		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 595.5f);
+		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 595.5f);
+
 		
 		playersGame[UsuariosActivos[3]].CasasN.setPosition(1138.65f, 595.5f);//-60
 		playersGame[UsuariosActivos[3]].Home.setPosition(1158.65f, 595.5f);//-40
+
 
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[3]].textureAvatarPLayer);
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[3]].textureAvatarPLayer.getSize().x / 2));
@@ -411,20 +416,20 @@ void MultiplayerGame::update() {
 
 		Event();
 		
+		//mecanica dado
 		Dado.loopP(client);
-		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
 			DadoResul = resultadoDado;
 			TempoAnimacion.restart();
 		}
+
 		// mecanica ruleta
 		if (animacionRuleta == true && !animacionIniciada) {
 			TempoAnimacion.restart();
 			animacionRuleta = false;
 			animacionIniciada = true;
 		}
-		// mecanica ruleta
 		if (client->giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
 			client->giroActivo = false;
 			ruleta_draw = false;
@@ -433,12 +438,11 @@ void MultiplayerGame::update() {
 			animacionRuleta = false;
 		}
 
-		// mecanica Impuesto
+		// mecanica impuesto
 		if (animacionImpuesto == true && !animacionIniciada) {
 			TempoAnimacion.restart();
 			animacionImpuesto = false;
 			animacionIniciada = true;
-			//std::cout << "animacionImpuesto entro: " << std::boolalpha << animacionImpuesto << "\n";
 		}
 
 		if (animacionImpuesto == false && animacionIniciada && impuesto_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
@@ -660,8 +664,6 @@ void MultiplayerGame::Event() {
 					house[UsuariosActivos[0]].ViewHouseBuys();
 				}
 
-
-
 				if (ruleta_draw && turn && turnoGiro) {
 					ruleta->trurntrue();
 					turnoGiro = false;
@@ -757,23 +759,21 @@ void MultiplayerGame::DrawGameRuleta() {
 	if (!client->giroActivo && turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
-		// Modificar el escalado
 		if (increasing) {
-			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; // Incrementa el escalado
+			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; 
 			if (currentScale >= maxScale) {
 				currentScale = maxScale;
-				increasing = false; // Comienza a reducir el escalado
+				increasing = false;
 			}
 		}
 		else {
-			currentScale -= (maxScale - minScale) / (duration / 2) * deltaTime; // Reduce el escalado
+			currentScale -= (maxScale - minScale) / (duration / 2) * deltaTime; 
 			if (currentScale <= minScale) {
 				currentScale = minScale;
-				increasing = true; // Comienza a aumentar el escalado
+				increasing = true; 
 			}
 		}
 		DescripDado.setPosition(640, 550);
-		// Aplicar el escalado a DescripDado
 		DescripDado.setScale(currentScale, currentScale);
 
 		window->draw(DescripDado);
@@ -831,7 +831,7 @@ void MultiplayerGame::DrawGameImpuesto() {
 
 }
 void MultiplayerGame::InicioPartida() {
-	sf::Clock clocks;  // Inicia el temporizador
+	sf::Clock clocks;  
 	sf::Clock deltaClock;
 	Bienvenida.setScale(0.5, 0.5);
 
@@ -839,17 +839,15 @@ void MultiplayerGame::InicioPartida() {
 	float currentScaleY = 0.5f;
 	float targetScaleX = 1.0f;
 	float targetScaleY = 1.0f;
-	float duration = 1.0f; // Duración en segundos
+	float duration = 1.0f; 
 	float elapsedTime = 0.0f;
 
-	// El bucle solo se ejecutará durante 5 segundos
 	while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
 
 
 		float deltaTime = deltaClock.restart().asSeconds();
 		elapsedTime += deltaTime;
 
-		// Calcula el nuevo escalado basado en el tiempo
 		if (elapsedTime < duration) {
 			float progress = elapsedTime / duration;
 			currentScaleX = 0.5f + progress * (targetScaleX - 0.5f);
@@ -857,21 +855,17 @@ void MultiplayerGame::InicioPartida() {
 			Bienvenida.setScale(currentScaleX, currentScaleY);
 		}
 		else {
-			// Asegúrate de que el escalado final sea exactamente el objetivo
 			Bienvenida.setScale(targetScaleX, targetScaleY);
 		}
 
 		window->setView(window->getDefaultView());
-		window->clear();  // Limpia la ventana para dibujar la siguiente pantalla
+		window->clear(); 
 
-		// Dibuja los elementos de fondo y mapa
 		window->draw(spriteBackgroundG);
 		window->draw(spriteMapa);
 
-		// Actualiza el dado y calcula el tiempo transcurrido
 		Dado.update();
 
-		// Dibuja los jugadores en la pantalla
 		for (int i = 0; i < UsuariosActivos.size(); i++) {
 			window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
 			window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
@@ -885,9 +879,6 @@ void MultiplayerGame::InicioPartida() {
 
 		}
 
-
-
-		// Dibuja los settings (configuración) al final
 		window->draw(SpriteChat);
 		window->draw(Settings);
 		window->draw(overlay);
@@ -986,12 +977,14 @@ void MultiplayerGame::DrawGame() {
 		turn_ruleta = false;
 		userRuleta = false;
 	}
+
 	if (userCasa) {
 		casa_draw = true;
 		eventoActivo = true;
 		userCasa = false;
 		turn_casa = false;
 	}
+
 	if (userImpuesto) {
 
 		impuesto_draw = true;
@@ -1039,29 +1032,26 @@ void MultiplayerGame::DrawGame() {
 		window->draw(playersGame[UsuariosActivos[i]].Home);
 		window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
 
-
-
 	}
+
 	if (turn_dado) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
-		// Modificar el escalado
 		if (increasing) {
-			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; // Incrementa el escalado
+			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; 
 			if (currentScale >= maxScale) {
 				currentScale = maxScale;
-				increasing = false; // Comienza a reducir el escalado
+				increasing = false; 
 			}
 		}
 		else {
-			currentScale -= (maxScale - minScale) / (duration / 2) * deltaTime; // Reduce el escalado
+			currentScale -= (maxScale - minScale) / (duration / 2) * deltaTime;
 			if (currentScale <= minScale) {
 				currentScale = minScale;
-				increasing = true; // Comienza a aumentar el escalado
+				increasing = true; 
 			}
 		}
 		DescripDado.setPosition(640, 450);
-		// Aplicar el escalado a DescripDado
 		DescripDado.setScale(currentScale, currentScale);
 
 		window->draw(DescripDado);
@@ -1081,6 +1071,5 @@ void MultiplayerGame::DrawGame() {
 
 		chats->draw();
 	}
-	
 
 }

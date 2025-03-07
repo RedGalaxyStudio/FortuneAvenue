@@ -8,7 +8,7 @@
 
 class StealplayerO {
 private:
-    sf::RenderWindow* window;                 // Ventana principal para dibujar
+    sf::RenderWindow* window;               
     sf::Text SlectingPlayer;
     std::vector<int> UsuariosEleccion;
     std::vector<sf::RectangleShape> isMouseOver;
@@ -19,8 +19,8 @@ private:
     
     
 public:
-    StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGameOff> PSteal);        // Constructor que toma la ventana principal
-    ~StealplayerO();                               // Destructor
+    StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec, std::vector<PlayerGameOff> PSteal);  
+    ~StealplayerO();                            
     void resource();
     void update();
 

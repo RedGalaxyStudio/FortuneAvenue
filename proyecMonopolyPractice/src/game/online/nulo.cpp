@@ -37,7 +37,6 @@ void Nulo::Update() {
   
     sf::Clock clocks;  // Inicia el temporizador
 
-    // El bucle solo se ejecutará durante 5 segundos
     while (window->isOpen() && clocks.getElapsedTime().asSeconds() <= 2.5f) {
     
         sf::Event event;
