@@ -81,6 +81,15 @@ void PieceSelectOff::displayPieces() {
 
 	}
 }
+
+void bots() {
+
+
+
+
+
+
+}
 void PieceSelectOff::updateSelection() {
 
 	sf::Clock clock;
