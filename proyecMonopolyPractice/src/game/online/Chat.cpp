@@ -45,7 +45,6 @@ void Chat::resource() {
 	sf::FloatRect globalBounds = enunciado.getGlobalBounds();
 	enunciado.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
 	indicacion.setCharacterSize(20);
 	indicacion.setFont(Fuentechat);
 	indicacion.setFillColor(sf::Color::White);
@@ -117,7 +116,6 @@ void Chat::resource() {
 	PlantillaMensajeE.ContenidoEnviado.setPosition(940, 600);
 	PlantillaMensajeE.ContenidoEnviado.setFillColor(sf::Color(0, 104, 167));
 
-	PlantillaMensajeR.AvatarEnviado.setTexture(&playersGame[0].textureAvatarPLayer);
 	PlantillaMensajeR.AvatarEnviado.setRadius(18);
 	PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 	PlantillaMensajeR.SMSEnviado.setCharacterSize(15);
@@ -133,7 +131,8 @@ void Chat::resource() {
 	PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
 	PlantillaMensajeR.ContenidoEnviado.setPosition(915, 600);
 	PlantillaMensajeR.ContenidoEnviado.setFillColor(sf::Color(239, 39, 133));
-	std::cout << "\nBiwnnn";
+	std::cout << "\nBiwnnn noooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo";
+
 }
 
 void Chat::insertarSaltoDeLinea() {
@@ -205,7 +204,7 @@ void Chat::Event(sf::Event event) {
 
 		playClickSound();
 		PlantillaMensajeE.SMSEnviado.setString(input);
-		client->networkMessage.sendSmg(std::to_string(0) + input);
+		client->networkMessage.sendSmg(std::to_string(client->playerIndex) + input);
 		PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 			PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 

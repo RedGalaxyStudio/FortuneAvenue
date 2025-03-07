@@ -1,20 +1,20 @@
 {
-    "Volumen_Effects": 11.5,
-    "Volumen_Music": 2.5,
+    "Volumen_Effects": 35.5,
+    "Volumen_Music": 34.5,
     "sizeFilledBar_Effects": {
-        "x": 23.0,
+        "x": 71.0,
         "y": 10.0
     },
     "sizeFilledBar_Music": {
-        "x": 5.0,
+        "x": 69.0,
         "y": 10.0
     },
     "thumbPosition_Effects": {
-        "x": 210.5,
+        "x": 258.5,
         "y": 392.5
     },
     "thumbPosition_Music": {
-        "x": 192.5,
+        "x": 256.5,
         "y": 292.5
     }
 }

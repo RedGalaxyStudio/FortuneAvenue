@@ -9,7 +9,7 @@
 
 PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
 	: window(windowRef), selectedPiece(-1),Nmap(Map) {
-	loadResourceGame();
+	loadResourceGameO();
 }
 PieceSelectOff::~PieceSelectOff() {
 	piecesOff.clear();
@@ -25,8 +25,9 @@ void PieceSelectOff::Resource() {
 	piecesOff.resize(piecesCount);
 	shadow.resize(piecesCount);
 	pieceShape.resize(piecesCount);
-
-
+	if (!TextureFrame.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
+	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.png")) return;
+	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.png")) return;
 
 	turn_dice = false;
 	firstTurn = false;
@@ -111,9 +112,13 @@ void PieceSelectOff::updateSelection() {
 	playerGameNew.NamePlayer.setString(playerGameInfo[0].playerName);
 
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
-
-
 	playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+	playerGameNew.MarcoPlayer.setTexture(TextureFrame);
+	globalBounds = playerGameNew.MarcoPlayer.getGlobalBounds();
+	playerGameNew.MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
+	playerGameNew.MarcoPlayer.setPosition(52.5f, 62.5f);
+
 	playerGameNew.boxPlayer.setTexture(textureBoxPerfilOff);
 	playerGameNew.boxPlayer.setOrigin(125, 40);
 	playerGameNew.boxPlayer.setScale(0.9f, 0.9f);

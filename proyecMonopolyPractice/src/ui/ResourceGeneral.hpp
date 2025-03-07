@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-extern sf::Texture TextureFondoGame;
+extern sf::Texture TextureBackgroundG;
 extern sf::Sprite spriteBackgroundG;
 
 

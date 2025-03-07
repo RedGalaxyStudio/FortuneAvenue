@@ -1,5 +1,7 @@
 #include "ResourceGameO.hpp"
 #include "../../core/ResourceGlobal.hpp"
+#include "../../ui/ResourceGeneral.hpp"
+
 
 
 
@@ -10,7 +12,6 @@ sf::Texture TextureMoney1; //texturecash
 sf::Texture TextureBuilding; //texturehome
 sf::Font &fontUserProfile =fontUser ; //&fontUserPerfil
 std::vector<sf::Texture> avatarTexturesOff; 
-sf::Texture TextureBackground; //TextureFondoGame
 sf::Texture TextureFrame; //textureMarco
 sf::Sprite spriteBackground;
 int NumberPlayers;
@@ -75,16 +76,15 @@ GameManager GM;
 
 void loadResourceGameO() {
 
-	if (!TextureBackground.loadFromFile("assets/image/Game/FondoGame2.jpg")) return;
 	if (!TextureFrame.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
-	spriteBackground.setTexture(TextureBackground);
+
 	fontUserProfile = fontUser;
 	wait = false;
 	
-	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.jpg")) return;
-	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.jpg")) return;
-	if (!CheckOn.loadFromFile("assets/imagen/Game/check1on.jpg")) return;
-	if (!CheckOff.loadFromFile("assets/imagen/Game/check1off.jpg")) return;
+	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.png")) return;
+	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.png")) return;
+	if (!CheckOn.loadFromFile("assets/image/Game/check1on.png")) return;
+	if (!CheckOff.loadFromFile("assets/image/Game/check1off.png")) return;
 
 }
 

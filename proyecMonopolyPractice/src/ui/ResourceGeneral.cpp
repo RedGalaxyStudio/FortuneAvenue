@@ -1,4 +1,4 @@
 #include "ResourceGeneral.hpp"
 
-sf::Texture TextureFondoGame;
+sf::Texture TextureBackgroundG;
 sf::Sprite spriteBackgroundG;

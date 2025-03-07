@@ -327,8 +327,8 @@ void Ruleta::createSegments() {
 void Ruleta::loadIconTextures() {
 	iconTextures.resize(numSegments);
 	std::string iconPaths[] = {
-		"assets/image/icono11.png", "assets/image/icon2.png", "assets/image/icono333.png",
-		"assets/image/icon4.png", "assets/image/icono55.png", "assets/image/icono666.png", "assets/image/icono7.png"
+		"assets/image/IconRulette/icono11.png", "assets/image/IconRulette/icon2.png", "assets/image/IconRulette/icono333.png",
+		"assets/image/IconRulette/icon4.png", "assets/image/IconRulette/icono55.png", "assets/image/IconRulette/icono666.png", "assets/image/IconRulette/icono7.png"
 	};
 
 	for (int i = 0; i < numSegments; ++i) {
