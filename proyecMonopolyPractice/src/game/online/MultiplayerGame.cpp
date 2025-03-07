@@ -61,32 +61,10 @@ void MultiplayerGame::resource() {
 	spriteMapa.setTexture(TextureMapa);
 	spriteMapa.setOrigin(360, 360);
 	spriteMapa.setPosition(640, 360);
-
-	/*if (MapaSelector == 1)
-	{
-		spriteMapa.setTexture(TextureMapa);
-		spriteMapa.setOrigin(360, 360);
-		spriteMapa.setPosition(640, 360);
-
-	}
-	else if (MapaSelector == 2)
-	{
-		spriteMapa.setTexture(TextureMapa2);
-		spriteMapa.setOrigin(360, 360);
-		spriteMapa.setPosition(640, 360);
-
-	}
-	else if (MapaSelector == 2)
-	{
-		spriteMapa.setTexture(TextureMapa3);
-		spriteMapa.setOrigin(360, 360);
-		spriteMapa.setPosition(640, 360);
-	}*/
 	
 	TextureCasa.resize(17);
 	for (int i = 0; i < 17; i++)
 	{
-		std::cout << "\ni";
 		if (!TextureCasa[i].loadFromFile("assets/image/Game/Casas/Casa" + std::to_string(i) + ".png")) {
 			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
 		}
@@ -216,9 +194,6 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 95.5f);//-60
 		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 95.5f);//-40
 
-
-
-
 		playersGame[UsuariosActivos[0]].textureAvatarPLayer = *selectedAvatarCopy.getTexture();
 		playersGame[UsuariosActivos[0]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[0]].textureAvatarPLayer);
 		playersGame[UsuariosActivos[0]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[0]].textureAvatarPLayer.getSize().x / 2));
@@ -230,7 +205,7 @@ void MultiplayerGame::positionPefil() {
 		globalBounds = playersGame[UsuariosActivos[0]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-
+		std::cout << "\n\n\nsi pasa por casa\n\n\n\n";
 		playersGame[0].origen = sf::Vector2f(330, 439);
 		playersGame[0].PieceSelect.setPosition(playersGame[0].origen);
 	}
@@ -280,7 +255,7 @@ void MultiplayerGame::positionPefil() {
 
 		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);//-60
 		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);//-40
-
+		
 		playersGame[UsuariosActivos[1]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[1]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -330,8 +305,8 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[2]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[2]].numCasas));
 
-		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 595.5f);//-60
-		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 595.5f);//-40
+		playersGame[UsuariosActivos[2]].CasasN.setPosition(138.65f, 595.5f);//-60
+		playersGame[UsuariosActivos[2]].Home.setPosition(158.65f, 595.5f);//-40
 
 		playersGame[UsuariosActivos[2]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[2]].PieceSelect.getGlobalBounds();
@@ -374,9 +349,9 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[3]].CasasN.setOutlineThickness(2);
 		playersGame[UsuariosActivos[3]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[3]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[3]].numCasas));
-
-		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 595.5f);//-60
-		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 595.5f);//-40
+		
+		playersGame[UsuariosActivos[3]].CasasN.setPosition(1138.65f, 595.5f);//-60
+		playersGame[UsuariosActivos[3]].Home.setPosition(1158.65f, 595.5f);//-40
 
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[3]].textureAvatarPLayer);
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[3]].textureAvatarPLayer.getSize().x / 2));
@@ -422,7 +397,6 @@ void MultiplayerGame::update() {
 		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
 
 	}
-	std::cout << "hola";
 
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame,client);
 	robarjugador.resource();
@@ -571,7 +545,6 @@ void MultiplayerGame::update() {
 			nular = true;
 		}
 		else if (moverFichas[IndexTurn].enMovimiento == true) {
-			std::cout << "\nIndex de quien lo mueviendo " << IndexTurn;
 			moverFichas[IndexTurn].actualizarMovimiento(deltaTime);
 			DrawPieceMoviendo();
 			window->display();
@@ -641,9 +614,6 @@ void MultiplayerGame::update() {
 			window->display();
 		}
 
-
-
-		std::cout << "\n HOLa:" << client->juegoTerminado;
 
 	}
 
@@ -922,7 +892,6 @@ void MultiplayerGame::InicioPartida() {
 		window->draw(Settings);
 		window->draw(overlay);
 		window->draw(Bienvenida);
-		// Muestra todo lo que se ha dibujado en la ventana
 		window->display();
 	}
 }
@@ -1017,15 +986,12 @@ void MultiplayerGame::DrawGame() {
 		turn_ruleta = false;
 		userRuleta = false;
 	}
-	std::cout << "probando" << std::endl;
 	if (userCasa) {
 		casa_draw = true;
 		eventoActivo = true;
-		std::cout << "probando2" << std::endl;
 		userCasa = false;
 		turn_casa = false;
 	}
-	std::cout << "probando3" << std::endl;
 	if (userImpuesto) {
 
 		impuesto_draw = true;
@@ -1045,23 +1011,10 @@ void MultiplayerGame::DrawGame() {
 
 	}
 
-
-/*	std::cout << "turn: " << turn << "\n";
-	std::cout << "turn_impuesto: " << turn_impuesto << "\n";
-	std::cout << "turn_casa: " << turn_casa << "\n";
-	std::cout << "turn_ruleta: " << turn_ruleta << "\n";
-	std::cout << "turn_dado: " << turn_dado << "\n";
-	std::cout << "turn_Moviendo: " << turn_Moviendo << "\n";
-	std::cout << "eventoActivo: " << eventoActivo << "\n";
-	std::cout << "impuesto_draw: " << impuesto_draw << "\n";
-	std::cout << "casa_draw: " << casa_draw << "\n";
-	std::cout << "ruleta_draw: " << ruleta_draw << "\n";
-*/
 	if (turn && !turn_impuesto && !turn_casa && !turn_ruleta && !turn_dado && !turn_Moviendo && !eventoActivo && !impuesto_draw && !casa_draw && !ruleta_draw) {
 
 		client->networkMessage.endTurn();
 		turn = false;
-		//std::cout << "\nTurno antes de enviar  de " << IndexTurn << "finalizo";
 	}
 
 	window->setView(window->getDefaultView());

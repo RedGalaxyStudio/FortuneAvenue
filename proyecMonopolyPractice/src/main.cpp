@@ -26,13 +26,10 @@ int main() {
     if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
     window->setMouseCursorVisible(false);
     window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-   //Cinematic cinematic(window);
-   //cinematic.Resource();
-   //cinematic.Update();
+   Cinematic cinematic(*window);
+   cinematic.Resource();
+   cinematic.Update();
 
-   //Cinematic cinematic(window);
-   //cinematic.Resource();
-   //cinematic.Update();
     printMemoryUsage();
     Sleep(1000); // Mide cada 1 segundo
     Menup.setWindow(*window);  
