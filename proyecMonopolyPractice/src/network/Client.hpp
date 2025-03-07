@@ -34,11 +34,11 @@ public:
 	bool Nmsg=false;
 
 	void process();
-	void insertarCola(Nodo*& frente, Nodo*& fin, std::string n);
+	void insertC(Nodo*& frente, Nodo*& fin, std::string n);
 	Nodo* frente = nullptr;
 	Nodo* fin = nullptr;
 	Client();
-	bool cola_vacia(Nodo* frente);
+	bool c_empty(Nodo* frente);
 	~Client();
 	void run();
 	bool initialize();
@@ -72,7 +72,7 @@ public:
 	bool impuestoMessageReceived = false;
 
 	bool agregardor = false;
-	void suprimirCola(Nodo*& frente, Nodo*& fin);
+	void suprim(Nodo*& frente, Nodo*& fin);
 	std::mutex mtxExisting;
 	std::condition_variable cvExisting;
 	bool accionCompra;
