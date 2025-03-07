@@ -63,7 +63,6 @@ void MultiplayerGame::resource() {
 	TextureCasa.resize(17);
 	for (int i = 0; i < 17; i++)
 	{
-		std::cout << "\ni";
 		if (!TextureCasa[i].loadFromFile("assets/image/Game/Casas/Casa" + std::to_string(i) + ".png")) {
 			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
 		}
@@ -194,6 +193,9 @@ void MultiplayerGame::positionPefil() {
 		globalBounds = playersGame[UsuariosActivos[0]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
+
+		std::cout << "\n\n\nsi pasa por casa\n\n\n\n";
+
 		playersGame[0].origen = sf::Vector2f(330, 439);
 		playersGame[0].PieceSelect.setPosition(playersGame[0].origen);
 	}
@@ -241,9 +243,14 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[1]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[1]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[1]].numCasas));
 
+
 		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);
 		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);
 
+
+		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 95.5f);//-60
+		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 95.5f);//-40
+		
 		playersGame[UsuariosActivos[1]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[1]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -296,6 +303,10 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 595.5f);
 		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 595.5f);
 
+		playersGame[UsuariosActivos[2]].CasasN.setPosition(138.65f, 595.5f);//-60
+		playersGame[UsuariosActivos[2]].Home.setPosition(158.65f, 595.5f);//-40
+
+
 		playersGame[UsuariosActivos[2]].PieceSelect.setScale(1, 1);
 		globalBounds = playersGame[UsuariosActivos[2]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[2]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -338,8 +349,14 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[3]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[3]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[3]].numCasas));
 
+
 		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 595.5f);
 		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 595.5f);
+
+		
+		playersGame[UsuariosActivos[3]].CasasN.setPosition(1138.65f, 595.5f);//-60
+		playersGame[UsuariosActivos[3]].Home.setPosition(1158.65f, 595.5f);//-40
+
 
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[3]].textureAvatarPLayer);
 		playersGame[UsuariosActivos[3]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[3]].textureAvatarPLayer.getSize().x / 2));
@@ -600,6 +617,7 @@ void MultiplayerGame::update() {
 			DrawGame();
 			window->display();
 		}
+
 
 	}
 

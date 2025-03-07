@@ -47,7 +47,7 @@ struct PlayerInfo {
 	std::string username;
 	std::string image;
 	int numCasas=0;
-	int money = 200;
+	int money = 300;
 	int impuesto = 50;
 	int roomconect;
 	int Posicion;
