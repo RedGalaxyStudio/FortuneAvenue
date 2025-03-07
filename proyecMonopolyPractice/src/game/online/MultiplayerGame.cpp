@@ -194,7 +194,6 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-		std::cout << "\n\n\nsi pasa por casa\n\n\n\n";
 
 		playersGame[0].origen = sf::Vector2f(330, 439);
 		playersGame[0].PieceSelect.setPosition(playersGame[0].origen);

@@ -97,14 +97,13 @@ void IniciarPartida::update() {
 				}
 
 				if (SpriteCrearPartida.getGlobalBounds().contains(mousePosFloat)) {
-					std::cout << "\nque mierda";
+					
 					if (LimTimeBotton.getElapsedTime().asSeconds() >= 1.0f) { // Verifica si ha pasado al menos 1 segundo
-						std::cout << "\nque mierda";
-						// Rcia el reloj
+						
 						LimTimeBotton.restart();
-						std::cout << "\nque mierda2";
+					
 						playClickSound();
-						std::cout << "\nque mierda3";
+					
 
 
 						client->initialize();
@@ -112,7 +111,6 @@ void IniciarPartida::update() {
 							Code = client->createRoom(nameUser, TextureAvatarPath);
 
 
-							std::cout << "\nque mierda";
 							PieceSelector pieceselector(window, client);
 							pieceselector.Resource();
 							pieceselector.updateSelection();

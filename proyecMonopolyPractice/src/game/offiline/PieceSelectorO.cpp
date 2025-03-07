@@ -19,8 +19,7 @@ PieceSelectOff::~PieceSelectOff() {
 	newSelection = nullptr;
 }
 void PieceSelectOff::Resource() {
-	std::cout << "\nwo";
-	
+
 	int piecesCount = 19; 
 	piecesOff.resize(piecesCount);
 	shadow.resize(piecesCount);
@@ -35,14 +34,12 @@ void PieceSelectOff::Resource() {
 	turn_house = false;
 	turn_Tax = false;
 	rolldicePlayer = false;
-	std::cout << "\nwo";
 	if (!Textufondopiece.loadFromFile("assets/image/Game/FondoGameScroll.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
 	if (!CheckOn.loadFromFile("assets/image/Game/check1on.png")) return;
 	if (!CheckOff.loadFromFile("assets/image/Game/check1off.png")) return;
 
-	std::cout << "\nwo";
 	for (int i = 0; i < piecesCount; i++) {
 		if (!pieceShape[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
 			return;
@@ -55,7 +52,7 @@ void PieceSelectOff::Resource() {
 		shadow[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	}
-	std::cout << "\nwo";
+	
 
 	for (int i = 0; i < piecesOff.size(); i++) {
 		int row = i / 8; 
@@ -150,7 +147,6 @@ void PieceSelectOff::updateSelection() {
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
 
-	std::cout << "\nwo1111";
 	Scrollbar scrollbarPiece(340, thumbHeight, 14);
 
 	scrollbarPiece.setPosition(1260, 340);
@@ -170,7 +166,7 @@ void PieceSelectOff::updateSelection() {
 	float separacion = 20.0f;  
 	ButtonG botonCheck1(CheckOff, CheckOn);
 	bool Agregado = false;
-	std::cout << "\naqui";
+	
 	while (window->isOpen()&& !cierre) {
 
 		sf::Event event;
@@ -316,14 +312,7 @@ void PieceSelectOff::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client.playerIndex:"<< client.playerIndex;
-		/*if (CplayerIndex != client.playerIndex && CplayerIndex != -1) {
 
-			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
-			CplayerIndex = -1;
-			client.cvExisting.notify_all();
-
-		}*/
 	
 		for (int i = 0; i < ActiveUsers.size(); i++)
 		{

@@ -58,7 +58,6 @@ void GameOffline::resource() {
 	TextureHouse.resize(17);
 	for (int i = 0; i < 17; i++)
 	{
-		std::cout << "\ni";
 		if (!TextureHouse[i].loadFromFile("assets/image/Game/Casas/Casa" + std::to_string(i) + ".png")) {
 			std::cerr << "Error al cargar la textura de la casa " << i << "\n";
 		}
@@ -140,7 +139,6 @@ void GameOffline::resource() {
 }
 void GameOffline::positionPefil() {
 	if (ActiveUsers.size() >= 1) {
-		std::cout << "\nHHHHHHHHHHHHHHHHHHHHHHH";
 		playerGameOff[ActiveUsers[0]].NamePlayer.setPosition(188.65f, 62.5f);
 
 		playerGameOff[ActiveUsers[0]].boxPlayer.setPosition(188.65f, 62.5f);

@@ -93,7 +93,6 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
 	Cell c5(q.at(5), &TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
-	std::cout << "\nIndexCAsa" << IndexCAsa;
 
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 

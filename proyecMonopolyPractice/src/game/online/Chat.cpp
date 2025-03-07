@@ -30,7 +30,7 @@ void Chat::resource() {
 	SpriteBotonEnviar.setTexture(TextureBotonEviar);
 	SpriteBotonEnviar.setOrigin(20, 20);
 	SpriteBotonEnviar.setPosition(1245, 675);
-	std::cout << "\nmall";
+	
 	spriteX.setPosition(1240, 35);
 
 	enunciado.setCharacterSize(28);

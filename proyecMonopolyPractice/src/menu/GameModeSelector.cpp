@@ -94,11 +94,11 @@ void GameModeSelector::update() {
 
 				if (SpriteOffline.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					std::cout << "\n1";
+					
 					GameOptions partida(*window);
-					std::cout << "\n1";
+				
 					partida.update();
-					std::cout << "\n1";
+			
 
 					box.setPosition(273, 74);
 

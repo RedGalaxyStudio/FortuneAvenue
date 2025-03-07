@@ -190,8 +190,7 @@ void GameOptions::update() {
 				if (SpriteMapaS.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					SpriteMapaS.setTexture(TextureMapaSM);
-					std::cout << "hola entre";
-
+			
 					Mapa1 = true;
 					Mapa2 = false;
 					Mapa3 = false;
