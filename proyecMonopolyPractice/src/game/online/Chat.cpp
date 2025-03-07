@@ -4,7 +4,7 @@
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
 
-Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win),client(clienT) {
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
 	resource();
 }
 
@@ -197,79 +197,83 @@ void Chat::Event(sf::Event event) {
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-		if (SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat) && !input.empty()) {
-			playClickSound();
-			PlantillaMensajeE.SMSEnviado.setString(input);
-			client->networkMessage.sendSmg(std::to_string(0) + input);
-			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
-				PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
+	if (((event.type == sf::Event::MouseButtonPressed &&
+		event.mouseButton.button == sf::Mouse::Left &&
+		SpriteBotonEnviar.getGlobalBounds().contains(mousePosFloat)) ||
+		(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter))
+		&& !input.empty()) {
 
-			input = "";
-			indicacion.setString(input);
+		playClickSound();
+		PlantillaMensajeE.SMSEnviado.setString(input);
+		client->networkMessage.sendSmg(std::to_string(0) + input);
+		PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
+			PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
-
-			for (int i = 0; i < Mensajes.size(); i++) {
-
-				Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
-				Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
-				Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
-			}
-
-			Aumento = 0;
-			float aux = PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height;
+		input = "";
+		indicacion.setString(input);
 
 
-			int In = calcularNumeroDeLineas(PlantillaMensajeE.SMSEnviado) + 1;
+		for (int i = 0; i < Mensajes.size(); i++) {
 
-			if (In == 1) {
-				sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
+			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
+			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
+		}
 
-				PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
-				PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
-				PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
-				PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
-				PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
+		Aumento = 0;
+		float aux = PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height;
 
-			}
-				
-			else if (In > 1) {
 
-				indicacion.setPosition(940, 668);
-				Caja.setSize(sf::Vector2f(260, 40));
-				Caja.setPosition(940, 650);
-				CajaI.setSize(sf::Vector2f(20, 0));
-				CajaI.setPosition(940, 670);
-				CajaD.setSize(sf::Vector2f(20, 0));
-				CajaD.setPosition(1200, 670);
-				ArriDerecha.setPosition(1200, 670);
-				ArriIzquierda.setPosition(940, 670);
-				AbajDerecha.setPosition(1200, 670);
-				AbajIzquierda.setPosition(940, 670);
-				sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+		int In = calcularNumeroDeLineas(PlantillaMensajeE.SMSEnviado) + 1;
 
-				PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
-				PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
-				PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
-				PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
-				PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
+		if (In == 1) {
+			sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 
-			}
-
-			aux += 20;
-			Mensajes.push_back(PlantillaMensajeE);
-			for (int i = 0; i < Mensajes.size() - 1; i++)
-			{
-				Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
-				Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
-				Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
-				Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
-				Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
-				Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
-			}
+			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
+			PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
+			PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
+			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 
 		}
+
+		else if (In > 1) {
+
+			indicacion.setPosition(940, 668);
+			Caja.setSize(sf::Vector2f(260, 40));
+			Caja.setPosition(940, 650);
+			CajaI.setSize(sf::Vector2f(20, 0));
+			CajaI.setPosition(940, 670);
+			CajaD.setSize(sf::Vector2f(20, 0));
+			CajaD.setPosition(1200, 670);
+			ArriDerecha.setPosition(1200, 670);
+			ArriIzquierda.setPosition(940, 670);
+			AbajDerecha.setPosition(1200, 670);
+			AbajIzquierda.setPosition(940, 670);
+			sf::FloatRect altura = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
+
+			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
+			PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
+			PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
+			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
+
+		}
+
+		aux += 20;
+		Mensajes.push_back(PlantillaMensajeE);
+		for (int i = 0; i < Mensajes.size() - 1; i++)
+		{
+			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
+			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
+			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
+			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
+			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
+			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
+		}
+
 	}
+
 
 	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
@@ -442,7 +446,7 @@ void Chat::Event(sf::Event event) {
 }
 void Chat::draw() {
 
-
+	client->Nmsg = false;
 	window->draw(Fondo);
 
 

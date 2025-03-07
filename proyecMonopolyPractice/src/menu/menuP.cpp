@@ -108,7 +108,7 @@ void menuP::Resource() {
 
 
 	spriteInstrucciones.setTexture(textureInstruccionesOff);
-	spriteInstrucciones.setPosition(400, 500);
+	spriteInstrucciones.setPosition(200, 520);
 	spriteInstrucciones.setOrigin(103.5f, 36.5f);
 
 	Blur.setUniform("resolution", sf::Glsl::Vec2(
@@ -438,6 +438,7 @@ void menuP::MenuOpcion(bool fon) {
 
 	ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
 	ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
+	ButtonG BotonInstrucciones(spriteInstrucciones, textureInstruccionesOff, textureInstruccionesOn);
 
 	while (window->isOpen()) {
 		currentCursor = &normalCursor;
@@ -515,7 +516,8 @@ void menuP::MenuOpcion(bool fon) {
 				}
 			}
 		}
-
+		BotonInstrucciones.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
+		window->setMouseCursor(*currentCursor);
 
 		// Dibujo de elementos en la ventana
 		window->clear();

@@ -29,6 +29,10 @@ public:
 		Nodo* siguiente;
 	};
 
+
+
+	bool Nmsg=false;
+
 	void process();
 	void insertarCola(Nodo*& frente, Nodo*& fin, std::string n);
 	Nodo* frente = nullptr;

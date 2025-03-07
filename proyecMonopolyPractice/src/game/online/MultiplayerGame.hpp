@@ -49,7 +49,7 @@ public:
 
 private:
 	sf::Text Conteosuel;
-
+	sf::CircleShape Notifi;
 	Chat *chats;
 	Client* client;
 	sf::Clock clockMensaje;  // Reloj para medir el tiempo

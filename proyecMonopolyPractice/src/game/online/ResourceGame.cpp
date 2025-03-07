@@ -158,5 +158,5 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
 
 
     }
-
+    return true;
 }

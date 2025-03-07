@@ -11,6 +11,11 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clien
 }
 void MultiplayerGame::resource() {
 
+	Notifi.setRadius(5);
+	Notifi.setFillColor(sf::Color::Red);
+	Notifi.setOutlineColor(sf::Color::Cyan);
+	Notifi.setOutlineThickness(1);
+	Notifi.setPosition(30, 80);
 
 	if (!TextureChat.loadFromFile("assets/image/window_13905854.png")) return;
 	if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
@@ -1112,10 +1117,12 @@ void MultiplayerGame::DrawGame() {
 
 
 	window->draw(Settings);
-	//window->draw(Conteosuel);
 	if (!chatOn)
 	{
 		window->draw(SpriteChat);
+		if(client->Nmsg){
+			window->draw(Notifi);
+		}
 	}
 	else {
 

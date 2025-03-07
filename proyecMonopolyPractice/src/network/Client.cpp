@@ -673,7 +673,7 @@ void Client::handleServerMessage(const std::string& message) {
 		PlantillaMensajeR.SMSEnviado.setString(rest);
 
 		int In = calcularNumeroDeLineas(PlantillaMensajeR.SMSEnviado) + 1;
-
+		Nmsg = true;
 		if (In == 1) {
 			sf::FloatRect altura = PlantillaMensajeR.SMSEnviado.getGlobalBounds();
 

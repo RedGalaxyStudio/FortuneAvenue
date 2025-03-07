@@ -47,7 +47,7 @@ void Stealplayer::resource() {
 void Stealplayer::update() {
 
 
-    return;
+    
     // Configurar perfiles
     float perfilWidth = 200.0f; // Ancho estimado de cada perfil
     float separacion = 20.0f;   // Espaciado entre perfiles
