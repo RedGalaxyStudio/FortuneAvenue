@@ -20,7 +20,6 @@ menuP::~menuP() {
 		effectSlider = nullptr;
 	}
 
-	std::cout << "Liberando texturas del menuP..." << std::endl;
 
 	textureLogoFortuneAvenue = sf::Texture();
 	Textureflechainstder = sf::Texture();
@@ -43,7 +42,7 @@ menuP::~menuP() {
 	TextureConfirmarSalir = sf::Texture();
 	TextureConfirmarSalirSala = sf::Texture();
 	TextureConfirmarSalirPartida = sf::Texture();
-	std::cout << "Texturas liberadas correctamente." << std::endl;
+
 }
 void menuP::setWindow(sf::RenderWindow& win) {
 	window = &win;

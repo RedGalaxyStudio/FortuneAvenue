@@ -10,12 +10,10 @@ isConnected(false),playerIndex(-1) {
 }
 
 int Client::calcularNumeroDeLineas(const sf::Text& text) {
-	// Obtener el rectángulo delimitador (bounding box) del texto
+
 	sf::FloatRect bounds = text.getGlobalBounds();
 
-	// Dividir la altura del rectángulo entre la altura de la fuente
-	// Esto nos da el número de líneas
-	float alturaLinea = text.getCharacterSize();  // El tamaño de la fuente
+	float alturaLinea = text.getCharacterSize();  
 	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
 
 	return numeroDeLineas;
@@ -38,7 +36,7 @@ bool Client::cola_vacia(Nodo* frente) {
 void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
 	std::string n = frente->dato;
 	Nodo* aux = frente;
-	std::cout << "\n" << n;
+
 	handleServerMessage(n);
 	if (frente == fin) {
 		frente = NULL;
@@ -57,34 +55,28 @@ Client::~Client() {
 	enet_deinitialize();
 }
 bool Client::initialize() {
-	std::cout << "\n[DEBUG] Dirección de client al inicio de initialize: " << std::hex << reinterpret_cast<uintptr_t>(client);
 
 	static bool enetInitialized = false;
 	if (!enetInitialized) {
-		std::cout << "\nHola1";
 		if (enet_initialize() != 0) {
 			std::cerr << "Error initializing ENet!" << std::endl;
-			std::cout << "\nHola11";
 			return false;
 		}
 		enetInitialized = true;
-		std::cout << "\nHola111";
+
 	}
 
-	// crea cliente solo si no existe
-	std::cout << "\nHola32422222222222";
-	std::cout << "\nValor de client antes del if: " << client;
 	if (reinterpret_cast<uintptr_t>(client) < 0x1000) {  // Detectar valores raros
-		std::cout << "\nClient tiene un valor inesperado, reiniciándolo...";
+
 		client = nullptr;
 	}
 	if (!client) {
-		std::cout << "\nHola324";
+	
 		client = enet_host_create(nullptr, 1, 2, 0, 0);
-		std::cout << "\nHola3224";
+	
 		if (!client) {
 			std::cerr << "Error creating ENet client!" << std::endl;
-			std::cout << "\nHo2la";
+		
 			return false;
 		}
 	}
@@ -163,7 +155,7 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 	const int retryDelay = 50;
 	for (int i = 0; i < maxRetries; ++i) {
 		if (enet_host_service(client, &event, retryDelay) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
-			////std::cout << "Connected to server!" << std::endl;
+		
 			isConnected = true;
 			clientThread = std::thread(&Client::run, this);
 			clientMensThread = std::thread(&Client::process, this);
@@ -232,7 +224,6 @@ std::string Client::createRoom(const std::string& username,const std::string& fi
 	playerInfoNew.username = nameUser;
 	playerInfoNew.PiecUserme = true;
 	playerInfos.push_back(playerInfoNew);
-	std::cout << "\n" << playerInfos[0].username;
 
 	playerGameNew.CashSprite.setTexture(TextureCash);
 	playerGameNew.Home.setTexture(TextureHome);
@@ -312,7 +303,6 @@ void Client::MONEYSALARIO(std::string message, int usuario) {
 	}
 }
 void Client::handleServerMessage(const std::string& message) {
-	std::cout << "\nMensaje recibido procesando: " << message << std::endl;
 
 	if (message.rfind("YOUR_TURN", 0) == 0) {
 
@@ -465,16 +455,15 @@ void Client::handleServerMessage(const std::string& message) {
 	else if (message.rfind("INVERCIONSEGURA", 0) == 0) {
 		
 		std::string data = message.substr(15 + 1);
-		std::cout << "\n entra en inversion:"<<data;
+
 		std::istringstream iss(data);
 		std::string  indexStr, moneyStr;
-		std::cout << "\n entra en inversion";
+
 		if (!(std::getline(iss, indexStr, ':') &&
 			std::getline(iss, moneyStr, ':'))
 			) {
 			return;
 		}
-		std::cout << "\nindexStr:" << indexStr << " moneyStr:" << moneyStr<<".:.";
 		int indext = std::stoi(indexStr);
 		playerInfos[indext].money = std::stoi(moneyStr);
 
@@ -533,7 +522,6 @@ void Client::handleServerMessage(const std::string& message) {
 		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.insert(UsuariosActivos.begin(), playerIndex);
 
-		std::cout << "\nPLAYER_INDEX "<< playerIndex <<" UsuariosActivos:" << UsuariosActivos.size();
 
 	}
 	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
@@ -583,8 +571,6 @@ void Client::handleServerMessage(const std::string& message) {
 		playersGame.push_back(playerGameNew);
 		playerInfos.push_back(playerInfoNew);
 		UsuariosActivos.push_back(index);
-
-		std::cout << "\n NEW_PLAYER " << index << " UsuariosActivos:" << UsuariosActivos.size();
 	}
 	else if (message.rfind("EXISTING_PLAYER:", 0) == 0) {
 
@@ -719,7 +705,6 @@ void Client::handleServerMessage(const std::string& message) {
 		
 
 		}
-		std::cout << "uuuuu: " << Mensajes.size();
 	}
 	else if (message.rfind("PLAYER_CHANGED_PIECE:", 0) == 0) {
 
@@ -825,7 +810,6 @@ void Client::handleServerMessage(const std::string& message) {
 			) {
 			return;
 		}
-		std::cout << "\nImpuesto:" << impuesto << ":indexStr:" << indexStr << " moneyStr:" << moneyStr;
 		int indext = std::stoi(indexStr);
 		playerInfos[indext].money = std::stoi(moneyStr);
 		playerInfos[indext].impuesto = std::stoi(impuesto);
@@ -901,8 +885,6 @@ void Client::handleServerMessage(const std::string& message) {
 
 
 			for (int i=0; i < UsuariosActivos.size(); i++) {
-
-				std::cout << "\n UsuariosActivos:" << UsuariosActivos[i]<< "\n Usuarios:"<<playerInfos.size();
 
 
 			}

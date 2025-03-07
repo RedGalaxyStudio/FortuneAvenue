@@ -5,10 +5,6 @@
 #include "core/ResourceGlobal.hpp"
 #define _CRTDBG_MAP_ALLOC  
 
-
-//std::atomic<bool> running(true); 
-//const unsigned short PORT = 53000; 
-//int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 int main() {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     sf::err().rdbuf(std::cout.rdbuf()); // Redirige los errores de SFML a la consola
