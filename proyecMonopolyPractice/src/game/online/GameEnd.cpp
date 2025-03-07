@@ -2,12 +2,12 @@
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
-// Constructor
+
 GameEnd::GameEnd(sf::RenderWindow* window, Client* clienT) : window(window),client(clienT) {
 
 }
 
-// Destructor
+
 GameEnd::~GameEnd() {}
 
 
@@ -23,10 +23,9 @@ public:
     }
 
     void update(float deltaTime) {
-        position.y += velocity * deltaTime;  // Baja el confeti
-        angle += rotationSpeed * deltaTime; // Rota la espiral
+        position.y += velocity * deltaTime;  
+        angle += rotationSpeed * deltaTime;
 
-        // Resetea la posición si sale de la ventana
         if (position.y > windowHeight) {
             position.y = -50;
             position.x = static_cast<float>(rand() % windowWidth);
@@ -35,26 +34,26 @@ public:
 
     void draw(sf::RenderWindow& window) {
         sf::Transform transform;
-        transform.translate(position);   // Traslada a la posición del confeti
-        transform.rotate(angle);        // Aplica rotación a la espiral
-        window.draw(spiral, transform); // Dibuja con transformación
+        transform.translate(position);   
+        transform.rotate(angle);        
+        window.draw(spiral, transform); 
     }
 
 private:
     sf::Vector2f position;
     sf::Color color;
-    float angle = 0;                   // Ángulo de rotación
-    float rotationSpeed = 50;          // Velocidad de rotación
-    float velocity = 100;              // Velocidad de caída
-    sf::ConvexShape spiral;            // Forma convexa para la espiral
+    float angle = 0;                  
+    float rotationSpeed = 50;          
+    float velocity = 100;             
+    sf::ConvexShape spiral;            
 
-    const int windowWidth = 800;       // Ancho de la ventana
-    const int windowHeight = 600;      // Alto de la ventana
+    const int windowWidth = 800;       
+    const int windowHeight = 600;      
 
     void generateSpiral() {
-        const int points = 10;         // Número de puntos en la espiral
-        const float radiusStep = 2.0f; // Incremento del radio
-        const float angleStep = 0.5f;  // Incremento del ángulo en radianes
+        const int points = 10;         
+        const float radiusStep = 2.0f; 
+        const float angleStep = 0.5f;  
 
         std::vector<sf::Vector2f> vertices;
         float radius = 0;
@@ -66,12 +65,12 @@ private:
             float y = radius * std::sin(theta);
             vertices.emplace_back(x, y);
 
-            // Incrementa el radio y el ángulo
+            
             radius += radiusStep;
             theta += angleStep;
         }
 
-        // Configura la forma convexa
+        
         spiral.setPointCount(vertices.size());
         for (size_t i = 0; i < vertices.size(); ++i) {
             spiral.setPoint(i, vertices[i]);
@@ -88,12 +87,12 @@ public:
         : position(startPosition), size(size), color(color) {
 
         rect.setSize(size);
-        angle = static_cast<float>(rand() % 360);  // Ángulo inicial
-        rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50)); // Velocidad de rotación
-        velocity.y = static_cast<float>(rand() % 80 + 20);  // Velocidad vertical aleatoria
+        angle = static_cast<float>(rand() % 360);  
+        rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50)); 
+        velocity.y = static_cast<float>(rand() % 80 + 20); 
         velocity.x = 0;
-        if (rand() % 30 == 0) {  // Genera un número entre 0 y 29, 1/30 probabilidad de ser 0
-            rotateangle = -1;  // Asegura que el ángulo sea negativo
+        if (rand() % 30 == 0) {  
+            rotateangle = -1;  
         }
         else {
 
@@ -107,42 +106,37 @@ public:
     void update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
 
 
-        // Movimiento hacia el mouse cuando colisiona con él
         if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
 
 
             if (colision) {
-                position.y += velocity.y * deltaTime;  // Actualiza posición en Y
-                position.x += velocity.x * deltaTime;  // Actualiza posición en X
-                angle += (rotationSpeed * deltaTime) * rotateangle;  // Actualiza el ángulo de rotación
+                position.y += velocity.y * deltaTime; 
+                position.x += velocity.x * deltaTime;  
+                angle += (rotationSpeed * deltaTime) * rotateangle;  
 
-                // Si colisiona con los bordes, cambia de dirección (reflexión)
+                
                 if (position.y > screenHeight) {
-                    position.y = screenHeight;  // Límite inferior
-                    velocity.y = -velocity.y * 0.8f;  // Inversión y desaceleración
+                    position.y = screenHeight;  
+                    velocity.y = -velocity.y * 0.8f;  
                 }
                 if (position.x > screenWidth || position.x < 0) {
-                    position.x = std::clamp(position.x, 0.f, screenWidth);  // Evita que se salga
-                    velocity.x = -velocity.x * 0.8f;  // Inversión y desaceleración
+                    position.x = std::clamp(position.x, 0.f, screenWidth);  
+                    velocity.x = -velocity.x * 0.8f;  
                 }
 
-                // Simula un aumento o disminución en la velocidad del confeti por la gravedad o la resistencia al aire
-                velocity.y += 20.f * deltaTime;  // Aceleración vertical debido a la gravedad
-
-
-
+                
+                velocity.y += 20.f * deltaTime;  
 
             }
             else {
                 sf::Vector2f rectCenter(rect.getPosition().x + rect.getSize().x / 2, rect.getPosition().y + rect.getSize().y / 2);
                 sf::Vector2f mouseDirection(mousePositionn.x - rectCenter.x, mousePositionn.y - rectCenter.y);
 
-                // Calcula el ángulo hacia el mouse y ajusta la velocidad en esa dirección
                 float angleToMouse = std::atan2(mouseDirection.y, mouseDirection.x);
-                velocity.x = std::cos(angleToMouse) * 150.f;  // velocidad en X
-                velocity.y = std::sin(angleToMouse) * 150.f;  // velocidad en Y
+                velocity.x = std::cos(angleToMouse) * 150.f;  
+                velocity.y = std::sin(angleToMouse) * 150.f;  
                 colision = true;
-                // Reduce la velocidad progresivamente para simular fricción
+               
                 velocity.x *= 0.98f;
                 velocity.y *= 0.98f;
 
@@ -151,22 +145,22 @@ public:
 
         }
         else if (!rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
-            position.y += velocity.y * deltaTime;  // Actualiza posición en Y
-            position.x += velocity.x * deltaTime;  // Actualiza posición en X
-            angle += (rotationSpeed * deltaTime) * rotateangle;  // Actualiza el ángulo de rotación
+            position.y += velocity.y * deltaTime; 
+            position.x += velocity.x * deltaTime;  
+            angle += (rotationSpeed * deltaTime) * rotateangle;  
             colision = false;
-            // Si colisiona con los bordes, cambia de dirección (reflexión)
+            
             if (position.y > screenHeight) {
-                position.y = screenHeight;  // Límite inferior
-                velocity.y = -velocity.y * 0.8f;  // Inversión y desaceleración
+                position.y = screenHeight;  
+                velocity.y = -velocity.y * 0.8f;  
             }
             if (position.x > screenWidth || position.x < 0) {
-                position.x = std::clamp(position.x, 0.f, screenWidth);  // Evita que se salga
-                velocity.x = -velocity.x * 0.8f;  // Inversión y desaceleración
+                position.x = std::clamp(position.x, 0.f, screenWidth);  
+                velocity.x = -velocity.x * 0.8f;  
             }
 
-            // Simula un aumento o disminución en la velocidad del confeti por la gravedad o la resistencia al aire
-            velocity.y += 20.f * deltaTime;  // Aceleración vertical debido a la gravedad
+            
+            velocity.y += 20.f * deltaTime;  
         }
 
         if (position.y > screenHeight) {
@@ -180,10 +174,6 @@ public:
         rect.setPosition(position);
         rect.setFillColor(color);
 
-
-
-        // Aplica rotación
-       // rect.setOrigin(size.x / 2, size.y / 2);  // Establece el origen al centro del rectángulo
         rect.setRotation(angle);
 
         window.draw(rect);
@@ -192,12 +182,12 @@ public:
 private:
     sf::RectangleShape rect;
     bool colision = false;
-    sf::Vector2f position;   // Posición del confeti
-    sf::Vector2f size;       // Tamaño del confeti
-    sf::Vector2f velocity;   // Velocidad
-    sf::Color color;         // Color del confeti
-    float angle;             // Ángulo de rotación
-    float rotationSpeed;     // Velocidad de rotación
+    sf::Vector2f position;   
+    sf::Vector2f size;       
+    sf::Vector2f velocity;  
+    sf::Color color;         
+    float angle;             
+    float rotationSpeed;    
 };
 
 class ConfettiRain {
@@ -210,13 +200,11 @@ public:
                 static_cast<float>(rand() % static_cast<int>(screenHeight))
             );
 
-            // Tamaño aleatorio
             sf::Vector2f size(
-                static_cast<float>(rand() % 15 + 5),  // Ancho entre 5 y 20
-                static_cast<float>(rand() % 15 + 5)   // Alto entre 5 y 20
+                static_cast<float>(rand() % 15 + 5),  
+                static_cast<float>(rand() % 15 + 5)   
             );
 
-            // Color aleatorio
             sf::Color color(
                 rand() % 256,
                 rand() % 256,
@@ -243,7 +231,7 @@ public:
     }
 
 private:
-    std::vector<Confetti> confettiList;  // Lista de confetis
+    std::vector<Confetti> confettiList; 
 };
 
 /*int main() {

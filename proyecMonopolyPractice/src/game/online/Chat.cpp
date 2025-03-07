@@ -10,11 +10,9 @@ Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) 
 
 
 int calcularNumeroDeLineas(const sf::Text& text) {
-	// Obtener el rectángulo delimitador (bounding box) del texto
+	
 	sf::FloatRect bounds = text.getGlobalBounds();
 
-	// Dividir la altura del rectángulo entre la altura de la fuente
-	// Esto nos da el número de líneas
 	float alturaLinea = static_cast<float>(text.getCharacterSize());  // El tamaño de la fuente
 	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
 
@@ -63,7 +61,6 @@ void Chat::resource() {
 	Fondo.setOutlineThickness(-10);
 	Fondo.setOutlineColor(sf::Color(50, 50, 50));
 
-	std::cout << "\nBiwnnn nose";
 	FondoChat.setSize(sf::Vector2f(380, 60));
 	FondoChat.setPosition(900, 0);
 	FondoChat.setFillColor(sf::Color(50, 50, 50));
@@ -96,13 +93,11 @@ void Chat::resource() {
 	AbajDerecha.setRadius(20);
 	AbajDerecha.setFillColor(sf::Color(50, 50, 50));
 	AbajDerecha.setPosition(1200, 670);
-	std::cout << "\nBiwnnn nose";
 	AbajIzquierda.setOrigin(20, 20);
 	AbajIzquierda.setRadius(20);
 	AbajIzquierda.setFillColor(sf::Color(50, 50, 50));
 	AbajIzquierda.setPosition(940, 670);
 
-	std::cout << "\nBiwnnn nose";
 	PlantillaMensajeE.SMSEnviado.setCharacterSize(15);
 	PlantillaMensajeE.SMSEnviado.setFont(FuenteMensaje);
 	PlantillaMensajeE.SMSEnviado.setFillColor(sf::Color::White);
@@ -133,38 +128,36 @@ void Chat::resource() {
 	PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
 	PlantillaMensajeR.ContenidoEnviado.setPosition(915, 600);
 	PlantillaMensajeR.ContenidoEnviado.setFillColor(sf::Color(239, 39, 133));
-	std::cout << "\nBiwnnn";
+
 }
 
 void Chat::insertarSaltoDeLinea() {
 	if (input.empty()) return;
 	std::string aux = input;
-	// Crear un texto temporal para medir cada segmento
 	sf::Text tempText;
 	tempText.setFont(Fuentechat);
 	tempText.setCharacterSize(indicacion.getCharacterSize());
 	tempText.setStyle(indicacion.getStyle());
 
-	// Iterar sobre el texto y ajustar
 	size_t posicionUltimoEspacio = 0;
 	for (size_t i = 0; i < input.size(); ++i) {
 		tempText.setString(input.substr(0, i + 1));
 		if (tempText.getGlobalBounds().width > 260) {
 			if (posicionUltimoEspacio > 0) {
-				input[posicionUltimoEspacio] = '\n'; // Reemplazar el espacio con un salto de línea
-				posicionUltimoEspacio = 0;          // Reiniciar el último espacio
+				input[posicionUltimoEspacio] = '\n'; 
+				posicionUltimoEspacio = 0;          
 			}
 			else {
 				aux.pop_back();
 				tempText.setString(aux);
 
 				if (tempText.getGlobalBounds().width > 260) {
-					input.insert(i - 1, "\n"); // Insertar un salto de línea si no hay espacio disponible
+					input.insert(i - 1, "\n"); 
 
 				}
 				else {
 
-					input.insert(i, "\n"); // Insertar un salto de línea si no hay espacio disponible
+					input.insert(i, "\n"); 
 
 				}
 			}
@@ -179,9 +172,7 @@ void Chat::insertarSaltoDeLinea() {
 void Chat::update() {
 	if (!chatOn) return;
 
-
 	Valida = false;
-
 
 	Valida = true;
 

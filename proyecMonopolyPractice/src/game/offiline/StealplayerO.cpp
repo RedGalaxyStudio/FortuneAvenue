@@ -2,12 +2,11 @@
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
-// Constructor
+
 StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGameOff> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
 
-// Destructor
 StealplayerO::~StealplayerO() {}
 
  
@@ -23,21 +22,19 @@ void StealplayerO::resource() {
 	SlectingPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	SlectingPlayer.setPosition(640, 100);
    //std::cout << "\n3";
-    if (!UsuariosEleccion.empty()) { // Asegúrate de que el vector no esté vacío
-        UsuariosEleccion.erase(UsuariosEleccion.begin()); // Elimina el primer elemento
+    if (!UsuariosEleccion.empty()) { 
+        UsuariosEleccion.erase(UsuariosEleccion.begin()); 
     }
     isMouseOver.resize(UsuariosEleccion.size());
     PosIsMouseOver.resize(UsuariosEleccion.size());
-   //std::cout << "\n4";
+   
     for (auto& MouseOver : isMouseOver) {
 
         MouseOver.setFillColor(sf::Color(0, 0, 0, 0));
         MouseOver.setSize(sf::Vector2f(200.0f, 380.0f));
         MouseOver.setOrigin(100, 64);
     }
-   //std::cout << "\n7";
-
-
+   
     if(!texturebottonRobar.loadFromFile("assets/image/Button/robar.png")) return;
     SpritebottonRobar.setTexture(texturebottonRobar);
     SpritebottonRobar.setOrigin(95, 38);
@@ -48,27 +45,24 @@ void StealplayerO::update() {
 
 
     return;
-    // Configurar perfiles
-    float perfilWidth = 200.0f; // Ancho estimado de cada perfil
-    float separacion = 20.0f;   // Espaciado entre perfiles
-    int totalPerfiles = static_cast<int>(UsuariosEleccion.size()); // Usar el número real de perfiles
+    // Configuracion de los perfiles
+    float perfilWidth = 200.0f; 
+    float separacion = 20.0f;  
+    int totalPerfiles = static_cast<int>(UsuariosEleccion.size());
 
 
     if (totalPerfiles > 0) {
-        // Calcular ancho total ocupado por perfiles y separaciones
+      
         float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
-
-        // Calcular inicio X para centrar los perfiles horizontalmente
-        float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); // Desplaza para centrar el origen
-
-        float startY = 300.0f; // Centrado verticalmente
+        float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f); 
+        float startY = 300.0f; 
 
         for (int i = 0; i < totalPerfiles; i++) {
-            float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+            float xPos = startX + i * (perfilWidth + separacion);
             float yPos = startY;
 
             PosIsMouseOver[i] = sf::Vector2f(startX, startY +270);
-            // Posicionar elementos
+            
             PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
@@ -89,7 +83,7 @@ void StealplayerO::update() {
         }
     }
     bool seleccionlista = false;
-   //std::cout << "\n77";
+
     int indexMouseOver=-1;
     while (window->isOpen()&& !seleccionlista) {
         sf::Event event;
@@ -153,10 +147,7 @@ void StealplayerO::update() {
             }
 
         }
-       //std::cout << "\n6";
-        // Dibujar otros elementos
         window->draw(SlectingPlayer);
-   
         window->display();
     }
 }
