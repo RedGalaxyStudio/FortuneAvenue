@@ -168,8 +168,6 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 	enet_peer_reset(peer);
 	return false;
 }
-
-// Si no se conecta no hace nada
 void Client::disconnect() {
 	if (!isConnected) return;
 
@@ -776,25 +774,29 @@ void Client::handleServerMessage(const std::string& message) {
 
 	}
 	else if (message.rfind("ROBARPLAYER:", 0) == 0) {
-
-		std::string datos = message.substr(11);
+		std::string datos = message.substr(12);
 		std::stringstream ss(datos);
 		std::string token;
 
-		std::vector<std::pair<int, int>> jugadores;
+		while (true) {
+			std::string indiceStr, dineroStr;
 
-		while (std::getline(ss, token, ':')) {
+			if (!std::getline(ss, indiceStr, ':')) break;
+			if (!std::getline(ss, dineroStr, ':')) break;
 
-			int indice = std::stoi(token); 
-			if (std::getline(ss, token, ':')) {
-				int dinero = std::stoi(token); 
+			try {
+				int indice = std::stoi(indiceStr);
+				int dinero = std::stoi(dineroStr);
 
 				playerInfos[indice].money = dinero;
-				playersGame[indice].Money.setString(std::to_string(playerInfos[indice].money));
-
+				playersGame[indice].Money.setString(std::to_string(dinero));
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Error al convertir valores: " << e.what() << std::endl;
 			}
 		}
-	}
+}
+
 	else if (message.rfind("EVENTOCASA", 0) == 0) {
 		userCasa = true;
 	}
