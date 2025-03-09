@@ -7,7 +7,9 @@ StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosEl
 
 }
 
-StealplayerO::~StealplayerO() {}
+StealplayerO::~StealplayerO() {
+
+}
 
  
 void StealplayerO::resource() {
@@ -43,7 +45,7 @@ void StealplayerO::resource() {
 }
 void StealplayerO::update() {
 
-
+    
     return;
     // Configuracion de los perfiles
     float perfilWidth = 200.0f; 

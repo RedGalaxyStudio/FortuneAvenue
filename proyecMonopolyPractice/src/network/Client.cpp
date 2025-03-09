@@ -30,10 +30,10 @@ std::string generateRoomCode() {
 
 	return code;
 }
-bool Client::cola_vacia(Nodo* frente) {
+bool Client::c_empty(Nodo* frente) {
 	return (frente == NULL) ? true : false;
 }
-void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
+void Client::suprim(Nodo*& frente, Nodo*& fin) {
 	std::string n = frente->dato;
 	Nodo* aux = frente;
 
@@ -84,13 +84,13 @@ bool Client::initialize() {
 
 	return true;
 }
-void Client::insertarCola(Nodo*& frente, Nodo*& fin, std::string n) {
+void Client::insertC(Nodo*& frente, Nodo*& fin, std::string n) {
 	Nodo* nuevo_nodo = new Nodo();
 
 	nuevo_nodo->dato = n;
 	nuevo_nodo->siguiente = NULL;
 
-	if (cola_vacia(frente)) {
+	if (c_empty(frente)) {
 		frente = nuevo_nodo;
 	}
 	else {
@@ -107,7 +107,7 @@ void Client::run() {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
 				std::string message(reinterpret_cast<char*>(event.packet->data), event.packet->dataLength);
-				insertarCola(frente, fin, message);
+				insertC(frente, fin, message);
 				std::cout << "\nMensaje recibido: " << message << std::endl;
 				enet_packet_destroy(event.packet);
 				break;
@@ -125,7 +125,7 @@ void Client::process() {
 	running = true;
 	while (running) {
 		if (frente != NULL) {
-			suprimirCola(frente, fin);
+			suprim(frente, fin);
 		}
 
 	}
