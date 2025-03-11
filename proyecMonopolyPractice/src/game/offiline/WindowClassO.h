@@ -78,18 +78,20 @@ public:
 	bool eventStarted = false;
 	sf::RectangleShape shadowOverlay;
 	int faceIndex;
-
+	int WidthW=0, HeightH=0;
 	sf::RenderWindow* window;
 
 	WindowO(sf::RenderWindow* windowRef) : window(windowRef), cube(nullptr) {}
 
 
 	void start(unsigned int Width, unsigned int Height) {
-
+		WidthW = Width;
+			
+			HeightH = Height;
 		cube = new CubeO(100);
 		Cube3D.setPrimitiveType(sf::Quads);
-		cube->move(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, -100.0f);
-		cube->draw(static_cast<float>(Width) / 2, static_cast<float>(Height) / 2, static_cast<float>(posz));
+		cube->move(static_cast<float>(Width) , static_cast<float>(Height) , -100.0f);
+		cube->draw(static_cast<float>(Width) , static_cast<float>(Height) , static_cast<float>(posz));
 		srand(static_cast<unsigned int>(time(0)));
 
 
@@ -101,8 +103,6 @@ public:
 		Cube3D.resize(cube->show.size() * 4);
 
 	}
-
-
 
 	void update() {
 
@@ -124,7 +124,6 @@ public:
 
 			for (int j = 0; j < 4; j++) {
 				sf::Vector2f shadowPosition = face[j].position + sf::Vector2f(5.0f, 5.0f);
-
 
 				shadow[i * 4 + j].position = shadowPosition;
 				shadow[i * 4 + j].color = shadowColor;
@@ -232,7 +231,7 @@ public:
 				float alfaY = atan2f(dy, disP1);
 
 				cube->rotate(alfaY, alfaX, 0);
-				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
+				cube->draw(WidthW, HeightH, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
 				ok = 0;
@@ -242,7 +241,7 @@ public:
 
 				cube->resetPosition(faceIndex);
 
-				cube->draw(static_cast<float>(window->getSize().x) / 2, static_cast<float>(window->getSize().y) / 2, static_cast<float>(posz));
+				cube->draw(WidthW, HeightH, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
 
