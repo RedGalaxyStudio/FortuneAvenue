@@ -359,9 +359,6 @@ void menuP::MenuJugar() {
 
 	box.setPosition(273, 74);
 
-
-
-
 };
 void menuP::Inicializar() {
 	IniciaUser iniciaUser(*window);
@@ -408,11 +405,6 @@ void menuP::MenuOpcion(bool fon) {
 
 	SpriteBotonNo.setTexture(TextureBotonNoOff);
 	SpriteBotonNo.setPosition(1000, 350);
-
-
-
-
-
 
 
 	if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
@@ -828,7 +820,7 @@ void menuP::MenuAcercaDe() {
 		"version 1.0.0\n\n"
 		"Fortune Avenue esta basado en los clasicos juegos de mesa donde el objetivo principal es obtener \nla mayor cantidad de dinero al finalizar la partida, tomando decisiones sobre la compra de viviendas \ny el pago de impuestos, todo mientras el azar juega un papel importante al final de cada partida.\n\n"
 		"Este proyecto fue desarrollado por Red Galaxy Studio, un equipo de 4 estudiantes apasionados por el \ndesarrollo de videojuegos. Nuestra mision es crear experiencias unicas e interactivas que entretengan \ny desafien a los jugadores.\n\n"
-		"Integrantes del equipo:\n\n"
+		"Desarrolladores:\n\n"
 		"Daniel Fernandez\n"
 		"Lider del Proyecto | Programador | Especialista en Redes\n\n"
 		"Jose Garcia\n"

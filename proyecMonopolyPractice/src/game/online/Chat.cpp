@@ -106,11 +106,29 @@ void Chat::resource() {
 	PlantillaMensajeE.SMSEnviado.setPosition(940, 618);
 	globalBounds = PlantillaMensajeE.SMSEnviado.getGlobalBounds();
 	PlantillaMensajeE.SMSEnviado.setOrigin(0, globalBounds.height / 2.0f);
+	PlantillaMensajeE.NombreChat.setCharacterSize(10);
+	PlantillaMensajeE.NombreChat.setFont(FuenteMensaje);
+	PlantillaMensajeE.NombreChat.setFillColor(sf::Color::White);
+	PlantillaMensajeE.NombreChat.setOutlineThickness(1);
+	PlantillaMensajeE.NombreChat.setOutlineColor(sf::Color(117, 220, 255));
+	PlantillaMensajeE.NombreChat.setString("Nombre1");
+	PlantillaMensajeE.NombreChat.setPosition(1200, 590);
+	globalBounds = PlantillaMensajeE.NombreChat.getGlobalBounds();
+	PlantillaMensajeE.NombreChat.setOrigin(0, globalBounds.height / 2.0f);
 
 	PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(260, 40));
 	PlantillaMensajeE.ContenidoEnviado.setPosition(940, 600);
 	PlantillaMensajeE.ContenidoEnviado.setFillColor(sf::Color(0, 104, 167));
 
+	PlantillaMensajeR.NombreChat.setCharacterSize(10);
+	PlantillaMensajeR.NombreChat.setFont(FuenteMensaje);
+	PlantillaMensajeR.NombreChat.setFillColor(sf::Color::White);
+	PlantillaMensajeR.NombreChat.setOutlineThickness(1);
+	PlantillaMensajeR.NombreChat.setOutlineColor(sf::Color(117, 220, 255));
+	PlantillaMensajeR.NombreChat.setString("Nombre2");
+	PlantillaMensajeR.NombreChat.setPosition(925, 618);
+	globalBounds = PlantillaMensajeR.NombreChat.getGlobalBounds();
+	PlantillaMensajeR.NombreChat.setOrigin(0, globalBounds.height / 2.0f);
 	PlantillaMensajeR.AvatarEnviado.setRadius(18);
 	PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
 	PlantillaMensajeR.SMSEnviado.setCharacterSize(15);
@@ -444,6 +462,7 @@ void Chat::draw() {
 		window->draw(Mensajes[i].ContenidoEnviado);
 		window->draw(Mensajes[i].AvatarEnviado);
 		window->draw(Mensajes[i].SMSEnviado);
+		window->draw(Mensajes[i].NombreChat);
 	}
 	window->draw(Caja);
 	window->draw(FondoChat);

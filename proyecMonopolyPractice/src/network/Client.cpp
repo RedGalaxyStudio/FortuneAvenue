@@ -30,10 +30,10 @@ std::string generateRoomCode() {
 
 	return code;
 }
-bool Client::cola_vacia(Nodo* frente) {
+bool Client::c_empty(Nodo* frente) {
 	return (frente == NULL) ? true : false;
 }
-void Client::suprimirCola(Nodo*& frente, Nodo*& fin) {
+void Client::suprim(Nodo*& frente, Nodo*& fin) {
 	std::string n = frente->dato;
 	Nodo* aux = frente;
 
@@ -84,13 +84,13 @@ bool Client::initialize() {
 
 	return true;
 }
-void Client::insertarCola(Nodo*& frente, Nodo*& fin, std::string n) {
+void Client::insertC(Nodo*& frente, Nodo*& fin, std::string n) {
 	Nodo* nuevo_nodo = new Nodo();
 
 	nuevo_nodo->dato = n;
 	nuevo_nodo->siguiente = NULL;
 
-	if (cola_vacia(frente)) {
+	if (c_empty(frente)) {
 		frente = nuevo_nodo;
 	}
 	else {
@@ -107,7 +107,7 @@ void Client::run() {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
 				std::string message(reinterpret_cast<char*>(event.packet->data), event.packet->dataLength);
-				insertarCola(frente, fin, message);
+				insertC(frente, fin, message);
 				std::cout << "\nMensaje recibido: " << message << std::endl;
 				enet_packet_destroy(event.packet);
 				break;
@@ -125,7 +125,7 @@ void Client::process() {
 	running = true;
 	while (running) {
 		if (frente != NULL) {
-			suprimirCola(frente, fin);
+			suprim(frente, fin);
 		}
 
 	}
@@ -168,8 +168,6 @@ bool Client::connectToServer(const std::string& address, uint16_t port) {
 	enet_peer_reset(peer);
 	return false;
 }
-
-// Si no se conecta no hace nada
 void Client::disconnect() {
 	if (!isConnected) return;
 
@@ -776,25 +774,29 @@ void Client::handleServerMessage(const std::string& message) {
 
 	}
 	else if (message.rfind("ROBARPLAYER:", 0) == 0) {
-
-		std::string datos = message.substr(11);
+		std::string datos = message.substr(12);
 		std::stringstream ss(datos);
 		std::string token;
 
-		std::vector<std::pair<int, int>> jugadores;
+		while (true) {
+			std::string indiceStr, dineroStr;
 
-		while (std::getline(ss, token, ':')) {
+			if (!std::getline(ss, indiceStr, ':')) break;
+			if (!std::getline(ss, dineroStr, ':')) break;
 
-			int indice = std::stoi(token); 
-			if (std::getline(ss, token, ':')) {
-				int dinero = std::stoi(token); 
+			try {
+				int indice = std::stoi(indiceStr);
+				int dinero = std::stoi(dineroStr);
 
 				playerInfos[indice].money = dinero;
-				playersGame[indice].Money.setString(std::to_string(playerInfos[indice].money));
-
+				playersGame[indice].Money.setString(std::to_string(dinero));
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Error al convertir valores: " << e.what() << std::endl;
 			}
 		}
-	}
+}
+
 	else if (message.rfind("EVENTOCASA", 0) == 0) {
 		userCasa = true;
 	}
