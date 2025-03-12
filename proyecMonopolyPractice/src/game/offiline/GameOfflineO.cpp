@@ -918,12 +918,25 @@ void GameOffline::DrawGame() {
 	}
 
 
-
+	std::cout << "hola no11";
 	if (firstTurn && !turn_Tax && !turn_house && !turn_roulette && !turn_dice && !turn_Move && !activeEvent && !draw_tax && !draw_house && !draw_roulette) {
 
-		//client.endTurn();
-		firstTurn = false;
+		GM.nextTurn();
+		
 	}
+	std::cout << "hola si11";
+	std::cout << "firstTurn: " << firstTurn
+		<< ", turn_Tax: " << turn_Tax
+		<< ", turn_house: " << turn_house
+		<< ", turn_roulette: " << turn_roulette
+		<< ", turn_dice: " << turn_dice
+		<< ", turn_Move: " << turn_Move
+		<< ", activeEvent: " << activeEvent
+		<< ", draw_tax: " << draw_tax
+		<< ", draw_house: " << draw_house
+		<< ", draw_roulette: " << draw_roulette
+		<< std::endl;
+
 
 	window->setView(window->getDefaultView());
 	window->clear();

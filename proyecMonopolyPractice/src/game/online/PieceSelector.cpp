@@ -10,6 +10,7 @@
 #include <atomic>
 #include "Chat.hpp"
 
+
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
 	: window(windowRef),client(clientRef), selectedPiece(-1) {
 	loadResourceGame();
@@ -25,7 +26,6 @@ PieceSelector::~PieceSelector() {
 
 	newSelection = nullptr;
 }
-
 void PieceSelector::Resource() {
 	printMemoryUsage();
 	
@@ -224,8 +224,20 @@ void PieceSelector::updateSelection() {
 
 				for (int i = 0; i < pieces.size(); ++i) {
 
-					if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
-						if (previousSelection != &pieces[i]) {  
+					if (pieces[i].getGlobalBounds().contains(mousePosFloat) ) {
+
+
+						bool validP = true;
+						for (int j = 0; j < UsuariosActivos.size(); j++)
+						{
+							if (playerInfos[j].indexPiece == i)
+							{
+								validP = false;
+								break; 
+							}
+						}
+
+						if ((previousSelection != &pieces[i])&& validP) {
 							if (previousSelection != nullptr) {
 								previousSelection->setColor(sf::Color::White);
 							}
@@ -401,7 +413,6 @@ void PieceSelector::updateSelection() {
 	}
 
 }
-
 void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 
 	pieces[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); 

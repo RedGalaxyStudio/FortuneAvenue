@@ -216,7 +216,7 @@ void GameOptions::update() {
 
 				if (SpriteCrear.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					PieceSelectOff pieceselectoff(window, CantNum,Map);
+					PieceSelectOff pieceselectoff(window, CantNum-1,Map);
 					pieceselectoff.Resource();
 					pieceselectoff.updateSelection();
 

@@ -21,7 +21,7 @@ private:
     sf::Text CODE;
     float startX;
     float startY;
-
+    int nUserBot;
     int Nmap;
 public:
     

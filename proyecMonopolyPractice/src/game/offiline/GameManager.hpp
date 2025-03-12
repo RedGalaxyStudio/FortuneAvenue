@@ -9,6 +9,9 @@
 class GameManager {
 public:
     GameManager();
+
+
+    void GenerarBot(int BotN);
     void startGame();  
     void nextTurn();   
     void processTurn(int playerId); 
@@ -17,8 +20,7 @@ public:
   int turnopermitido = 0;
   bool juegoTerminado = false;
   bool giroActivo = false;
-private:
-    std::vector<std::shared_ptr<Bot>> players; 
+private: 
     int currentTurn;
   
     bool gameOver;

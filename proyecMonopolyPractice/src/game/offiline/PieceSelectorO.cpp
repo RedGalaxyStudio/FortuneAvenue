@@ -8,7 +8,7 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
-	: window(windowRef), selectedPiece(-1),Nmap(Map) {
+	: window(windowRef), selectedPiece(-1), nUserBot(UsersN), Nmap(Map) {
 	loadResourceGameO();
 }
 PieceSelectOff::~PieceSelectOff() {
@@ -277,7 +277,7 @@ void PieceSelectOff::updateSelection() {
 						//client.networkMessage.playerReady();
 						
 					}
-
+					GM.GenerarBot(nUserBot);
 					GameOffline gameOff(*window, Nmap);
 					gameOff.update();
 
