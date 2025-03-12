@@ -98,7 +98,7 @@ struct MensajeMSG {
 	sf::CircleShape AvatarEnviado;
 	sf::Text SMSEnviado;
 	sf::RectangleShape ContenidoEnviado;
-
+	sf::Text NombreChat;
 	sf::Vector2f positionSMSEnviado;
 	sf::Vector2f positionContenidoEnviado;
 	sf::Vector2f positionAvatarEnviado;

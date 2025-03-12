@@ -14,16 +14,23 @@ void GameOffline::resource() {
 
 	if(NMapa==1){
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
+
+		Dado.start(640, 360);
+		int DadoResul = 0;
 	}
 	else if (NMapa == 2) {
 
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa22l.png")) return;
+		Dado.start(630, 350);
+		int DadoResul = 0;
 
 	}
 	else if (NMapa == 3) {
 
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa1l.png")) return;
 
+		Dado.start(610, 352);
+		int DadoResul = 0;
 	}
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
@@ -382,8 +389,8 @@ void GameOffline::update() {
 	//GameEnd gameend(window);
 	//gameend.resource();
 	//gameend.update();
-
-	Dado.start(1280, 720);
+	
+	//Dado.start(640, 360);
 	int DadoResul = 0;
 
 	rouletteAnimation = false;
