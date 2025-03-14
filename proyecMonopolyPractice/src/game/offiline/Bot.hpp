@@ -7,6 +7,7 @@
 namespace CreatorB{
     std::vector<std::string> getRandomBotNames(int count);
     std::vector<int> getRandomBotPieces(int count);
+    std::vector<int> getRandomBotAvatar(int count);
 }
 
 class Bot {

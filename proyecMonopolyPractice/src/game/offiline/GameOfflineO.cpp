@@ -291,8 +291,8 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playerGameOff[ActiveUsers[2]].CasasN.setString(std::to_string(playerGameInfo[ActiveUsers[2]].numCasas));
 
-		playerGameOff[ActiveUsers[0]].CasasN.setPosition(138.65f, 595.5f);//-60
-		playerGameOff[ActiveUsers[0]].Home.setPosition(158.65f, 595.5f);//-40
+		playerGameOff[ActiveUsers[2]].CasasN.setPosition(138.65f, 595.5f);//-60
+		playerGameOff[ActiveUsers[2]].Home.setPosition(158.65f, 595.5f);//-40
 
 		playerGameOff[ActiveUsers[2]].PieceSelect.setScale(1, 1);
 		globalBounds = playerGameOff[ActiveUsers[2]].PieceSelect.getGlobalBounds();
@@ -335,8 +335,8 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[3]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playerGameOff[ActiveUsers[3]].CasasN.setString(std::to_string(playerGameInfo[ActiveUsers[3]].numCasas));
 
-		playerGameOff[ActiveUsers[1]].CasasN.setPosition(1138.65f, 595.5f);//-60
-		playerGameOff[ActiveUsers[1]].Home.setPosition(1158.65f, 595.5f);//-40
+		playerGameOff[ActiveUsers[3]].CasasN.setPosition(1138.65f, 595.5f);//-60
+		playerGameOff[ActiveUsers[3]].Home.setPosition(1158.65f, 595.5f);//-40
 
 		playerGameOff[ActiveUsers[3]].AvatarPlayer.setTexture(&playerGameOff[ActiveUsers[3]].textureAvatarPLayer);
 		playerGameOff[ActiveUsers[3]].AvatarPlayer.setRadius(static_cast<float>(playerGameOff[ActiveUsers[3]].textureAvatarPLayer.getSize().x / 2));

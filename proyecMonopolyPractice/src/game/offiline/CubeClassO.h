@@ -182,8 +182,8 @@ public :
 		move();
 	}
 
-	void resetPosition(int dadoIndex) {
-		center = Vector3D(640, 360, -100);
+	void resetPosition(int W,int H,int dadoIndex) {
+		center = Vector3D(W, H, -100);
 
 		CDis = 50.0f;  
 

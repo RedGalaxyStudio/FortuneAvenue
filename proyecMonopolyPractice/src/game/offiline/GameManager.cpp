@@ -15,6 +15,7 @@ void GameManager::GenerarBot(int BotN) {
 	std::vector<std::string> NamesBots = CreatorB::getRandomBotNames(BotN);
 
 	std::vector<int> PiecesBot = CreatorB::getRandomBotPieces(BotN);
+	std::vector<int> avatarsBot = CreatorB::getRandomBotAvatar(BotN);
 
 
 
@@ -31,6 +32,8 @@ void GameManager::GenerarBot(int BotN) {
 		playerGameInfo.push_back(plantillaInfoMBot);
 		plantillaGMBot.CashSprite.setTexture(TextureMoney1);
 		plantillaGMBot.Home.setTexture(TextureBuilding);
+
+		plantillaGMBot.textureAvatarPLayer.loadFromFile("assets/image/Avatars/avatar" + std::to_string(avatarsBot[i]) + ".png");
 		plantillaGMBot.NamePlayer.setCharacterSize(17);
 		plantillaGMBot.NamePlayer.setFont(fontUserProfile);
 		plantillaGMBot.NamePlayer.setFillColor(sf::Color::White);

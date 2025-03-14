@@ -69,6 +69,29 @@ namespace CreatorB {
 		return pieces;
 
 	}
+	std::vector<int> getRandomBotAvatar(int count) {
+
+
+		if (count > 20) {
+			count = 20;  // No podemos generar más de 20 números distintos en el rango 0-19
+		}
+
+		std::vector<int> avatarss;
+		std::unordered_set<int> usedNumbers;
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> dist(1, 20);
+
+		while (avatarss.size() < count) {
+			int num = dist(gen);
+			if (usedNumbers.insert(num).second) { // Si se inserta correctamente (no repetido)
+				avatarss.push_back(num);
+			}
+		}
+
+		return avatarss;
+
+	}
 }
 
 Bot::Bot(int id, int Dificultad) : id(id), score(0), Dificultad(Dificultad) {
