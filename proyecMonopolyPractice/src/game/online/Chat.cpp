@@ -324,6 +324,7 @@ void Chat::Event(sf::Event event) {
 						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
 						Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
 
+
 					}
 
 					Aumento = 0;
