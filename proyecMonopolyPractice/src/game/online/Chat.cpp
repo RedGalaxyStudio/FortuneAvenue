@@ -225,6 +225,7 @@ void Chat::Event(sf::Event event) {
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
 			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
 			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
+			Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat);
 		}
 
 		Aumento = 0;
@@ -274,9 +275,11 @@ void Chat::Event(sf::Event event) {
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
 			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
 			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
+			Mensajes[i].NombreChat.setPosition(Mensajes[i].NombreChat.getPosition().x, Mensajes[i].NombreChat.getPosition().y - aux);
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
+			Mensajes[i].positionNombreChat = Mensajes[i].NombreChat.getPosition();
 		}
 
 	}
@@ -323,7 +326,7 @@ void Chat::Event(sf::Event event) {
 						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
 						Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
-
+						Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat.x, Mensajes[i].positionNombreChat.y - Aumento);
 					}
 
 					Aumento = 0;
@@ -358,6 +361,7 @@ void Chat::Event(sf::Event event) {
 						Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 						Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
 						Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
+						Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat.x, Mensajes[i].positionNombreChat.y - Aumento);
 					}
 
 					indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
@@ -399,6 +403,7 @@ void Chat::Event(sf::Event event) {
 							Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
 							Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
 							Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
+							Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat);
 
 						}
 						Aumento = 0;
@@ -436,6 +441,7 @@ void Chat::Event(sf::Event event) {
 							Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado.x, Mensajes[i].positionContenidoEnviado.y - Aumento);
 							Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado.x, Mensajes[i].positionSMSEnviado.y - Aumento);
 							Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado.x, Mensajes[i].positionAvatarEnviado.y - Aumento);
+							Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat.x, Mensajes[i].positionNombreChat.y - Aumento);
 						}
 
 						indicacion.setPosition(sf::Vector2f(940, Caja.getPosition().y + 18));
