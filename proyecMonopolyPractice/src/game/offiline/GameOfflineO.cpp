@@ -5,14 +5,14 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 
-GameOffline::GameOffline(sf::RenderWindow& win,int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	resource();
 }
 void GameOffline::resource() {
 
-	if(NMapa==1){
+	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 
 		Dado.start(640, 360);
@@ -142,6 +142,7 @@ void GameOffline::resource() {
 
 
 	animacionIniciada = false;
+	std::cout << "COSitta";
 
 }
 void GameOffline::positionPefil() {
@@ -356,10 +357,13 @@ void GameOffline::positionPefil() {
 	}
 }
 void GameOffline::update() {
+
 	positionPefil();
 
 	sf::Clock clock;
-
+	std::cout << "COSitta";
+	GM.CasasAleatorias();
+	std::cout << "COSitta";
 	resultadoDado = 0;
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -389,17 +393,27 @@ void GameOffline::update() {
 	//GameEnd gameend(window);
 	//gameend.resource();
 	//gameend.update();
-	
+
 	//Dado.start(640, 360);
 	int DadoResul = 0;
 
 	rouletteAnimation = false;
 	InicioPartida();
 	GM.startGame();
-	while (window->isOpen() ) {
+	std::cout << "COSitta";
+	while (window->isOpen()) {
 
+
+		if (secondTurn) {
+
+			if (turn_diceB && GM.bot.roll()) {
+
+				Dado.loopP();
+
+			}
+		}
 		Event();
-	
+
 		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
@@ -412,8 +426,8 @@ void GameOffline::update() {
 			rouletteAnimation = false;
 			animacionIniciada = true;
 		}
-		
-		if ( rouletteAnimation == true && draw_roulette && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+
+		if (rouletteAnimation == true && draw_roulette && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
 			draw_roulette = false;
 			activeEvent = false;
 			animacionIniciada = false;
@@ -494,6 +508,7 @@ void GameOffline::update() {
 		}
 
 
+		std::cout << "COSitta";
 		if (GM.turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
@@ -546,6 +561,7 @@ void GameOffline::update() {
 
 		}
 		else if (draw_house) {
+			std::cout << "COSitto";
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);
@@ -570,7 +586,11 @@ void GameOffline::update() {
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
+			std::cout << "COSitto";
+			std::cout << "house: " << house.size()<<":  IndexTurn1  :"<< IndexTurn1<<": playerGameOff[IndexTurn1].PieceSelect.getPosition() :"<< playerGameOff[IndexTurn1].PieceSelect.getPosition().x << ", "
+				<< playerGameOff[IndexTurn1].PieceSelect.getPosition().y << ")";
 			house[IndexTurn1].update(playerGameOff[IndexTurn1].PieceSelect.getPosition());
+			std::cout << "COSitto";
 			activeEvent = false;
 			draw_house = false;
 
@@ -588,7 +608,7 @@ void GameOffline::update() {
 
 	}
 
-	if (window->isOpen() && GM.juegoTerminado) {
+	if (window->isOpen() && GM.juegoTerminadoo) {
 		GameEndO gameend(window);
 		gameend.resource();
 		gameend.update();
@@ -677,7 +697,6 @@ void GameOffline::DrawPieceMoviendo() {
 	window->setView(window->getDefaultView());
 
 }
-
 void GameOffline::DrawGameRuleta() {
 	float deltaTime = clock.restart().asSeconds();
 
@@ -717,7 +736,7 @@ void GameOffline::DrawGameRuleta() {
 			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; // Incrementa el escalado
 			if (currentScale >= maxScale) {
 				currentScale = maxScale;
-				increasing = false; 
+				increasing = false;
 			}
 		}
 		else {
@@ -768,7 +787,7 @@ void GameOffline::DrawGameImpuesto() {
 
 }
 void GameOffline::InicioPartida() {
-	sf::Clock clocks; 
+	sf::Clock clocks;
 	sf::Clock deltaClock;
 	Bienvenida.setScale(0.5, 0.5);
 
@@ -822,8 +841,6 @@ void GameOffline::InicioPartida() {
 		window->display();
 	}
 }
-
-
 void GameOffline::DrawGame() {
 
 	if (firstTurn) {
@@ -873,7 +890,70 @@ void GameOffline::DrawGame() {
 						turn_Tax = false;
 						activeEvent = true;
 						animacionImpuesto = true;
-					
+
+						impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
+						Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
+						globalBounds = Impuesto.getGlobalBounds();
+						Impuesto.setOrigin(globalBounds.width, globalBounds.height / 2.0f);
+						ImpuestoCasa.setString(std::to_string(impuestoCasa));
+						globalBounds = ImpuestoCasa.getGlobalBounds();
+						ImpuestoCasa.setOrigin(globalBounds.width, globalBounds.height / 2.0f);
+
+					}
+				}
+				turn_Tax = false;
+			}
+
+		}
+	}
+	if (secondTurn) {
+		if (!activeEvent) {
+
+			if (turn_roulette && turnRule && !turn_diceB && !turn_Move) {
+
+				for (int i = 0; i < casillasRuleta.size(); i++)
+				{
+					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == casillasRuleta[i])
+					{
+						//client.EventoRuleta();
+						draw_roulette = true;
+						turn_roulette = false;
+						activeEvent = true;
+						turnoGiro = true;
+						ruleta->trurntrue();
+					}
+				}
+				turnRule = false;
+				turn_roulette = false;
+
+			}
+
+			if (turn_house && !turn_diceB && !turn_Move) {
+
+				for (int i = 0; i < caminocasa.size(); i++)
+				{
+					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == caminocasa[i])
+					{
+						//client.EventoCasa();
+						draw_house = true;
+						activeEvent = true;
+					}
+				}
+				turn_house = false;
+			}
+
+
+			if (turn_Tax && !turn_diceB && !turn_Move) {
+				for (int i = 0; i < caminoimpuesto.size(); i++)
+				{
+					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == caminoimpuesto[i])
+					{
+						//client.EventoImpuesto();
+						draw_tax = true;
+						turn_Tax = false;
+						activeEvent = true;
+						animacionImpuesto = true;
+
 						impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
 						Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
 						globalBounds = Impuesto.getGlobalBounds();
@@ -890,48 +970,25 @@ void GameOffline::DrawGame() {
 		}
 	}
 
-	if (userRulette) {
-		draw_roulette = true;
-		turn_roulette = false;
-		activeEvent = true;
+	//std::cout << "hola no11";
 
-		ruleta->trurntrue();
-		turnRule = false;
-		turn_roulette = false;
-		userRulette = false;
-	}
-	if (userHouse) {
-		draw_house = true;
-		activeEvent = true;
-		userHouse = false;
-		turn_house = false;
-	}
-	if (userTax) {
-		draw_tax = true;
-		turn_Tax = false;
-		activeEvent = true;
-		animacionImpuesto = true;
-		userTax = false;
-		impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
+	if (BotTurn) {
+		if (secondTurn && !turn_Tax && !turn_house && !turn_roulette && !turn_diceB && !turn_Move && !activeEvent && !draw_tax && !draw_house && !draw_roulette) {
 
-		Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
-		globalBounds = Impuesto.getGlobalBounds();
-		Impuesto.setOrigin(globalBounds.width, globalBounds.height / 2.0f);
+			GM.nextTurn();
 
-		ImpuestoCasa.setString(std::to_string(impuestoCasa));
-		globalBounds = ImpuestoCasa.getGlobalBounds();
-		ImpuestoCasa.setOrigin(globalBounds.width, globalBounds.height / 2.0f);
+		}
+
 
 	}
+	else {
+		if (firstTurn && !turn_Tax && !turn_house && !turn_roulette && !turn_dice && !turn_Move && !activeEvent && !draw_tax && !draw_house && !draw_roulette) {
 
+			GM.nextTurn();
 
-	std::cout << "hola no11";
-	if (firstTurn && !turn_Tax && !turn_house && !turn_roulette && !turn_dice && !turn_Move && !activeEvent && !draw_tax && !draw_house && !draw_roulette) {
-
-		GM.nextTurn();
-		
+		}
 	}
-	std::cout << "hola si11";
+	//std::cout << "hola si11";
 	std::cout << "firstTurn: " << firstTurn
 		<< ", turn_Tax: " << turn_Tax
 		<< ", turn_house: " << turn_house
@@ -974,14 +1031,14 @@ void GameOffline::DrawGame() {
 			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; // Incrementa el escalado
 			if (currentScale >= maxScale) {
 				currentScale = maxScale;
-				increasing = false; 
+				increasing = false;
 			}
 		}
 		else {
 			currentScale -= (maxScale - minScale) / (duration / 2) * deltaTime; // Reduce el escalado
 			if (currentScale <= minScale) {
 				currentScale = minScale;
-				increasing = true; 
+				increasing = true;
 			}
 		}
 		DescripDado.setPosition(640, 450);
@@ -993,5 +1050,5 @@ void GameOffline::DrawGame() {
 	window->draw(Settings);
 	//window->draw(countsalary);
 	//window->draw(SpriteChat);
-
+	std::cout << "COSitta";
 }

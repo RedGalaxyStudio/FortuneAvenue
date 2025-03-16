@@ -11,7 +11,7 @@
 class GameManager;
 
 
-
+extern bool BotTurn;
 extern GameManager GM;
 extern std::vector<sf::Texture> TextureHouse; //texturecasa
 extern sf::Texture TextureMoney1; //TextureCash
@@ -58,7 +58,7 @@ struct PlayerInformation {
 	bool isSelectingPiece = false; 
 	bool isInGame = false;        
 	int indexPiece;
-	int casasPorJugador[17];
+	std::vector<int> casasPorJugador;
 	int Vueltas = 0;
 	bool final= false;
 	bool PiecUserme = false;
@@ -88,6 +88,7 @@ extern std::vector<int> ActiveUsers; //UsuariosActivos
 extern bool firstTurn; // turn       
 extern bool secondTurn; //otherturn    
 extern bool turn_dice; //turn_dado
+extern bool turn_diceB; //turn_dado
 extern bool turn_roulette; //turn_ruleta
 extern bool turn_house; //turn_casa
 extern bool turn_Tax; //turn_impuesto

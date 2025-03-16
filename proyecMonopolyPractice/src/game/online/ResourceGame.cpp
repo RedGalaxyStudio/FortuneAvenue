@@ -120,7 +120,7 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
                 if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
                     playClickSound();
 
-                    if (cliente->running && cliente->peer != nullptr) {
+                    if (cliente->clientData->running && cliente->peer != nullptr) {
                         cliente->disconnect();
                     }
 

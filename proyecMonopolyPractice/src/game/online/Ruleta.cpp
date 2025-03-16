@@ -2,6 +2,7 @@
 #include "ResourceGame.hpp"
 #include <cstdlib> // Para rand() y RAND_MAX
 #include "../../ui/Sound.hpp"
+#include "OnlineVars.hpp"
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
 	: width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
@@ -37,7 +38,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			}
 			turno = false;
 		
-			initialSpeed = client->initialSpeedActi;
+			initialSpeed = initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
 			clock.restart(); 
@@ -58,7 +59,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			}
 			turno = false;
 
-			initialSpeed = client->initialSpeedActi;
+			initialSpeed = initialSpeedActi;
 			decelerationRate = initialSpeed / 7.0f; 
 			rotationSpeed = initialSpeed;
 			clock.restart();
@@ -139,7 +140,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		if(turn){
 			switch (currentSegment) {
 			case 0://pierdes un turno
-				client->turnopermitido -= 1;
+				turnopermitido -= 1;
 				break;
 
 			case 1://robar a un jugador

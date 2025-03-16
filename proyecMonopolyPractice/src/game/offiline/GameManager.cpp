@@ -1,11 +1,47 @@
 #include "GameManager.hpp"
 #include <iostream>
 #include "ResourceGameO.hpp"
+#include <random>
 GameManager::GameManager() : currentTurn(0), gameOver(false) {
 
 
 }
 
+
+
+void GameManager::CasasAleatorias() {
+	int numJugadores = ActiveUsers.size();
+	int numCasas = 17;
+	std::vector<std::vector<int>> casasR;
+	casasR.resize(numJugadores);
+	std::cout << "COta";
+	// Lista de todas las casas (suponiendo que son números del 1 al 68)
+	std::vector<int> casas;
+	for (int i = 0; i < numCasas; ++i) {
+		casas.push_back(i);
+	}
+	for (int i = 0; i < numJugadores; i++) {
+		casasR[i].resize(numCasas);
+	}
+	// Barajar la lista de casas una sola vez
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::cout << "COta";
+	// Asignar las casas a los jugadores
+	for (int i = 0; i < numJugadores; ++i) {
+		std::shuffle(casas.begin(), casas.end(), g);
+		std::cout << "\niiii:  " << i;
+		for (int j = 0; j < numCasas; ++j) {
+			std::cout << "\nJJJJJ:  " << i;
+			casasR[i][j] = casas[j];
+		}
+	}
+	std::cout << "COta";
+	for (int i = 0; i < numJugadores; ++i) {
+		playerGameInfo[i].casasPorJugador = casasR[i];
+	}
+	std::cout << "COta";
+}
 
 
 
@@ -14,7 +50,7 @@ void GameManager::GenerarBot(int BotN) {
 
 	std::vector<std::string> NamesBots = CreatorB::getRandomBotNames(BotN);
 
-	std::vector<int> PiecesBot = CreatorB::getRandomBotPieces(BotN);
+	std::vector<int> PiecesBot = CreatorB::getRandomBotPieces(BotN, playerGameInfo[0].indexPiece);
 	std::vector<int> avatarsBot = CreatorB::getRandomBotAvatar(BotN);
 
 
@@ -44,7 +80,7 @@ void GameManager::GenerarBot(int BotN) {
 		globalBounds = plantillaGMBot.NamePlayer.getGlobalBounds();
 		plantillaGMBot.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		plantillaGMBot.MarcoPlayer.setTexture(TextureFrame);
-		
+
 		globalBounds = plantillaGMBot.MarcoPlayer.getGlobalBounds();
 		plantillaGMBot.MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -60,8 +96,6 @@ void GameManager::GenerarBot(int BotN) {
 	}
 
 }
-
-
 
 void GameManager::startGame() {
 	std::cout << "El juego ha comenzado!" << std::endl;
@@ -89,7 +123,7 @@ void GameManager::nextTurn() {
 			nextTurn();
 			return;
 		}
-
+		BotTurn = false;
 		turn_dice = true;
 		firstTurn = true;
 		activeEvent = false;
@@ -102,17 +136,20 @@ void GameManager::nextTurn() {
 	}
 	else {
 
+		BotTurn = true;
+		turn_diceB = true;
 		secondTurn = true;
 		activeEvent = false;
 		turn_roulette = true;
 		turn_house = true;
 		turn_Tax = true;
 		turn_Move = true;
+		bot.resetT();
 	}
 }
 
 void GameManager::processTurn(int playerId) {
-	std::cout << "Procesando el turno para el jugador con ID: " << playerId << std::endl;
+	//std::cout << "Procesando el turno para el jugador con ID: " << playerId << std::endl;
 	//  if (playerId < players.size()) {
   //        players[playerId]->playTurn();  
 	 // }

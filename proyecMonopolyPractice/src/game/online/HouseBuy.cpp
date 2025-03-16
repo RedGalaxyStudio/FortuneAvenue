@@ -8,6 +8,7 @@
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/ResourceGeneral.hpp"
+#include "OnlineVars.hpp"
 
 using json = nlohmann::json;
 
@@ -182,11 +183,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 		window->setMouseCursor(*currentCursor);
 		window->clear();
-		if (client->accionCompra) {
+		if (accionCompra) {
 
 			playClickSound();
 			cierre = true;
-			client->accionCompra = false;
+			accionCompra = false;
 		}
 		window->draw(renderedSprite);
 

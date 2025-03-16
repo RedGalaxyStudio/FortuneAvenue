@@ -3,6 +3,7 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/TextBox.hpp"
 #include "../../ui/MensageBox.hpp"
+#include "OnlineVars.hpp"
 
 Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
 	resource();
@@ -212,7 +213,7 @@ void Chat::Event(sf::Event event) {
 
 		playClickSound();
 		PlantillaMensajeE.SMSEnviado.setString(input);
-		client->networkMessage.sendSmg(std::to_string(client->playerIndex) + input);
+		client->networkMessage.sendSmg(std::to_string(playerIndex) + input);
 		PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(PlantillaMensajeE.SMSEnviado.getGlobalBounds().width + 20,
 			PlantillaMensajeE.SMSEnviado.getGlobalBounds().height + 10));
 
@@ -462,7 +463,7 @@ void Chat::Event(sf::Event event) {
 }
 void Chat::draw() {
 
-	client->Nmsg = false;
+	client->clientData->Nmsg = false;
 	window->draw(Fondo);
 
 
