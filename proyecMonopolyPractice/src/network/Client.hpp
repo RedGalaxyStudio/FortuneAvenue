@@ -7,10 +7,9 @@
 #include <SFML/Graphics.hpp>
 #include <winsock2.h>
 #include "NetworkMessage.hpp"
+#include "ServerMessageHandler.hpp"
 #include <windows.h>
 #include <enet/enet.h>
-#include <fstream>
-#include <iostream>
 #include <vector>
 #include <thread>
 #include <atomic>
@@ -19,22 +18,16 @@
 #include <random>
 #include <condition_variable>
 #include <mutex>
+#include "ClientData.hpp"
 
 class Client {
 public:
-
-
 	struct Nodo {
-		std::string dato;
+		ENetPacket* dato;
 		Nodo* siguiente;
 	};
-
-
-
-	bool Nmsg=false;
-
 	void process();
-	void insertC(Nodo*& frente, Nodo*& fin, std::string n);
+	void insertC(Nodo*& frente, Nodo*& fin, ENetPacket* n);
 	Nodo* frente = nullptr;
 	Nodo* fin = nullptr;
 	Client();
@@ -46,53 +39,14 @@ public:
 	bool joinRoom(const std::string& roomCode, const std::string& username, const std::string& filename);
 	bool connectToServer(const std::string& address, uint16_t port);
 	void disconnect();
-	void moneyActu(int money);
-	void handleServerMessage(const std::string& message);
-	int lastRollResult;
 	ENetPeer* peer;
-	std::atomic<bool> running;
-	bool isConnected;
 	ENetHost* client;
-	std::mutex mtx;
-	std::condition_variable cv;
-	std::mutex casasMutex;        // Protege el acceso a las casas
-	bool casasCargadas;
-	int conteoturn;
-	float anguloActualrule;
-	float initialSpeedActi;
-	float decelerationRateActi;
-	bool giroActivo;
-	int turnopermitido;
-	std::mutex ruletaMutex;
-	std::condition_variable ruletaCondVar;
-	bool ruletaMessageReceived = false;
-
-	std::mutex impuestoMutex;
-	std::condition_variable impuestoCondVar;
-	bool impuestoMessageReceived = false;
-
-	bool agregardor = false;
 	void suprim(Nodo*& frente, Nodo*& fin);
-	std::mutex mtxExisting;
-	std::condition_variable cvExisting;
-	bool accionCompra;
-	void llegadaFinal();
-	void MONEYSALARIO(std::string message, int usuario);
-	std::mutex mtxx;
-	std::condition_variable cvv;
-	int playerIndex;
-	std::mutex mtex;
-	std::condition_variable cvDis;
-	bool eventOccurred = false;
-	bool disconnecte;
-	bool disActiv;
-	bool juegoTerminado = false;
-
 
 	NetworkMessage networkMessage;
-	int calcularNumeroDeLineas(const sf::Text& text);
+	ClientData* clientData;
 private:
-	
+	ServerMessageHandler* SMessageHandler;
 	sf::FloatRect globalBounds;
 	std::thread clientThread;
 	std::thread clientMensThread;
