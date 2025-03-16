@@ -166,10 +166,6 @@
     <ClCompile Include="src\ui\ResourceGeneral.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="LoadingScreen.cpp">
-      <Filter>src</Filter>
-=======
     <ClCompile Include="src\network\ServerMessageHandler.cpp">
       <Filter>src\network</Filter>
     </ClCompile>
@@ -178,7 +174,6 @@
     </ClCompile>
     <ClCompile Include="src\network\ClientData.cpp">
       <Filter>src\network</Filter>
->>>>>>> 34a2a6928b87de86e85c7dcc2640c843ffe3ad34
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,9 +321,6 @@
     <ClInclude Include="src\ui\ResourceGeneral.hpp">
       <Filter>src\ui</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="LoadingScreen.hpp" />
-=======
     <ClInclude Include="src\network\ServerMessageHandler.hpp">
       <Filter>src\network</Filter>
     </ClInclude>
@@ -338,7 +330,6 @@
     <ClInclude Include="src\network\ClientData.hpp">
       <Filter>src\network</Filter>
     </ClInclude>
->>>>>>> 34a2a6928b87de86e85c7dcc2640c843ffe3ad34
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
