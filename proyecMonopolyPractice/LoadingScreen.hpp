@@ -1,7 +1,7 @@
 #ifndef LOADINGSCREEN_HPP
 #define LOADINGSCREEN_HPP
 
-#include "../core/ResourceGlobal.hpp"
+/*#include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
 
 class LoadingScreen {
@@ -26,3 +26,4 @@ private:
 
 
 #endif
+/*
