@@ -665,10 +665,12 @@ void Client::handleServerMessage(const std::string& message) {
 			PlantillaMensajeR.ContenidoEnviado.setPosition(970, 600);
 			PlantillaMensajeR.SMSEnviado.setPosition(970 + 10, 618);
 			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
+			PlantillaMensajeR.NombreChat.setPosition(925, 618);
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
-
+			PlantillaMensajeR.positionNombreChat = PlantillaMensajeR.NombreChat.getPosition();
+				
 		}
 
 		else if (In > 1) {
@@ -678,9 +680,11 @@ void Client::handleServerMessage(const std::string& message) {
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(970, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
 			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(970 + 10, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeR.NombreChat.setPosition(sf::Vector2f(9525 + 10, PlantillaMensajeR.NombreChat.getPosition().y + 18));
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
+			PlantillaMensajeR.positionNombreChat = PlantillaMensajeR.NombreChat.getPosition();
 		}
 
 		PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
@@ -699,6 +703,7 @@ void Client::handleServerMessage(const std::string& message) {
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
+			Mensajes[i].positionNombreChat = Mensajes[i].NombreChat.getPosition();
 
 		
 

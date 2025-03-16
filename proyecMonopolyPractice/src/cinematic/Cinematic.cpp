@@ -16,7 +16,7 @@ Cinematic::~Cinematic() {
 void Cinematic::loadTexturesInBackground() {
     for (int i = 0; i < 6; ++i) {
         sf::Texture texture;
-        if (!texture.loadFromFile("assets/image/Fondos/part" + std::to_string(i) + ".jpg")) {
+        if (!texture.loadFromFile("assets/image/Fondos/part" + std::to_string(i) + ".tjpg")) {
         }
         textures[i] = texture;
     }

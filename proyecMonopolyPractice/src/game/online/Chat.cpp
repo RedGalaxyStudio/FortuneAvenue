@@ -10,7 +10,7 @@ Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) 
 
 
 int calcularNumeroDeLineas(const sf::Text& text) {
-	
+
 	sf::FloatRect bounds = text.getGlobalBounds();
 
 	float alturaLinea = static_cast<float>(text.getCharacterSize());
@@ -30,7 +30,7 @@ void Chat::resource() {
 	SpriteBotonEnviar.setTexture(TextureBotonEviar);
 	SpriteBotonEnviar.setOrigin(20, 20);
 	SpriteBotonEnviar.setPosition(1245, 675);
-	
+
 	spriteX.setPosition(1240, 35);
 
 	enunciado.setCharacterSize(28);
@@ -160,20 +160,20 @@ void Chat::insertarSaltoDeLinea() {
 		tempText.setString(input.substr(0, i + 1));
 		if (tempText.getGlobalBounds().width > 260) {
 			if (posicionUltimoEspacio > 0) {
-				input[posicionUltimoEspacio] = '\n'; 
-				posicionUltimoEspacio = 0;          
+				input[posicionUltimoEspacio] = '\n';
+				posicionUltimoEspacio = 0;
 			}
 			else {
 				aux.pop_back();
 				tempText.setString(aux);
 
 				if (tempText.getGlobalBounds().width > 260) {
-					input.insert(i - 1, "\n"); 
+					input.insert(i - 1, "\n");
 
 				}
 				else {
 
-					input.insert(i, "\n"); 
+					input.insert(i, "\n");
 
 				}
 			}
@@ -240,8 +240,10 @@ void Chat::Event(sf::Event event) {
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
 			PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
 			PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 10), 618);
 			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
 			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
+			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
 
 		}
 
@@ -453,9 +455,8 @@ void Chat::Event(sf::Event event) {
 
 
 		}
+
 	}
-
-
 }
 void Chat::draw() {
 
