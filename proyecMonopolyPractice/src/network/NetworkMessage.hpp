@@ -1,9 +1,9 @@
 #ifndef NETWORKMESSAGE_HPP
 #define NETWORKMESSAGE_HPP
-
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <enet/enet.h>
-
+#include <vector>
 
 class NetworkMessage {
 
@@ -15,6 +15,7 @@ public:
     NetworkMessage();
      void Enetpeer(ENetPeer* Peer);
      static void sendMessage(ENetPeer* Peer, const std::string& message);
+     void cargarImagen(const std::string& ruta);
      void sendSafeInvestment();
      void sendSmg(std::string mensaje);
      void sendXHouse();
@@ -32,6 +33,7 @@ public:
      void sendRouletteGame(float angle);
      void playerChangedPiece(int pieceIndex);
      void playerReady();
+     void llegadaFinal();
 };
 
 #endif 

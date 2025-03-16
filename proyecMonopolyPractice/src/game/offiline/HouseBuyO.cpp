@@ -69,18 +69,14 @@ void HouseBuyO::resource() {
 	Xc.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 }
-
-
 void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	float angle = 0.f;
 	float rotationSpeed = 45.f;
-
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
-	readData(pp, cc, "quad.vtk");
-
+	readData(pp, cc, "src/ui/quad.vtk");
+	std::cout << "\nouno,,,"<< pp.size()<<":"<< cc.size();
 	IndexCAsa += 1;
-
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
 	for (int i = 0; i < 6; i++)
 		for (int j = 0; j < 4; j++)
@@ -93,7 +89,6 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
 	Cell c5(q.at(5), &TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
-
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 
 	pp.clear();
@@ -115,6 +110,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	const sf::Vector3f Wquad = { 1., 1., -1. }; // rotation vector components
 	const sf::Vector3f Oquad = { 199., 350., -187.5 }; // rotation vector origin
 	ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 235.);
+
 	while (window->isOpen() && !cierre) {
 
 

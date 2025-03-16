@@ -45,8 +45,7 @@ namespace CreatorB {
 
 		return selectedNames;
 	}
-
-	std::vector<int> getRandomBotPieces(int count) {
+	std::vector<int> getRandomBotPieces(int count,int pieceP) {
 
 
 		if (count > 20) {
@@ -61,7 +60,7 @@ namespace CreatorB {
 
 		while (pieces.size() < count) {
 			int num = dist(gen);
-			if (usedNumbers.insert(num).second) { // Si se inserta correctamente (no repetido)
+			if (usedNumbers.insert(num).second && (num != pieceP)) { // Si se inserta correctamente (no repetido)
 				pieces.push_back(num);
 			}
 		}
@@ -94,14 +93,31 @@ namespace CreatorB {
 	}
 }
 
-Bot::Bot(int id, int Dificultad) : id(id), score(0), Dificultad(Dificultad) {
-
-
-
+Bot::Bot() {
 
 
 }
+bool Bot::roll() {
+	if ( clock.getElapsedTime().asSeconds() >=waitTime) {
+		return true;
+	}
+	return false;
+}
+int Bot::eleccion() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dist(0, 1);
 
-void Bot::playTurn() {
-	std::cout << "Bot " << id << " jugando su turno..." << std::endl;
+	int cam = dist(gen);
+	return cam;
+
+}
+
+void Bot::resetT() {
+	waitTime = 1 + std::rand() % 5; // Número aleatorio entre 1 y 5 segundos
+	clock.restart();
+}
+void Bot::resetTCAM() {
+	waitTime = 2 + std::rand() % 6; // Número aleatorio entre 1 y 5 segundos
+	clock.restart();
 }

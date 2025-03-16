@@ -10,6 +10,9 @@
 #include "../../libs/nlohmann/json.hpp"
 #include <windows.h>
 #include <commdlg.h>
+#include <filesystem>
+
+
 using json = nlohmann::json;
 
 
@@ -39,10 +42,6 @@ std::string openFileDialog() {
 	}
 	return "";
 }
-
-
-
-
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
 	: window(&windowRef), currentIndex(0) {
 	Resource();
@@ -51,6 +50,8 @@ IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
 IniciaUser::~IniciaUser() {
 }
 void IniciaUser::Resource() {
+	projectPath = std::filesystem::current_path().string(); // Guarda la ruta original
+
 	SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 void IniciaUser::Update() {
@@ -68,7 +69,6 @@ void IniciaUser::Update() {
 	}
 
 }
-
 void IniciaUser::UpdateEdit() {
 
 
@@ -87,13 +87,8 @@ void IniciaUser::UpdateEdit() {
 }
 void IniciaUser::IniciAcion() {
 	spriteCkeck.setPosition(850, 70);
-
-
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-
-
-
 	float deltaScroll = 0.0f;
 	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
 	const float avatarWidth = 128.0f;
@@ -101,32 +96,19 @@ void IniciaUser::IniciAcion() {
 	const float avatarSeparation = 28.0f;
 	const float visibleAreaHeight = 248.0f;
 	const float maxScrollOffset = 156.0f;
-
 	float widthSeparation = avatarWidth + avatarSeparation;
 	float heightSeparation = avatarHeight + avatarSeparation;
-
 	recua.setPosition(400, 112);
 	TextBox textBox(496, 50, "Ingresa tu nombre: ");
 	textBox.setPosition(496, 50);
-
 	const float totalContentHeight = 440.0f;
 	const float scrollbarHeight = 340.0f;
-
-
 	float proportion = visibleAreaHeight / totalContentHeight;
 	float thumbHeight = scrollbarHeight * proportion;
-
-
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
-
-
 	Scrollbar scrollbar(340, thumbHeight, 14);
-
 	scrollbar.setPosition(1260, 340);
-
-
-
 	selectedAvatarCopy.setPosition(400, 112);
 	for (int i = 0; i < avatars.size(); i++) {
 		sf::Vector2f pos = avatars[i].getPosition();
@@ -134,9 +116,6 @@ void IniciaUser::IniciAcion() {
 	}
 	float avatarYOffset = 0.0f;
 	bool salir = false;
-
-
-
 	std::vector<sf::CircleShape> circles;
 	std::vector<sf::Color> colors = {
 		sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Yellow,
@@ -145,25 +124,19 @@ void IniciaUser::IniciAcion() {
 		sf::Color(139, 69, 19), // Marrón
 		sf::Color(255, 192, 203) // Rosa
 	};
-
 	for (size_t i = 0; i < 10; ++i) {
 		sf::CircleShape circle(30);
 		circle.setFillColor(colors[i]);
 		circle.setPosition(20 + i * 120, 300); // Distribuidos horizontalmente
 		circles.push_back(circle);
 	}
-
 	sf::Color selectedBackgroundColor = sf::Color::White; // Color por defecto
-
 	sf::Texture tempTexture;
-
 	sf::Image croppedImage;
 	bool hasTransparency = false;
-
 	sf::Image imageWithBackground;
 	sf::CircleShape colores=selectedAvatarCopy;
 	colores.setFillColor(sf::Color::Transparent);
-
 	while (window->isOpen() && !salir) {
 		mousePosition = sf::Mouse::getPosition(*window);
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -254,38 +227,6 @@ void IniciaUser::IniciAcion() {
 					if (circles[i].getGlobalBounds().contains(mousePosFloat)) {
 						selectedBackgroundColor = colors[i];
 						colores.setFillColor(selectedBackgroundColor);
-
-						/*if (hasTransparency) {
-
-
-							sf::RenderTexture renderTexturo;
-
-							if (!renderTexturo.create(128, 128)) {
-								std::cerr << " Error al crear RenderTexture\n";
-								return;
-							}
-							
-							sf::Sprite sprite(tempTexture);
-
-							// Dibujar la imagen escalada en el RenderTexture
-							renderTexturo.clear(selectedBackgroundColor);
-							renderTexturo.draw(sprite);
-							renderTexturo.display();
-
-
-							croppedImage = renderTexturo.getTexture().copyToImage();
-
-							croppedImage.saveToFile("temp_crop_filled.png");
-							std::cout << "HOLa";
-							textselectedAvatarCopy.loadFromFile("temp_crop_filled.png");
-							// Guardar y cargar la textura recortada
-
-							// Crear el CircleShape con la textura
-							newSelection = new sf::CircleShape(64);
-							newSelection->setTexture(&textselectedAvatarCopy);
-
-						}
-						selectedAvatarCopy.setTexture(&textselectedAvatarCopy);*/
 					}
 				}
 
@@ -294,7 +235,8 @@ void IniciaUser::IniciAcion() {
 					if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
 						if (i == 0) {
 
-							std::string imagePath = openFileDialog();
+							imagePath = openFileDialog();
+							std::filesystem::current_path(projectPath);
 							if (imagePath.empty()) {
 								std::cout << "No se seleccionó ninguna imagen.\n";
 								return;
@@ -305,11 +247,6 @@ void IniciaUser::IniciAcion() {
 								std::cerr << "Error al cargar la imagen\n";
 								return;
 							}
-
-
-
-
-
 
 							sf::Vector2u imgSize = originalImage.getSize();
 							
@@ -406,17 +343,18 @@ void IniciaUser::IniciAcion() {
 									}
 								}
 							}
-							
-							croppedImage.saveToFile("temp_crop.png");
+							std::cout << "jokokok\n:" << projectPath;
+							std::filesystem::current_path(projectPath); 
+							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
+							croppedImage.saveToFile(dirPath);
 							std::cout << "HOLa";
-							textselectedAvatarCopy.loadFromFile("temp_crop.png");
-							// Guardar y cargar la textura recortada
-
-							// Crear el CircleShape con la textura
+							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
+							selectedIndex = 0;
 						}
 						else {
+							selectedIndex = i;
 							newSelection = &avatars[i];
 							break;
 
@@ -480,21 +418,23 @@ void IniciaUser::IniciAcion() {
 	}
 }
 void IniciaUser::saveSelectedAvatar() {
+	std::filesystem::current_path(projectPath); // Asegura que estamos en la ruta original del proyecto
+
 	if (selectedAvatar != nullptr) {
 
-		int selectedIndex = -1;
-		for (int i = 0; i < avatars.size(); ++i) {
-			if (&avatars[i] == selectedAvatar) {
-				selectedIndex = i;
-				break;
-			}
-		}
 
-
+		std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-
+			std::cout << "Holaaaaaaaaa00000000:      "<< selectedIndex;
 			json avatarData;
+			if (selectedIndex == 0) {
+				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+			}
+			else {
+
 			avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
+
+			}
 
 			//std::cout << "\ninput1:" << input1;
 			avatarData["username"] = input1;
@@ -522,9 +462,9 @@ void IniciaUser::loadSelectedAvatar() {
 		TextureAvatarPath = avatarData["selected_avatar_path"];
 		input1 = avatarData["username"];
 
-
-		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();
-
+		std::cout << "h" << TextureAvatarPath;
+		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) std::cout << "error";//loadAvatars();
+	
 		selectedAvatarCopy.setTexture(&TextureAvatarSelec);
 	}
 }
@@ -535,8 +475,6 @@ void IniciaUser::loadAvatars() {
 	avatars.resize(avatarCount);
 	avatarTextures.resize(avatarCount);
 	textureAvatarsFilePath.resize(avatarCount);
-
-	printMemoryUsage();
 
 	for (int i = 0; i < avatarCount; i++) {
 
@@ -549,7 +487,6 @@ void IniciaUser::loadAvatars() {
 		avatars[i].setRadius(radio);
 		avatars[i].setTexture(&avatarTextures[i]);
 		avatars[i].setOrigin(radio, radio);
-
 
 	}
 

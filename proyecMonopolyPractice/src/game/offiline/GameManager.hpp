@@ -10,7 +10,8 @@ class GameManager {
 public:
     GameManager();
 
-
+    Bot bot;
+    void CasasAleatorias();
     void GenerarBot(int BotN);
     void startGame();  
     void nextTurn();   
@@ -18,7 +19,7 @@ public:
     void addPlayer(bool isBot);  
     bool isGameOver();  
   int turnopermitido = 0;
-  bool juegoTerminado = false;
+  bool juegoTerminadoo = false;
   bool giroActivo = false;
 private: 
     int currentTurn;

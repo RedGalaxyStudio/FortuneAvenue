@@ -165,6 +165,7 @@
     <ClCompile Include="src\game\online\MovePieces.cpp" />
     <ClCompile Include="src\game\online\MultiplayerGame.cpp" />
     <ClCompile Include="src\game\online\nulo.cpp" />
+    <ClCompile Include="src\game\online\OnlineVars.cpp" />
     <ClCompile Include="src\game\online\PieceSelector.cpp" />
     <ClCompile Include="src\game\online\ResourceGame.cpp" />
     <ClCompile Include="src\game\online\Ruleta.cpp" />
@@ -175,6 +176,8 @@
     <ClCompile Include="src\menu\IniciaUser.cpp" />
     <ClCompile Include="src\menu\menuP.cpp" />
     <ClCompile Include="src\network\Client.cpp" />
+    <ClCompile Include="src\network\ClientData.cpp" />
+    <ClCompile Include="src\network\ServerMessageHandler.cpp" />
     <ClCompile Include="src\network\NetworkMessage.cpp" />
     <ClCompile Include="src\settings\SettingsManager.cpp" />
     <ClCompile Include="src\ui\ButtonG.cpp" />
@@ -214,6 +217,7 @@
     <ClInclude Include="src\game\online\MovePieces.hpp" />
     <ClInclude Include="src\game\online\MultiplayerGame.hpp" />
     <ClInclude Include="src\game\online\nulo.hpp" />
+    <ClInclude Include="src\game\online\OnlineVars.hpp" />
     <ClInclude Include="src\game\online\PieceSelector.hpp" />
     <ClInclude Include="src\game\online\ResourceGame.hpp" />
     <ClInclude Include="src\game\online\Ruleta.hpp" />
@@ -224,6 +228,8 @@
     <ClInclude Include="src\menu\IniciaUser.hpp" />
     <ClInclude Include="src\menu\menuP.hpp" />
     <ClInclude Include="src\network\Client.hpp" />
+    <ClInclude Include="src\network\ClientData.hpp" />
+    <ClInclude Include="src\network\ServerMessageHandler.hpp" />
     <ClInclude Include="src\network\NetworkMessage.hpp" />
     <ClInclude Include="src\settings\SettingsManager.hpp" />
     <ClInclude Include="src\ui\ButtonG.hpp" />

@@ -19,6 +19,7 @@ C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\o
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\MovePieces.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\MovePieces.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\MultiplayerGame.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\MultiplayerGame.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\nulo.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\nulo.obj
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\OnlineVars.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\OnlineVars.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\PieceSelector.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\PieceSelector.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\ResourceGame.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\ResourceGame.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\game\online\Ruleta.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\Ruleta.obj
@@ -29,6 +30,8 @@ C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\menu\I
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\menu\IniciaUser.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\IniciaUser.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\menu\menuP.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\menuP.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\network\Client.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\Client.obj
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\network\ClientData.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\ClientData.obj
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\network\ServerMessageHandler.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\ServerMessageHandler.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\network\NetworkMessage.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\NetworkMessage.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\settings\SettingsManager.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\SettingsManager.obj
 C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\src\ui\ButtonG.cpp;C:\Users\D2niel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\ButtonG.obj
