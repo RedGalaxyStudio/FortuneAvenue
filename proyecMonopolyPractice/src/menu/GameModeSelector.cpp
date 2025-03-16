@@ -80,12 +80,13 @@ void GameModeSelector::update() {
 				if (SpriteOnline.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 				
-
+					std::cout << "\nHO2222111";
 
 
 					IniciarPartida inicial(*window);
+					std::cout << "\nHO222222";
 					inicial.update();
-
+					std::cout << "\nHO2222";
 					box.setPosition(273, 74);
 
 					Valida = false;
@@ -136,65 +137,4 @@ void GameModeSelector::update() {
 		message.draw(*window);
 		window->display();
 	}
-}
-
-void GameModeSelector::updatejoinRoom() {
-	std::string code;
-	bool Valida1 = false;
-	TextBox textBoxRoom(640, 80, "Ingresa el codigo: ");
-	textBoxRoom.setPosition(505, 80);
-	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-	MensageBox messageInvalido("Codigo invalido", fontUser, 12);
-
-	while (window->isOpen() && !Valida1) {
-		sf::Event event1;
-		mousePosition = sf::Mouse::getPosition(*window);
-		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-		while (window->pollEvent(event1)) {
-			if (event1.type == sf::Event::Closed ||
-				(event1.type == sf::Event::KeyPressed && event1.key.code == sf::Keyboard::Escape)) {
-
-				renderTexture.clear();
-				renderTexture.draw(spriteBackgroundG);
-			
-				textBoxRoom.Prinf();
-
-
-				renderTexture.draw(spriteX);
-				renderTexture.draw(overlay);
-				Menup.MenuSalir(nullptr);
-
-
-
-			}
-
-			if (event1.type == sf::Event::MouseButtonPressed && event1.mouseButton.button == sf::Mouse::Left) {
-	
-				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-					Valida1 = true;
-				}
-			}
-
-			textBoxRoom.handleInput(event1, 5);
-		}
-
-		currentCursor = &normalCursor;
-		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-		message.update();
-		messageInvalido.update();
-
-		window->setMouseCursor(*currentCursor);
-
-		window->clear();
-		window->draw(spriteBackgroundG);
-		window->draw(spriteX);
-;
-		textBoxRoom.draw(*window);
-		message.draw(*window);
-		messageInvalido.draw(*window);
-		window->display();
-	}
-
 }
