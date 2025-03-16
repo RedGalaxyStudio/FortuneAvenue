@@ -166,6 +166,9 @@
     <ClCompile Include="src\ui\ResourceGeneral.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\ButtonG.hpp">
@@ -312,6 +315,7 @@
     <ClInclude Include="src\ui\ResourceGeneral.hpp">
       <Filter>src\ui</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingScreen.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
