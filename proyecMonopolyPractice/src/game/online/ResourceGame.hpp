@@ -102,6 +102,7 @@ struct MensajeMSG {
 	sf::Vector2f positionSMSEnviado;
 	sf::Vector2f positionContenidoEnviado;
 	sf::Vector2f positionAvatarEnviado;
+	sf::Vector2f positionNombreChat;
 	
 };
 extern MensajeMSG PlantillaMensajeR;

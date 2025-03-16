@@ -4,7 +4,7 @@
 #include "../game/online/OnlineVars.hpp"
 #include <fstream>
 
-ServerMessageHandler::ServerMessageHandler(ClientData* cData):clientData(cData), peer(nullptr){}
+ServerMessageHandler::ServerMessageHandler(ClientData* cData) :clientData(cData), peer(nullptr) {}
 void ServerMessageHandler::Enetpeer(ENetPeer* Peer) {
 	this->peer = Peer;
 }
@@ -20,9 +20,9 @@ int ServerMessageHandler::calcularNumeroDeLineas(const sf::Text& text) {
 void ServerMessageHandler::moneyActu(int money) {
 	std::string message = "MONEY_ACTU:" + std::to_string(money);
 
-//	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-//	enet_peer_send(peer, 0, packet);
-	//enet_host_flush();
+	//	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	//	enet_peer_send(peer, 0, packet);
+		//enet_host_flush();
 
 
 }
@@ -408,9 +408,11 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			PlantillaMensajeR.ContenidoEnviado.setPosition(970, 600);
 			PlantillaMensajeR.SMSEnviado.setPosition(970 + 10, 618);
 			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
+			PlantillaMensajeR.NombreChat.setPosition(925, 618);
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
+			PlantillaMensajeR.positionNombreChat = PlantillaMensajeR.NombreChat.getPosition();
 
 		}
 
@@ -421,9 +423,11 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(970, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
 			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(970 + 10, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeR.NombreChat.setPosition(sf::Vector2f(9525 + 10, PlantillaMensajeR.NombreChat.getPosition().y + 18));
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
+			PlantillaMensajeR.positionNombreChat = PlantillaMensajeR.NombreChat.getPosition();
 		}
 
 		PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
@@ -442,6 +446,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();
+			Mensajes[i].positionNombreChat = Mensajes[i].NombreChat.getPosition();
 
 
 
