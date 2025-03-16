@@ -5,14 +5,23 @@
 #include "../game/online/Chat.hpp"
 #include "../ui/MensageBox.hpp"
 #include "../ui/ResourceGeneral.hpp"
-IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win), client(new Client()) {
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win){
+	try {
+		client = new Client();
+	}
+	catch (const std::exception& e) {
+		std::cerr << "Error al crear Client: " << e.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Error desconocido al crear Client" << std::endl;
+	}
 	
 	loadResourceGame();
 	resource();
 }
 
 void IniciarPartida::resource() {
-	printMemoryUsage();
+	std::cout << "\nHO";
 	TextureCrearPartidaOff.loadFromFile("assets/image/Game/CrearPartidaOff.png");
 	TextureCrearPartidaOn.loadFromFile("assets/image/Game/CrearPartidaOn.png");
 	TextureUnirse.loadFromFile("assets/image/Game/unirse1encendido.png");
@@ -51,7 +60,7 @@ void IniciarPartida::resource() {
 void IniciarPartida::update() {
 	Valida = false;
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-	
+	std::cout << "\nHO";
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
 
