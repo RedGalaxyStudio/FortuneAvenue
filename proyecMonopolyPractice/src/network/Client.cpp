@@ -5,7 +5,9 @@
 #include <iostream>
 
 
-Client::Client() : client(nullptr), peer(nullptr), SMessageHandler(new ServerMessageHandler(clientData)){
+Client::Client() : client(nullptr), peer(nullptr){
+	clientData = new ClientData();
+	SMessageHandler = new ServerMessageHandler(clientData);
 	clientData->running=false;
     clientData->isConnected=false;
 	clientData->lastRollResult = 0;
