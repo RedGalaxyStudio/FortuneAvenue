@@ -185,12 +185,12 @@ public :
 				ok = 1;
 				clock.restart();
 				
-				std::unique_lock<std::mutex> lock(client->mtx);
-				client->cv.wait(lock, [] { return espera; }); 
+				std::unique_lock<std::mutex> lock(client->clientData->mtx);
+				client->clientData->cv.wait(lock, [] { return espera; });
 
 				
-				faceIndex = client->lastRollResult;
-				client->lastRollResult = -1;
+				faceIndex = client->clientData->lastRollResult;
+				client->clientData->lastRollResult = -1;
 				espera = false;
 				
 			}
@@ -204,9 +204,9 @@ public :
 
 		
 		if (rolldiceJugador) {
-			std::unique_lock<std::mutex> lock(client->mtx);
-			while (client->lastRollResult == -1) {
-				client->cv.wait(lock);
+			std::unique_lock<std::mutex> lock(client->clientData->mtx);
+			while (client->clientData->lastRollResult == -1) {
+				client->clientData->cv.wait(lock);
 			}
 
 			DiceSound.play();
@@ -218,8 +218,8 @@ public :
 			ok = 1;
 			clock.restart();
 
-			faceIndex = client->lastRollResult;
-			client->lastRollResult = -1;
+			faceIndex = client->clientData->lastRollResult;
+			client->clientData->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
 			rolldiceJugador = false;

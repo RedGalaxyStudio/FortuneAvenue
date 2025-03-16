@@ -9,6 +9,7 @@
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
 using json = nlohmann::json;
+#include "OnlineVars.hpp"
 
 Nulo::Nulo() : window(nullptr), client(nullptr), IndexCAsa(-1) {}
 
@@ -76,7 +77,7 @@ void Nulo::Update() {
 
         window->display();
     }
-    client->turnopermitido++;
+    turnopermitido++;
     client->networkMessage.endTurn();
     nular = true;
   

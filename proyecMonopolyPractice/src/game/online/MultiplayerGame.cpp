@@ -3,6 +3,7 @@
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
 #include "../../ui/ResourceGeneral.hpp"
+#include "OnlineVars.hpp"
 MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); 
 
@@ -411,7 +412,7 @@ void MultiplayerGame::update() {
 	animacionRuleta = false;
 	InicioPartida();
 
-	while (window->isOpen() && !client->juegoTerminado) {
+	while (window->isOpen() && !juegoTerminado) {
 
 		Event();
 		
@@ -429,8 +430,8 @@ void MultiplayerGame::update() {
 			animacionRuleta = false;
 			animacionIniciada = true;
 		}
-		if (client->giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
-			client->giroActivo = false;
+		if (giroActivo == true && animacionRuleta == true && ruleta_draw && TempoAnimacion.getElapsedTime().asSeconds() >= 4.0f) {
+			giroActivo = false;
 			ruleta_draw = false;
 			eventoActivo = false;
 			animacionIniciada = false;
@@ -485,17 +486,17 @@ void MultiplayerGame::update() {
 
 			case 2:
 
-				if (IndexTurn == client->playerIndex) {
+				if (IndexTurn == playerIndex) {
 					client->networkMessage.sendEventTax();
 					impuesto_draw = true;
 					turn_impuesto = false;
 					eventoActivo = true;
 					animacionImpuesto = true;
 					{
-						std::unique_lock<std::mutex> lock(client->impuestoMutex);
-						client->impuestoCondVar.wait(lock, [this] { return client->impuestoMessageReceived; });
+						std::unique_lock<std::mutex> lock(client->clientData->impuestoMutex);
+						client->clientData->impuestoCondVar.wait(lock, [this] { return client->clientData->impuestoMessageReceived; });
 
-						client->impuestoMessageReceived = false;
+						client->clientData->impuestoMessageReceived = false;
 					}
 					impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
@@ -521,7 +522,7 @@ void MultiplayerGame::update() {
 		}
 	
 
-		if (client->turnopermitido != 0 && nular == false) {
+		if (turnopermitido != 0 && nular == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(spriteMapa);
@@ -620,7 +621,7 @@ void MultiplayerGame::update() {
 
 	}
 
-	if (window->isOpen() && client->juegoTerminado) {
+	if (window->isOpen() && juegoTerminado) {
 		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
@@ -754,8 +755,8 @@ void MultiplayerGame::DrawGameRuleta() {
 	renderedSprite.setTexture(renderTexture.getTexture());
 
 	window->draw(renderedSprite);
-	ruleta->draw(*window, deltaTime, client->giroActivo);
-	if (!client->giroActivo && turn) {
+	ruleta->draw(*window, deltaTime, giroActivo);
+	if (!giroActivo && turn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		if (increasing) {
@@ -936,10 +937,10 @@ void MultiplayerGame::DrawGame() {
 						eventoActivo = true;
 						animacionImpuesto = true;
 						{
-							std::unique_lock<std::mutex> lock(client->impuestoMutex);
-							client->impuestoCondVar.wait(lock, [this] { return client->impuestoMessageReceived; });
+							std::unique_lock<std::mutex> lock(client->clientData->impuestoMutex);
+							client->clientData->impuestoCondVar.wait(lock, [this] { return client->clientData->impuestoMessageReceived; });
 
-							client->impuestoMessageReceived = false;
+							client->clientData->impuestoMessageReceived = false;
 						}
 						impuestoCasa = playerInfos[IndexTurn].impuesto - 50;
 
@@ -965,10 +966,10 @@ void MultiplayerGame::DrawGame() {
 		eventoActivo = true;
 
 		{
-			std::unique_lock<std::mutex> lock(client->ruletaMutex);
-			client->ruletaCondVar.wait(lock, [this] { return client->ruletaMessageReceived; });
+			std::unique_lock<std::mutex> lock(client->clientData->ruletaMutex);
+			client->clientData->ruletaCondVar.wait(lock, [this] { return client->clientData->ruletaMessageReceived; });
 
-			client->ruletaMessageReceived = false;
+			client->clientData->ruletaMessageReceived = false;
 		}
 
 		ruleta->trurntrue();
@@ -1062,7 +1063,7 @@ void MultiplayerGame::DrawGame() {
 	if (!chatOn)
 	{
 		window->draw(SpriteChat);
-		if(client->Nmsg){
+		if(client->clientData->Nmsg){
 			window->draw(Notifi);
 		}
 	}

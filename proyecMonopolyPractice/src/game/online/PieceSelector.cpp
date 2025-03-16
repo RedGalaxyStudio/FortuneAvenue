@@ -9,7 +9,7 @@
 #include <thread>
 #include <atomic>
 #include "Chat.hpp"
-
+#include "OnlineVars.hpp"
 
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
 	: window(windowRef),client(clientRef), selectedPiece(-1) {
@@ -243,13 +243,13 @@ void PieceSelector::updateSelection() {
 							}
 							newSelection = &pieces[i];
 
-							playersGame[client->playerIndex].PieceSelect.setTexture(piecesTextures[i], true); 
-							playersGame[client->playerIndex].PieceSelect.setScale(pieces[i].getScale()); 
-							playersGame[client->playerIndex].PieceSelect.setOrigin(pieces[i].getOrigin());  
-							playersGame[client->playerIndex].PieceSelect.setColor(sf::Color::White); 
-							playersGame[client->playerIndex].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							playersGame[playerIndex].PieceSelect.setTexture(piecesTextures[i], true); 
+							playersGame[playerIndex].PieceSelect.setScale(pieces[i].getScale()); 
+							playersGame[playerIndex].PieceSelect.setOrigin(pieces[i].getOrigin());  
+							playersGame[playerIndex].PieceSelect.setColor(sf::Color::White); 
+							playersGame[playerIndex].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
 							pieces[i].setColor(sf::Color(248, 134, 255)); 
-							playerInfos[client->playerIndex].indexPiece = i;
+							playerInfos[playerIndex].indexPiece = i;
 							client->networkMessage.playerChangedPiece(i);
 				
 							
@@ -302,23 +302,23 @@ void PieceSelector::updateSelection() {
 			}
 
 		}
-		if (client->agregardor) {
+		if (client->clientData->agregardor) {
 			botonCheck1.spriteAsig(playersGame[UsuariosActivos[0]].Check);
-			client->agregardor = false;
+			client->clientData->agregardor = false;
 			Agregado = true;
 
 		}
 
 
-		if(client->disconnecte==true){
-			client->disActiv = true;
+		if(client->clientData->disconnecte==true){
+			client->clientData->disActiv = true;
 			{
-				std::unique_lock<std::mutex> lock(client->mtex);
-				client->cvDis.wait(lock, [this] { return client->eventOccurred; }); 
+				std::unique_lock<std::mutex> lock(client->clientData->mtex);
+				client->clientData->cvDis.wait(lock, [this] { return client->clientData->eventOccurred; });
 			}
-			client->disconnecte = false;
-			client->disActiv = false;
-			client->eventOccurred = false;
+			client->clientData->disconnecte = false;
+			client->clientData->disActiv = false;
+			client->clientData->eventOccurred = false;
 		}
 		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
 	
@@ -352,13 +352,13 @@ void PieceSelector::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		//std::cout << "\nCplayerIndex:" << CplayerIndex << " client->playerIndex:"<< client->playerIndex;
-		if (CplayerIndex != client->playerIndex && CplayerIndex != -1) {
+		//std::cout << "\nCplayerIndex:" << CplayerIndex << " playerIndex:"<< playerIndex;
+		if (CplayerIndex != playerIndex && CplayerIndex != -1) {
 
 
 			updatePlayerPieceSelection(playerInfos[CplayerIndex].indexPiece);
 			CplayerIndex = -1;
-			client->cvExisting.notify_all();
+			client->clientData->cvExisting.notify_all();
 
 		}
 	

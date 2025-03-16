@@ -27,7 +27,10 @@ private:
     std::vector<std::string> textureAvatarsFilePath;
     // Texturas y sprites
     sf::Texture ckeck;
+    int selectedIndex = -1;
     sf::Sprite spriteCkeck;
+    std::string imagePath;
+    std::string projectPath=""; // Guarda la ruta original
 
     sf::CircleShape* selectedAvatar = nullptr; 
     sf::Sprite SpriteFondoMenu;

@@ -184,33 +184,20 @@ public:
 
 
 	};
-	void loopP()
-	{
-
-
-		if (rolldicePlayer) {
-			//std::unique_lock<std::mutex> lock(client->mtx);
-
-			//while (client->lastRollResult == -1) {
-			//	client->cv.wait(lock);
-			//}
-
-			DicesSound.play();
-			updateDiceAppearance();
-			eventStarted = true;
-
-			mouseStart.x = rand() % 400 + 1;
-			mouseStart.y = rand() % 600 + 1;
-			ok = 1;
-			clock.restart();
-
-			faceIndex = 1;//client->lastRollResult;
-			//client->lastRollResult = -1;
-			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
-			wait = false;
-			rolldicePlayer = false;
-			secondTurn = false;
-		}
+	void loopP(){
+		turn_diceB = false;
+		DicesSound.play();
+		updateDiceAppearance();
+		eventStarted = true;
+		mouseStart.x = rand() % 400 + 1;
+		mouseStart.y = rand() % 600 + 1;
+		ok = 1;
+		clock.restart();
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(1, 6);
+		faceIndex = dis(gen);
+		
 	};
 
 
@@ -231,7 +218,6 @@ public:
 				float alfaY = atan2f(dy, disP1);
 
 				cube->rotate(alfaY, alfaX, 0);
-				std::cout << "\nhoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo";
 				cube->draw(WidthW, HeightH, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
@@ -241,7 +227,6 @@ public:
 			else {
 
 				cube->resetPosition(WidthW, HeightH,faceIndex);
-				std::cout << "hooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiioooooo";
 				cube->draw(WidthW, HeightH, static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
