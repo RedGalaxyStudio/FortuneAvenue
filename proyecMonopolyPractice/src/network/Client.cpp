@@ -5,21 +5,21 @@
 #include <iostream>
 
 
-Client::Client() : client(nullptr), peer(nullptr){
+Client::Client() : client(nullptr), peer(nullptr) {
 	clientData = new ClientData();
 	SMessageHandler = new ServerMessageHandler(clientData);
-	clientData->running=false;
-    clientData->isConnected=false;
+	clientData->running = false;
+	clientData->isConnected = false;
 	clientData->lastRollResult = 0;
 	turnopermitido = 0;
 	accionCompra = false;
-	clientData->anguloActualrule=0.f;
+	clientData->anguloActualrule = 0.f;
 	clientData->casasCargadas = false;
 	decelerationRateActi = 0.f;
 	clientData->disActiv = false;
 	clientData->disconnecte = false;
 	giroActivo = false;
-	initialSpeedActi=0.f;
+	initialSpeedActi = 0.f;
 	//std::cout << "\n[DEBUG] Constructor: Dirección de client: " << std::hex << reinterpret_cast<uintptr_t>(client);
 }
 std::string generateRoomCode() {
@@ -34,23 +34,7 @@ std::string generateRoomCode() {
 
 	return code;
 }
-bool Client::c_empty(Nodo* frente) {
-	return (frente == NULL) ? true : false;
-}
-void Client::suprim(Nodo*& frente, Nodo*& fin) {
-	ENetPacket* n = frente->dato;
-	Nodo* aux = frente;
 
-	SMessageHandler->handleServerMessage(n);
-	if (frente == fin) {
-		frente = NULL;
-		fin = NULL;
-	}
-	else {
-		frente = frente->siguiente;
-	}
-	delete aux;
-}
 Client::~Client() {
 	disconnect();
 	if (client) {
@@ -88,21 +72,7 @@ bool Client::initialize() {
 
 	return true;
 }
-void Client::insertC(Nodo*& frente, Nodo*& fin, ENetPacket* n) {
-	Nodo* nuevo_nodo = new Nodo();
 
-	nuevo_nodo->dato = n;
-	nuevo_nodo->siguiente = NULL;
-
-	if (c_empty(frente)) {
-		frente = nuevo_nodo;
-	}
-	else {
-		fin->siguiente = nuevo_nodo;
-	}
-
-	fin = nuevo_nodo;
-}
 void Client::run() {
 	clientData->running = true;
 	while (clientData->running) {
@@ -110,9 +80,8 @@ void Client::run() {
 		while (enet_host_service(client, &event, 100) > 0) {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
-
-				insertC(frente, fin, event.packet);
-				enet_packet_destroy(event.packet);
+				std::cout << "\nuuuuuuuuuuuiwfijjiwejdfewijfwijfoiewjefiwuuuuuuu";
+				packetQueue.push(event.packet);
 				break;
 			}
 			case ENET_EVENT_TYPE_DISCONNECT:
@@ -127,8 +96,12 @@ void Client::run() {
 void Client::process() {
 	clientData->running = true;
 	while (clientData->running) {
-		if (frente != NULL) {
-			suprim(frente, fin);
+		if (!packetQueue.empty()) {
+			ENetPacket* n = packetQueue.front();  // Obtener el primer paquete
+			packetQueue.pop();  // Eliminar el paquete de la cola
+			std::cout << "\nuuuuuuuuuuuuuuuuuuwwwwwwwwwwwww";
+			SMessageHandler->handleServerMessage(n);  // Procesar el paquete con tu manejador
+			enet_packet_destroy(n);  // Liberar el paquete después de procesarlo
 		}
 
 	}
