@@ -283,14 +283,15 @@ void PieceSelectOff::updateSelection() {
 
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+					
 					playClickSound();
-					cierre = true;
+					//cierre = true;
 				
 
-						playerGameOff.clear();
-						playerGameInfo.clear();
-						ActiveUsers.clear();
-
+						//playerGameOff.clear();
+						//playerGameInfo.clear();
+						//ActiveUsers.clear();
+					return;
 				}
 
 			}
