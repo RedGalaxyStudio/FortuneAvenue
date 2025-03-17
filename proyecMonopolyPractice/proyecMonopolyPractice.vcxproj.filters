@@ -175,6 +175,9 @@
     <ClCompile Include="src\network\ClientData.cpp">
       <Filter>src\network</Filter>
     </ClCompile>
+    <ClCompile Include="loading.cpp">
+      <Filter>src\game\online</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\ButtonG.hpp">
@@ -329,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="src\network\ClientData.hpp">
       <Filter>src\network</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.hpp">
+      <Filter>src\game\online</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
