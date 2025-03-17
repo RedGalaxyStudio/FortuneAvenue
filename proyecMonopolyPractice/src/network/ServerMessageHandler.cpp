@@ -40,8 +40,22 @@ void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
 }
 
 void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
-	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
+	std::cout << "\nuuuuuuuuuuuuuuuuuu11111111111111111111111";
 
+
+	if (preprocces == nullptr || preprocces->data == nullptr) {
+		std::cerr << "Error: preprocces o preprocces->data es nulo." << std::endl;
+		return;
+	}
+
+	// Verificar que la longitud de los datos sea válida
+	if (preprocces->dataLength == 0) {
+		std::cerr << "Error: los datos recibidos tienen longitud 0." << std::endl;
+		return;
+	}
+
+	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
+	std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
 	std::cout << "\nMensaje recibido: " << message << std::endl;
 	if (message.rfind("YOUR_TURN", 0) == 0) {
 
