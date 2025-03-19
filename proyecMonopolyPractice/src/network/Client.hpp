@@ -5,6 +5,7 @@
 //#include "ResourceGlobal.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <queue>
 #include <winsock2.h>
 #include "NetworkMessage.hpp"
 #include "ServerMessageHandler.hpp"
@@ -22,16 +23,9 @@
 
 class Client {
 public:
-	struct Nodo {
-		ENetPacket* dato;
-		Nodo* siguiente;
-	};
+	std::queue<ENetPacket*> packetQueue;
 	void process();
-	void insertC(Nodo*& frente, Nodo*& fin, ENetPacket* n);
-	Nodo* frente = nullptr;
-	Nodo* fin = nullptr;
 	Client();
-	bool c_empty(Nodo* frente);
 	~Client();
 	void run();
 	bool initialize();
@@ -41,8 +35,6 @@ public:
 	void disconnect();
 	ENetPeer* peer;
 	ENetHost* client;
-	void suprim(Nodo*& frente, Nodo*& fin);
-
 	NetworkMessage networkMessage;
 	ClientData* clientData;
 private:
