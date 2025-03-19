@@ -182,6 +182,10 @@ void MovePiecesO::updateCAmbioCasilla() {
 		caminoActual--;
 	
 	}
+	if (secondTurn) {
+
+		GM.bot.resetTCAM();
+	}
 
 	while (finalCamino == true) {
 	
@@ -190,28 +194,26 @@ void MovePiecesO::updateCAmbioCasilla() {
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 		while (window->pollEvent(event)) {
+			if (event.type == sf::Event::Closed ||
+				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
-			if (firstTurn) {
-				if (event.type == sf::Event::Closed ||
-					(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-
-					renderTexture.clear();
-					renderTexture.draw(spriteBackgroundG);
-					renderTexture.draw(MapSprite);
-					for (int i = 0; i < 4; i++)
-					{
-						renderTexture.draw(playerGameOff[i].NamePlayer);
-						renderTexture.draw(playerGameOff[i].boxPlayer);
-						renderTexture.draw(playerGameOff[i].MarcoPlayer);
-						renderTexture.draw(playerGameOff[i].AvatarPlayer);
-					}
-					renderTexture.draw(spriteX);
-					renderTexture.draw(overlay);
-					renderTexture.display();
-					Menup.MenuSalir(nullptr);
-
+				renderTexture.clear();
+				renderTexture.draw(spriteBackgroundG);
+				renderTexture.draw(MapSprite);
+				for (int i = 0; i < 4; i++)
+				{
+					renderTexture.draw(playerGameOff[i].NamePlayer);
+					renderTexture.draw(playerGameOff[i].boxPlayer);
+					renderTexture.draw(playerGameOff[i].MarcoPlayer);
+					renderTexture.draw(playerGameOff[i].AvatarPlayer);
 				}
+				renderTexture.draw(spriteX);
+				renderTexture.draw(overlay);
+				renderTexture.display();
+				Menup.MenuSalir(nullptr);
 
+			}
+			if (firstTurn) {
 
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -271,7 +273,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 			}
 		}
 
+		if (secondTurn) {
 
+			if (GM.bot.roll()) {
+
+				RoadOption = GM.bot.eleccion();
+
+			}
+		}
 
 
 		if (!firstTurn) {

@@ -8,6 +8,7 @@
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/ResourceGeneral.hpp"
+#include "OnlineVars.hpp"
 
 using json = nlohmann::json;
 
@@ -79,9 +80,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
 	readData(pp, cc, "src/ui/quad.vtk");
-
+	
 	IndexCAsa += 1;
-
+	if (IndexCAsa >= playerInfos[index].casasPorJugador.size()) {
+		IndexCAsa = 0;
+	}
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
 
 	for (int i = 0; i < 6; i++) {
@@ -150,9 +153,9 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			if (turn) {
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && cellQua[0].finAnimacion == true) {
-					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[0].money >= houses[playerInfos[0].casasPorJugador[IndexCAsa]].costo) {
+					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[UsuariosActivos[0]].money >= houses[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						client->networkMessage.buyHouse(playerInfos[0].casasPorJugador[IndexCAsa]);
+						client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
@@ -162,6 +165,8 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 						playerInfos[UsuariosActivos[0]].numCasas += 1;
 						playersGame[UsuariosActivos[0]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[0]].numCasas));
 						cierre = true;
+						playerInfos[UsuariosActivos[0]].casasPorJugador.erase(playerInfos[UsuariosActivos[0]].casasPorJugador.begin() + IndexCAsa);
+						IndexCAsa--;
 					}
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
@@ -182,11 +187,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 
 		window->setMouseCursor(*currentCursor);
 		window->clear();
-		if (client->accionCompra) {
+		if (accionCompra) {
 
 			playClickSound();
 			cierre = true;
-			client->accionCompra = false;
+			accionCompra = false;
 		}
 		window->draw(renderedSprite);
 

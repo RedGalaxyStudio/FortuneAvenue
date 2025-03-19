@@ -1,5 +1,7 @@
 #include "NetworkMessage.hpp"
 
+#include <fstream>
+
 
 NetworkMessage::NetworkMessage() :peer(nullptr) {}
 
@@ -13,6 +15,22 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 	if (!packet) return;
 	if (enet_peer_send(Peer, 0, packet) < 0) return;
 	enet_host_flush(Peer->host);
+}
+void NetworkMessage::cargarImagen(const std::string& ruta) {
+	sf::Image imagen;
+	if (!imagen.loadFromFile(ruta)) {
+		throw std::runtime_error("No se pudo cargar la imagen");
+	}
+
+	std::vector<uint8_t> buffer;
+	if (!imagen.saveToMemory(buffer, "png")) {
+		throw std::runtime_error("No se pudo convertir la imagen a PNG");
+	}
+
+	ENetPacket* packet = enet_packet_create(buffer.data(), buffer.size(), ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(peer->host);
+
 }
 void NetworkMessage::sendSafeInvestment() {
 	std::string message = "INVERCIONSEGURA";
@@ -81,4 +99,13 @@ void NetworkMessage::playerChangedPiece(int pieceIndex) {
 void NetworkMessage::playerReady() {
 	std::string message = "PLAYER_READY";
 	sendMessage(peer, message);
+}
+void NetworkMessage::llegadaFinal() {
+
+	std::string message = "LLEGUEFINAL";
+	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+	enet_host_flush(peer->host);
+
+
 }

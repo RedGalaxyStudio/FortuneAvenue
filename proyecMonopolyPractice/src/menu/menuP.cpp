@@ -557,7 +557,7 @@ void menuP::MenuSalir(Client* client) {
 		while (window->pollEvent(event)) {
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-				if (client != nullptr && client->running && client->peer != nullptr) {
+				if (client != nullptr && client->clientData->running && client->peer != nullptr) {
 					client->disconnect();
 				}
 				window->setActive(false);
@@ -577,7 +577,7 @@ void menuP::MenuSalir(Client* client) {
 				if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 
-					if (client != nullptr && client->running && client->peer != nullptr) {
+					if (client != nullptr && client->clientData->running && client->peer != nullptr) {
 						client->disconnect();
 					}
 					window->setActive(false);

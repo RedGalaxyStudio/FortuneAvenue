@@ -20,14 +20,19 @@ public:
     void saveSelectedAvatar();
     void loadSelectedAvatar();
     void loadAvatars();
+    void fun();
 private:
     sf::RenderWindow *window;
+    sf::Image originalImage;
     std::vector<sf::CircleShape> avatars;
     std::vector<sf::Texture> avatarTextures;
     std::vector<std::string> textureAvatarsFilePath;
     // Texturas y sprites
     sf::Texture ckeck;
+    int selectedIndex = -1;
     sf::Sprite spriteCkeck;
+    std::string imagePath;
+    std::string projectPath=""; // Guarda la ruta original
 
     sf::CircleShape* selectedAvatar = nullptr; 
     sf::Sprite SpriteFondoMenu;

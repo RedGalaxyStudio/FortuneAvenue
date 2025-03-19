@@ -6,7 +6,7 @@
 
 
 sf::Texture &textureBoxPerfilOff= textureBox;
-
+bool BotTurn=false;
 std::vector<sf::Texture> TextureHouse; //texturecasa
 sf::Texture TextureMoney1; //texturecash
 sf::Texture TextureBuilding; //texturehome
@@ -61,6 +61,7 @@ std::vector<int> ActiveUsers;
 bool firstTurn;
 bool secondTurn;
 bool turn_dice;
+bool turn_diceB;
 bool turn_roulette;
 bool turn_house;
 bool turn_Tax;

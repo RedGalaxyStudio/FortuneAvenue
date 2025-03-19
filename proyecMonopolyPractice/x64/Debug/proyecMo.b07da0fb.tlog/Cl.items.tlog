@@ -1,3 +1,4 @@
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\loading.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\loading.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\cinematic\Cinematic.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Cinematic.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\core\ObjetosGlobal.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ObjetosGlobal.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\core\ResourceGlobal.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ResourceGlobal.obj
@@ -19,6 +20,7 @@ C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractic
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\MovePieces.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\MovePieces.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\MultiplayerGame.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\MultiplayerGame.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\nulo.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\nulo.obj
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\OnlineVars.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\OnlineVars.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\PieceSelector.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\PieceSelector.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\ResourceGame.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ResourceGame.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\game\online\Ruleta.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Ruleta.obj
@@ -29,6 +31,8 @@ C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractic
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\menu\IniciaUser.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\IniciaUser.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\menu\menuP.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\menuP.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\network\Client.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\Client.obj
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\network\ClientData.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ClientData.obj
+C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\network\ServerMessageHandler.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ServerMessageHandler.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\network\NetworkMessage.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\NetworkMessage.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\settings\SettingsManager.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\SettingsManager.obj
 C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\src\ui\ButtonG.cpp;C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\proyecMonopolyPractice\x64\Debug\ButtonG.obj

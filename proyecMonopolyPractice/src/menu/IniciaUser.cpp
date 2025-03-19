@@ -10,7 +10,16 @@
 #include "../../libs/nlohmann/json.hpp"
 #include <windows.h>
 #include <commdlg.h>
+#include <filesystem>
+
+
 using json = nlohmann::json;
+
+sf::RectangleShape createCorner(sf::Color color) {
+	sf::RectangleShape corner(sf::Vector2f(10, 10));
+	corner.setFillColor(color);
+	return corner;
+}
 
 
 std::string wideToString(const std::wstring& wideStr) {
@@ -39,10 +48,6 @@ std::string openFileDialog() {
 	}
 	return "";
 }
-
-
-
-
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
 	: window(&windowRef), currentIndex(0) {
 	Resource();
@@ -51,6 +56,8 @@ IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
 IniciaUser::~IniciaUser() {
 }
 void IniciaUser::Resource() {
+	projectPath = std::filesystem::current_path().string(); // Guarda la ruta original
+
 	SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 void IniciaUser::Update() {
@@ -68,7 +75,6 @@ void IniciaUser::Update() {
 	}
 
 }
-
 void IniciaUser::UpdateEdit() {
 
 
@@ -87,13 +93,8 @@ void IniciaUser::UpdateEdit() {
 }
 void IniciaUser::IniciAcion() {
 	spriteCkeck.setPosition(850, 70);
-
-
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-
-
-
 	float deltaScroll = 0.0f;
 	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
 	const float avatarWidth = 128.0f;
@@ -101,32 +102,19 @@ void IniciaUser::IniciAcion() {
 	const float avatarSeparation = 28.0f;
 	const float visibleAreaHeight = 248.0f;
 	const float maxScrollOffset = 156.0f;
-
 	float widthSeparation = avatarWidth + avatarSeparation;
 	float heightSeparation = avatarHeight + avatarSeparation;
-
 	recua.setPosition(400, 112);
 	TextBox textBox(496, 50, "Ingresa tu nombre: ");
 	textBox.setPosition(496, 50);
-
 	const float totalContentHeight = 440.0f;
 	const float scrollbarHeight = 340.0f;
-
-
 	float proportion = visibleAreaHeight / totalContentHeight;
 	float thumbHeight = scrollbarHeight * proportion;
-
-
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
-
-
 	Scrollbar scrollbar(340, thumbHeight, 14);
-
 	scrollbar.setPosition(1260, 340);
-
-
-
 	selectedAvatarCopy.setPosition(400, 112);
 	for (int i = 0; i < avatars.size(); i++) {
 		sf::Vector2f pos = avatars[i].getPosition();
@@ -134,9 +122,6 @@ void IniciaUser::IniciAcion() {
 	}
 	float avatarYOffset = 0.0f;
 	bool salir = false;
-
-
-
 	std::vector<sf::CircleShape> circles;
 	std::vector<sf::Color> colors = {
 		sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Yellow,
@@ -145,24 +130,23 @@ void IniciaUser::IniciAcion() {
 		sf::Color(139, 69, 19), // Marrón
 		sf::Color(255, 192, 203) // Rosa
 	};
-
 	for (size_t i = 0; i < 10; ++i) {
 		sf::CircleShape circle(30);
 		circle.setFillColor(colors[i]);
 		circle.setPosition(20 + i * 120, 300); // Distribuidos horizontalmente
 		circles.push_back(circle);
 	}
-
 	sf::Color selectedBackgroundColor = sf::Color::White; // Color por defecto
-
 	sf::Texture tempTexture;
-
 	sf::Image croppedImage;
 	bool hasTransparency = false;
-
 	sf::Image imageWithBackground;
-	sf::CircleShape colores=selectedAvatarCopy;
+	sf::CircleShape colores = selectedAvatarCopy;
 	colores.setFillColor(sf::Color::Transparent);
+
+
+
+
 
 	while (window->isOpen() && !salir) {
 		mousePosition = sf::Mouse::getPosition(*window);
@@ -254,38 +238,6 @@ void IniciaUser::IniciAcion() {
 					if (circles[i].getGlobalBounds().contains(mousePosFloat)) {
 						selectedBackgroundColor = colors[i];
 						colores.setFillColor(selectedBackgroundColor);
-
-						/*if (hasTransparency) {
-
-
-							sf::RenderTexture renderTexturo;
-
-							if (!renderTexturo.create(128, 128)) {
-								std::cerr << " Error al crear RenderTexture\n";
-								return;
-							}
-							
-							sf::Sprite sprite(tempTexture);
-
-							// Dibujar la imagen escalada en el RenderTexture
-							renderTexturo.clear(selectedBackgroundColor);
-							renderTexturo.draw(sprite);
-							renderTexturo.display();
-
-
-							croppedImage = renderTexturo.getTexture().copyToImage();
-
-							croppedImage.saveToFile("temp_crop_filled.png");
-							std::cout << "HOLa";
-							textselectedAvatarCopy.loadFromFile("temp_crop_filled.png");
-							// Guardar y cargar la textura recortada
-
-							// Crear el CircleShape con la textura
-							newSelection = new sf::CircleShape(64);
-							newSelection->setTexture(&textselectedAvatarCopy);
-
-						}
-						selectedAvatarCopy.setTexture(&textselectedAvatarCopy);*/
 					}
 				}
 
@@ -294,38 +246,34 @@ void IniciaUser::IniciAcion() {
 					if (avatars[i].getGlobalBounds().contains(mousePosFloat)) {
 						if (i == 0) {
 
-							std::string imagePath = openFileDialog();
+							imagePath = openFileDialog();
+							std::filesystem::current_path(projectPath);
 							if (imagePath.empty()) {
 								std::cout << "No se seleccionó ninguna imagen.\n";
 								return;
 							}
 
-							sf::Image originalImage;
+
 							if (!originalImage.loadFromFile(imagePath)) {
 								std::cerr << "Error al cargar la imagen\n";
 								return;
 							}
 
-
-
-
-
-
 							sf::Vector2u imgSize = originalImage.getSize();
-							
-							
+
+
 							sf::RenderTexture renderTexturo;
 							// Si la imagen es cuadrada, solo escalar
 							if (imgSize.x == imgSize.y) {
-								
+
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
 									return;
 								}
-								
+
 								tempTexture.loadFromImage(originalImage);
 								sf::Sprite sprite(tempTexture);
-								
+
 								// Escalar la imagen para que encaje en 128x128 sin deformarse
 								float scale = std::min(128.f / imgSize.x, 128.f / imgSize.y);
 								sprite.setScale(scale, scale);
@@ -342,40 +290,10 @@ void IniciaUser::IniciAcion() {
 
 							}
 							else {
-								// Si no es cuadrada, permitir al usuario elegir una región
-								sf::RenderWindow window(sf::VideoMode(400, 400), "Selecciona el área");
-
-								sf::Texture tempTexture;
-								tempTexture.loadFromImage(originalImage);
-								sf::Sprite sprite(tempTexture);
-
-								// Aquí puedes permitir que el usuario seleccione una región
+								fun();
 								sf::IntRect selectedRegion(0, 0, 128, 128);
-
-								while (window.isOpen()) {
-									sf::Event event;
-									while (window.pollEvent(event)) {
-										if (event.type == sf::Event::Closed) {
-											window.close();
-										}
-										// Aquí podrías agregar lógica para permitir al usuario mover la selección
-									}
-
-									window.clear();
-									window.draw(sprite);
-									// Dibujar la selección con un rectángulo de 128x128
-									sf::RectangleShape selectionBox(sf::Vector2f(128, 128));
-									selectionBox.setPosition(selectedRegion.left, selectedRegion.top);
-									selectionBox.setFillColor(sf::Color(255, 255, 255, 50)); // Transparente
-									selectionBox.setOutlineThickness(2);
-									selectionBox.setOutlineColor(sf::Color::Red);
-									window.draw(selectionBox);
-
-									window.display();
-								}
-
 								// Recortar la imagen
-							
+
 								croppedImage.create(128, 128);
 								croppedImage.copy(originalImage, 0, 0, selectedRegion);
 
@@ -406,17 +324,19 @@ void IniciaUser::IniciAcion() {
 									}
 								}
 							}
-							
-							croppedImage.saveToFile("temp_crop.png");
+							std::cout << "jokokok\n:" << projectPath;
+							std::filesystem::current_path(projectPath);
+							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
+							croppedImage.saveToFile(dirPath);
 							std::cout << "HOLa";
-							textselectedAvatarCopy.loadFromFile("temp_crop.png");
-							// Guardar y cargar la textura recortada
-
-							// Crear el CircleShape con la textura
+							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
+							selectedIndex = 0;
 						}
+
 						else {
+							selectedIndex = i;
 							newSelection = &avatars[i];
 							break;
 
@@ -461,7 +381,7 @@ void IniciaUser::IniciAcion() {
 
 
 		window->draw(SpriteFondoMenuAvar);
-		
+
 
 		if (selectedAvatar != nullptr) {
 			window->draw(colores);
@@ -480,21 +400,23 @@ void IniciaUser::IniciAcion() {
 	}
 }
 void IniciaUser::saveSelectedAvatar() {
+	std::filesystem::current_path(projectPath); // Asegura que estamos en la ruta original del proyecto
+
 	if (selectedAvatar != nullptr) {
 
-		int selectedIndex = -1;
-		for (int i = 0; i < avatars.size(); ++i) {
-			if (&avatars[i] == selectedAvatar) {
-				selectedIndex = i;
-				break;
-			}
-		}
 
-
+		std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-
+			std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
 			json avatarData;
-			avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
+			if (selectedIndex == 0) {
+				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+			}
+			else {
+
+				avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
+
+			}
 
 			//std::cout << "\ninput1:" << input1;
 			avatarData["username"] = input1;
@@ -522,8 +444,8 @@ void IniciaUser::loadSelectedAvatar() {
 		TextureAvatarPath = avatarData["selected_avatar_path"];
 		input1 = avatarData["username"];
 
-
-		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) loadAvatars();
+		std::cout << "h" << TextureAvatarPath;
+		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) std::cout << "error";//loadAvatars();
 
 		selectedAvatarCopy.setTexture(&TextureAvatarSelec);
 	}
@@ -536,8 +458,6 @@ void IniciaUser::loadAvatars() {
 	avatarTextures.resize(avatarCount);
 	textureAvatarsFilePath.resize(avatarCount);
 
-	printMemoryUsage();
-
 	for (int i = 0; i < avatarCount; i++) {
 
 		textureAvatarsFilePath[i] = "assets/image/Avatars/avatar" + std::to_string(i) + ".png";
@@ -549,7 +469,6 @@ void IniciaUser::loadAvatars() {
 		avatars[i].setRadius(radio);
 		avatars[i].setTexture(&avatarTextures[i]);
 		avatars[i].setOrigin(radio, radio);
-
 
 	}
 
@@ -575,4 +494,263 @@ void IniciaUser::loadAvatars() {
 	Texrecua.loadFromFile("assets/image/Avatars/recua.png");
 	recua.setTexture(Texrecua);
 	recua.setOrigin(65, 65);
+}
+
+
+void IniciaUser::fun() {
+
+
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
+	// Calcular el tamaño de la ventana (2/3 del tamaño de la pantalla)
+	unsigned int windowWidth = desktop.width * 2 / 3;
+	unsigned int windowHeight = desktop.height * 2 / 3;
+
+	// Crear la ventana con el tamaño calculado
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Selecciona el área");
+
+	sf::Texture tempTexture;
+	tempTexture.loadFromImage(originalImage);
+	sf::Sprite sprite(tempTexture);
+
+	// Aquí puedes permitir que el usuario seleccione una región
+	sf::IntRect selectedRegion(0, 0, 128, 128);
+
+	bool dragging = false;
+	sf::Vector2f offset;
+
+
+
+
+
+
+	// Obtener tamaño de la imagen
+	sf::Vector2u imgSize = tempTexture.getSize();
+	sf::RectangleShape selectionBox;
+
+	selectionBox.setPosition(selectedRegion.left, selectedRegion.top);
+	selectionBox.setFillColor(sf::Color(255, 255, 255, 50)); // Transparente
+	selectionBox.setOutlineThickness(2);
+	selectionBox.setOutlineColor(sf::Color::Red);
+
+	// Calcular escalado manteniendo la proporción
+	float scaleX = static_cast<float>(windowWidth) / imgSize.x;
+	float scaleY = static_cast<float>(windowHeight) / imgSize.y;
+	float scale = std::min(scaleX, scaleY);  // Escalar para que todo quepa en la ventana
+
+	sprite.setScale(scale, scale);
+
+	sf::Vector2u imgSizeSprite = sprite.getTexture()->getSize();
+	sf::Vector2f scaleo = sprite.getScale(); // Escala aplicada al sprite
+
+	sf::Vector2f spriteSize(imgSizeSprite.x * scaleo.x, imgSizeSprite.y * scaleo.y);
+
+	if (spriteSize.x >= spriteSize.y) {
+
+
+		selectionBox.setSize(sf::Vector2f(spriteSize.y, spriteSize.y));
+
+
+	}
+	else {
+		selectionBox.setSize(sf::Vector2f(spriteSize.x, spriteSize.x));
+
+	}
+	// Centrar la imagen
+	float offsetX = (windowWidth - imgSize.x * scale) / 2;
+	float offsetY = (windowHeight - imgSize.y * scale) / 2;
+	sprite.setPosition(offsetX, offsetY);
+	// Posición inicial dentro del sprite
+	selectionBox.setPosition(offsetX, offsetY);
+
+	bool resizing = false;
+	int resizingCorner = -1;
+	float enA = selectionBox.getSize().x / 12;
+	float enH = selectionBox.getSize().x / 30;
+	sf::RectangleShape topLeftH(sf::Vector2f(enA, enH));  // Horizontal
+	sf::RectangleShape topLeftV(sf::Vector2f(enH, enA));  // Vertical
+
+	sf::RectangleShape topRightH(sf::Vector2f(enA, enH));
+	sf::RectangleShape topRightV(sf::Vector2f(enH, enA));
+
+	sf::RectangleShape bottomLeftH(sf::Vector2f(enA, enH));
+	sf::RectangleShape bottomLeftV(sf::Vector2f(enH, enA));
+
+	sf::RectangleShape bottomRightH(sf::Vector2f(enA, enH));
+	sf::RectangleShape bottomRightV(sf::Vector2f(enH, enA));
+
+	// Color de las líneas
+	sf::Color cornerColor = sf::Color::Red;
+	topLeftH.setFillColor(cornerColor);
+	topLeftV.setFillColor(cornerColor);
+	topRightH.setFillColor(cornerColor);
+	topRightV.setFillColor(cornerColor);
+	bottomLeftH.setFillColor(cornerColor);
+	bottomLeftV.setFillColor(cornerColor);
+	bottomRightH.setFillColor(cornerColor);
+	bottomRightV.setFillColor(cornerColor);
+
+	std::vector<sf::RectangleShape*> corners = {
+		&topLeftH, &topLeftV, &topRightH, &topRightV,
+		&bottomLeftH, &bottomLeftV, &bottomRightH, &bottomRightV
+	};
+
+
+	sf::Vector2f pos = selectionBox.getPosition();
+	sf::Vector2f size = selectionBox.getSize();
+
+	// Top-left
+	corners[0]->setPosition(pos.x, pos.y);
+	corners[1]->setPosition(pos.x, pos.y);
+
+	// Top-right
+	corners[2]->setPosition(pos.x + size.x - enA, pos.y);
+	corners[3]->setPosition(pos.x + size.x - enH, pos.y);
+
+	// Bottom-left
+	corners[4]->setPosition(pos.x, pos.y + size.y - enH);
+	corners[5]->setPosition(pos.x, pos.y + size.y - enA);
+
+	// Bottom-right
+	corners[6]->setPosition(pos.x + size.x - enA, pos.y + size.y - enH);
+	corners[7]->setPosition(pos.x + size.x - enH, pos.y + size.y - enA);
+	while (window.isOpen()) {
+		sf::Event event;
+		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+		while (window.pollEvent(event)) {
+
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
+			std::cout << "Evento detectado: " << event.type << std::endl;
+			if (event.type == sf::Event::MouseButtonPressed) {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					//sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+
+					std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
+					for (int i = 0; i < 8; ++i) {
+						if (corners[i]->getGlobalBounds().contains(mousePos)) {
+							resizing = true;
+							std::cout << "\nnnnnnnn:::::::::::|";
+							resizingCorner = i;
+							break;
+						}
+					}
+
+					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
+						dragging = true;
+						std::cout << "\nnnnnnnn:::::::::::|";
+						offset = mousePos - selectionBox.getPosition();
+					}
+				}
+			}
+
+
+			// Detectar movimiento del mouse mientras se arrastra
+			if (event.type == sf::Event::MouseMoved) {
+				if (dragging) {
+					//sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
+					//selectionBox.setPosition(mousePos - offset);
+
+					sf::Vector2f newPos = mousePos - offset;
+
+					//**Límites dentro del `sprite`**
+					float minX = offsetX;
+					float minY = offsetY;
+					float maxX = offsetX + imgSize.x * scale - selectionBox.getSize().x;
+					float maxY = offsetY + imgSize.y * scale - selectionBox.getSize().y;
+
+					newPos.x = std::max(minX, std::min(newPos.x, maxX));
+					newPos.y = std::max(minY, std::min(newPos.y, maxY));
+
+					selectionBox.setPosition(newPos);
+				}
+				else if (resizing) {
+					sf::Vector2f newSize = selectionBox.getSize();
+					sf::Vector2f newPos = selectionBox.getPosition();
+
+					float minSize = 50; // Tamaño mínimo
+					float maxSize = std::min(imgSize.x * scale, imgSize.y * scale); // Tamaño máximo
+
+					float diff = 0;
+
+					if (resizingCorner == 0 || resizingCorner == 1) {  // Esquina superior izquierda
+						diff = selectionBox.getPosition().x - mousePos.x;
+						newSize.x += diff;
+						newSize.y += diff;
+						newPos.x -= diff;
+						newPos.y -= diff;
+					}
+					else if (resizingCorner == 2 || resizingCorner == 3) {  // Esquina superior derecha
+						diff = mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
+						newSize.x += diff;
+						newSize.y += diff;
+						newPos.y -= diff; //  Ajustar posición en Y para que la reducción sea hacia abajo
+					}
+					else if (resizingCorner == 4 || resizingCorner == 5) {  // Esquina inferior izquierda
+						diff = selectionBox.getPosition().x - mousePos.x;
+						newSize.x += diff;
+						newSize.y += diff;
+						newPos.x -= diff;
+					}
+					else if (resizingCorner == 6 || resizingCorner == 7) {  // Esquina inferior derecha
+						diff = mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
+						newSize.x += diff;
+						newSize.y += diff;
+					}
+
+					newSize.x = std::max(minSize, std::min(newSize.x, maxSize));
+					newSize.y = newSize.x;  // Mantener cuadrado
+
+					newPos.x = std::max(offsetX, std::min(newPos.x, offsetX + imgSize.x * scale - newSize.x));
+					newPos.y = std::max(offsetY, std::min(newPos.y, offsetY + imgSize.y * scale - newSize.y));
+
+					selectionBox.setSize(newSize);
+					selectionBox.setPosition(newPos);
+
+
+				}
+			}
+			std::cout << "Dragging: " << dragging << " | Resizing: " << resizing << " | MousePos: " << mousePos.x << ", " << mousePos.y << std::endl;
+
+			// Detectar cuando se suelta el botón del mouse
+			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+				dragging = false;
+				resizing = false;
+			}
+		}
+
+
+		sf::Vector2f pos = selectionBox.getPosition();
+		sf::Vector2f size = selectionBox.getSize();
+
+		// Top-left
+		corners[0]->setPosition(pos.x, pos.y);
+		corners[1]->setPosition(pos.x, pos.y);
+
+		// Top-right
+		corners[2]->setPosition(pos.x + size.x - enA, pos.y);
+		corners[3]->setPosition(pos.x + size.x - enH, pos.y);
+
+		// Bottom-left
+		corners[4]->setPosition(pos.x, pos.y + size.y - enH);
+		corners[5]->setPosition(pos.x, pos.y + size.y - enA);
+
+		// Bottom-right
+		corners[6]->setPosition(pos.x + size.x - enA, pos.y + size.y - enH);
+		corners[7]->setPosition(pos.x + size.x - enH, pos.y + size.y - enA);
+
+
+		window.clear();
+		window.draw(sprite);
+
+		window.draw(selectionBox);
+		for (auto& corner : corners) {
+			window.draw(*corner);
+		}
+
+		window.display();
+	}
+
 }
