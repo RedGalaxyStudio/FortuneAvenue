@@ -9,7 +9,8 @@
 #include "../../ui/ButtonG.hpp"
 #include "../../ui/ResourceGeneral.hpp"
 #include "OnlineVars.hpp"
-
+#include <vector>
+#include <algorithm>
 using json = nlohmann::json;
 
 HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
@@ -57,16 +58,40 @@ void HouseBuy::resource() {
 	file >> jsonData;
 
 
+	std::vector<std::pair<int, nlohmann::json>> houseList;
+
+	// Extraer los datos y guardar el número de la casa
 	for (auto& [key, value] : jsonData.items()) {
+		int houseNumber = std::stoi(key.substr(4)); // Extrae el número de "casaX"
+		houseList.push_back({ houseNumber, value });
+	}
+
+	// Ordenar por el número de la casa
+	std::sort(houseList.begin(), houseList.end(), [](const auto& a, const auto& b) {
+		return a.first < b.first;
+		});
+
+	for (auto& [number, value] : houseList) {
 		houseInfo house;
 
 		house.salario = std::stoi(value["salario"].get<std::string>().substr(0, value["salario"].get<std::string>().size() - 1));
 		house.costo = std::stoi(value["costo"].get<std::string>().substr(0, value["costo"].get<std::string>().size() - 1));
 		house.impuesto = std::stoi(value["impuesto"].get<std::string>().substr(0, value["impuesto"].get<std::string>().size() - 1));
+		
+
+		// Imprimir valores antes de agregarlos a la lista
+		std::cout << "Casa: " << number << "\n";
+		std::cout << "  Salario: " << house.salario << "\n";
+		std::cout << "  Costo: " << house.costo << "\n";
+		std::cout << "  Impuesto: " << house.impuesto << "\n";
+		std::cout << "-------------------------\n";
+
 
 		houses.push_back(house);
 	}
 
+
+	
 	sf::FloatRect globalBounds = Xc.getGlobalBounds();
 	Xc.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -104,7 +129,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
-
+	std::cout << "\n::index" << index << "IndexCAsa" << IndexCAsa << "::"<<playerInfos[index].casasPorJugador[IndexCAsa];
 	pp.clear();
 	cc.clear();
 
@@ -155,12 +180,12 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && cellQua[0].finAnimacion == true) {
 					std::cout << "money::  " << playerInfos[UsuariosActivos[0]].money << "::" << houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo;
 					std::cout << "\n" << index;
-					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[index].money >= houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo) {
+					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[UsuariosActivos[0]].money >= houses[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						client->networkMessage.buyHouse(playerInfos[index].casasPorJugador[IndexCAsa]);
+						client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
-						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
+						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]]);
 						VCcompradas.push_back(CasasaCOMPRAR);
 						CsCmpdrsindex.push_back(IndexCAsa);
 

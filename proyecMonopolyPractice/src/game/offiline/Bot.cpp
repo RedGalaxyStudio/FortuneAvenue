@@ -32,6 +32,7 @@ namespace CreatorB {
 		std::unordered_set<size_t> usedIndices;
 		std::vector<std::string> selectedNames;
 
+
 		while (selectedNames.size() < count) {
 			std::uniform_int_distribution<size_t> dist(0, botNames.size() - 1);
 			size_t randomIndex = dist(gen);
@@ -114,10 +115,19 @@ int Bot::eleccion() {
 }
 
 void Bot::resetT() {
-	waitTime = 1 + std::rand() % 5; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 0 + std::rand() % 3; // Número aleatorio entre 1 y 5 segundos
 	clock.restart();
 }
 void Bot::resetTCAM() {
-	waitTime = 2 + std::rand() % 6; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 1 + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
 	clock.restart();
 }
+
+void Bot::resetTRuleta() {
+	waitTime = 1 + std::rand() % 5; 
+}
+void Bot::resetTCAMRuleta() {
+	waitTime = 0 + std::rand() % 3; 
+	clock.restart();
+}
+

@@ -9,8 +9,10 @@
 #include "GameManager.hpp"
 
 class GameManager;
+extern bool giroActivoO;
 
-
+extern float initialSpeedActiO;
+extern float decelerationRateActiO;
 extern bool BotTurn;
 extern GameManager GM;
 extern std::vector<sf::Texture> TextureHouse; //texturecasa
