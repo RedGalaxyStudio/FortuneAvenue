@@ -20,8 +20,10 @@ public:
     void saveSelectedAvatar();
     void loadSelectedAvatar();
     void loadAvatars();
+    void fun();
 private:
     sf::RenderWindow *window;
+    sf::Image originalImage;
     std::vector<sf::CircleShape> avatars;
     std::vector<sf::Texture> avatarTextures;
     std::vector<std::string> textureAvatarsFilePath;

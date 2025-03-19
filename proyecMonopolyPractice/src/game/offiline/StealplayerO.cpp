@@ -125,12 +125,8 @@ void StealplayerO::update() {
                     //client.networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
                     seleccionlista = true;
 
-                }
-               
-
+                }  
             }
-
-            
         }
 
         window->clear();
