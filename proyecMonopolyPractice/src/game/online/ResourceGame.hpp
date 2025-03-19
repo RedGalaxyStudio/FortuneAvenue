@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include "../../network/Client.hpp"
-
+#include <vector>
 class Client;
 
 extern std::vector<sf::Texture> TextureCasa;
@@ -54,10 +54,13 @@ struct PlayerInfo {
 	bool isSelectingPiece = false; 
 	bool isInGame = false;        
 	int indexPiece;
-	int casasPorJugador[17];
+	std::vector<int> casasPorJugador;
 	int Vueltas = 0;
 	bool final= false;
 	bool PiecUserme = false;
+
+	PlayerInfo() : casasPorJugador(17) {}
+
 	void reset() {
 		username.clear();                     
 		image.clear();                           
