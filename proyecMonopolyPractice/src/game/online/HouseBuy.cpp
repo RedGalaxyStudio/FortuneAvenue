@@ -153,9 +153,11 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			if (turn) {
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && cellQua[0].finAnimacion == true) {
-					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[UsuariosActivos[0]].money >= houses[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]].costo) {
+					std::cout << "money::  " << playerInfos[UsuariosActivos[0]].money << "::" << houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo;
+					std::cout << "\n" << index;
+					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[index].money >= houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
-						client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);
+						client->networkMessage.buyHouse(playerInfos[index].casasPorJugador[IndexCAsa]);
 
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
