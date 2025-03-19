@@ -17,6 +17,10 @@ public:
     int eleccion();
     void resetT();
     void resetTCAM();
+
+    void resetTRuleta();
+    void resetTCAMRuleta();
+
 private:
     sf::Clock clock;
     float waitTime;

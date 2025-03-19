@@ -3,8 +3,10 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 
+ bool giroActivoO=false;
 
-
+float initialSpeedActiO;
+float decelerationRateActiO;
 sf::Texture &textureBoxPerfilOff= textureBox;
 bool BotTurn=false;
 std::vector<sf::Texture> TextureHouse; //texturecasa

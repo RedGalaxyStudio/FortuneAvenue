@@ -70,6 +70,7 @@ void HouseBuyO::resource() {
 
 }
 void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
+	return;
 	float angle = 0.f;
 	float rotationSpeed = 45.f;
 	std::vector<points> pp{ 0 };

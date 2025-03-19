@@ -412,8 +412,14 @@ void GameOffline::update() {
 
 			}
 		}
+
+
 		Event();
 
+
+
+
+		
 		// dado mecanica 
 		resultadoDado = Dado.logica();
 		if (resultadoDado != 0) {
@@ -652,10 +658,10 @@ void GameOffline::Event() {
 					house[ActiveUsers[0]].ViewHouseBuys();
 				}
 
-
-
 				if (draw_roulette && firstTurn && turnoGiro) {
+					
 					ruleta->trurntrue();
+					GM.giroActivo = true;
 					turnoGiro = false;
 				}
 
@@ -665,8 +671,8 @@ void GameOffline::Event() {
 
 				if (draw_roulette && firstTurn && turnoGiro) {
 
-					//client.startSpin();
 					ruleta->trurntrue();
+					GM.giroActivo = true;
 					turnoGiro = false;
 				}
 			}
@@ -699,7 +705,17 @@ void GameOffline::DrawPieceMoviendo() {
 }
 void GameOffline::DrawGameRuleta() {
 	float deltaTime = clock.restart().asSeconds();
+	if (secondTurn) {
 
+		if (draw_roulette && turnoGiro && GM.bot.roll()) {
+			ruleta->trurntrue();
+			turnoGiro = false;
+
+			GM.giroActivo = true;
+
+
+		}
+	}
 	window->clear();
 	renderTexture.clear();
 
@@ -729,7 +745,7 @@ void GameOffline::DrawGameRuleta() {
 
 	window->draw(renderedSprite);
 	ruleta->draw(*window, deltaTime, GM.giroActivo);
-	if (GM.giroActivo && firstTurn) {
+	if (!GM.giroActivo && firstTurn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		if (increasing) {
@@ -920,6 +936,7 @@ void GameOffline::DrawGame() {
 						turn_roulette = false;
 						activeEvent = true;
 						turnoGiro = true;
+						GM.bot.resetTCAMRuleta();
 						ruleta->trurntrue();
 					}
 				}
