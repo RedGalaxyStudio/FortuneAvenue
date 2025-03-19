@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="loading.cpp" />
     <ClCompile Include="src\cinematic\Cinematic.cpp" />
     <ClCompile Include="src\core\ObjetosGlobal.cpp" />
     <ClCompile Include="src\core\ResourceGlobal.cpp" />
@@ -193,6 +194,7 @@
   <ItemGroup>
     <ClInclude Include="libs\nlohmann\json.hpp" />
     <ClInclude Include="libs\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="loading.hpp" />
     <ClInclude Include="src\cinematic\Cinematic.hpp" />
     <ClInclude Include="src\core\ObjetosGlobal.hpp" />
     <ClInclude Include="src\core\ResourceGlobal.hpp" />
