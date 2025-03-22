@@ -2,6 +2,7 @@
 #include "iostream"
 #include "../game/online/ResourceGame.hpp"
 #include "../game/online/OnlineVars.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <fstream>
 
 ServerMessageHandler::ServerMessageHandler(ClientData* cData) :clientData(cData), peer(nullptr) {}
@@ -266,6 +267,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerGameNew.Home.setTexture(TextureHome);
+		playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		playerGameNew.Check.setTexture(CheckTexturesOff);
