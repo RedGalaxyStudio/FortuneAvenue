@@ -57,7 +57,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
 	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
-	//std::cout << "\nMensaje recibido: " << message << std::endl;
+	std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
 	if (message.rfind("YOUR_TURN", 0) == 0) {
 
 		MONEYSALARIO(message, playerIndex);
@@ -302,7 +302,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		int index = std::stoi(indexStr);
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
-
+		std::cout << "\n\n\noooooooooooo" << username;
 
 		//playerInfoNew.image = isimageStr;
 		playerGameNew.NamePlayer.setCharacterSize(17);
