@@ -41,6 +41,9 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		ENetPacket* packet = enet_packet_create(paquete.data(), paquete.size(), ENET_PACKET_FLAG_RELIABLE);
 		enet_peer_send(peer, 0, packet);
 		enet_host_flush(peer->host);
+
+
+		std::cout << "\nhola1111aa";
 	}
 	else {
 		std::string avatarspre="image0;"+ std::to_string(UsuariosActivos[0]) + ";"+ruta;
