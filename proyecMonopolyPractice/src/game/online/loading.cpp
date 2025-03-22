@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "loading.hpp"
-
+#include "ResourceGame.hpp"
 
 LoadingScreen::LoadingScreen(sf::RenderWindow& windowRef)
-    : window(windowRef), beta(0.0f), fade(true), frame(0),
+    : window(windowRef),  beta(0.0f), fade(true), frame(0),
     frametime(1.0f / 12.0f), timeAcumulado(0.0f), currentDiceIndex(0), loadedTextures(false) {
 }
 
@@ -65,7 +65,7 @@ void LoadingScreen::Update() {
 
         window.clear();
 
-        if (loadedTextures&& animationClock.getElapsedTime().asSeconds() <= 3) {
+        if (loadedTextures&& !Resourceready) {
             updateDice(deltaTiempoFrame);
             window.draw(SpriteFondo);
             window.draw(TextCargando);
@@ -94,6 +94,15 @@ void LoadingScreen::updateDice(sf::Time deltaTime) {
        // if (frame == 0) {
       //      currentDiceIndex = (currentDiceIndex + 1) % 6;
             spriteBackground.setTexture(dice[frame]);
+            for (size_t i = 0; i < playersGame.size(); ++i) {
+                std::cout << " Verificando jugador " << i << "..." << std::endl;
+
+                // Verificar la carga de la textura del avatar
+                if (playersGame[i].textureAvatarPLayer.getSize().x == 0) {
+                    break;
+                }
+                Resourceready = true;
+            }
      
     }
 }

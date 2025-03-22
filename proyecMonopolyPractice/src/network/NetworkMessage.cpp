@@ -19,6 +19,8 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 void NetworkMessage::cargarImagen(const std::string& ruta) {
 
 	if (ruta.find("personal") != std::string::npos) {
+
+		//std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
 		sf::Image imagen;
 		if (!imagen.loadFromFile(ruta)) {
 			throw std::runtime_error("No se pudo cargar la imagen");
