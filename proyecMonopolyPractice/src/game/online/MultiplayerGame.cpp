@@ -148,6 +148,9 @@ void MultiplayerGame::resource() {
 	animacionIniciada = false;
 
 }
+
+
+
 void MultiplayerGame::positionPefil() {
 	if (UsuariosActivos.size() >= 1) {
 
@@ -376,6 +379,8 @@ void MultiplayerGame::positionPefil() {
 	}
 }
 void MultiplayerGame::update() {
+
+	
 
 	positionPefil();
 
@@ -631,6 +636,10 @@ void MultiplayerGame::Event() {
 	sf::Event event;
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 	sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+
+	GameEnd gameend(window, client);
+	gameend.resource();
+	gameend.update();
 
 	while (window->pollEvent(event)) {
 	
