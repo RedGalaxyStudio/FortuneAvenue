@@ -636,11 +636,6 @@ void MultiplayerGame::Event() {
 	sf::Event event;
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 	sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-	GameEnd gameend(window, client);
-	gameend.resource();
-	gameend.update();
-
 	while (window->pollEvent(event)) {
 	
 			Dado.loop(event, client);
