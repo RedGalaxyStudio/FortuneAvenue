@@ -234,31 +234,7 @@ private:
 };
 
 /*int main() {
-    srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
-
-    // Configuración de la ventana
-    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Juego en Pantalla Completa", sf::Style::Fullscreen); "Lluvia de Confeti en SFML");
-    window.setFramerateLimit(60);
-
-    // Dimensiones del lienzo
-    float screenWidth = window.getSize().x;
-    float screenHeight = window.getSize().y;
-
-    // Crea una lluvia de confeti
-    size_t confettiCount = 400;  // Número de confetis
-    ConfettiRain confettiRain(confettiCount, screenWidth, screenHeight);
-    std::vector<SpiralConfetti> confettiListt;
-    for (int i = 0; i < 50; ++i) {
-        sf::Vector2f pos(rand() % 800, rand() % 600);
-        sf::Color color(rand() % 256, rand() % 256, rand() % 256);
-        confettiListt.emplace_back(pos, color);
-    }
-
-
-
-
-    sf::Clock clock;  // Reloj para deltaTime
-
+   
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -267,35 +243,7 @@ private:
             }
         }
 
-        float deltaTime = clock.restart().asSeconds() * 1.5;
-
-        for (auto& confetti : confettiListt) {
-            confetti.update(deltaTime);
-        }
-
-        // Actualización
-
-        previousMousePosition = currentMousePosition;
-        currentMousePosition = sf::Mouse::getPosition(window);
-
-        sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
-        float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
-
-        confettiRain.update(deltaTime, screenWidth, screenHeight, window);
-
-
-        // Renderizado
-
-
-
-        window.clear(sf::Color::Black);
-
-
-        for (auto& confetti : confettiListt) {
-            confetti.draw(window);
-        }
-        confettiRain.draw(window);
-        window.display();
+      
     }
 
     return 0;
@@ -339,6 +287,12 @@ void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& p
 
 
 void GameEnd::resource() {
+    
+    if (!fontEnd.loadFromFile("assets/fonts/Pixels.ttf")) {
+     //   std::cerr << "Error loading font\n";
+    }
+
+
 	fingame12.setCharacterSize(40);
 	fingame12.setFont(fontUser);
 	fingame12.setFillColor(sf::Color::White);
@@ -366,12 +320,12 @@ void GameEnd::resource() {
 
 		
 
-		posicionesGanadores[i].setCharacterSize(40);
-		posicionesGanadores[i].setFont(fontUser);
+		posicionesGanadores[i].setCharacterSize(80);
+		posicionesGanadores[i].setFont(fontEnd);
 		posicionesGanadores[i].setFillColor(sf::Color::White);
 		posicionesGanadores[i].setOutlineThickness(2);
 		posicionesGanadores[i].setOutlineColor(sf::Color(135, 135, 135));
-		posicionesGanadores[i].setString(std::to_string(posiGndrs[i])+"°");
+		posicionesGanadores[i].setString(std::to_string(posiGndrs[i])+"©");
 		sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
 		posicionesGanadores[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
@@ -393,7 +347,7 @@ void GameEnd::update() {
 		for (int i = 0; i < totalPerfiles; i++) {
 			float xPos = startX + i * (perfilWidth + separacion); 
 			float yPos = startY;
-			posicionesGanadores[i].setPosition(xPos, startY- 90);
+			posicionesGanadores[i].setPosition(xPos + 80, startY- 210);
 			playersGame[i].NamePlayer.setPosition(xPos, startY + 70);
 			playersGame[i].boxPlayer.setPosition(xPos, startY + 70);
 			playersGame[i].AvatarPlayer.setPosition(xPos, startY);
@@ -402,7 +356,7 @@ void GameEnd::update() {
 				playersGame[i].PieceSelect.setScale(2.0f, 2.0f);
 				sf::FloatRect pieceSelectBounds = playersGame[i].PieceSelect.getGlobalBounds();
 				playersGame[i].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-				playersGame[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 220);
+				playersGame[i].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 250);
 			}
 
 			sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
@@ -412,6 +366,26 @@ void GameEnd::update() {
 
 		}
 	}
+    srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
+
+    // Dimensiones del lienzo
+    float screenWidth = window->getSize().x;
+    float screenHeight = window->getSize().y;
+
+    // Crea una lluvia de confeti
+    size_t confettiCount = 400;  // Número de confetis
+    ConfettiRain confettiRain(confettiCount, screenWidth, screenHeight);
+    std::vector<SpiralConfetti> confettiListt;
+    for (int i = 0; i < 50; ++i) {
+        sf::Vector2f pos(rand() % 800, rand() % 600);
+        sf::Color color(rand() % 256, rand() % 256, rand() % 256);
+        confettiListt.emplace_back(pos, color);
+    }
+
+
+
+
+    sf::Clock clock;  // Reloj para deltaTime
 
 
 	while (window->isOpen()) {
@@ -476,6 +450,31 @@ void GameEnd::update() {
 
 		}  
 
+
+
+
+
+
+        float deltaTime = clock.restart().asSeconds() * 1.5;
+
+        for (auto& confetti : confettiListt) {
+            confetti.update(deltaTime);
+        }
+
+        // Actualización
+
+        previousMousePosition = currentMousePosition;
+        currentMousePosition = sf::Mouse::getPosition(*window);
+
+        sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
+        float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+
+        confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
+
+
+        // Renderizado
+
+
 		window->setMouseCursor(*currentCursor);
 
 
@@ -512,23 +511,24 @@ void GameEnd::update() {
 				float xPos = startX + i * (perfilWidth + separacion); 
 				float yPos = startY;
 
-				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY+170);
-				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY+170);
+				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY+198);
+				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY+200);
 				//playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
 				playersGame[UsuariosActivos[i]].AvatarPlayer.setPosition(xPos, yPos+100);
-				playersGame[UsuariosActivos[i]].AvatarPlayer.setScale(1,1);
+				playersGame[UsuariosActivos[i]].AvatarPlayer.setScale(0.8f, 0.8f);
+                playersGame[UsuariosActivos[i]].MarcoPlayer.setScale(1.3f, 1.3f);
 				playersGame[UsuariosActivos[i]].MarcoPlayer.setPosition(xPos, yPos+100);
 
 				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
 					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
 					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
 					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-					playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 310);
+					playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 340);
 				}
 
 				sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
 				playersGame[UsuariosActivos[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
-				playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 210);
+				playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 240);
 
 				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
 		
@@ -562,7 +562,10 @@ void GameEnd::update() {
 		}
 			
 		window->draw(fingame12);
-
+        for (auto& confetti : confettiListt) {
+            confetti.draw(*window);
+        }
+        confettiRain.draw(*window);
 
 		window->display();
 
