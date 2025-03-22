@@ -11,6 +11,7 @@
 #include "Chat.hpp"
 #include "OnlineVars.hpp"
 #include "loading.hpp"
+#include "string"
 
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
 	: window(windowRef),client(clientRef), selectedPiece(-1) {
@@ -28,7 +29,7 @@ PieceSelector::~PieceSelector() {
 	newSelection = nullptr;
 }
 void PieceSelector::Resource() {
-	printMemoryUsage();
+	//printMemoryUsage();
 	
 	int piecesCount = 19; 
 	pieces.resize(piecesCount);
@@ -45,7 +46,7 @@ void PieceSelector::Resource() {
 	if (!Preguntasalir.loadFromFile("assets/image/Button/ExitSala.png")) return;
 	fondopiece.setTexture(Textufondopiece);
 
-	printMemoryUsage();
+	//printMemoryUsage();
 
 	for (int i = 0; i < piecesCount; i++) {
 		if (!piecesTextures[i].loadFromFile("assets/image/Game/pieces/piece" + std::to_string(i) + ".png"))
@@ -60,7 +61,7 @@ void PieceSelector::Resource() {
 
 	}
 
-	printMemoryUsage();
+	//printMemoryUsage();
 	for (int i = 0; i < pieces.size(); i++) {
 		int row = i / 8;  
 		int col = i % 8;  
