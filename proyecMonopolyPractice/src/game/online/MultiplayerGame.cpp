@@ -186,7 +186,7 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 95.5f);//-60
 		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 95.5f);//-40
 
-		playersGame[UsuariosActivos[0]].textureAvatarPLayer = *selectedAvatarCopy.getTexture();
+
 		playersGame[UsuariosActivos[0]].AvatarPlayer.setTexture(&playersGame[UsuariosActivos[0]].textureAvatarPLayer);
 		playersGame[UsuariosActivos[0]].AvatarPlayer.setRadius(static_cast<float>(playersGame[UsuariosActivos[0]].textureAvatarPLayer.getSize().x / 2));
 		playersGame[UsuariosActivos[0]].AvatarPlayer.setOrigin(64, 64);

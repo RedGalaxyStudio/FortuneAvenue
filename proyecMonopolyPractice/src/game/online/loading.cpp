@@ -93,15 +93,17 @@ void LoadingScreen::updateDice(sf::Time deltaTime) {
 
        // if (frame == 0) {
       //      currentDiceIndex = (currentDiceIndex + 1) % 6;
+      // 
+      Resourceready = true;
             spriteBackground.setTexture(dice[frame]);
-            for (size_t i = 0; i < playersGame.size(); ++i) {
-                std::cout << " Verificando jugador " << i << "..." << std::endl;
+            for (size_t i = 0; i < playersGame.size(); i++) {
 
                 // Verificar la carga de la textura del avatar
                 if (playersGame[i].textureAvatarPLayer.getSize().x == 0) {
-                    break;
+                    std::cout << "\nHONLA no se cargo:" << i;
+                    Resourceready = false;
                 }
-                Resourceready = true;
+                
             }
      
     }
