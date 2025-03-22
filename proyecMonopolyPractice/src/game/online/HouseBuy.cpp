@@ -318,7 +318,11 @@ void HouseBuy::ViewHouseBuys() {
 
 
 
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+			
+
+
+			}
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 					if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 
 						playClickSound();
@@ -328,9 +332,6 @@ void HouseBuy::ViewHouseBuys() {
 
 
 				}
-
-
-			}
 		}
 		CartaActiva = false;
 		window->clear();
