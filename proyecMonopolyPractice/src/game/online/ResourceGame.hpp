@@ -10,7 +10,7 @@
 class Client;
 
 extern std::vector<sf::Texture> TextureCasa;
-
+extern bool Resourceready;
 extern sf::Texture TextureCash;
 extern sf::Texture TextureHome;
 extern  sf::Texture TextureMarco;

@@ -3,7 +3,7 @@
 #include "../game/online/OnlineVars.hpp"
 #include <fstream>
 #include <iostream>
-
+#include "../core/ResourceGlobal.hpp"
 
 Client::Client() : client(nullptr), peer(nullptr) {
 	clientData = new ClientData();
@@ -208,6 +208,13 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 	playerGameNew.NamePlayer.setOutlineThickness(2);
 	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
+	playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
+	if (playerGameNew.textureAvatarPLayer.getSize().x == 0) {
+		std::cout << "\nHOuuwuwuwuwNLA no se cargo:"  ;
+	}
+	else {
+		std::cout << "\nSSSSSSSSSSSSSSSSSSSSSSSSSIiiiiiiiiiiiiiiii no se cargo:" ;
+	}
 
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 

@@ -17,8 +17,10 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 	enet_host_flush(Peer->host);
 }
 void NetworkMessage::cargarImagen(const std::string& ruta) {
-
+	
 	if (ruta.find("personal") != std::string::npos) {
+
+		//std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
 		sf::Image imagen;
 		if (!imagen.loadFromFile(ruta)) {
 			throw std::runtime_error("No se pudo cargar la imagen");
@@ -37,6 +39,8 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 
 		// Crear el paquete ENet
 		ENetPacket* packet = enet_packet_create(paquete.data(), paquete.size(), ENET_PACKET_FLAG_RELIABLE);
+	//	std::string message(reinterpret_cast<char*>(packet->data), packet->dataLength);
+	//	std::cout << "\n" << message;
 		enet_peer_send(peer, 0, packet);
 		enet_host_flush(peer->host);
 	}

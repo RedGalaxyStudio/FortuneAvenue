@@ -21,7 +21,6 @@ public:
 	std::condition_variable cv;
 private:
 	sf::RenderWindow& window;
-
 	sf::Texture dice[8];
 	sf::Texture textureFondo;
 	sf::Sprite spriteBackground;
