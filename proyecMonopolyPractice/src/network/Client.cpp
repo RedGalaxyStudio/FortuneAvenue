@@ -242,6 +242,6 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 	}
 
 	enet_host_flush(client);
-
+	std::cout << "\nhola;";
 	return true;
 }

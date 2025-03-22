@@ -144,7 +144,9 @@ void PieceSelector::updateSelection() {
 	float separacion = 20.0f;  
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
-	printMemoryUsage();
+
+	std::cout << "\njjjjjjjjjjjjjjjjjjjjj";
+//	printMemoryUsage();
 	while (window->isOpen()&& !cierre) {
 
 
