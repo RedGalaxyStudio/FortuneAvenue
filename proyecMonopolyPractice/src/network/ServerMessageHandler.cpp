@@ -1,4 +1,4 @@
-#include "ServerMessageHandler.hpp"
+﻿#include "ServerMessageHandler.hpp"
 #include "iostream"
 #include "../game/online/ResourceGame.hpp"
 #include "../game/online/OnlineVars.hpp"
@@ -48,7 +48,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		return;
 	}
 
-	// Verificar que la longitud de los datos sea v�lida
+	// Verificar que la longitud de los datos sea válida
 	if (preprocces->dataLength == 0) {
 		std::cerr << "Error: los datos recibidos tienen longitud 0." << std::endl;
 		return;
@@ -56,7 +56,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
 	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
-	std::cout << "\nMensaje recibido: " << message << std::endl;
+	//std::cout << "\nMensaje recibido: " << message << std::endl;
 	if (message.rfind("YOUR_TURN", 0) == 0) {
 
 		MONEYSALARIO(message, playerIndex);
@@ -238,7 +238,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 
 		for (size_t i = 0; i < tokens.size(); i += 2) {
-			if (i + 1 < tokens.size()) { // Asegurarse de que hay un par �ndice/dinero
+			if (i + 1 < tokens.size()) { // Asegurarse de que hay un par índice/dinero
 				int indexjugador = std::stoi(tokens[i]);
 				int moneyAmount = std::stoi(tokens[i + 1]);
 
@@ -624,6 +624,8 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 	else if (message.rfind("image1;", 0) == 0) { // Verifica si comienza con "image;"
 		// Buscar los delimitadores `;`
+
+		std::cout << "\nimage1;";
 		size_t pos1 = message.find(";");
 		size_t pos2 = message.find(";", pos1 + 1);
 
@@ -642,7 +644,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			return;
 		}
 
-		// Extraer los datos binarios de la imagen despu�s del segundo ';'
+		// Extraer los datos binarios de la imagen después del segundo ';'
 		size_t datosInicio = pos2 + 1;
 		if (datosInicio >= preprocces->dataLength) {
 			std::cerr << "Paquete sin datos de imagen\n";
@@ -659,20 +661,20 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 		archivo.write(reinterpret_cast<const char*>(datos.data()), datos.size());
 		archivo.close();
-		// 2?? Cargar la imagen en SFML
+		// 2️⃣ Cargar la imagen en SFML
 		sf::Image imagen;
 		if (!imagen.loadFromFile(filename)) {
 			std::cerr << "Error al cargar la imagen en SFML\n";
 			return;
 		}
 
-		// 3?? Cargar la imagen en una textura SFML
+		// 3️⃣ Cargar la imagen en una textura SFML
 
 		playerInfos[jugadorID].image = filename;
 		playersGame[jugadorID].textureAvatarPLayer.loadFromFile(playerInfos[jugadorID].image);
 
 
-	
+		std::cout << "\nimage111;";
 
 	}
 	else if (message.rfind("PLAYER_DISCONNECTED", 0) == 0) {
@@ -735,5 +737,5 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 
 	}
-
+	
 }
