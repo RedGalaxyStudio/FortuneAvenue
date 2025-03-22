@@ -189,7 +189,7 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 
 	playerIndex = 0;
 
-	std::string message = "CREATE_ROOM:" + roomCode + ":" + username + ":" + filename;
+	std::string message = "CREATE_ROOM:" + roomCode + ":" + username; //+ ":" + filename;
 
 
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
@@ -230,7 +230,7 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 		return false;
 	}
 
-	std::string message = "JOIN_ROOM:" + roomCode + ":" + username + ":" + filename;
+	std::string message = "JOIN_ROOM:" + roomCode + ":" + username;// +":" + filename;
 
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
 	if (!packet) {

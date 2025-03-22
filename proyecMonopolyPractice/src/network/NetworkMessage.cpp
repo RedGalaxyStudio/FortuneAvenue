@@ -1,5 +1,5 @@
 #include "NetworkMessage.hpp"
-
+#include "../game/online/ResourceGame.hpp"
 #include <fstream>
 
 
@@ -17,19 +17,41 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 	enet_host_flush(Peer->host);
 }
 void NetworkMessage::cargarImagen(const std::string& ruta) {
-	sf::Image imagen;
-	if (!imagen.loadFromFile(ruta)) {
-		throw std::runtime_error("No se pudo cargar la imagen");
+
+	if (ruta.find("personal") != std::string::npos) {
+		sf::Image imagen;
+		if (!imagen.loadFromFile(ruta)) {
+			throw std::runtime_error("No se pudo cargar la imagen");
+		}
+
+		std::vector<uint8_t> buffer;
+		if (!imagen.saveToMemory(buffer, "png")) {
+			throw std::runtime_error("No se pudo convertir la imagen a PNG");
+		}
+
+		std::string header = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
+
+		// Crear un buffer que contenga la cabecera + imagen
+		std::vector<uint8_t> paquete(header.begin(), header.end());
+		paquete.insert(paquete.end(), buffer.begin(), buffer.end());
+
+		// Crear el paquete ENet
+		ENetPacket* packet = enet_packet_create(paquete.data(), paquete.size(), ENET_PACKET_FLAG_RELIABLE);
+		enet_peer_send(peer, 0, packet);
+		enet_host_flush(peer->host);
+	}
+	else {
+		std::string avatarspre="image0;"+ std::to_string(UsuariosActivos[0]) + ";"+ruta;
+		ENetPacket* packet = enet_packet_create(avatarspre.c_str(), avatarspre.size() + 1, ENET_PACKET_FLAG_RELIABLE);
+
+		// Enviar el paquete al servidor o cliente
+		enet_peer_send(peer, 0, packet);
+
+		// Asegurar que los datos se envíen
+		enet_host_flush(peer->host);
 	}
 
-	std::vector<uint8_t> buffer;
-	if (!imagen.saveToMemory(buffer, "png")) {
-		throw std::runtime_error("No se pudo convertir la imagen a PNG");
-	}
 
-	ENetPacket* packet = enet_packet_create(buffer.data(), buffer.size(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet);
-	enet_host_flush(peer->host);
 
 }
 void NetworkMessage::sendSafeInvestment() {

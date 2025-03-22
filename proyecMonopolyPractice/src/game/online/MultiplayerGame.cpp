@@ -196,8 +196,8 @@ void MultiplayerGame::positionPefil() {
 
 
 
-		playersGame[0].origen = sf::Vector2f(330, 439);
-		playersGame[0].PieceSelect.setPosition(playersGame[0].origen);
+		playersGame[UsuariosActivos[0]].origen = sf::Vector2f(330, 439);
+		playersGame[UsuariosActivos[0]].PieceSelect.setPosition(playersGame[UsuariosActivos[0]].origen);
 	}
 	else {
 		return;
@@ -255,8 +255,8 @@ void MultiplayerGame::positionPefil() {
 		globalBounds = playersGame[UsuariosActivos[1]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-		playersGame[1].origen = sf::Vector2f(354, 427);
-		playersGame[1].PieceSelect.setPosition(playersGame[1].origen);
+		playersGame[UsuariosActivos[1]].origen = sf::Vector2f(354, 427);
+		playersGame[UsuariosActivos[1]].PieceSelect.setPosition(playersGame[UsuariosActivos[1]].origen);
 
 	}
 	else {
@@ -300,8 +300,8 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[2]].CasasN.setOutlineColor(sf::Color(135, 135, 135));
 		playersGame[UsuariosActivos[2]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[2]].numCasas));
 
-		playersGame[UsuariosActivos[0]].CasasN.setPosition(138.65f, 595.5f);
-		playersGame[UsuariosActivos[0]].Home.setPosition(158.65f, 595.5f);
+		playersGame[UsuariosActivos[2]].CasasN.setPosition(138.65f, 595.5f);
+		playersGame[UsuariosActivos[2]].Home.setPosition(158.65f, 595.5f);
 
 		playersGame[UsuariosActivos[2]].CasasN.setPosition(138.65f, 595.5f);//-60
 		playersGame[UsuariosActivos[2]].Home.setPosition(158.65f, 595.5f);//-40
@@ -311,8 +311,8 @@ void MultiplayerGame::positionPefil() {
 		globalBounds = playersGame[UsuariosActivos[2]].PieceSelect.getGlobalBounds();
 		playersGame[UsuariosActivos[2]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-		playersGame[2].origen = sf::Vector2f(399, 427);
-		playersGame[2].PieceSelect.setPosition(playersGame[2].origen);
+		playersGame[UsuariosActivos[2]].origen = sf::Vector2f(399, 427);
+		playersGame[UsuariosActivos[2]].PieceSelect.setPosition(playersGame[UsuariosActivos[2]].origen);
 
 	}
 	else {
@@ -350,8 +350,8 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[3]].CasasN.setString(std::to_string(playerInfos[UsuariosActivos[3]].numCasas));
 
 
-		playersGame[UsuariosActivos[1]].CasasN.setPosition(1138.65f, 595.5f);
-		playersGame[UsuariosActivos[1]].Home.setPosition(1158.65f, 595.5f);
+		playersGame[UsuariosActivos[3]].CasasN.setPosition(1138.65f, 595.5f);
+		playersGame[UsuariosActivos[3]].Home.setPosition(1158.65f, 595.5f);
 
 		
 		playersGame[UsuariosActivos[3]].CasasN.setPosition(1138.65f, 595.5f);//-60
@@ -370,14 +370,12 @@ void MultiplayerGame::positionPefil() {
 		playersGame[UsuariosActivos[3]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-		playersGame[3].origen = sf::Vector2f(428, 440);
-		playersGame[3].PieceSelect.setPosition(playersGame[3].origen);
+		playersGame[UsuariosActivos[3]].origen = sf::Vector2f(428, 440);
+		playersGame[UsuariosActivos[3]].PieceSelect.setPosition(playersGame[UsuariosActivos[3]].origen);
 
 	}
 }
-void MultiplayerGame::update() {
-
-	positionPefil();
+void MultiplayerGame::update(LoadingScreen& loading) {
 
 	sf::Clock clock;
 
@@ -400,7 +398,6 @@ void MultiplayerGame::update() {
 		house[i].resource();
 
 		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
-
 	}
 
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame,client);
@@ -410,7 +407,19 @@ void MultiplayerGame::update() {
 	int DadoResul = 0;
 
 	animacionRuleta = false;
+
+	//////////pantalla carga esperando////
+
+	std::unique_lock<std::mutex> lock(loading.mtx);
+	loading.cv.wait(lock, [&loading] { return loading.timeReady; });  // Espera hasta que timeready sea true
+	window->setActive(true);
+	positionPefil();
 	InicioPartida();
+
+
+
+
+
 
 	while (window->isOpen() && !juegoTerminado) {
 

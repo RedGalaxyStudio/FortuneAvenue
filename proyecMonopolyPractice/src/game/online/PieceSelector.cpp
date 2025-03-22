@@ -10,6 +10,7 @@
 #include <atomic>
 #include "Chat.hpp"
 #include "OnlineVars.hpp"
+#include "loading.hpp"
 
 PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
 	: window(windowRef),client(clientRef), selectedPiece(-1) {
@@ -340,9 +341,15 @@ void PieceSelector::updateSelection() {
 
 		if (SelectingPiece) {
 
+			LoadingScreen loading(*window);
+			window->setActive(false);
+
+			loading.LoadResources();
+
+
 			MultiplayerGame mpGame(*window,chat,client);
-		
-			mpGame.update();
+			client->networkMessage.cargarImagen(TextureAvatarPath);
+			mpGame.update(loading);
 		}
 
 		currentCursor = &normalCursor;
