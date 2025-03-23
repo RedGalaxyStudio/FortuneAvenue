@@ -336,11 +336,11 @@ void IniciaUser::IniciAcion() {
 									}
 								}
 							}
-							std::cout << "jokokok\n:" << projectPath;
+							//std::cout << "jokokok\n:" << projectPath;
 							std::filesystem::current_path(projectPath);
 							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
 							croppedImage.saveToFile(dirPath);
-							std::cout << "HOLa";
+						//	std::cout << "HOLa";
 							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
@@ -418,9 +418,9 @@ void IniciaUser::saveSelectedAvatar() {
 	if (selectedAvatar != nullptr) {
 
 
-		std::cout << "Holaaaaaaaaa1111";
+		//std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-			std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
+		//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
 			json avatarData;
 			if (selectedIndex == 0) {
 				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
@@ -457,7 +457,7 @@ void IniciaUser::loadSelectedAvatar() {
 		TextureAvatarPath = avatarData["selected_avatar_path"];
 		input1 = avatarData["username"];
 
-		std::cout << "h" << TextureAvatarPath;
+		//std::cout << "h" << TextureAvatarPath;
 		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) std::cout << "error";//loadAvatars();
 
 		selectedAvatarCopy.setTexture(&TextureAvatarSelec);
@@ -640,16 +640,16 @@ sf::Texture IniciaUser::fun() {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
-			std::cout << "Evento detectado: " << event.type << std::endl;
+			//std::cout << "Evento detectado: " << event.type << std::endl;
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					//sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
-					std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
+					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
 					for (int i = 0; i < 8; ++i) {
 						if (corners[i]->getGlobalBounds().contains(mousePos)) {
 							resizing = true;
-							std::cout << "\nnnnnnnn:::::::::::|";
+							//std::cout << "\nnnnnnnn:::::::::::|";
 							resizingCorner = i;
 							break;
 						}
@@ -657,7 +657,7 @@ sf::Texture IniciaUser::fun() {
 
 					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
 						dragging = true;
-						std::cout << "\nnnnnnnn:::::::::::|";
+						//std::cout << "\nnnnnnnn:::::::::::|";
 						offset = mousePos - selectionBox.getPosition();
 					}
 
@@ -750,7 +750,7 @@ sf::Texture IniciaUser::fun() {
 
 				}
 			}
-			std::cout << "Dragging: " << dragging << " | Resizing: " << resizing << " | MousePos: " << mousePos.x << ", " << mousePos.y << std::endl;
+			//std::cout << "Dragging: " << dragging << " | Resizing: " << resizing << " | MousePos: " << mousePos.x << ", " << mousePos.y << std::endl;
 
 			// Detectar cuando se suelta el botón del mouse
 			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {

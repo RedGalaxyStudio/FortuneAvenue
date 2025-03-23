@@ -80,11 +80,11 @@ void HouseBuy::resource() {
 		
 
 		// Imprimir valores antes de agregarlos a la lista
-		std::cout << "Casa: " << number << "\n";
-		std::cout << "  Salario: " << house.salario << "\n";
-		std::cout << "  Costo: " << house.costo << "\n";
-		std::cout << "  Impuesto: " << house.impuesto << "\n";
-		std::cout << "-------------------------\n";
+		//std::cout << "Casa: " << number << "\n";
+		//std::cout << "  Salario: " << house.salario << "\n";
+		//std::cout << "  Costo: " << house.costo << "\n";
+		//std::cout << "  Impuesto: " << house.impuesto << "\n";
+		//std::cout << "-------------------------\n";
 
 
 		houses.push_back(house);
@@ -129,7 +129,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
-	std::cout << "\n::index" << index << "IndexCAsa" << IndexCAsa << "::"<<playerInfos[index].casasPorJugador[IndexCAsa];
+	//std::cout << "\n::index" << index << "IndexCAsa" << IndexCAsa << "::"<<playerInfos[index].casasPorJugador[IndexCAsa];
 	pp.clear();
 	cc.clear();
 
@@ -178,8 +178,8 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			if (turn) {
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && cellQua[0].finAnimacion == true) {
-					std::cout << "money::  " << playerInfos[UsuariosActivos[0]].money << "::" << houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo;
-					std::cout << "\n" << index;
+					//std::cout << "money::  " << playerInfos[UsuariosActivos[0]].money << "::" << houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo;
+					//std::cout << "\n" << index;
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[UsuariosActivos[0]].money >= houses[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
 						client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);

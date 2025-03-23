@@ -572,7 +572,7 @@ void menuP::MenuSalir(Client* client) {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-				printMemoryUsage();
+				//printMemoryUsage();
 
 				if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();

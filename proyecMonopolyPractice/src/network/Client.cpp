@@ -80,7 +80,7 @@ void Client::run() {
 		while (enet_host_service(client, &event, 100) > 0) {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
-				std::cout << "\nuuuuuuuuuuuiwfijjiwejdfewijfwijfoiewjefiwuuuuuuu";
+			//	std::cout << "\nuuuuuuuuuuuiwfijjiwejdfewijfwijfoiewjefiwuuuuuuu";
 				packetQueue.push(event.packet);
 				break;
 			}
@@ -99,7 +99,7 @@ void Client::process() {
 		if (!packetQueue.empty()) {
 			ENetPacket* n = packetQueue.front();  // Obtener el primer paquete
 			packetQueue.pop();  // Eliminar el paquete de la cola
-			std::cout << "\nuuuuuuuuuuuuuuuuuuwwwwwwwwwwwww";
+			//std::cout << "\nuuuuuuuuuuuuuuuuuuwwwwwwwwwwwww";
 			SMessageHandler->handleServerMessage(n);  // Procesar el paquete con tu manejador
 			enet_packet_destroy(n);  // Liberar el paquete después de procesarlo
 		}
@@ -210,10 +210,10 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
 	playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
 	if (playerGameNew.textureAvatarPLayer.getSize().x == 0) {
-		std::cout << "\nHOuuwuwuwuwNLA no se cargo:"  ;
+	//	std::cout << "\nHOuuwuwuwuwNLA no se cargo:"  ;
 	}
 	else {
-		std::cout << "\nSSSSSSSSSSSSSSSSSSSSSSSSSIiiiiiiiiiiiiiiii no se cargo:" ;
+		//std::cout << "\nSSSSSSSSSSSSSSSSSSSSSSSSSIiiiiiiiiiiiiiiii no se cargo:" ;
 	}
 
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();

@@ -8,3 +8,4 @@ bool juegoTerminado = false;
 float initialSpeedActi;
 float decelerationRateActi;
 bool giroActivo;
+std::map<uint32_t, std::vector<uint8_t>> MYplayerImageFragments;

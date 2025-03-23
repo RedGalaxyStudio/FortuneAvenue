@@ -28,8 +28,8 @@ int main() {
    cinematic.Update();
    */
 
-    printMemoryUsage();
-    Sleep(1000); // Mide cada 1 segundo
+  //  printMemoryUsage();
+  //  Sleep(1000); // Mide cada 1 segundo
     Menup.setWindow(*window);  
     Menup.Resource();   
     Menup.MenuPrincipal();
