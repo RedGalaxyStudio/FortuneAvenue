@@ -11,7 +11,7 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <filesystem>
-
+#include "../ui/MensageBox.hpp"
 
 using json = nlohmann::json;
 
@@ -250,13 +250,13 @@ void IniciaUser::IniciAcion() {
 							std::filesystem::current_path(projectPath);
 							if (imagePath.empty()) {
 								std::cout << "No se seleccionó ninguna imagen.\n";
-								return;
+								
 							}
 
 
 							if (!originalImage.loadFromFile(imagePath)) {
 								std::cerr << "Error al cargar la imagen\n";
-								return;
+							
 							}
 
 							sf::Vector2u imgSize = originalImage.getSize();
@@ -268,7 +268,7 @@ void IniciaUser::IniciAcion() {
 
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-									return;
+								///	return;
 								}
 
 								tempTexture.loadFromImage(originalImage);
@@ -292,7 +292,7 @@ void IniciaUser::IniciAcion() {
 							else{
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-									return;
+								//	return;
 								}
 
 								

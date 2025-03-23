@@ -41,8 +41,6 @@ void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
 }
 
 void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
-	//std::cout << "\nuuuuuuuuuuuuuuuuuu11111111111111111111111";
-
 
 	if (preprocces == nullptr || preprocces->data == nullptr) {
 		std::cerr << "Error: preprocces o preprocces->data es nulo." << std::endl;
@@ -54,11 +52,65 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::cerr << "Error: los datos recibidos tienen longitud 0." << std::endl;
 		return;
 	}
+	std::vector<uint8_t> rawData(preprocces->data, preprocces->data + preprocces->dataLength);
+
+	// Convertir los primeros bytes en texto para verificar si es un mensaje de imagen
+
+	std::string header(rawData.begin(), rawData.begin() + std::min<size_t>(rawData.size(), 10));
+	std::cout << "\nCabecera recibida: " << header << std::endl;
+
 
 	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
+
 	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
 	std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
-	if (message.rfind("YOUR_TURN", 0) == 0) {
+	if (preprocces->dataLength < 4 || memcmp(preprocces->data, "IMG|", 4) == 0) {
+		uint32_t senderID, chunkIndex, totalChunks;
+		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
+		memcpy(&chunkIndex, preprocces->data + 8, sizeof(uint32_t));
+		memcpy(&totalChunks, preprocces->data + 12, sizeof(uint32_t));
+
+		// Almacenar la cantidad de fragmentos esperados si es el primer fragmento recibido
+		if (expectedChunksPerPlayer.find(senderID) == expectedChunksPerPlayer.end()) {
+			expectedChunksPerPlayer[senderID] = totalChunks;
+		}
+
+		// Guardar fragmento en la posición correcta
+		std::vector<uint8_t> chunkData(preprocces->data + 16, preprocces->data + preprocces->dataLength);
+		playerImageFragments[senderID][chunkIndex] = chunkData;
+
+
+		//expectedChunksPerPlayer[senderID] = totalChunks;
+
+		if (playerImageFragments[senderID].size() == expectedChunksPerPlayer[senderID]) {
+			std::vector<uint8_t> completeImage;
+			for (uint32_t i = 0; i < totalChunks; ++i) {
+				completeImage.insert(completeImage.end(), playerImageFragments[senderID][i].begin(), playerImageFragments[senderID][i].end());
+			}
+
+			std::string filename = "avatar_" + std::to_string(senderID) + ".png";
+			std::ofstream outFile(filename, std::ios::binary);
+			outFile.write(reinterpret_cast<const char*>(completeImage.data()), completeImage.size());
+			outFile.close();
+
+
+
+			sf::Image imagen;
+			if (!imagen.loadFromFile(filename)) {
+				std::cerr << "Error al cargar la imagen en SFML\n";
+				return;
+			}
+
+			// 3️⃣ Cargar la imagen en una textura SFML
+
+			playerInfos[senderID].image = filename;
+			playersGame[senderID].textureAvatarPLayer.loadFromFile(playerInfos[senderID].image);
+
+			std::cout << "Imagen de jugador " << senderID << " recibida correctamente.\n";
+			playerImageFragments.erase(senderID);
+		}
+	}
+	else if (message.rfind("YOUR_TURN", 0) == 0) {
 
 		MONEYSALARIO(message, playerIndex);
 
@@ -623,9 +675,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 		}
 	}
-
-	else if (message.rfind("image1;", 0) == 0) { // Verifica si comienza con "image;"
-		// Buscar los delimitadores `;`
+	else if (header.rfind("image1;", 0)==0) {
 
 		std::cout << "\nimage1;";
 		size_t pos1 = message.find(";");
