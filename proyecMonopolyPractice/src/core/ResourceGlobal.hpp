@@ -42,6 +42,7 @@ extern sf::Texture textselectedAvatarCopy;
 extern sf::Texture textureBox;
 extern sf::Sprite box;
 extern sf::Font fontUser;
+extern sf::Font fontEnd;
 extern  std::wstring Token;
 extern  std::string email;
 extern  std::string id;

@@ -64,11 +64,13 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 
 		enet_peer_send(peer, 0, packet);
 		enet_host_flush(peer->host);
+
 		std::cout << "Bytes de imagen enviados: ";
 		for (size_t i = 0; i < std::min(buffer.size(), size_t(10)); i++) {
 			std::cout << std::hex << static_cast<int>(buffer[i]) << " ";
 		}
 		std::cout << std::dec << std::endl;*/
+
 	}
 	else {
 		std::string avatarspre="image0;"+ std::to_string(UsuariosActivos[0]) + ";"+ruta;
