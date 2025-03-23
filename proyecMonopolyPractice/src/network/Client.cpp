@@ -3,7 +3,7 @@
 #include "../game/online/OnlineVars.hpp"
 #include <fstream>
 #include <iostream>
-
+#include "../core/ResourceGlobal.hpp"
 
 Client::Client() : client(nullptr), peer(nullptr) {
 	clientData = new ClientData();
@@ -189,7 +189,7 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 
 	playerIndex = 0;
 
-	std::string message = "CREATE_ROOM:" + roomCode + ":" + username + ":" + filename;
+	std::string message = "CREATE_ROOM:" + roomCode + ":" + username; //+ ":" + filename;
 
 
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
@@ -208,6 +208,13 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 	playerGameNew.NamePlayer.setOutlineThickness(2);
 	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
+	playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
+	if (playerGameNew.textureAvatarPLayer.getSize().x == 0) {
+		std::cout << "\nHOuuwuwuwuwNLA no se cargo:"  ;
+	}
+	else {
+		std::cout << "\nSSSSSSSSSSSSSSSSSSSSSSSSSIiiiiiiiiiiiiiiii no se cargo:" ;
+	}
 
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 
@@ -230,7 +237,7 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 		return false;
 	}
 
-	std::string message = "JOIN_ROOM:" + roomCode + ":" + username + ":" + filename;
+	std::string message = "JOIN_ROOM:" + roomCode + ":" + username;// +":" + filename;
 
 	ENetPacket* packet = enet_packet_create(message.c_str(), message.size(), ENET_PACKET_FLAG_RELIABLE);
 	if (!packet) {
@@ -242,6 +249,6 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 	}
 
 	enet_host_flush(client);
-
+	std::cout << "\nhola;";
 	return true;
 }

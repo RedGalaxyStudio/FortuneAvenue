@@ -20,7 +20,7 @@ public:
     void saveSelectedAvatar();
     void loadSelectedAvatar();
     void loadAvatars();
-    void fun();
+    sf::Texture fun();
 private:
     sf::RenderWindow *window;
     sf::Image originalImage;

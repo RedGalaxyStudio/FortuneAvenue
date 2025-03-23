@@ -33,6 +33,7 @@ sf::Texture textselectedAvatarCopy;
 sf::Texture textureBox;
 sf::Sprite box;
 sf::Font fontUser;
+sf::Font fontEnd;
 std::wstring Token;
 std::string email;
 std::string id;

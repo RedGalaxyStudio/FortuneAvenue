@@ -14,7 +14,7 @@ int main() {
 
     std::unique_ptr<sf::RenderWindow> window = std::make_unique<sf::RenderWindow>(
         sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen, settings);
-
+    // 
     window->setFramerateLimit(60);
 
   
@@ -22,9 +22,11 @@ int main() {
     if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
     window->setMouseCursorVisible(false);
     window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-  /* Cinematic cinematic(*window);
+  /* 
+  Cinematic cinematic(*window);
    cinematic.Resource();
-   cinematic.Update();*/
+   cinematic.Update();
+   */
 
     printMemoryUsage();
     Sleep(1000); // Mide cada 1 segundo

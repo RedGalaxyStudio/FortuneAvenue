@@ -1,5 +1,5 @@
 #pragma once
-
+#include <unordered_map>
 
 extern int playerIndex;
 extern int turnopermitido;

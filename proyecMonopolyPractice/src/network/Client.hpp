@@ -37,6 +37,7 @@ public:
 	ENetHost* client;
 	NetworkMessage networkMessage;
 	ClientData* clientData;
+
 private:
 	ServerMessageHandler* SMessageHandler;
 	sf::FloatRect globalBounds;

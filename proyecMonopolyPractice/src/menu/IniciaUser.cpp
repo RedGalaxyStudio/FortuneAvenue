@@ -11,7 +11,7 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <filesystem>
-
+#include "../ui/MensageBox.hpp"
 
 using json = nlohmann::json;
 
@@ -146,7 +146,7 @@ void IniciaUser::IniciAcion() {
 
 
 
-
+	sf::Sprite holi;
 
 	while (window->isOpen() && !salir) {
 		mousePosition = sf::Mouse::getPosition(*window);
@@ -250,13 +250,13 @@ void IniciaUser::IniciAcion() {
 							std::filesystem::current_path(projectPath);
 							if (imagePath.empty()) {
 								std::cout << "No se seleccionó ninguna imagen.\n";
-								return;
+								
 							}
 
 
 							if (!originalImage.loadFromFile(imagePath)) {
 								std::cerr << "Error al cargar la imagen\n";
-								return;
+							
 							}
 
 							sf::Vector2u imgSize = originalImage.getSize();
@@ -268,7 +268,7 @@ void IniciaUser::IniciAcion() {
 
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-									return;
+								///	return;
 								}
 
 								tempTexture.loadFromImage(originalImage);
@@ -289,20 +289,32 @@ void IniciaUser::IniciAcion() {
 
 
 							}
-							else {
-								fun();
-								sf::IntRect selectedRegion(0, 0, 128, 128);
-								// Recortar la imagen
+							else{
+								if (!renderTexturo.create(128, 128)) {
+									std::cerr << " Error al crear RenderTexture\n";
+								//	return;
+								}
 
-								croppedImage.create(128, 128);
-								croppedImage.copy(originalImage, 0, 0, selectedRegion);
+								
+								tempTexture=fun();
 
-								// Guardar y cargar la textura recortada
-								croppedImage.saveToFile("temp_crop.png");
-								textselectedAvatarCopy.loadFromFile("temp_crop.png");
+								sf::Vector2u imgSize = tempTexture.getSize();
 
-								newSelection = new sf::CircleShape(64);
-								newSelection->setTexture(&textselectedAvatarCopy);
+								sf::Sprite sprite(tempTexture);
+
+								//holi.setTexture(tempTexture);
+								// Escalar la imagen para que encaje en 128x128 sin deformarse
+								float scale = std::min(128.f / imgSize.x, 128.f / imgSize.y);
+								sprite.setScale(scale, scale);
+
+								// Centrar la imagen en caso de que sea más pequeña que 128x128
+								sf::Vector2f newSize(imgSize.x * scale, imgSize.y * scale);
+								sprite.setPosition((128 - newSize.x) / 2, (128 - newSize.y) / 2);
+
+								// Dibujar la imagen escalada en el RenderTexture
+								renderTexturo.clear(sf::Color::Transparent);
+								renderTexturo.draw(sprite);
+								renderTexturo.display();
 							}
 
 
@@ -392,6 +404,7 @@ void IniciaUser::IniciAcion() {
 		scrollbar.draw(*window);
 		window->draw(recua);
 		window->draw(spriteCkeck);
+		window->draw(holi);
 		for (const auto& circle : circles) {
 			window->draw(circle);
 		}
@@ -497,7 +510,7 @@ void IniciaUser::loadAvatars() {
 }
 
 
-void IniciaUser::fun() {
+sf::Texture IniciaUser::fun() {
 
 
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -518,11 +531,6 @@ void IniciaUser::fun() {
 
 	bool dragging = false;
 	sf::Vector2f offset;
-
-
-
-
-
 
 	// Obtener tamaño de la imagen
 	sf::Vector2u imgSize = tempTexture.getSize();
@@ -614,6 +622,15 @@ void IniciaUser::fun() {
 	// Bottom-right
 	corners[6]->setPosition(pos.x + size.x - enA, pos.y + size.y - enH);
 	corners[7]->setPosition(pos.x + size.x - enH, pos.y + size.y - enA);
+
+
+
+	sf::Sprite boton;
+	sf::Texture bottt;
+	bottt.loadFromFile("assets/image/Icon/Cosas que no se usan - Icon/iconojuegodado.png");
+	boton.setTexture(bottt);
+
+	
 	while (window.isOpen()) {
 		sf::Event event;
 		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
@@ -642,6 +659,27 @@ void IniciaUser::fun() {
 						dragging = true;
 						std::cout << "\nnnnnnnn:::::::::::|";
 						offset = mousePos - selectionBox.getPosition();
+					}
+
+					if (!resizing && !dragging &&boton.getGlobalBounds().contains(mousePos)) {
+						// Obtener la posición y tamaño del `selectionBox`
+						sf::Vector2f selPos = selectionBox.getPosition();
+						sf::Vector2f selSize = selectionBox.getSize();
+
+						// Convertir la posición en coordenadas de textura (en caso de transformaciones)
+						sf::Vector2f texCoords = selPos - sf::Vector2f(offsetX, offsetY);
+
+						// Definir el rectángulo a recortar
+						sf::IntRect textureRect(texCoords.x / scale, texCoords.y / scale,
+							selSize.x / scale, selSize.y / scale);
+
+						// Crear una nueva textura y copiar la parte seleccionada
+						sf::Texture newTexture;
+						newTexture.loadFromImage(sprite.getTexture()->copyToImage(), textureRect);
+
+						// Crear un nuevo sprite con la nueva textura
+						return newTexture;
+				
 					}
 				}
 			}
@@ -744,12 +782,13 @@ void IniciaUser::fun() {
 
 		window.clear();
 		window.draw(sprite);
+		
 
 		window.draw(selectionBox);
 		for (auto& corner : corners) {
 			window.draw(*corner);
 		}
-
+		window.draw(boton);
 		window.display();
 	}
 

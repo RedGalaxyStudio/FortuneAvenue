@@ -1,7 +1,8 @@
-#include "ServerMessageHandler.hpp"
+﻿#include "ServerMessageHandler.hpp"
 #include "iostream"
 #include "../game/online/ResourceGame.hpp"
 #include "../game/online/OnlineVars.hpp"
+#include "../core/ResourceGlobal.hpp"
 #include <fstream>
 
 ServerMessageHandler::ServerMessageHandler(ClientData* cData) :clientData(cData), peer(nullptr) {}
@@ -40,24 +41,76 @@ void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
 }
 
 void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
-	std::cout << "\nuuuuuuuuuuuuuuuuuu11111111111111111111111";
-
 
 	if (preprocces == nullptr || preprocces->data == nullptr) {
 		std::cerr << "Error: preprocces o preprocces->data es nulo." << std::endl;
 		return;
 	}
 
-	// Verificar que la longitud de los datos sea v�lida
+	// Verificar que la longitud de los datos sea válida
 	if (preprocces->dataLength == 0) {
 		std::cerr << "Error: los datos recibidos tienen longitud 0." << std::endl;
 		return;
 	}
+	std::vector<uint8_t> rawData(preprocces->data, preprocces->data + preprocces->dataLength);
+
+	// Convertir los primeros bytes en texto para verificar si es un mensaje de imagen
+
+	std::string header(rawData.begin(), rawData.begin() + std::min<size_t>(rawData.size(), 10));
+	std::cout << "\nCabecera recibida: " << header << std::endl;
+
 
 	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
-	std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
-	std::cout << "\nMensaje recibido: " << message << std::endl;
-	if (message.rfind("YOUR_TURN", 0) == 0) {
+
+	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
+	std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
+	if (preprocces->dataLength < 4 || memcmp(preprocces->data, "IMG|", 4) == 0) {
+		uint32_t senderID, chunkIndex, totalChunks;
+		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
+		memcpy(&chunkIndex, preprocces->data + 8, sizeof(uint32_t));
+		memcpy(&totalChunks, preprocces->data + 12, sizeof(uint32_t));
+
+		// Almacenar la cantidad de fragmentos esperados si es el primer fragmento recibido
+		if (expectedChunksPerPlayer.find(senderID) == expectedChunksPerPlayer.end()) {
+			expectedChunksPerPlayer[senderID] = totalChunks;
+		}
+
+		// Guardar fragmento en la posición correcta
+		std::vector<uint8_t> chunkData(preprocces->data + 16, preprocces->data + preprocces->dataLength);
+		playerImageFragments[senderID][chunkIndex] = chunkData;
+
+
+		//expectedChunksPerPlayer[senderID] = totalChunks;
+
+		if (playerImageFragments[senderID].size() == expectedChunksPerPlayer[senderID]) {
+			std::vector<uint8_t> completeImage;
+			for (uint32_t i = 0; i < totalChunks; ++i) {
+				completeImage.insert(completeImage.end(), playerImageFragments[senderID][i].begin(), playerImageFragments[senderID][i].end());
+			}
+
+			std::string filename = "avatar_" + std::to_string(senderID) + ".png";
+			std::ofstream outFile(filename, std::ios::binary);
+			outFile.write(reinterpret_cast<const char*>(completeImage.data()), completeImage.size());
+			outFile.close();
+
+
+
+			sf::Image imagen;
+			if (!imagen.loadFromFile(filename)) {
+				std::cerr << "Error al cargar la imagen en SFML\n";
+				return;
+			}
+
+			// 3️⃣ Cargar la imagen en una textura SFML
+
+			playerInfos[senderID].image = filename;
+			playersGame[senderID].textureAvatarPLayer.loadFromFile(playerInfos[senderID].image);
+
+			std::cout << "Imagen de jugador " << senderID << " recibida correctamente.\n";
+			playerImageFragments.erase(senderID);
+		}
+	}
+	else if (message.rfind("YOUR_TURN", 0) == 0) {
 
 		MONEYSALARIO(message, playerIndex);
 
@@ -238,7 +291,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 
 		for (size_t i = 0; i < tokens.size(); i += 2) {
-			if (i + 1 < tokens.size()) { // Asegurarse de que hay un par �ndice/dinero
+			if (i + 1 < tokens.size()) { // Asegurarse de que hay un par índice/dinero
 				int indexjugador = std::stoi(tokens[i]);
 				int moneyAmount = std::stoi(tokens[i + 1]);
 
@@ -266,6 +319,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerGameNew.Home.setTexture(TextureHome);
+		playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		playerGameNew.Check.setTexture(CheckTexturesOff);
@@ -282,14 +336,14 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 	else if (message.rfind("NEW_PLAYER:", 0) == 0) {
 
 		std::istringstream iss(message.substr(11));
-		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, isimageStr;
+		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr;// , isimageStr;
 
 		if (!(std::getline(iss, username, ':') &&
 			std::getline(iss, indexStr, ':') &&
 			std::getline(iss, moneyStr, ':') &&
 			std::getline(iss, isSelectingStr, ':') &&
-			std::getline(iss, isInGameStr, ':') &&
-			std::getline(iss, isimageStr, ':')
+			std::getline(iss, isInGameStr, ':') //&&
+			//std::getline(iss, isimageStr, ':')
 			)
 			) {
 
@@ -300,9 +354,9 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		int index = std::stoi(indexStr);
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
+		std::cout << "\n\n\noooooooooooo" << username;
 
-
-		playerInfoNew.image = isimageStr;
+		//playerInfoNew.image = isimageStr;
 		playerGameNew.NamePlayer.setCharacterSize(17);
 		playerGameNew.NamePlayer.setFont(fontUserPerfil);
 		playerGameNew.NamePlayer.setFillColor(sf::Color::White);
@@ -314,7 +368,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
 		playerInfoNew.isInGame = (isInGameStr == "true");
-		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
+		//playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -331,14 +385,14 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 		std::string data = message.substr(16);
 		std::istringstream iss(data);
-		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, imagePath, indexPieceStr;
+		std::string username, indexStr, moneyStr, isSelectingStr, isInGameStr, indexPieceStr;// imagePath,;
 
 		if (!(std::getline(iss, username, ':') &&
 			std::getline(iss, indexStr, ':') &&
 			std::getline(iss, moneyStr, ':') &&
 			std::getline(iss, isSelectingStr, ':') &&
 			std::getline(iss, isInGameStr, ':') &&
-			std::getline(iss, imagePath, ':') &&
+			//std::getline(iss, imagePath, ':') &&
 			std::getline(iss, indexPieceStr))
 			) {
 			return;
@@ -358,13 +412,13 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
 		playerInfoNew.isInGame = (isInGameStr == "true");
-		playerInfoNew.image = imagePath;
+	//	playerInfoNew.image = imagePath;
 		int indexPiece = std::stoi(indexPieceStr);
 		playerGameNew.CashSprite.setTexture(TextureCash);
 		playerGameNew.Home.setTexture(TextureHome);
 		playerGameNew.Check.setTexture(CheckTexturesOff);
 		playerGameNew.Check.setOrigin(50.0f, 46.5f);
-		playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
+	//	playerGameNew.textureAvatarPLayer.loadFromFile(playerInfoNew.image);
 		playerGameNew.NamePlayer.setString(playerInfoNew.username);
 		globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
 		playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -600,8 +654,30 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		juegoTerminado = true;
 
 	}
-	else if (message.rfind("image;", 0) == 0) { // Verifica si comienza con "image;"
-		// Buscar los delimitadores `;`
+	else if (message.rfind("image0;", 0) == 0) {
+
+		std::stringstream ss(message);
+		std::vector<std::string> partes;
+		std::string item;
+
+		while (std::getline(ss, item, ';')) {
+			partes.push_back(item);
+		}
+
+		// Validar que el mensaje tenga el formato esperado
+		if (partes.size() >= 3) {
+			std::string tipo = partes[0];   // "image0"
+			int idUsuario = std::stoi(partes[1]); // Convertir ID a entero
+			std::string ruta = partes[2];   // Ruta de la imagen
+
+			playerInfos[idUsuario].image = ruta;
+			playersGame[idUsuario].textureAvatarPLayer.loadFromFile(playerInfos[idUsuario].image);
+
+		}
+	}
+	else if (header.rfind("image1;", 0)==0) {
+
+		std::cout << "\nimage1;";
 		size_t pos1 = message.find(";");
 		size_t pos2 = message.find(";", pos1 + 1);
 
@@ -620,7 +696,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			return;
 		}
 
-		// Extraer los datos binarios de la imagen despu�s del segundo ';'
+		// Extraer los datos binarios de la imagen después del segundo ';'
 		size_t datosInicio = pos2 + 1;
 		if (datosInicio >= preprocces->dataLength) {
 			std::cerr << "Paquete sin datos de imagen\n";
@@ -628,16 +704,29 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 
 		std::vector<uint8_t> datos(preprocces->data + datosInicio, preprocces->data + preprocces->dataLength);
-
+		std::string filename = "avatar_" + std::to_string(jugadorID) + ".png";
 		// Guardar la imagen con el identificador del jugador
-		std::ofstream archivo("avatar_" + std::to_string(jugadorID) + ".png", std::ios::binary);
+		std::ofstream archivo(filename, std::ios::binary);
 		if (!archivo) {
 			std::cerr << "No se pudo guardar la imagen\n";
 			return;
 		}
 		archivo.write(reinterpret_cast<const char*>(datos.data()), datos.size());
 		archivo.close();
+		// 2️⃣ Cargar la imagen en SFML
+		sf::Image imagen;
+		if (!imagen.loadFromFile(filename)) {
+			std::cerr << "Error al cargar la imagen en SFML\n";
+			return;
+		}
 
+		// 3️⃣ Cargar la imagen en una textura SFML
+
+		playerInfos[jugadorID].image = filename;
+		playersGame[jugadorID].textureAvatarPLayer.loadFromFile(playerInfos[jugadorID].image);
+
+
+		std::cout << "\nimage111;";
 
 	}
 	else if (message.rfind("PLAYER_DISCONNECTED", 0) == 0) {
@@ -700,5 +789,5 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 
 	}
-
+	
 }

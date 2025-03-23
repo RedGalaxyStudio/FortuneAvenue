@@ -20,6 +20,8 @@
 
 #include "nulo.hpp"
 #include "HouseBuy.hpp"
+
+#include "loading.hpp"
 class Ruleta;
 class HouseBuy;
 class Chat;
@@ -38,7 +40,7 @@ public:
 
 	void resource();
 
-	void update();
+	void update(LoadingScreen &loading);
 	void Event();
 	void DrawPieceMoviendo();
 	void DrawGame();
