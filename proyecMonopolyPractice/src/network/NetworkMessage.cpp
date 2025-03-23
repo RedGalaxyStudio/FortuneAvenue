@@ -21,7 +21,7 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 	enet_host_flush(Peer->host);
 }
 void NetworkMessage::cargarImagen(const std::string& ruta) {
-	
+
 	if (ruta.find("personal") != std::string::npos) {
 
 		//std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
@@ -35,7 +35,7 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		if (!imagen.saveToMemory(buffer, "png")) {
 			throw std::runtime_error("No se pudo convertir la imagen a PNG");
 		}
-		
+
 		size_t chunkSize = 1024;
 		size_t totalSize = buffer.size();
 		uint32_t numChunks = (totalSize + chunkSize - 1) / chunkSize;
@@ -85,7 +85,8 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 
 	}
 	else {
-		std::string avatarspre="image0;"+ std::to_string(UsuariosActivos[0]) + ";"+ruta;
+
+		std::string avatarspre = "image0;" + std::to_string(UsuariosActivos[0]) + ";" + ruta;
 		ENetPacket* packet = enet_packet_create(avatarspre.c_str(), avatarspre.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 
 		// Enviar el paquete al servidor o cliente
