@@ -23,6 +23,8 @@ public:
     ~StealplayerO();                            
     void resource();
     void update();
+    void BotRobar();
+
 
 };
 

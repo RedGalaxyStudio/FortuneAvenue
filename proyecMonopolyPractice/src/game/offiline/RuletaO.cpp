@@ -149,11 +149,12 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		if(firstTurn){
+		//if(firstTurn){
 			int totalRestado = 0;
 			switch (currentSegment) {
 			case 0://pierdes un turno
-				GM.turnopermitido -= 1;
+				//GM.turnopermitido -= 1;
+				event = 3;
 				break;
 
 			case 1://roba a un jugador
@@ -161,11 +162,12 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			case 2://comprar una casa
-				event = 1;
+				//event = 1;
+				event = 3;
 				break;
 
 			case 3://todos pierden 30 y se les da a el jugador
-
+				event = 3;/*
 				for (size_t i = 0; i < ActiveUsers.size();i++) {  
 					if (i != IndexTurn1) {
 
@@ -184,28 +186,29 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 					playerGameOff[i].Money.setString(std::to_string(playerGameInfo[i].money));
 
 					
-				}
+				}*/
 				break;
 
 			case 4://ganas 150
-				
+				event = 3;/*
 				playerGameInfo[IndexTurn1].money += 150;
-				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));*/
 				break;
 
 			case 5://paga impuestos
-				event = 2;
+				//event = 2;
+				event = 3;
 				break;
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
-
+				event = 3;
 				//client.networkMessage.sendSafeInvestment();
 				break;
 
 			default:
 				break;
 			}
-		}
+	//	}
 
 		giro = false;
 

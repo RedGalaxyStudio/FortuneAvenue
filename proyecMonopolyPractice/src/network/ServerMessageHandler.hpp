@@ -25,7 +25,7 @@ public:
 	void moneyActu(int money);
 	void handleServerMessage(const ENetPacket* preprocces);
 	void MONEYSALARIO(std::string message, int usuario);
-
+	
 private:
 	ClientData* clientData;
 	ENetPeer* peer;
