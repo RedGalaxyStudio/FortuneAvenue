@@ -39,7 +39,7 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		// Construir el mensaje con roomCode + tamaño + imagen
 		std::vector<char> packetData;
 		packetData.insert(packetData.end(), roomCode.begin(), roomCode.end()); // Room Code (10 bytes)
-		packetData.resize(10, '\0');  // Rellenar con ceros
+		//packetData.resize(10, '\0');  // Rellenar con ceros
 		packetData.insert(packetData.end(), reinterpret_cast<char*>(&fileSize), reinterpret_cast<char*>(&fileSize) + sizeof(fileSize)); // Tamaño
 		packetData.insert(packetData.end(), imageData.begin(), imageData.end()); // Imagen
 
