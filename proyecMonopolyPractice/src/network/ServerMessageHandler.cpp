@@ -749,7 +749,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		int index= std::stoi(roomCode.substr(7, 1)); // Extrae solo el noveno carácter
 		// Guardar la imagen
 	
-		std::string filename = "received_image_" + roomCode + ".png";
+		std::string filename = "received_image_" + std::to_string(index) + ".png";
 		std::ofstream file(filename, std::ios::binary);
 		if (!file.is_open()) {
 			std::cerr << "Error al guardar la imagen." << std::endl;
