@@ -4,12 +4,12 @@
 #include "core/ObjetosGlobal.hpp"
 #include "core/ResourceGlobal.hpp"
 
-#include <boost/asio.hpp>
+//#include <boost/asio.hpp>
 
 #define _CRTDBG_MAP_ALLOC  
 
 int main() {
-    boost::asio::io_context io;
+  //  boost::asio::io_context io;
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     sf::err().rdbuf(std::cout.rdbuf()); // Redirige los errores de SFML a la consola
 
