@@ -424,11 +424,12 @@ void IniciaUser::saveSelectedAvatar() {
 			json avatarData;
 			if (selectedIndex == 0) {
 				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+				TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
 			}
 			else {
 
 				avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
-
+				TextureAvatarPath = textureAvatarsFilePath[selectedIndex];
 			}
 
 			//std::cout << "\ninput1:" << input1;
