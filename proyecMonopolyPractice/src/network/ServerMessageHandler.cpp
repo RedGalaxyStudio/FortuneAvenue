@@ -738,6 +738,32 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 	}
 	else if (header.rfind("image1;", 0)==0) {
+		std::string roomCode(reinterpret_cast<const char*>(preprocces->data), 9); // Código de sala
+		std::streamsize fileSize;
+		std::memcpy(&fileSize, preprocces->data + 9, sizeof(fileSize)); // Tamaño de la imagen
+		std::vector<char> imageData(preprocces->data + 9 + sizeof(fileSize), preprocces->data + preprocces->dataLength); // Imagen
+		int index= std::stoi(roomCode.substr(8, 1)); // Extrae solo el noveno carácter
+		// Guardar la imagen
+		std::string filename = "received_image_" + roomCode + ".png";
+		std::ofstream file(filename, std::ios::binary);
+		if (!file.is_open()) {
+			std::cerr << "Error al guardar la imagen." << std::endl;
+			return;
+		}
+		file.write(imageData.data(), imageData.size());
+		file.close();
+		sf::Image imagen;
+		if (!imagen.loadFromFile(filename)) {
+			std::cerr << "Error al cargar la imagen en SFML\n";
+			return;
+		}
+
+		// 3️⃣ Cargar la imagen en una textura SFML
+
+		playerInfos[index].image = filename;
+		playersGame[index].textureAvatarPLayer.loadFromFile(playerInfos[index].image);
+		/*
+
 
 	//	std::cout << "\nimage1;";
 		size_t pos1 = message.find(";");
@@ -788,7 +814,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playersGame[jugadorID].textureAvatarPLayer.loadFromFile(playerInfos[jugadorID].image);
 
 
-	//	std::cout << "\nimage111;";
+	//	std::cout << "\nimage111;";*/
 
 	}
 	else if (message.rfind("PLAYER_DISCONNECTED", 0) == 0) {

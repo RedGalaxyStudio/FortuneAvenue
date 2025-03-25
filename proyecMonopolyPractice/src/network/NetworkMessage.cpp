@@ -23,8 +23,32 @@ void NetworkMessage::sendMessage(ENetPeer* Peer, const std::string& message) {
 void NetworkMessage::cargarImagen(const std::string& ruta) {
 
 	if (ruta.find("personal") != std::string::npos) {
+		std::ifstream file(ruta, std::ios::binary | std::ios::ate);
+		if (!file.is_open()) {
+			std::cerr << "Error al abrir el archivo de imagen." << std::endl;
+			return;
+		}
 
-		//std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
+		// Leer imagen completa
+		std::streamsize fileSize = file.tellg();
+		file.seekg(0, std::ios::beg);
+		std::vector<char> imageData(fileSize);
+		file.read(imageData.data(), fileSize);
+		file.close();
+		std::string roomCode = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
+		// Construir el mensaje con roomCode + tamaño + imagen
+		std::vector<char> packetData;
+		packetData.insert(packetData.end(), roomCode.begin(), roomCode.end()); // Room Code (10 bytes)
+		packetData.resize(10, '\0');  // Rellenar con ceros
+		packetData.insert(packetData.end(), reinterpret_cast<char*>(&fileSize), reinterpret_cast<char*>(&fileSize) + sizeof(fileSize)); // Tamaño
+		packetData.insert(packetData.end(), imageData.begin(), imageData.end()); // Imagen
+
+		// Crear y enviar el paquete
+		ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+		enet_peer_send(peer, 0, packet);
+		enet_host_flush(peer->host); // Asegurar envío inmediato
+
+		/*/std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
 		sf::Image imagen;
 		if (!imagen.loadFromFile(ruta)) {
 			throw std::runtime_error("No se pudo cargar la imagen");
