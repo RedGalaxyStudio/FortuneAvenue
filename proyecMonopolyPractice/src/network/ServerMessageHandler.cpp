@@ -745,6 +745,11 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::streamsize fileSize;	
 		std::cout << "\n\n" << roomCode;
 		std::memcpy(&fileSize, preprocces->data + 9, sizeof(fileSize)); // Tamaño de la imagen
+		if (preprocces->dataLength < 9 + sizeof(fileSize) + fileSize) {
+			std::cerr << "Los datos recibidos no coinciden con el tamaño esperado de la imagen." << std::endl;
+			return;
+		}
+
 		std::vector<char> imageData(preprocces->data + 9 + sizeof(fileSize), preprocces->data + preprocces->dataLength); // Imagen
 		int index= std::stoi(roomCode.substr(7, 1)); // Extrae solo el noveno carácter
 		// Guardar la imagen
