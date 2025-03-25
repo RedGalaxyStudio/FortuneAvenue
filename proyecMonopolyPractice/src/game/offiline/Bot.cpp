@@ -127,7 +127,7 @@ void Bot::resetTRuleta() {
 	waitTime = 1 + std::rand() % 5; 
 }
 void Bot::resetTCAMRuleta() {
-	waitTime = 0 + std::rand() % 3; 
+	waitTime = 1 + std::rand() % 3; 
 	clock.restart();
 }
 
