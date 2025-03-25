@@ -46,6 +46,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::cerr << "Error: preprocces o preprocces->data es nulo." << std::endl;
 		return;
 	}
+	std::cout << "Paquete recibido de tamaño " << preprocces->dataLength << " bytes.\n";
 
 	// Verificar que la longitud de los datos sea válida
 	if (preprocces->dataLength == 0) {
@@ -64,11 +65,37 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
 	std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
-	if (preprocces->dataLength < 4 || memcmp(preprocces->data, "IMG|", 4) == 0) {
-		uint32_t senderID, chunkIndex, totalChunks;
+	if (memcmp(preprocces->data, "REQ|", 4) == 0) {
+		uint32_t senderID, requesterID, chunkIndex;
+		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
+		memcpy(&requesterID, preprocces->data + 8, sizeof(uint32_t));
+		memcpy(&chunkIndex, preprocces->data + 12, sizeof(uint32_t));
+
+		if (MYplayerImageFragments.find(chunkIndex) != MYplayerImageFragments.end()) {
+			std::vector<uint8_t>& chunkData = MYplayerImageFragments[chunkIndex];
+			//uint32_t crc = calcularCRC32(chunkData.data(), chunkData.size());
+
+			std::vector<uint8_t> packetData(sizeof(uint32_t) * 4 + 5 + chunkData.size());
+			memcpy(packetData.data(), "IMG|", 4);
+			uint32_t* header = reinterpret_cast<uint32_t*>(packetData.data() + 4);
+			header[0] = senderID; // Imagen de quién es
+			header[1] = chunkIndex;
+			header[2] = expectedChunksPerPlayer[senderID];
+			//header[3] = crc;
+
+			memcpy(packetData.data() + 4 + sizeof(uint32_t) * 3, chunkData.data(), chunkData.size());
+
+			ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+
+			enet_peer_send(peer, 0, packet);
+		
+		}
+	} else if (preprocces->dataLength < 4 || memcmp(preprocces->data, "IMG|", 4) == 0) {
+		uint32_t senderID, chunkIndex, totalChunks, receivedCRC;
 		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
 		memcpy(&chunkIndex, preprocces->data + 8, sizeof(uint32_t));
 		memcpy(&totalChunks, preprocces->data + 12, sizeof(uint32_t));
+	
 
 		// Almacenar la cantidad de fragmentos esperados si es el primer fragmento recibido
 		if (expectedChunksPerPlayer.find(senderID) == expectedChunksPerPlayer.end()) {
@@ -79,10 +106,45 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::vector<uint8_t> chunkData(preprocces->data + 16, preprocces->data + preprocces->dataLength);
 		playerImageFragments[senderID][chunkIndex] = chunkData;
 
+		std::cout << "Encabezado recibido: " << std::endl;
+		std::cout << "SenderID: " << senderID << std::endl;
+		std::cout << "ChunkIndex: " << chunkIndex << std::endl;
+		std::cout << "TotalChunks: " << totalChunks << std::endl;
 
 		//expectedChunksPerPlayer[senderID] = totalChunks;
 
 		if (playerImageFragments[senderID].size() == expectedChunksPerPlayer[senderID]) {
+
+
+
+			std::vector<uint32_t> missingChunks;
+			for (uint32_t i = 0; i < totalChunks; ++i) {
+				if (playerImageFragments[senderID].find(i) == playerImageFragments[senderID].end()) {
+					missingChunks.push_back(i);
+				}
+			}
+
+			// Si hay fragmentos faltantes, solicitar reenvío
+			if (!missingChunks.empty()) {
+				std::cout << "Faltan fragmentos del jugador " << senderID << ": ";
+				for (uint32_t chunk : missingChunks) std::cout << chunk << " ";
+				std::cout << "\nSolicitando reenvío...\n";
+
+				for (uint32_t chunk : missingChunks) {
+					std::vector<uint8_t> requestPacket(sizeof(uint32_t) * 2 + 5);
+					memcpy(requestPacket.data(), "REQ|", 4);
+					uint32_t* header = reinterpret_cast<uint32_t*>(requestPacket.data() + 4);
+					header[0] = senderID;
+					header[1] = chunk;
+
+					ENetPacket* request = enet_packet_create(requestPacket.data(), requestPacket.size(), ENET_PACKET_FLAG_RELIABLE);
+					enet_peer_send(peer, 0, request);
+				}
+
+				return; // No intentar reconstruir la imagen todavía
+			}
+
+
 			std::vector<uint8_t> completeImage;
 			for (uint32_t i = 0; i < totalChunks; ++i) {
 				completeImage.insert(completeImage.end(), playerImageFragments[senderID][i].begin(), playerImageFragments[senderID][i].end());
@@ -354,7 +416,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		int index = std::stoi(indexStr);
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
-		std::cout << "\n\n\noooooooooooo" << username;
+		//std::cout << "\n\n\noooooooooooo" << username;
 
 		//playerInfoNew.image = isimageStr;
 		playerGameNew.NamePlayer.setCharacterSize(17);
@@ -431,13 +493,13 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 		if (indexPiece >= 0) {
 
-			std::cout << "\n pieza:" << indexPiece << " CplayerIndex:" << CplayerIndex;
+		//	std::cout << "\n pieza:" << indexPiece << " CplayerIndex:" << CplayerIndex;
 			playerInfos[index].indexPiece = indexPiece;
 			int newPieceIndex = playerInfos[index].indexPiece;
 
 			pieces[previousSelectionIndex[index]].setColor(sf::Color::White); // Color original
 			pieces[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
-			std::cout << "\nplayersGame" << playersGame.size();
+			//std::cout << "\nplayersGame" << playersGame.size();
 			// Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
 			playersGame[index].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
 			playersGame[index].PieceSelect.setScale(pieces[newPieceIndex].getScale());
@@ -677,7 +739,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 	}
 	else if (header.rfind("image1;", 0)==0) {
 
-		std::cout << "\nimage1;";
+	//	std::cout << "\nimage1;";
 		size_t pos1 = message.find(";");
 		size_t pos2 = message.find(";", pos1 + 1);
 
@@ -726,7 +788,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playersGame[jugadorID].textureAvatarPLayer.loadFromFile(playerInfos[jugadorID].image);
 
 
-		std::cout << "\nimage111;";
+	//	std::cout << "\nimage111;";
 
 	}
 	else if (message.rfind("PLAYER_DISCONNECTED", 0) == 0) {

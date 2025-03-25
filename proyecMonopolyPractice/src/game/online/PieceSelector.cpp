@@ -146,7 +146,8 @@ void PieceSelector::updateSelection() {
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
 
-	std::cout << "\njjjjjjjjjjjjjjjjjjjjj";
+	//
+	// << "\njjjjjjjjjjjjjjjjjjjjj";
 //	printMemoryUsage();
 	while (window->isOpen()&& !cierre) {
 

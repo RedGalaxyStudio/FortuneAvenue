@@ -72,7 +72,7 @@ void IniciarPartida::update() {
 	box.setPosition(xPos, startY + 110);
 	selectedAvatarCopy.setPosition(xPos, startY);
 	recua.setPosition(xPos, startY);
-	printMemoryUsage();
+	//printMemoryUsage();
 	
 	bool valida2 = false;
 	while (window->isOpen() && !valida2) {

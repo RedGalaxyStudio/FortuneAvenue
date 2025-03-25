@@ -1,7 +1,11 @@
 #include "NetworkMessage.hpp"
 #include "../game/online/ResourceGame.hpp"
 #include <fstream>
+//#include <zlib.h> // Librería para CRC32
 
+//uint32_t calcularCRC32(const uint8_t* datos, size_t tamano) {
+	//return crc32(0, datos, tamano);
+//}
 
 NetworkMessage::NetworkMessage() :peer(nullptr) {}
 
@@ -35,22 +39,30 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		size_t chunkSize = 1024;
 		size_t totalSize = buffer.size();
 		uint32_t numChunks = (totalSize + chunkSize - 1) / chunkSize;
+		uint32_t senderID = UsuariosActivos[0];
 
-		for (uint32_t i = 0; i < numChunks; ++i) {
+		for (uint32_t i = 0; i < numChunks; i++) {
 			size_t offset = i * chunkSize;
 			size_t size = std::min(chunkSize, totalSize - offset);
+			//uint32_t crc = calcularCRC32(buffer.data() + offset, size);
 
 			// Crear el paquete con identificador de imagen
 			std::vector<uint8_t> packetData(sizeof(uint32_t) * 3 + 5 + size); // "IMG|" + datos
 			memcpy(packetData.data(), "IMG|", 4); // Prefijo de imagen
 			uint32_t* header = reinterpret_cast<uint32_t*>(packetData.data() + 4);
-			header[0] = UsuariosActivos[0];
+			header[0] = senderID;
 			header[1] = i;
 			header[2] = numChunks;
+			//header[3] = crc;  // Agregar CRC32
 			memcpy(packetData.data() + 4 + sizeof(uint32_t) * 3, buffer.data() + offset, size);
 
 			ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
+			std::cout << "Enviando fragmento " << i << "/" << numChunks
+				<< " al jugador " << senderID
+				<< " (tamaño: " << size << " bytes)\n";
+
 			enet_peer_send(peer, 0, packet);
+			enet_host_flush(peer->host);
 		}
 
 		/*std::string header = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
