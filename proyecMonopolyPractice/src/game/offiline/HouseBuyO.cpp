@@ -163,7 +163,24 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 
 		}
 
+		if (secondTurn) {
+			if (GM.bot.roll()) {
+				if (playerGameInfo[IndexTurn1].money >= houses[playerGameInfo[IndexTurn1].casasPorJugador[IndexCAsa]].costo) {
+					playClickSound();
 
+					/*CasasCompradas CasasaCOMPRAR;
+					CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[IndexTurn1].casasPorJugador[IndexCAsa]]);
+					VCcompradas.push_back(CasasaCOMPRAR);
+					CsCmpdrsindex.push_back(IndexCAsa);
+
+					playerGameInfo[ActiveUsers[0]].numCasas += 1;
+					playerGameOff[ActiveUsers[0]].CasasN.setString(std::to_string(playerGameInfo[ActiveUsers[0]].numCasas));*/
+					cierre = true;
+
+				}
+
+			}
+		}
 		currentCursor = &normalCursor;
 		botonXc.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
@@ -292,7 +309,11 @@ void HouseBuyO::ViewHouseBuys() {
 
 		}
 		CartaActiva = false;
+
+
 		window->clear();
+
+
 
 		window->draw(spriteBackgroundG);
 
@@ -300,6 +321,9 @@ void HouseBuyO::ViewHouseBuys() {
 			window->draw(VCcompradas[i].CsCmpdrsSprite);
 
 		}
+
+
+
 		window->draw(spriteX);
 		window->display();
 	}

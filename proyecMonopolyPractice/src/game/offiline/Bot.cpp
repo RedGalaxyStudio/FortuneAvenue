@@ -131,3 +131,6 @@ void Bot::resetTCAMRuleta() {
 	clock.restart();
 }
 
+void Bot::houseBuy (int costo, int money) {
+
+}
