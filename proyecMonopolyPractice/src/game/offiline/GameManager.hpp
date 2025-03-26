@@ -15,7 +15,7 @@ public:
     void GenerarBot(int BotN);
     void startGame();  
     void nextTurn();   
-    void impuesto()
+    void impuesto();
     void processTurn(int playerId); 
     void addPlayer(bool isBot);  
     bool isGameOver();  
