@@ -115,19 +115,19 @@ int Bot::eleccion() {
 }
 
 void Bot::resetT() {
-	waitTime = 0 + std::rand() % 3; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 2 + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
 	clock.restart();
 }
 void Bot::resetTCAM() {
-	waitTime = 1 + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 2 + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
 	clock.restart();
 }
 
 void Bot::resetTRuleta() {
-	waitTime = 1 + std::rand() % 5; 
+	waitTime = 2 + std::rand() % 4; 
 }
 void Bot::resetTCAMRuleta() {
-	waitTime = 0 + std::rand() % 3; 
+	waitTime = 2 + std::rand() % 4; 
 	clock.restart();
 }
 

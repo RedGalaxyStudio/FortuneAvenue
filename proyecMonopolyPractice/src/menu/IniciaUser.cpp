@@ -124,11 +124,16 @@ void IniciaUser::IniciAcion() {
 	bool salir = false;
 	std::vector<sf::CircleShape> circles;
 	std::vector<sf::Color> colors = {
-		sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Yellow,
-		sf::Color::Magenta, sf::Color::Cyan, sf::Color(255, 165, 0), // Naranja
-		sf::Color(128, 0, 128), // Púrpura
-		sf::Color(139, 69, 19), // Marrón
-		sf::Color(255, 192, 203) // Rosa
+		sf::Color(255, 182, 193), // Rosa pastel
+		sf::Color(152, 251, 152), // Verde pastel
+		sf::Color(173, 216, 230), // Azul pastel
+		sf::Color(255, 255, 153), // Amarillo pastel
+		sf::Color(221, 160, 221), // Magenta/Lila pastel
+	sf::Color(175, 238, 238), // Cian pastel
+	sf::Color(255, 218, 185), // Naranja pastel
+	sf::Color(216, 191, 216), // Púrpura pastel
+	sf::Color(205, 133, 63),  // Marrón claro (Tono pastel)
+	sf::Color(240, 128, 128)  // Rojo pastel
 	};
 	for (size_t i = 0; i < 10; ++i) {
 		sf::CircleShape circle(30);
@@ -250,13 +255,13 @@ void IniciaUser::IniciAcion() {
 							std::filesystem::current_path(projectPath);
 							if (imagePath.empty()) {
 								std::cout << "No se seleccionó ninguna imagen.\n";
-								
+
 							}
 
 
 							if (!originalImage.loadFromFile(imagePath)) {
 								std::cerr << "Error al cargar la imagen\n";
-							
+
 							}
 
 							sf::Vector2u imgSize = originalImage.getSize();
@@ -268,7 +273,7 @@ void IniciaUser::IniciAcion() {
 
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-								///	return;
+									///	return;
 								}
 
 								tempTexture.loadFromImage(originalImage);
@@ -289,14 +294,14 @@ void IniciaUser::IniciAcion() {
 
 
 							}
-							else{
+							else {
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-								//	return;
+									//	return;
 								}
 
-								
-								tempTexture=fun();
+
+								tempTexture = fun();
 
 								sf::Vector2u imgSize = tempTexture.getSize();
 
@@ -340,7 +345,7 @@ void IniciaUser::IniciAcion() {
 							std::filesystem::current_path(projectPath);
 							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
 							croppedImage.saveToFile(dirPath);
-						//	std::cout << "HOLa";
+							//	std::cout << "HOLa";
 							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
@@ -420,15 +425,16 @@ void IniciaUser::saveSelectedAvatar() {
 
 		//std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-		//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
+			//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
 			json avatarData;
 			if (selectedIndex == 0) {
 				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+				TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
 			}
 			else {
 
 				avatarData["selected_avatar_path"] = textureAvatarsFilePath[selectedIndex];
-
+				TextureAvatarPath = textureAvatarsFilePath[selectedIndex];
 			}
 
 			//std::cout << "\ninput1:" << input1;
@@ -630,7 +636,7 @@ sf::Texture IniciaUser::fun() {
 	bottt.loadFromFile("assets/image/Icon/Cosas que no se usan - Icon/iconojuegodado.png");
 	boton.setTexture(bottt);
 
-	
+
 	while (window.isOpen()) {
 		sf::Event event;
 		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
@@ -661,7 +667,7 @@ sf::Texture IniciaUser::fun() {
 						offset = mousePos - selectionBox.getPosition();
 					}
 
-					if (!resizing && !dragging &&boton.getGlobalBounds().contains(mousePos)) {
+					if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						// Obtener la posición y tamaño del `selectionBox`
 						sf::Vector2f selPos = selectionBox.getPosition();
 						sf::Vector2f selSize = selectionBox.getSize();
@@ -679,7 +685,7 @@ sf::Texture IniciaUser::fun() {
 
 						// Crear un nuevo sprite con la nueva textura
 						return newTexture;
-				
+
 					}
 				}
 			}
@@ -782,7 +788,7 @@ sf::Texture IniciaUser::fun() {
 
 		window.clear();
 		window.draw(sprite);
-		
+
 
 		window.draw(selectionBox);
 		for (auto& corner : corners) {

@@ -463,14 +463,17 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		int index = std::stoi(indexStr);
 
 		std::unique_lock<std::mutex> lock(clientData->mtxExisting);
+
 		PlayerInfo playerInfoNew;
 		PlayerGame playerGameNew;
+		
 		playerGameNew.NamePlayer.setCharacterSize(17);
 		playerGameNew.NamePlayer.setFont(fontUserPerfil);
 		playerGameNew.NamePlayer.setFillColor(sf::Color::White);
 		playerGameNew.NamePlayer.setOutlineThickness(2);
 		playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		playerInfoNew.username = username;
+		std::cout << "\n\n\n\n:" << playerInfoNew.username <<":\n\n";
 		playerInfoNew.money = std::stoi(moneyStr);
 		playerInfoNew.isSelectingPiece = (isSelectingStr == "true");
 		playerInfoNew.isInGame = (isInGameStr == "true");
@@ -739,12 +742,19 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 	}
 	else if (header.rfind("image1;", 0)==0) {
 		std::string roomCode(reinterpret_cast<const char*>(preprocces->data), 9); // Código de sala
-		std::streamsize fileSize;
+		std::streamsize fileSize;	
+		std::cout << "\n\n" << roomCode;
 		std::memcpy(&fileSize, preprocces->data + 9, sizeof(fileSize)); // Tamaño de la imagen
+		if (preprocces->dataLength < 9 + sizeof(fileSize) + fileSize) {
+			std::cerr << "Los datos recibidos no coinciden con el tamaño esperado de la imagen." << std::endl;
+			return;
+		}
+
 		std::vector<char> imageData(preprocces->data + 9 + sizeof(fileSize), preprocces->data + preprocces->dataLength); // Imagen
-		int index= std::stoi(roomCode.substr(8, 1)); // Extrae solo el noveno carácter
+		int index= std::stoi(roomCode.substr(7, 1)); // Extrae solo el noveno carácter
 		// Guardar la imagen
-		std::string filename = "received_image_" + roomCode + ".png";
+	
+		std::string filename = "received_image_" + std::to_string(index) + ".png";
 		std::ofstream file(filename, std::ios::binary);
 		if (!file.is_open()) {
 			std::cerr << "Error al guardar la imagen." << std::endl;

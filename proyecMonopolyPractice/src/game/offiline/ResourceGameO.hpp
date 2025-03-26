@@ -50,11 +50,19 @@ extern std::string namePlayer; //nameUser
 extern sf::Texture CheckOn; //CheckTexturesOn
 extern sf::Texture CheckOff; //CheckTexturesOff
 struct PlayerInformation {
+	int impuesto = 50;
+	int salario = 60;
+	int controlSalario = 0;
+	bool inversionActiva = false;
+	int turnosInversion = 0;
+	bool GameFinal = false;
+	bool GameTerm = false;
+
 	std::string playerName; //username
 	std::string image; //image
 	int numCasas=0;
 	int money = 200;
-	int impuesto = 50;
+
 	int roomconect;
 	int Posicion;
 	bool isSelectingPiece = false; 
