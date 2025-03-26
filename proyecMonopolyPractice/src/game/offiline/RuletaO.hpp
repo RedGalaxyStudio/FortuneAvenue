@@ -11,7 +11,7 @@
 class RuletaO {
 public:
     RuletaO(float width, float height, float centerX, float centerY);
-    void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
+    void draw(sf::RenderWindow& window, float deltaTime, bool& giroActivo);
     void update(float deltaTime);
     void trurntrue();
     int event;
