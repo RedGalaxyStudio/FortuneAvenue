@@ -659,12 +659,7 @@ void GameOffline::Event() {
 					house[ActiveUsers[0]].ViewHouseBuys();
 				}
 
-				if (draw_roulette && firstTurn && turnoGiro) {
-					
-					ruleta->trurntrue();
-					GM.giroActivo = true;
-					turnoGiro = false;
-				}
+
 
 			}
 

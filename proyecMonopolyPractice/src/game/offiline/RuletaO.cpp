@@ -29,7 +29,7 @@ RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 	if (firstTurn) {
-		if (giroActivo&& turno) {
+		if ( giroActivo && turno) {
 			isSpinning = !isSpinning;
 			turnSound.play();
 			giro = true;
@@ -51,6 +51,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
 			clock.restart();
+			giroActivo = false;
 		}
 	}
 	
@@ -76,9 +77,11 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			decelerationRate = initialSpeed / 7.0f; 
 			rotationSpeed = initialSpeed;
 			clock.restart();
+			giroActivo = false;
 		}
 	}
 
+	
 
 	deltaTime = clock.restart().asSeconds();
 
@@ -113,6 +116,8 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
 		}
 	}
+
+
 
 	float segmentAngle = 360.0f / numSegments; 
 
@@ -211,7 +216,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 		}
 
 		giro = false;
-
+		
 		window.draw(ruletaBase);
 
 		for (auto& segment : segments) {
