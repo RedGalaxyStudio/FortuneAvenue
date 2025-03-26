@@ -400,7 +400,8 @@ void GameOffline::update() {
 	rouletteAnimation = false;
 	InicioPartida();
 	GM.startGame();
-	std::cout << "COSitta";
+	
+	playerGameInfo[IndexTurn1].controlSalario += 1;
 	while (window->isOpen()) {
 
 
@@ -485,7 +486,7 @@ void GameOffline::update() {
 
 
 			case 2:
-				if (IndexTurn1 == 0) {
+				GM.impuesto();
 					draw_tax = true;
 					turn_Tax = false;
 					activeEvent = true;
@@ -500,7 +501,7 @@ void GameOffline::update() {
 					globalBounds = ImpuestoCasa.getGlobalBounds();
 					ImpuestoCasa.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-				}
+				
 
 				break;
 
@@ -901,7 +902,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
-						//client.EventoImpuesto();
+						GM.impuesto();
 						draw_tax = true;
 						turn_Tax = false;
 						activeEvent = true;

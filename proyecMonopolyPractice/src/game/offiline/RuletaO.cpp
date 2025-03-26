@@ -199,7 +199,10 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
 
-				//client.networkMessage.sendSafeInvestment();
+				playerGameInfo[IndexTurn1].money -= 100;
+				playerGameInfo[IndexTurn1].inversionActiva = true;
+				playerGameInfo[IndexTurn1].turnosInversion = 2;
+				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 				break;
 
 			default:

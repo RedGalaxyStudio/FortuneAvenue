@@ -42,10 +42,6 @@ void GameManager::CasasAleatorias() {
 	}
 	std::cout << "COta";
 }
-
-
-
-
 void GameManager::GenerarBot(int BotN) {
 
 	std::vector<std::string> NamesBots = CreatorB::getRandomBotNames(BotN);
@@ -96,7 +92,6 @@ void GameManager::GenerarBot(int BotN) {
 	}
 
 }
-
 void GameManager::startGame() {
 	std::cout << "El juego ha comenzado!" << std::endl;
 	IndexTurn1 = 0;
@@ -110,11 +105,79 @@ void GameManager::startGame() {
 
 	secondTurn = false;
 }
-
 void GameManager::nextTurn() {
 	firstTurn = false;
 	size_t currentTurn = IndexTurn1;
 	IndexTurn1 = (currentTurn + 1) % ActiveUsers.size();
+
+
+
+	if (playerGameInfo[IndexTurn1].GameFinal) {
+
+		if (!playerGameInfo[IndexTurn1].inversionActiva) {
+			playerGameInfo[IndexTurn1].GameTerm = true;
+
+			juegoTerminadoo = true;
+			for (size_t i = 0; i < playerGameInfo.size(); i++)
+			{
+				if (!playerGameInfo[i].GameTerm) {
+
+					juegoTerminadoo = false;
+				}
+			}
+	
+
+			if (!juegoTerminadoo) {
+				nextTurn();
+			}
+
+			if (juegoTerminadoo) {
+
+				return;
+			}
+		}
+
+		if (playerGameInfo[IndexTurn1].inversionActiva &&
+			playerGameInfo[IndexTurn1].turnosInversion > 0) {
+
+			playerGameInfo[IndexTurn1].turnosInversion -= 1;
+
+		}
+		else if (playerGameInfo[IndexTurn1].inversionActiva &&
+			playerGameInfo[IndexTurn1].turnosInversion == 0) {
+			playerGameInfo[IndexTurn1].inversionActiva = false;
+			playerGameInfo[IndexTurn1].money += 200;
+		
+			playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+		}
+
+	}
+	else {
+
+		if (playerGameInfo[IndexTurn1].inversionActiva &&
+			playerGameInfo[IndexTurn1].turnosInversion > 0) {
+
+			playerGameInfo[IndexTurn1].turnosInversion -= 1;
+
+		}
+		else if (playerGameInfo[IndexTurn1].inversionActiva &&
+			playerGameInfo[IndexTurn1].turnosInversion == 0) {
+			playerGameInfo[IndexTurn1].inversionActiva = false;
+			playerGameInfo[IndexTurn1].money += 200;
+			playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+
+		}
+
+		if (playerGameInfo[IndexTurn1].controlSalario == 2) {
+			playerGameInfo[IndexTurn1].money += playerGameInfo[IndexTurn1].salario;
+			playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+			playerGameInfo[IndexTurn1].controlSalario = 0;
+		}
+		else if (playerGameInfo[IndexTurn1].controlSalario < 2) {
+			playerGameInfo[IndexTurn1].controlSalario += 1;
+		}
+		
+	}
 
 	if (IndexTurn1 == 0) {
 
@@ -146,6 +209,12 @@ void GameManager::nextTurn() {
 		turn_Move = true;
 		bot.resetT();
 	}
+}
+
+void GameManager::impuesto() {
+	playerGameInfo[IndexTurn1].controlSalario += 1;
+	playerGameInfo[IndexTurn1].money -= playerGameInfo[IndexTurn1].impuesto;
+	playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 }
 
 void GameManager::processTurn(int playerId) {
