@@ -26,7 +26,7 @@ RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	createPointer();
 }
 
-void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
+void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) {
 
 	if (firstTurn) {
 		if ( giroActivo && turno) {
