@@ -1,0 +1,27 @@
+var classtgui_1_1_backend_font =
+[
+    [ "BackendFont", "classtgui_1_1_backend_font.html#a92db238a04d37826ce9138eaf24ddb2f", null ],
+    [ "BackendFont", "classtgui_1_1_backend_font.html#a37b4b4b256173ccaa99da9c5d4737040", null ],
+    [ "BackendFont", "classtgui_1_1_backend_font.html#a96c6309fa93abc9f283cb8b531ba8030", null ],
+    [ "~BackendFont", "classtgui_1_1_backend_font.html#a0dd114fcc814022d50a22f06ba7f9a48", null ],
+    [ "constructGlyphKey", "classtgui_1_1_backend_font.html#a45a88b728ccd94c69514a1e3916a24dc", null ],
+    [ "getAscent", "classtgui_1_1_backend_font.html#aa9e8b90f35cbd6f772ed853869ba4c2c", null ],
+    [ "getDescent", "classtgui_1_1_backend_font.html#a96e9cff9d80fd16ee476b249b4db339f", null ],
+    [ "getFontHeight", "classtgui_1_1_backend_font.html#a7fc48b7b4f901a38b7e92440df41227d", null ],
+    [ "getFontScale", "classtgui_1_1_backend_font.html#a67adb5817f633e0ff9fd170b2a1d0794", null ],
+    [ "getGlyph", "classtgui_1_1_backend_font.html#afbbc39b52e3baf435fa6cc523d581472", null ],
+    [ "getKerning", "classtgui_1_1_backend_font.html#a87080f27fd565b674d876cdbebe8d1bf", null ],
+    [ "getLineSpacing", "classtgui_1_1_backend_font.html#a4728cfa1d2d9afca0689419fc940fd0e", null ],
+    [ "getTexture", "classtgui_1_1_backend_font.html#ac7e4f6ecb21ebb49841f4ccdf0c2a28c", null ],
+    [ "getTextureSize", "classtgui_1_1_backend_font.html#ae8adaca64d4d844492028bbf452fc402", null ],
+    [ "getUnderlinePosition", "classtgui_1_1_backend_font.html#a426df2b14c307fa2e2874499a7fe5ac5", null ],
+    [ "getUnderlineThickness", "classtgui_1_1_backend_font.html#a3f8f7a481f8efc27451350a5656a920f", null ],
+    [ "hasGlyph", "classtgui_1_1_backend_font.html#ac46a7f03d237d03a661613cb7a07bbcc", null ],
+    [ "isSmooth", "classtgui_1_1_backend_font.html#a4d201e82047e3106e15246327cbbebaa", null ],
+    [ "loadFromFile", "classtgui_1_1_backend_font.html#ad04abf8d54b65080f90a3f7f1a418f33", null ],
+    [ "loadFromMemory", "classtgui_1_1_backend_font.html#a2d04941b7e29786746ddfec4a6ed78d7", null ],
+    [ "loadFromMemory", "classtgui_1_1_backend_font.html#a2f59a2c7bf26ed9aa5b977c4c2b2cce4", null ],
+    [ "operator=", "classtgui_1_1_backend_font.html#a2ed48a8ad14ceb608ffbc020dd607a8f", null ],
+    [ "operator=", "classtgui_1_1_backend_font.html#a557b1702dd46317d7df3dc3036c8fd20", null ],
+    [ "setSmooth", "classtgui_1_1_backend_font.html#a736a425e949a881acb960755f3853480", null ]
+];

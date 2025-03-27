@@ -419,11 +419,6 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	positionPefil();
 	InicioPartida();
 
-
-
-
-
-
 	while (window->isOpen() && !juegoTerminado) {
 
 		Event();
@@ -490,9 +485,12 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 			{
 			case 1:
 
-				casa_draw = true;
+				if (IndexTurn == playerIndex) {
+					client->networkMessage.sendEventHouse();
+					casa_draw = true;
 
-				eventoActivo = true;
+					eventoActivo = true;
+				}
 				break;
 
 
@@ -637,6 +635,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
+		
 	}
 }
 void MultiplayerGame::Event() {
@@ -645,9 +644,7 @@ void MultiplayerGame::Event() {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 	sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-	//GameEnd gameend(window, client);
-	//gameend.resource();
-	//gameend.update();
+	
 
 	while (window->pollEvent(event)) {
 	

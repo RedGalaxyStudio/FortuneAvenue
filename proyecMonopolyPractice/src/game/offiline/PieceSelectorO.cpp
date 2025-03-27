@@ -279,6 +279,7 @@ void PieceSelectOff::updateSelection() {
 					}
 					GM.GenerarBot(nUserBot);
 					GameOffline gameOff(*window, Nmap);
+					std::cout << "\nuy";
 					gameOff.update();
 
 				}

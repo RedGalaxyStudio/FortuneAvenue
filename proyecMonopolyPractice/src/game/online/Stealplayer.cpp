@@ -60,13 +60,14 @@ void Stealplayer::update() {
             float xPos = startX + i * (perfilWidth + separacion);
             float yPos = startY;
 
-            PosIsMouseOver[i] = sf::Vector2f(startX, startY +270);
+            PosIsMouseOver[i] = sf::Vector2f(xPos, startY +270);
        
             PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
             PlayersSteal[UsuariosEleccion[i]].MarcoPlayer.setPosition(xPos, startY);
             isMouseOver[i].setPosition(xPos, startY);
+            isMouseOver[i].setFillColor(sf::Color::Blue);
             if (PlayersSteal[UsuariosEleccion[i]].PieceSelect.getTexture() != nullptr) {
                 PlayersSteal[UsuariosEleccion[i]].PieceSelect.setScale(2.0f, 2.0f);
                 sf::FloatRect pieceSelectBounds = PlayersSteal[UsuariosEleccion[i]].PieceSelect.getGlobalBounds();
@@ -82,7 +83,7 @@ void Stealplayer::update() {
         }
     }
     bool seleccionlista = false;
-
+    
     int indexMouseOver=-1;
     while (window->isOpen()&& !seleccionlista) {
         sf::Event event;
@@ -104,15 +105,16 @@ void Stealplayer::update() {
                 renderTexture.draw(overlay);
                 Menup.MenuSalir(client);
             }
-            indexMouseOver = -1;
+            // Reiniciar la detección de jugador
             for (int i = 0; i < UsuariosEleccion.size(); i++) {
-
                 if (isMouseOver[i].getGlobalBounds().contains(mousePosFloat)) {
-                    
                     indexMouseOver = i;
-                    SpritebottonRobar.setPosition(PosIsMouseOver[i]);
-                    
                 }
+            }
+
+            // Si detectamos un jugador válido, posicionamos el botón de robar
+            if (indexMouseOver != -1) {
+                SpritebottonRobar.setPosition(PosIsMouseOver[indexMouseOver]);
             }
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
@@ -129,7 +131,10 @@ void Stealplayer::update() {
 
             
         }
-
+        if (indexMouseOver != -1) {
+            
+            SpritebottonRobar.setPosition(PosIsMouseOver[indexMouseOver]);
+        }
         window->clear();
         window->draw(spriteBackgroundG);
 
