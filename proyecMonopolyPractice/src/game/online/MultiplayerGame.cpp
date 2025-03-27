@@ -627,6 +627,11 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 			DrawGameImpuesto();
 			window->display();
 		}
+		else if (!house[UsuariosActivos[0]].seleccionlista) {
+			house[UsuariosActivos[0]].ViewHouseBs();
+			window->display();
+
+		}
 		else
 		{
 			DrawGame();
@@ -656,7 +661,10 @@ void MultiplayerGame::Event() {
 	
 			Dado.loop(event, client);
 			chats->Event(event);
-
+			if (!house[UsuariosActivos[0]].seleccionlista) {
+				house[UsuariosActivos[0]].evenViewHouseCV(event);
+			
+			}
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
@@ -937,6 +945,7 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 					{
+						std::cout << "\n\ncasaaaaaaaaaaaaaaaaaaaaaaaa";
 						client->networkMessage.sendEventHouse();
 						casa_draw = true;
 						eventoActivo = true;
