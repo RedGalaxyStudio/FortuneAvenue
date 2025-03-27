@@ -5,6 +5,7 @@
 extern int playerIndex;
 extern int turnopermitido;
 extern bool accionCompra;
+extern bool accionXhouse;
 extern bool juegoTerminado;
 //extern int conteoturn;
 extern float initialSpeedActi;

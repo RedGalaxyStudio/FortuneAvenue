@@ -217,6 +217,26 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			cierre = true;
 			accionCompra = false;
 		}
+		if (accionXhouse) {
+
+			playClickSound();
+
+			CasasCompradas CasasaCOMPRAR;
+			CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
+			VCcompradas.push_back(CasasaCOMPRAR);
+			CsCmpdrsindex.push_back(IndexCAsa);
+
+			playerInfos[index].numCasas += 1;
+			playersGame[index].CasasN.setString(std::to_string(playerInfos[index].numCasas));
+			cierre = true;
+			playerInfos[index].casasPorJugador.erase(playerInfos[index].casasPorJugador.begin() + IndexCAsa);
+			IndexCAsa--;
+			cierre = true;
+			accionCompra = false;
+			accionXhouse = false;
+
+
+		}
 		window->draw(renderedSprite);
 		
 		ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 5.);

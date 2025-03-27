@@ -3,6 +3,7 @@
 int playerIndex=-1;
 int turnopermitido;
 bool accionCompra;
+bool accionXhouse;
 bool juegoTerminado = false;
 //int conteoturn;
 float initialSpeedActi;

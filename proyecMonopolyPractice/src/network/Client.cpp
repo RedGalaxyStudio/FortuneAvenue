@@ -13,6 +13,7 @@ Client::Client() : client(nullptr), peer(nullptr) {
 	clientData->lastRollResult = 0;
 	turnopermitido = 0;
 	accionCompra = false;
+	accionXhouse = false;
 	clientData->anguloActualrule = 0.f;
 	clientData->casasCargadas = false;
 	decelerationRateActi = 0.f;

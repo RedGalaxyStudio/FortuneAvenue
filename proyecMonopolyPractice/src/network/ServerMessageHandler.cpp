@@ -274,6 +274,10 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			int indexPlayerr = std::stoi(data.substr(0, delimiterPos));
 			//	indexPlayerr = (indexPlayerr - playerIndex + 4) % 4;
 			int moneyy = std::stoi(data.substr(delimiterPos + 1));
+			if (indexPlayerr != UsuariosActivos[0]) {
+
+				accionXhouse = true;
+			}
 			playerInfos[indexPlayerr].money = moneyy;
 			playersGame[indexPlayerr].Money.setString(std::to_string(playerInfos[indexPlayerr].money));
 		}
