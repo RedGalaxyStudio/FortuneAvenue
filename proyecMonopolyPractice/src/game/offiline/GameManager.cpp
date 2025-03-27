@@ -82,7 +82,10 @@ void GameManager::GenerarBot(int BotN) {
 
 		plantillaGMBot.MarcoPlayer.setPosition(52.5f, 62.5f);
 
-		plantillaGMBot.PieceSelect.setTexture(pieceShape[plantillaInfoMBot.indexPiece]);
+		plantillaGMBot.PieceSelect.setTexture(pieceShape[plantillaInfoMBot.indexPiece], true);
+	//	std::cout << "Escala de PieceSelect: " << plantillaGMBot.PieceSelect.getScale().x << ", " << plantillaGMBot.PieceSelect.getScale().y << std::endl;
+		sf::IntRect rect = plantillaGMBot.PieceSelect.getTextureRect();
+		std::cout << "TextureRect: " << rect.left << ", " << rect.top << ", " << rect.width << ", " << rect.height << std::endl;
 		plantillaGMBot.boxPlayer.setTexture(textureBoxPerfilOff);
 		plantillaGMBot.boxPlayer.setOrigin(125, 40);
 		plantillaGMBot.boxPlayer.setScale(0.9f, 0.9f);
