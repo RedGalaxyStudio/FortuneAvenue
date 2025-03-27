@@ -385,6 +385,7 @@ void GameOffline::update() {
 		moverFichas[i].Inicializar(&playerGameOff[i].PieceSelect, &casillas[i], &playerGameInfo[i].Vueltas, playerGameOff[i].origen, &playerGameInfo[i].final, playerGameInfo[i].PiecUserme);
 
 	}
+	std::cout << "\n\nl::" << playerGameOff[0].origen.x << ":" << playerGameOff[0].origen.y;
 
 	StealplayerO robarjugador(window, ActiveUsers, playerGameOff);
 	robarjugador.resource();
