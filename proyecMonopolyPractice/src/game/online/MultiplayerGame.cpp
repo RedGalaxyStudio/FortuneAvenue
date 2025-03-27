@@ -490,9 +490,12 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 			{
 			case 1:
 
-				casa_draw = true;
+				if (IndexTurn == playerIndex) {
+					client->networkMessage.sendEventHouse();
+					casa_draw = true;
 
-				eventoActivo = true;
+					eventoActivo = true;
+				}
 				break;
 
 
