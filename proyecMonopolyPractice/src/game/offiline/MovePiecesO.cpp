@@ -13,6 +13,7 @@ void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::V
 	PieceUser = PiecUser;
 	*vuelta = 2;
 }
+
 void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
 

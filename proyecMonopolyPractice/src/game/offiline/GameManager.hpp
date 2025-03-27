@@ -8,23 +8,24 @@
 
 class GameManager {
 public:
-    GameManager();
+	GameManager();
 
-    Bot bot;
-    void CasasAleatorias();
-    void GenerarBot(int BotN);
-    void startGame();  
-    void nextTurn();   
-    void processTurn(int playerId); 
-    void addPlayer(bool isBot);  
-    bool isGameOver();  
-  int turnopermitido = 0;
-  bool juegoTerminadoo = false;
-  bool giroActivo = false;
-private: 
-    int currentTurn;
-  
-    bool gameOver;
+	Bot bot;
+	void CasasAleatorias();
+	void GenerarBot(int BotN);
+	void startGame();
+	void nextTurn();
+	void impuesto();
+	void processTurn(int playerId);
+	void addPlayer(bool isBot);
+	bool isGameOver();
+	int turnopermitido = 0;
+	bool juegoTerminadoo = false;
+	bool giroActivo = false;
+private:
+	int currentTurn;
+
+	bool gameOver;
 };
 
 #endif

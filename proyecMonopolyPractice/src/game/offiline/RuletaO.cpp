@@ -26,10 +26,10 @@ RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	createPointer();
 }
 
-void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
+void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) {
 
 	if (firstTurn) {
-		if (giroActivo&& turno) {
+		if ( giroActivo && turno) {
 			isSpinning = !isSpinning;
 			turnSound.play();
 			giro = true;
@@ -51,6 +51,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			decelerationRate = initialSpeed / 7.0f;
 			rotationSpeed = initialSpeed;			
 			clock.restart();
+			giroActivo = false;
 		}
 	}
 	
@@ -76,9 +77,11 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			decelerationRate = initialSpeed / 7.0f; 
 			rotationSpeed = initialSpeed;
 			clock.restart();
+			giroActivo = false;
 		}
 	}
 
+	
 
 	deltaTime = clock.restart().asSeconds();
 
@@ -113,6 +116,8 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 			int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
 		}
 	}
+
+
 
 	float segmentAngle = 360.0f / numSegments; 
 
@@ -201,8 +206,16 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 				break;
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
+
 				event = 3;
 				//client.networkMessage.sendSafeInvestment();
+
+
+				playerGameInfo[IndexTurn1].money -= 100;
+				playerGameInfo[IndexTurn1].inversionActiva = true;
+				playerGameInfo[IndexTurn1].turnosInversion = 2;
+				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+
 				break;
 
 			default:
@@ -211,7 +224,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 	//	}
 
 		giro = false;
-
+		
 		window.draw(ruletaBase);
 
 		for (auto& segment : segments) {

@@ -142,7 +142,7 @@ void GameOffline::resource() {
 
 
 	animacionIniciada = false;
-	std::cout << "COSitta";
+//	std::cout << "COSitta";
 
 }
 void GameOffline::positionPefil() {
@@ -191,8 +191,8 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[0]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-		playerGameOff[0].origen = sf::Vector2f(330, 439);
-		playerGameOff[0].PieceSelect.setPosition(playerGameOff[0].origen);
+		playerGameOff[ActiveUsers[0]].origen = sf::Vector2f(330, 439);
+		playerGameOff[ActiveUsers[0]].PieceSelect.setPosition(playerGameOff[0].origen);
 	}
 	else {
 		return;
@@ -247,8 +247,8 @@ void GameOffline::positionPefil() {
 		globalBounds = playerGameOff[ActiveUsers[1]].PieceSelect.getGlobalBounds();
 		playerGameOff[ActiveUsers[1]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-		playerGameOff[1].origen = sf::Vector2f(354, 427);
-		playerGameOff[1].PieceSelect.setPosition(playerGameOff[1].origen);
+		playerGameOff[ActiveUsers[1]].origen = sf::Vector2f(354, 427);
+		playerGameOff[ActiveUsers[1]].PieceSelect.setPosition(playerGameOff[ActiveUsers[1]].origen);
 
 	}
 	else {
@@ -299,8 +299,8 @@ void GameOffline::positionPefil() {
 		globalBounds = playerGameOff[ActiveUsers[2]].PieceSelect.getGlobalBounds();
 		playerGameOff[ActiveUsers[2]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-		playerGameOff[2].origen = sf::Vector2f(399, 427);
-		playerGameOff[2].PieceSelect.setPosition(playerGameOff[2].origen);
+		playerGameOff[ActiveUsers[2]].origen = sf::Vector2f(399, 427);
+		playerGameOff[ActiveUsers[2]].PieceSelect.setPosition(playerGameOff[ActiveUsers[2]].origen);
 
 	}
 	else {
@@ -351,8 +351,8 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[3]].PieceSelect.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
-		playerGameOff[3].origen = sf::Vector2f(428, 440);
-		playerGameOff[3].PieceSelect.setPosition(playerGameOff[3].origen);
+		playerGameOff[ActiveUsers[3]].origen = sf::Vector2f(428, 440);
+		playerGameOff[ActiveUsers[3]].PieceSelect.setPosition(playerGameOff[ActiveUsers[3]].origen);
 
 	}
 }
@@ -361,9 +361,9 @@ void GameOffline::update() {
 	positionPefil();
 
 	sf::Clock clock;
-	std::cout << "COSitta";
+	//std::cout << "COSitta";
 	GM.CasasAleatorias();
-	std::cout << "COSitta";
+	//std::cout << "COSitta";
 	resultadoDado = 0;
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -400,7 +400,8 @@ void GameOffline::update() {
 	rouletteAnimation = false;
 	InicioPartida();
 	GM.startGame();
-	std::cout << "COSitta";
+	
+	playerGameInfo[IndexTurn1].controlSalario += 1;
 	while (window->isOpen()) {
 
 
@@ -485,7 +486,7 @@ void GameOffline::update() {
 
 
 			case 2:
-				if (IndexTurn1 == 0) {
+				GM.impuesto();
 					draw_tax = true;
 					turn_Tax = false;
 					activeEvent = true;
@@ -500,7 +501,7 @@ void GameOffline::update() {
 					globalBounds = ImpuestoCasa.getGlobalBounds();
 					ImpuestoCasa.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-				}
+				
 
 				break;
 
@@ -514,7 +515,12 @@ void GameOffline::update() {
 		}
 
 
+
 		//std::cout << "COSitta";
+
+		std::cout << "\n" << GM.giroActivo;
+	//	std::cout << "COSitta";
+
 		if (GM.turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
@@ -567,7 +573,7 @@ void GameOffline::update() {
 
 		}
 		else if (draw_house) {
-			std::cout << "COSitto";
+		//	std::cout << "COSitto";
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);
@@ -592,9 +598,9 @@ void GameOffline::update() {
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
-			std::cout << "COSitto";
-			std::cout << "house: " << house.size()<<":  IndexTurn1  :"<< IndexTurn1<<": playerGameOff[IndexTurn1].PieceSelect.getPosition() :"<< playerGameOff[IndexTurn1].PieceSelect.getPosition().x << ", "
-				<< playerGameOff[IndexTurn1].PieceSelect.getPosition().y << ")";
+			//std::cout << "COSitto";
+			//std::cout << "house: " << house.size()<<":  IndexTurn1  :"<< IndexTurn1<<": playerGameOff[IndexTurn1].PieceSelect.getPosition() :"<< playerGameOff[IndexTurn1].PieceSelect.getPosition().x << ", "
+				//<< playerGameOff[IndexTurn1].PieceSelect.getPosition().y << ")";
 			house[IndexTurn1].update(playerGameOff[IndexTurn1].PieceSelect.getPosition());
 			std::cout << "COSitto";
 			activeEvent = false;
@@ -658,12 +664,7 @@ void GameOffline::Event() {
 					house[ActiveUsers[0]].ViewHouseBuys();
 				}
 
-				if (draw_roulette && firstTurn && turnoGiro) {
-					
-					ruleta->trurntrue();
-					GM.giroActivo = true;
-					turnoGiro = false;
-				}
+
 
 			}
 
@@ -901,7 +902,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
-						//client.EventoImpuesto();
+						GM.impuesto();
 						draw_tax = true;
 						turn_Tax = false;
 						activeEvent = true;
@@ -1005,6 +1006,7 @@ void GameOffline::DrawGame() {
 
 		}
 	}
+
 	//std::cout << "hola si11";
 	//std::cout << "firstTurn: " << firstTurn
 	//	<< ", turn_Tax: " << turn_Tax
@@ -1017,6 +1019,20 @@ void GameOffline::DrawGame() {
 	//	<< ", draw_house: " << draw_house
 	//	<< ", draw_roulette: " << draw_roulette
 	//	<< std::endl;
+
+	/*/std::cout << "hola si11";
+	std::cout << "firstTurn: " << firstTurn
+		<< ", turn_Tax: " << turn_Tax
+		<< ", turn_house: " << turn_house
+		<< ", turn_roulette: " << turn_roulette
+		<< ", turn_dice: " << turn_dice
+		<< ", turn_Move: " << turn_Move
+		<< ", activeEvent: " << activeEvent
+		<< ", draw_tax: " << draw_tax
+		<< ", draw_house: " << draw_house
+		<< ", draw_roulette: " << draw_roulette
+		<< std::endl;*/
+
 
 
 	window->setView(window->getDefaultView());
@@ -1067,5 +1083,5 @@ void GameOffline::DrawGame() {
 	window->draw(Settings);
 	//window->draw(countsalary);
 	//window->draw(SpriteChat);
-	std::cout << "COSitta";
+	//std::cout << "COSitta";
 }
