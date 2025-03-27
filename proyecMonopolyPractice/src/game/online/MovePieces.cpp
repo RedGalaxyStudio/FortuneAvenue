@@ -58,11 +58,11 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 				if (caminoActual + 1 == 7 && casillasRestantes != 0) {
 					*vuelta += 1;
 
-					if (*vuelta > 3) {
-						*vuelta = 3;
+					if (*vuelta > 2) {
+						*vuelta = 2;
 					}
 
-					if (*vuelta == 3) {
+					if (*vuelta == 2) {
 
 
 						posicionFinal = final;
@@ -123,6 +123,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			turn_Moviendo = false;
 			giroRule = true;
 			if (*vuelta == 3) {
+				
 				*CsFinal = true;
 			
 
