@@ -48,15 +48,24 @@ struct houseInfo {
     int impuesto;
 };
 Client* client;
+float perfilWidth;
+float separacion ;
+int totalPerfiles ;
 
+bool CartaActiva;
+int indexMouseOver ;
+int cartaActivaIndex;
 public:
+    bool seleccionlista ;
     HouseBuy();   
     int IndexCAsa;
     std::vector<houseInfo> houses;
     void setWindow(sf::RenderWindow& win, int indice, Client& clienT);
     void resource();
+    void evenViewHouseCV(sf::Event event);
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuys();
+    void ViewHouseBs();
     int index;
    
 
