@@ -92,7 +92,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 		
 			if(casillasRestantes!=0){
 			posicionInicial = sprite->getPosition();
-			if (*vuelta != 3) {
+			if (*vuelta != 2) {
 			posicionFinal = (*casillas)[caminoActual][casillaActual];}
 			}
 		}
@@ -103,7 +103,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
 
-			if (*vuelta == 3&& sprite->getPosition()== final){
+			if (*vuelta == 2&& sprite->getPosition()== final){
 				casillasRestantes = 0;
 
 				enMovimiento = false;
@@ -122,7 +122,7 @@ void MovePieces::actualizarMovimiento(float deltaTime) {
 			enMovimiento = false;
 			turn_Moviendo = false;
 			giroRule = true;
-			if (*vuelta == 3) {
+			if (*vuelta == 2) {
 				
 				*CsFinal = true;
 			
