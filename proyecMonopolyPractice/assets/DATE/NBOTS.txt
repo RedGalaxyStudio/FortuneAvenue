@@ -241,7 +241,7 @@ CyberSpectrX
 QuantumBladeX
 CrystalDashX
 FrostNovaX
-LightningSpectrX
+LightningSp
 HyperDashX
 WarpFuryX
 ShadowHunter

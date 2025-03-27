@@ -515,10 +515,11 @@ void GameOffline::update() {
 		}
 
 
-
 		//std::cout << "COSitta";
 
 		std::cout << "\n" << GM.giroActivo;
+		//std::cout << "\n" << GM.giroActivo;
+
 	//	std::cout << "COSitta";
 
 		if (GM.turnopermitido != 0 && zero == false) {

@@ -231,7 +231,7 @@ void IniciaUser::IniciAcion() {
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
-				if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)) {
+				if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)&&(selectedAvatar != nullptr)&&(input1!="")) {
 					playClickSound();
 					saveSelectedAvatar();
 					salir = true;

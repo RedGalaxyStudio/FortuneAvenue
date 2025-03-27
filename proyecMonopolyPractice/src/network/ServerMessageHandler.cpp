@@ -276,7 +276,6 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			int moneyy = std::stoi(data.substr(delimiterPos + 1));
 			playerInfos[indexPlayerr].money = moneyy;
 			playersGame[indexPlayerr].Money.setString(std::to_string(playerInfos[indexPlayerr].money));
-			accionCompra = true;
 		}
 	}
 	else if (message.rfind("RULETE_GAME:", 0) == 0) {
