@@ -11,7 +11,6 @@ StealplayerO::~StealplayerO() {
 
 }
 
- 
 void StealplayerO::resource() {
 	SlectingPlayer.setCharacterSize(40);
 	SlectingPlayer.setFont(fontUser);
@@ -43,16 +42,35 @@ void StealplayerO::resource() {
 
 
 }
+void StealplayerO::BotRobar() {
+
+    int aux = playerGameInfo.size() - 1;
+    playerGameInfo[IndexTurn1].money += 100;
+    playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(0, aux);
+
+    int in;
+    do {
+        in = dist(gen);  // Genera un número aleatorio
+    } while (in == IndexTurn1); // Si es igual a IndexTurn1, genera otro
+
+    // Ahora in es un jugador aleatorio diferente a IndexTurn1
+    playerGameInfo[in].money -= 100;
+    playerGameOff[in].Money.setString(std::to_string(playerGameInfo[in].money));
+}
+
 void StealplayerO::update() {
 
     
-    return;
     // Configuracion de los perfiles
     float perfilWidth = 200.0f; 
     float separacion = 20.0f;  
     int totalPerfiles = static_cast<int>(UsuariosEleccion.size());
 
-
+    GM.bot.resetTCAM();
     if (totalPerfiles > 0) {
       
         float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
@@ -89,6 +107,8 @@ void StealplayerO::update() {
     int indexMouseOver=-1;
     while (window->isOpen()&& !seleccionlista) {
         sf::Event event;
+
+        std::cout << "\njjjjjjjjjjjjjjjjjjjj";
         while (window->pollEvent(event)) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -128,7 +148,15 @@ void StealplayerO::update() {
                 }  
             }
         }
+        if (secondTurn) {
 
+            if (GM.bot.roll()) {
+
+
+                BotRobar();
+                seleccionlista = true;
+            }
+        }
         window->clear();
         window->draw(spriteBackgroundG);
 

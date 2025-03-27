@@ -26,10 +26,12 @@ public:
 	void moneyActu(int money);
 	void handleServerMessage(const ENetPacket* preprocces);
 	void MONEYSALARIO(std::string message, int usuario);
+
 	std::unordered_map<uint32_t, std::map<uint32_t, std::vector<uint8_t>>> playerImageFragments;
 
 	//std::unordered_map<uint32_t, std::vector<uint8_t>> playerImageFragments;
 	std::unordered_map<uint32_t, uint32_t> expectedChunksPerPlayer;
+
 private:
 	ClientData* clientData;
 	ENetPeer* peer;

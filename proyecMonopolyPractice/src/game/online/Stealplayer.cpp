@@ -67,7 +67,6 @@ void Stealplayer::update() {
             PlayersSteal[UsuariosEleccion[i]].AvatarPlayer.setPosition(xPos, startY);
             PlayersSteal[UsuariosEleccion[i]].MarcoPlayer.setPosition(xPos, startY);
             isMouseOver[i].setPosition(xPos, startY);
-            isMouseOver[i].setFillColor(sf::Color::Blue);
             if (PlayersSteal[UsuariosEleccion[i]].PieceSelect.getTexture() != nullptr) {
                 PlayersSteal[UsuariosEleccion[i]].PieceSelect.setScale(2.0f, 2.0f);
                 sf::FloatRect pieceSelectBounds = PlayersSteal[UsuariosEleccion[i]].PieceSelect.getGlobalBounds();

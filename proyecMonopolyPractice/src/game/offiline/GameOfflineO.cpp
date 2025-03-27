@@ -514,8 +514,14 @@ void GameOffline::update() {
 
 		}
 
+
+		//std::cout << "COSitta";
+
+		std::cout << "\n" << GM.giroActivo;
 		//std::cout << "\n" << GM.giroActivo;
+
 	//	std::cout << "COSitta";
+
 		if (GM.turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
@@ -1001,6 +1007,20 @@ void GameOffline::DrawGame() {
 
 		}
 	}
+
+	//std::cout << "hola si11";
+	//std::cout << "firstTurn: " << firstTurn
+	//	<< ", turn_Tax: " << turn_Tax
+	//	<< ", turn_house: " << turn_house
+	//	<< ", turn_roulette: " << turn_roulette
+	//	<< ", turn_dice: " << turn_dice
+	//	<< ", turn_Move: " << turn_Move
+	//	<< ", activeEvent: " << activeEvent
+	//	<< ", draw_tax: " << draw_tax
+	//	<< ", draw_house: " << draw_house
+	//	<< ", draw_roulette: " << draw_roulette
+	//	<< std::endl;
+
 	/*/std::cout << "hola si11";
 	std::cout << "firstTurn: " << firstTurn
 		<< ", turn_Tax: " << turn_Tax
@@ -1013,6 +1033,7 @@ void GameOffline::DrawGame() {
 		<< ", draw_house: " << draw_house
 		<< ", draw_roulette: " << draw_roulette
 		<< std::endl;*/
+
 
 
 	window->setView(window->getDefaultView());
