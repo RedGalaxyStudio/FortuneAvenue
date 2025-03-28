@@ -22,6 +22,7 @@ public:
     void loadAvatars();
     sf::Texture fun();
 private:
+    sf::CircleShape colores;
     sf::RenderWindow *window;
     sf::Image originalImage;
     std::vector<sf::CircleShape> avatars;

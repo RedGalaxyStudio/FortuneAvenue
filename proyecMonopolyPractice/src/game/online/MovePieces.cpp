@@ -13,7 +13,7 @@ void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Ve
 	std::cout << "\n\n\n\n" << final.x << ":" << final.y;
 	this->CsFinal = CsFin;
 	PieceUser = PiecUser;
-	*vuelta = 0;
+	*vuelta = 1;
 }
 void MovePieces::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
