@@ -220,7 +220,7 @@ public :
 			clock.restart();
 
 			faceIndex = client->clientData->lastRollResult;
-			faceIndex = 39;
+			faceIndex = 30;
 			client->clientData->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;
