@@ -5,13 +5,8 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 
-<<<<<<< HEAD
 GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
-=======
-GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
-	std::cout << "\n\nPROBA1" << std::endl;
-	
->>>>>>> a86ee4e421e41facbd5bfb4cb65cae0d952e8c4f
+
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	resource();
@@ -527,21 +522,13 @@ void GameOffline::update() {
 
 
 			case 2:
-<<<<<<< HEAD
-				GM.impuesto();
-				draw_tax = true;
-				turn_Tax = false;
-				activeEvent = true;
-				animacionImpuesto = true;
-				impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
-=======
+
 			      	GM.impuesto();
 					draw_tax = true;
 					turn_Tax = false;
 					activeEvent = true;
 					animacionImpuesto = true;
 					impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
->>>>>>> a86ee4e421e41facbd5bfb4cb65cae0d952e8c4f
 
 				Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
 				globalBounds = Impuesto.getGlobalBounds();
