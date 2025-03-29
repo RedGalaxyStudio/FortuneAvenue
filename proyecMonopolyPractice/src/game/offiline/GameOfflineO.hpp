@@ -51,6 +51,7 @@ private:
 	
 	sf::RenderWindow* window;
 	std::vector<std::vector<std::vector<sf::Vector2f>>> casillas;
+	std::vector<sf::Vector2f> origenS;
 
 
 	std::vector<sf::Vector2f> casillasRuleta = {

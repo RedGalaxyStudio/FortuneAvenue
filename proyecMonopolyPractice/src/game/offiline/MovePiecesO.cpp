@@ -3,7 +3,13 @@
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
 
-MovePiecesO::MovePiecesO(sf::RenderWindow& win) : window(&win), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+
+	if(mapaActual==3){
+	posSelecCAm = { sf::Vector2f(858.500f, 332.500f),	sf::Vector2f(855.000f, 427.500f) };
+	}
+
+};
 void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
@@ -13,11 +19,10 @@ void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::V
 	PieceUser = PiecUser;
 	*vuelta = 2;
 }
-
 void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
 
-	if (caminoActual + 1 > (*casillas).size() ) {
+	if (caminoActual + 1 > (*casillas).size()) {
 
 		finalCamino = true;
 		updateCAmbioCasilla();
@@ -55,62 +60,63 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 			if (*vuelta < 3) {
-			if (casillaActual >= (*casillas)[caminoActual].size()) {
-				casillaActual = 0;
+				if (casillaActual >= (*casillas)[caminoActual].size()) {
+					casillaActual = 0;
 
-				//std::cout << "\nCasi caso";
-				if (caminoActual + 1 == 7 && casillasRestantes != 0) {
-					*vuelta += 1;
+					//std::cout << "\nCasi caso";
+					if (caminoActual + 1 == 7 && casillasRestantes != 0) {
+						*vuelta += 1;
 
-					if (*vuelta > 3) {
-						*vuelta = 3;
+						if (*vuelta > 3) {
+							*vuelta = 3;
+						}
+
+						if (*vuelta == 3) {
+
+
+							posicionFinal = final;
+							casillasRestantes = 1;
+
+
+						}
+						else {
+							(*casillas).resize(1);
+							caminoActual = -1;
+
+
+						}
+
+
 					}
+					else
+						if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
-					if (*vuelta == 3) {
+							finalCamino = true;
 
+							updateCAmbioCasilla();
+						}
+					caminoActual++;
 
-						posicionFinal = final;
-						casillasRestantes = 1;
-
-
-					}
-					else {
-						(*casillas).resize(1);
-						caminoActual = -1;
-
-
-					}
 
 
 				}
-				else
-					if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
-
-						finalCamino = true;
-
-						updateCAmbioCasilla();
-					}
-				caminoActual++;
-
-
-
 			}
-		}
-		
-			if(casillasRestantes!=0){
-			posicionInicial = sprite->getPosition();
-			if (*vuelta != 3) {
-			posicionFinal = (*casillas)[caminoActual][casillaActual];}
+
+			if (casillasRestantes != 0) {
+				posicionInicial = sprite->getPosition();
+				if (*vuelta != 3) {
+					posicionFinal = (*casillas)[caminoActual][casillaActual];
+				}
 			}
 		}
 
 		if (enMovimiento && casillasRestantes > 0 && !*CsFinal) {
 
-			 
+
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
 
-			if (*vuelta == 3&& sprite->getPosition()== final){
+			if (*vuelta == 3 && sprite->getPosition() == final) {
 
 				*CsFinal = true;
 				casillasRestantes = 0;
@@ -123,19 +129,19 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				if (PieceUser) {
 
 					//client.llegadaFinal();
-					
+
 				}
 			}
 		}
-		else {		
-			
+		else {
+
 			enMovimiento = false;
 			turn_Move = false;
 			turnRule = true;
 			if (*vuelta == 3) {
 
 				*CsFinal = true;
-			
+
 
 
 				if (PieceUser) {
@@ -157,39 +163,95 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 }
 void MovePiecesO::updateCAmbioCasilla() {
 
-	int tan = static_cast<int>((*casillas).size());
 
-	if (tan == 3) {
-		SpriteUpArrow.setPosition(370, 400);
 
-		RightArrow.setPosition(900, 400);
+	switch (mapaActual) {
+	case 1: // Configuración para el mapa 1
 
-	}
-	else if (tan == 5) {
-		SpriteUpArrow.setPosition(900, 400);
+		 tan = static_cast<int>((*casillas).size());
+		if (tan == 3) {
+			SpriteUpArrow.setPosition(370, 400);
 
-		LeftArrow.setPosition(370, 400);
-	}
-	else if (tan == 1) {
-		LeftArrow.setPosition(370, 400);
+			RightArrow.setPosition(900, 400);
 
-		RightArrow.setPosition(900, 400);
-	}
+		}
+		else if (tan == 5) {
+			SpriteUpArrow.setPosition(900, 400);
 
-	if (caminoActual >= 6) {
-		caminoActual = 0;
-		casillas->resize(1);
-		finalCamino = false;
-		caminoActual--;
+			LeftArrow.setPosition(370, 400);
+		}
+		else if (tan == 1) {
+			LeftArrow.setPosition(370, 400);
+
+			RightArrow.setPosition(900, 400);
+		}
+
+
+		if (caminoActual >= 6) {
+			caminoActual = 0;
+			casillas->resize(1);
+			finalCamino = false;
+			caminoActual--;
+
+		}
+
+		break;
+
+	case 2: // Configuración para el mapa 2
+		//iteUpArrow.setPosition(900, 400);
+		//LeftArrow.setPosition(370, 400);
+		break;
+
+	case 3: // Configuración para el mapa 3
 	
+		for (int i = 0; i < posSelecCAm.size(); i++)
+		{
+			if(posSelecCAm[i]==sprite->getPosition()){
+			tan = i+1;}
+		}
+		
+
+
+
+
+		if (tan == 3) {
+			SpriteUpArrow.setPosition(370, 400);
+
+			RightArrow.setPosition(900, 400);
+
+		}
+		else if (tan == 4) {
+			SpriteUpArrow.setPosition(900, 400);
+
+			LeftArrow.setPosition(370, 400);
+		}
+		else if (tan == 1 || tan == 2) {
+			LeftArrow.setPosition(370, 400);
+
+			RightArrow.setPosition(900, 400);
+		}
+
+
+		if (caminoActual >= 6) {
+			caminoActual = 0;
+			casillas->resize(1);
+			finalCamino = false;
+			caminoActual--;
+
+		}
+
+		break;
 	}
+
+
+
 	if (secondTurn) {
 
 		GM.bot.resetTCAM();
 	}
 
 	while (finalCamino == true) {
-	
+
 		sf::Event event;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -218,55 +280,115 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+					switch (mapaActual) {
+					case 1: // Configuración para el mapa 1
+						if (tan == 3) {
+							if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(0);
+								selCamIzq1();
 
-					if (tan == 3) {
-						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-						//	client.networkMessage.sendPathOption(0);
-							seleccionarCaminoIzq();
-							
+							}
+
+							if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(1);
+								selCamDer1();
+							}
+
 						}
+						else if (tan == 5) {
+							if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(0);
+								selCamDer1();
 
-						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-						//	client.networkMessage.sendPathOption(1);
-							seleccionarCaminoDer();
+							}
+
+							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(1);
+								selCamIzq1();
+							}
 						}
+						else if (tan == 1) {
+							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(0);
+								selCamIzq1();
+							}
 
+							if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(1);
+								selCamDer1();
+							}
+						}
+						break;
+
+					case 2: // Configuración para el mapa 2
+						//SpriteUpArrow.setPosition(900, 400);
+						//LeftArrow.setPosition(370, 400);
+						break;
+
+					case 3: // Configuración para el mapa 3
+						if (tan == 3) {
+							if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(0);
+								selCamIzq3();
+
+							}
+
+							if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(1);
+								selCamDer3();
+							}
+
+						}
+						else if (tan == 4) {
+							if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(0);
+								selCamDer3();
+
+							}
+
+							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(1);
+								selCamIzq3();
+							}
+						}
+						else if (tan == 1 || tan == 2) {
+							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//client.networkMessage.sendPathOption(0);
+								selCamIzq3();
+							}
+
+							if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
+								playClickSound();
+								finalCamino = false;
+								//	client.networkMessage.sendPathOption(1);
+								selCamDer3();
+							}
+						}
+						break;
 					}
-					else if (tan == 5) {
-						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-							//client.networkMessage.sendPathOption(0);
-							seleccionarCaminoDer();
-							
-						}
 
-						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-							//client.networkMessage.sendPathOption(1);
-							seleccionarCaminoIzq();
-						}
-					}
-					else if (tan == 1) {
-						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-							//client.networkMessage.sendPathOption(0);
-							seleccionarCaminoIzq();
-						}
-
-						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
-							playClickSound();
-							finalCamino = false;
-						//	client.networkMessage.sendPathOption(1);
-							seleccionarCaminoDer();
-						}
-					}
 
 
 				}
@@ -285,53 +407,111 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 
 		if (!firstTurn) {
+			switch (mapaActual) {
+			case 1: // Configuración para el mapa 1
+				if (tan == 3) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq1();
+						RoadOption = -1;
+					}
 
-			if (tan == 3) {
-				if (RoadOption == 0) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoIzq();
-					RoadOption = -1;
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer1();
+						RoadOption = -1;
+					}
+
 				}
+				else if (tan == 5) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer1();
+						RoadOption = -1;
+					}
 
-				if (RoadOption == 1) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoDer();
-					RoadOption = -1;
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq1();
+						RoadOption = -1;
+					}
 				}
+				else if (tan == 1) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq1();
+						RoadOption = -1;
+					}
 
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer1();
+						RoadOption = -1;
+					}
+				}
+				break;
+
+			case 2: // Configuración para el mapa 2
+				//SpriteUpArrow.setPosition(900, 400);
+				//LeftArrow.setPosition(370, 400);
+				break;
+
+			case 3: // Configuración para el mapa 3
+				if (tan == 3) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq3();
+						RoadOption = -1;
+					}
+
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer3();
+						RoadOption = -1;
+					}
+
+				}
+				else if (tan == 2) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer3();
+						RoadOption = -1;
+					}
+
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq3();
+						RoadOption = -1;
+					}
+				}
+				else if (tan == 1) {
+					if (RoadOption == 0) {
+						playClickSound();
+						finalCamino = false;
+						selCamIzq3();
+						RoadOption = -1;
+					}
+
+					if (RoadOption == 1) {
+						playClickSound();
+						finalCamino = false;
+						selCamDer3();
+						RoadOption = -1;
+					}
+				}
+				break;
 			}
-			else if (tan == 5) {
-				if (RoadOption == 0) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoDer();
-					RoadOption = -1;
-				}
 
-				if (RoadOption == 1) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoIzq();
-					RoadOption = -1;
-				}
-			}
-			else if (tan == 1) {
-				if (RoadOption == 0) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoIzq();
-					RoadOption = -1;
-				}
-
-				if (RoadOption == 1) {
-					playClickSound();
-					finalCamino = false;
-					seleccionarCaminoDer();
-					RoadOption = -1;
-				}
-			}
 		}
 		currentCursor = &normalCursor;
 
@@ -360,25 +540,54 @@ void MovePiecesO::updateCAmbioCasilla() {
 		window->setView(window->getDefaultView());
 
 
+		switch (mapaActual) {
+		case 1: // Configuración para el mapa 1
+			if (tan == 3) {
+				window->draw(SpriteUpArrow);
 
 
-		if (tan == 3) {
-			window->draw(SpriteUpArrow);
+				window->draw(RightArrow);
+
+			}
+			else if (tan == 5) {
+				window->draw(SpriteUpArrow);
+
+				window->draw(LeftArrow);
+			}
+			else if (tan == 1) {
+				window->draw(LeftArrow);
+
+				window->draw(RightArrow);
+			}
+			break;
+
+		case 2: // Configuración para el mapa 2
+			//SpriteUpArrow.setPosition(900, 400);
+			//LeftArrow.setPosition(370, 400);
+			break;
+
+		case 3: // Configuración para el mapa 3
+			if (tan == 3) {
+				window->draw(SpriteUpArrow);
 
 
-			window->draw(RightArrow);
+				window->draw(RightArrow);
 
+			}
+			else if (tan == 5) {
+				window->draw(SpriteUpArrow);
+
+				window->draw(LeftArrow);
+			}
+			else if (tan == 1||tan ==2) {
+				window->draw(LeftArrow);
+
+				window->draw(RightArrow);
+			}
+			break;
 		}
-		else if (tan == 5) {
-			window->draw(SpriteUpArrow);
 
-			window->draw(LeftArrow);
-		}
-		else if (tan == 1) {
-			window->draw(LeftArrow);
 
-			window->draw(RightArrow);
-		}
 
 
 
@@ -386,7 +595,9 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 	}
 }
-void MovePiecesO::seleccionarCaminoIzq() {
+
+
+void MovePiecesO::selCamIzq1() {
 
 	if ((*casillas).size() == 1) {
 
@@ -398,10 +609,26 @@ void MovePiecesO::seleccionarCaminoIzq() {
 			sf::Vector2f(394,678),
 			sf::Vector2f(425,654)
 		};
+		std::vector<sf::Vector2f> camino3 = {
 
-
-
-		std::vector<sf::Vector2f> caminocasa2_1 = {  };
+		sf::Vector2f(473,661),
+		sf::Vector2f(505,632),
+		sf::Vector2f(505,586),
+		sf::Vector2f(519,544),
+		sf::Vector2f(556,544),
+		sf::Vector2f(568,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(580,678),
+		sf::Vector2f(621,677),
+		sf::Vector2f(632,637),
+		sf::Vector2f(632,585),
+		sf::Vector2f(642,542),
+		sf::Vector2f(678,542),
+		sf::Vector2f(694,582),
+		sf::Vector2f(694,636),
+		sf::Vector2f(725,668),
+		sf::Vector2f(772,666)
+		};
 
 		casillas->push_back(camino2_1);
 		casillas->push_back(camino3);
@@ -415,11 +642,49 @@ void MovePiecesO::seleccionarCaminoIzq() {
 		sf::Vector2f(881, 540)
 		};
 
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
 
-		std::vector<sf::Vector2f> caminoimpuesto4_1 = {  };
-		std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623) };
 
-		
+
+
+
 		casillas->push_back(camino4_1);
 		casillas->push_back(camino5);
 	}
@@ -429,7 +694,14 @@ void MovePiecesO::seleccionarCaminoIzq() {
 		std::vector<sf::Vector2f> camino6_1{
 			sf::Vector2f(407, 98),
 		};
-
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
 
 		casillas->push_back(camino6_1);
 		casillas->push_back(camino7);
@@ -437,7 +709,7 @@ void MovePiecesO::seleccionarCaminoIzq() {
 	}
 
 }
-void MovePiecesO::seleccionarCaminoDer() {
+void MovePiecesO::selCamDer1() {
 
 	if ((*casillas).size() == 1) {
 		std::vector<sf::Vector2f> camino2_2{
@@ -447,8 +719,26 @@ void MovePiecesO::seleccionarCaminoDer() {
 	 sf::Vector2f(425, 654)
 		};
 
-		std::vector<sf::Vector2f> caminoimpuesto2_2 = {  };
-		std::vector<sf::Vector2f> caminocasa2_2 = {  };
+		std::vector<sf::Vector2f> camino3 = {
+
+		sf::Vector2f(473,661),
+		sf::Vector2f(505,632),
+		sf::Vector2f(505,586),
+		sf::Vector2f(519,544),
+		sf::Vector2f(556,544),
+		sf::Vector2f(568,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(580,678),
+		sf::Vector2f(621,677),
+		sf::Vector2f(632,637),
+		sf::Vector2f(632,585),
+		sf::Vector2f(642,542),
+		sf::Vector2f(678,542),
+		sf::Vector2f(694,582),
+		sf::Vector2f(694,636),
+		sf::Vector2f(725,668),
+		sf::Vector2f(772,666)
+		};
 
 		casillas->push_back(camino2_2);
 		casillas->push_back(camino3);
@@ -465,11 +755,49 @@ void MovePiecesO::seleccionarCaminoDer() {
 		sf::Vector2f(881, 541)
 		};
 
-	
-		std::vector<sf::Vector2f> caminoimpuesto4_2 = {  };
-		std::vector<sf::Vector2f> caminocasa4_2 = {  };
 
-	
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
+
+
+
+
 
 		casillas->push_back(camino4_2);
 		casillas->push_back(camino5);
@@ -487,11 +815,15 @@ void MovePiecesO::seleccionarCaminoDer() {
 	   sf::Vector2f(365, 168)
 		};
 
-	
-		std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(790, 539),sf::Vector2f(444, 42), sf::Vector2f(320, 118),sf::Vector2f(869, 679),sf::Vector2f(428, 517) };
-		std::vector<sf::Vector2f> caminocasa6_2 = {  };
 
-
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
 
 		casillas->push_back(camino6_2);
 		casillas->push_back(camino7);
@@ -499,6 +831,478 @@ void MovePiecesO::seleccionarCaminoDer() {
 	}
 
 }
+
+void MovePiecesO::selCamIzq2() {
+
+	if ((*casillas).size() == 1) {
+
+		std::vector<sf::Vector2f> camino2_1 = {
+			sf::Vector2f(325,523),
+			sf::Vector2f(325,576),
+			sf::Vector2f(323,629),
+			sf::Vector2f(351,676),
+			sf::Vector2f(394,678),
+			sf::Vector2f(425,654)
+		};
+		std::vector<sf::Vector2f> camino3 = {
+
+		sf::Vector2f(473,661),
+		sf::Vector2f(505,632),
+		sf::Vector2f(505,586),
+		sf::Vector2f(519,544),
+		sf::Vector2f(556,544),
+		sf::Vector2f(568,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(580,678),
+		sf::Vector2f(621,677),
+		sf::Vector2f(632,637),
+		sf::Vector2f(632,585),
+		sf::Vector2f(642,542),
+		sf::Vector2f(678,542),
+		sf::Vector2f(694,582),
+		sf::Vector2f(694,636),
+		sf::Vector2f(725,668),
+		sf::Vector2f(772,666)
+		};
+
+		casillas->push_back(camino2_1);
+		casillas->push_back(camino3);
+	}
+	else if ((*casillas).size() == 3) {
+		std::vector<sf::Vector2f> camino4_1{
+		sf::Vector2f(765, 623),
+		sf::Vector2f(764, 577),
+		sf::Vector2f(790, 539),
+		sf::Vector2f(835, 540),
+		sf::Vector2f(881, 540)
+		};
+
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
+
+
+
+
+
+		casillas->push_back(camino4_1);
+		casillas->push_back(camino5);
+	}
+	else if ((*casillas).size() == 5) {
+
+
+		std::vector<sf::Vector2f> camino6_1{
+			sf::Vector2f(407, 98),
+		};
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
+
+		casillas->push_back(camino6_1);
+		casillas->push_back(camino7);
+
+	}
+
+}
+void MovePiecesO::selCamDer2() {
+
+	if ((*casillas).size() == 1) {
+		std::vector<sf::Vector2f> camino2_2{
+	 sf::Vector2f(428, 517),
+	 sf::Vector2f(429, 566),
+	 sf::Vector2f(429, 612),
+	 sf::Vector2f(425, 654)
+		};
+
+		std::vector<sf::Vector2f> camino3 = {
+
+		sf::Vector2f(473,661),
+		sf::Vector2f(505,632),
+		sf::Vector2f(505,586),
+		sf::Vector2f(519,544),
+		sf::Vector2f(556,544),
+		sf::Vector2f(568,586),
+		sf::Vector2f(568,636),
+		sf::Vector2f(580,678),
+		sf::Vector2f(621,677),
+		sf::Vector2f(632,637),
+		sf::Vector2f(632,585),
+		sf::Vector2f(642,542),
+		sf::Vector2f(678,542),
+		sf::Vector2f(694,582),
+		sf::Vector2f(694,636),
+		sf::Vector2f(725,668),
+		sf::Vector2f(772,666)
+		};
+
+		casillas->push_back(camino2_2);
+		casillas->push_back(camino3);
+	}
+	else if ((*casillas).size() == 3) {
+		std::vector<sf::Vector2f> camino4_2{
+		sf::Vector2f(817, 679),
+		sf::Vector2f(869, 679),
+		sf::Vector2f(923, 679),
+		sf::Vector2f(955, 648),
+		sf::Vector2f(955, 609),
+		sf::Vector2f(955, 568),
+		sf::Vector2f(926, 541),
+		sf::Vector2f(881, 541)
+		};
+
+
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
+
+
+
+
+
+		casillas->push_back(camino4_2);
+		casillas->push_back(camino5);
+	}
+	else if ((*casillas).size() == 5) {
+
+
+		std::vector<sf::Vector2f> camino6_2{
+	   sf::Vector2f(444, 42),
+	   sf::Vector2f(398, 41),
+	   sf::Vector2f(355, 40),
+	   sf::Vector2f(322, 73),
+	   sf::Vector2f(320, 118),
+	   sf::Vector2f(328, 161),
+	   sf::Vector2f(365, 168)
+		};
+
+
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
+
+		casillas->push_back(camino6_2);
+		casillas->push_back(camino7);
+
+	}
+
+}
+
+void MovePiecesO::selCamIzq3() {
+
+	if (tan == 1) {
+
+		std::vector<sf::Vector2f> camino2_1 = {
+	sf::Vector2f(800.500f, 333.000f),
+	sf::Vector2f(758.500f, 333.000f),
+	sf::Vector2f(715.000f, 335.000f),
+	sf::Vector2f(661.500f, 335.000f),
+	sf::Vector2f(660.500f, 397.000f),
+	sf::Vector2f(660.000f, 463.500f)
+		};
+
+		std::vector<sf::Vector2f> camino3 = {
+			sf::Vector2f(660.833f, 532.500f),
+			sf::Vector2f(602.833f, 532.500f),
+			sf::Vector2f(556.167f, 530.500f),
+			sf::Vector2f(506.833f, 516.500f)
+		};
+
+
+		casillas->push_back(camino2_1);
+		casillas->push_back(camino3);
+	}
+	else if (tan == 2) {
+
+		std::vector<sf::Vector2f> camino3 = {
+				sf::Vector2f(803.000f, 436.500f),
+				sf::Vector2f(759.000f, 476.000f),
+			//	sf::Vector2f(761.500f, 584.000f),
+				sf::Vector2f(746.500f, 534.000f),
+				sf::Vector2f(660.833f, 532.500f),
+				sf::Vector2f(602.833f, 532.500f),
+				sf::Vector2f(556.167f, 530.500f),
+				sf::Vector2f(506.833f, 516.500f)
+		};
+		casillas->push_back(camino3);
+	}
+	else if (tan == 3) {
+		std::vector<sf::Vector2f> camino4_1{
+		sf::Vector2f(765, 623),
+		sf::Vector2f(764, 577),
+		sf::Vector2f(790, 539),
+		sf::Vector2f(835, 540),
+		sf::Vector2f(881, 540)
+		};
+
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
+
+
+
+
+
+		casillas->push_back(camino4_1);
+		casillas->push_back(camino5);
+	}
+	else if (tan == 5) {
+
+
+		std::vector<sf::Vector2f> camino6_1{
+			sf::Vector2f(407, 98),
+		};
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
+
+		casillas->push_back(camino6_1);
+		casillas->push_back(camino7);
+
+	}
+
+}
+void MovePiecesO::selCamDer3() {
+
+	if (tan == 1) {
+		std::vector<sf::Vector2f> camino2_2 = {
+	sf::Vector2f(855.000f, 427.500f)
+
+		};
+
+
+
+		casillas->push_back(camino2_2);
+
+	}
+	else if (tan == 2) {
+	
+
+		std::vector<sf::Vector2f> camino3 = {
+				sf::Vector2f(916.000f, 449.000f),
+				sf::Vector2f(950.500f, 510.500f),
+				sf::Vector2f(944.500f, 580.500f),
+				sf::Vector2f(893.500f, 621.500f),
+				sf::Vector2f(842.500f, 631.000f),
+				sf::Vector2f(792.000f, 619.000f),
+				sf::Vector2f(761.500f, 584.000f),
+				sf::Vector2f(746.500f, 534.000f),
+				sf::Vector2f(660.833f, 532.500f),
+				sf::Vector2f(602.833f, 532.500f),
+				sf::Vector2f(556.167f, 530.500f),
+				sf::Vector2f(506.833f, 516.500f)
+		};
+		casillas->push_back(camino3);
+	}
+	else if (tan == 3) {
+		std::vector<sf::Vector2f> camino4_2{
+		sf::Vector2f(817, 679),
+		sf::Vector2f(869, 679),
+		sf::Vector2f(923, 679),
+		sf::Vector2f(955, 648),
+		sf::Vector2f(955, 609),
+		sf::Vector2f(955, 568),
+		sf::Vector2f(926, 541),
+		sf::Vector2f(881, 541)
+		};
+
+
+		std::vector<sf::Vector2f> camino5{
+		 sf::Vector2f(881, 495),
+		 sf::Vector2f(840, 476),
+		 sf::Vector2f(805, 450),
+		 sf::Vector2f(807, 416),
+		 sf::Vector2f(838, 398),
+		 sf::Vector2f(881, 399),
+		 sf::Vector2f(925, 396),
+		 sf::Vector2f(958, 372),
+		 sf::Vector2f(953, 335),
+		 sf::Vector2f(920, 312),
+		 sf::Vector2f(881, 312),
+		 sf::Vector2f(838, 311),
+		 sf::Vector2f(806, 292),
+		 sf::Vector2f(808, 257),
+		 sf::Vector2f(842, 238),
+		 sf::Vector2f(882, 238),
+		 sf::Vector2f(930, 231),
+		 sf::Vector2f(956, 190),
+		 sf::Vector2f(956, 141),
+		 sf::Vector2f(917, 124),
+		 sf::Vector2f(874, 132),
+		 sf::Vector2f(861, 178),
+		 sf::Vector2f(819, 188),
+		 sf::Vector2f(773, 190),
+		 sf::Vector2f(722, 183),
+		 sf::Vector2f(688, 137),
+		 sf::Vector2f(688, 81),
+		 sf::Vector2f(675, 40),
+		 sf::Vector2f(635, 37),
+		 sf::Vector2f(619, 81),
+		 sf::Vector2f(620, 131),
+		 sf::Vector2f(595, 175),
+		 sf::Vector2f(544, 175),
+		 sf::Vector2f(514, 141),
+		 sf::Vector2f(503, 98),
+		 sf::Vector2f(460, 79)
+		};
+
+
+
+
+
+		casillas->push_back(camino4_2);
+		casillas->push_back(camino5);
+	}
+	else if (tan == 5) {
+
+
+		std::vector<sf::Vector2f> camino6_2{
+	   sf::Vector2f(444, 42),
+	   sf::Vector2f(398, 41),
+	   sf::Vector2f(355, 40),
+	   sf::Vector2f(322, 73),
+	   sf::Vector2f(320, 118),
+	   sf::Vector2f(328, 161),
+	   sf::Vector2f(365, 168)
+		};
+
+
+		std::vector<sf::Vector2f> camino7{
+			// sf::Vector2f(407, 98),
+			 sf::Vector2f(402, 157),
+			 sf::Vector2f(442, 209),
+			 sf::Vector2f(413, 253),
+			 sf::Vector2f(364, 283),
+			 sf::Vector2f(368, 339)
+		};
+
+		casillas->push_back(camino6_2);
+		casillas->push_back(camino7);
+
+	}
+
+}
+
+
 void MovePiecesO::animacionRastro(float deltaTime) {
 	static float tiempoAcumulado = 0.0f;
 	float intervalo = 0.1f;
@@ -513,7 +1317,7 @@ void MovePiecesO::animacionRastro(float deltaTime) {
 		tiempoAcumulado = 0.0f;
 	}
 
-	
+
 	for (auto& s : trace) {
 		sf::Color color = s.getColor();
 		if (color.a > 0) {

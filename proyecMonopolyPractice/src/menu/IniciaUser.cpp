@@ -424,10 +424,8 @@ void IniciaUser::saveSelectedAvatar() {
 
 	if (selectedAvatar != nullptr) {
 
-
-		//std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-			//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
+			
 			json avatarData;
 			if (selectedIndex == 0) {
 
