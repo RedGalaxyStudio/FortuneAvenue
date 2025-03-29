@@ -215,9 +215,11 @@ void GameManager::nextTurn() {
 }
 
 void GameManager::impuesto() {
-	playerGameInfo[IndexTurn1].controlSalario += 1;
+	std::cout << "\nhola1:" << playerGameInfo[IndexTurn1].impuesto << ":" << playerGameInfo[IndexTurn1].money;
 	playerGameInfo[IndexTurn1].money -= playerGameInfo[IndexTurn1].impuesto;
 	playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+	std::cout << "\nhola1:" << playerGameInfo[IndexTurn1].impuesto << ":" << playerGameInfo[IndexTurn1].money;
+
 }
 
 void GameManager::processTurn(int playerId) {

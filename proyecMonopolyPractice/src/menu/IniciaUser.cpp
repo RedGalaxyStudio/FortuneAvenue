@@ -146,10 +146,11 @@ void IniciaUser::IniciAcion() {
 	sf::Image croppedImage;
 	bool hasTransparency = false;
 	sf::Image imageWithBackground;
-	sf::CircleShape colores = selectedAvatarCopy;
+	
+	colores.setRadius(selectedAvatarCopy.getRadius());
 	colores.setFillColor(sf::Color::Transparent);
-
-
+	colores.setOrigin(selectedAvatarCopy.getOrigin());
+	colores.setPosition(selectedAvatarCopy.getPosition());
 
 	sf::Sprite holi;
 
@@ -230,7 +231,13 @@ void IniciaUser::IniciAcion() {
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-
+				for (int i = 0; i < circles.size(); i++) {
+					if (circles[i].getGlobalBounds().contains(mousePosFloat)) {
+						//selectedBackgroundColor = colors[i];
+						std::cout << "\njjjj" << i;
+						colores.setFillColor(circles[i].getFillColor());
+					}
+				}
 				if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)&&(selectedAvatar != nullptr)&&(input1!="")) {
 					playClickSound();
 					saveSelectedAvatar();
@@ -239,12 +246,7 @@ void IniciaUser::IniciAcion() {
 				sf::CircleShape* newSelection = nullptr;
 
 				// Verificar si se selecciona un color
-				for (int i = 0; i < circles.size(); ++i) {
-					if (circles[i].getGlobalBounds().contains(mousePosFloat)) {
-						selectedBackgroundColor = colors[i];
-						colores.setFillColor(selectedBackgroundColor);
-					}
-				}
+		
 
 				for (int i = 0; i < avatars.size(); ++i) {
 
@@ -428,8 +430,40 @@ void IniciaUser::saveSelectedAvatar() {
 			//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
 			json avatarData;
 			if (selectedIndex == 0) {
-				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
-				TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
+
+				sf::RenderTexture renderTexturo;
+			
+					if (!renderTexturo.create(128, 128)) {
+						std::cerr << " Error al crear RenderTexture\n";
+						///	return;
+					}
+					sf::RectangleShape spo;
+					spo.setFillColor(colores.getFillColor());
+					spo.setSize(sf::Vector2f(128.f, 128.f));
+					sf::Texture tempTexture;
+					tempTexture.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+					sf::Sprite sprite(tempTexture);
+					// Dibujar la imagen escalada en el RenderTexture
+					renderTexturo.clear(colores.getFillColor());
+					renderTexturo.draw(spo);
+					renderTexturo.draw(sprite);
+					renderTexturo.display();
+
+					sf::Image croppedImage = renderTexturo.getTexture().copyToImage();
+					
+					//std::cout << "jokokok\n:" << projectPath;
+					std::filesystem::current_path(projectPath);
+					std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
+					croppedImage.saveToFile(dirPath);
+						std::cout << "HOLa";
+					textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+					sf::CircleShape* newSelection;
+					newSelection = new sf::CircleShape(64);
+					newSelection->setTexture(&textselectedAvatarCopy);
+					textselectedAvatarCopy = *newSelection->getTexture();
+					selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
+					avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+					TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
 			}
 			else {
 
