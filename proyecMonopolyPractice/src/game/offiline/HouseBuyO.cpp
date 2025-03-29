@@ -70,7 +70,7 @@ void HouseBuyO::resource() {
 
 }
 void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
-	return;
+
 	float angle = 0.f;
 	float rotationSpeed = 45.f;
 	std::vector<points> pp{ 0 };
@@ -193,6 +193,11 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					cierre = true;
 
 				}
+				else {
+
+					playClickSound();
+					cierre = true;
+				}
 
 			}
 		}
@@ -241,30 +246,25 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 
 }
 
-void HouseBuyO::ViewHouseBuys() {
-	//for (int i = 0; i < 6; i++)
-	//{
-	//	CasasCompradas CasasaCOMPRAR;
-	//	CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[index].casasPorJugador[i]]);
-	//	VCcompradas.push_back(CasasaCOMPRAR);
-	//	CsCmpdrsindex.push_back(i);
-	//}
+void HouseBuyO::ViewHouseBuysO() {
 
-	float perfilWidth = 200.0f;
-	float separacion = 20.0f;
-	int totalPerfiles = static_cast<int>(CsCmpdrsindex.size());
-
+	perfilWidth = 200.0f;
+	separacion = 20.0f;
+	totalPerfiles = static_cast<int>(CsCmpdrsindex.size());
+	seleccionlista = false;
+	CartaActiva = false;
+	indexMouseOver = -1;
+	cartaActivaIndex = -1;
 
 	if (totalPerfiles > 0) {
-
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+
 		float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
 		float startY = 360.0f;
 
 		for (int i = 0; i < totalPerfiles; i++) {
-			float xPos = startX + i * (perfilWidth + separacion); // Calcula la posición en X para cada perfil
+			float xPos = startX + i * (perfilWidth + separacion);
 			float yPos = startY;
-
 
 			sf::FloatRect globalBounds = VCcompradas[i].CsCmpdrsSprite.getGlobalBounds();
 			VCcompradas[i].CsCmpdrsSprite.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -275,71 +275,64 @@ void HouseBuyO::ViewHouseBuys() {
 
 		}
 	}
+}
+void HouseBuyO::ViewHouseBsaO(){
 
-	bool seleccionlista = false;
-	bool CartaActiva = false;
-	int indexMouseOver = -1;
-	int cartaActivaIndex = -1;
+	CartaActiva = false;
+	window->clear();
 
-	while (window->isOpen() && !seleccionlista) {
-		sf::Event event;
-		while (window->pollEvent(event)) {
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-			if (event.type == sf::Event::Closed ||
-				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-				renderTexture.clear();
-				renderTexture.draw(spriteBackgroundG);
-
-				renderTexture.draw(spriteX);
-				renderTexture.draw(overlay);
-				Menup.MenuSalir(nullptr);
-			}
+	window->draw(spriteBackgroundG);
 
 
-			for (int i = 0; i < VCcompradas.size(); i++) {
-				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
-			}
+	for (int i = 0; i < VCcompradas.size(); i++) {
+		window->draw(VCcompradas[i].CsCmpdrsSprite);
 
-			cartaActivaIndex = -1; // Reinicia la carta activa
-			for (int i = VCcompradas.size() - 1; i >= 0; i--) {
-				if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
-					VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
-					cartaActivaIndex = i;
-					break;
-				}
 
-				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-					if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+	}
+	window->draw(spriteX);
+	//window->display();
+}
 
-						playClickSound();
-						seleccionlista = true;
+void HouseBuyO::evenViewHouseCVO(sf::Event event) {
 
-					}
+	while (window->pollEvent(event)) {
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-				}
+		if (event.type == sf::Event::Closed ||
+			(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+			renderTexture.clear();
+			renderTexture.draw(spriteBackgroundG);
 
-			}
-
+			renderTexture.draw(spriteX);
+			renderTexture.draw(overlay);
+			Menup.MenuSalir(nullptr);
 		}
-		CartaActiva = false;
 
-
-		window->clear();
-
-
-
-		window->draw(spriteBackgroundG);
 
 		for (int i = 0; i < VCcompradas.size(); i++) {
-			window->draw(VCcompradas[i].CsCmpdrsSprite);
-
+			VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
 		}
 
+		cartaActivaIndex = -1;
+		for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
+			if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
+				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
+				cartaActivaIndex = i;
+				break;
+			}
+
+		}
+		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+			if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+
+				playClickSound();
+				seleccionlista = true;
+
+			}
 
 
-		window->draw(spriteX);
-		window->display();
+		}
 	}
+
 }

@@ -5,13 +5,19 @@
 #include "../../ui/ResourceGeneral.hpp"
 
 
+<<<<<<< HEAD
 GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+=======
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+	std::cout << "\n\nPROBA1" << std::endl;
+	
+>>>>>>> a86ee4e421e41facbd5bfb4cb65cae0d952e8c4f
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
 
 	resource();
 }
 void GameOffline::resource() {
-
+	std::cout << "\n\nPROBA2" << std::endl;
 	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 
@@ -93,7 +99,7 @@ void GameOffline::resource() {
 	RightArrow.setTexture(TextureArrowDer);
 	RightArrow.setOrigin(350.0f, 350.0f);
 	RightArrow.setPosition(900, 400);
-
+	std::cout << "\n\nPROBA2" << std::endl;
 	SpriteUpArrow.setTexture(TextureArrowArriba);
 	SpriteUpArrow.setOrigin(350.0f, 350.0f);
 	SpriteUpArrow.setPosition(370, 400);
@@ -136,7 +142,7 @@ void GameOffline::resource() {
 	globalBounds = Bienvenida.getGlobalBounds();
 	Bienvenida.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	posicionActual = 0;
-
+	std::cout << "\n\nPROBA4" << std::endl;
 	Impuesto.setCharacterSize(20);
 	Impuesto.setFont(fontUser);
 	Impuesto.setFillColor(sf::Color::Red);
@@ -389,9 +395,9 @@ void GameOffline::positionPefil() {
 	}
 }
 void GameOffline::update() {
-
+	std::cout << "\n\nPROBA5" << std::endl;
 	positionPefil();
-
+	std::cout << "\n\nPROBA6" << std::endl;
 	sf::Clock clock;
 	//std::cout << "COSitta";
 	GM.CasasAleatorias();
@@ -406,6 +412,7 @@ void GameOffline::update() {
 	NuloO NUlOO;
 	NUlOO.setWindow(*window);
 	NUlOO.Resource();
+	std::cout << "\n\nPROBA7" << std::endl;
 
 	float duracionMovimiento = 0.5f;
 
@@ -421,7 +428,7 @@ void GameOffline::update() {
 
 	StealplayerO robarjugador(window, ActiveUsers, playerGameOff);
 	robarjugador.resource();
-
+	
 
 	//GameEnd gameend(window);
 	//gameend.resource();
@@ -431,6 +438,7 @@ void GameOffline::update() {
 	int DadoResul = 0;
 
 	rouletteAnimation = false;
+	std::cout << "\n\nPROBA8" << std::endl;
 	InicioPartida();
 	GM.startGame();
 
@@ -519,12 +527,21 @@ void GameOffline::update() {
 
 
 			case 2:
+<<<<<<< HEAD
 				GM.impuesto();
 				draw_tax = true;
 				turn_Tax = false;
 				activeEvent = true;
 				animacionImpuesto = true;
 				impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
+=======
+			      	GM.impuesto();
+					draw_tax = true;
+					turn_Tax = false;
+					activeEvent = true;
+					animacionImpuesto = true;
+					impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
+>>>>>>> a86ee4e421e41facbd5bfb4cb65cae0d952e8c4f
 
 				Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
 				globalBounds = Impuesto.getGlobalBounds();
@@ -639,6 +656,11 @@ void GameOffline::update() {
 			DrawGameImpuesto();
 			window->display();
 		}
+		else if (ActiveHouse) {
+			house[auxHouse].ViewHouseBsaO();// ViewHouseBs
+			window->display();
+
+		}
 		else
 		{
 			DrawGame();
@@ -662,7 +684,13 @@ void GameOffline::Event() {
 
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+			if (ActiveHouse) {
 
+				house[auxHouse].evenViewHouseCVO(event);
+				if(house[auxHouse].seleccionlista) {
+					ActiveHouse = false;
+				}
+			}
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
@@ -686,13 +714,17 @@ void GameOffline::Event() {
 					playClickSound();
 					Menup.MenuOpcion(false);
 				}
-				if (playerGameOff[ActiveUsers[0]].Home.getGlobalBounds().contains(mousePosFloat)) {
-					playClickSound();
-					house[ActiveUsers[0]].ViewHouseBuys();
+
+				for (int i = 0; i < ActiveUsers.size(); i++)
+				{
+					if (playerGameOff[i].Home.getGlobalBounds().contains(mousePosFloat)) {
+						playClickSound();
+						house[ActiveUsers[i]].ViewHouseBuysO();
+						 auxHouse = i;
+						 ActiveHouse = true;
+					}
+
 				}
-
-
-
 			}
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
@@ -993,7 +1025,7 @@ void GameOffline::DrawGame() {
 				{
 					if (playerGameOff[IndexTurn1].PieceSelect.getPosition() == caminoimpuesto[i])
 					{
-						//client.EventoImpuesto();
+						GM.impuesto();
 						draw_tax = true;
 						turn_Tax = false;
 						activeEvent = true;

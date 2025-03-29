@@ -40,6 +40,9 @@ public:
 private:
 	sf::Text Conteosuel;
 
+	int auxHouse ;
+	bool ActiveHouse ;
+
 	Client* client;
 	sf::Clock clockMensaje; 
 	float currentScale = 1.0f; 
