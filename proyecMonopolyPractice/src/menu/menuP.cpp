@@ -838,7 +838,63 @@ void menuP::MenuAcercaDe() {
 	TextAcercaDe.setCharacterSize(static_cast <unsigned int>(17.5f));
 	TextAcercaDe.setFillColor(sf::Color::White);
 	TextAcercaDe.setPosition(50, 100);
+	/*std::vector<sf::Text> textos;
 
+	// Función para crear y almacenar texto formateado
+	auto crearTexto = [&](const std::string& contenido, unsigned int tamano, sf::Color color, float x, float y) {
+		sf::Text texto;
+		texto.setFont(Fuente);
+		texto.setString(contenido);
+		texto.setCharacterSize(tamano);
+		texto.setFillColor(color);
+		texto.setPosition(x, y);
+		texto.setOutlineColor(sf::Color::Black);  // Agrega borde para mejorar visibilidad
+		texto.setOutlineThickness(2);
+		textos.push_back(texto);
+		};
+
+	// 📌 TÍTULO
+	crearTexto("Fortune Avenue", 35, sf::Color::Yellow, 50, 50);
+	crearTexto("version 1.0.0", 20, sf::Color::White, 50, 90);
+
+	// 📌 DESCRIPCIÓN
+	crearTexto(
+		"Fortune Avenue esta basado en los clasicos juegos de mesa donde el objetivo principal es obtener\n"
+		"la mayor cantidad de dinero al finalizar la partida, tomando decisiones sobre la compra de viviendas\n"
+		"y el pago de impuestos, todo mientras el azar juega un papel importante al final de cada partida.\n",
+		18, sf::Color::White, 50, 130
+	);
+
+	// 📌 INFORMACIÓN DEL EQUIPO
+	crearTexto("Este proyecto fue desarrollado por Red Galaxy Studio,", 18, sf::Color::Cyan, 50, 200);
+	crearTexto("un equipo de 4 estudiantes apasionados por el desarrollo de videojuegos.", 18, sf::Color::White, 50, 230);
+
+	// 📌 DESARROLLADORES (Nombres en color distinto)
+	crearTexto("Desarrolladores:", 22, sf::Color::Cyan, 50, 270);
+	crearTexto("Daniel Fernandez", 20, sf::Color::Green, 50, 300);
+	crearTexto("Lider del Proyecto | Programador | Especialista en Redes", 18, sf::Color::White, 50, 325);
+
+	crearTexto("Jose Garcia", 20, sf::Color::Green, 50, 360);
+	crearTexto("Especialista en Testing y Calidad | Diseñador de Mecanicas | Encargado de Documentacion", 18, sf::Color::White, 50, 385);
+
+	crearTexto("Susana Rendon", 20, sf::Color::Green, 50, 420);
+	crearTexto("Artista Grafico | Diseñadora de UI/UX | Implementación de Sonidos", 18, sf::Color::White, 50, 445);
+
+	crearTexto("Marcos Rondon", 20, sf::Color::Green, 50, 480);
+	crearTexto("Encargado de Marketing | Diseñador de Mecanicas | Responsable de Economia del Juego", 18, sf::Color::White, 50, 505);
+
+	// 📌 NOTA FINAL
+	crearTexto(
+		"Nota: Aunque cada miembro asumió roles específicos, el proyecto fue un esfuerzo colaborativo en el\n"
+		"que todos contribuyeron activamente en diversas áreas del desarrollo.",
+		18, sf::Color::Yellow, 50, 540
+	);
+
+	// 📌 INFO FINAL
+	crearTexto("Ubicación: Proyecto académico, Universidad de los Andes.", 18, sf::Color::White, 50, 580);
+	crearTexto("Tecnologías utilizadas: SFML, ENet, C++.", 18, sf::Color::White, 50, 610);
+	crearTexto("Contacto: redgalaxy.studio24@gmail.com", 18, sf::Color::Cyan, 50, 640);
+*/
 	window->setMouseCursorVisible(true);
 
 	while (window->isOpen()) {

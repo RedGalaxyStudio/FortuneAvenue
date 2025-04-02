@@ -9,7 +9,7 @@
 #define _CRTDBG_MAP_ALLOC
 
 int main() {
-    std::cout << "SFML Version: " << SFML_VERSION_MAJOR << "." << SFML_VERSION_MINOR << "." << SFML_VERSION_PATCH << std::endl;
+    //std::cout << "SFML Version: " << SFML_VERSION_MAJOR << "." << SFML_VERSION_MINOR << "." << SFML_VERSION_PATCH << std::endl;
 
   //  boost::asio::io_context io;
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -32,14 +32,11 @@ int main() {
     if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
     window->setMouseCursorVisible(false);
     window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-  /* 
-  Cinematic cinematic(*window);
-   cinematic.Resource();
-   cinematic.Update();
-   */
-
-  //  printMemoryUsage();
-  //  Sleep(1000); // Mide cada 1 segundo
+  
+ // Cinematic cinematic(*window);
+  // cinematic.Resource();
+   //cinematic.Update();
+  
     Menup.setWindow(*window);  
     Menup.Resource();   
     Menup.MenuPrincipal();

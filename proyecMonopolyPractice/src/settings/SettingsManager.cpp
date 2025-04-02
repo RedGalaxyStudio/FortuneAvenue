@@ -22,7 +22,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     thumb.setRadius((height + 5) / 2 + 5.f);
     thumb.setFillColor(sf::Color(95, 179, 255));
     thumb.setOutlineColor(sf::Color::Black);
-    thumb.setOutlineThickness(2.0f);
+    thumb.setOutlineThickness(-2.0f);
 
 
     if (std::filesystem::exists("settings.json")) {
@@ -199,11 +199,15 @@ void SettingsManager::handleEvent(sf::Event& event, const sf::RenderWindow& wind
     case sf::Event::MouseButtonPressed:
         if (thumb.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
             isDragging = true;
+            thumb.setOutlineThickness(-4.0f);
+
         }
         break;
 
     case sf::Event::MouseButtonReleased:
         isDragging = false;
+        thumb.setOutlineThickness(-2.0f);
+
         break;
 
     case sf::Event::MouseMoved:

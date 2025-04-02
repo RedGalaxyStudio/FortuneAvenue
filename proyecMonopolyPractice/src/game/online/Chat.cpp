@@ -113,7 +113,7 @@ void Chat::resource() {
 	PlantillaMensajeE.NombreChat.setOutlineThickness(1);
 	PlantillaMensajeE.NombreChat.setOutlineColor(sf::Color(117, 220, 255));
 	PlantillaMensajeE.NombreChat.setString("Nombre1");
-	PlantillaMensajeE.NombreChat.setPosition(1200, 590);
+	PlantillaMensajeE.NombreChat.setPosition(1200, 400);
 	globalBounds = PlantillaMensajeE.NombreChat.getGlobalBounds();
 	PlantillaMensajeE.NombreChat.setOrigin(0, globalBounds.height / 2.0f);
 
@@ -127,7 +127,7 @@ void Chat::resource() {
 	PlantillaMensajeR.NombreChat.setOutlineThickness(1);
 	PlantillaMensajeR.NombreChat.setOutlineColor(sf::Color(117, 220, 255));
 	PlantillaMensajeR.NombreChat.setString("Nombre2");
-	PlantillaMensajeR.NombreChat.setPosition(925, 618);
+	PlantillaMensajeR.NombreChat.setPosition(925, 400);
 	globalBounds = PlantillaMensajeR.NombreChat.getGlobalBounds();
 	PlantillaMensajeR.NombreChat.setOrigin(0, globalBounds.height / 2.0f);
 	PlantillaMensajeR.AvatarEnviado.setRadius(18);
@@ -241,10 +241,11 @@ void Chat::Event(sf::Event event) {
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
 			PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
 			PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
-			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 10), 618);
+			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), 590);
+			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
 			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
 			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
-			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
+	
 
 		}
 
@@ -266,6 +267,8 @@ void Chat::Event(sf::Event event) {
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 			PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
 			PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
+			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), 570 - PlantillaMensajeE.NombreChat.getGlobalBounds().height);
+			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
 			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
 			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
 

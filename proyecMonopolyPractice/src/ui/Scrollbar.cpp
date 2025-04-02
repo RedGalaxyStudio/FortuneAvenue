@@ -5,20 +5,24 @@
 // Constructor
 Scrollbar::Scrollbar(float windowHeight, float scrollbarHeight, float width)
     : windowHeight(windowHeight), scrollbarHeight(scrollbarHeight), x(0), y(0), scrollOffset(0) {
-    conerPs = width / 2;
-
+ 
     // Crear el fondo de la barra (track)
     scrollbarTrack.setSize(sf::Vector2f(width, windowHeight));
     scrollbarTrack.setFillColor(sf::Color(74, 84, 88));  // Color: #4a5458
 
+     espacio = width * 0.2;
+     thumbW = width * 0.6;
+     bordetumbW = width * 0.2;
+     conerPs = thumbW / 2;
+
     // Crear el pulgar de la barra (thumb)
-    scrollbarThumb.setSize(sf::Vector2f(width, scrollbarHeight));
+    scrollbarThumb.setSize(sf::Vector2f(thumbW, scrollbarHeight));
     scrollbarThumb.setFillColor(sf::Color(81, 109, 255));  // Color: #516dff
-    scrollbarThumb.setOutlineThickness(4);
+    scrollbarThumb.setOutlineThickness(bordetumbW);
     scrollbarThumb.setOutlineColor(sf::Color(35, 46, 51));  // Borde color: #232E33
 
     // Crear los círculos para simular bordes redondeados
-    float radius = width / 2.0f;
+    float radius = thumbW / 2.0f;
 
     cornerTL.setRadius(radius);
     cornerTL.setFillColor(scrollbarThumb.getFillColor());
@@ -35,6 +39,24 @@ Scrollbar::Scrollbar(float windowHeight, float scrollbarHeight, float width)
     cornerBR.setRadius(radius);
     cornerBR.setFillColor(scrollbarThumb.getFillColor());
     cornerBR.setOrigin(radius, radius);
+
+
+    radius += bordetumbW;
+    cornerTLB.setRadius(radius);
+    cornerTLB.setFillColor(sf::Color(35, 46, 51));
+    cornerTLB.setOrigin(radius, radius);
+
+    cornerTRB.setRadius(radius);
+    cornerTRB.setFillColor(sf::Color(35, 46, 51));
+    cornerTRB.setOrigin(radius, radius);
+
+    cornerBLB.setRadius(radius);
+    cornerBLB.setFillColor(sf::Color(35, 46, 51));
+    cornerBLB.setOrigin(radius, radius);
+
+    cornerBRB.setRadius(radius);
+    cornerBRB.setFillColor(sf::Color(35, 46, 51));
+    cornerBRB.setOrigin(radius, radius);
 
     // Inicializar posiciones
     scrollbarTrack.setPosition(x, y);
@@ -67,13 +89,24 @@ void Scrollbar::update(float deltaScroll) {
     cornerTR.setPosition(x + scrollbarThumb.getSize().x - conerPs, thumbPosition);
     cornerBL.setPosition(x + conerPs, thumbPosition + scrollbarThumb.getSize().y);
     cornerBR.setPosition(x + scrollbarThumb.getSize().x - conerPs, thumbPosition + scrollbarThumb.getSize().y);
+
+    cornerTLB.setPosition(x + conerPs, thumbPosition);
+    cornerTRB.setPosition(x + scrollbarThumb.getSize().x - conerPs, thumbPosition);
+    cornerBLB.setPosition(x + conerPs, thumbPosition + scrollbarThumb.getSize().y);
+    cornerBRB.setPosition(x + scrollbarThumb.getSize().x - conerPs, thumbPosition + scrollbarThumb.getSize().y);
 }
 
 // Método para dibujar la barra de desplazamiento
 void Scrollbar::draw(sf::RenderWindow& window) {
     window.draw(scrollbarTrack);
+    window.draw(cornerTLB);
+    window.draw(cornerTRB);
+    window.draw(cornerBLB);
+    window.draw(cornerBRB);
     window.draw(scrollbarThumb);
 
+
+    
     // Dibujar los bordes redondeados
     window.draw(cornerTL);
     window.draw(cornerTR);
@@ -87,6 +120,10 @@ void Scrollbar::Prinft() {
     renderTexture.draw(scrollbarThumb);
 
     // Dibujar los bordes redondeados
+    renderTexture.draw(cornerTLB);
+    renderTexture.draw(cornerTRB);
+    renderTexture.draw(cornerBLB);
+    renderTexture.draw(cornerBRB);
     renderTexture.draw(cornerTL);
     renderTexture.draw(cornerTR);
     renderTexture.draw(cornerBL);
@@ -99,6 +136,8 @@ void Scrollbar::setPosition(float xNew, float yNew) {
     y = yNew;
 
     scrollbarTrack.setPosition(x, y);
+
+    x += espacio;
     scrollbarThumb.setPosition(x, y);
 
     // Ajustar las posiciones de los círculos
@@ -106,6 +145,11 @@ void Scrollbar::setPosition(float xNew, float yNew) {
     cornerTR.setPosition(x + scrollbarThumb.getSize().x - conerPs, y);
     cornerBL.setPosition(x + conerPs, y + scrollbarThumb.getSize().y);
     cornerBR.setPosition(x + scrollbarThumb.getSize().x - conerPs, y + scrollbarThumb.getSize().y);
+
+    cornerTLB.setPosition(x + conerPs, y);
+    cornerTRB.setPosition(x + scrollbarThumb.getSize().x - conerPs, y);
+    cornerBLB.setPosition(x + conerPs, y + scrollbarThumb.getSize().y);
+    cornerBRB.setPosition(x + scrollbarThumb.getSize().x - conerPs, y + scrollbarThumb.getSize().y);
 }
 
 // Método para cambiar los colores
@@ -118,6 +162,10 @@ void Scrollbar::setColors(const sf::Color& trackColor, const sf::Color& thumbCol
     cornerTR.setFillColor(thumbColor);
     cornerBL.setFillColor(thumbColor);
     cornerBR.setFillColor(thumbColor);
+    cornerTLB.setFillColor(sf::Color(35, 46, 51));
+    cornerTRB.setFillColor(sf::Color(35, 46, 51));
+    cornerBLB.setFillColor(sf::Color(35, 46, 51));
+    cornerBRB.setFillColor(sf::Color(35, 46, 51));
 }
 
 // Método para ajustar el grosor del borde
