@@ -721,6 +721,8 @@ void GameOffline::Event() {
 					ruleta->trurntrue();
 					GM.giroActivo = true;
 					turnoGiro = false;
+					RulletG = true;
+
 				}
 			}
 		}
@@ -759,7 +761,7 @@ void GameOffline::DrawGameRuleta() {
 			turnoGiro = false;
 
 			GM.giroActivo = true;
-
+			RulletG = true;
 
 		}
 	}
@@ -792,7 +794,7 @@ void GameOffline::DrawGameRuleta() {
 
 	window->draw(renderedSprite);
 	ruleta->draw(*window, deltaTime, GM.giroActivo);
-	if (!GM.giroActivo && firstTurn) {
+	if (!RulletG && firstTurn) {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		if (increasing) {
@@ -920,6 +922,8 @@ void GameOffline::DrawGame() {
 						turn_roulette = false;
 						activeEvent = true;
 						turnoGiro = true;
+						RulletG = false;
+
 						ruleta->trurntrue();
 					}
 				}
@@ -983,6 +987,8 @@ void GameOffline::DrawGame() {
 						turn_roulette = false;
 						activeEvent = true;
 						turnoGiro = true;
+						RulletG = false;
+
 						GM.bot.resetTCAMRuleta();
 						ruleta->trurntrue();
 					}

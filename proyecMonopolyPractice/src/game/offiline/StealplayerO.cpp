@@ -81,7 +81,7 @@ void StealplayerO::update() {
             float xPos = startX + i * (perfilWidth + separacion);
             float yPos = startY;
 
-            PosIsMouseOver[i] = sf::Vector2f(startX, startY +270);
+            PosIsMouseOver[i] = sf::Vector2f(xPos, startY +270);
             
             PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);

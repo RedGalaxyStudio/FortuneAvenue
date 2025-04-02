@@ -665,8 +665,9 @@ sf::Texture IniciaUser::fun() {
 
 	sf::Sprite boton;
 	sf::Texture bottt;
-	bottt.loadFromFile("assets/image/Icon/Cosas que no se usan - Icon/iconojuegodado.png");
+	bottt.loadFromFile("assets/image/Button/aceptar1.png");
 	boton.setTexture(bottt);
+	boton.setPosition(325, 365);
 
 
 	while (window.isOpen()) {
@@ -682,24 +683,7 @@ sf::Texture IniciaUser::fun() {
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					//sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-
-					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
-					for (int i = 0; i < 8; ++i) {
-						if (corners[i]->getGlobalBounds().contains(mousePos)) {
-							resizing = true;
-							//std::cout << "\nnnnnnnn:::::::::::|";
-							resizingCorner = i;
-							break;
-						}
-					}
-
-					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
-						dragging = true;
-						//std::cout << "\nnnnnnnn:::::::::::|";
-						offset = mousePos - selectionBox.getPosition();
-					}
-
-					if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
+if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						// Obtener la posición y tamaño del `selectionBox`
 						sf::Vector2f selPos = selectionBox.getPosition();
 						sf::Vector2f selSize = selectionBox.getSize();
@@ -719,6 +703,23 @@ sf::Texture IniciaUser::fun() {
 						return newTexture;
 
 					}
+					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
+					for (int i = 0; i < 8; ++i) {
+						if (corners[i]->getGlobalBounds().contains(mousePos)) {
+							resizing = true;
+							//std::cout << "\nnnnnnnn:::::::::::|";
+							resizingCorner = i;
+							break;
+						}
+					}
+
+					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
+						dragging = true;
+						//std::cout << "\nnnnnnnn:::::::::::|";
+						offset = mousePos - selectionBox.getPosition();
+					}
+
+					
 				}
 			}
 

@@ -42,6 +42,7 @@ private:
 
 	int auxHouse ;
 	bool ActiveHouse ;
+	bool RulletG=false;
 
 	Client* client;
 	sf::Clock clockMensaje; 
