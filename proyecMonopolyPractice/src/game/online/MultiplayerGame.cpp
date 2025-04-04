@@ -395,13 +395,8 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 
 	float duracionMovimiento = 0.5f;
 
-	for (int i = 0; i < UsuariosActivos.size(); i++) {
 
-		house[i].setWindow(*window, i,*client);
-		house[i].resource();
-
-		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
-	}
+	std::cout << "\n\nl::" << playersGame[0].origen.x << ":" << playersGame[0].origen.y;
 
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame,client);
 	robarjugador.resource();
@@ -417,6 +412,14 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	loading.cv.wait(lock, [&loading] { return loading.timeReady; });  // Espera hasta que timeready sea true
 	window->setActive(true);
 	positionPefil();
+	for (int i = 0; i < UsuariosActivos.size(); i++) {
+
+		house[i].setWindow(*window, i, *client);
+		house[i].resource();
+
+		moverFichas[i].Inicializar(&playersGame[i].PieceSelect, &casillas[i], &playerInfos[i].Vueltas, playersGame[i].origen, &playerInfos[i].final, playerInfos[i].PiecUserme);
+	}
+
 	InicioPartida();
 
 	while (window->isOpen() && !juegoTerminado) {
