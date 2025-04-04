@@ -183,6 +183,9 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
     ImgVolumen.setOrigin(25, 25);
     ImgVolumen.setPosition(width + 310, y + 7);
     updateVolumeText();
+
+
+
 }
 
 
