@@ -643,7 +643,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
-		
+		return;
 	}
 }
 void MultiplayerGame::Event() {

@@ -42,6 +42,9 @@ extern std::string nameUser;
 extern sf::Texture CheckTexturesOn;
 extern sf::Texture CheckTexturesOff;
 
+extern bool ReturnMenu;
+extern bool ReturnPieces;
+
 extern bool chatOn;
 struct PlayerInfo {
 	std::string username;

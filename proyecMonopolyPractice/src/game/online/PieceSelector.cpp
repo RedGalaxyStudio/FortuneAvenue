@@ -354,6 +354,9 @@ void PieceSelector::updateSelection() {
 			MultiplayerGame mpGame(*window,chat,client);
 			client->networkMessage.cargarImagen(TextureAvatarPath);
 			mpGame.update(loading);
+			if(ReturnMenu){
+				return;
+			}
 		}
 
 		currentCursor = &normalCursor;

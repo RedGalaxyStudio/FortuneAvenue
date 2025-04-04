@@ -69,6 +69,9 @@ bool ruleta_draw;
 bool impuesto_draw;
 bool casa_draw;
 
+bool ReturnMenu = false;
+bool ReturnPieces = false;
+
 bool ChatOn = false;
 
 void loadResourceGame(){
