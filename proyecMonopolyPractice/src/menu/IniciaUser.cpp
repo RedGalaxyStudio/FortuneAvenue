@@ -114,7 +114,7 @@ void IniciaUser::IniciAcion() {
 	const float minThumbHeight = 14.0f;
 	thumbHeight = std::max(thumbHeight, minThumbHeight);
 	Scrollbar scrollbar(340, thumbHeight, 14);
-	scrollbar.setPosition(1260, 340);
+	scrollbar.setPosition(1260, 360);
 	selectedAvatarCopy.setPosition(400, 112);
 	for (int i = 0; i < avatars.size(); i++) {
 		sf::Vector2f pos = avatars[i].getPosition();
@@ -135,12 +135,34 @@ void IniciaUser::IniciAcion() {
 	sf::Color(205, 133, 63),  // Marrón claro (Tono pastel)
 	sf::Color(240, 128, 128)  // Rojo pastel
 	};
-	for (size_t i = 0; i < 10; ++i) {
-		sf::CircleShape circle(30);
-		circle.setFillColor(colors[i]);
-		circle.setPosition(20 + i * 120, 300); // Distribuidos horizontalmente
+
+	float windowWidth = 1280;  // Ancho de la ventana
+	size_t numCircles = 10;    // Número de círculos
+	float circleRadius = 30;   // Radio de los círculos
+
+	// Calcular el espacio disponible entre los círculos
+	float totalWidth = windowWidth - 4 * circleRadius; // El espacio entre el primer y el último círculo
+	float spacing = totalWidth / (numCircles - 1);     // El espaciado entre los círculos
+
+	// Calcular la posición X para centrar los círculos
+	float firstCircleX = (windowWidth - totalWidth) / 2;  // La posición X del primer círculo, centrado
+
+	// Coloca los círculos de manera equitativa
+	for (size_t i = 0; i < numCircles; ++i) {
+		sf::CircleShape circle(circleRadius);
+		circle.setFillColor(colors[i]);  // Colores de los círculos
+
+		// Calcula la posición X para cada círculo, centrando la distribución
+		float posX = firstCircleX + i * spacing;
+
+		circle.setOrigin(circleRadius, circleRadius);  // Establece el origen en el centro del círculo
+		circle.setPosition(posX, 300);  // Coloca el círculo en la posición Y deseada (280)
+
 		circles.push_back(circle);
 	}
+
+
+
 	sf::Color selectedBackgroundColor = sf::Color::White; // Color por defecto
 	sf::Texture tempTexture;
 	sf::Image croppedImage;
@@ -153,6 +175,24 @@ void IniciaUser::IniciAcion() {
 	colores.setPosition(selectedAvatarCopy.getPosition());
 
 	sf::Sprite holi;
+
+
+
+
+	sf::RectangleShape marcoFondo,BordeFondo;
+
+	marcoFondo.setSize(sf::Vector2f(1280.f, 400.f));
+	marcoFondo.setFillColor(sf::Color(0, 0, 0, 58));
+	marcoFondo.setPosition(0, 310);
+	BordeFondo.setSize(sf::Vector2f(1280.f, 370.f));
+	BordeFondo.setFillColor(sf::Color(0, 0, 0, 0));
+	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
+	BordeFondo.setOutlineThickness(-22);
+	BordeFondo.setPosition(0 -2, 358);
+
+
+
+
 
 	while (window->isOpen() && !salir) {
 		mousePosition = sf::Mouse::getPosition(*window);
@@ -389,6 +429,7 @@ void IniciaUser::IniciAcion() {
 		}
 		window->clear();
 		window->draw(SpriteFondoMenu);
+		window->draw(marcoFondo);
 
 		for (int i = 0; i < avatars.size(); ++i) {
 
@@ -400,6 +441,7 @@ void IniciaUser::IniciAcion() {
 
 
 		window->draw(SpriteFondoMenuAvar);
+		window->draw(BordeFondo);
 
 
 		if (selectedAvatar != nullptr) {
@@ -424,10 +466,8 @@ void IniciaUser::saveSelectedAvatar() {
 
 	if (selectedAvatar != nullptr) {
 
-
-		//std::cout << "Holaaaaaaaaa1111";
 		if (selectedIndex != -1) {
-			//	std::cout << "Holaaaaaaaaa00000000:      " << selectedIndex;
+			
 			json avatarData;
 			if (selectedIndex == 0) {
 
@@ -503,7 +543,6 @@ void IniciaUser::loadSelectedAvatar() {
 		selectedAvatarCopy.setTexture(&TextureAvatarSelec);
 	}
 }
-
 void IniciaUser::loadAvatars() {
 
 	int avatarCount = 21;
@@ -548,8 +587,6 @@ void IniciaUser::loadAvatars() {
 	recua.setTexture(Texrecua);
 	recua.setOrigin(65, 65);
 }
-
-
 sf::Texture IniciaUser::fun() {
 
 
@@ -667,8 +704,9 @@ sf::Texture IniciaUser::fun() {
 
 	sf::Sprite boton;
 	sf::Texture bottt;
-	bottt.loadFromFile("assets/image/Icon/Cosas que no se usan - Icon/iconojuegodado.png");
+	bottt.loadFromFile("assets/image/Button/aceptar1.png");
 	boton.setTexture(bottt);
+	boton.setPosition(325, 365);
 
 
 	while (window.isOpen()) {
@@ -684,24 +722,7 @@ sf::Texture IniciaUser::fun() {
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					//sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-
-					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
-					for (int i = 0; i < 8; ++i) {
-						if (corners[i]->getGlobalBounds().contains(mousePos)) {
-							resizing = true;
-							//std::cout << "\nnnnnnnn:::::::::::|";
-							resizingCorner = i;
-							break;
-						}
-					}
-
-					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
-						dragging = true;
-						//std::cout << "\nnnnnnnn:::::::::::|";
-						offset = mousePos - selectionBox.getPosition();
-					}
-
-					if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
+if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						// Obtener la posición y tamaño del `selectionBox`
 						sf::Vector2f selPos = selectionBox.getPosition();
 						sf::Vector2f selSize = selectionBox.getSize();
@@ -721,6 +742,23 @@ sf::Texture IniciaUser::fun() {
 						return newTexture;
 
 					}
+					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
+					for (int i = 0; i < 8; ++i) {
+						if (corners[i]->getGlobalBounds().contains(mousePos)) {
+							resizing = true;
+							//std::cout << "\nnnnnnnn:::::::::::|";
+							resizingCorner = i;
+							break;
+						}
+					}
+
+					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
+						dragging = true;
+						//std::cout << "\nnnnnnnn:::::::::::|";
+						offset = mousePos - selectionBox.getPosition();
+					}
+
+					
 				}
 			}
 

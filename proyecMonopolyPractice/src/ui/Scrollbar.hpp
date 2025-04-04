@@ -36,6 +36,7 @@ private:
     sf::RectangleShape scrollbarTrack; 
     sf::RectangleShape scrollbarThumb;
     sf::CircleShape cornerTL, cornerTR, cornerBL, cornerBR; 
+    sf::CircleShape cornerTLB, cornerTRB, cornerBLB, cornerBRB; 
     float conerPs,x,y;
     float maxScrollOffset;
     
@@ -47,6 +48,10 @@ private:
     float windowHeight;      
     float scrollbarHeight;   
     float scrollOffset;    
+
+    float bordetumbW;
+    float espacio;
+    float thumbW;
    
 };
 

@@ -544,7 +544,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			PlantillaMensajeR.ContenidoEnviado.setPosition(970, 600);
 			PlantillaMensajeR.SMSEnviado.setPosition(970 + 10, 618);
 			PlantillaMensajeR.AvatarEnviado.setPosition(920, 600);
-			PlantillaMensajeR.NombreChat.setPosition(925, 618);
+			PlantillaMensajeR.NombreChat.setPosition(930, 618);
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();;
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
@@ -559,7 +559,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			PlantillaMensajeR.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 			PlantillaMensajeR.ContenidoEnviado.setPosition(sf::Vector2f(970, 640 - PlantillaMensajeR.ContenidoEnviado.getGlobalBounds().height));
 			PlantillaMensajeR.SMSEnviado.setPosition(sf::Vector2f(970 + 10, PlantillaMensajeR.ContenidoEnviado.getPosition().y + 18));
-			PlantillaMensajeR.NombreChat.setPosition(sf::Vector2f(9525 + 10, PlantillaMensajeR.NombreChat.getPosition().y + 18));
+			PlantillaMensajeR.NombreChat.setPosition(sf::Vector2f(925 + 20, PlantillaMensajeR.NombreChat.getPosition().y + 20));
 			PlantillaMensajeR.positionContenidoEnviado = PlantillaMensajeR.ContenidoEnviado.getPosition();
 			PlantillaMensajeR.positionSMSEnviado = PlantillaMensajeR.SMSEnviado.getPosition();
 			PlantillaMensajeR.positionAvatarEnviado = PlantillaMensajeR.AvatarEnviado.getPosition();
@@ -579,6 +579,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
 			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].AvatarEnviado.getPosition().x, Mensajes[i].AvatarEnviado.getPosition().y - aux);
 			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
+			Mensajes[i].NombreChat.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x + 10, Mensajes[i].ContenidoEnviado.getPosition().y + 20);
 			Mensajes[i].positionContenidoEnviado = Mensajes[i].ContenidoEnviado.getPosition();
 			Mensajes[i].positionSMSEnviado = Mensajes[i].SMSEnviado.getPosition();
 			Mensajes[i].positionAvatarEnviado = Mensajes[i].AvatarEnviado.getPosition();

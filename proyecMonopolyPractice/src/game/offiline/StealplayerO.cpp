@@ -22,7 +22,7 @@ void StealplayerO::resource() {
 	sf::FloatRect globalBounds = SlectingPlayer.getGlobalBounds();
 	SlectingPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	SlectingPlayer.setPosition(640, 100);
-   //std::cout << "\n3";
+    //std::cout << "\n3"
     if (!UsuariosEleccion.empty()) { 
         UsuariosEleccion.erase(UsuariosEleccion.begin()); 
     }
@@ -81,7 +81,7 @@ void StealplayerO::update() {
             float xPos = startX + i * (perfilWidth + separacion);
             float yPos = startY;
 
-            PosIsMouseOver[i] = sf::Vector2f(startX, startY +270);
+            PosIsMouseOver[i] = sf::Vector2f(xPos, startY +270);
             
             PlayersSteal[UsuariosEleccion[i]].NamePlayer.setPosition(xPos, startY + 70);
             PlayersSteal[UsuariosEleccion[i]].boxPlayer.setPosition(xPos, startY + 70);

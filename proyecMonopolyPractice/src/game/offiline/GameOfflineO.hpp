@@ -40,6 +40,10 @@ public:
 private:
 	sf::Text Conteosuel;
 
+	int auxHouse ;
+	bool ActiveHouse ;
+	bool RulletG=false;
+
 	Client* client;
 	sf::Clock clockMensaje; 
 	float currentScale = 1.0f; 
@@ -51,6 +55,7 @@ private:
 	
 	sf::RenderWindow* window;
 	std::vector<std::vector<std::vector<sf::Vector2f>>> casillas;
+	std::vector<sf::Vector2f> origenS;
 
 
 	std::vector<sf::Vector2f> casillasRuleta = {
