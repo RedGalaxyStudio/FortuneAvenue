@@ -8,6 +8,8 @@
 #include <algorithm>
 #include "ResourceGameO.hpp"
 
+
+
 class MovePiecesO {
 public:
 	MovePiecesO(sf::RenderWindow& win,int mapauso);
@@ -65,6 +67,17 @@ private:
 	float tiempoCambio; 
 	float timer;
 
+	static sf::Texture TextureArrowIzq;
+	static sf::Texture TextureArrowDer;
+	static sf::Texture TextureArrowArriba;
+	static sf::Texture TextureArrowAbajo;
+
+	sf::Sprite SpriteUpArrow;
+	sf::Sprite LeftArrow;
+	sf::Sprite RightArrow;
+	sf::Sprite DownArrow;  
+
 };
+
 
 #endif

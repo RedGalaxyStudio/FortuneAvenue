@@ -28,12 +28,9 @@ extern sf::Texture &textureBoxPerfilOff;
 extern sf::Sprite MapSprite; //spriteMapa
 extern sf::Clock watch; //reloj
 extern sf::View vision; //view 
-extern sf::Sprite RightArrow; //SpriteArrowDer
 extern std::vector<sf::Sprite> trace; //rastro
-extern sf::Sprite LeftArrow; //SpriteArrowIzq
 extern bool plataform; //server
 extern std::vector<sf::Sprite> piecesOff; //pieces
-extern sf::Sprite SpriteUpArrow; //SpriteArrowArriba
 extern int previousSelectionIndex[4];
 extern bool userRulette; //userRuleta
 extern bool userTax; //userImpuesto
