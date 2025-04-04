@@ -1,0 +1,29 @@
+{
+    "Volumen_Effects": 0.0,
+    "Volumen_Music": 0.0,
+    "sizeFilledBar_Effects": {
+        "x": 0.0,
+<<<<<<< HEAD
+        "y": 10.0
+=======
+        "y": 0.0
+>>>>>>> 4460fc84dadb36ac99353d071b1c3445acc840fe
+    },
+    "sizeFilledBar_Music": {
+        "x": 0.0,
+        "y": 10.0
+    },
+    "thumbPosition_Effects": {
+<<<<<<< HEAD
+        "x": 187.5,
+        "y": 392.5
+=======
+        "x": 0.0,
+        "y": 0.0
+>>>>>>> 4460fc84dadb36ac99353d071b1c3445acc840fe
+    },
+    "thumbPosition_Music": {
+        "x": 187.5,
+        "y": 292.5
+    }
+}

@@ -58,65 +58,14 @@ private:
 	std::vector<sf::Vector2f> origenS;
 
 
-	std::vector<sf::Vector2f> casillasRuleta = {
-	sf::Vector2f(402, 157),
-	sf::Vector2f(840, 476),
-	sf::Vector2f(958, 372),
-	sf::Vector2f(930, 231),
-	sf::Vector2f(688, 137),
-	sf::Vector2f(675, 40),
-	sf::Vector2f(514, 141),
-	sf::Vector2f(425,654),
-	sf::Vector2f(556 , 544),
-	sf::Vector2f(632 , 585),
-	sf::Vector2f(923, 679),
-	sf::Vector2f(328, 161),
-	sf::Vector2f(790, 539),
-	sf::Vector2f(325,523)
-	};
+	std::vector<sf::Vector2f> casillasRuleta;
 
 	std::vector<sf::CircleShape> puntos;
 
-	std::vector<sf::Vector2f> caminoimpuesto{
-		sf::Vector2f(621 , 677),
-		sf::Vector2f(694 ,582),
-		sf::Vector2f(413, 253),
-		sf::Vector2f(444, 42),
-		sf::Vector2f(320, 118),
-		sf::Vector2f(869, 679),
-		sf::Vector2f(428, 517),
-		sf::Vector2f(835, 540),
-		sf::Vector2f(805, 450),
-		sf::Vector2f(925, 396),
-		sf::Vector2f(808, 257),
-		sf::Vector2f(882, 238),
-		sf::Vector2f(773, 190),
-		sf::Vector2f(635, 37)
-
-
-	};
+	std::vector<sf::Vector2f> caminoimpuesto;
 	int NMapa;
 
-	std::vector<sf::Vector2f> caminocasa{
-		sf::Vector2f(807, 416),
-		sf::Vector2f(881, 312),
-		sf::Vector2f(842, 238),
-		sf::Vector2f(874, 132),
-		sf::Vector2f(819, 188),
-		sf::Vector2f(595, 175),
-		sf::Vector2f(505,586),
-		sf::Vector2f(568,636),
-		sf::Vector2f(694,636),
-		sf::Vector2f(368, 339),
-		sf::Vector2f(407, 98),
-		sf::Vector2f(764, 577),
-		sf::Vector2f(429, 566),
-		sf::Vector2f(955, 609),
-		sf::Vector2f(355, 40),
-		sf::Vector2f(323,629),
-		sf::Vector2f(394,678)
-
-	};
+	std::vector<sf::Vector2f> caminocasa;
 
 
 	sf::Text Bienvenida;
@@ -150,9 +99,7 @@ private:
 	sf::Texture TextureMapa;
 	sf::Texture SettingsOn;
 	sf::Texture SettingsOff;
-	sf::Texture TextureArrowDer;
-	sf::Texture TextureArrowIzq;
-	sf::Texture TextureArrowArriba;
+
 	sf::Texture TextureImpuesto;
 
 	sf::Sprite SpriteImpuesto;

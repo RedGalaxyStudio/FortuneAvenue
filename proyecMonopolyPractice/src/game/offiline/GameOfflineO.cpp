@@ -12,7 +12,7 @@ GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMa
 	resource();
 }
 void GameOffline::resource() {
-	std::cout << "\n\nPROBA2" << std::endl;
+	//std::cout << "\n\nPROBA2" << std::endl;
 	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 
@@ -21,6 +21,77 @@ void GameOffline::resource() {
 		MapSprite.setTexture(TextureMapa);
 		MapSprite.setOrigin(360, 360);
 		MapSprite.setPosition(640, 360);
+
+		caminoimpuesto = {
+	   sf::Vector2f(621 , 677),
+	   sf::Vector2f(694 ,582),
+	   sf::Vector2f(413, 253),
+	   sf::Vector2f(444, 42),
+	   sf::Vector2f(320, 118),
+	   sf::Vector2f(869, 679),
+	   sf::Vector2f(428, 517),
+	   sf::Vector2f(835, 540),
+	   sf::Vector2f(805, 450),
+	   sf::Vector2f(925, 396),
+	   sf::Vector2f(808, 257),
+	   sf::Vector2f(882, 238),
+	   sf::Vector2f(773, 190),
+	   sf::Vector2f(635, 37)
+
+
+		};
+		caminocasa = {
+		sf::Vector2f(807, 416),
+	 sf::Vector2f(881, 312),
+	 sf::Vector2f(842, 238),
+	 sf::Vector2f(874, 132),
+	 sf::Vector2f(819, 188),
+	 sf::Vector2f(595, 175),
+	 sf::Vector2f(505,586),
+	 sf::Vector2f(568,636),
+	 sf::Vector2f(694,636),
+	 sf::Vector2f(368, 339),
+	 sf::Vector2f(407, 98),
+	 sf::Vector2f(764, 577),
+	 sf::Vector2f(429, 566),
+	 sf::Vector2f(955, 609),
+	 sf::Vector2f(355, 40),
+	 sf::Vector2f(323,629),
+	 sf::Vector2f(394,678)
+
+		};
+
+		casillasRuleta = {
+		sf::Vector2f(402, 157),
+		sf::Vector2f(840, 476),
+		sf::Vector2f(958, 372),
+		sf::Vector2f(930, 231),
+		sf::Vector2f(688, 137),
+		sf::Vector2f(675, 40),
+		sf::Vector2f(514, 141),
+		sf::Vector2f(425,654),
+		sf::Vector2f(556 , 544),
+		sf::Vector2f(632 , 585),
+		sf::Vector2f(923, 679),
+		sf::Vector2f(328, 161),
+		sf::Vector2f(790, 539),
+		sf::Vector2f(325,523)
+		};
+		caminocasa = {
+	sf::Vector2f(717.500f, 679.500f),
+	sf::Vector2f(502.167f, 656.833f),
+	sf::Vector2f(320.167f, 288.500f),
+	sf::Vector2f(485.500f, 524.833f),
+	sf::Vector2f(552.167f, 360.167f),
+	sf::Vector2f(701.167f, 272.833f),
+	sf::Vector2f(441.500f, 99.000f),
+	sf::Vector2f(642.500f, 31.250f),
+	sf::Vector2f(933.000f, 212.000f),
+	sf::Vector2f(965.500f, 417.500f),
+	sf::Vector2f(766.000f, 168.500f)
+		};
+
+
 
 		std::vector<sf::Vector2f> camino1 = { sf::Vector2f(375, 480) };
 
@@ -42,6 +113,56 @@ void GameOffline::resource() {
 		MapSprite.setOrigin(360, 360);
 		MapSprite.setPosition(640, 360);
 
+
+		caminoimpuesto = {
+	sf::Vector2f(641.833f, 688.500f),
+	sf::Vector2f(312.500f, 364.833f),
+	sf::Vector2f(641.750f, 550.250f),
+	sf::Vector2f(732.167f, 358.500f),
+	sf::Vector2f(640.250f, 269.000f),
+	sf::Vector2f(714.250f, 36.750f),
+	sf::Vector2f(508.500f, 166.750f),
+	sf::Vector2f(834.500f, 170.000f)
+		};
+
+
+
+		casillasRuleta = {
+	sf::Vector2f(793.167f, 653.500f),
+	sf::Vector2f(436.000f, 617.500f),
+	sf::Vector2f(348.625f, 504.062f),
+	sf::Vector2f(345.500f, 220.167f),
+	sf::Vector2f(568.500f, 40.750f),
+	sf::Vector2f(844.500f, 101.500f),
+	sf::Vector2f(955.500f, 261.000f),
+	sf::Vector2f(952.500f, 470.500f),
+	sf::Vector2f(641.750f, 170.000f)
+		};
+
+
+
+		std::vector<sf::Vector2f> camino1 = {
+	sf::Vector2f(793.167f, 653.500f),
+	sf::Vector2f(717.500f, 679.500f),
+	sf::Vector2f(641.833f, 688.500f)
+		};
+
+	
+
+		origenS = {
+	sf::Vector2f(958.500f, 207.500f),
+	sf::Vector2f(1017.500f, 207.500f),
+	sf::Vector2f(990.500f, 208.500f),
+	sf::Vector2f(1041.500f, 209.500f)
+		};
+
+		casillas.resize(ActiveUsers.size());
+
+		for (int i = 0; i < casillas.size(); i++)
+		{
+			casillas[i].push_back(camino1);
+
+		}
 
 	}
 	else if (NMapa == 3) {
@@ -82,22 +203,8 @@ void GameOffline::resource() {
 	if (!GameMusicFondo.openFromFile("assets/sounds/gamemusic.wav")) return;
 	RoadOption = -1;
 
-	if (!TextureArrowIzq.loadFromFile("assets/image/Game/Izq.png")) return;
-	if (!TextureArrowDer.loadFromFile("assets/image/Game/Der.png")) return;
-	if (!TextureArrowArriba.loadFromFile("assets/image/Game/Arriba.png")) return;
+
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
-
-	LeftArrow.setTexture(TextureArrowIzq);
-	LeftArrow.setOrigin(350.0f, 350.0f);
-	LeftArrow.setPosition(370, 400);
-
-	RightArrow.setTexture(TextureArrowDer);
-	RightArrow.setOrigin(350.0f, 350.0f);
-	RightArrow.setPosition(900, 400);
-	std::cout << "\n\nPROBA2" << std::endl;
-	SpriteUpArrow.setTexture(TextureArrowArriba);
-	SpriteUpArrow.setOrigin(350.0f, 350.0f);
-	SpriteUpArrow.setPosition(370, 400);
 
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
@@ -390,9 +497,9 @@ void GameOffline::positionPefil() {
 	}
 }
 void GameOffline::update() {
-	std::cout << "\n\nPROBA5" << std::endl;
+	//std::cout << "\n\nPROBA5" << std::endl;
 	positionPefil();
-	std::cout << "\n\nPROBA6" << std::endl;
+	//std::cout << "\n\nPROBA6" << std::endl;
 	sf::Clock clock;
 	//std::cout << "COSitta";
 	GM.CasasAleatorias();
@@ -407,7 +514,7 @@ void GameOffline::update() {
 	NuloO NUlOO;
 	NUlOO.setWindow(*window);
 	NUlOO.Resource();
-	std::cout << "\n\nPROBA7" << std::endl;
+	//std::cout << "\n\nPROBA7" << std::endl;
 
 	float duracionMovimiento = 0.5f;
 
@@ -419,11 +526,11 @@ void GameOffline::update() {
 		moverFichas[i].Inicializar(&playerGameOff[i].PieceSelect, &casillas[i], &playerGameInfo[i].Vueltas, playerGameOff[i].origen, &playerGameInfo[i].final, playerGameInfo[i].PiecUserme);
 
 	}
-	std::cout << "\n\nl::" << playerGameOff[0].origen.x << ":" << playerGameOff[0].origen.y;
+	//	std::cout << "\n\nl::" << playerGameOff[0].origen.x << ":" << playerGameOff[0].origen.y;
 
 	StealplayerO robarjugador(window, ActiveUsers, playerGameOff);
 	robarjugador.resource();
-	
+
 
 	//GameEnd gameend(window);
 	//gameend.resource();
@@ -433,7 +540,7 @@ void GameOffline::update() {
 	int DadoResul = 0;
 
 	rouletteAnimation = false;
-	std::cout << "\n\nPROBA8" << std::endl;
+	//std::cout << "\n\nPROBA8" << std::endl;
 	InicioPartida();
 	GM.startGame();
 
@@ -523,12 +630,12 @@ void GameOffline::update() {
 
 			case 2:
 
-			      	GM.impuesto();
-					draw_tax = true;
-					turn_Tax = false;
-					activeEvent = true;
-					animacionImpuesto = true;
-					impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
+				GM.impuesto();
+				draw_tax = true;
+				turn_Tax = false;
+				activeEvent = true;
+				animacionImpuesto = true;
+				impuestoCasa = playerGameInfo[IndexTurn1].impuesto - 50;
 
 				Impuesto.setString(std::to_string(playerGameInfo[IndexTurn1].impuesto));
 				globalBounds = Impuesto.getGlobalBounds();
@@ -633,7 +740,7 @@ void GameOffline::update() {
 			//std::cout << "house: " << house.size()<<":  IndexTurn1  :"<< IndexTurn1<<": playerGameOff[IndexTurn1].PieceSelect.getPosition() :"<< playerGameOff[IndexTurn1].PieceSelect.getPosition().x << ", "
 				//<< playerGameOff[IndexTurn1].PieceSelect.getPosition().y << ")";
 			house[IndexTurn1].update(playerGameOff[IndexTurn1].PieceSelect.getPosition());
-			std::cout << "COSitto";
+			//	std::cout << "COSitto";
 			activeEvent = false;
 			draw_house = false;
 
@@ -674,7 +781,7 @@ void GameOffline::Event() {
 			if (ActiveHouse) {
 
 				house[auxHouse].evenViewHouseCVO(event);
-				if(house[auxHouse].seleccionlista) {
+				if (house[auxHouse].seleccionlista) {
 					ActiveHouse = false;
 				}
 			}
@@ -707,8 +814,8 @@ void GameOffline::Event() {
 					if (playerGameOff[i].Home.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						house[ActiveUsers[i]].ViewHouseBuysO();
-						 auxHouse = i;
-						 ActiveHouse = true;
+						auxHouse = i;
+						ActiveHouse = true;
 					}
 
 				}

@@ -30,9 +30,9 @@ std::vector<sf::Texture> pieceShape;
 sf::Texture CheckOn;
 sf::Texture CheckOff; 
 std::string Code1; //code
-sf::Sprite RightArrow;
+
 bool rouletteAnimation; //animacionRuleta
-sf::Sprite SpriteUpArrow;
+
 bool plataform; //server
 bool rolldicePlayer;
 std::string playerName; //username
@@ -42,7 +42,6 @@ std::vector<char> image1; //image Store image data directly.
  sf::Sound turnSound; //girosSound
  bool zero;
 int countsalary;
-sf::Sprite LeftArrow;
 bool SelectorPieces = false; // Inicialmente en selección de pieza
 bool GamePlay = false;        // No en juego al principio
 std::vector<PlayerInformation> playerGameInfo;
