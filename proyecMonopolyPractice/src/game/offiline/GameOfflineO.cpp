@@ -174,6 +174,49 @@ void GameOffline::resource() {
 		MapSprite.setTexture(TextureMapa);
 		MapSprite.setOrigin(470, 360);
 		MapSprite.setPosition(640, 380);
+
+
+		// Camino Ruleta
+		casillasRuleta = {
+			sf::Vector2f{715.f, 335.f},
+			sf::Vector2f(660.f, 463.5f),
+			sf::Vector2f(803.f, 436.5f),
+			sf::Vector2f(438.833f, 597.833f),
+			sf::Vector2f(248.833f, 302.833f),
+			sf::Vector2f(348.f, 160.f),
+			sf::Vector2f(842.5f, 631.f),
+			sf::Vector2f(411.743f, 413.369f),
+			sf::Vector2f(857.5f, 273.5f)
+		};
+
+		// Camino Impuesto
+		caminoimpuesto = {
+
+			sf::Vector2f(858.5f, 332.5f),
+			sf::Vector2f(660.833f, 532.5f),
+			sf::Vector2f(320.167f, 513.833f),
+			sf::Vector2f(280.833f, 254.833f),
+			sf::Vector2f(722.833f, 127.5f),
+			sf::Vector2f(944.5f, 580.5f),
+			sf::Vector2f(761.5f, 584.f),
+			sf::Vector2f(400.167,126.833),
+			sf::Vector2f(470.187f, 268.5f)
+		};
+
+		
+		caminocasa = {
+			sf::Vector2f(661.5f, 335.f),
+			sf::Vector2f(506.833f, 516.5f),
+			sf::Vector2f(759.f, 476.f),
+			sf::Vector2f(254.167f, 362.167f),
+			sf::Vector2f(556.833f, 127.5f),
+			sf::Vector2f(916.f, 449.f),
+			sf::Vector2f(470.167f, 331.833f),
+			sf::Vector2f(828.167f, 157.5f)
+		};
+
+
+
 		std::vector<sf::Vector2f> camino1 = {
 			sf::Vector2f(906.000f, 207.000f),
 			sf::Vector2f(853.500f, 212.500f),
@@ -197,6 +240,9 @@ void GameOffline::resource() {
 		}
 
 	}
+
+	
+
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
 
@@ -771,6 +817,8 @@ void GameOffline::update() {
 }
 void GameOffline::Event() {
 	sf::Event event;
+
+
 
 	do {
 		if (window->pollEvent(event)) {

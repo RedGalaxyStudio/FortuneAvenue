@@ -418,14 +418,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 								playClickSound();
 								finalCamino = false;
-								selCamIzq3();
+								selCamIzq2();
 
 							}
 
 							if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
 								playClickSound();
 								finalCamino = false;
-								selCamDer3();
+								selCamDer2();
 							}
 
 						}
@@ -434,7 +434,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 								playClickSound();
 								finalCamino = false;
 								//client.networkMessage.sendPathOption(0);
-								selCamDer3();
+								selCamDer2();
 
 							}
 
@@ -442,20 +442,20 @@ void MovePiecesO::updateCAmbioCasilla() {
 								playClickSound();
 								finalCamino = false;
 								//client.networkMessage.sendPathOption(1);
-								selCamIzq3();
+								selCamIzq2();
 							}
 						}
 						else if (tan == 1 || tan == 2) {
 							if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 								playClickSound();
 								finalCamino = false;
-								selCamIzq3();
+								selCamIzq2();
 							}
 
 							if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
 								playClickSound();
 								finalCamino = false;
-								selCamDer3();
+								selCamDer2();
 							}
 						}
 
@@ -597,14 +597,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 					if (RoadOption == 0) {
 						playClickSound();
 						finalCamino = false;
-						selCamIzq3();
+						selCamIzq2();
 						RoadOption = -1;
 					}
 
 					if (RoadOption == 1) {
 						playClickSound();
 						finalCamino = false;
-						selCamDer3();
+						selCamDer2();
 						RoadOption = -1;
 					}
 
@@ -613,14 +613,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 					if (RoadOption == 0) {
 						playClickSound();
 						finalCamino = false;
-						selCamIzq3();
+						selCamIzq2();
 						RoadOption = -1;
 					}
 
 					if (RoadOption == 1) {
 						playClickSound();
 						finalCamino = false;
-						selCamDer3();
+						selCamDer2();
 						RoadOption = -1;
 					}
 
@@ -629,14 +629,14 @@ void MovePiecesO::updateCAmbioCasilla() {
 					if (RoadOption == 0) {
 						playClickSound();
 						finalCamino = false;
-						selCamDer3();
+						selCamDer2();
 						RoadOption = -1;
 					}
 
 					if (RoadOption == 1) {
 						playClickSound();
 						finalCamino = false;
-						selCamIzq3();
+						selCamIzq2();
 						RoadOption = -1;
 					}
 				}
