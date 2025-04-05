@@ -62,18 +62,23 @@ struct PlayerInfo {
 	bool final= false;
 	bool PiecUserme = false;
 
+
 	PlayerInfo() : casasPorJugador(17) {}
 
-	void reset() {
-		username.clear();                     
-		image.clear();                           
-		money = 200;                            
-		roomconect = 0;                       
+	void reset() {     
+		numCasas = 0;
+		money = 300;        
+		impuesto = 50;
+		Vueltas = 0;
 		isSelectingPiece = false;             
 		isInGame = false;                       
-		indexPiece = -1;                         
-
+		indexPiece = -1; 
+		final = false;
+		PiecUserme = false;
+		casasPorJugador.clear();
+		casasPorJugador.resize(17);
 	}
+
 };
 
 extern int Opcioncami;
@@ -131,15 +136,10 @@ struct PlayerGame {
 	sf::Sprite CashSprite;
 	sf::Sprite Check;
 	MensajeMSG plantillaMsg;
-	void reset() {
-		textureAvatarPLayer = sf::Texture();  
-		AvatarPlayer = sf::CircleShape();    
-		//MarcoPlayer = sf::Sprite();         
-		NamePlayer = sf::Text();             
-		//boxPlayer = sf::Sprite();            
-		PieceSelect = sf::Sprite();         
-		Money = sf::Text();                  
-		Activo = false;                      
+	void reset() {    
+		PieceSelect = sf::Sprite();
+		Money = sf::Text();
+		 origen= sf::Vector2f();
 	}
 
 };
@@ -149,7 +149,7 @@ extern std::vector<PlayerGame> playersGame;
 
 void loadResourceGame();
 bool salirX(sf::Texture Pregunta,sf::RenderWindow* window, Client* cliente);
-
+void resetGameResources();
 
 #endif 
 

@@ -162,3 +162,86 @@ bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
     }
     return true;
 }
+void resetGameResources() {
+    // Recursos gráficos
+    TextureCasa.clear();
+    piecesTextures.clear();
+    pieces.clear();
+    rastro.clear();
+
+    // Texturas
+    TextureCash = sf::Texture();
+    TextureHome = sf::Texture();
+    TextureMarco = sf::Texture();
+    CheckTexturesOn = sf::Texture();
+    CheckTexturesOff = sf::Texture();
+
+    // Sprites
+    spriteMapa = sf::Sprite();
+    SpriteArrowDer = sf::Sprite();
+    SpriteArrowIzq = sf::Sprite();
+    SpriteArrowAbajo = sf::Sprite();
+    SpriteArrowArriba = sf::Sprite();
+
+    // Font y texturas referenciadas (si están ligadas por referencia, no se pueden reiniciar directamente aquí)
+    // fontUserPerfil;      <-- Referencia, cuidado con reiniciarla aquí
+    // textureBoxPerfil;    <-- Referencia también
+
+    // Variables de estado
+    Resourceready = false;
+    NumPlayers = 0;
+    userRuleta = false;
+    userImpuesto = false;
+    userCasa = false;
+    conteosuel = 0;
+    nular = false;
+    rolldiceJugador = false;
+    ReturnMenu = false;
+    ReturnPieces = false;
+    chatOn = false;
+    ChatOn = false;
+    SelectingPiece = false;
+    Game = false;
+    animacionRuleta = false;
+    espera = false;
+    giroRule = false;
+    IndexTurn = 0;
+    ruleta_draw = false;
+    impuesto_draw = false;
+    casa_draw = false;
+    turn = false;
+    otherturn = false;
+    turn_dado = false;
+    turn_ruleta = false;
+    turn_casa = false;
+    turn_impuesto = false;
+    turn_Moviendo = false;
+    eventoActivo = false;
+    Opcioncami = 0;
+    Code.clear();
+    nameUser.clear();
+
+    // Índices previos
+    for (int& index : previousSelectionIndex) {
+        index = -1;
+    }
+
+    // Usuarios activos
+    UsuariosActivos.clear();
+
+    // Jugadores
+    for (auto& info : playerInfos) {
+        info.reset();
+    }
+
+    for (auto& gamePlayer : playersGame) {
+        gamePlayer.reset();
+    }
+
+    playerInfos.clear();
+    playersGame.clear();
+
+    // Mensajes
+    Mensajes.clear();
+    PlantillaMensajeR = MensajeMSG();
+}

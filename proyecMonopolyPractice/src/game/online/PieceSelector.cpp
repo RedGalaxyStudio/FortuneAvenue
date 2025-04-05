@@ -122,8 +122,8 @@ void PieceSelector::updateSelection() {
 	scrollbarPiece.setPosition(1260, 340);
 
 	float avatarYOffset = 0.0f;
-	 startX = 275; 
-	 startY = 100;  
+	startX = 275; 
+	startY = 100;  
 	CODE.setFont(fontUser);
 	CODE.setCharacterSize(20);
 	CODE.setString("CODIGO: " + Code);
@@ -145,10 +145,6 @@ void PieceSelector::updateSelection() {
 	float separacion = 20.0f;  
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
-
-	//
-	// << "\njjjjjjjjjjjjjjjjjjjjj";
-//	printMemoryUsage();
 	while (window->isOpen()&& !cierre) {
 
 
@@ -338,7 +334,7 @@ void PieceSelector::updateSelection() {
 
 			if (!playerInfos[UsuariosActivos[i]].isSelectingPiece ){
 				SelectingPiece = false;
-
+				
 				
 			}
 		}
@@ -355,7 +351,22 @@ void PieceSelector::updateSelection() {
 			client->networkMessage.cargarImagen(TextureAvatarPath);
 			mpGame.update(loading);
 			if(ReturnMenu){
+				
+				client->~Client();
+				resetGameResources();
 				return;
+			}
+			else {
+				SelectingPiece = false;
+				for (int i = 0; i < UsuariosActivos.size(); i++) {
+					playerInfos[i].reset();
+					playersGame[i].reset();
+
+
+				}
+
+
+
 			}
 		}
 

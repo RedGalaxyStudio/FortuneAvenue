@@ -448,11 +448,11 @@ void GameEnd::update() {
 					}
 				}
 
-				if (ReturnPieces = true) {
+				if (ReturnPieces ) {
 					return;
 				}
 
-				if (ReturnMenu = true) {
+				if (ReturnMenu ) {
 					return;
 				}
 			}
