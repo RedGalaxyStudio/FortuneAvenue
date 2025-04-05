@@ -16,7 +16,9 @@ private:
     sf::Vector2f mousePosFloat;
     sf::FloatRect globalBounds;
     sf::Sprite fondopiece;
+    sf::Sprite CircleSpri;
     sf::Texture Textufondopiece;
+    sf::Texture Textucicle;
     
     sf::Text CODE;
     float startX;

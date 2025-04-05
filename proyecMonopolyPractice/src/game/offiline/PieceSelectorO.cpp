@@ -25,6 +25,7 @@ void PieceSelectOff::Resource() {
 	shadow.resize(piecesCount);
 	pieceShape.resize(piecesCount);
 	if (!TextureFrame.loadFromFile("assets/image/Avatars/MarcoTexture.png")) return;
+	if (!Textucicle.loadFromFile("assets/image/Game/pieces/1ntitled.png")) return;
 	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.png")) return;
 	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.png")) return;
 
@@ -52,7 +53,10 @@ void PieceSelectOff::Resource() {
 		shadow[i].setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	}
-	
+	CircleSpri.setTexture(Textucicle);
+	globalBounds = CircleSpri.getGlobalBounds();
+	CircleSpri.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+
 
 	for (int i = 0; i < piecesOff.size(); i++) {
 		int row = i / 8; 
@@ -256,6 +260,7 @@ void PieceSelectOff::updateSelection() {
 							playerGameOff[0].PieceSelect.setOrigin(piecesOff[i].getOrigin()); 
 							playerGameOff[0].PieceSelect.setColor(sf::Color::White); 
 							playerGameOff[0].PieceSelect.setPosition(startX + 0 * (250 + 10), startY + 100);
+							
 							piecesOff[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerGameInfo[0].indexPiece = i;
 							piecesOff[i].setColor(sf::Color(248, 134, 255));
@@ -314,13 +319,13 @@ void PieceSelectOff::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		std::cout << "\n\nPROBANDO6" << std::endl;
+		//std::cout << "\n\nPROBANDO6" << std::endl;
 	
 		for (int i = 0; i < ActiveUsers.size(); i++)
 		{
-			std::cout << "\n\nPROBANDO7" << std::endl;
+			//std::cout << "\n\nPROBANDO7" << std::endl;
 			if (playerGameInfo[ActiveUsers[i]].isSelectingPiece) {
-				std::cout << "\n\nPROBANDO8" << std::endl;
+			//	std::cout << "\n\nPROBANDO8" << std::endl;
 				playerGameOff[ActiveUsers[i]].Check.setTexture(CheckOn);
 			}
 		}
@@ -348,11 +353,12 @@ void PieceSelectOff::updateSelection() {
 				playerGameOff[ActiveUsers[i]].boxPlayer.setPosition(xPos, startY );
 				playerGameOff[ActiveUsers[i]].PieceSelect.setPosition(xPos, startY + 100);
 				playerGameOff[ActiveUsers[i]].Check.setPosition(xPos, yPos + 200);
+				CircleSpri.setPosition(xPos, startY + 100);
 				window->draw(playerGameOff[ActiveUsers[i]].NamePlayer);
 				window->draw(playerGameOff[ActiveUsers[i]].boxPlayer);
 				window->draw(playerGameOff[ActiveUsers[i]].PieceSelect);
 				window->draw(playerGameOff[ActiveUsers[i]].Check);
-				std::cout << "\n\nPROBANDO10" << std::endl;
+			//	std::cout << "\n\nPROBANDO10" << std::endl;
 			}
 
 
@@ -360,10 +366,11 @@ void PieceSelectOff::updateSelection() {
 
 		window->draw(CODE);
 		window->draw(spriteX);
+		window->draw(CircleSpri);
 
 		scrollbarPiece.draw(*window);
 		window->display();
-		std::cout << "\n\nPROBANDO11" << std::endl;
+		//std::cout << "\n\nPROBANDO11" << std::endl;
 	}
 
 }

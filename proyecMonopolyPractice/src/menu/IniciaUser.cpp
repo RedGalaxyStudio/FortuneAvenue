@@ -182,12 +182,12 @@ void IniciaUser::IniciAcion() {
 	sf::RectangleShape marcoFondo,BordeFondo;
 
 	marcoFondo.setSize(sf::Vector2f(1280.f, 400.f));
-	marcoFondo.setFillColor(sf::Color(0, 0, 0, 58));
+	marcoFondo.setFillColor(sf::Color(0, 0, 0, 0));
 	marcoFondo.setPosition(0, 310);
 	BordeFondo.setSize(sf::Vector2f(1280.f, 370.f));
 	BordeFondo.setFillColor(sf::Color(0, 0, 0, 0));
-	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
-	BordeFondo.setOutlineThickness(-22);
+//	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
+	//BordeFondo.setOutlineThickness(-22);
 	BordeFondo.setPosition(0 -2, 358);
 
 
