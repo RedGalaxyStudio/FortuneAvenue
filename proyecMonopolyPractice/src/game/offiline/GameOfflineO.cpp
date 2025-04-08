@@ -705,7 +705,7 @@ void GameOffline::update() {
 		}
 
 
-		if (GM.turnopermitido != 0 && zero == false) {
+		if (playerGameInfo.at(IndexTurn1).turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);

@@ -19,7 +19,7 @@ public:
 	void processTurn(int playerId);
 	void addPlayer(bool isBot);
 	bool isGameOver();
-	int turnopermitido = 0;
+	
 	bool juegoTerminadoo = false;
 	bool giroActivo = false;
 private:

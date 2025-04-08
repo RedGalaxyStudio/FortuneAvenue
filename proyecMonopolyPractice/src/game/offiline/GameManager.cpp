@@ -181,7 +181,7 @@ void GameManager::nextTurn() {
 		}
 		
 	}
-
+	
 	if (IndexTurn1 == 0) {
 
 		if (playerGameInfo[ActiveUsers[0]].final) {

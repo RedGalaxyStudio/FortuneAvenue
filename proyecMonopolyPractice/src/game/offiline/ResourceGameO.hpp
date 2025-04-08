@@ -60,6 +60,8 @@ struct PlayerInformation {
 	int numCasas=0;
 	int money = 200;
 
+	int turnopermitido = 0;
+
 	int roomconect;
 	int Posicion;
 	bool isSelectingPiece = false; 
@@ -76,7 +78,8 @@ struct PlayerInformation {
 		roomconect = 0;                         
 		isSelectingPiece = false;                
 		isInGame = false;                       
-		indexPiece = -1;                        
+		indexPiece = -1; 
+		turnopermitido = 0;
 
 	}
 };
