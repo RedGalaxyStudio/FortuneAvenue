@@ -189,6 +189,10 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					CsCmpdrsindex.push_back(IndexCAsa);
 
 					playerGameInfo[IndexTurn1].numCasas += 1;
+					playerGameInfo[IndexTurn1].impuesto += houses[playerGameInfo[IndexTurn1].casasPorJugador[IndexCAsa]].impuesto;
+					playerGameInfo[IndexTurn1].salario += houses[playerGameInfo[IndexTurn1].casasPorJugador[IndexCAsa]].salario;
+					playerGameInfo[IndexTurn1].money -= houses[IndexCAsa].costo;
+					playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 					playerGameOff[IndexTurn1].CasasN.setString(std::to_string(playerGameInfo[IndexTurn1].numCasas));
 					cierre = true;
 

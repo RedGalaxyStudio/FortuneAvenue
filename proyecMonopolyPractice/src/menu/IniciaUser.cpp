@@ -48,8 +48,13 @@ std::string openFileDialog() {
 	}
 	return "";
 }
+IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
+	: window(&windowRef), currentIndex(0), TextGrd(Grd){
+	Resource();
+	loadAvatars();
+}
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
-	: window(&windowRef), currentIndex(0) {
+	: window(&windowRef), currentIndex(0), TextGrd("") {
 	Resource();
 	loadAvatars();
 }
@@ -105,7 +110,7 @@ void IniciaUser::IniciAcion() {
 	float widthSeparation = avatarWidth + avatarSeparation;
 	float heightSeparation = avatarHeight + avatarSeparation;
 	recua.setPosition(400, 112);
-	TextBox textBox(496, 50, "Ingresa tu nombre: ");
+	TextBox textBox(496, 50, "Ingresa tu nombre: ",TextGrd);
 	textBox.setPosition(496, 50);
 	const float totalContentHeight = 440.0f;
 	const float scrollbarHeight = 340.0f;
@@ -182,12 +187,12 @@ void IniciaUser::IniciAcion() {
 	sf::RectangleShape marcoFondo,BordeFondo;
 
 	marcoFondo.setSize(sf::Vector2f(1280.f, 400.f));
-	marcoFondo.setFillColor(sf::Color(0, 0, 0, 58));
+	marcoFondo.setFillColor(sf::Color(0, 0, 0, 0));
 	marcoFondo.setPosition(0, 310);
 	BordeFondo.setSize(sf::Vector2f(1280.f, 370.f));
 	BordeFondo.setFillColor(sf::Color(0, 0, 0, 0));
-	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
-	BordeFondo.setOutlineThickness(-22);
+//	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
+	//BordeFondo.setOutlineThickness(-22);
 	BordeFondo.setPosition(0 -2, 358);
 
 

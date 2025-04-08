@@ -56,6 +56,15 @@ private:
 	bool girarIzquierda; 
 	float tiempoCambio; 
 	float timer; 
+	static sf::Texture TextureArrowIzq;
+	static sf::Texture TextureArrowDer;
+	static sf::Texture TextureArrowArriba;
+	static sf::Texture TextureArrowAbajo;
+
+	sf::Sprite SpriteUpArrow;
+	sf::Sprite LeftArrow;
+	sf::Sprite RightArrow;
+	sf::Sprite DownArrow;
 
 
 	std::vector<sf::Vector2f> camino3 = {

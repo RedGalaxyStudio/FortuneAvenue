@@ -10,6 +10,7 @@
 
 class IniciaUser {
 public:
+    IniciaUser(sf::RenderWindow &windowRef,std::string Grd);
     IniciaUser(sf::RenderWindow &windowRef);
     ~IniciaUser();
 
@@ -22,6 +23,7 @@ public:
     void loadAvatars();
     sf::Texture fun();
 private:
+    std::string TextGrd;
     sf::CircleShape colores;
     sf::RenderWindow *window;
     sf::Image originalImage;

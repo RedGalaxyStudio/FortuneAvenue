@@ -72,8 +72,6 @@ std::string generateRoomCode() {
 
 	return code;
 }
-
-
 bool Client::initialize() {
 
 	static bool enetInitialized = false;
@@ -104,7 +102,6 @@ bool Client::initialize() {
 
 	return true;
 }
-
 void Client::run() {
 	clientData->running = true;
 	while (clientData->running) {

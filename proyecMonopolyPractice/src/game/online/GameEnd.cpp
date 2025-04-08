@@ -290,12 +290,12 @@ void GameEnd::resource() {
 	if (!TBotonPieces.loadFromFile("paginarara/erizo-Photoroom.png")) return;
 
 	SBotonMenu.setTexture(TBotonMenu);
-	SBotonMenu.setScale(0.1, 0.1);
+	SBotonMenu.setScale(0.1f, 0.1f);
 	SBotonMenu.setPosition(1100, 600);
 	SBotonMenu.setOrigin(101, 40);
 
 	SBotonPieces.setTexture(TBotonPieces);
-	SBotonPieces.setScale(0.1, 0.1);
+	SBotonPieces.setScale(0.1f, 0.1f);
 	SBotonPieces.setPosition(100, 600);
 	SBotonPieces.setOrigin(101, 40);
 

@@ -27,19 +27,14 @@ std::vector<sf::Texture> piecesTextures;
 sf::Texture CheckTexturesOn;
 sf::Texture CheckTexturesOff;
 std::string Code;
-sf::Sprite SpriteArrowDer;
 bool animacionRuleta;
-sf::Sprite SpriteArrowArriba;
-sf::Sprite SpriteArrowAbajo;
 bool server;
 bool rolldiceJugador;
 std::string username;
 std::vector<char> image;
 bool chatOn = false;
-
- bool nular;
+bool nular;
 int conteosuel;
-sf::Sprite SpriteArrowIzq;
 bool SelectingPiece = false; 
 bool Game = false;     
 std::vector<PlayerInfo> playerInfos;
@@ -48,7 +43,6 @@ bool espera;
 bool giroRule;
 int CplayerIndex = -1;
 int Opcioncami;
-
 bool userRuleta;
 bool userImpuesto;
 bool userCasa;
@@ -170,19 +164,14 @@ void resetGameResources() {
     rastro.clear();
 
     // Texturas
-    TextureCash = sf::Texture();
-    TextureHome = sf::Texture();
+    //TextureCash = sf::Texture();
+    //TextureHome = sf::Texture();
     TextureMarco = sf::Texture();
-    CheckTexturesOn = sf::Texture();
-    CheckTexturesOff = sf::Texture();
+   // CheckTexturesOn = sf::Texture();
+   // CheckTexturesOff = sf::Texture();
 
     // Sprites
     spriteMapa = sf::Sprite();
-    SpriteArrowDer = sf::Sprite();
-    SpriteArrowIzq = sf::Sprite();
-    SpriteArrowAbajo = sf::Sprite();
-    SpriteArrowArriba = sf::Sprite();
-
     // Font y texturas referenciadas (si están ligadas por referencia, no se pueden reiniciar directamente aquí)
     // fontUserPerfil;      <-- Referencia, cuidado con reiniciarla aquí
     // textureBoxPerfil;    <-- Referencia también
@@ -219,7 +208,7 @@ void resetGameResources() {
     eventoActivo = false;
     Opcioncami = 0;
     Code.clear();
-    nameUser.clear();
+    //nameUser.clear();
 
     // Índices previos
     for (int& index : previousSelectionIndex) {
