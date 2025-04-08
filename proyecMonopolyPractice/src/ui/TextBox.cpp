@@ -3,11 +3,9 @@
 // Constructor con parámetros
 
 TextBox::TextBox() {}// Constructor por defecto
-
-
-TextBox::TextBox(float width, float height,std::string solicitud) {
+TextBox::TextBox(float width, float height,std::string solicitud, std::string TextGrd) {
     
-    input = "";
+    input = TextGrd;
 
     if (!nombre.empty()) {  
         
@@ -18,7 +16,7 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
 
     x = 50;
     y = 50;
-    text.setString(nombre);
+   
        //std::cout << "La variable tiene contenido.\n";
     }
     else {
@@ -38,16 +36,52 @@ TextBox::TextBox(float width, float height,std::string solicitud) {
     text.setFillColor(sf::Color::White);
     text.setOutlineThickness(2);
     text.setOutlineColor(sf::Color(135, 135, 135));
-}
+    text.setString(TextGrd);
 
+    sf::FloatRect globalBounds = text.getGlobalBounds();
+
+    text.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+}
+TextBox::TextBox(float width, float height, std::string solicitud) {
+
+    input = "";
+
+    if (!nombre.empty()) {
+
+        textoGuardado.setFont(fontUser);
+        textoGuardado.setCharacterSize(24);
+        textoGuardado.setString("");
+        textoGuardado.setPosition(525, 250);
+
+        x = 50;
+        y = 50;
+        text.setString(nombre);
+        //std::cout << "La variable tiene contenido.\n";
+    }
+    else {
+        //std::cout << "La variable esta vacia.\n";
+
+        textoPregunta.setFont(fontUser);
+        textoPregunta.setCharacterSize(24);
+        textoPregunta.setString(solicitud);
+        textoPregunta.setOutlineColor(sf::Color(135, 135, 135));
+        textoPregunta.setOutlineThickness(2);
+        x = 525;
+        y = 80;
+
+    }
+    text.setFont(fontUser);
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setOutlineThickness(2);
+    text.setOutlineColor(sf::Color(135, 135, 135));
+}
 // Posición del cuadro de texto
 void TextBox::setPosition(int XX ,int YY) {
     box.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 60));
     text.setPosition(static_cast<float>(XX + 145), static_cast<float>(YY + 56));
     textoPregunta.setPosition(static_cast<float>(XX), static_cast<float>(YY - 25));
 }
-
-
 std::string TextBox::handleInput(sf::Event event, const size_t maxLength) {
  
     if (event.type == sf::Event::TextEntered && nombre.empty()) {

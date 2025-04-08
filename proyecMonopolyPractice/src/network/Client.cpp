@@ -23,6 +23,43 @@ Client::Client() : client(nullptr), peer(nullptr) {
 	initialSpeedActi = 0.f;
 	//std::cout << "\n[DEBUG] Constructor: Dirección de client: " << std::hex << reinterpret_cast<uintptr_t>(client);
 }
+Client::~Client() {
+	disconnect();
+	// Esperar a que los hilos terminen si están en ejecución
+	if (clientThread.joinable()) {
+		clientThread.join();
+	}
+
+	if (clientMensThread.joinable()) {
+		clientMensThread.join();
+	}
+
+	// Limpiar ENet (cerrar conexión si existe)
+	if (peer != nullptr) {
+		enet_peer_disconnect(peer, 0);
+		peer = nullptr;
+	}
+
+	if (client != nullptr) {
+		enet_host_destroy(client);
+		client = nullptr;
+	}
+
+	// Vaciar y destruir los paquetes en la cola
+	while (!packetQueue.empty()) {
+		ENetPacket* packet = packetQueue.front();
+		enet_packet_destroy(packet);
+		packetQueue.pop();
+	}
+
+	// Eliminar punteros dinámicos
+	delete clientData;
+	clientData = nullptr;
+
+	delete SMessageHandler;
+	SMessageHandler = nullptr;
+}
+
 std::string generateRoomCode() {
 	std::string code;
 	std::random_device rd;
@@ -34,14 +71,6 @@ std::string generateRoomCode() {
 	}
 
 	return code;
-}
-
-Client::~Client() {
-	disconnect();
-	if (client) {
-		enet_host_destroy(client);
-	}
-	enet_deinitialize();
 }
 bool Client::initialize() {
 
@@ -73,7 +102,6 @@ bool Client::initialize() {
 
 	return true;
 }
-
 void Client::run() {
 	clientData->running = true;
 	while (clientData->running) {

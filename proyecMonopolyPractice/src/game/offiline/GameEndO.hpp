@@ -17,6 +17,10 @@ private:
     sf::Text funciona;
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
+
+    sf::Vector2i previousMousePosition;
+    sf::Vector2i currentMousePosition;
+
 public:
     GameEndO(sf::RenderWindow* window);       
     ~GameEndO();                              

@@ -374,7 +374,7 @@ void menuP::Inicializar() {
 
 }
 void menuP::editPerfil() {
-	IniciaUser iniciaUserEdit(*window);
+	IniciaUser iniciaUserEdit(*window, Sesion.getString());
 
 	iniciaUserEdit.Resource();
 

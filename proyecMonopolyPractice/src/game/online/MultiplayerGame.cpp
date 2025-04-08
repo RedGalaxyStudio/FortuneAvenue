@@ -28,27 +28,7 @@ void MultiplayerGame::resource() {
 	if (!GameMusicFondo.openFromFile("assets/sounds/gamemusic.wav")) return;
 	Opcioncami = -1;
 
-	if (!TextureArrowIzq.loadFromFile("assets/image/Game/Izq.png")) return;
-	if (!TextureArrowDer.loadFromFile("assets/image/Game/Der.png")) return;
-	if (!TextureArrowAbajo.loadFromFile("assets/image/Game/Abajo.png")) return;
-	if (!TextureArrowArriba.loadFromFile("assets/image/Game/Arriba.png")) return;
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
-
-	SpriteArrowIzq.setTexture(TextureArrowIzq);
-	SpriteArrowIzq.setOrigin(350.0f, 350.0f);
-	SpriteArrowIzq.setPosition(370, 400);
-
-	SpriteArrowDer.setTexture(TextureArrowDer);
-	SpriteArrowDer.setOrigin(350.0f, 350.0f);
-	SpriteArrowDer.setPosition(900, 400);
-
-	SpriteArrowArriba.setTexture(TextureArrowArriba);
-	SpriteArrowArriba.setOrigin(350.0f, 350.0f);
-	SpriteArrowArriba.setPosition(370, 400);
-
-	SpriteArrowAbajo.setTexture(TextureArrowAbajo);
-	SpriteArrowAbajo.setOrigin(350.0f, 350.0f);
-	SpriteArrowAbajo.setPosition(370, 400);
 
 	SpriteChat.setTexture(TextureChat);
 	SpriteChat.setOrigin(20, 20);
@@ -148,9 +128,6 @@ void MultiplayerGame::resource() {
 	animacionIniciada = false;
 
 }
-
-
-
 void MultiplayerGame::positionPefil() {
 	if (UsuariosActivos.size() >= 1) {
 
@@ -421,7 +398,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	InicioPartida();
-
+	juegoTerminado = true;//borrar esta linea
 	while (window->isOpen() && !juegoTerminado) {
 
 		Event();
@@ -643,7 +620,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
-		
+		return;
 	}
 }
 void MultiplayerGame::Event() {

@@ -3,7 +3,38 @@
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
 
-MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {};
+sf::Texture MovePieces::TextureArrowIzq;
+sf::Texture MovePieces::TextureArrowDer;
+sf::Texture MovePieces::TextureArrowArriba;
+sf::Texture MovePieces::TextureArrowAbajo;
+
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+	static bool texturesLoaded = false;
+	if (!texturesLoaded) {
+		TextureArrowIzq.loadFromFile("assets/image/Game/izq.png");
+		TextureArrowDer.loadFromFile("assets/image/Game/der.png");
+		TextureArrowArriba.loadFromFile("assets/image/Game/arriba.png");
+		TextureArrowAbajo.loadFromFile("assets/image/Game/abajo.png");
+		texturesLoaded = true;
+	}
+	LeftArrow.setTexture(TextureArrowIzq);
+	LeftArrow.setOrigin(65, 42);
+	//	LeftArrow.setPosition(370, 400);
+
+	RightArrow.setTexture(TextureArrowDer);
+	RightArrow.setOrigin(65, 42);
+	//	RightArrow.setPosition(900, 400);
+
+	DownArrow.setTexture(TextureArrowAbajo);
+	DownArrow.setOrigin(42, 65);
+	//	DownArrow.setPosition(900, 400);
+
+
+	SpriteUpArrow.setTexture(TextureArrowArriba);
+	SpriteUpArrow.setOrigin(42, 65);
+	//SpriteUpArrow.setPosition(370, 400);
+
+};
 void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
 	this->sprite = spriteC;
 	this->casillas = casillasC;
@@ -163,20 +194,20 @@ void MovePieces::updateCAmbioCasilla() {
 	int tan = static_cast<int>((*casillas).size());
 
 	if (tan == 3) {
-		SpriteArrowArriba.setPosition(370, 400);
+		SpriteUpArrow.setPosition(370, 400);
 
-		SpriteArrowDer.setPosition(900, 400);
+		RightArrow.setPosition(900, 400);
 
 	}
 	else if (tan == 5) {
-		SpriteArrowArriba.setPosition(900, 400);
+		SpriteUpArrow.setPosition(900, 400);
 
-		SpriteArrowIzq.setPosition(370, 400);
+		LeftArrow.setPosition(370, 400);
 	}
 	else if (tan == 1) {
-		SpriteArrowIzq.setPosition(370, 400);
+		LeftArrow.setPosition(370, 400);
 
-		SpriteArrowDer.setPosition(900, 400);
+		RightArrow.setPosition(900, 400);
 	}
 	if (caminoActual >= 6) {
 		caminoActual = 0;
@@ -220,7 +251,7 @@ void MovePieces::updateCAmbioCasilla() {
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
 					if (tan == 3) {
-						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(0);
@@ -228,7 +259,7 @@ void MovePieces::updateCAmbioCasilla() {
 							
 						}
 
-						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(1);
@@ -237,7 +268,7 @@ void MovePieces::updateCAmbioCasilla() {
 
 					}
 					else if (tan == 5) {
-						if (SpriteArrowArriba.getGlobalBounds().contains(mousePosFloat)) {
+						if (SpriteUpArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(0);
@@ -245,7 +276,7 @@ void MovePieces::updateCAmbioCasilla() {
 							
 						}
 
-						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(1);
@@ -253,14 +284,14 @@ void MovePieces::updateCAmbioCasilla() {
 						}
 					}
 					else if (tan == 1) {
-						if (SpriteArrowIzq.getGlobalBounds().contains(mousePosFloat)) {
+						if (LeftArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(0);
 							seleccionarCaminoIzq();
 						}
 
-						if (SpriteArrowDer.getGlobalBounds().contains(mousePosFloat)) {
+						if (RightArrow.getGlobalBounds().contains(mousePosFloat)) {
 							playClickSound();
 							finalCamino = false;
 							client->networkMessage.sendPathOption(1);
@@ -356,21 +387,21 @@ void MovePieces::updateCAmbioCasilla() {
 
 
 		if (tan == 3) {
-			window->draw(SpriteArrowArriba);
+			window->draw(SpriteUpArrow);
 
 
-			window->draw(SpriteArrowDer);
+			window->draw(RightArrow);
 
 		}
 		else if (tan == 5) {
-			window->draw(SpriteArrowArriba);
+			window->draw(SpriteUpArrow);
 
-			window->draw(SpriteArrowIzq);
+			window->draw(LeftArrow);
 		}
 		else if (tan == 1) {
-			window->draw(SpriteArrowIzq);
+			window->draw(LeftArrow);
 
-			window->draw(SpriteArrowDer);
+			window->draw(RightArrow);
 		}
 
 

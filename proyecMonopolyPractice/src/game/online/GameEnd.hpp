@@ -19,6 +19,13 @@ private:
     std::vector<sf::Text> posicionesGanadores;
     std::vector<int>posiGndrs;
     Client* client;
+
+    sf::Texture TBotonMenu;
+    sf::Texture TBotonPieces;
+    sf::Sprite SBotonMenu;
+    sf::Sprite SBotonPieces;
+
+
 public:
     GameEnd(sf::RenderWindow* window, Client* clienT);        
     ~GameEnd();                               

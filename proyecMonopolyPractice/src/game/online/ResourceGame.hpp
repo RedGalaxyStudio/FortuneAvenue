@@ -21,13 +21,9 @@ extern sf::Texture &textureBoxPerfil;
 extern sf::Sprite spriteMapa;
 extern sf::Clock reloj;
 extern sf::View view; 
-extern sf::Sprite SpriteArrowDer;
 extern std::vector<sf::Sprite> rastro;
-extern sf::Sprite SpriteArrowIzq;
-extern sf::Sprite SpriteArrowAbajo;
 extern bool server;
 extern std::vector<sf::Sprite> pieces;
-extern sf::Sprite SpriteArrowArriba;
 extern int previousSelectionIndex[4];
 extern bool userRuleta;
 extern bool userImpuesto;
@@ -42,37 +38,9 @@ extern std::string nameUser;
 extern sf::Texture CheckTexturesOn;
 extern sf::Texture CheckTexturesOff;
 
+extern bool ReturnMenu;
+extern bool ReturnPieces;
 extern bool chatOn;
-struct PlayerInfo {
-	std::string username;
-	std::string image;
-	int numCasas=0;
-	int money = 300;
-	int impuesto = 50;
-	int roomconect;
-	int Posicion;
-	bool isSelectingPiece = false; 
-	bool isInGame = false;        
-	int indexPiece;
-	std::vector<int> casasPorJugador;
-	int Vueltas = 0;
-	bool final= false;
-	bool PiecUserme = false;
-
-	PlayerInfo() : casasPorJugador(17) {}
-
-	void reset() {
-		username.clear();                     
-		image.clear();                           
-		money = 200;                            
-		roomconect = 0;                       
-		isSelectingPiece = false;             
-		isInGame = false;                       
-		indexPiece = -1;                         
-
-	}
-};
-
 extern int Opcioncami;
 extern bool espera;
 extern bool giroRule;
@@ -128,25 +96,57 @@ struct PlayerGame {
 	sf::Sprite CashSprite;
 	sf::Sprite Check;
 	MensajeMSG plantillaMsg;
-	void reset() {
-		textureAvatarPLayer = sf::Texture();  
-		AvatarPlayer = sf::CircleShape();    
-		//MarcoPlayer = sf::Sprite();         
-		NamePlayer = sf::Text();             
-		//boxPlayer = sf::Sprite();            
-		PieceSelect = sf::Sprite();         
-		Money = sf::Text();                  
-		Activo = false;                      
+	void reset() {    
+		PieceSelect = sf::Sprite();
+		Money = sf::Text();
+		origen= sf::Vector2f();
+		MarcoPlayer.setScale(0.9f, 0.9f);
 	}
 
 };
+
+struct PlayerInfo {
+	std::string username;
+	std::string image;
+	int numCasas = 0;
+	int money = 300;
+	int impuesto = 50;
+	int roomconect;
+	int Posicion;
+	bool isSelectingPiece = false;
+	bool isInGame = false;
+	int indexPiece;
+	std::vector<int> casasPorJugador;
+	int Vueltas = 0;
+	bool final = false;
+	bool PiecUserme = false;
+
+
+	PlayerInfo() : casasPorJugador(17) {}
+
+	void reset() {
+		numCasas = 0;
+		money = 300;
+		impuesto = 50;
+		Vueltas = 0;
+		isSelectingPiece = false;
+		isInGame = false;
+		indexPiece = -1;
+		final = false;
+		PiecUserme = false;
+		casasPorJugador.clear();
+		casasPorJugador.resize(17);
+	}
+
+};
+
 
 extern std::vector<PlayerInfo> playerInfos;
 extern std::vector<PlayerGame> playersGame;
 
 void loadResourceGame();
 bool salirX(sf::Texture Pregunta,sf::RenderWindow* window, Client* cliente);
-
+void resetGameResources();
 
 #endif 
 

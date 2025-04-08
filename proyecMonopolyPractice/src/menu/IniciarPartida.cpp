@@ -123,9 +123,18 @@ void IniciarPartida::update() {
 							PieceSelector pieceselector(window, client);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
-
+							std::cout << "\nq loco";
 							pieceselector.~PieceSelector();
-							
+							std::cout << "\nq wwloco1";
+							if (client != nullptr) {
+								std::cout << "\nq wwloco2";
+								delete client;
+								std::cout << "\nq wwloco3";
+								client = nullptr;
+							}
+							std::cout << "\nq wwloco4";
+							client = new Client();
+							std::cout << "\nq loco5";
 						}
 						else
 						{
