@@ -398,7 +398,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	InicioPartida();
-	juegoTerminado = true;//borrar esta linea
+	
 	while (window->isOpen() && !juegoTerminado) {
 
 		Event();
@@ -634,7 +634,8 @@ void MultiplayerGame::Event() {
 	while (window->pollEvent(event)) {
 	
 			Dado.loop(event, client);
-			chats->Event(event);
+			if(chatOn){
+			chats->Event(event);}
 			if (!house[UsuariosActivos[0]].seleccionlista) {
 				house[UsuariosActivos[0]].evenViewHouseCV(event);
 			
@@ -681,7 +682,7 @@ void MultiplayerGame::Event() {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 
-				if (ruleta_draw && turn && turnoGiro) {
+				if (ruleta_draw && turn && turnoGiro && !chatOn) {
 
 					client->networkMessage.startSpin();
 					ruleta->trurntrue();

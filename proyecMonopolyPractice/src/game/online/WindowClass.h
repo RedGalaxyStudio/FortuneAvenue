@@ -171,7 +171,7 @@ public :
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
-		if (turn_dado) {
+		if (turn_dado && !chatOn) {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				turn_dado = false;
