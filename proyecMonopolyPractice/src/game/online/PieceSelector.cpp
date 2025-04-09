@@ -145,7 +145,7 @@ void PieceSelector::updateSelection() {
 	float separacion = 20.0f;
 	ButtonG botonCheck1(CheckTexturesOff, CheckTexturesOn);
 	bool Agregado = false;
-	while (window->isOpen() && !cierre) {
+	while (window->isOpen()) {
 
 
 		sf::Event event;
@@ -292,14 +292,9 @@ void PieceSelector::updateSelection() {
 					cierre = salirX(Preguntasalir, window, client);
 
 					if (cierre) {
-						playersGame.clear();
-						playerInfos.clear();
-						UsuariosActivos.clear();
-
-						client->disconnect();
+						resetGameResources();
+						return;
 					}
-
-
 
 				}
 

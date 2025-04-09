@@ -1,20 +1,31 @@
 {
+<<<<<<< HEAD
     "Volumen_Effects": 0.0,
     "Volumen_Music": 15.000000953674316,
     "sizeFilledBar_Effects": {
         "x": 0.0,
+=======
+    "Volumen_Effects": 100.0,
+    "Volumen_Music": 100.0,
+    "sizeFilledBar_Effects": {
+        "x": 200.0,
+>>>>>>> 9a5090ae03f8824f91d8fabeb2d2615088c6af59
         "y": 10.0
     },
     "sizeFilledBar_Music": {
-        "x": 30.000001907348633,
+        "x": 200.0,
         "y": 10.0
     },
     "thumbPosition_Effects": {
+<<<<<<< HEAD
         "x": 187.5,
+=======
+        "x": 387.5,
+>>>>>>> 9a5090ae03f8824f91d8fabeb2d2615088c6af59
         "y": 392.5
     },
     "thumbPosition_Music": {
-        "x": 217.5,
+        "x": 387.5,
         "y": 292.5
     }
 }

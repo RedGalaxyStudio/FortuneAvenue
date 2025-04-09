@@ -232,7 +232,7 @@ void MovePieces::updateCAmbioCasilla() {
 					renderTexture.clear();
 					renderTexture.draw(spriteBackgroundG);
 					renderTexture.draw(spriteMapa);
-					for (int i = 0; i < 4; i++)
+					for (int i = 0; i < UsuariosActivos.size(); i++)
 					{
 						renderTexture.draw(playersGame[i].NamePlayer);
 						renderTexture.draw(playersGame[i].boxPlayer);
@@ -242,7 +242,7 @@ void MovePieces::updateCAmbioCasilla() {
 					renderTexture.draw(spriteX);
 					renderTexture.draw(overlay);
 					renderTexture.display();
-					Menup.MenuSalir(nullptr);
+					Menup.MenuSalir(client);
 
 				}
 

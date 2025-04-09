@@ -9,12 +9,8 @@ GameEnd::GameEnd(sf::RenderWindow* window, Client* clienT) : window(window), cli
 
 
 GameEnd::~GameEnd() {}
-
-
-
 sf::Vector2i previousMousePosition;
 sf::Vector2i currentMousePosition;
-
 class SpiralConfetti {
 public:
 	SpiralConfetti(sf::Vector2f position, sf::Color color)
@@ -79,8 +75,6 @@ private:
 		spiral.setFillColor(color);
 	}
 };
-
-
 class Confetti {
 public:
 	Confetti(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
@@ -188,7 +182,6 @@ private:
 	float angle;
 	float rotationSpeed;
 };
-
 class ConfettiRain {
 public:
 	ConfettiRain(size_t confettiCount, float screenWidth, float screenHeight) {
@@ -232,25 +225,6 @@ public:
 private:
 	std::vector<Confetti> confettiList;
 };
-
-/*int main() {
-
-	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
-		}
-
-
-	}
-
-	return 0;
-}
-
-*/
-
 void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& positions) {
 	// Crear un vector de índices
 	std::vector<size_t> indices(players.size());
@@ -278,26 +252,28 @@ void assignPositions(const std::vector<PlayerInfo>& players, std::vector<int>& p
 		}
 	}
 }
-
-
 void GameEnd::resource() {
 
 	if (!fontEnd.loadFromFile("assets/fonts/Pixels.ttf")) {
 		//   std::cerr << "Error loading font\n";
 	}
 
-	if (!TBotonMenu.loadFromFile("paginarara/koala-Photoroom.png")) return;
-	if (!TBotonPieces.loadFromFile("paginarara/erizo-Photoroom.png")) return;
+	if (!TBotonMenu.loadFromFile("assets/image/Button/volveramenu.png")) return;
+	if (!TBotonPieces.loadFromFile("assets/image/Button/volverajugar.png")) return;
 
+	
 	SBotonMenu.setTexture(TBotonMenu);
-	SBotonMenu.setScale(0.1f, 0.1f);
-	SBotonMenu.setPosition(1100, 600);
-	SBotonMenu.setOrigin(101, 40);
+	//SBotonMenu.setScale(0.1f, 0.1f);
+	SBotonMenu.setPosition(1160-70, 650);
+	sf::FloatRect globalBounds = SBotonMenu.getGlobalBounds();
+
+	SBotonMenu.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	SBotonPieces.setTexture(TBotonPieces);
-	SBotonPieces.setScale(0.1f, 0.1f);
-	SBotonPieces.setPosition(100, 600);
-	SBotonPieces.setOrigin(101, 40);
+	//SBotonPieces.setScale(0.1f, 0.1f);
+	SBotonPieces.setPosition(120 + 70, 650);
+	globalBounds = SBotonPieces.getGlobalBounds();
+	SBotonPieces.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 	fingame12.setCharacterSize(40);
 	fingame12.setFont(fontUser);
@@ -313,7 +289,7 @@ void GameEnd::resource() {
 
 	fingame12.setString("Fin de la partida");
 	fingame12.setPosition(640, 70);
-	sf::FloatRect globalBounds = fingame12.getGlobalBounds();
+	globalBounds = fingame12.getGlobalBounds();
 	fingame12.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
@@ -325,7 +301,7 @@ void GameEnd::resource() {
 
 
 
-
+		
 		posicionesGanadores[i].setCharacterSize(80);
 		posicionesGanadores[i].setFont(fontEnd);
 		posicionesGanadores[i].setFillColor(sf::Color::White);
@@ -337,7 +313,6 @@ void GameEnd::resource() {
 
 	}
 }
-
 void GameEnd::update() {
 
 	float perfilWidth = 200.0f;
@@ -388,20 +363,13 @@ void GameEnd::update() {
 		confettiListt.emplace_back(pos, color);
 	}
 
-
-
-
 	sf::Clock clock;  // Reloj para deltaTime
 
-
 	while (window->isOpen()) {
-
 
 		sf::Event event;
 
 		while (window->pollEvent(event)) {
-
-
 
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -417,13 +385,12 @@ void GameEnd::update() {
 			renderTexture.draw(spriteX);
 			renderTexture.draw(overlay);
 
-
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 
 				renderTexture.clear();
 				renderTexture.draw(spriteBackgroundG);
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < UsuariosActivos.size(); i++) {
 					renderTexture.draw(playersGame[i].NamePlayer);
 					renderTexture.draw(playersGame[i].boxPlayer);
 					renderTexture.draw(playersGame[i].MarcoPlayer);
@@ -448,136 +415,123 @@ void GameEnd::update() {
 					}
 				}
 
-				if (ReturnPieces ) {
+				if (ReturnPieces) {
 					return;
 				}
 
-				if (ReturnMenu ) {
+				if (ReturnMenu) {
 					return;
 				}
 			}
 		}
-				float deltaTime = clock.restart().asSeconds() * 1.5;
+		float deltaTime = clock.restart().asSeconds() * 1.5;
 
-				for (auto& confetti : confettiListt) {
-					confetti.update(deltaTime);
-				}
-
-				// Actualización
-
-				previousMousePosition = currentMousePosition;
-				currentMousePosition = sf::Mouse::getPosition(*window);
-
-				sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
-				float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
-
-				confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
-
-
-				// Renderizado
-
-
-				window->setMouseCursor(*currentCursor);
-
-
-				window->clear();
-
-				window->draw(spriteBackgroundG);
-
-
-				window->draw(fingame12);
-
-				confettiRain.draw(*window);
-
-
-				float perfilWidth = 200.0f;
-				float separacion = 20.0f;
-				int totalPerfiles = static_cast<int>(UsuariosActivos.size());
-
-
-				float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
-
-
-				float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
-				float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
-
-
-
-				if (totalPerfiles > 0) {
-
-					float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
-
-
-					float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
-					float startY = 100.0f;
-
-					for (int i = 0; i < totalPerfiles; i++) {
-						float xPos = startX + i * (perfilWidth + separacion);
-						float yPos = startY;
-
-						playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY + 198);
-						playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY + 200);
-						//playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
-						playersGame[UsuariosActivos[i]].AvatarPlayer.setPosition(xPos, yPos + 100);
-						playersGame[UsuariosActivos[i]].AvatarPlayer.setScale(0.8f, 0.8f);
-						playersGame[UsuariosActivos[i]].MarcoPlayer.setScale(1.3f, 1.3f);
-						playersGame[UsuariosActivos[i]].MarcoPlayer.setPosition(xPos, yPos + 100);
-
-						if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
-							playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
-							sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
-							playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-							playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 340);
-						}
-
-						sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
-						playersGame[UsuariosActivos[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
-						playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 240);
-
-						if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
-
-							playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
-
-							sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
-							playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-
-						}
-
-						window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
-						window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
-						window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
-						window->draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
-						window->draw(playersGame[UsuariosActivos[i]].Money);
-						window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
-					}
-				}
-
-
-				for (int i = 0; i < UsuariosActivos.size(); i++) {
-
-					window->draw(playersGame[i].NamePlayer);
-					window->draw(playersGame[i].boxPlayer);
-					window->draw(playersGame[i].AvatarPlayer);
-					window->draw(playersGame[i].MarcoPlayer);
-					window->draw(playersGame[i].Money);
-					window->draw(playersGame[i].PieceSelect);
-					window->draw(posicionesGanadores[i]);
-				}
-
-				window->draw(SBotonMenu);
-				window->draw(SBotonPieces);
-
-				window->draw(fingame12);
-				for (auto& confetti : confettiListt) {
-					confetti.draw(*window);
-				}
-
-
-				window->display();
-
-			}
-
+		for (auto& confetti : confettiListt) {
+			confetti.update(deltaTime);
 		}
+
+		previousMousePosition = currentMousePosition;
+		currentMousePosition = sf::Mouse::getPosition(*window);
+
+		sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
+		float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+
+		confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
+
+		window->setMouseCursor(*currentCursor);
+
+		window->clear();
+
+		window->draw(spriteBackgroundG);
+
+		window->draw(fingame12);
+
+		confettiRain.draw(*window);
+
+		float perfilWidth = 200.0f;
+		float separacion = 20.0f;
+		int totalPerfiles = static_cast<int>(UsuariosActivos.size());
+
+		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+
+		float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
+		float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
+
+		if (totalPerfiles > 0) {
+
+			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+
+
+			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+			float startY = 100.0f;
+
+			for (int i = 0; i < totalPerfiles; i++) {
+				float xPos = startX + i * (perfilWidth + separacion);
+				float yPos = startY;
+
+				playersGame[UsuariosActivos[i]].NamePlayer.setPosition(xPos, startY + 198);
+				playersGame[UsuariosActivos[i]].boxPlayer.setPosition(xPos, startY + 200);
+				//playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
+				playersGame[UsuariosActivos[i]].AvatarPlayer.setPosition(xPos, yPos + 100);
+				playersGame[UsuariosActivos[i]].AvatarPlayer.setScale(0.8f, 0.8f);
+				playersGame[UsuariosActivos[i]].MarcoPlayer.setScale(1.3f, 1.3f);
+				playersGame[UsuariosActivos[i]].MarcoPlayer.setPosition(xPos, yPos + 100);
+
+				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
+					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
+					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
+					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+					playersGame[UsuariosActivos[i]].PieceSelect.setPosition(xPos + (pieceSelectBounds.width / 2.0f), startY + 340);
+				}
+
+				sf::FloatRect moneyBounds = playersGame[i].Money.getGlobalBounds();
+				playersGame[UsuariosActivos[i]].Money.setOrigin(moneyBounds.width / 2.0f, moneyBounds.height / 2.0f);
+				playersGame[UsuariosActivos[i]].Money.setPosition(xPos, yPos + 240);
+
+				if (playersGame[UsuariosActivos[i]].PieceSelect.getTexture() != nullptr) {
+
+					playersGame[UsuariosActivos[i]].PieceSelect.setScale(2.0f, 2.0f);
+
+					sf::FloatRect pieceSelectBounds = playersGame[UsuariosActivos[i]].PieceSelect.getGlobalBounds();
+					playersGame[UsuariosActivos[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
+
+				}
+
+				window->draw(playersGame[UsuariosActivos[i]].NamePlayer);
+				window->draw(playersGame[UsuariosActivos[i]].boxPlayer);
+				window->draw(playersGame[UsuariosActivos[i]].AvatarPlayer);
+				window->draw(playersGame[UsuariosActivos[i]].MarcoPlayer);
+				window->draw(playersGame[UsuariosActivos[i]].Money);
+				window->draw(playersGame[UsuariosActivos[i]].PieceSelect);
+			}
+		}
+
+
+		for (int i = 0; i < UsuariosActivos.size(); i++) {
+
+			window->draw(playersGame[i].NamePlayer);
+			window->draw(playersGame[i].boxPlayer);
+			window->draw(playersGame[i].AvatarPlayer);
+			window->draw(playersGame[i].MarcoPlayer);
+			window->draw(playersGame[i].Money);
+			window->draw(playersGame[i].PieceSelect);
+			window->draw(posicionesGanadores[i]);
+		}
+
+		window->draw(SBotonMenu);
+		window->draw(SBotonPieces);
+
+		window->draw(fingame12);
+		for (auto& confetti : confettiListt) {
+			confetti.draw(*window);
+		}
+
+
+		window->display();
+
+	}
+
+}
 
 
 

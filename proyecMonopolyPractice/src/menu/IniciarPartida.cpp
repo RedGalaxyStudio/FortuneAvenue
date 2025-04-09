@@ -123,18 +123,21 @@ void IniciarPartida::update() {
 							PieceSelector pieceselector(window, client);
 							pieceselector.Resource();
 							pieceselector.updateSelection();
-							std::cout << "\nq loco";
+						
 							pieceselector.~PieceSelector();
-							std::cout << "\nq wwloco1";
+							
 							if (client != nullptr) {
-								std::cout << "\nq wwloco2";
+								
 								delete client;
-								std::cout << "\nq wwloco3";
+							
 								client = nullptr;
 							}
-							std::cout << "\nq wwloco4";
+							
 							client = new Client();
-							std::cout << "\nq loco5";
+							SelectingMusicFondo.stop();
+							sf::sleep(sf::seconds(0.5));
+							MenuMusicFondo.setLoop(true);
+							MenuMusicFondo.play();
 						}
 						else
 						{
@@ -164,13 +167,7 @@ void IniciarPartida::update() {
 
 		window->setMouseCursor(*currentCursor);
 
-
 		message.update();
-
-
-
-	
-
 
 		window->clear();
 		window->draw(spriteBackgroundG);
@@ -238,6 +235,19 @@ void IniciarPartida::updatejoinRoom() {
 								pieceselector.updateSelection();
 
 								pieceselector.~PieceSelector();
+
+								if (client != nullptr) {
+
+									delete client;
+
+									client = nullptr;
+								}
+
+								client = new Client();
+								SelectingMusicFondo.stop();
+								sf::sleep(sf::seconds(0.5));
+								MenuMusicFondo.setLoop(true);
+								MenuMusicFondo.play();
 
 							}
 							else {

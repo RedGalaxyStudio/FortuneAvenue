@@ -49,7 +49,7 @@ void Nulo::Update() {
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 renderTexture.clear();
                 renderTexture.draw(spriteBackgroundG);
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < UsuariosActivos.size(); i++) {
                     renderTexture.draw(playersGame[i].NamePlayer);
                     renderTexture.draw(playersGame[i].boxPlayer);
                     renderTexture.draw(playersGame[i].MarcoPlayer);

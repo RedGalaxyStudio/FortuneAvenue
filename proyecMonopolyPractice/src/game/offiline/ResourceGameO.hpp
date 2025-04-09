@@ -10,7 +10,7 @@
 
 class GameManager;
 extern bool giroActivoO;
-
+extern sf::Texture textureBoxPerfilOn;
 extern float initialSpeedActiO;
 extern float decelerationRateActiO;
 extern bool BotTurn;

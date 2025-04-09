@@ -4,6 +4,7 @@
 
 
 sf::Texture &textureBoxPerfil= textureBox;
+sf::Texture textureBoxPerfiloff;
 std::vector <MensajeMSG> Mensajes;
 bool Resourceready=false;
 MensajeMSG PlantillaMensajeR;

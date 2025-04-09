@@ -218,7 +218,7 @@ public:
 				float alfaY = atan2f(dy, disP1);
 
 				cube->rotate(alfaY, alfaX, 0);
-				cube->draw(WidthW, HeightH, static_cast<float>(posz));
+				cube->draw(static_cast<float>(WidthW), static_cast<float>(HeightH), static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 
 				ok = 0;
@@ -227,7 +227,7 @@ public:
 			else {
 
 				cube->resetPosition(WidthW, HeightH,faceIndex);
-				cube->draw(WidthW, HeightH, static_cast<float>(posz));
+				cube->draw(static_cast<float>(WidthW), static_cast<float>(HeightH), static_cast<float>(posz));
 				Cube3D.resize(cube->show.size() * 4);
 				eventStarted = false;
 
