@@ -8,6 +8,7 @@
 float initialSpeedActiO;
 float decelerationRateActiO;
 sf::Texture &textureBoxPerfilOff= textureBox;
+sf::Texture textureBoxPerfilOn;
 bool BotTurn=false;
 std::vector<sf::Texture> TextureHouse; //texturecasa
 sf::Texture TextureMoney1; //texturecash

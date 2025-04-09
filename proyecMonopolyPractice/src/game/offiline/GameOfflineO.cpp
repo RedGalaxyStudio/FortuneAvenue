@@ -251,6 +251,7 @@ void GameOffline::resource() {
 
 
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
+	if (!textureBoxPerfilOn.loadFromFile("assets/image/Button/Rectángulo Apagado1.png")) return;
 
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
@@ -337,7 +338,7 @@ void GameOffline::positionPefil() {
 
 		playerGameOff[ActiveUsers[0]].boxPlayer.setPosition(188.65f, 62.5f);
 		playerGameOff[ActiveUsers[0]].boxPlayer.setScale(0.7f, 0.7f);
-
+	
 		playerGameOff[ActiveUsers[0]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[0]].MarcoPlayer.getGlobalBounds();
 		playerGameOff[ActiveUsers[0]].MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -393,7 +394,8 @@ void GameOffline::positionPefil() {
 
 		playerGameOff[ActiveUsers[1]].boxPlayer.setPosition(1188.65f, 52.5f);
 		playerGameOff[ActiveUsers[1]].boxPlayer.setScale(0.7f, 0.7f);
-
+		playerGameOff[ActiveUsers[1]].boxPlayer.setTexture(textureBoxPerfilOn);
+		
 		playerGameOff[ActiveUsers[1]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[1]].MarcoPlayer.getGlobalBounds();
 		playerGameOff[ActiveUsers[1]].MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -448,6 +450,8 @@ void GameOffline::positionPefil() {
 
 		playerGameOff[ActiveUsers[2]].boxPlayer.setPosition(188.65f, 552.5f);
 		playerGameOff[ActiveUsers[2]].boxPlayer.setScale(0.7f, 0.7f);
+		playerGameOff[ActiveUsers[2]].boxPlayer.setTexture(textureBoxPerfilOn);
+
 
 		playerGameOff[ActiveUsers[2]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[2]].MarcoPlayer.getGlobalBounds();
@@ -498,6 +502,7 @@ void GameOffline::positionPefil() {
 			;
 		playerGameOff[ActiveUsers[3]].boxPlayer.setPosition(1188.65f, 552.5f);
 		playerGameOff[ActiveUsers[3]].boxPlayer.setScale(0.7f, 0.7f);
+		playerGameOff[ActiveUsers[3]].boxPlayer.setTexture(textureBoxPerfilOn);
 
 		playerGameOff[ActiveUsers[3]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[3]].MarcoPlayer.getGlobalBounds();
@@ -705,7 +710,7 @@ void GameOffline::update() {
 		}
 
 
-		if (GM.turnopermitido != 0 && zero == false) {
+		if (playerGameInfo.at(IndexTurn1).turnopermitido != 0 && zero == false) {
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);

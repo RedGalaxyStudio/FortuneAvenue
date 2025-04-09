@@ -109,6 +109,9 @@ void GameManager::startGame() {
 	secondTurn = false;
 }
 void GameManager::nextTurn() {
+
+
+	playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOn);
 	firstTurn = false;
 	size_t currentTurn = IndexTurn1;
 	IndexTurn1 = (currentTurn + 1) % ActiveUsers.size();
@@ -181,7 +184,7 @@ void GameManager::nextTurn() {
 		}
 		
 	}
-
+	
 	if (IndexTurn1 == 0) {
 
 		if (playerGameInfo[ActiveUsers[0]].final) {
@@ -189,6 +192,7 @@ void GameManager::nextTurn() {
 			nextTurn();
 			return;
 		}
+		playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOff);
 		BotTurn = false;
 		turn_dice = true;
 		firstTurn = true;
@@ -201,7 +205,7 @@ void GameManager::nextTurn() {
 		secondTurn = false;
 	}
 	else {
-
+		playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOff);
 		BotTurn = true;
 		turn_diceB = true;
 		secondTurn = true;

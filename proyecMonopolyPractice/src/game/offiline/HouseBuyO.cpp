@@ -126,7 +126,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 
 				renderTexture.clear();
 				renderTexture.draw(spriteBackgroundG);
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < ActiveUsers.size(); i++) {
 					renderTexture.draw(playerGameOff[i].NamePlayer);
 					renderTexture.draw(playerGameOff[i].boxPlayer);
 					renderTexture.draw(playerGameOff[i].MarcoPlayer);

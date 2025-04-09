@@ -171,7 +171,7 @@ public :
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
-		if (turn_dado) {
+		if (turn_dado && !chatOn) {
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				turn_dado = false;
@@ -190,7 +190,7 @@ public :
 
 				
 				faceIndex = client->clientData->lastRollResult;
-				faceIndex = 100;
+				
 				client->clientData->lastRollResult = -1;
 				espera = false;
 				
@@ -220,7 +220,7 @@ public :
 			clock.restart();
 
 			faceIndex = client->clientData->lastRollResult;
-			faceIndex = 100;
+			
 			client->clientData->lastRollResult = -1;
 			//std::cout << "\nResultado en clase dado:" << faceIndex << "\n";
 			espera = false;

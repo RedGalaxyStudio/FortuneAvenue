@@ -344,7 +344,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 				renderTexture.clear();
 				renderTexture.draw(spriteBackgroundG);
 				renderTexture.draw(MapSprite);
-				for (int i = 0; i < 4; i++)
+				for (int i = 0; i < ActiveUsers.size(); i++)
 				{
 					renderTexture.draw(playerGameOff[i].NamePlayer);
 					renderTexture.draw(playerGameOff[i].boxPlayer);

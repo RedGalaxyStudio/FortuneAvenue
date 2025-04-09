@@ -112,7 +112,7 @@ void Chat::resource() {
 	PlantillaMensajeE.NombreChat.setFillColor(sf::Color::White);
 	PlantillaMensajeE.NombreChat.setOutlineThickness(1);
 	PlantillaMensajeE.NombreChat.setOutlineColor(sf::Color(117, 220, 255));
-	PlantillaMensajeE.NombreChat.setString("Nombre1");
+	PlantillaMensajeE.NombreChat.setString(playersGame[playerIndex].NamePlayer.getString());
 	PlantillaMensajeE.NombreChat.setPosition(1200, 400);
 	globalBounds = PlantillaMensajeE.NombreChat.getGlobalBounds();
 	PlantillaMensajeE.NombreChat.setOrigin(0, globalBounds.height / 2.0f);
@@ -223,10 +223,25 @@ void Chat::Event(sf::Event event) {
 
 		for (int i = 0; i < Mensajes.size(); i++) {
 
-			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].positionContenidoEnviado);
-			Mensajes[i].SMSEnviado.setPosition(Mensajes[i].positionSMSEnviado);
-			Mensajes[i].AvatarEnviado.setPosition(Mensajes[i].positionAvatarEnviado);
-			Mensajes[i].NombreChat.setPosition(Mensajes[i].positionNombreChat);
+			Mensajes[i].ContenidoEnviado.setPosition(
+				Mensajes[i].positionContenidoEnviado.x,
+				Mensajes[i].positionContenidoEnviado.y - 15
+			);
+
+			Mensajes[i].SMSEnviado.setPosition(
+				Mensajes[i].positionSMSEnviado.x,
+				Mensajes[i].positionSMSEnviado.y - 15
+			);
+
+			Mensajes[i].AvatarEnviado.setPosition(
+				Mensajes[i].positionAvatarEnviado.x,
+				Mensajes[i].positionAvatarEnviado.y - 15
+			);
+
+			Mensajes[i].NombreChat.setPosition(
+				Mensajes[i].positionNombreChat.x,
+				Mensajes[i].positionNombreChat.y - 15
+			);
 		}
 
 		Aumento = 0;
@@ -241,7 +256,7 @@ void Chat::Event(sf::Event event) {
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, 40));
 			PlantillaMensajeE.ContenidoEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 600);
 			PlantillaMensajeE.SMSEnviado.setPosition(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), 618);
-			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), 590);
+			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), PlantillaMensajeE.ContenidoEnviado.getPosition().y - 10);
 			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
 			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();;
 			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
@@ -267,7 +282,7 @@ void Chat::Event(sf::Event event) {
 			PlantillaMensajeE.ContenidoEnviado.setSize(sf::Vector2f(altura.width + 20, altura.height + 22));
 			PlantillaMensajeE.ContenidoEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 20), 640 - PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().height));
 			PlantillaMensajeE.SMSEnviado.setPosition(sf::Vector2f(1280 - (PlantillaMensajeE.ContenidoEnviado.getGlobalBounds().width + 10), PlantillaMensajeE.ContenidoEnviado.getPosition().y + 18));
-			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), 570 - PlantillaMensajeE.NombreChat.getGlobalBounds().height);
+			PlantillaMensajeE.NombreChat.setPosition(1280 - (PlantillaMensajeE.NombreChat.getGlobalBounds().width + 20), PlantillaMensajeE.ContenidoEnviado.getPosition().y - 10);
 			PlantillaMensajeE.positionNombreChat = PlantillaMensajeE.NombreChat.getPosition();
 			PlantillaMensajeE.positionContenidoEnviado = PlantillaMensajeE.ContenidoEnviado.getPosition();
 			PlantillaMensajeE.positionSMSEnviado = PlantillaMensajeE.SMSEnviado.getPosition();
@@ -275,7 +290,10 @@ void Chat::Event(sf::Event event) {
 		}
 
 		aux += 20;
+
+	
 		Mensajes.push_back(PlantillaMensajeE);
+
 		for (int i = 0; i < Mensajes.size() - 1; i++)
 		{
 			Mensajes[i].ContenidoEnviado.setPosition(Mensajes[i].ContenidoEnviado.getPosition().x, Mensajes[i].ContenidoEnviado.getPosition().y - aux);
