@@ -1,2 +1,4 @@
 Excepción atrapada: [json.exception.parse_error.101] parse error at line 2, column 1: syntax error while parsing object key - invalid literal; last read: '{<U+000A><'; expected string literal
 Excepción atrapada: [json.exception.parse_error.101] parse error at line 2, column 1: syntax error while parsing object key - invalid literal; last read: '{<U+000A><'; expected string literal
+Excepción atrapada: [json.exception.parse_error.101] parse error at line 2, column 1: syntax error while parsing object key - invalid literal; last read: '{<U+000A><'; expected string literal
+Excepción atrapada: [json.exception.parse_error.101] parse error at line 2, column 1: syntax error while parsing object key - invalid literal; last read: '{<U+000A><'; expected string literal
