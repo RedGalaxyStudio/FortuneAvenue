@@ -398,7 +398,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	InicioPartida();
-	juegoTerminado = true;//borrar esta linea
+	//juegoTerminado = true;//borrar esta linea
 	while (window->isOpen() && !juegoTerminado) {
 
 		Event();

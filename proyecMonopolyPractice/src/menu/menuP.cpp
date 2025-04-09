@@ -536,7 +536,7 @@ void menuP::MenuOpcion(bool fon) {
 }
 void menuP::MenuSalir(Client* client) {
 
-
+	std::cout << "\nHOLA1";
 	sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
 	overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
@@ -551,7 +551,7 @@ void menuP::MenuSalir(Client* client) {
 
 	ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
 	ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
-
+	std::cout << "\nHOLA2";
 	while (window->isOpen()) {
 		sf::Event event;
 		while (window->pollEvent(event)) {
@@ -568,7 +568,7 @@ void menuP::MenuSalir(Client* client) {
 				break;  
 			}
 			
-
+			std::cout << "\nHOLA6";
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
