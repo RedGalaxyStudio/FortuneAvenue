@@ -14,7 +14,7 @@ extern bool Resourceready;
 extern sf::Texture TextureCash;
 extern sf::Texture TextureHome;
 extern  sf::Texture TextureMarco;
-
+extern sf::Texture textureBoxPerfiloff;
 extern int NumPlayers;
 extern sf::Font &fontUserPerfil;
 extern sf::Texture &textureBoxPerfil;

@@ -183,7 +183,7 @@ public :
 	}
 
 	void resetPosition(int W,int H,int dadoIndex) {
-		center = Vector3D(W, H, -100);
+		center = Vector3D(static_cast<float>(W), static_cast<float>(H), -100);
 
 		CDis = 50.0f;  
 

@@ -12,6 +12,8 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clien
 }
 void MultiplayerGame::resource() {
 
+	if (!textureBoxPerfiloff.loadFromFile("assets/image/Button/Rectángulo Apagado1.png")) return;
+
 	Notifi.setRadius(5);
 	Notifi.setFillColor(sf::Color::Red);
 	Notifi.setOutlineColor(sf::Color::Cyan);
@@ -135,6 +137,7 @@ void MultiplayerGame::positionPefil() {
 
 		playersGame[UsuariosActivos[0]].boxPlayer.setPosition(188.65f, 62.5f);
 		playersGame[UsuariosActivos[0]].boxPlayer.setScale(0.7f, 0.7f);
+		//playersGame[0].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		playersGame[UsuariosActivos[0]].MarcoPlayer.setTexture(TextureMarco);
 		globalBounds = playersGame[UsuariosActivos[0]].MarcoPlayer.getGlobalBounds();
@@ -192,6 +195,7 @@ void MultiplayerGame::positionPefil() {
 
 		playersGame[UsuariosActivos[1]].boxPlayer.setPosition(1188.65f, 52.5f);
 		playersGame[UsuariosActivos[1]].boxPlayer.setScale(0.7f, 0.7f);
+		playersGame[1].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		playersGame[UsuariosActivos[1]].MarcoPlayer.setTexture(TextureMarco);
 		globalBounds = playersGame[UsuariosActivos[1]].MarcoPlayer.getGlobalBounds();
@@ -250,6 +254,7 @@ void MultiplayerGame::positionPefil() {
 
 		playersGame[UsuariosActivos[2]].boxPlayer.setPosition(188.65f, 552.5f);
 		playersGame[UsuariosActivos[2]].boxPlayer.setScale(0.7f, 0.7f);
+		playersGame[2].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		playersGame[UsuariosActivos[2]].MarcoPlayer.setTexture(TextureMarco);
 		globalBounds = playersGame[UsuariosActivos[2]].MarcoPlayer.getGlobalBounds();
@@ -305,6 +310,7 @@ void MultiplayerGame::positionPefil() {
 			;
 		playersGame[UsuariosActivos[3]].boxPlayer.setPosition(1188.65f, 552.5f);
 		playersGame[UsuariosActivos[3]].boxPlayer.setScale(0.7f, 0.7f);
+		playersGame[3].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		playersGame[UsuariosActivos[3]].MarcoPlayer.setTexture(TextureMarco);
 		globalBounds = playersGame[UsuariosActivos[3]].MarcoPlayer.getGlobalBounds();

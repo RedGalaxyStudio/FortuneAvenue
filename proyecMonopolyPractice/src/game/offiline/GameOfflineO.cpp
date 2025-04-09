@@ -12,7 +12,9 @@ GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMa
 	resource();
 }
 void GameOffline::resource() {
-	//std::cout << "\n\nPROBA2" << std::endl;
+	//std::cout << "\n\nPROBA2" << std::endl
+	// ;
+
 	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 
@@ -147,13 +149,13 @@ void GameOffline::resource() {
 	sf::Vector2f(641.833f, 688.500f)
 		};
 
-	
+
 
 		origenS = {
-	sf::Vector2f(958.500f, 207.500f),
-	sf::Vector2f(1017.500f, 207.500f),
-	sf::Vector2f(990.500f, 208.500f),
-	sf::Vector2f(1041.500f, 209.500f)
+			sf::Vector2f(958.500f, 207.500f),
+			sf::Vector2f(1017.500f, 207.500f),
+			sf::Vector2f(990.500f, 208.500f),
+			sf::Vector2f(1041.500f, 209.500f)
 		};
 
 		casillas.resize(ActiveUsers.size());
@@ -199,11 +201,11 @@ void GameOffline::resource() {
 			sf::Vector2f(722.833f, 127.5f),
 			sf::Vector2f(944.5f, 580.5f),
 			sf::Vector2f(761.5f, 584.f),
-			sf::Vector2f(400.167,126.833),
+			sf::Vector2f(400.167f,126.833f),
 			sf::Vector2f(470.187f, 268.5f)
 		};
 
-		
+
 		caminocasa = {
 			sf::Vector2f(661.5f, 335.f),
 			sf::Vector2f(506.833f, 516.5f),
@@ -225,10 +227,10 @@ void GameOffline::resource() {
 		};
 
 		origenS = {
-	sf::Vector2f(958.500f, 207.500f),
-	sf::Vector2f(1017.500f, 207.500f),
-	sf::Vector2f(990.500f, 208.500f),
-	sf::Vector2f(1041.500f, 209.500f)
+			sf::Vector2f(958.500f, 207.500f),
+			sf::Vector2f(1017.500f, 207.500f),
+			sf::Vector2f(990.500f, 208.500f),
+			sf::Vector2f(1041.500f, 209.500f)
 		};
 
 		casillas.resize(ActiveUsers.size());
@@ -241,7 +243,7 @@ void GameOffline::resource() {
 
 	}
 
-	
+
 
 	if (!SettingsOff.loadFromFile("assets/image/Game/settingOff.png")) return;
 	if (!SettingsOn.loadFromFile("assets/image/Game/settingOn.png")) return;
@@ -338,7 +340,7 @@ void GameOffline::positionPefil() {
 
 		playerGameOff[ActiveUsers[0]].boxPlayer.setPosition(188.65f, 62.5f);
 		playerGameOff[ActiveUsers[0]].boxPlayer.setScale(0.7f, 0.7f);
-	
+
 		playerGameOff[ActiveUsers[0]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[0]].MarcoPlayer.getGlobalBounds();
 		playerGameOff[ActiveUsers[0]].MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
@@ -395,7 +397,7 @@ void GameOffline::positionPefil() {
 		playerGameOff[ActiveUsers[1]].boxPlayer.setPosition(1188.65f, 52.5f);
 		playerGameOff[ActiveUsers[1]].boxPlayer.setScale(0.7f, 0.7f);
 		playerGameOff[ActiveUsers[1]].boxPlayer.setTexture(textureBoxPerfilOn);
-		
+
 		playerGameOff[ActiveUsers[1]].MarcoPlayer.setTexture(TextureFrame);
 		globalBounds = playerGameOff[ActiveUsers[1]].MarcoPlayer.getGlobalBounds();
 		playerGameOff[ActiveUsers[1]].MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);

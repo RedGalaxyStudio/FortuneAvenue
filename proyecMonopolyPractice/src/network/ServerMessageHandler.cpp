@@ -173,6 +173,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		}
 	}
 	else if (message.rfind("YOUR_TURN", 0) == 0) {
+		playersGame[IndexTurn].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		MONEYSALARIO(message, playerIndex);
 
@@ -192,6 +193,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			return;
 		}
 
+
 		turn_dado = true;
 		turn = true;
 		eventoActivo = false;
@@ -201,8 +203,13 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		turn_Moviendo = true;
 		IndexTurn = playerIndex;
 		otherturn = false;
+		playersGame[IndexTurn].boxPlayer.setTexture(textureBoxPerfil);
+
 	}
 	else if (message.rfind("TURN_START", 0) == 0) {
+
+
+		playersGame[IndexTurn].boxPlayer.setTexture(textureBoxPerfiloff);
 
 		otherturn = true;
 		eventoActivo = false;
@@ -221,6 +228,8 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			MONEYSALARIO(message, playerIndexTurn);
 
 		}
+		playersGame[IndexTurn].boxPlayer.setTexture(textureBoxPerfil);
+
 
 	}
 	else if (message.rfind("ROLL_RESULT:", 0) == 0) {
