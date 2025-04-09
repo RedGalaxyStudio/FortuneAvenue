@@ -140,8 +140,27 @@ void GameOffline::resource() {
 	sf::Vector2f(952.500f, 470.500f),
 	sf::Vector2f(641.750f, 170.000f)
 		};
+		caminocasa = {
+	sf::Vector2f(717.500f, 679.500f),
+	sf::Vector2f(502.167f, 656.833f),
+	sf::Vector2f(320.167f, 288.500f),
+	sf::Vector2f(485.500f, 524.833f),
+	sf::Vector2f(552.167f, 360.167f),
+	sf::Vector2f(701.167f, 272.833f),
+	sf::Vector2f(441.500f, 99.000f),
+	sf::Vector2f(642.500f, 31.250f),
+	sf::Vector2f(933.000f, 212.000f),
+	sf::Vector2f(965.500f, 417.500f),
+	sf::Vector2f(766.000f, 168.500f)
+		};
 
 
+		origenS = {
+	{903.f, 548.5f},
+	{884.5f, 573.f},
+	{862.75f, 595.f},
+	{840.5f, 615.25f}
+		};
 
 		std::vector<sf::Vector2f> camino1 = {
 	sf::Vector2f(793.167f, 653.500f),
@@ -151,12 +170,7 @@ void GameOffline::resource() {
 
 
 
-		origenS = {
-			sf::Vector2f(958.500f, 207.500f),
-			sf::Vector2f(1017.500f, 207.500f),
-			sf::Vector2f(990.500f, 208.500f),
-			sf::Vector2f(1041.500f, 209.500f)
-		};
+	
 
 		casillas.resize(ActiveUsers.size());
 

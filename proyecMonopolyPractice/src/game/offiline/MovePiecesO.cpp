@@ -43,7 +43,7 @@ MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), spr
 	else if (mapaActual == 2) {
 
 
-		posSelecCAm = { sf::Vector2f(641.833f, 688.500f),sf::Vector2f(641.750f, 550.250f),sf::Vector2f(642.167f, 448.833f),sf::Vector2f(386.833f, 153.500f), sf::Vector2f(641.750f, 170.000f) };
+		posSelecCAm = { sf::Vector2f(641.833f, 688.500f),sf::Vector2f(641.750f, 550.250f),sf::Vector2f(642.167f, 448.833f),sf::Vector2f(386.833f, 153.500f), sf::Vector2f(641.750f, 170.000f),sf::Vector2f(931.000f, 515.500f) };
 
 	}
 
@@ -103,40 +103,115 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 					casillaActual = 0;
 
 					//std::cout << "\nCasi caso";
-					if (caminoActual + 1 == 7 && casillasRestantes != 0) {
-						*vuelta += 1;
 
-						if (*vuelta > 3) {
-							*vuelta = 3;
+					switch (mapaActual) {
+					case 1: // Configuración para el mapa 1
+
+						if (caminoActual + 1 == 7 && casillasRestantes != 0) {
+							*vuelta += 1;
+
+							if (*vuelta > 2) {
+								*vuelta = 2;
+							}
+
+							if (*vuelta == 2) {
+
+
+								posicionFinal = final;
+								casillasRestantes = 1;
+
+
+							}
+							else {
+								(*casillas).resize(1);
+								caminoActual = -1;
+
+
+							}
+
+
 						}
+						else
+							if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
-						if (*vuelta == 3) {
+								finalCamino = true;
+
+								updateCAmbioCasilla();
+							}
+
+						caminoActual++;
+						break;
+
+					case 2:
+						if (sf::Vector2f(931.000f, 515.500f) == sprite->getPosition() && casillasRestantes != 0) {
+							*vuelta += 1;
+
+							if (*vuelta > 2) {
+								*vuelta = 2;
+							}
+
+							if (*vuelta == 2) {
 
 
-							posicionFinal = final;
-							casillasRestantes = 1;
+								posicionFinal = final;
+								casillasRestantes = 1;
+
+
+							}
+							else {
+								(*casillas).resize(1);
+								caminoActual = -1;
+
+
+							}
 
 
 						}
-						else {
-							(*casillas).resize(1);
-							caminoActual = -1;
+						else
+							if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+
+								finalCamino = true;
+
+								updateCAmbioCasilla();
+							}
+
+						caminoActual++;
+						break;
+					case 3:
+						if (sf::Vector2f(828.167f, 157.500f) == sprite->getPosition() && casillasRestantes != 0) {
+							*vuelta += 1;
+
+							if (*vuelta > 2) {
+								*vuelta = 2;
+							}
+
+							if (*vuelta == 2) {
+
+
+								posicionFinal = final;
+								casillasRestantes = 1;
+
+
+							}
+							else {
+								(*casillas).resize(1);
+								caminoActual = -1;
+
+
+							}
 
 
 						}
-
-
-					}
-					else
-						if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
 							finalCamino = true;
 
 							updateCAmbioCasilla();
 						}
-					caminoActual++;
 
-
+						caminoActual++;
+						break;
+					}
 
 				}
 			}
@@ -155,7 +230,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
 
-			if (*vuelta == 3 && sprite->getPosition() == final) {
+			if (*vuelta == 2 && sprite->getPosition() == final) {
 
 				*CsFinal = true;
 				casillasRestantes = 0;
@@ -177,7 +252,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			enMovimiento = false;
 			turn_Move = false;
 			turnRule = true;
-			if (*vuelta == 3) {
+			if (*vuelta == 2) {
 
 				*CsFinal = true;
 
