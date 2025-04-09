@@ -252,10 +252,18 @@ void MovePiecesO::updateCAmbioCasilla() {
 			SpriteUpArrow.setPosition(900, 400);
 
 		}
-		else if (tan == 2 || tan == 4) {
+		else if (tan == 4) {
+
+			SpriteUpArrow.setPosition(370, 400);
+
 			RightArrow.setPosition(900, 400);
 
+		}
+
+		else if (tan == 2) {
 			LeftArrow.setPosition(370, 400);
+
+			SpriteUpArrow.setPosition(900, 400);
 		}
 		else if (tan == 1) {
 			LeftArrow.setPosition(370, 400);
@@ -263,9 +271,9 @@ void MovePiecesO::updateCAmbioCasilla() {
 			SpriteUpArrow.setPosition(900, 400);
 		}
 		else if (tan == 5) {
-			LeftArrow.setPosition(370, 400);
-
 			RightArrow.setPosition(900, 400);
+
+			SpriteUpArrow.setPosition(370, 400);
 		}
 
 
