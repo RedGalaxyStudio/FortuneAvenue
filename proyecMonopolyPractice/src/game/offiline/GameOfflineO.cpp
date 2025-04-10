@@ -610,7 +610,8 @@ void GameOffline::update() {
 	//std::cout << "\n\nPROBA8" << std::endl;
 	InicioPartida();
 	GM.startGame();
-
+	float fps = 0;
+	sf::Clock clocky;
 	playerGameInfo[IndexTurn1].controlSalario += 1;
 	while (window->isOpen()) {
 
@@ -683,7 +684,11 @@ void GameOffline::update() {
 		bool ruletaVisible = false;
 
 		float deltaTime = watch.restart().asSeconds();
+	
 
+		float deltaTime1 = clocky.restart().asSeconds();
+		fps = 1.f / deltaTime1;
+		std::cout << "FPS: " << fps << std::endl;
 
 		if (!draw_roulette) {
 

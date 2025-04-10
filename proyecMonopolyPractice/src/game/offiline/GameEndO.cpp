@@ -2,147 +2,106 @@
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
-
+#include "ResourceGameO.hpp"
+#include "../../core/ResourceGlobal.hpp"
 GameEndO::GameEndO(sf::RenderWindow* window) : window(window) {
 
 }
 
 GameEndO::~GameEndO() {}
 
-class SpiralConfetti {
-public:
-	SpiralConfetti(sf::Vector2f position, sf::Color color)
-		: position(position), color(color) {
-		generateSpiral();
+ConfettiRainO::ConfettiRainO(size_t confettiCount, float screenWidth, float screenHeight) {
+	for (size_t i = 0; i < confettiCount; ++i) {
+		// Posición aleatoria inicial
+		sf::Vector2f startPosition(
+			static_cast<float>(rand() % static_cast<int>(screenWidth)),
+			static_cast<float>(rand() % static_cast<int>(screenHeight))
+		);
+
+		sf::Vector2f size(
+			static_cast<float>(rand() % 15 + 5),
+			static_cast<float>(rand() % 15 + 5)
+		);
+
+		sf::Color color(
+			rand() % 256,
+			rand() % 256,
+			rand() % 256
+		);
+
+		confettiList.emplace_back(startPosition, size, color);
 	}
+}
 
-	void update(float deltaTime) {
-		position.y += velocity * deltaTime;
-		angle += rotationSpeed * deltaTime;
+void ConfettiRainO::update(float deltaTime, float screenWidth, float screenHeight, sf::RenderWindow& window) {
 
-		if (position.y > windowHeight) {
-			position.y = -50;
-			position.x = static_cast<float>(rand() % windowWidth);
-		}
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+	for (auto& confetti : confettiList) {
+		confetti.update(deltaTime, screenHeight, screenWidth, mousePosition);
 	}
+}
 
-	void draw(sf::RenderWindow& window) {
-		sf::Transform transform;
-		transform.translate(position);
-		transform.rotate(angle);
-		window.draw(spiral, transform);
+void ConfettiRainO::draw(sf::RenderWindow& window) {
+	for (auto& confetti : confettiList) {
+		confetti.draw(window);
 	}
+}
 
-private:
-	sf::Vector2f position;
-	sf::Color color;
-	float angle = 0;
-	float rotationSpeed = 50;
-	float velocity = 100;
-	sf::ConvexShape spiral;
-
-	const int windowWidth = 800;
-	const int windowHeight = 600;
-
-	void generateSpiral() {
-		const int points = 10;
-		const float radiusStep = 2.0f;
-		const float angleStep = 0.5f;
-
-		std::vector<sf::Vector2f> vertices;
-		float radius = 0;
-		float theta = 0;
-
-		for (int i = 0; i < points; ++i) {
-			// Calcula coordenadas polares
-			float x = radius * std::cos(theta);
-			float y = radius * std::sin(theta);
-			vertices.emplace_back(x, y);
-
-
-			radius += radiusStep;
-			theta += angleStep;
-		}
-
-
-		spiral.setPointCount(vertices.size());
-		for (size_t i = 0; i < vertices.size(); ++i) {
-			spiral.setPoint(i, vertices[i]);
-		}
-
-		spiral.setFillColor(color);
+ConfettiO::ConfettiO(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
+	: position(startPosition), size(size), color(color) {
+	//Vida.restart();
+	std::cout << "\nInicio de vida: ";
+	rect.setSize(size);
+	angle = static_cast<float>(rand() % 360);
+	rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50));
+	velocity.y = static_cast<float>(rand() % 80 + 20);
+	velocity.x = 0;
+	if (rand() % 30 == 0) {
+		rotateangle = -1;
 	}
-};
+	else {
 
-
-class Confetti {
-public:
-	Confetti(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
-		: position(startPosition), size(size), color(color) {
-
-		rect.setSize(size);
-		angle = static_cast<float>(rand() % 360);
-		rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50));
-		velocity.y = static_cast<float>(rand() % 80 + 20);
-		velocity.x = 0;
-		if (rand() % 30 == 0) {
-			rotateangle = -1;
-		}
-		else {
-
-			rotateangle = 1;
-		}
+		rotateangle = 1;
 	}
+}
 
 
-	int rotateangle;
+void ConfettiO::reset(float screenWidth) {
+	position.y = -size.y;
+	position.x = static_cast<float>(rand() % static_cast<int>(screenWidth));
+	velocity.y = static_cast<float>(rand() % 80 + 20);
+	velocity.x = 0;
+	angle = static_cast<float>(rand() % 360);
+	rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50));
+	//timeAlive = 0.f;
+	colision = false;
+	color = sf::Color(rand() % 256, rand() % 256, rand() % 256);
+	size = sf::Vector2f(static_cast<float>(rand() % 15 + 5), static_cast<float>(rand() % 15 + 5));
+	rect.setSize(size);
+	//Vida.restart();
+}
 
-	void update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
+void ConfettiO::update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
 
-
-		if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
-
-
-			if (colision) {
-				position.y += velocity.y * deltaTime;
-				position.x += velocity.x * deltaTime;
-				angle += (rotationSpeed * deltaTime) * rotateangle;
-
-
-				if (position.y > screenHeight) {
-					position.y = screenHeight;
-					velocity.y = -velocity.y * 0.8f;
-				}
-				if (position.x > screenWidth || position.x < 0) {
-					position.x = std::clamp(position.x, 0.f, screenWidth);
-					velocity.x = -velocity.x * 0.8f;
-				}
+	//float tiempoVivo = Vida.getElapsedTime().asSeconds();
+	//std::cout << "Tiempo actual de vida: " << tiempoVivo << " segundos\n";
 
 
-				velocity.y += 20.f * deltaTime;
+	//if (tiempoVivo >= lifetime) {
+	//	std::cout << "\n888112" << Vida.getElapsedTime().asSeconds();
+	//	reset(screenWidth);
+	//	return;
+	//}
 
-			}
-			else {
-				sf::Vector2f rectCenter(rect.getPosition().x + rect.getSize().x / 2, rect.getPosition().y + rect.getSize().y / 2);
-				sf::Vector2f mouseDirection(mousePositionn.x - rectCenter.x, mousePositionn.y - rectCenter.y);
-
-				float angleToMouse = std::atan2(mouseDirection.y, mouseDirection.x);
-				velocity.x = std::cos(angleToMouse) * 150.f;
-				velocity.y = std::sin(angleToMouse) * 150.f;
-				colision = true;
-
-				velocity.x *= 0.98f;
-				velocity.y *= 0.98f;
-
-			}
+	if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
 
 
-		}
-		else if (!rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
+		if (colision) {
 			position.y += velocity.y * deltaTime;
 			position.x += velocity.x * deltaTime;
 			angle += (rotationSpeed * deltaTime) * rotateangle;
-			colision = false;
+
 
 			if (position.y > screenHeight) {
 				position.y = screenHeight;
@@ -155,77 +114,57 @@ public:
 
 
 			velocity.y += 20.f * deltaTime;
+
 		}
+		else {
+			sf::Vector2f rectCenter(rect.getPosition().x + rect.getSize().x / 2, rect.getPosition().y + rect.getSize().y / 2);
+			sf::Vector2f mouseDirection(mousePositionn.x - rectCenter.x, mousePositionn.y - rectCenter.y);
+
+			float angleToMouse = std::atan2(mouseDirection.y, mouseDirection.x);
+			velocity.x = std::cos(angleToMouse) * 150.f;
+			velocity.y = std::sin(angleToMouse) * 150.f;
+			colision = true;
+
+			velocity.x *= 0.98f;
+			velocity.y *= 0.98f;
+
+		}
+
+
+	}
+	else if (!rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
+		position.y += velocity.y * deltaTime;
+		position.x += velocity.x * deltaTime;
+		angle += (rotationSpeed * deltaTime) * rotateangle;
+		colision = false;
 
 		if (position.y > screenHeight) {
-			position.y = -size.y;  // Reaparece arriba
-			position.x = static_cast<float>(rand() % static_cast<int>(screenWidth));
+			position.y = screenHeight;
+			velocity.y = -velocity.y * 0.8f;
 		}
-	}
-
-	void draw(sf::RenderWindow& window) {
-
-		rect.setPosition(position);
-		rect.setFillColor(color);
-		rect.setRotation(angle);
-
-		window.draw(rect);
-	}
-
-private:
-	sf::RectangleShape rect;
-	bool colision = false;
-	sf::Vector2f position;
-	sf::Vector2f size;
-	sf::Vector2f velocity;
-	sf::Color color;
-	float angle;
-	float rotationSpeed;
-};
-
-class ConfettiRain {
-public:
-	ConfettiRain(size_t confettiCount, float screenWidth, float screenHeight) {
-		for (size_t i = 0; i < confettiCount; ++i) {
-			// Posición aleatoria inicial
-			sf::Vector2f startPosition(
-				static_cast<float>(rand() % static_cast<int>(screenWidth)),
-				static_cast<float>(rand() % static_cast<int>(screenHeight))
-			);
-
-			sf::Vector2f size(
-				static_cast<float>(rand() % 15 + 5),
-				static_cast<float>(rand() % 15 + 5)
-			);
-
-			sf::Color color(
-				rand() % 256,
-				rand() % 256,
-				rand() % 256
-			);
-
-			confettiList.emplace_back(startPosition, size, color);
+		if (position.x > screenWidth || position.x < 0) {
+			position.x = std::clamp(position.x, 0.f, screenWidth);
+			velocity.x = -velocity.x * 0.8f;
 		}
+
+
+		velocity.y += 20.f * deltaTime;
 	}
 
-	void update(float deltaTime, float screenWidth, float screenHeight, sf::RenderWindow& window) {
-
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-		for (auto& confetti : confettiList) {
-			confetti.update(deltaTime, screenHeight, screenWidth, mousePosition);
-		}
+	if (position.y > screenHeight) {
+		position.y = -size.y;  // Reaparece arriba
+		position.x = static_cast<float>(rand() % static_cast<int>(screenWidth));
 	}
+}
 
-	void draw(sf::RenderWindow& window) {
-		for (auto& confetti : confettiList) {
-			confetti.draw(window);
-		}
-	}
+void ConfettiO::draw(sf::RenderWindow& window) {
 
-private:
-	std::vector<Confetti> confettiList;
-};
+	rect.setPosition(position);
+	rect.setFillColor(color);
+	rect.setRotation(angle);
+
+	window.draw(rect);
+}
 
 void assignPositions(const std::vector<PlayerInformation>& players, std::vector<int>& positions) {
 	std::vector<size_t> indices(players.size());
@@ -339,16 +278,7 @@ void GameEndO::update() {
 
 	// Crea una lluvia de confeti
 	size_t confettiCount = 400;  // Número de confetis
-	ConfettiRain confettiRain(confettiCount, screenWidth, screenHeight);
-	std::vector<SpiralConfetti> confettiListt;
-	for (int i = 0; i < 50; ++i) {
-		sf::Vector2f pos(rand() % 800, rand() % 600);
-		sf::Color color(rand() % 256, rand() % 256, rand() % 256);
-		confettiListt.emplace_back(pos, color);
-	}
-
-
-
+	ConfettiRainO confettiRain(confettiCount, screenWidth, screenHeight);
 
 	sf::Clock clock;
 
@@ -404,6 +334,21 @@ void GameEndO::update() {
 			
 		}  
 
+
+		float deltaTime = clock.restart().asSeconds() * 1.5;
+
+		//for (auto& confetti : confettiListt) {
+			//confetti.update(deltaTime);
+		//}
+
+		previousMousePosition = currentMousePosition;
+		currentMousePosition = sf::Mouse::getPosition(*window);
+
+		sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
+		float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+
+		confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
+
 		window->setMouseCursor(*currentCursor);
 
 
@@ -413,6 +358,8 @@ void GameEndO::update() {
 
 
 		window->draw(fingame12);
+
+		confettiRain.draw(*window);
 
 		float perfilWidth = 200.0f; 
 		float separacion = 20.0f;  
@@ -482,10 +429,6 @@ void GameEndO::update() {
 		}
 			
 		window->draw(fingame12);
-		for (auto& confetti : confettiListt) {
-			confetti.draw(*window);
-		}
-		confettiRain.draw(*window);
 
 		window->display();
 
