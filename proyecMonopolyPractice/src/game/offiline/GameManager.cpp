@@ -116,7 +116,7 @@ void GameManager::nextTurn() {
 	size_t currentTurn = IndexTurn1;
 	IndexTurn1 = (currentTurn + 1) % ActiveUsers.size();
 
-
+	std::cout << "\n\Turno \n" << IndexTurn1;
 
 	if (playerGameInfo[IndexTurn1].GameFinal) {
 
@@ -188,7 +188,7 @@ void GameManager::nextTurn() {
 	if (IndexTurn1 == 0) {
 
 		if (playerGameInfo[ActiveUsers[0]].final) {
-
+			std::cout << "\nELLL\n" << playerGameInfo[ActiveUsers[0]].final;
 			nextTurn();
 			return;
 		}
@@ -203,8 +203,10 @@ void GameManager::nextTurn() {
 		turn_Move = true;
 
 		secondTurn = false;
+
+		std::cout << "\nTurnYo\n";
 	}
-	else {
+	else if (IndexTurn1 != 0) {
 		playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOff);
 		BotTurn = true;
 		turn_diceB = true;
@@ -215,6 +217,8 @@ void GameManager::nextTurn() {
 		turn_Tax = true;
 		turn_Move = true;
 		bot.resetT();
+
+		std::cout << "\TurnoEL\n";
 	}
 }
 
