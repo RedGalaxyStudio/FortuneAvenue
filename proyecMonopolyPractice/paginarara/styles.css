@@ -1,0 +1,619 @@
+/* Estilos básicos y reset */
+
+
+@font-face {
+    font-family: "BigBlueTermPlus Nerd Font Propo";
+    src: url("./fonts/BigBlueTermPlusNerdFontPropo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("./fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Importar la fuente ArcadePix */
+.text {
+    font-family: 'Arcadepix Plus Regular';
+}
+
+body {
+    font-family: "Arcadepix Plus Regular", sans-serif;
+    color: #f200ff;
+    background-color: #000000;
+    width: 100%;
+    height: 100%;
+} 
+.Principal{
+
+    width: 100vw;
+    height:100vh;
+
+
+}
+.logo{
+
+    width: 30%;
+    height: 30%;
+
+}
+
+
+
+
+
+hr {
+    border: none;        /* Elimina bordes predeterminados */
+    height: 1px;         /* Grosor de la línea */
+    background-color: #000; /* Color de la línea (negro) */
+    margin: 10px 0;      /* Espacio superior e inferior */
+}
+
+.BoxTop {
+
+    margin-top: 4em; /* Espacio hacia arriba */
+  
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1; /* Envía el canvas al fondo */
+}
+
+.BoxTop2 {
+
+    margin-top: 2em; /* Espacio hacia arriba */
+  
+}
+
+.BoxOpp2 {
+
+    margin-bottom:2em; /* Espacio hacia arriba */
+  
+}
+
+.BoxOpp {
+
+    margin-bottom:2.5em; /* Espacio hacia arriba */
+  
+}
+
+/* Degradado de texto para todo el contenido */
+p {
+    font-family:"Poppins";
+    font-size: 1.5em !important; /* Tamaño del título */
+ 
+  /*  background-image: linear-gradient(to right, #0058f0, #00f088); /* Degradado de azul a verde */
+    background-color: #ffffff;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 15px;
+}
+
+
+h1 {
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+    font-size: 8em !important; /* Tamaño del título */
+    margin-bottom: 20px; /* Espaciado */
+    color: #fff; /* Texto blanco */
+    text-shadow: 
+        0 0 1px #fff, 
+        0 0 5px #fff, 
+        0 0 2px rgba(255, 255, 255, 0.3); /* Efecto de neón más suave */
+}
+
+
+h2 { 
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+
+    font-size: 3em !important; /* Tamaño del título */
+
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h3 { 
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+}
+
+h4 { 
+    font-family:"BigBlueTermPlus Nerd Font Propo";
+    font-size: 1.5em !important; /* Tamaño del título */
+   
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a rosa */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+}
+
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.barra-lateral {
+    position: fixed;
+    top: 0; /* Mantiene la barra lateral en la parte superior */
+    right: 0; /* Mueve la barra lateral a la derecha */
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro, puedes ajustar la opacidad */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column; /* Cambia a columna para que los botones estén en vertical */
+}
+
+nav ul li {
+    margin-bottom: 15px; /* Espaciado entre botones */
+}
+
+nav ul li a {
+    background-image: linear-gradient(to right, #ffffff, #ffffff); /* Degradado de azul a verde */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.5em; /* Tamaño de fuente más grande */
+    padding: 10px; /* Espaciado interno de los botones */
+}
+
+nav ul li a:hover {
+    background-image: linear-gradient(to right, #0028f0, #f72b8e); /* Degradado invertido en hover */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+
+
+#bg-video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+section {
+    
+        text-align: center;
+        padding: 25px 3px;
+        box-sizing: border-box;
+}
+
+h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.btn,
+.btn-especifico {
+    position: relative;
+    padding: 15px 30px; /* Ajusta según sea necesario */
+    background: linear-gradient(to right, #0028f0, #f72b8e);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    transition: background 0.3s, box-shadow 0.3s; /* Añadir box-shadow a la transición */
+}
+
+.btn:hover,
+.btn-especifico:hover {
+    background: linear-gradient(to right,#0028f0 #f72b8e);
+    box-shadow: 0 0 10px #f72b8e, 0 0 20px #f72b8e; /* Efecto de borde neón */
+}
+
+.btn-especifico {
+    position: relative;
+    top: 50px; /* Mueve el botón 50 píxeles hacia abajo */
+}
+
+.seccion {
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+.SeccionMeca{
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 23%;
+    height: 25%;
+}
+
+.card h4 {
+    margin-bottom: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    position: relative;
+}
+
+/* Nuevos botones en la barra de navegación */
+.barra-lateral ul li a[href="#AcercaDe"],
+.barra-lateral ul li a[href="#Contribuidores"] {
+    background-image: linear-gradient(to right, #0058f0, #00f088);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.barra-lateral ul li a[href="#AcercaDe"]:hover,
+.barra-lateral ul li a[href="#Contribuidores"]:hover {
+    background-image: linear-gradient(to right, #0028f0, #f72b8e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.caja {
+    border: 2px solid #ffffff; /* Borde de la caja */
+    padding: 20px; /* Espaciado interior */
+    margin: 20px 500px; /* Espaciado exterior */
+    background-color: #000000; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    box-sizing: border-box;
+    right: 0;
+    
+    }
+
+    .contenedor {
+        display: flex; /* Activa flexbox */
+        justify-content: space-between; /* Distribuye el contenido con espacio entre los elementos */
+        align-items: center; /* Alinea los elementos verticalmente al centro */
+        gap: 20px; /* Espacio entre la imagen y el texto */
+        padding: 20px; /* Espaciado interno */
+    }
+
+
+    * Aseguramos que solo los elementos dentro de la sección #Mecanica1 se vean afectados */
+#Mecanica1 .contenedor {
+  display: flex; /* Usamos Flexbox para alinear los elementos */
+  align-items: flex-start; /* Alinea verticalmente los elementos al principio (superior) */
+  gap: 20px; /* Añadimos un espacio entre la imagen y el texto */
+}
+
+#Mecanica1 .texto {
+    flex: 1;
+}
+
+#Mecanica1 h2, #Mecanica1 p {
+    margin: 0 50px;
+    padding: 0; 
+    line-height: 1.5; 
+}
+
+
+#Mecanica1 .texto h2,
+#Mecanica1 .texto p {
+    text-align: left; 
+}
+
+
+#Mecanica1 .imagen img {
+    width: 600px; 
+    height: auto; 
+    margin: 30px; 
+}
+
+
+    #Mecanica2 .contenedor {
+        display: flex; 
+        flex-direction: row-reverse; 
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    #Mecanica2 .texto {
+        flex: 1; 
+    }
+
+    #Mecanica2 h2, #Mecanica2 p {
+        margin: 0 50px; 
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica2 .texto h2,
+        #Mecanica2 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica2 .imagen img {
+        width: 700px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Mecanica3 .contenedor {
+        display: flex; /* Usamos Flexbox para alinear los elementos */
+        align-items: center; /* Alinea verticalmente los elementos al principio (superior) */
+        gap: 20px; /* Añadimos un espacio entre la imagen y el texto */
+    }
+    
+    #Mecanica3 .texto {
+        flex: 1;
+    }
+    
+    #Mecanica3 h2, #Mecanica3 p {
+        margin: 0 50px;
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica3 .texto h2,
+    #Mecanica3 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica3 .imagen img {
+        width: 600px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Mecanica4 .contenedor {
+        display: flex; 
+        flex-direction: row-reverse; 
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    #Mecanica4 .texto {
+        flex: 1; 
+    }
+
+    #Mecanica4 h2, #Mecanica4 p {
+        margin: 0 50px; 
+        padding: 0; 
+        line-height: 1.5; 
+    }
+
+    #Mecanica4 .texto h2,
+        #Mecanica4 .texto p {
+        text-align: left; 
+    }
+
+    #Mecanica4 .imagen img {
+        width: 600px; 
+        height: auto; 
+        margin: 30px; 
+    }
+
+    #Team img {
+        width: 900px;  /* Ajusta este valor según lo que necesites */
+        height: auto;  /* Mantiene la proporción de la imagen */
+    }
+
+    #miembros .grid .card img {
+        width: 150px; /* Establece un tamaño fijo para la imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        margin-bottom: 10px; /* Opcional: espacio debajo de la imagen */
+    }
+    #miembros {
+        line-height: 1.6;
+        margin: 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+    }
+
+    #miembros h2 {
+        text-align: center;
+        font-size: 2em;
+
+    }
+    
+    #miembros p {
+        font-size: 1.1em;
+
+        margin-bottom: 1em;
+    }
+    
+    #miembros h3 {
+        font-size: 1.5em;
+        margin-top: 1px;
+
+    }
+
+    .barra-lateral {
+    position: fixed;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 1000; /* Para asegurarse de que esté encima del contenido */
+}
+
+.barra-lateral ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.barra-lateral ul li {
+    padding: 10px 15px;
+}
+
+.barra-lateral ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.barra-lateral.open {
+    left: 0; /* Cuando se añade la clase 'open', la barra lateral se muestra */
+}
+
+.toggle-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+}
+
+.barra-lateral.open .close-btn {
+    display: block; /* Mostrar el botón de cerrar cuando la barra está abierta */
+}
+
+/* Estilo para el botón 'Menú' */
+.toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000; /* Asegura que esté por encima de la barra lateral */
+}
+
+/* Estilo de la barra lateral */
+.barra-lateral {
+    position: fixed;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 999; /* Para que esté debajo del botón 'Menú' */
+}
+
+/* Estilo de la lista de la barra lateral */
+.barra-lateral ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.barra-lateral ul li {
+    padding: 10px 15px;
+}
+
+.barra-lateral ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Mostrar la barra lateral cuando se añade la clase 'open' */
+.barra-lateral.open {
+    left: 0;
+}
+
+/* Estilo del botón de cierre 'X' */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+}
+
+/* Muestra el botón de cierre 'X' cuando la barra lateral está abierta */
+.barra-lateral.open .close-btn {
+    display: block;
+}
+
+/* Esconde el botón 'Menú' cuando la barra lateral está abierta */
+.barra-lateral.open ~ .toggle-btn {
+    display: none;
+}

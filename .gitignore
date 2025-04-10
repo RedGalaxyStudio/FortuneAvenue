@@ -1,1 +1,15 @@
+
 .vs/
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.log
+/proyecMonopolyPractice/x64/
+*.obj
+*.log
+*.pdb
+*.tlog
+*.obj
