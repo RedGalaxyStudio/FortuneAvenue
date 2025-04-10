@@ -404,6 +404,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	InicioPartida();
+	juegoTerminado = true;
 
 	while (window->isOpen() && !juegoTerminado) {
 
@@ -623,6 +624,23 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	if (window->isOpen() && juegoTerminado) {
+		// Jugador 1
+		playerInfos[0].money = 450;  // Dinero inicial para el jugador 1
+		playersGame[0].Money.setString(std::to_string(playerInfos[0].money));
+
+		// Jugador 2
+		playerInfos[1].money = 750;  // Dinero inicial para el jugador 2
+		playersGame[1].Money.setString(std::to_string(playerInfos[1].money));
+
+		// Jugador 3
+		playerInfos[2].money = 610;  // Dinero inicial para el jugador 3
+		playersGame[2].Money.setString(std::to_string(playerInfos[2].money));
+
+		// Jugador 4 (si es necesario)
+		playerInfos[3].money = 230;  // Dinero inicial para el jugador 4
+		playersGame[3].Money.setString(std::to_string(playerInfos[3].money));
+
+
 		GameEnd gameend(window,client);
 		gameend.resource();
 		gameend.update();
