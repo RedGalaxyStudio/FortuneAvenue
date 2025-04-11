@@ -1,0 +1,2 @@
+C:\Users\D2niel\Desktop\proyecMonopolyPractice\x64\Debug\WebView2Loader.dll
+C:\Users\D2niel\Desktop\Fortune Avenue\x64\Debug\WebView2Loader.dll
