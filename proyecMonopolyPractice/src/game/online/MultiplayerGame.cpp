@@ -404,7 +404,7 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 	}
 
 	InicioPartida();
-	juegoTerminado = true;
+	//juegoTerminado = true;
 	while (window->isOpen() && !juegoTerminado) {
 
 		Event();

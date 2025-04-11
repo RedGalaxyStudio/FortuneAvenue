@@ -62,11 +62,11 @@ struct PlayerInformation {
 
 	int turnopermitido = 0;
 
-	int roomconect;
-	int Posicion;
+	int roomconect=00000;
+	int Posicion=0;
 	bool isSelectingPiece = false; 
 	bool isInGame = false;        
-	int indexPiece;
+	int indexPiece=-1;
 	std::vector<int> casasPorJugador;
 	int Vueltas = 0;
 	bool final= false;
@@ -138,7 +138,7 @@ extern std::vector<PlayerInformation> playerGameInfo; //playersInfo
 extern std::vector<PlayerGameOff> playerGameOff; //playersGame
 
 void loadResourceGameO();
-void loadPieceGame();
+
 
 
 #endif 

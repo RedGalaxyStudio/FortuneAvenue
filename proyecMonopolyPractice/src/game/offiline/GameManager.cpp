@@ -10,7 +10,7 @@ GameManager::GameManager() : currentTurn(0), gameOver(false) {
 
 
 void GameManager::CasasAleatorias() {
-	int numJugadores = ActiveUsers.size();
+	int numJugadores = static_cast<int>(ActiveUsers.size());
 	int numCasas = 17;
 	std::vector<std::vector<int>> casasR;
 	casasR.resize(numJugadores);
@@ -114,9 +114,7 @@ void GameManager::nextTurn() {
 	playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOn);
 	firstTurn = false;
 	size_t currentTurn = IndexTurn1;
-	IndexTurn1 = (currentTurn + 1) % ActiveUsers.size();
-
-	std::cout << "\n\Turno \n" << IndexTurn1;
+	IndexTurn1 = (currentTurn + 1) % static_cast<int>(ActiveUsers.size());
 
 	if (playerGameInfo[IndexTurn1].GameFinal) {
 
@@ -217,17 +215,12 @@ void GameManager::nextTurn() {
 		turn_Tax = true;
 		turn_Move = true;
 		bot.resetT();
-
-		std::cout << "\TurnoEL\n";
 	}
 }
 
 void GameManager::impuesto() {
-	std::cout << "\nhola1:" << playerGameInfo[IndexTurn1].impuesto << ":" << playerGameInfo[IndexTurn1].money;
 	playerGameInfo[IndexTurn1].money -= playerGameInfo[IndexTurn1].impuesto;
 	playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
-	std::cout << "\nhola1:" << playerGameInfo[IndexTurn1].impuesto << ":" << playerGameInfo[IndexTurn1].money;
-
 }
 
 void GameManager::processTurn(int playerId) {

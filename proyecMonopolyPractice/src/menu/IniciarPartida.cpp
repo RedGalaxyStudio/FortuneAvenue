@@ -68,10 +68,10 @@ void IniciarPartida::update() {
 	int xPos=180;
 	int startY=120;
 
-	Sesion.setPosition(xPos, startY + 110);
-	box.setPosition(xPos, startY + 110);
-	selectedAvatarCopy.setPosition(xPos, startY);
-	recua.setPosition(xPos, startY);
+	Sesion.setPosition(static_cast<float>(xPos), static_cast<float>(startY + 110));
+	box.setPosition(static_cast<float>(xPos), static_cast<float>(startY + 110));
+	selectedAvatarCopy.setPosition(static_cast<float>(xPos), static_cast<float>(startY));
+	recua.setPosition(static_cast<float>(xPos), static_cast<float>(startY));
 	//printMemoryUsage();
 	
 	bool valida2 = false;

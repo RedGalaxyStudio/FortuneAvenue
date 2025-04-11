@@ -44,7 +44,7 @@ void StealplayerO::resource() {
 }
 void StealplayerO::BotRobar() {
 
-    int aux = playerGameInfo.size() - 1;
+    int aux = static_cast<int>(playerGameInfo.size()) - 1;
     playerGameInfo[IndexTurn1].money += 100;
     playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 

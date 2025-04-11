@@ -296,8 +296,8 @@ void GameEnd::update() {
 	srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
 
 	// Dimensiones del lienzo
-	float screenWidth = window->getSize().x;
-	float screenHeight = window->getSize().y;
+	float screenWidth = static_cast<float>(window->getSize().x);
+	float screenHeight = static_cast<float>(window->getSize().y);
 
 	// Crea una lluvia de confeti
 	size_t confettiCount = 400;  // Número de confetis
@@ -370,7 +370,7 @@ void GameEnd::update() {
 				}
 			}
 		}
-		float deltaTime = clock.restart().asSeconds() * 1.5;
+		float deltaTime = static_cast<float>(clock.restart().asSeconds() * 1.5);
 
 		//for (auto& confetti : confettiListt) {
 			//confetti.update(deltaTime);
@@ -380,7 +380,7 @@ void GameEnd::update() {
 		currentMousePosition = sf::Mouse::getPosition(*window);
 
 		sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
-		float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+		float speed = static_cast<float>(std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y));
 
 		confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
 

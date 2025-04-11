@@ -1,5 +1,0 @@
-local.properties
-.idea
-.gradle
-app/build
-app/.cxx

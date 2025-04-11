@@ -238,7 +238,7 @@ void GameEndO::update() {
 
 	float perfilWidth = 200.0f; 
 	float separacion = 20.0f;  
-	int totalPerfiles = ActiveUsers.size();    
+	int totalPerfiles = static_cast<int>(ActiveUsers.size());    
 
 	if (totalPerfiles > 0) {
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
@@ -273,8 +273,8 @@ void GameEndO::update() {
 	srand(static_cast<unsigned>(time(nullptr)));  // Semilla para números aleatorios
 
 	// Dimensiones del lienzo
-	float screenWidth = window->getSize().x;
-	float screenHeight = window->getSize().y;
+	float screenWidth = static_cast<float>(window->getSize().x);
+	float screenHeight = static_cast<float>(window->getSize().y);
 
 	// Crea una lluvia de confeti
 	size_t confettiCount = 400;  // Número de confetis
@@ -335,7 +335,7 @@ void GameEndO::update() {
 		}  
 
 
-		float deltaTime = clock.restart().asSeconds() * 1.5;
+		float deltaTime = static_cast<float>(clock.restart().asSeconds() * 1.5);
 
 		//for (auto& confetti : confettiListt) {
 			//confetti.update(deltaTime);
@@ -345,7 +345,7 @@ void GameEndO::update() {
 		currentMousePosition = sf::Mouse::getPosition(*window);
 
 		sf::Vector2i deltaMouse = currentMousePosition - previousMousePosition;
-		float speed = std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y);
+		float speed = static_cast<float>(std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y));
 
 		confettiRain.update(deltaTime, screenWidth, screenHeight, *window);
 
@@ -363,7 +363,7 @@ void GameEndO::update() {
 
 		float perfilWidth = 200.0f; 
 		float separacion = 20.0f;  
-		int totalPerfiles = ActiveUsers.size();    
+		int totalPerfiles = static_cast<int>(ActiveUsers.size());
 		float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
 		float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
 		float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
@@ -384,8 +384,8 @@ void GameEndO::update() {
 				playerGameOff[ActiveUsers[i]].boxPlayer.setPosition(xPos, startY+200);
 				//playerGameOff[ActiveUsers[i]].PieceSelect.setPosition(xPos+ 30, startY + 330);
 				playerGameOff[ActiveUsers[i]].AvatarPlayer.setPosition(xPos, yPos+100);
-				playerGameOff[ActiveUsers[i]].AvatarPlayer.setScale(0.8, 0.8);
-				playerGameOff[ActiveUsers[i]].MarcoPlayer.setScale(1.3, 1.3);
+				playerGameOff[ActiveUsers[i]].AvatarPlayer.setScale(0.8f, 0.8f);
+				playerGameOff[ActiveUsers[i]].MarcoPlayer.setScale(1.3f, 1.3f);
 				playerGameOff[ActiveUsers[i]].MarcoPlayer.setPosition(xPos, yPos+100);
 
 				if (playerGameOff[ActiveUsers[i]].PieceSelect.getTexture() != nullptr) {
