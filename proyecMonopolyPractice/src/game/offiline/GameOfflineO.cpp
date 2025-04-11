@@ -239,10 +239,10 @@ void GameOffline::resource() {
 		};
 
 		origenS = {
-			sf::Vector2f(958.500f, 207.500f),
-			sf::Vector2f(1017.500f, 207.500f),
-			sf::Vector2f(990.500f, 208.500f),
-			sf::Vector2f(1041.500f, 209.500f)
+			sf::Vector2f(958.500f, 177.500f),
+			sf::Vector2f(1017.500f, 177.500f),
+			sf::Vector2f(990.500f, 241.500f),
+			sf::Vector2f(1041.500f, 241.500f)
 		};
 
 		casillas.resize(ActiveUsers.size());
