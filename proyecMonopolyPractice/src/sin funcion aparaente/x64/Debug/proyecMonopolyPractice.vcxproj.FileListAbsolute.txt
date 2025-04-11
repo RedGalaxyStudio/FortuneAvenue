@@ -1,5 +1,0 @@
-C:\Users\Siragon\Desktop\RedGalaxy Proyecto1\FortuneAvenue\x64\Debug\WebView2Loader.dll
-C:\Users\Daniel\Desktop\proyecMonopolyPractice\x64\Debug\WebView2Loader.dll
-C:\Users\Daniel\Desktop\proyecMonopolyPractice\proyecMonopolyPractice\x64\Debug\proyecMo.9D9640D3.Up2Date
-C:\Users\User\Desktop\ProyectoReal\FortuneAvenue\x64\Debug\WebView2Loader.dll
-C:\Users\Usuario\Desktop\FortuneAvenue\FortuneAvenue\x64\Debug\WebView2Loader.dll

@@ -93,7 +93,7 @@ void LoadingScreen::updateDice(sf::Time deltaTime) {
 		timeAcumulado = 0.0f;
 		frame = (frame + 1) % 8;
 
-	//	Resourceready = true;
+		Resourceready = true;
 		spriteBackground.setTexture(dice[frame]);
 		for (size_t i = 0; i < playersGame.size(); i++) {
 
