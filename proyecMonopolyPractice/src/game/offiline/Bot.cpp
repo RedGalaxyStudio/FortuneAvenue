@@ -15,7 +15,6 @@ namespace CreatorB {
 		std::vector<std::string>botNames;
 		std::string line;
 
-		// Cargar todos los nombres en un vector
 		while (std::getline(file, line)) {
 			botNames.push_back(line);
 		}
@@ -26,7 +25,6 @@ namespace CreatorB {
 			return {};
 		}
 
-		// Generador de números aleatorios
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::unordered_set<size_t> usedIndices;
@@ -37,7 +35,6 @@ namespace CreatorB {
 			std::uniform_int_distribution<size_t> dist(0, botNames.size() - 1);
 			size_t randomIndex = dist(gen);
 
-			// Asegurar que no se repita el índice
 			if (usedIndices.find(randomIndex) == usedIndices.end()) {
 				usedIndices.insert(randomIndex);
 				selectedNames.push_back(botNames[randomIndex]);
@@ -50,7 +47,7 @@ namespace CreatorB {
 
 
 		if (count > 20) {
-			count = 20;  // No podemos generar más de 20 números distintos en el rango 0-19
+			count = 20; 
 		}
 
 		std::vector<int> pieces;
@@ -61,7 +58,7 @@ namespace CreatorB {
 
 		while (pieces.size() < count) {
 			int num = dist(gen);
-			if (usedNumbers.insert(num).second && (num != pieceP)) { // Si se inserta correctamente (no repetido)
+			if (usedNumbers.insert(num).second && (num != pieceP)) { 
 				pieces.push_back(num);
 			}
 		}
@@ -73,7 +70,7 @@ namespace CreatorB {
 
 
 		if (count > 20) {
-			count = 20;  // No podemos generar más de 20 números distintos en el rango 0-19
+			count = 20; 
 		}
 
 		std::vector<int> avatarss;
@@ -84,7 +81,7 @@ namespace CreatorB {
 
 		while (avatarss.size() < count) {
 			int num = dist(gen);
-			if (usedNumbers.insert(num).second) { // Si se inserta correctamente (no repetido)
+			if (usedNumbers.insert(num).second) { 
 				avatarss.push_back(num);
 			}
 		}
@@ -94,10 +91,7 @@ namespace CreatorB {
 	}
 }
 
-Bot::Bot() {
-
-
-}
+Bot::Bot() {}
 bool Bot::roll() {
 	if ( clock.getElapsedTime().asSeconds() >=waitTime) {
 		return true;
@@ -111,26 +105,21 @@ int Bot::eleccion() {
 
 	int cam = dist(gen);
 	return cam;
-
 }
 
 void Bot::resetT() {
-	waitTime = 2.0f + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 2.0f + std::rand() % 3;
 	clock.restart();
 }
 void Bot::resetTCAM() {
-	waitTime = 2.0f + std::rand() % 4; // Número aleatorio entre 1 y 5 segundos
+	waitTime = 2.0f + std::rand() % 4; 
 	clock.restart();
 }
 
 void Bot::resetTRuleta() {
-	waitTime = 2.0f + std::rand() % 4;
+	waitTime = 1.0f + std::rand() % 4;
 }
 void Bot::resetTCAMRuleta() {
 	waitTime = 2.0f + std::rand() % 4;
 	clock.restart();
-}
-
-void Bot::houseBuy (int costo, int money) {
-
 }

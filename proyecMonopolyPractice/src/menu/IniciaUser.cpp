@@ -458,7 +458,7 @@ void IniciaUser::IniciAcion() {
 	}
 }
 void IniciaUser::saveSelectedAvatar() {
-	std::filesystem::current_path(projectPath); // Asegura que estamos en la ruta original del proyecto
+	std::filesystem::current_path(projectPath);
 
 	if (selectedAvatar != nullptr) {
 
@@ -479,7 +479,6 @@ void IniciaUser::saveSelectedAvatar() {
 				sf::Texture tempTexture;
 				tempTexture.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 				sf::Sprite sprite(tempTexture);
-				// Dibujar la imagen escalada en el RenderTexture
 				renderTexturo.clear(colores.getFillColor());
 				renderTexturo.draw(spo);
 				renderTexturo.draw(sprite);

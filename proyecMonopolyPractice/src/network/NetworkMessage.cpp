@@ -35,10 +35,9 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		file.read(imageData.data(), fileSize);
 		file.close();
 		std::string roomCode = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
-		// Construir el mensaje con roomCode + tamaño + imagen
 		std::vector<char> packetData;
 		packetData.insert(packetData.end(), roomCode.begin(), roomCode.end()); 
-		packetData.insert(packetData.end(), reinterpret_cast<char*>(&fileSize), reinterpret_cast<char*>(&fileSize) + sizeof(fileSize)); // Tamaño
+		packetData.insert(packetData.end(), reinterpret_cast<char*>(&fileSize), reinterpret_cast<char*>(&fileSize) + sizeof(fileSize)); 
 		packetData.insert(packetData.end(), imageData.begin(), imageData.end()); 
 
 		ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);

@@ -44,14 +44,12 @@ Client::~Client() {
 		client = nullptr;
 	}
 
-	// Vaciar y destruir los paquetes en la cola
 	while (!packetQueue.empty()) {
 		ENetPacket* packet = packetQueue.front();
 		enet_packet_destroy(packet);
 		packetQueue.pop();
 	}
 
-	// Eliminar punteros dinámicos
 	delete clientData;
 	clientData = nullptr;
 
@@ -83,8 +81,7 @@ bool Client::initialize() {
 
 	}
 
-	if (reinterpret_cast<uintptr_t>(client) < 0x1000) {  // Detectar valores raros
-
+	if (reinterpret_cast<uintptr_t>(client) < 0x1000) { 
 		client = nullptr;
 	}
 	if (!client) {
