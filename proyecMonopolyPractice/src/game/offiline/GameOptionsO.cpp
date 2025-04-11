@@ -32,14 +32,9 @@ void GameOptions::resource() {
 	globalBounds = SpriteMapaS.getGlobalBounds();
 	SpriteMapaS.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	SpriteMapaS.setPosition(640, 460);
+	SpriteMapaS.setPosition(355, 460);
 	SpriteflecDerecha.setTexture(TextureflecDerecha);
 	SpriteflecIzquier.setTexture(TextureflecIzquier);
-
-	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
-	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
-
-
 	if (!TextureMapa22.loadFromFile("assets/image/Game/mapa22m.png")) return;
 	if (!TextureMapa22M.loadFromFile("assets/image/Game/mapa22mM.png")) return;
 
@@ -47,7 +42,7 @@ void GameOptions::resource() {
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa22.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	SpriteMapa22.setPosition(360, 460);
+	SpriteMapa22.setPosition(638, 460);
 	borde1.setFillColor(sf::Color::Transparent);
 	borde1.setOutlineColor(sf::Color::White);
 	borde1.setOutlineThickness(6);
@@ -80,7 +75,7 @@ void GameOptions::resource() {
 	globalBounds = SpriteMapa22.getGlobalBounds();
 	SpriteMapa1.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
-	SpriteMapa1.setPosition(920, 460);
+	SpriteMapa1.setPosition(915, 460);
 	borde3.setPosition(920, 465);
 	borde2.setPosition(640, 465);
 	borde1.setPosition(360, 465);
@@ -143,8 +138,8 @@ void GameOptions::update() {
 	Valida = false;
 	bool valida2 = false;
 
-	ButtonG MapaS(SpriteMapaS, TextureMapaS, TextureMapaSM, borde2, Minimo, Maximo);
-	ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M, borde1, Minimo, Maximo);
+	ButtonG MapaS(SpriteMapaS, TextureMapaS, TextureMapaSM, borde1, Minimo, Maximo);
+	ButtonG Mapa22(SpriteMapa22, TextureMapa22, TextureMapa22M,borde2 , Minimo, Maximo);
 	ButtonG Mapa11(SpriteMapa1, TextureMapa1, TextureMapa1M, borde3, Minimo, Maximo);
 	bool Mapa1{ false }, Mapa2{ false }, Mapa3{ false };
 	int Map=-1;

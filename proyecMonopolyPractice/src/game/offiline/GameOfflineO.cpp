@@ -109,7 +109,7 @@ void GameOffline::resource() {
 	else if (NMapa == 2) {
 
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa22l.png")) return;
-		Dado.start(630, 350);
+		Dado.start(638, 358);
 		int DadoResul = 0;
 		MapSprite.setTexture(TextureMapa);
 		MapSprite.setOrigin(360, 360);
@@ -593,28 +593,20 @@ void GameOffline::update() {
 		moverFichas[i].Inicializar(&playerGameOff[i].PieceSelect, &casillas[i], &playerGameInfo[i].Vueltas, playerGameOff[i].origen, &playerGameInfo[i].final, playerGameInfo[i].PiecUserme);
 
 	}
-	//	std::cout << "\n\nl::" << playerGameOff[0].origen.x << ":" << playerGameOff[0].origen.y;
-
+	
 	StealplayerO robarjugador(window, ActiveUsers, playerGameOff);
 	robarjugador.resource();
 
-
-	//GameEnd gameend(window);
-	//gameend.resource();
-	//gameend.update();
-
-	//Dado.start(640, 360);
 	int DadoResul = 0;
 
 	rouletteAnimation = false;
-	//std::cout << "\n\nPROBA8" << std::endl;
 	InicioPartida();
 	GM.startGame();
-	float fps = 0;
+
 	sf::Clock clocky;
 	playerGameInfo[IndexTurn1].controlSalario += 1;
-	while (window->isOpen()) {
 
+	while (window->isOpen()&&!GM.juegoTerminadoo) {
 
 		if (secondTurn) {
 
@@ -625,12 +617,7 @@ void GameOffline::update() {
 			}
 		}
 
-
 		Event();
-
-
-
-
 
 		// dado mecanica 
 		resultadoDado = Dado.logica();
@@ -684,11 +671,6 @@ void GameOffline::update() {
 		bool ruletaVisible = false;
 
 		float deltaTime = watch.restart().asSeconds();
-	
-
-		float deltaTime1 = clocky.restart().asSeconds();
-		fps = 1.f / deltaTime1;
-		std::cout << "FPS: " << fps << std::endl;
 
 		if (!draw_roulette) {
 
@@ -843,8 +825,6 @@ void GameOffline::update() {
 }
 void GameOffline::Event() {
 	sf::Event event;
-
-
 
 	do {
 		if (window->pollEvent(event)) {

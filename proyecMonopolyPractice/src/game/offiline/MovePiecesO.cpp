@@ -55,7 +55,7 @@ void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::V
 	this->final = fin;
 	this->CsFinal = CsFin;
 	PieceUser = PiecUser;
-	*vuelta = 0;
+	*vuelta = 1;
 }
 void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
@@ -131,13 +131,12 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 						}
-						else
-							if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
 								finalCamino = true;
 
 								updateCAmbioCasilla();
-							}
+						}
 
 						caminoActual++;
 						break;
@@ -167,8 +166,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 						}
-						else
-							if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
 								finalCamino = true;
 
@@ -231,7 +229,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			sprite->setPosition(nuevaPosicion);
 
 			if (*vuelta == 2 && sprite->getPosition() == final) {
-				std::cout << "Vueeeltikaaa" << *vuelta;
+			
 				*CsFinal = true;
 				casillasRestantes = 0;
 
@@ -240,11 +238,14 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				turnRule = true;
 
 
-				if (PieceUser) {
-
-					//client.llegadaFinal();
-
+				GM.juegoTerminadoo = true;
+				for (int i = 0; i < ActiveUsers.size(); i++)
+				{
+					if (!playerGameInfo[i].final) {
+						GM.juegoTerminadoo = false;
+					}
 				}
+		
 			}
 		}
 		else {
@@ -253,15 +254,17 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			turn_Move = false;
 			turnRule = true;
 			if (*vuelta == 2) {
-				std::cout << "\nVueltika " << *vuelta;
+				
 				*CsFinal = true;
 
 
 
-				if (PieceUser) {
-
-					//client.llegadaFinal();
-
+				GM.juegoTerminadoo = true;
+				for (int i = 0; i < ActiveUsers.size(); i++)
+				{
+					if (!playerGameInfo[i].final) {
+						GM.juegoTerminadoo = false;
+					}
 				}
 			}
 
