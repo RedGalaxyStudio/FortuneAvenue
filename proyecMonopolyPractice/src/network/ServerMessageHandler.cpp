@@ -13,7 +13,7 @@ int ServerMessageHandler::calcularNumeroDeLineas(const sf::Text& text) {
 
 	sf::FloatRect bounds = text.getGlobalBounds();
 
-	float alturaLinea = text.getCharacterSize();
+	float alturaLinea = static_cast<float>(text.getCharacterSize());
 	int numeroDeLineas = static_cast<int>(bounds.height / alturaLinea);
 
 	return numeroDeLineas;
@@ -46,9 +46,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::cerr << "Error: preprocces o preprocces->data es nulo." << std::endl;
 		return;
 	}
-	std::cout << "Paquete recibido de tamaño " << preprocces->dataLength << " bytes.\n";
-
-	// Verificar que la longitud de los datos sea válida
+//	std::cout << "Paquete recibido de tamaño " << preprocces->dataLength << " bytes.\n";
 	if (preprocces->dataLength == 0) {
 		std::cerr << "Error: los datos recibidos tienen longitud 0." << std::endl;
 		return;
@@ -58,13 +56,12 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 	// Convertir los primeros bytes en texto para verificar si es un mensaje de imagen
 
 	std::string header(rawData.begin(), rawData.begin() + std::min<size_t>(rawData.size(), 10));
-	std::cout << "\nCabecera recibida: " << header << std::endl;
+	//std::cout << "\nCabecera recibida: " << header << std::endl;
 
 
 	std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
 
-	//std::cout << "\nuuuuuuuuuuuuuuuuuu22222222222222222222222";
-	std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
+	//std::cout << "\n\n\nMensaje recibido : " << message << std::endl;
 	if (memcmp(preprocces->data, "REQ|", 4) == 0) {
 		uint32_t senderID, requesterID, chunkIndex;
 		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
@@ -91,7 +88,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		
 		}
 	} else if (preprocces->dataLength < 4 || memcmp(preprocces->data, "IMG|", 4) == 0) {
-		uint32_t senderID, chunkIndex, totalChunks, receivedCRC;
+		uint32_t senderID, chunkIndex, totalChunks;
 		memcpy(&senderID, preprocces->data + 4, sizeof(uint32_t));
 		memcpy(&chunkIndex, preprocces->data + 8, sizeof(uint32_t));
 		memcpy(&totalChunks, preprocces->data + 12, sizeof(uint32_t));
@@ -106,10 +103,10 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		std::vector<uint8_t> chunkData(preprocces->data + 16, preprocces->data + preprocces->dataLength);
 		playerImageFragments[senderID][chunkIndex] = chunkData;
 
-		std::cout << "Encabezado recibido: " << std::endl;
-		std::cout << "SenderID: " << senderID << std::endl;
-		std::cout << "ChunkIndex: " << chunkIndex << std::endl;
-		std::cout << "TotalChunks: " << totalChunks << std::endl;
+		//std::cout << "Encabezado recibido: " << std::endl;
+		//std::cout << "SenderID: " << senderID << std::endl;
+		//std::cout << "ChunkIndex: " << chunkIndex << std::endl;
+		//std::cout << "TotalChunks: " << totalChunks << std::endl;
 
 		//expectedChunksPerPlayer[senderID] = totalChunks;
 
@@ -126,9 +123,9 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 			// Si hay fragmentos faltantes, solicitar reenvío
 			if (!missingChunks.empty()) {
-				std::cout << "Faltan fragmentos del jugador " << senderID << ": ";
-				for (uint32_t chunk : missingChunks) std::cout << chunk << " ";
-				std::cout << "\nSolicitando reenvío...\n";
+				//std::cout << "Faltan fragmentos del jugador " << senderID << ": ";
+				for (uint32_t chunk : missingChunks) //std::cout << chunk << " ";
+				//std::cout << "\nSolicitando reenvío...\n";
 
 				for (uint32_t chunk : missingChunks) {
 					std::vector<uint8_t> requestPacket(sizeof(uint32_t) * 2 + 5);
@@ -168,7 +165,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			playerInfos[senderID].image = filename;
 			playersGame[senderID].textureAvatarPLayer.loadFromFile(playerInfos[senderID].image);
 
-			std::cout << "Imagen de jugador " << senderID << " recibida correctamente.\n";
+			//std::cout << "Imagen de jugador " << senderID << " recibida correctamente.\n";
 			playerImageFragments.erase(senderID);
 		}
 	}

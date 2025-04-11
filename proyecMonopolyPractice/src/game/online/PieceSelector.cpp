@@ -222,12 +222,10 @@ void PieceSelector::updateSelection() {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				static sf::Sprite* previousSelection = nullptr;
 
-				std::cout << "\n11111111jjjjjjjjjjjjjj";
 				for (int i = 0; i < pieces.size(); ++i) {
 
 					if (pieces[i].getGlobalBounds().contains(mousePosFloat)) {
 
-						std::cout << "\njjjjjjjjjjjjjj";
 						bool validP = true;
 						for (int j = 0; j < UsuariosActivos.size(); j++)
 						{
@@ -237,7 +235,7 @@ void PieceSelector::updateSelection() {
 								break;
 							}
 						}
-						std::cout << "\njjjjjjjjjjjjjj";
+					
 						if ((previousSelection != &pieces[i]) && validP) {
 							if (previousSelection != nullptr) {
 								previousSelection->setColor(sf::Color::White);
@@ -375,7 +373,6 @@ void PieceSelector::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		//std::cout << "\nCplayerIndex:" << CplayerIndex << " playerIndex:"<< playerIndex;
 		if (CplayerIndex != playerIndex && CplayerIndex != -1) {
 
 

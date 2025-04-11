@@ -21,11 +21,10 @@ Client::Client() : client(nullptr), peer(nullptr) {
 	clientData->disconnecte = false;
 	giroActivo = false;
 	initialSpeedActi = 0.f;
-	//std::cout << "\n[DEBUG] Constructor: Dirección de client: " << std::hex << reinterpret_cast<uintptr_t>(client);
 }
 Client::~Client() {
 	disconnect();
-	// Esperar a que los hilos terminen si están en ejecución
+	
 	if (clientThread.joinable()) {
 		clientThread.join();
 	}
@@ -109,7 +108,6 @@ void Client::run() {
 		while (enet_host_service(client, &event, 100) > 0) {
 			switch (event.type) {
 			case ENET_EVENT_TYPE_RECEIVE: {
-			//	std::cout << "\nuuuuuuuuuuuiwfijjiwejdfewijfwijfoiewjefiwuuuuuuu";
 				packetQueue.push(event.packet);
 				break;
 			}
@@ -126,11 +124,10 @@ void Client::process() {
 	clientData->running = true;
 	while (clientData->running) {
 		if (!packetQueue.empty()) {
-			ENetPacket* n = packetQueue.front();  // Obtener el primer paquete
-			packetQueue.pop();  // Eliminar el paquete de la cola
-			//std::cout << "\nuuuuuuuuuuuuuuuuuuwwwwwwwwwwwww";
-			SMessageHandler->handleServerMessage(n);  // Procesar el paquete con tu manejador
-			enet_packet_destroy(n);  // Liberar el paquete después de procesarlo
+			ENetPacket* n = packetQueue.front();
+			packetQueue.pop();
+			SMessageHandler->handleServerMessage(n);  
+			enet_packet_destroy(n); 
 		}
 
 	}
@@ -238,15 +235,7 @@ std::string Client::createRoom(const std::string& username, const std::string& f
 	playerGameNew.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 	playerGameNew.NamePlayer.setString(playerInfos[0].username);
 	playerGameNew.textureAvatarPLayer = *selectedAvatarCopy.getTexture();
-	if (playerGameNew.textureAvatarPLayer.getSize().x == 0) {
-	//	std::cout << "\nHOuuwuwuwuwNLA no se cargo:"  ;
-	}
-	else {
-		//std::cout << "\nSSSSSSSSSSSSSSSSSSSSSSSSSIiiiiiiiiiiiiiiii no se cargo:" ;
-	}
-
 	globalBounds = playerGameNew.NamePlayer.getGlobalBounds();
-
 
 	playerGameNew.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	playerGameNew.boxPlayer.setTexture(textureBoxPerfil);
@@ -278,6 +267,5 @@ bool Client::joinRoom(const std::string& roomCode, const std::string& username, 
 	}
 
 	enet_host_flush(client);
-	std::cout << "\nhola;";
 	return true;
 }

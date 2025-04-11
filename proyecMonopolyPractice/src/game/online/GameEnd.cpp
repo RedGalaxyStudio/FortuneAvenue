@@ -53,8 +53,7 @@ void ConfettiRain::draw(sf::RenderWindow& window) {
 
 Confetti::Confetti(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
 		: position(startPosition), size(size), color(color) {
-		//Vida.restart();
-		std::cout << "\nInicio de vida: ";
+
 		rect.setSize(size);
 		angle = static_cast<float>(rand() % 360);
 		rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50));
@@ -82,20 +81,11 @@ Confetti::Confetti(sf::Vector2f startPosition, sf::Vector2f size, sf::Color colo
 		color = sf::Color(rand() % 256, rand() % 256, rand() % 256);
 		size = sf::Vector2f(static_cast<float>(rand() % 15 + 5), static_cast<float>(rand() % 15 + 5));
 		rect.setSize(size);
-		lifeClock.restart();
+	
 	}
 
 	void Confetti::update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
 
-		float tiempoVivo = lifeClock.getElapsedTime().asSeconds();
-		//std::cout << "Tiempo actual de vida: " << tiempoVivo << " segundos\n";
-
-
-		if (tiempoVivo >= lifetime) {
-		//	std::cout << "\n888112" << Vida.getElapsedTime().asSeconds();
-			//reset(screenWidth);
-			//return;
-		}
 
 		if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
 

@@ -402,7 +402,6 @@ void Chat::Event(sf::Event event) {
 				if (indicacion.getGlobalBounds().width > 260) {
 					insertarSaltoDeLinea();
 					indicacion.setString(input);
-					std::cout << "salto de linea" << indicacion.getGlobalBounds().width << std::endl;
 					int In = calcularNumeroDeLineas(indicacion) + 1;
 
 					if (In == 1) {

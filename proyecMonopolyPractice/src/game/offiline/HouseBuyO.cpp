@@ -76,7 +76,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	std::vector<points> pp{ 0 };
 	std::vector<cells> cc{ 0 };
 	readData(pp, cc, "src/ui/quad.vtk");
-	std::cout << "\nouno,,,"<< pp.size()<<":"<< cc.size();
+
 	IndexCAsa += 1;
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
 	for (int i = 0; i < 6; i++)
@@ -145,17 +145,10 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 						playClickSound();
 
 						std::string clavesita = "casa" + std::to_string(IndexCAsa);
-						std::cout << "\n:::::" << clavesita;
 						playerGameInfo[IndexTurn1].salario += houses[IndexCAsa].salario;
 						playerGameInfo[IndexTurn1].impuesto += houses[IndexCAsa].impuesto;
 						playerGameInfo[IndexTurn1].money -= houses[IndexCAsa].costo;
 						playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
-						std::cout << "\nHoooooooooooooola:" << playerGameInfo[IndexTurn1].money
-							<< " Cosas:" << houses[IndexCAsa].costo;
-						// Implementa la lógica para procesar la compra
-						
-						//client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);
-
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[ActiveUsers[0]].casasPorJugador[IndexCAsa]]);
 						VCcompradas.push_back(CasasaCOMPRAR);
@@ -171,7 +164,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						cierre = true;
-						//client.networkMessage.sendXHouse();
+		
 					}
 				}
 			}

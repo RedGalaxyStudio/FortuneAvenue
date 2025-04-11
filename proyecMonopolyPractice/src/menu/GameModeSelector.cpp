@@ -79,14 +79,11 @@ void GameModeSelector::update() {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				if (SpriteOnline.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-				
-					std::cout << "\nHO2222111";
-
-
+			
 					IniciarPartida inicial(*window);
-					std::cout << "\nHO222222";
+			
 					inicial.update();
-					std::cout << "\nHO2222";
+			
 					box.setPosition(273, 74);
 
 					Valida = false;

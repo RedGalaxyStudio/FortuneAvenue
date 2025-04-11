@@ -10,9 +10,9 @@ Scrollbar::Scrollbar(float windowHeight, float scrollbarHeight, float width)
     scrollbarTrack.setSize(sf::Vector2f(width, windowHeight));
     scrollbarTrack.setFillColor(sf::Color(74, 84, 88));  // Color: #4a5458
 
-     espacio = width * 0.2;
-     thumbW = width * 0.6;
-     bordetumbW = width * 0.2;
+     espacio = static_cast<float>(width * 0.2);
+     thumbW = static_cast<float>(width * 0.6);
+     bordetumbW = static_cast<float>(width * 0.2);
      conerPs = thumbW / 2;
 
     // Crear el pulgar de la barra (thumb)

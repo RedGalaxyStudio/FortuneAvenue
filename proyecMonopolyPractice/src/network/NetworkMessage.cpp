@@ -29,7 +29,6 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 			return;
 		}
 
-		// Leer imagen completa
 		std::streamsize fileSize = file.tellg();
 		file.seekg(0, std::ios::beg);
 		std::vector<char> imageData(fileSize);
@@ -38,85 +37,21 @@ void NetworkMessage::cargarImagen(const std::string& ruta) {
 		std::string roomCode = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
 		// Construir el mensaje con roomCode + tamaño + imagen
 		std::vector<char> packetData;
-		packetData.insert(packetData.end(), roomCode.begin(), roomCode.end()); // Room Code (10 bytes)
-		//packetData.resize(10, '\0');  // Rellenar con ceros
+		packetData.insert(packetData.end(), roomCode.begin(), roomCode.end()); 
 		packetData.insert(packetData.end(), reinterpret_cast<char*>(&fileSize), reinterpret_cast<char*>(&fileSize) + sizeof(fileSize)); // Tamaño
-		packetData.insert(packetData.end(), imageData.begin(), imageData.end()); // Imagen
+		packetData.insert(packetData.end(), imageData.begin(), imageData.end()); 
 
-		// Crear y enviar el paquete
 		ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
 		enet_peer_send(peer, 0, packet);
-		enet_host_flush(peer->host); // Asegurar envío inmediato
-
-		/*/std::cout << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN";
-		sf::Image imagen;
-		if (!imagen.loadFromFile(ruta)) {
-			throw std::runtime_error("No se pudo cargar la imagen");
-		}
-
-		std::vector<uint8_t> buffer;
-
-		if (!imagen.saveToMemory(buffer, "png")) {
-			throw std::runtime_error("No se pudo convertir la imagen a PNG");
-		}
-
-		size_t chunkSize = 1024;
-		size_t totalSize = buffer.size();
-		uint32_t numChunks = (totalSize + chunkSize - 1) / chunkSize;
-		uint32_t senderID = UsuariosActivos[0];
-
-		for (uint32_t i = 0; i < numChunks; i++) {
-			size_t offset = i * chunkSize;
-			size_t size = std::min(chunkSize, totalSize - offset);
-			//uint32_t crc = calcularCRC32(buffer.data() + offset, size);
-
-			// Crear el paquete con identificador de imagen
-			std::vector<uint8_t> packetData(sizeof(uint32_t) * 3 + 5 + size); // "IMG|" + datos
-			memcpy(packetData.data(), "IMG|", 4); // Prefijo de imagen
-			uint32_t* header = reinterpret_cast<uint32_t*>(packetData.data() + 4);
-			header[0] = senderID;
-			header[1] = i;
-			header[2] = numChunks;
-			//header[3] = crc;  // Agregar CRC32
-			memcpy(packetData.data() + 4 + sizeof(uint32_t) * 3, buffer.data() + offset, size);
-
-			ENetPacket* packet = enet_packet_create(packetData.data(), packetData.size(), ENET_PACKET_FLAG_RELIABLE);
-			std::cout << "Enviando fragmento " << i << "/" << numChunks
-				<< " al jugador " << senderID
-				<< " (tamaño: " << size << " bytes)\n";
-
-			enet_peer_send(peer, 0, packet);
-			enet_host_flush(peer->host);
-		}
-
-		/*std::string header = "image1;" + std::to_string(UsuariosActivos[0]) + ";";
-
-		// Crear un buffer que contenga la cabecera + imagen
-		std::vector<uint8_t> paquete(header.begin(), header.end());
-		paquete.insert(paquete.end(), buffer.begin(), buffer.end());
-
-		// Crear el paquete ENet
-		ENetPacket* packet = enet_packet_create(paquete.data(), paquete.size(), ENET_PACKET_FLAG_RELIABLE);
-
-		enet_peer_send(peer, 0, packet);
-		enet_host_flush(peer->host);
-
-		std::cout << "Bytes de imagen enviados: ";
-		for (size_t i = 0; i < std::min(buffer.size(), size_t(10)); i++) {
-			std::cout << std::hex << static_cast<int>(buffer[i]) << " ";
-		}
-		std::cout << std::dec << std::endl;*/
-
+		enet_host_flush(peer->host); 
 	}
 	else {
 
 		std::string avatarspre = "image0;" + std::to_string(UsuariosActivos[0]) + ";" + ruta;
 		ENetPacket* packet = enet_packet_create(avatarspre.c_str(), avatarspre.size() + 1, ENET_PACKET_FLAG_RELIABLE);
 
-		// Enviar el paquete al servidor o cliente
 		enet_peer_send(peer, 0, packet);
 
-		// Asegurar que los datos se envíen
 		enet_host_flush(peer->host);
 	}
 

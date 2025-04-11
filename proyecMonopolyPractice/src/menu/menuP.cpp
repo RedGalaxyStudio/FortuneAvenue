@@ -535,8 +535,7 @@ void menuP::MenuOpcion(bool fon) {
 
 }
 void menuP::MenuSalir(Client* client) {
-
-	std::cout << "\nHOLA1";
+	
 	sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
 	overlay.setFillColor(sf::Color(0, 0, 0, 10));
 
@@ -551,7 +550,6 @@ void menuP::MenuSalir(Client* client) {
 
 	ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
 	ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
-	std::cout << "\nHOLA2";
 	while (window->isOpen()) {
 		sf::Event event;
 		while (window->pollEvent(event)) {
@@ -568,11 +566,9 @@ void menuP::MenuSalir(Client* client) {
 				break;  
 			}
 			
-			std::cout << "\nHOLA6";
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-				//printMemoryUsage();
 
 				if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -642,7 +638,7 @@ void menuP::instruccionesGame() {
 	TextInstruccion2.setFont(Fuente);
 	TextInstruccion3.setFont(Fuente);
 
-	TextInstruccion1.setString("Instrucciones de Fortuna Avenue\n\nObjetivo del juego :\nEl objetivo de Fortuna Avenue es ser el jugador con mas dinero al final de la partida, despues de \ncompletar 3 vueltas alrededor del tablero.Los jugadores deben administrar sus recursos, hacer \ninversiones y aprovechar tanto la suerte como la estrategia para ganar.\n\nComponentes del juego :\n    - Tablero : Un tablero con 4 tipos de casillas :\n    - Casillas :\n    -  Casillas de Casas : 17 casillas donde los jugadores pueden comprar casas.\n    - Casillas de Impuestos : 14 casillas donde los jugadores deben pagar impuestos.\n    - Casillas de Ruleta : 14 casillas con diferentes efectos aleatorios.\n    - Casillas Vacias : 43 casillas donde no ocurre ningun evento especial.    \n    - Dados : Un dado de 6 caras que dicta la cantidad de casillas que se movera el jugador.    \n    - Dinero : Cada jugador comienza con 200 billetes y recibe 60 billetes cada 2 turnos como sueldo \nbase y de ahi en adelante, al sueldo base se le ira sumando el sueldo de las casas que adquiera.\n\nPreparacion del juego :\n    1. Cada jugador selecciona una ficha que al iniciar el juego, se colocara automaticamente en la \ncasilla de ''Start''.\n    2. Los jugadores reciben 200 billetes como su primer sueldo.\n    3. El orden de turnos se elegira a partir de quienes ingresen primero a la sala, es decir, el \n    primer turno sera del creador de la sala y a partir de ahi, se elegira por orden de entrada, \n    que se mantendra durante toda la partida.\n    4. En el juego, se dan 3 vueltas por el tablero.Despues de la tercera vuelta de todos los \n    jugadores, el jugador con mas dinero gana.");
+	TextInstruccion1.setString("Instrucciones de Fortuna Avenue\n\nObjetivo del juego :\nEl objetivo de Fortuna Avenue es ser el jugador con mas dinero al final de la partida, despues de \ncompletar 2 vueltas alrededor del tablero.Los jugadores deben administrar sus recursos, hacer \ninversiones y aprovechar tanto la suerte como la estrategia para ganar.\n\nComponentes del juego :\n    - Tablero : Un tablero con 4 tipos de casillas :\n    - Casillas :\n    -  Casillas de Casas.\n    - Casillas de Impuestos.\n    - Casillas de Ruleta.\n    - Casillas Vacias.    \n    - Dados : Un dado de 6 caras que dicta la cantidad de casillas que se movera el jugador.    \n    - Dinero : Cada jugador comienza con 300 billetes y recibe 60 billetes cada 2 turnos como sueldo \nbase y de ahi en adelante, al sueldo base se le ira sumando el sueldo de las casas que adquiera.\n\nPreparacion del juego :\n    1. Cada jugador selecciona una ficha que al iniciar el juego, se colocara automaticamente en la \ncasilla de ''Start''.\n    2. Los jugadores reciben 200 billetes como su primer sueldo.\n    3. El orden de turnos se elegira a partir de quienes ingresen primero a la sala, es decir, el \n    primer turno sera del creador de la sala y a partir de ahi, se elegira por orden de entrada, \n    que se mantendra durante toda la partida.\n    4. En el juego, se dan 3 vueltas por el tablero.Despues de la tercera vuelta de todos los \n    jugadores, el jugador con mas dinero gana.");
 	TextInstruccion2.setString(
 		"Como jugar:\n\n"
 		"1. Turnos:\n"
@@ -673,7 +669,7 @@ void menuP::instruccionesGame() {
 	);
 	TextInstruccion3.setString(
 		"Final del juego:\n\n"
-		"El juego finaliza cuando todos los jugadores hayan dado 3 vueltas alrededor del tablero. Al finalizar, \n"
+		"El juego finaliza cuando todos los jugadores hayan dado 2 vueltas alrededor del tablero. Al finalizar, \n"
 		"se cuentan los billetes de cada jugador, y el jugador con la mayor cantidad de billetes es el ganador.\n\n"
 		"Ejemplo de turno:\n"
 		"1. Jugador 1 lanza el dado y obtiene un 4. Elige el camino de la izquierda, mueve su ficha 4 casillas \ny cae en una casilla de casa.\n"
@@ -817,7 +813,7 @@ void menuP::MenuAcercaDe() {
 
 	TextAcercaDe.setString(
 		"Fortune Avenue\n"
-		"version 1.0.0\n\n"
+		"version 2.0.0\n\n"
 		"Fortune Avenue esta basado en los clasicos juegos de mesa donde el objetivo principal es obtener \nla mayor cantidad de dinero al finalizar la partida, tomando decisiones sobre la compra de viviendas \ny el pago de impuestos, todo mientras el azar juega un papel importante al final de cada partida.\n\n"
 		"Este proyecto fue desarrollado por Red Galaxy Studio, un equipo de 4 estudiantes apasionados por el \ndesarrollo de videojuegos. Nuestra mision es crear experiencias unicas e interactivas que entretengan \ny desafien a los jugadores.\n\n"
 		"Desarrolladores:\n\n"
@@ -838,63 +834,7 @@ void menuP::MenuAcercaDe() {
 	TextAcercaDe.setCharacterSize(static_cast <unsigned int>(17.5f));
 	TextAcercaDe.setFillColor(sf::Color::White);
 	TextAcercaDe.setPosition(50, 100);
-	/*std::vector<sf::Text> textos;
-
-	// Función para crear y almacenar texto formateado
-	auto crearTexto = [&](const std::string& contenido, unsigned int tamano, sf::Color color, float x, float y) {
-		sf::Text texto;
-		texto.setFont(Fuente);
-		texto.setString(contenido);
-		texto.setCharacterSize(tamano);
-		texto.setFillColor(color);
-		texto.setPosition(x, y);
-		texto.setOutlineColor(sf::Color::Black);  // Agrega borde para mejorar visibilidad
-		texto.setOutlineThickness(2);
-		textos.push_back(texto);
-		};
-
-	// 📌 TÍTULO
-	crearTexto("Fortune Avenue", 35, sf::Color::Yellow, 50, 50);
-	crearTexto("version 1.0.0", 20, sf::Color::White, 50, 90);
-
-	// 📌 DESCRIPCIÓN
-	crearTexto(
-		"Fortune Avenue esta basado en los clasicos juegos de mesa donde el objetivo principal es obtener\n"
-		"la mayor cantidad de dinero al finalizar la partida, tomando decisiones sobre la compra de viviendas\n"
-		"y el pago de impuestos, todo mientras el azar juega un papel importante al final de cada partida.\n",
-		18, sf::Color::White, 50, 130
-	);
-
-	// 📌 INFORMACIÓN DEL EQUIPO
-	crearTexto("Este proyecto fue desarrollado por Red Galaxy Studio,", 18, sf::Color::Cyan, 50, 200);
-	crearTexto("un equipo de 4 estudiantes apasionados por el desarrollo de videojuegos.", 18, sf::Color::White, 50, 230);
-
-	// 📌 DESARROLLADORES (Nombres en color distinto)
-	crearTexto("Desarrolladores:", 22, sf::Color::Cyan, 50, 270);
-	crearTexto("Daniel Fernandez", 20, sf::Color::Green, 50, 300);
-	crearTexto("Lider del Proyecto | Programador | Especialista en Redes", 18, sf::Color::White, 50, 325);
-
-	crearTexto("Jose Garcia", 20, sf::Color::Green, 50, 360);
-	crearTexto("Especialista en Testing y Calidad | Diseñador de Mecanicas | Encargado de Documentacion", 18, sf::Color::White, 50, 385);
-
-	crearTexto("Susana Rendon", 20, sf::Color::Green, 50, 420);
-	crearTexto("Artista Grafico | Diseñadora de UI/UX | Implementación de Sonidos", 18, sf::Color::White, 50, 445);
-
-	crearTexto("Marcos Rondon", 20, sf::Color::Green, 50, 480);
-	crearTexto("Encargado de Marketing | Diseñador de Mecanicas | Responsable de Economia del Juego", 18, sf::Color::White, 50, 505);
-
-	// 📌 NOTA FINAL
-	crearTexto(
-		"Nota: Aunque cada miembro asumió roles específicos, el proyecto fue un esfuerzo colaborativo en el\n"
-		"que todos contribuyeron activamente en diversas áreas del desarrollo.",
-		18, sf::Color::Yellow, 50, 540
-	);
-
-	// 📌 INFO FINAL
-	crearTexto("Ubicación: Proyecto académico, Universidad de los Andes.", 18, sf::Color::White, 50, 580);
-	crearTexto("Tecnologías utilizadas: SFML, ENet, C++.", 18, sf::Color::White, 50, 610);
-	crearTexto("Contacto: redgalaxy.studio24@gmail.com", 18, sf::Color::Cyan, 50, 640);
-*/
+	
 	window->setMouseCursorVisible(true);
 
 	while (window->isOpen()) {

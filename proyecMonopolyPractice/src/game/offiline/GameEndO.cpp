@@ -50,8 +50,7 @@ void ConfettiRainO::draw(sf::RenderWindow& window) {
 
 ConfettiO::ConfettiO(sf::Vector2f startPosition, sf::Vector2f size, sf::Color color)
 	: position(startPosition), size(size), color(color) {
-	//Vida.restart();
-	std::cout << "\nInicio de vida: ";
+
 	rect.setSize(size);
 	angle = static_cast<float>(rand() % 360);
 	rotationSpeed = static_cast<float>((rand() % 2 == 0 ? -1 : 1) * (rand() % 100 + 50));
@@ -83,16 +82,6 @@ void ConfettiO::reset(float screenWidth) {
 }
 
 void ConfettiO::update(float deltaTime, float screenHeight, float screenWidth, sf::Vector2i mousePositionn) {
-
-	//float tiempoVivo = Vida.getElapsedTime().asSeconds();
-	//std::cout << "Tiempo actual de vida: " << tiempoVivo << " segundos\n";
-
-
-	//if (tiempoVivo >= lifetime) {
-	//	std::cout << "\n888112" << Vida.getElapsedTime().asSeconds();
-	//	reset(screenWidth);
-	//	return;
-	//}
 
 	if (rect.getGlobalBounds().contains(static_cast<float>(mousePositionn.x), static_cast<float>(mousePositionn.y))) {
 
@@ -404,8 +393,7 @@ void GameEndO::update() {
 					playerGameOff[ActiveUsers[i]].PieceSelect.setScale(2.0f, 2.0f);
 					sf::FloatRect pieceSelectBounds = playerGameOff[ActiveUsers[i]].PieceSelect.getGlobalBounds();
 					playerGameOff[ActiveUsers[i]].PieceSelect.setOrigin(pieceSelectBounds.width / 2.0f, pieceSelectBounds.height / 2.0f);
-					std::cout << "\npiece: " << pieceSelectBounds.width / 2.0f << "," << pieceSelectBounds.height / 2.0f;
-					
+						
 				}
 				
 				window->draw(playerGameOff[ActiveUsers[i]].NamePlayer);

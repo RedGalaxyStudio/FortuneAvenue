@@ -30,7 +30,7 @@ void LoadingScreen::LoadResources() {
 	TextCargando.setFont(font);
 	TextCargando.setCharacterSize(35);
 	TextCargando.setFillColor(sf::Color::White);
-	TextCargando.setPosition(795, 270);
+	TextCargando.setPosition(950, 650);
 
 	loadedTexturesThread = std::thread(&LoadingScreen::Update, this);
 }
@@ -45,6 +45,8 @@ void LoadingScreen::Update() {
 		dice[i] = texture;
 	}
 	spriteBackground.setTexture(dice[currentDiceIndex]);
+	spriteBackground.setPosition(180, -10);
+	;
 
 	loadedTextures = true;
 
@@ -91,16 +93,12 @@ void LoadingScreen::updateDice(sf::Time deltaTime) {
 		timeAcumulado = 0.0f;
 		frame = (frame + 1) % 8;
 
-		// if (frame == 0) {
-	   //      currentDiceIndex = (currentDiceIndex + 1) % 6;
-	   // 
-
-		Resourceready = true;
+	//	Resourceready = true;
 		spriteBackground.setTexture(dice[frame]);
 		for (size_t i = 0; i < playersGame.size(); i++) {
 
 			if (playersGame[i].textureAvatarPLayer.getSize().x == 0) {
-			//	std::cout << "\nHONLA no se cargo:" << i;
+		
 				Resourceready = false;
 			}
 

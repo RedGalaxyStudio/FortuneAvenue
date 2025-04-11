@@ -83,15 +83,6 @@ void PieceSelectOff::displayPieces() {
 
 	}
 }
-
-void bots() {
-
-
-
-
-
-
-}
 void PieceSelectOff::updateSelection() {
 
 	sf::Clock clock;
@@ -274,40 +265,26 @@ void PieceSelectOff::updateSelection() {
 				if (playerGameOff[ActiveUsers[0]].Check.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
 					const sf::Texture* texturePtr = playerGameOff[ActiveUsers[0]].PieceSelect.getTexture();
-					std::cout << "\n\nPROBANDO" << std::endl;
+			
 					if (texturePtr != nullptr&& ActiveUsers.size()>0) {
 						sf::Texture textureSelec = *texturePtr; 
 
 						playerGameInfo[ActiveUsers[0]].isSelectingPiece = true;
-						//client.networkMessage.playerReady();
-						std::cout << "\n\nPROBANDO2" << std::endl;
+				
 					}
 					GM.GenerarBot(nUserBot);
 					GameOffline gameOff(*window, Nmap);
-					std::cout << "\nuy";
+				
 					gameOff.update();
-					std::cout << "\n\nPROBANDO3" << std::endl;
+				
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
-					std::cout << "\n\nPROBANDO4" << std::endl;
+			
 					playClickSound();
-					//cierre = true;
-				
-
-						//playerGameOff.clear();
-						//playerGameInfo.clear();
-						//ActiveUsers.clear();
+			
 					return;
 				}
 
-			}
-
-		}
-
-		for (int i = 0; i < ActiveUsers.size(); i++) {
-			std::cout << "\n\nPROBANDO5" << std::endl;
-			if (!playerGameInfo[ActiveUsers[i]].isSelectingPiece ){// || UsuariosActivos.size()<2) {
-				SelectorPieces = false;				
 			}
 
 		}
@@ -319,16 +296,6 @@ void PieceSelectOff::updateSelection() {
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
 		window->setMouseCursor(*currentCursor);
-		//std::cout << "\n\nPROBANDO6" << std::endl;
-	
-		for (int i = 0; i < ActiveUsers.size(); i++)
-		{
-			//std::cout << "\n\nPROBANDO7" << std::endl;
-			if (playerGameInfo[ActiveUsers[i]].isSelectingPiece) {
-			//	std::cout << "\n\nPROBANDO8" << std::endl;
-				playerGameOff[ActiveUsers[i]].Check.setTexture(CheckOn);
-			}
-		}
 
 		window->clear();
 		window->draw(spriteBackgroundG);
@@ -338,8 +305,7 @@ void PieceSelectOff::updateSelection() {
 
 		float totalPerfiles = 1;
 		if (4 > 0) {
-			std::cout << "\n\nPROBANDO9" << std::endl;
-			
+
 			float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
 			float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
 
@@ -358,7 +324,7 @@ void PieceSelectOff::updateSelection() {
 				window->draw(playerGameOff[ActiveUsers[i]].boxPlayer);
 				window->draw(playerGameOff[ActiveUsers[i]].PieceSelect);
 				window->draw(playerGameOff[ActiveUsers[i]].Check);
-			//	std::cout << "\n\nPROBANDO10" << std::endl;
+
 			}
 
 
@@ -370,22 +336,7 @@ void PieceSelectOff::updateSelection() {
 
 		scrollbarPiece.draw(*window);
 		window->display();
-		//std::cout << "\n\nPROBANDO11" << std::endl;
+
 	}
 
-}
-
-void PieceSelectOff::updatePlayerPieceSelection(int newPieceIndex) {
-/*
-	piecesOff[previousSelectionIndex[CplayerIndex]].setColor(sf::Color::White); // Color original
-	piecesOff[newPieceIndex].setColor(sf::Color(248, 134, 255)); // Resaltar la nueva pieza
-	std::cout << "\nplayersGame" << playerGameOff.size();
-	// Actualizar el sprite del jugador con la nueva textura de la pieza seleccionada
-	playerGameOff[CplayerIndex].PieceSelect.setTexture(piecesTextures[newPieceIndex], true);
-	playerGameOff[CplayerIndex].PieceSelect.setScale(pieces[newPieceIndex].getScale());
-	playerGameOff[CplayerIndex].PieceSelect.setOrigin(pieces[newPieceIndex].getOrigin());
-	playerGameOff[CplayerIndex].PieceSelect.setColor(sf::Color::White); // Asegurar el color correcto
-	playerGameOff[CplayerIndex].PieceSelect.setPosition(startX + CplayerIndex * (250 + 10), startY + 100);
-	previousSelectionIndex[CplayerIndex] = newPieceIndex;
-*/
 }

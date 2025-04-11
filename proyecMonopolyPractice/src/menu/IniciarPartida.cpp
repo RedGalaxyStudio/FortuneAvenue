@@ -21,7 +21,6 @@ IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win){
 }
 
 void IniciarPartida::resource() {
-	std::cout << "\nHO";
 	TextureCrearPartidaOff.loadFromFile("assets/image/Game/CrearPartidaOff.png");
 	TextureCrearPartidaOn.loadFromFile("assets/image/Game/CrearPartidaOn.png");
 	TextureUnirse.loadFromFile("assets/image/Game/unirse1encendido.png");
@@ -42,9 +41,7 @@ void IniciarPartida::resource() {
 	SpriteUnirsePartida.setTexture(TextureUnirsePartidaOff);
 	SpriteUnirsePartida.setOrigin(150, 59);
 	SpriteUnirsePartida.setPosition(640, 500);
-
 	nameUser = input1;
-	std::cout << "\nnameUser: "+ nameUser;
 	enunciado.setCharacterSize(40);
 	enunciado.setFont(fontUser);
 	enunciado.setFillColor(sf::Color::White);
@@ -60,10 +57,8 @@ void IniciarPartida::resource() {
 void IniciarPartida::update() {
 	Valida = false;
 	MensageBox message("   Error al conectar  \n    con el servidor", fontUser, 12);
-	std::cout << "\nHO";
 	ButtonG botonCrearPartida(SpriteCrearPartida, TextureCrearPartidaOff, TextureCrearPartidaOn);
 	ButtonG botonUnirsePartida(SpriteUnirsePartida, TextureUnirsePartidaOff, TextureUnirsePartidaOn);
-
 
 	int xPos=180;
 	int startY=120;
@@ -101,7 +96,7 @@ void IniciarPartida::update() {
 					playClickSound();
 					updatejoinRoom();
 					Valida = false;
-					box.setPosition(xPos, startY + 110);
+					box.setPosition(static_cast<float>(xPos), static_cast<float>(startY + 110));
 
 				}
 

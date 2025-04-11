@@ -53,15 +53,6 @@ std::string TextureAvatarPath;
 sf::Texture Texrecua;
 sf::Sprite recua;
 
-// carga los cursores desde una imagen o textura
-void printMemoryUsage() {
-    PROCESS_MEMORY_COUNTERS memInfo;
-    if (GetProcessMemoryInfo(GetCurrentProcess(), &memInfo, sizeof(memInfo))) {
-      //  std::cout << "Memoria en uso: " << (memInfo.WorkingSetSize / 1024) << " KB" << std::endl;
-       // std::cout << "Memoria Peak: " << (memInfo.PeakWorkingSetSize / 1024) << " KB" << std::endl;
-       // std::cout << "Memoria Virtual: " << (memInfo.PagefileUsage / 1024) << " KB" << std::endl;
-    }
-}
 
 void playClickSound() {
     ClickSound.play();

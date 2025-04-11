@@ -17,7 +17,8 @@ TextBox::TextBox(float width, float height,std::string solicitud, std::string Te
     x = 50;
     y = 50;
    
-       //std::cout << "La variable tiene contenido.\n";
+       //
+       // << "La variable tiene contenido.\n";
     }
     else {
        //std::cout << "La variable esta vacia.\n";

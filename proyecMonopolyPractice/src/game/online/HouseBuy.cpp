@@ -78,15 +78,6 @@ void HouseBuy::resource() {
 		house.costo = std::stoi(value["costo"].get<std::string>().substr(0, value["costo"].get<std::string>().size() - 1));
 		house.impuesto = std::stoi(value["impuesto"].get<std::string>().substr(0, value["impuesto"].get<std::string>().size() - 1));
 
-
-		// Imprimir valores antes de agregarlos a la lista
-		//std::cout << "Casa: " << number << "\n";
-		//std::cout << "  Salario: " << house.salario << "\n";
-		//std::cout << "  Costo: " << house.costo << "\n";
-		//std::cout << "  Impuesto: " << house.impuesto << "\n";
-		//std::cout << "-------------------------\n";
-
-
 		houses.push_back(house);
 	}
 
@@ -98,7 +89,7 @@ void HouseBuy::resource() {
 }
 
 void HouseBuy::update(sf::Vector2f posicionactuInicial) {
-	std::cout << "\n\nmemeomeomeo";
+
 	float angle = 0.f;
 	float rotationSpeed = 45.f;
 
@@ -129,10 +120,10 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
-	//std::cout << "\n::index" << index << "IndexCAsa" << IndexCAsa << "::"<<playerInfos[index].casasPorJugador[IndexCAsa];
+
 	pp.clear();
 	cc.clear();
-	std::cout << "\n\nmemeomeomeo2";
+	
 	Xc.setPosition(790, 148);
 
 	renderedSprite.setTexture(renderTexture.getTexture());
@@ -148,14 +139,13 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	const sf::Vector3f Wquad = { 1., 1., -1. }; // rotation vector components
 	const sf::Vector3f Oquad = { 199., 350., -187.5 }; // rotation vector origin
 	ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 235.);
-	std::cout << "\n\nmemeomeomeo3";
-	while (window->isOpen() && !cierre) {
 
+	while (window->isOpen() && !cierre) {
 
 		sf::Event event;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
 		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-		std::cout << "\n\nmemeomeomeo4";
+
 		while (window->pollEvent(event)) {
 
 
@@ -179,8 +169,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			if (turn) {
 
 				if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && cellQua[0].finAnimacion == true) {
-					//std::cout << "money::  " << playerInfos[UsuariosActivos[0]].money << "::" << houses[playerInfos[index].casasPorJugador[IndexCAsa]].costo;
-					//std::cout << "\n" << index;
+
 					if (SpriteBotonComprar.getGlobalBounds().contains(mousePosFloat) && playerInfos[UsuariosActivos[0]].money >= houses[playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]].costo) {
 						playClickSound();
 						client->networkMessage.buyHouse(playerInfos[UsuariosActivos[0]].casasPorJugador[IndexCAsa]);
@@ -204,7 +193,6 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 				}
 			}
 		}
-		std::cout << "\n\nmemeomeomeo5::"<<accionCompra;
 
 		currentCursor = &normalCursor;
 		botonXc.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -255,7 +243,6 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 		}
 
 		window->display();
-		std::cout << "\n\nmemeomeomeo8::"<< cierre;
 	}
 	pp.clear();
 	cc.clear();

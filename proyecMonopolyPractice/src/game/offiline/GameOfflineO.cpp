@@ -12,8 +12,6 @@ GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMa
 	resource();
 }
 void GameOffline::resource() {
-	//std::cout << "\n\nPROBA2" << std::endl
-	// ;
 
 	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
@@ -307,7 +305,6 @@ void GameOffline::resource() {
 	globalBounds = Bienvenida.getGlobalBounds();
 	Bienvenida.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	posicionActual = 0;
-	std::cout << "\n\nPROBA4" << std::endl;
 	Impuesto.setCharacterSize(20);
 	Impuesto.setFont(fontUser);
 	Impuesto.setFillColor(sf::Color::Red);
@@ -345,7 +342,6 @@ void GameOffline::resource() {
 
 
 	animacionIniciada = false;
-	//	std::cout << "COSitta";
 
 }
 void GameOffline::positionPefil() {
@@ -564,13 +560,9 @@ void GameOffline::positionPefil() {
 	}
 }
 void GameOffline::update() {
-	//std::cout << "\n\nPROBA5" << std::endl;
 	positionPefil();
-	//std::cout << "\n\nPROBA6" << std::endl;
 	sf::Clock clock;
-	//std::cout << "COSitta";
 	GM.CasasAleatorias();
-	//std::cout << "COSitta";
 	resultadoDado = 0;
 	mousePosition = sf::Mouse::getPosition(*window);
 	mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -581,7 +573,6 @@ void GameOffline::update() {
 	NuloO NUlOO;
 	NUlOO.setWindow(*window);
 	NUlOO.Resource();
-	//std::cout << "\n\nPROBA7" << std::endl;
 
 	float duracionMovimiento = 0.5f;
 
@@ -765,7 +756,7 @@ void GameOffline::update() {
 
 		}
 		else if (draw_house) {
-			//	std::cout << "COSitto";
+		
 			renderTexture.clear();
 			renderTexture.draw(spriteBackgroundG);
 			renderTexture.draw(MapSprite);
@@ -790,11 +781,9 @@ void GameOffline::update() {
 			renderTexture.draw(Settings);
 
 			renderTexture.display();
-			//std::cout << "COSitto";
-			//std::cout << "house: " << house.size()<<":  IndexTurn1  :"<< IndexTurn1<<": playerGameOff[IndexTurn1].PieceSelect.getPosition() :"<< playerGameOff[IndexTurn1].PieceSelect.getPosition().x << ", "
-				//<< playerGameOff[IndexTurn1].PieceSelect.getPosition().y << ")";
+
 			house[IndexTurn1].update(playerGameOff[IndexTurn1].PieceSelect.getPosition());
-			//	std::cout << "COSitto";
+
 			activeEvent = false;
 			draw_house = false;
 
@@ -805,7 +794,7 @@ void GameOffline::update() {
 			window->display();
 		}
 		else if (ActiveHouse) {
-			house[auxHouse].ViewHouseBsaO();// ViewHouseBs
+			house[auxHouse].ViewHouseBsaO();
 			window->display();
 
 		}
@@ -1201,8 +1190,6 @@ void GameOffline::DrawGame() {
 		}
 	}
 
-	//std::cout << "hola no11";
-
 	if (BotTurn) {
 		if (secondTurn && !turn_Tax && !turn_house && !turn_roulette && !turn_diceB && !turn_Move && !activeEvent && !draw_tax && !draw_house && !draw_roulette) {
 
@@ -1219,34 +1206,6 @@ void GameOffline::DrawGame() {
 
 		}
 	}
-
-	//std::cout << "hola si11";
-	//std::cout << "firstTurn: " << firstTurn
-	//	<< ", turn_Tax: " << turn_Tax
-	//	<< ", turn_house: " << turn_house
-	//	<< ", turn_roulette: " << turn_roulette
-	//	<< ", turn_dice: " << turn_dice
-	//	<< ", turn_Move: " << turn_Move
-	//	<< ", activeEvent: " << activeEvent
-	//	<< ", draw_tax: " << draw_tax
-	//	<< ", draw_house: " << draw_house
-	//	<< ", draw_roulette: " << draw_roulette
-	//	<< std::endl;
-
-	/*/std::cout << "hola si11";
-	std::cout << "firstTurn: " << firstTurn
-		<< ", turn_Tax: " << turn_Tax
-		<< ", turn_house: " << turn_house
-		<< ", turn_roulette: " << turn_roulette
-		<< ", turn_dice: " << turn_dice
-		<< ", turn_Move: " << turn_Move
-		<< ", activeEvent: " << activeEvent
-		<< ", draw_tax: " << draw_tax
-		<< ", draw_house: " << draw_house
-		<< ", draw_roulette: " << draw_roulette
-		<< std::endl;*/
-
-
 
 	window->setView(window->getDefaultView());
 	window->clear();
@@ -1274,7 +1233,7 @@ void GameOffline::DrawGame() {
 		float deltaTime = clockMensaje.restart().asSeconds();
 
 		if (increasing) {
-			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; // Incrementa el escalado
+			currentScale += (maxScale - minScale) / (duration / 2) * deltaTime; 
 			if (currentScale >= maxScale) {
 				currentScale = maxScale;
 				increasing = false;
@@ -1294,7 +1253,5 @@ void GameOffline::DrawGame() {
 	}
 
 	window->draw(Settings);
-	//window->draw(countsalary);
-	//window->draw(SpriteChat);
-	//std::cout << "COSitta";
+
 }

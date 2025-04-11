@@ -22,7 +22,9 @@ void StealplayerO::resource() {
 	sf::FloatRect globalBounds = SlectingPlayer.getGlobalBounds();
 	SlectingPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	SlectingPlayer.setPosition(640, 100);
-    //std::cout << "\n3"
+    //
+    // 
+    // << "\n3"
     if (!UsuariosEleccion.empty()) { 
         UsuariosEleccion.erase(UsuariosEleccion.begin()); 
     }

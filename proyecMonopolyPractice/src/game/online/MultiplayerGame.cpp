@@ -378,9 +378,6 @@ void MultiplayerGame::update(LoadingScreen& loading) {
 
 	float duracionMovimiento = 0.5f;
 
-
-	std::cout << "\n\nl::" << playersGame[0].origen.x << ":" << playersGame[0].origen.y;
-
 	Stealplayer robarjugador(window, UsuariosActivos, playersGame,client);
 	robarjugador.resource();
 
@@ -943,7 +940,6 @@ void MultiplayerGame::DrawGame() {
 				{
 					if (playersGame[IndexTurn].PieceSelect.getPosition() == caminocasa[i])
 					{
-						std::cout << "\n\ncasaaaaaaaaaaaaaaaaaaaaaaaa";
 						client->networkMessage.sendEventHouse();
 						casa_draw = true;
 						eventoActivo = true;

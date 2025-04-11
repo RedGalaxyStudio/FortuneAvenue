@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>\SFML\include;$(ProjectDir)curl\include;$(IncludePath)</IncludePath>
-    <LibraryPath>\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)libs\SFML\include;$(ProjectDir)curl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)libs\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)\SFML\lib;$(ProjectDir)curl\lib;$(LibraryPath)</LibraryPath>

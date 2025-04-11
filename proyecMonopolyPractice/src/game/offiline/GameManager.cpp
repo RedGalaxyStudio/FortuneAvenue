@@ -2,20 +2,13 @@
 #include <iostream>
 #include "ResourceGameO.hpp"
 #include <random>
-GameManager::GameManager() : currentTurn(0), gameOver(false) {
-
-
-}
-
-
+GameManager::GameManager() : currentTurn(0), gameOver(false) {}
 
 void GameManager::CasasAleatorias() {
 	int numJugadores = static_cast<int>(ActiveUsers.size());
 	int numCasas = 17;
 	std::vector<std::vector<int>> casasR;
 	casasR.resize(numJugadores);
-	std::cout << "COta";
-	// Lista de todas las casas (suponiendo que son números del 1 al 68)
 	std::vector<int> casas;
 	for (int i = 0; i < numCasas; ++i) {
 		casas.push_back(i);
@@ -23,24 +16,23 @@ void GameManager::CasasAleatorias() {
 	for (int i = 0; i < numJugadores; i++) {
 		casasR[i].resize(numCasas);
 	}
-	// Barajar la lista de casas una sola vez
 	std::random_device rd;
 	std::mt19937 g(rd());
-	std::cout << "COta";
+
 	// Asignar las casas a los jugadores
 	for (int i = 0; i < numJugadores; ++i) {
 		std::shuffle(casas.begin(), casas.end(), g);
-		std::cout << "\niiii:  " << i;
+
 		for (int j = 0; j < numCasas; ++j) {
-			std::cout << "\nJJJJJ:  " << i;
+
 			casasR[i][j] = casas[j];
 		}
 	}
-	std::cout << "COta";
+
 	for (int i = 0; i < numJugadores; ++i) {
 		playerGameInfo[i].casasPorJugador = casasR[i];
 	}
-	std::cout << "COta";
+
 }
 void GameManager::GenerarBot(int BotN) {
 
@@ -48,8 +40,6 @@ void GameManager::GenerarBot(int BotN) {
 
 	std::vector<int> PiecesBot = CreatorB::getRandomBotPieces(BotN, playerGameInfo[0].indexPiece);
 	std::vector<int> avatarsBot = CreatorB::getRandomBotAvatar(BotN);
-
-
 
 	PlayerInformation plantillaInfoMBot;
 	PlayerGameOff plantillaGMBot;
@@ -83,9 +73,7 @@ void GameManager::GenerarBot(int BotN) {
 		plantillaGMBot.MarcoPlayer.setPosition(52.5f, 62.5f);
 
 		plantillaGMBot.PieceSelect.setTexture(pieceShape[plantillaInfoMBot.indexPiece], true);
-	//	std::cout << "Escala de PieceSelect: " << plantillaGMBot.PieceSelect.getScale().x << ", " << plantillaGMBot.PieceSelect.getScale().y << std::endl;
 		sf::IntRect rect = plantillaGMBot.PieceSelect.getTextureRect();
-		std::cout << "TextureRect: " << rect.left << ", " << rect.top << ", " << rect.width << ", " << rect.height << std::endl;
 		plantillaGMBot.boxPlayer.setTexture(textureBoxPerfilOff);
 		plantillaGMBot.boxPlayer.setOrigin(125, 40);
 		plantillaGMBot.boxPlayer.setScale(0.9f, 0.9f);
@@ -96,7 +84,6 @@ void GameManager::GenerarBot(int BotN) {
 
 }
 void GameManager::startGame() {
-	std::cout << "El juego ha comenzado!" << std::endl;
 	IndexTurn1 = 0;
 	turn_dice = true;
 	firstTurn = true;
@@ -105,11 +92,9 @@ void GameManager::startGame() {
 	turn_house = true;
 	turn_Tax = true;
 	turn_Move = true;
-
 	secondTurn = false;
 }
 void GameManager::nextTurn() {
-
 
 	playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOn);
 	firstTurn = false;
@@ -129,7 +114,6 @@ void GameManager::nextTurn() {
 					juegoTerminadoo = false;
 				}
 			}
-	
 
 			if (!juegoTerminadoo) {
 				nextTurn();
@@ -151,7 +135,7 @@ void GameManager::nextTurn() {
 			playerGameInfo[IndexTurn1].turnosInversion == 0) {
 			playerGameInfo[IndexTurn1].inversionActiva = false;
 			playerGameInfo[IndexTurn1].money += 200;
-		
+
 			playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 		}
 
@@ -160,7 +144,6 @@ void GameManager::nextTurn() {
 
 		if (playerGameInfo[IndexTurn1].inversionActiva &&
 			playerGameInfo[IndexTurn1].turnosInversion > 0) {
-
 			playerGameInfo[IndexTurn1].turnosInversion -= 1;
 
 		}
@@ -180,13 +163,12 @@ void GameManager::nextTurn() {
 		else if (playerGameInfo[IndexTurn1].controlSalario < 2) {
 			playerGameInfo[IndexTurn1].controlSalario += 1;
 		}
-		
+
 	}
-	
+
 	if (IndexTurn1 == 0) {
 
 		if (playerGameInfo[ActiveUsers[0]].final) {
-			std::cout << "\nELLL\n" << playerGameInfo[ActiveUsers[0]].final;
 			nextTurn();
 			return;
 		}
@@ -199,10 +181,7 @@ void GameManager::nextTurn() {
 		turn_house = true;
 		turn_Tax = true;
 		turn_Move = true;
-
 		secondTurn = false;
-
-		std::cout << "\nTurnYo\n";
 	}
 	else if (IndexTurn1 != 0) {
 		playerGameOff[IndexTurn1].boxPlayer.setTexture(textureBoxPerfilOff);
@@ -223,23 +202,3 @@ void GameManager::impuesto() {
 	playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 }
 
-void GameManager::processTurn(int playerId) {
-	//std::cout << "Procesando el turno para el jugador con ID: " << playerId << std::endl;
-	//  if (playerId < players.size()) {
-  //        players[playerId]->playTurn();  
-	 // }
-}
-
-void GameManager::addPlayer(bool isBot) {
-	if (isBot) {
-		// players.push_back(std::make_shared<Bot>(players.size()));
-		std::cout << "Bot añadido al juego." << std::endl;
-	}
-	else {
-		std::cout << "Jugador añadido al juego." << std::endl;
-	}
-}
-
-bool GameManager::isGameOver() {
-	return gameOver;
-}

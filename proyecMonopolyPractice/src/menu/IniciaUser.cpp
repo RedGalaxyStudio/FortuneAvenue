@@ -49,7 +49,7 @@ std::string openFileDialog() {
 	return "";
 }
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
-	: window(&windowRef), currentIndex(0), TextGrd(Grd){
+	: window(&windowRef), currentIndex(0), TextGrd(Grd) {
 	Resource();
 	loadAvatars();
 }
@@ -110,7 +110,7 @@ void IniciaUser::IniciAcion() {
 	float widthSeparation = avatarWidth + avatarSeparation;
 	float heightSeparation = avatarHeight + avatarSeparation;
 	recua.setPosition(400, 112);
-	TextBox textBox(496, 50, "Ingresa tu nombre: ",TextGrd);
+	TextBox textBox(496, 50, "Ingresa tu nombre: ", TextGrd);
 	textBox.setPosition(496, 50);
 	const float totalContentHeight = 440.0f;
 	const float scrollbarHeight = 340.0f;
@@ -173,7 +173,7 @@ void IniciaUser::IniciAcion() {
 	sf::Image croppedImage;
 	bool hasTransparency = false;
 	sf::Image imageWithBackground;
-	
+
 	colores.setRadius(selectedAvatarCopy.getRadius());
 	colores.setFillColor(sf::Color::Transparent);
 	colores.setOrigin(selectedAvatarCopy.getOrigin());
@@ -184,16 +184,16 @@ void IniciaUser::IniciAcion() {
 
 
 
-	sf::RectangleShape marcoFondo,BordeFondo;
+	sf::RectangleShape marcoFondo, BordeFondo;
 
 	marcoFondo.setSize(sf::Vector2f(1280.f, 400.f));
 	marcoFondo.setFillColor(sf::Color(0, 0, 0, 0));
 	marcoFondo.setPosition(0, 310);
 	BordeFondo.setSize(sf::Vector2f(1280.f, 370.f));
 	BordeFondo.setFillColor(sf::Color(0, 0, 0, 0));
-//	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
-	//BordeFondo.setOutlineThickness(-22);
-	BordeFondo.setPosition(0 -2, 358);
+	//	BordeFondo.setOutlineColor(sf::Color(0, 0, 0,200));
+		//BordeFondo.setOutlineThickness(-22);
+	BordeFondo.setPosition(0 - 2, 358);
 
 
 
@@ -278,20 +278,16 @@ void IniciaUser::IniciAcion() {
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				for (int i = 0; i < circles.size(); i++) {
 					if (circles[i].getGlobalBounds().contains(mousePosFloat)) {
-						//selectedBackgroundColor = colors[i];
-						std::cout << "\njjjj" << i;
+
 						colores.setFillColor(circles[i].getFillColor());
 					}
 				}
-				if (spriteCkeck.getGlobalBounds().contains(mousePosFloat)&&(selectedAvatar != nullptr)&&(input1!="")) {
+				if (spriteCkeck.getGlobalBounds().contains(mousePosFloat) && (selectedAvatar != nullptr) && (input1 != "")) {
 					playClickSound();
 					saveSelectedAvatar();
 					salir = true;
 				}
 				sf::CircleShape* newSelection = nullptr;
-
-				// Verificar si se selecciona un color
-		
 
 				for (int i = 0; i < avatars.size(); ++i) {
 
@@ -300,11 +296,6 @@ void IniciaUser::IniciAcion() {
 
 							imagePath = openFileDialog();
 							std::filesystem::current_path(projectPath);
-							if (imagePath.empty()) {
-								std::cout << "No se seleccionó ninguna imagen.\n";
-
-							}
-
 
 							if (!originalImage.loadFromFile(imagePath)) {
 								std::cerr << "Error al cargar la imagen\n";
@@ -388,11 +379,11 @@ void IniciaUser::IniciAcion() {
 									}
 								}
 							}
-							//std::cout << "jokokok\n:" << projectPath;
+
 							std::filesystem::current_path(projectPath);
 							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
 							croppedImage.saveToFile(dirPath);
-							//	std::cout << "HOLa";
+
 							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
@@ -472,43 +463,41 @@ void IniciaUser::saveSelectedAvatar() {
 	if (selectedAvatar != nullptr) {
 
 		if (selectedIndex != -1) {
-			
+
 			json avatarData;
 			if (selectedIndex == 0) {
 
 				sf::RenderTexture renderTexturo;
-			
-					if (!renderTexturo.create(128, 128)) {
-						std::cerr << " Error al crear RenderTexture\n";
-						///	return;
-					}
-					sf::RectangleShape spo;
-					spo.setFillColor(colores.getFillColor());
-					spo.setSize(sf::Vector2f(128.f, 128.f));
-					sf::Texture tempTexture;
-					tempTexture.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
-					sf::Sprite sprite(tempTexture);
-					// Dibujar la imagen escalada en el RenderTexture
-					renderTexturo.clear(colores.getFillColor());
-					renderTexturo.draw(spo);
-					renderTexturo.draw(sprite);
-					renderTexturo.display();
 
-					sf::Image croppedImage = renderTexturo.getTexture().copyToImage();
-					
-					//std::cout << "jokokok\n:" << projectPath;
-					std::filesystem::current_path(projectPath);
-					std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
-					croppedImage.saveToFile(dirPath);
-						std::cout << "HOLa";
-					textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
-					sf::CircleShape* newSelection;
-					newSelection = new sf::CircleShape(64);
-					newSelection->setTexture(&textselectedAvatarCopy);
-					textselectedAvatarCopy = *newSelection->getTexture();
-					selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
-					avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
-					TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
+				if (!renderTexturo.create(128, 128)) {
+					std::cerr << " Error al crear RenderTexture\n";
+					///	return;
+				}
+				sf::RectangleShape spo;
+				spo.setFillColor(colores.getFillColor());
+				spo.setSize(sf::Vector2f(128.f, 128.f));
+				sf::Texture tempTexture;
+				tempTexture.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+				sf::Sprite sprite(tempTexture);
+				// Dibujar la imagen escalada en el RenderTexture
+				renderTexturo.clear(colores.getFillColor());
+				renderTexturo.draw(spo);
+				renderTexturo.draw(sprite);
+				renderTexturo.display();
+
+				sf::Image croppedImage = renderTexturo.getTexture().copyToImage();
+
+				std::filesystem::current_path(projectPath);
+				std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
+				croppedImage.saveToFile(dirPath);
+				textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+				sf::CircleShape* newSelection;
+				newSelection = new sf::CircleShape(64);
+				newSelection->setTexture(&textselectedAvatarCopy);
+				textselectedAvatarCopy = *newSelection->getTexture();
+				selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
+				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
+				TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
 			}
 			else {
 
@@ -516,12 +505,9 @@ void IniciaUser::saveSelectedAvatar() {
 				TextureAvatarPath = textureAvatarsFilePath[selectedIndex];
 			}
 
-			//std::cout << "\ninput1:" << input1;
 			avatarData["username"] = input1;
 
-
 			std::ofstream outFile("perfil.json");
-
 
 			if (outFile.is_open()) {
 				outFile << avatarData.dump(4);
@@ -542,8 +528,7 @@ void IniciaUser::loadSelectedAvatar() {
 		TextureAvatarPath = avatarData["selected_avatar_path"];
 		input1 = avatarData["username"];
 
-		//std::cout << "h" << TextureAvatarPath;
-		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) std::cout << "error";//loadAvatars();
+		if (!TextureAvatarSelec.loadFromFile(TextureAvatarPath)) std::cout << "error";
 
 		selectedAvatarCopy.setTexture(&TextureAvatarSelec);
 	}
@@ -618,7 +603,7 @@ sf::Texture IniciaUser::fun() {
 	sf::Vector2u imgSize = tempTexture.getSize();
 	sf::RectangleShape selectionBox;
 
-	selectionBox.setPosition(selectedRegion.left, selectedRegion.top);
+	selectionBox.setPosition(static_cast<float>(selectedRegion.left), static_cast<float>(selectedRegion.top));
 	selectionBox.setFillColor(sf::Color(255, 255, 255, 50)); // Transparente
 	selectionBox.setOutlineThickness(2);
 	selectionBox.setOutlineColor(sf::Color::Red);
@@ -723,11 +708,11 @@ sf::Texture IniciaUser::fun() {
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
-			//std::cout << "Evento detectado: " << event.type << std::endl;
+
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					//sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
+
+					if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						// Obtener la posición y tamaño del `selectionBox`
 						sf::Vector2f selPos = selectionBox.getPosition();
 						sf::Vector2f selSize = selectionBox.getSize();
@@ -736,8 +721,8 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						sf::Vector2f texCoords = selPos - sf::Vector2f(offsetX, offsetY);
 
 						// Definir el rectángulo a recortar
-						sf::IntRect textureRect(texCoords.x / scale, texCoords.y / scale,
-							selSize.x / scale, selSize.y / scale);
+						sf::IntRect textureRect(static_cast<int>(texCoords.x / scale), static_cast<int>(texCoords.y / scale),
+							static_cast<int>(selSize.x / scale),  static_cast<int>(selSize.y / scale));
 
 						// Crear una nueva textura y copiar la parte seleccionada
 						sf::Texture newTexture;
@@ -747,11 +732,11 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 						return newTexture;
 
 					}
-					//std::cout << "\yyyyyyyyyyyyyyy:::::::::::|";
+			
 					for (int i = 0; i < 8; ++i) {
 						if (corners[i]->getGlobalBounds().contains(mousePos)) {
 							resizing = true;
-							//std::cout << "\nnnnnnnn:::::::::::|";
+					
 							resizingCorner = i;
 							break;
 						}
@@ -759,11 +744,11 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 
 					if (!resizing && selectionBox.getGlobalBounds().contains(mousePos)) {
 						dragging = true;
-						//std::cout << "\nnnnnnnn:::::::::::|";
+				
 						offset = mousePos - selectionBox.getPosition();
 					}
 
-					
+
 				}
 			}
 
@@ -771,12 +756,9 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 			// Detectar movimiento del mouse mientras se arrastra
 			if (event.type == sf::Event::MouseMoved) {
 				if (dragging) {
-					//sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
-					//selectionBox.setPosition(mousePos - offset);
-
+	
 					sf::Vector2f newPos = mousePos - offset;
 
-					//**Límites dentro del `sprite`**
 					float minX = offsetX;
 					float minY = offsetY;
 					float maxX = offsetX + imgSize.x * scale - selectionBox.getSize().x;
@@ -833,9 +815,7 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 
 				}
 			}
-			//std::cout << "Dragging: " << dragging << " | Resizing: " << resizing << " | MousePos: " << mousePos.x << ", " << mousePos.y << std::endl;
 
-			// Detectar cuando se suelta el botón del mouse
 			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 				dragging = false;
 				resizing = false;
@@ -874,5 +854,6 @@ if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
 		window.draw(boton);
 		window.display();
 	}
-
+	sf::Texture tempTexturooo;
+	return tempTexturooo;
 }

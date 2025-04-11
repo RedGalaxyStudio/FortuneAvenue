@@ -9,7 +9,6 @@ sf::Texture MovePiecesO::TextureArrowDer;
 sf::Texture MovePiecesO::TextureArrowArriba;
 sf::Texture MovePiecesO::TextureArrowAbajo;
 
-
 MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
 
 	static bool texturesLoaded = false;
@@ -38,7 +37,7 @@ MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), spr
 	//SpriteUpArrow.setPosition(370, 400);
 
 	if (mapaActual == 3) {
-		posSelecCAm = { sf::Vector2f(858.500f, 332.500f),	sf::Vector2f(855.000f, 427.500f),sf::Vector2f(506.833f, 516.500f),sf::Vector2f(330.167f, 459.833f), sf::Vector2f(470.167f, 268.500f),sf::Vector2f(828.167f, 157.500f) };
+		posSelecCAm = { sf::Vector2f(858.500f, 332.500f),sf::Vector2f(855.000f, 427.500f),sf::Vector2f(506.833f, 516.500f),sf::Vector2f(330.167f, 459.833f), sf::Vector2f(470.167f, 268.500f),sf::Vector2f(828.167f, 157.500f) };
 	}
 	else if (mapaActual == 2) {
 
@@ -102,8 +101,6 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				if (casillaActual >= (*casillas)[caminoActual].size()) {
 					casillaActual = 0;
 
-					//std::cout << "\nCasi caso";
-
 					switch (mapaActual) {
 					case 1: // Configuración para el mapa 1
 
@@ -133,9 +130,9 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 						}
 						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
-								finalCamino = true;
+							finalCamino = true;
 
-								updateCAmbioCasilla();
+							updateCAmbioCasilla();
 						}
 
 						caminoActual++;
@@ -151,27 +148,22 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 							if (*vuelta == 2) {
 
-
 								posicionFinal = final;
 								casillasRestantes = 1;
-
 
 							}
 							else {
 								(*casillas).resize(1);
 								caminoActual = -1;
-
-
 							}
-
 
 						}
 						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
 
-								finalCamino = true;
+							finalCamino = true;
 
-								updateCAmbioCasilla();
-							}
+							updateCAmbioCasilla();
+						}
 
 						caminoActual++;
 						break;
@@ -215,22 +207,23 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			}
 
 			if (casillasRestantes != 0) {
+
 				posicionInicial = sprite->getPosition();
-				if (*vuelta != 3) {
+				if (*vuelta != 2) {
+
 					posicionFinal = (*casillas)[caminoActual][casillaActual];
+
 				}
 			}
 		}
 
 		if (enMovimiento && casillasRestantes > 0 && !*CsFinal) {
 
-
 			sf::Vector2f nuevaPosicion = posicionInicial + (posicionFinal - posicionInicial) * t;
 			sprite->setPosition(nuevaPosicion);
 
 			if (*vuelta == 2 && sprite->getPosition() == final) {
-			
-				*CsFinal = true;
+
 				casillasRestantes = 0;
 
 				enMovimiento = false;
@@ -245,20 +238,14 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 						GM.juegoTerminadoo = false;
 					}
 				}
-		
 			}
 		}
 		else {
-
 			enMovimiento = false;
 			turn_Move = false;
 			turnRule = true;
 			if (*vuelta == 2) {
-				
 				*CsFinal = true;
-
-
-
 				GM.juegoTerminadoo = true;
 				for (int i = 0; i < ActiveUsers.size(); i++)
 				{
@@ -267,15 +254,12 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 					}
 				}
 			}
-
-
+			
 		}
 		if (casillasRestantes != 0) {
 			animacionRebote(posicionFinal, deltaTime);
 		}
-
-
-
+		
 	}
 }
 void MovePiecesO::updateCAmbioCasilla() {
@@ -322,7 +306,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 			}
 		}
 
-		std::cout << "hola\n\n" << tan;
 		if (tan == 3) {
 
 			DownArrow.setPosition(370, 400);
@@ -374,7 +357,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 			}
 		}
 
-		std::cout << "hola\n\n" << tan;
 		if (tan == 3) {
 
 			DownArrow.setPosition(370, 400);
@@ -409,8 +391,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		break;
 	}
-
-
 
 	if (secondTurn) {
 
@@ -616,7 +596,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 			}
 		}
-
 		if (secondTurn) {
 
 			if (GM.bot.roll()) {
@@ -625,7 +604,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 			}
 		}
-
 
 		if (!firstTurn) {
 			switch (mapaActual) {
@@ -822,7 +800,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 		window->draw(*sprite);
 		window->setView(window->getDefaultView());
 
-
 		switch (mapaActual) {
 		case 1: // Configuración para el mapa 1
 			if (tan == 3) {
@@ -848,7 +825,6 @@ void MovePiecesO::updateCAmbioCasilla() {
 			if (tan == 3) {
 				window->draw(LeftArrow);
 
-				//std::cout << "HOla";
 				window->draw(RightArrow);
 
 			}
@@ -868,8 +844,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 		case 3: // Configuración para el mapa 3
 			if (tan == 3) {
 				window->draw(DownArrow);
-
-				std::cout << "HOla";
+\
 				window->draw(SpriteUpArrow);
 
 			}
@@ -891,13 +866,10 @@ void MovePiecesO::updateCAmbioCasilla() {
 			break;
 		}
 
-
-
-
-
 		window->display();
 
 	}
+
 }
 
 
@@ -1551,8 +1523,6 @@ sf::Vector2f(828.167f, 157.500f)
 	}
 
 }
-
-
 void MovePiecesO::animacionRastro(float deltaTime) {
 	static float tiempoAcumulado = 0.0f;
 	float intervalo = 0.1f;
