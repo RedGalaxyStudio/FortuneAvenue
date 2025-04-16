@@ -23,10 +23,10 @@ int main() {
 
 	try {
 		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-		sf::err().rdbuf(std::cout.rdbuf()); // Redirige los errores de SFML a la consola
+		sf::err().rdbuf(std::cout.rdbuf());
 
 		sf::ContextSettings settings;
-		settings.attributeFlags = sf::ContextSettings::Debug;  // Activa depuración OpenGL
+		settings.attributeFlags = sf::ContextSettings::Debug;  
 
 		std::unique_ptr<sf::RenderWindow> window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(1280, 720), "Fortune Avenue", sf::Style::Fullscreen, settings);
@@ -51,7 +51,6 @@ int main() {
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Excepción atrapada: " << e.what() << std::endl;
-		// Guarda en archivo log
 		std::ofstream log("crash_log.txt", std::ios::app);
 		log << "Excepción atrapada: " << e.what() << std::endl;
 	}

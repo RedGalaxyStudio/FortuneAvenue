@@ -733,9 +733,13 @@ void MultiplayerGame::DrawPieceMoviendo() {
 
 	window->draw(spriteBackgroundG);
 	window->draw(spriteMapa);
-	for (int i = 0; i < UsuariosActivos.size(); i++) {
-		window->draw(playersGame[i].PieceSelect);
+	for (int i = 0; i <UsuariosActivos.size(); i++) {
+		if (i != IndexTurn) {
+			window->draw(playersGame[i].PieceSelect);
+		}
 	}
+	window->draw(playersGame[IndexTurn].PieceSelect);
+
 	window->setView(window->getDefaultView());
 
 	if (chatOn)

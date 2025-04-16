@@ -21,20 +21,15 @@ MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), spr
 	}
 	LeftArrow.setTexture(TextureArrowIzq);
 	LeftArrow.setOrigin(65, 42);
-	//	LeftArrow.setPosition(370, 400);
 
 	RightArrow.setTexture(TextureArrowDer);
 	RightArrow.setOrigin(65, 42);
-	//	RightArrow.setPosition(900, 400);
 
 	DownArrow.setTexture(TextureArrowAbajo);
 	DownArrow.setOrigin(42, 65);
-	//	DownArrow.setPosition(900, 400);
-
 
 	SpriteUpArrow.setTexture(TextureArrowArriba);
 	SpriteUpArrow.setOrigin(42, 65);
-	//SpriteUpArrow.setPosition(370, 400);
 
 	if (mapaActual == 3) {
 		posSelecCAm = { sf::Vector2f(858.500f, 332.500f),sf::Vector2f(855.000f, 427.500f),sf::Vector2f(506.833f, 516.500f),sf::Vector2f(330.167f, 459.833f), sf::Vector2f(470.167f, 268.500f),sf::Vector2f(828.167f, 157.500f) };
@@ -54,7 +49,7 @@ void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::V
 	this->final = fin;
 	this->CsFinal = CsFin;
 	PieceUser = PiecUser;
-	*vuelta = 1;
+	*vuelta = 0;
 }
 void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
 	casillasRestantes = numeroCasillas;
@@ -85,6 +80,7 @@ int MovePiecesO::getcasillaActual() {
 	return casillaActual;
 }
 void MovePiecesO::actualizarMovimiento(float deltaTime) {
+
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
 		while (t > 1.0f && casillasRestantes > 0 && !*CsFinal) {
@@ -177,26 +173,36 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 							if (*vuelta == 2) {
 
-
 								posicionFinal = final;
 								casillasRestantes = 1;
 
-
+						
 							}
 							else {
-								(*casillas).resize(1);
-								caminoActual = -1;
+					
+								(*casillas).clear();
+								casillas->clear();
+								std::vector<sf::Vector2f> camino1 = {
+								sf::Vector2f(853.500f, 212.500f),
+								sf::Vector2f(857.500f, 273.500f),
+								sf::Vector2f(858.500f, 332.500f)
+								};
 
+								(*casillas).push_back(camino1);
+
+								caminoActual = -1;
+							
 
 							}
 
 
 						}
 						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
-
+						
 							finalCamino = true;
 
 							updateCAmbioCasilla();
+				
 						}
 
 						caminoActual++;
@@ -209,10 +215,11 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			if (casillasRestantes != 0) {
 
 				posicionInicial = sprite->getPosition();
+			
 				if (*vuelta != 2) {
 
 					posicionFinal = (*casillas)[caminoActual][casillaActual];
-
+					
 				}
 			}
 		}
@@ -229,7 +236,6 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				enMovimiento = false;
 				turn_Move = false;
 				turnRule = true;
-
 
 				GM.juegoTerminadoo = true;
 				for (int i = 0; i < ActiveUsers.size(); i++)
@@ -252,6 +258,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 					if (!playerGameInfo[i].final) {
 						GM.juegoTerminadoo = false;
 					}
+
 				}
 			}
 			
@@ -290,7 +297,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		if (caminoActual >= 6) {
 			caminoActual = 0;
-			casillas->resize(1);
+			(*casillas).resize(1);
 			finalCamino = false;
 			caminoActual--;
 
@@ -383,10 +390,16 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		if (tan == 6) {
 			caminoActual = 0;
-			casillas->resize(1);
+			casillas->clear();
+			std::vector<sf::Vector2f> camino1 = {
+			sf::Vector2f(853.500f, 212.500f),
+			sf::Vector2f(857.500f, 273.500f),
+			sf::Vector2f(858.500f, 332.500f)
+			};
+
+			casillas->push_back(camino1);
 			finalCamino = false;
 			caminoActual--;
-
 		}
 
 		break;

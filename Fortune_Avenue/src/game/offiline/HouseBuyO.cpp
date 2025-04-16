@@ -1,7 +1,6 @@
 #include "HouseBuyO.hpp"
 #include <sstream>
 #include "../../libs/nlohmann/json.hpp"
-//#include "card.h"
 #include "../../core/ObjetosGlobal.hpp"
 #include <filesystem>
 #include <cstring>
@@ -47,16 +46,25 @@ void HouseBuyO::resource() {
 	if (!file.is_open()) {
 		char error_message[256];
 		strerror_s(error_message, sizeof(error_message), errno);
-		std::cerr << "Error: No se pudo abrir el archivo: " << error_message << std::endl;
+		std::cerr << "Error: No se pudo abrir el archivo. Motivo: " << error_message << std::endl;
 		return;
 	}
 
 	json jsonData;
 	file >> jsonData;
 
+	std::vector<std::pair<int, nlohmann::json>> houseList;
+
 	for (auto& [key, value] : jsonData.items()) {
+		int houseNumber = std::stoi(key.substr(4)); 
+		houseList.push_back({ houseNumber, value });
+	}
+	std::sort(houseList.begin(), houseList.end(), [](const auto& a, const auto& b) {
+		return a.first < b.first;
+		});
+
+	for (auto& [number, value] : houseList) {
 		houseInfo house;
-		//		house.nombre = value["nombre"];
 
 		house.salario = std::stoi(value["salario"].get<std::string>().substr(0, value["salario"].get<std::string>().size() - 1));
 		house.costo = std::stoi(value["costo"].get<std::string>().substr(0, value["costo"].get<std::string>().size() - 1));
@@ -108,8 +116,8 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	settings.stencilBits = 8;
 
 	bool cierre = false;
-	const sf::Vector3f Wquad = { 1., 1., -1. }; // rotation vector components
-	const sf::Vector3f Oquad = { 199., 350., -187.5 }; // rotation vector origin
+	const sf::Vector3f Wquad = { 1., 1., -1. }; 
+	const sf::Vector3f Oquad = { 199., 350., -187.5 }; 
 	ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 235.);
 
 	while (window->isOpen() && !cierre) {
@@ -203,12 +211,6 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 
 		window->setMouseCursor(*currentCursor);
 		window->clear();
-		//if (client.accionCompra) {
-		//
-		//	playClickSound();
-		//	cierre = true;
-		//	client.accionCompra = false;
-		//}
 		window->draw(renderedSprite);
 
 		ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 5.);
@@ -287,7 +289,6 @@ void HouseBuyO::ViewHouseBsaO(){
 
 	}
 	window->draw(spriteX);
-	//window->display();
 }
 
 void HouseBuyO::evenViewHouseCVO(sf::Event event) {

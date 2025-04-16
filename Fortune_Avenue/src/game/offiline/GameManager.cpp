@@ -101,7 +101,9 @@ void GameManager::nextTurn() {
 	size_t currentTurn = IndexTurn1;
 	IndexTurn1 = (currentTurn + 1) % static_cast<int>(ActiveUsers.size());
 
-	if (playerGameInfo[IndexTurn1].GameFinal) {
+
+
+	if (playerGameInfo[IndexTurn1].final) {
 
 		if (!playerGameInfo[IndexTurn1].inversionActiva) {
 			playerGameInfo[IndexTurn1].GameTerm = true;
@@ -166,6 +168,19 @@ void GameManager::nextTurn() {
 
 	}
 
+	if (playerGameInfo[IndexTurn1].turnopermitido != 0) {
+		if(IndexTurn1==0){
+		zero = false;
+		return;
+		}
+		else {
+			playerGameInfo.at(IndexTurn1).turnopermitido = 0;
+			nextTurn();
+			return;
+
+		}
+	}
+	
 	if (IndexTurn1 == 0) {
 
 		if (playerGameInfo[ActiveUsers[0]].final) {

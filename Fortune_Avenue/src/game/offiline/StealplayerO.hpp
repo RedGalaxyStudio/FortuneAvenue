@@ -11,6 +11,7 @@ private:
     sf::RenderWindow* window;               
     sf::Text SlectingPlayer;
     std::vector<int> UsuariosEleccion;
+    std::vector<int> UsuariosEleccionC;
     std::vector<sf::RectangleShape> isMouseOver;
     std::vector<sf::Vector2f> PosIsMouseOver;
     sf::Texture texturebottonRobar;

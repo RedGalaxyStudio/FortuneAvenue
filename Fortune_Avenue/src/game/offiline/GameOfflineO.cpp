@@ -725,6 +725,7 @@ void GameOffline::update() {
 			renderTexture.draw(Settings);
 			renderTexture.display();
 			NUlOO.Update();
+			playerGameInfo.at(IndexTurn1).turnopermitido = 0;
 			zero = true;
 		}
 		else if (moverFichas[IndexTurn1].enMovimiento == true) {
@@ -897,8 +898,11 @@ void GameOffline::DrawPieceMoviendo() {
 	window->draw(spriteBackgroundG);
 	window->draw(MapSprite);
 	for (int i = 0; i < ActiveUsers.size(); i++) {
-		window->draw(playerGameOff[i].PieceSelect);
+		if (i != IndexTurn1) {
+			window->draw(playerGameOff[i].PieceSelect);
+		}
 	}
+	window->draw(playerGameOff[IndexTurn1].PieceSelect);
 	window->setView(window->getDefaultView());
 
 }
@@ -1225,9 +1229,12 @@ void GameOffline::DrawGame() {
 		window->draw(playerGameOff[ActiveUsers[i]].CashSprite);
 		window->draw(playerGameOff[ActiveUsers[i]].CasasN);
 		window->draw(playerGameOff[ActiveUsers[i]].Home);
-		window->draw(playerGameOff[ActiveUsers[i]].PieceSelect);
+		if (i != IndexTurn1) {
+			window->draw(playerGameOff[i].PieceSelect);
+		}
 
 	}
+	window->draw(playerGameOff[IndexTurn1].PieceSelect);
 
 	if (turn_dice) {
 		float deltaTime = clockMensaje.restart().asSeconds();

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../../core/ObjetosGlobal.hpp"
 #include "../../ui/ResourceGeneral.hpp"
-
+#include "ResourceGameO.hpp"
 StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGameOff> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
 
 }
@@ -22,22 +22,8 @@ void StealplayerO::resource() {
 	sf::FloatRect globalBounds = SlectingPlayer.getGlobalBounds();
 	SlectingPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	SlectingPlayer.setPosition(640, 100);
-    //
-    // 
-    // << "\n3"
-    if (!UsuariosEleccion.empty()) { 
-        UsuariosEleccion.erase(UsuariosEleccion.begin()); 
-    }
-    isMouseOver.resize(UsuariosEleccion.size());
-    PosIsMouseOver.resize(UsuariosEleccion.size());
-   
-    for (auto& MouseOver : isMouseOver) {
 
-        MouseOver.setFillColor(sf::Color(0, 0, 0, 0));
-        MouseOver.setSize(sf::Vector2f(200.0f, 380.0f));
-        MouseOver.setOrigin(100, 64);
-    }
-   
+    UsuariosEleccionC = UsuariosEleccion;
     if(!texturebottonRobar.loadFromFile("assets/image/Button/robar.png")) return;
     SpritebottonRobar.setTexture(texturebottonRobar);
     SpritebottonRobar.setOrigin(95, 38);
@@ -56,10 +42,9 @@ void StealplayerO::BotRobar() {
 
     int in;
     do {
-        in = dist(gen);  // Genera un número aleatorio
+        in = dist(gen); 
     } while (in == IndexTurn1); // Si es igual a IndexTurn1, genera otro
-
-    // Ahora in es un jugador aleatorio diferente a IndexTurn1
+    
     playerGameInfo[in].money -= 100;
     playerGameOff[in].Money.setString(std::to_string(playerGameInfo[in].money));
 }
@@ -67,7 +52,24 @@ void StealplayerO::BotRobar() {
 void StealplayerO::update() {
 
     
-    // Configuracion de los perfiles
+
+    UsuariosEleccion = UsuariosEleccionC;
+
+
+    auto it = std::find(UsuariosEleccion.begin(), UsuariosEleccion.end(),IndexTurn1);
+    if (it != UsuariosEleccion.end()) {
+        UsuariosEleccion.erase(it);
+    }
+    isMouseOver.resize(UsuariosEleccion.size());
+    PosIsMouseOver.resize(UsuariosEleccion.size());
+
+    for (auto& MouseOver : isMouseOver) {
+
+        MouseOver.setFillColor(sf::Color(0, 0, 0, 0));
+        MouseOver.setSize(sf::Vector2f(200.0f, 380.0f));
+        MouseOver.setOrigin(100, 64);
+    }
+
     float perfilWidth = 200.0f; 
     float separacion = 20.0f;  
     int totalPerfiles = static_cast<int>(UsuariosEleccion.size());
@@ -109,8 +111,6 @@ void StealplayerO::update() {
     int indexMouseOver=-1;
     while (window->isOpen()&& !seleccionlista) {
         sf::Event event;
-
-        std::cout << "\njjjjjjjjjjjjjjjjjjjj";
         while (window->pollEvent(event)) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
             sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -129,14 +129,14 @@ void StealplayerO::update() {
                 renderTexture.draw(overlay);
                 Menup.MenuSalir(nullptr);
             }
-            indexMouseOver = -1;
+            if(!secondTurn){indexMouseOver = -1;
             for (int i = 0; i < UsuariosEleccion.size(); i++) {
 
                 if (isMouseOver[i].getGlobalBounds().contains(mousePosFloat)) {
-                    
+
                     indexMouseOver = i;
                     SpritebottonRobar.setPosition(PosIsMouseOver[i]);
-                    
+
                 }
             }
 
@@ -144,11 +144,15 @@ void StealplayerO::update() {
                 if (SpritebottonRobar.getGlobalBounds().contains(mousePosFloat)) {
 
                     playClickSound();
-                    //client.networkMessage.stealPlayer(UsuariosEleccion[indexMouseOver]);
-                    seleccionlista = true;
+                    playerGameInfo[IndexTurn1].money += 100;
+                    playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+                    playerGameInfo[UsuariosEleccion[indexMouseOver]].money -= 100;
+                    playerGameOff[UsuariosEleccion[indexMouseOver]].Money.setString(std::to_string(playerGameInfo[UsuariosEleccion[indexMouseOver]].money));
+                    seleccionlista = true;                 
 
-                }  
+                }
             }
+        }
         }
         if (secondTurn) {
 

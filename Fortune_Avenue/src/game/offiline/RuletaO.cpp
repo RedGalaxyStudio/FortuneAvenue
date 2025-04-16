@@ -1,8 +1,7 @@
 #include "RuletaO.hpp"
 #include "ResourceGameO.hpp"
-
 #include <random>
-#include <cstdlib> // para rand() y RAND_MAX
+#include <cstdlib> 
 
 
 RuletaO::RuletaO(float width, float height, float centerX, float centerY)
@@ -43,8 +42,8 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 				i++;
 			}
 			turno = false;
-			std::random_device rd; // Entropía del sistema
-			std::mt19937 gen(rd()); // Generador basado en Mersenne Twister
+			std::random_device rd;
+			std::mt19937 gen(rd());
 
 			std::uniform_int_distribution<> initialSpeedDist(400, 1000);
 
@@ -155,7 +154,6 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		//if(firstTurn){
 			int totalRestado = 0;
 			switch (currentSegment) {
 			case 0://pierdes un turno
@@ -166,11 +164,13 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 
 			case 1://roba a un jugador
 				event = 3;
+
+
 				break;
 
 			case 2://comprar una casa
 				event = 1;
-				
+
 				break;
 
 			case 3://todos pierden 30 y se les da a el jugador
@@ -194,22 +194,22 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 
 					
 				}
+		
+
 				break;
 
 			case 4://ganas 150
-				
+
 				playerGameInfo[IndexTurn1].money += 150;
 				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
 				break;
 
 			case 5://paga impuestos
 				event = 2;
-				
+
 				break;
 
 			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
-				//client.networkMessage.sendSafeInvestment();
-
 				playerGameInfo[IndexTurn1].money -= 100;
 				playerGameInfo[IndexTurn1].inversionActiva = true;
 				playerGameInfo[IndexTurn1].turnosInversion = 2;
@@ -220,7 +220,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 			default:
 				break;
 			}
-	//	}
+
 
 		giro = false;
 		
@@ -253,7 +253,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 		for (const auto& segment : segments) {
 
 			fillColor = segment.getFillColor();
-			window.draw(segment); // Dibuja el sprite con shader1
+			window.draw(segment);
 
 		}
 
@@ -358,13 +358,13 @@ void RuletaO::setupIcons() {
 		icons[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
 
 		float iconAngle = i * angleStep + angleStep / 2;
-		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  // 50 es un margen
+		icons[i].setPosition(centerX + (radius - 70) * cos(iconAngle), centerY + (radius - 70) * sin(iconAngle));  
 
 		icons[i].setRotation(static_cast<float>(iconAngle * (180.0f / M_PI) + 90.0f));
 
 		iconsResul[i].setTexture(iconTextures[i]);
 		iconsResul[i].setOrigin(static_cast<float>(iconTextures[i].getSize().x / 2), static_cast<float>(iconTextures[i].getSize().y / 2));
-		iconsResul[i].setPosition(centerX, centerY);  // 50 es un margen
+		iconsResul[i].setPosition(centerX, centerY);  
 
 	}
 }
@@ -394,10 +394,10 @@ void RuletaO::drawLights(sf::RenderWindow& window, float deltaTime) {
 		luz.setFillColor(sf::Color(255, 255, 255, static_cast<int>(brightness)));
 
 		if (i % 2 == 0) {
-			luz.setOutlineColor(sf::Color(255, 0, 0, 150)); // Rojo
+			luz.setOutlineColor(sf::Color(255, 0, 0, 150)); 
 		}
 		else {
-			luz.setOutlineColor(sf::Color(0, 0, 255, 150)); // Azul
+			luz.setOutlineColor(sf::Color(0, 0, 255, 150)); 
 		}
 
 		window.draw(luz);

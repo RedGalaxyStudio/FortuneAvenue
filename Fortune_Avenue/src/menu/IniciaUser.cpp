@@ -90,7 +90,6 @@ void IniciaUser::UpdateEdit() {
 	loadAvatars();
 
 	selectedAvatar = &selectedAvatarCopy;
-	// selectedAvatar = nullptr;
 	IniciAcion();
 
 
@@ -141,34 +140,29 @@ void IniciaUser::IniciAcion() {
 	sf::Color(240, 128, 128)  // Rojo pastel
 	};
 
-	float windowWidth = 1280;  // Ancho de la ventana
-	size_t numCircles = 10;    // Número de círculos
-	float circleRadius = 30;   // Radio de los círculos
+	float windowWidth = 1280;  
+	size_t numCircles = 10;    
+	float circleRadius = 30;  
 
-	// Calcular el espacio disponible entre los círculos
-	float totalWidth = windowWidth - 4 * circleRadius; // El espacio entre el primer y el último círculo
-	float spacing = totalWidth / (numCircles - 1);     // El espaciado entre los círculos
+	float totalWidth = windowWidth - 4 * circleRadius; 
+	float spacing = totalWidth / (numCircles - 1);    
 
-	// Calcular la posición X para centrar los círculos
-	float firstCircleX = (windowWidth - totalWidth) / 2;  // La posición X del primer círculo, centrado
-
-	// Coloca los círculos de manera equitativa
+	float firstCircleX = (windowWidth - totalWidth) / 2;  
 	for (size_t i = 0; i < numCircles; ++i) {
 		sf::CircleShape circle(circleRadius);
 		circle.setFillColor(colors[i]);  // Colores de los círculos
 
-		// Calcula la posición X para cada círculo, centrando la distribución
 		float posX = firstCircleX + i * spacing;
 
-		circle.setOrigin(circleRadius, circleRadius);  // Establece el origen en el centro del círculo
-		circle.setPosition(posX, 300);  // Coloca el círculo en la posición Y deseada (280)
+		circle.setOrigin(circleRadius, circleRadius);  
+		circle.setPosition(posX, 300); 
 
 		circles.push_back(circle);
 	}
 
 
 
-	sf::Color selectedBackgroundColor = sf::Color::White; // Color por defecto
+	sf::Color selectedBackgroundColor = sf::Color::White; 
 	sf::Texture tempTexture;
 	sf::Image croppedImage;
 	bool hasTransparency = false;
@@ -239,12 +233,12 @@ void IniciaUser::IniciAcion() {
 
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Down) {
-					deltaScroll = 1.0f; // Desplazamiento hacia abajo
+					deltaScroll = 1.0f; 
 					scrollbar.update(deltaScroll);
 					avatarYOffset = scrollbar.getScrollOffset();
 				}
 				else if (event.key.code == sf::Keyboard::Up) {
-					deltaScroll = -1.0f; // Desplazamiento hacia arriba
+					deltaScroll = -1.0f; 
 					scrollbar.update(deltaScroll);
 					avatarYOffset = scrollbar.getScrollOffset();
 				}
@@ -311,21 +305,16 @@ void IniciaUser::IniciAcion() {
 
 								if (!renderTexturo.create(128, 128)) {
 									std::cerr << " Error al crear RenderTexture\n";
-									///	return;
 								}
 
 								tempTexture.loadFromImage(originalImage);
 								sf::Sprite sprite(tempTexture);
 
-								// Escalar la imagen para que encaje en 128x128 sin deformarse
 								float scale = std::min(128.f / imgSize.x, 128.f / imgSize.y);
 								sprite.setScale(scale, scale);
-
-								// Centrar la imagen en caso de que sea más pequeña que 128x128
 								sf::Vector2f newSize(imgSize.x * scale, imgSize.y * scale);
 								sprite.setPosition((128 - newSize.x) / 2, (128 - newSize.y) / 2);
 
-								// Dibujar la imagen escalada en el RenderTexture
 								renderTexturo.clear(sf::Color::Transparent);
 								renderTexturo.draw(sprite);
 								renderTexturo.display();
@@ -345,16 +334,12 @@ void IniciaUser::IniciAcion() {
 
 								sf::Sprite sprite(tempTexture);
 
-								//holi.setTexture(tempTexture);
-								// Escalar la imagen para que encaje en 128x128 sin deformarse
 								float scale = std::min(128.f / imgSize.x, 128.f / imgSize.y);
 								sprite.setScale(scale, scale);
 
-								// Centrar la imagen en caso de que sea más pequeña que 128x128
 								sf::Vector2f newSize(imgSize.x * scale, imgSize.y * scale);
 								sprite.setPosition((128 - newSize.x) / 2, (128 - newSize.y) / 2);
 
-								// Dibujar la imagen escalada en el RenderTexture
 								renderTexturo.clear(sf::Color::Transparent);
 								renderTexturo.draw(sprite);
 								renderTexturo.display();
@@ -471,7 +456,6 @@ void IniciaUser::saveSelectedAvatar() {
 
 				if (!renderTexturo.create(128, 128)) {
 					std::cerr << " Error al crear RenderTexture\n";
-					///	return;
 				}
 				sf::RectangleShape spo;
 				spo.setFillColor(colores.getFillColor());

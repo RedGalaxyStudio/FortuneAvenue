@@ -41,8 +41,7 @@ void Stealplayer::resource() {
 
 }
 void Stealplayer::update() {
-    
-    // Configuracion de los perfiles
+
     float perfilWidth = 200.0f; 
     float separacion = 20.0f;   
     int totalPerfiles = static_cast<int>(UsuariosEleccion.size()); 
