@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cinematic\Cinematic.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ObjetosGlobal.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\ResourceGlobal.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\Bot.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameEndO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameOfflineO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\GameOptionsO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\HouseBuyO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\MovePiecesO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\nuloO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\PieceSelectorO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\ResourceGameO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\RuletaO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\offiline\StealplayerO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\Chat.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\GameEnd.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\HouseBuy.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\loading.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\MovePieces.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\MultiplayerGame.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\nulo.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\OnlineVars.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\PieceSelector.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\ResourceGame.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\Ruleta.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\online\Stealplayer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\GameModeSelector.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\IniciarPartida.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\IniciaUser.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\menuP.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\Client.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\ClientData.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\NetworkMessage.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\network\ServerMessageHandler.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\settings\SettingsManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\ButtonG.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\cell.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Cube.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\fileio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\MensageBox.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\ResourceGeneral.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Scrollbar.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Sound.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\TextBox.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Logger.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cinematic\Cinematic.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\ObjetosGlobal.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\ResourceGlobal.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\Bot.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\CubeClassO.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameEndO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameManager.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameOfflineO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\GameOptionsO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\HouseBuyO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\MovePiecesO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\nuloO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\PieceSelectorO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\ResourceGameO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\RuletaO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\StealplayerO.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\offiline\WindowClassO.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\Chat.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\CubeClass.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\GameEnd.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\HouseBuy.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\loading.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\MovePieces.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\MultiplayerGame.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\nulo.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\OnlineVars.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\PieceSelector.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\ResourceGame.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\Ruleta.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\Stealplayer.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\online\WindowClass.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\GameModeSelector.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\IniciarPartida.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\IniciaUser.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\menuP.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\Client.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\ClientData.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\NetworkMessage.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\network\ServerMessageHandler.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\settings\SettingsManager.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\ButtonG.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\cell.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Cube.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\fileio.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\MensageBox.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Particles.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\ResourceGeneral.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Scrollbar.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Sound.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\TextBox.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\nlohmann\json.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\nlohmann\json_fwd.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\game\offiline\output.txt">
+      <Filter>Archivos de origen</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ui\quad.vtk">
+      <Filter>Archivos de origen</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Archivos de origen</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+Licencia de Código Fuente Propietario  
+Copyright © Red Galaxy Studio – Fortune Avenue – 2025
+
+Todos los derechos reservados.
+
+Este código fuente es propiedad exclusiva de Red Galaxy Studio y está protegido por las leyes de propiedad intelectual.
+
+Se prohíbe expresamente:
+- Copiar, modificar, distribuir o publicar cualquier parte del código.
+- Usar el código total o parcialmente en proyectos personales, comerciales o educativos.
+- Descompilar, realizar ingeniería inversa o intentar derivar el código original de forma no autorizada.
+
+Este código es solo para uso interno de Red Galaxy Studio y no está disponible públicamente.
+
+El incumplimiento de estas condiciones puede resultar en acciones legales.
+
+Para cualquier duda o solicitud especial, contactar a:  
+Correo electrónico: redgalaxy.studio24@gmail.com  
+Página web: https://fortuneavenueredgalaxy.click/
+
