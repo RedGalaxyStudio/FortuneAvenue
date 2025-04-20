@@ -26,16 +26,16 @@ void HouseBuy::resource() {
 
 	SpriteCasa.resize(17);
 	if (!TextureXcOFF.loadFromFile("assets/image/Button/XOffC.png")) {
-		std::cerr << "Error al cargar el botón de confirmación.\n";
+		std::cerr << "Error al cargar el botï¿½n de confirmaciï¿½n.\n";
 	}
 	if (!TextureXcOn.loadFromFile("assets/image/Button/XOnC.png")) {
-		std::cerr << "Error al cargar el botón de confirmación.\n";
+		std::cerr << "Error al cargar el botï¿½n de confirmaciï¿½n.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
 	if (!TextureBotonComprar.loadFromFile("assets/image/Button/comprarcasa.png")) {
-		std::cerr << "Error al cargar el botón de confirmación.\n";
+		std::cerr << "Error al cargar el botï¿½n de confirmaciï¿½n.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);
 	SpriteBotonComprar.setPosition(640, 545);
@@ -49,7 +49,12 @@ void HouseBuy::resource() {
 
 	if (!file.is_open()) {
 		char error_message[256];
-		strerror_s(error_message, sizeof(error_message), errno);
+		
+		#ifdef _WIN32
+    		strerror_s(error_message, sizeof(error_message), errno);
+		#else
+    		strerror_r(errno, error_message, sizeof(error_message));
+		#endif
 		std::cerr << "Error: No se pudo abrir el archivo. Motivo: " << error_message << std::endl;
 		return;
 	}
@@ -60,13 +65,13 @@ void HouseBuy::resource() {
 
 	std::vector<std::pair<int, nlohmann::json>> houseList;
 
-	// Extraer los datos y guardar el número de la casa
+	// Extraer los datos y guardar el nï¿½mero de la casa
 	for (auto& [key, value] : jsonData.items()) {
-		int houseNumber = std::stoi(key.substr(4)); // Extrae el número de "casaX"
+		int houseNumber = std::stoi(key.substr(4)); // Extrae el nï¿½mero de "casaX"
 		houseList.push_back({ houseNumber, value });
 	}
 
-	// Ordenar por el número de la casa
+	// Ordenar por el nï¿½mero de la casa
 	std::sort(houseList.begin(), houseList.end(), [](const auto& a, const auto& b) {
 		return a.first < b.first;
 		});

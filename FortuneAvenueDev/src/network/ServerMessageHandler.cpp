@@ -4,6 +4,7 @@
 #include "../game/online/OnlineVars.hpp"
 #include "../core/ResourceGlobal.hpp"
 #include <fstream>
+#include <cstring> 
 
 ServerMessageHandler::ServerMessageHandler(ClientData* cData) :clientData(cData), peer(nullptr) {}
 void ServerMessageHandler::Enetpeer(ENetPeer* Peer) {

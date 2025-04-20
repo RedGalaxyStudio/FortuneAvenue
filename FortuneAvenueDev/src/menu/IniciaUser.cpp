@@ -10,9 +10,9 @@
 #include "../../libs/nlohmann/json.hpp"
 #ifdef _WIN32
 #include <windows.h>
-#endif
-
 #include <commdlg.h>
+#endif
+#include <gtk/gtk.h>
 #include <filesystem>
 #include "../ui/MensageBox.hpp"
 
@@ -26,17 +26,22 @@ sf::RectangleShape createCorner(sf::Color color) {
 
 
 std::string wideToString(const std::wstring& wideStr) {
-	int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, nullptr, 0, nullptr, nullptr);
-	if (sizeNeeded <= 0) return "";
 
-	std::string str(sizeNeeded - 1, 0);
-	WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, &str[0], sizeNeeded, nullptr, nullptr);
-	return str;
+	#ifdef _WIN32
+    	int sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    	std::string strTo(sizeNeeded, 0);
+    	WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, &strTo[0], sizeNeeded, nullptr, nullptr);
+    	return strTo;
+	#else
+    	// En sistemas no Windows, podemos usar std::wstring_convert o métodos alternativos
+    	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+    	return conv.to_bytes(wideStr);
+	#endif
 }
 
 // Abre un cuadro de di�logo para seleccionar un archivo
 std::string openFileDialog() {
-	wchar_t filename[MAX_PATH] = L"";
+	/*wchar_t filename[MAX_PATH] = L"";
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
@@ -49,7 +54,44 @@ std::string openFileDialog() {
 	if (GetOpenFileName(&ofn)) {
 		return wideToString(filename);
 	}
-	return "";
+	return "";*/ //antigua interfas de dialogo
+
+	    // Inicializar GTK
+		gtk_init(NULL, NULL);
+
+		// Crear un cuadro de diálogo de selección de archivo
+		GtkWidget *dialog = gtk_file_chooser_dialog_new(
+			"Abrir Archivo", NULL,
+			GTK_FILE_CHOOSER_ACTION_OPEN,
+			"_Cancelar", GTK_RESPONSE_CANCEL,
+			"_Abrir", GTK_RESPONSE_ACCEPT,
+			NULL
+		);
+	
+		// Establecer el filtro para mostrar solo imágenes
+		GtkFileFilter *filter = gtk_file_filter_new();
+		gtk_file_filter_add_mime_type(filter, "image/png");
+		gtk_file_filter_add_mime_type(filter, "image/jpeg");
+		gtk_file_filter_add_mime_type(filter, "image/bmp");
+		gtk_file_filter_add_mime_type(filter, "image/tga");
+		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
+	
+		// Mostrar el diálogo y esperar la respuesta
+		std::string result = "";
+		if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+			// Obtener el archivo seleccionado
+			char *filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+			result = std::string(filename);
+			g_free(filename); // Liberar memoria
+		}
+	
+		// Cerrar el diálogo
+		gtk_widget_destroy(dialog);
+	
+		// Finalizar GTK
+		gtk_main_quit();
+	
+		return result;
 }
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
 	: window(&windowRef), currentIndex(0), TextGrd(Grd) {
@@ -91,8 +133,7 @@ void IniciaUser::UpdateEdit() {
 	if (!TextureFondoMenuAvar.loadFromFile("assets/image/Fondos/fondomenuAvar.png")) return;
 	SpriteFondoMenuAvar.setTexture(TextureFondoMenuAvar);
 	loadAvatars();
-
-	selectedAvatar = &selectedAvatarCopy;
+	selectedAvatar.reset(&selectedAvatarCopy);  // Usar reset() con el puntero crudo
 	IniciAcion();
 
 
@@ -393,7 +434,7 @@ void IniciaUser::IniciAcion() {
 					Menup.MenuPrincipal();
 				}
 				if (newSelection != nullptr) {
-					if (newSelection != selectedAvatar) {
+					if (newSelection != selectedAvatar.get()) {
 						if (selectedAvatar) {
 							selectedAvatar->setOutlineColor(sf::Color::Transparent);
 							selectedAvatar->setOutlineThickness(0);
@@ -404,7 +445,7 @@ void IniciaUser::IniciAcion() {
 							textselectedAvatarCopy = *newSelection->getTexture();
 							selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
 						}
-						selectedAvatar = newSelection;
+						selectedAvatar.reset(newSelection);  // Asume que 'selectedAvatarCopy' es un puntero crudo
 					}
 				}
 			}
@@ -549,7 +590,7 @@ void IniciaUser::loadAvatars() {
 
 		avatars[i].setPosition(x, y);
 	}
-	if (!sharedTexture.loadFromFile("assets/image/Avatars/Vacio.jpg")) return;
+	if (!sharedTexture.loadFromFile("assets/image/Avatars/vacio.jpg")) return;
 
 
 	if (selectedAvatarCopy.getTexture() == nullptr) {

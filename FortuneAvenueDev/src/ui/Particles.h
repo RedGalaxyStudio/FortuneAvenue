@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <cmath> 
 
 class Particle {
 public:
@@ -40,17 +41,17 @@ public:
 
     void addParticle(const sf::Vector2f& position, sf::Color color, float startRadius) {
         for (int i = 0; i < 50; ++i) {
-            // Generar un ángulo aleatorio entre 0 y 2*PI
+            // Generar un ï¿½ngulo aleatorio entre 0 y 2*PI
             float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 2 * 3.14159f;
 
             // Generar una velocidad aleatoria
             float speed = static_cast<float>(rand() % 100 + 50);
 
-            // Calcular la posición inicial en un radio alrededor del punto central
+            // Calcular la posiciï¿½n inicial en un radio alrededor del punto central
             sf::Vector2f offset(cos(angle) * startRadius, sin(angle) * startRadius);
             sf::Vector2f initialPosition = position + offset;
 
-            // Calcular la velocidad en la dirección del ángulo
+            // Calcular la velocidad en la direcciï¿½n del ï¿½ngulo
             sf::Vector2f velocity(cos(angle) * speed, sin(angle) * speed);
 
             particles.emplace_back(initialPosition, velocity, 5.0f, 3.0f, color);
@@ -62,7 +63,7 @@ public:
         for (auto& particle : particles) {
             particle.update(dt);
         }
-        // Eliminar partículas que hayan "muerto"
+        // Eliminar partï¿½culas que hayan "muerto"
         particles.erase(std::remove_if(particles.begin(), particles.end(),
             [](const Particle& p) { return p.isDead(); }), particles.end());
     }

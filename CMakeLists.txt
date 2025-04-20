@@ -3,7 +3,7 @@ project(fortuneAvenueDev)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+set(CMAKE_BUILD_TYPE Debug)
 # Nombre del ejecutable final
 set(EXECUTABLE_NAME fortuneAvenue)
 
@@ -11,7 +11,15 @@ set(EXECUTABLE_NAME fortuneAvenue)
 file(GLOB_RECURSE SOURCES FortuneAvenueDev/src/*.cpp FortuneAvenueDev/src/*.hpp)
 
 # Incluir encabezados desde src
-include_directories(src)
+include_directories(${CMAKE_SOURCE_DIR}FortuneAvenueDev/src)
+
+# Agregar soporte para GTK-3
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+
+# Incluir las rutas de los encabezados de GTK
+include_directories(${GTK3_INCLUDE_DIRS})
+
 
 # Incluir SFML
 if(WIN32)
@@ -55,6 +63,10 @@ endif()
 
 # Enlazar ENet
 target_link_libraries(${EXECUTABLE_NAME} ${ENET_LIB})
+
+# Enlazar GTK
+target_link_libraries(${EXECUTABLE_NAME} ${GTK3_LIBRARIES})
+
 
 # En Windows, agregar libs del sistema
 if(WIN32)

@@ -43,7 +43,7 @@ std::vector<char> image1; //image Store image data directly.
  sf::Sound turnSound; //girosSound
  bool zero;
 int countsalary;
-bool SelectorPieces = false; // Inicialmente en selección de pieza
+bool SelectorPieces = false; // Inicialmente en selecciï¿½n de pieza
 bool GamePlay = false;        // No en juego al principio
 std::vector<PlayerInformation> playerGameInfo;
 std::vector<PlayerGameOff> playerGameOff;
@@ -57,7 +57,7 @@ bool userTax;
 bool userHouse;
 
 
-int index = 0;
+int customIndex = 0;
 std::vector<int> ActiveUsers;
 
 bool firstTurn;

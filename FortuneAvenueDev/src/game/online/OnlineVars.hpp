@@ -1,6 +1,8 @@
 #pragma once
 #include <unordered_map>
 #include <map>
+#include <cstdint>  // Para uint32_t y uint8_t
+#include <vector>   // Para std::vector
 
 extern int playerIndex;
 extern int turnopermitido;

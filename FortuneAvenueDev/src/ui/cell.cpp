@@ -37,7 +37,7 @@ void Cell::get_projected_point(float &x, float &y, float &z) {
 Cell::Cell(const std::vector<sf::Vector3f> pt, sf::Color col,sf::Vector2f posicionInicial) : Shape(), initialPos{ posicionInicial.x, posicionInicial.y}, finAnimacion(false), conte(0){
 int i;
    
-        numCalls = 29;                // Número de veces que se llama a la función
+        numCalls = 29;                // Nï¿½mero de veces que se llama a la funciï¿½n
 
       currentPos = initialPos;
 
@@ -259,7 +259,7 @@ Position Cell::moveToTarget(Position currentPos, Position targetPos, int numCall
     float deltaX = (targetPos.x - currentPos.x) / numCalls;
     float deltaY = (targetPos.y - currentPos.y) / numCalls;
 
-    // Actualizamos la posición
+    // Actualizamos la posiciï¿½n
     currentPos.x += deltaX;
     currentPos.y += deltaY;
 
@@ -275,21 +275,21 @@ void Cell::Rotate(sf::Vector3f O, sf::Vector3f W, float thetaY) {
         int i;
         
         float thetaX = 0;
-        // Convertir los ángulos a radianes
+        // Convertir los ï¿½ngulos a radianes
         thetaX *= static_cast<float>(M_PI / 180.0f);
         thetaY *= static_cast<float>(M_PI / 180.0f);
 
-        // Crear matrices de rotación individuales para X e Y
+        // Crear matrices de rotaciï¿½n individuales para X e Y
         float RX[3][3] = {
             {1, 0, 0},
-            {0, cos(thetaX), -sin(thetaX)},
-            {0, sin(thetaX), cos(thetaX)}
+            {0, static_cast<float>(cos(thetaX)), static_cast<float>(-sin(thetaX))},
+            {0, static_cast<float>(sin(thetaX)), static_cast<float>(cos(thetaX))}
         };
 
         float RY[3][3] = {
-            {cos(thetaY), 0, sin(thetaY)},
+            {static_cast<float>(cos(thetaY)), 0, static_cast<float>(sin(thetaY))},
             {0, 1, 0},
-            {-sin(thetaY), 0, cos(thetaY)}
+            {static_cast<float>(-sin(thetaY)), 0, static_cast<float>(cos(thetaY))}
         };
 
         // Combinar las rotaciones RX y RY

@@ -1,5 +1,5 @@
 #include "MultiplayerGame.hpp"
-#include <String>
+#include <string>
 #include "GameEnd.hpp"
 #include "Stealplayer.hpp"
 #include "../../ui/ResourceGeneral.hpp"
@@ -12,7 +12,7 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clien
 }
 void MultiplayerGame::resource() {
 
-	if (!textureBoxPerfiloff.loadFromFile("assets/image/Button/Rectángulo Apagado1.png")) return;
+	if (!textureBoxPerfiloff.loadFromFile("assets/image/Button/Rectï¿½ngulo Apagado1.png")) return;
 
 	Notifi.setRadius(5);
 	Notifi.setFillColor(sf::Color::Red);

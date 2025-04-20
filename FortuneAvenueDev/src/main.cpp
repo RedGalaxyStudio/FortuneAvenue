@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Cinematic/Cinematic.hpp"
+#include "cinematic/Cinematic.hpp"
 #include "core/ObjetosGlobal.hpp"
 #include "core/ResourceGlobal.hpp"
 #include <fstream>
@@ -23,7 +23,6 @@ int main(){
 
 	try {
 	
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 		sf::err().rdbuf(std::cout.rdbuf());
 
 

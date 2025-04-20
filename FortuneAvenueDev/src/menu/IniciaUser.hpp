@@ -37,7 +37,7 @@ private:
     std::string imagePath;
     std::string projectPath=""; // Guarda la ruta original
 
-    sf::CircleShape* selectedAvatar = nullptr; 
+    std::unique_ptr<sf::CircleShape> selectedAvatar = nullptr; 
     sf::Sprite SpriteFondoMenu;
     sf::Sprite SpriteFondoMenuAvar;
     sf::Texture TextureFondoMenuAvar;

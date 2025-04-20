@@ -6,7 +6,9 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
+#ifdef _WIN32
 #include <winsock2.h>
+#endif
 #include <string>
 #include "../../network/Client.hpp"
 #include "../../core/ObjetosGlobal.hpp"
@@ -17,10 +19,8 @@
 #include "../../core/ResourceGlobal.hpp"
 #include "PieceSelector.hpp"
 #include "Chat.hpp"
-
 #include "nulo.hpp"
 #include "HouseBuy.hpp"
-
 #include "loading.hpp"
 class Ruleta;
 class HouseBuy;
