@@ -18,7 +18,7 @@ HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
 
 void HouseBuy::setWindow(sf::RenderWindow& win, int indice, Client& clienT) {
 	window = &win;
-	index = indice;
+	csIndex = indice;
 	client = &clienT;
 }
 void HouseBuy::resource() {
@@ -98,7 +98,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	readData(pp, cc, "src/ui/quad.vtk");
 
 	IndexCAsa += 1;
-	if (IndexCAsa >= playerInfos[index].casasPorJugador.size()) {
+	if (IndexCAsa >= playerInfos[csIndex].casasPorJugador.size()) {
 		IndexCAsa = 0;
 	}
 	std::vector<std::vector<sf::Vector3f>> q{ 6 };
@@ -117,7 +117,7 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 	Cell c2(q.at(2), sf::Color(0, 0, 255, 255), posicionactuInicial); cellQua.push_back(c2);
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
-	Cell c5(q.at(5), &TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
+	Cell c5(q.at(5), &TextureCasa[playerInfos[csIndex].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 
@@ -210,14 +210,14 @@ void HouseBuy::update(sf::Vector2f posicionactuInicial) {
 			playClickSound();
 
 			CasasCompradas CasasaCOMPRAR;
-			CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[index].casasPorJugador[IndexCAsa]]);
+			CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureCasa[playerInfos[csIndex].casasPorJugador[IndexCAsa]]);
 			VCcompradas.push_back(CasasaCOMPRAR);
 			CsCmpdrsindex.push_back(IndexCAsa);
 
-			playerInfos[index].numCasas += 1;
-			playersGame[index].CasasN.setString(std::to_string(playerInfos[index].numCasas));
+			playerInfos[csIndex].numCasas += 1;
+			playersGame[csIndex].CasasN.setString(std::to_string(playerInfos[csIndex].numCasas));
 			cierre = true;
-			playerInfos[index].casasPorJugador.erase(playerInfos[index].casasPorJugador.begin() + IndexCAsa);
+			playerInfos[csIndex].casasPorJugador.erase(playerInfos[csIndex].casasPorJugador.begin() + IndexCAsa);
 			IndexCAsa--;
 			cierre = true;
 			accionCompra = false;

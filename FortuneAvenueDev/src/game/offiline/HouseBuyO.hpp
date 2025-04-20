@@ -55,7 +55,7 @@ int totalPerfiles;
 bool CartaActiva;
 int indexMouseOver;
 int cartaActivaIndex;
-
+int csIndex;
 public:
     bool seleccionlista;
     HouseBuyO(); 

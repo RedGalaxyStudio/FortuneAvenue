@@ -16,7 +16,7 @@ HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
 
 void HouseBuyO::setWindow(sf::RenderWindow& win, int indice) {
 	window = &win;
-	index = indice;
+	csIndex = indice;
 }
 void HouseBuyO::resource() {
 
@@ -102,7 +102,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	Cell c2(q.at(2), sf::Color(0, 0, 255, 255), posicionactuInicial); cellQua.push_back(c2);
 	Cell c3(q.at(3), sf::Color(255, 255, 0, 255), posicionactuInicial); cellQua.push_back(c3);
 	Cell c4(q.at(4), &ReversoCart, posicionactuInicial); cellQua.push_back(c4);
-	Cell c5(q.at(5), &TextureHouse[playerGameInfo[index].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
+	Cell c5(q.at(5), &TextureHouse[playerGameInfo[csIndex].casasPorJugador[IndexCAsa]], posicionactuInicial); cellQua.push_back(c5);
 	ButtonG botonXc(Xc, TextureXcOFF, TextureXcOn);
 
 	pp.clear();

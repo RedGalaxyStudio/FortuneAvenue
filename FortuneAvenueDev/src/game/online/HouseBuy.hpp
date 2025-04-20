@@ -66,7 +66,7 @@ public:
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuys();
     void ViewHouseBs();
-    int index;
+    int csIndex;
    
 
 };
