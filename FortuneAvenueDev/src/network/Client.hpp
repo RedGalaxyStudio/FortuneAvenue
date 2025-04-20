@@ -6,10 +6,13 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <queue>
-#include <winsock2.h>
 #include "NetworkMessage.hpp"
 #include "ServerMessageHandler.hpp"
+#ifdef _WIN32
+#include <winsock2.h>
 #include <windows.h>
+#endif
+
 #include <enet/enet.h>
 #include <vector>
 #include <thread>

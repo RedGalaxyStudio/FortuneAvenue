@@ -1,6 +1,9 @@
 #include "ResourceGlobal.hpp"
+#ifdef _WIN32
 #include <windows.h>
 #include <psapi.h>
+#endif
+
 #include <iostream>
 
 sf::Music MenuMusicFondo;
@@ -39,7 +42,7 @@ std::string email;
 std::string id;
 std::string pictureUrl;
 sf::RectangleShape overlay;
-ButtonG* botonX = nullptr; // Definición de la variable
+ButtonG* botonX = nullptr; // Definiciï¿½n de la variable
 sf::Texture TextureAvatarSelec;
 sf::Texture sharedTexture; // Textura compartida para los avatares
 sf::Texture TextureBotonSiOn;

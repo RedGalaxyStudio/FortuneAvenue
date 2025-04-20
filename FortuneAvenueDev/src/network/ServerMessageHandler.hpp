@@ -12,8 +12,11 @@
 #include <condition_variable>
 #include <mutex>
 #include "ClientData.hpp"
+#ifdef _WIN32
 #include <winsock2.h>
 #include <windows.h>
+#endif
+
 #include <unordered_map>
 class ServerMessageHandler
 {

@@ -1,0 +1,3 @@
+/home/danieljob/Escritorio/FortuneAvenueDev/CMakeFiles/fortuneAvenue.dir
+/home/danieljob/Escritorio/FortuneAvenueDev/CMakeFiles/edit_cache.dir
+/home/danieljob/Escritorio/FortuneAvenueDev/CMakeFiles/rebuild_cache.dir

@@ -4,7 +4,6 @@
 #include "core/ObjetosGlobal.hpp"
 #include "core/ResourceGlobal.hpp"
 #include <fstream>
-#include <GL/gl.h>
 #include <SFML/System.hpp>
 #include <string>
 #include <vector>
@@ -14,7 +13,7 @@
 
 void terminator() {
 	Logger::log("Error fatal: std::terminate fue llamado.");
-	std::cerr << "El juego se cerró inesperadamente." << std::endl;
+	std::cerr << "El juego se cerrï¿½ inesperadamente." << std::endl;
 	std::abort();  
 }
 
@@ -54,14 +53,14 @@ int main(){
 
 	}
 	catch (const std::exception& e) {
-		std::cerr << "Excepción atrapada: " << e.what() << std::endl;
+		std::cerr << "Excepciï¿½n atrapada: " << e.what() << std::endl;
 		std::ofstream log("crash_log.txt", std::ios::app);
-		log << "Excepción atrapada: " << e.what() << std::endl;
+		log << "Excepciï¿½n atrapada: " << e.what() << std::endl;
 	}
 	catch (...) {
-		std::cerr << "Excepción desconocida atrapada." << std::endl;
+		std::cerr << "Excepciï¿½n desconocida atrapada." << std::endl;
 		std::ofstream log("crash_log.txt", std::ios::app);
-		log << "Excepción desconocida atrapada." << std::endl;
+		log << "Excepciï¿½n desconocida atrapada." << std::endl;
 	}
 	return EXIT_SUCCESS;
 }

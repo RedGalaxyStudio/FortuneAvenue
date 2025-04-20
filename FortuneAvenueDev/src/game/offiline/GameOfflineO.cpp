@@ -1,5 +1,5 @@
 #include "GameOfflineO.hpp"
-#include <String>
+#include <string>
 #include "GameEndO.hpp"
 #include "StealplayerO.hpp"
 #include "../../ui/ResourceGeneral.hpp"
@@ -7,7 +7,7 @@
 
 GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
 
-	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicialización del puntero
+	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicializaciï¿½n del puntero
 
 	resource();
 }
@@ -265,7 +265,7 @@ void GameOffline::resource() {
 
 
 	if (!TextureImpuesto.loadFromFile("assets/image/Game/Impuesto.png")) return;
-	if (!textureBoxPerfilOn.loadFromFile("assets/image/Button/Rectángulo Apagado1.png")) return;
+	if (!textureBoxPerfilOn.loadFromFile("assets/image/Button/Rectï¿½ngulo Apagado1.png")) return;
 
 	Settings.setTexture(SettingsOff);
 	Settings.setPosition(130, 6);
