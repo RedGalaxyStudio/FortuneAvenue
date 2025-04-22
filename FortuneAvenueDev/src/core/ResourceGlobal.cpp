@@ -42,7 +42,7 @@ std::string email;
 std::string id;
 std::string pictureUrl;
 sf::RectangleShape overlay;
-ButtonG* botonX = nullptr; // Definici�n de la variable
+ButtonG* botonX = nullptr; // Definicion de la variable
 sf::Texture TextureAvatarSelec;
 sf::Texture sharedTexture; // Textura compartida para los avatares
 sf::Texture TextureBotonSiOn;

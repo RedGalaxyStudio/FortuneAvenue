@@ -12,7 +12,7 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clien
 }
 void MultiplayerGame::resource() {
 
-	if (!textureBoxPerfiloff.loadFromFile("assets/image/Button/Rect�ngulo Apagado1.png")) return;
+	if (!textureBoxPerfiloff.loadFromFile("assets/image/Button/RectanguloApagado1.png")) return;
 
 	Notifi.setRadius(5);
 	Notifi.setFillColor(sf::Color::Red);

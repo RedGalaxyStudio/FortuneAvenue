@@ -37,7 +37,7 @@ void Cell::get_projected_point(float &x, float &y, float &z) {
 Cell::Cell(const std::vector<sf::Vector3f> pt, sf::Color col,sf::Vector2f posicionInicial) : Shape(), initialPos{ posicionInicial.x, posicionInicial.y}, finAnimacion(false), conte(0){
 int i;
    
-        numCalls = 29;                // N�mero de veces que se llama a la funci�n
+        numCalls = 29;                // Nomero de veces que se llama a la funcion
 
       currentPos = initialPos;
 
@@ -259,7 +259,7 @@ Position Cell::moveToTarget(Position currentPos, Position targetPos, int numCall
     float deltaX = (targetPos.x - currentPos.x) / numCalls;
     float deltaY = (targetPos.y - currentPos.y) / numCalls;
 
-    // Actualizamos la posici�n
+    // Actualizamos la posicion
     currentPos.x += deltaX;
     currentPos.y += deltaY;
 
@@ -275,11 +275,11 @@ void Cell::Rotate(sf::Vector3f O, sf::Vector3f W, float thetaY) {
         int i;
         
         float thetaX = 0;
-        // Convertir los �ngulos a radianes
+        // Convertir los ongulos a radianes
         thetaX *= static_cast<float>(M_PI / 180.0f);
         thetaY *= static_cast<float>(M_PI / 180.0f);
 
-        // Crear matrices de rotaci�n individuales para X e Y
+        // Crear matrices de rotacion individuales para X e Y
         float RX[3][3] = {
             {1, 0, 0},
             {0, static_cast<float>(cos(thetaX)), static_cast<float>(-sin(thetaX))},

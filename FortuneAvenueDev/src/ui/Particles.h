@@ -41,17 +41,17 @@ public:
 
     void addParticle(const sf::Vector2f& position, sf::Color color, float startRadius) {
         for (int i = 0; i < 50; ++i) {
-            // Generar un �ngulo aleatorio entre 0 y 2*PI
+            // Generar un ongulo aleatorio entre 0 y 2*PI
             float angle = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 2 * 3.14159f;
 
             // Generar una velocidad aleatoria
             float speed = static_cast<float>(rand() % 100 + 50);
 
-            // Calcular la posici�n inicial en un radio alrededor del punto central
+            // Calcular la posicion inicial en un radio alrededor del punto central
             sf::Vector2f offset(cos(angle) * startRadius, sin(angle) * startRadius);
             sf::Vector2f initialPosition = position + offset;
 
-            // Calcular la velocidad en la direcci�n del �ngulo
+            // Calcular la velocidad en la direccion del ongulo
             sf::Vector2f velocity(cos(angle) * speed, sin(angle) * speed);
 
             particles.emplace_back(initialPosition, velocity, 5.0f, 3.0f, color);
@@ -63,7 +63,7 @@ public:
         for (auto& particle : particles) {
             particle.update(dt);
         }
-        // Eliminar part�culas que hayan "muerto"
+        // Eliminar partoculas que hayan "muerto"
         particles.erase(std::remove_if(particles.begin(), particles.end(),
             [](const Particle& p) { return p.isDead(); }), particles.end());
     }

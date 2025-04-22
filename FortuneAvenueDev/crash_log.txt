@@ -1,0 +1,1 @@
+Excepci�n atrapada: bad allocation

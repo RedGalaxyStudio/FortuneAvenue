@@ -26,10 +26,10 @@ MensageBox::MensageBox(const std::string& text, const sf::Font& font, unsigned i
 
 void MensageBox::setupRoundedBox() {
     float radius = 15.0f; // Radio de las esquinas redondeadas
-    sf::Vector2f boxSize(200, 50); // Tama�o del cuadro
-    int numSegments = 8; // N�mero de segmentos para cada esquina
+    sf::Vector2f boxSize(200, 50); // Tamaoo del cuadro
+    int numSegments = 8; // Nomero de segmentos para cada esquina
 
-    // Configura el n�mero de puntos (4 esquinas, cada una con numSegments puntos)
+    // Configura el nomero de puntos (4 esquinas, cada una con numSegments puntos)
     roundedBox.setPointCount(4 * numSegments);
 
     // Coordenadas para cada una de las cuatro esquinas redondeadas
@@ -61,7 +61,7 @@ void MensageBox::setupRoundedBox() {
 
     // Posiciona `roundedBox` en la pantalla y establece un color visible
     roundedBox.setPosition(startX, startY);
-    roundedBox.setFillColor(sf::Color(0, 0, 0, 140)); // Color s�lido para pruebas
+    roundedBox.setFillColor(sf::Color(0, 0, 0, 140)); // Color solido para pruebas
 }
 
 
@@ -71,7 +71,7 @@ void MensageBox::showMessage() {
     isVisible = true;
     isFading = false;
     clock.restart();
-    roundedBox.setFillColor(sf::Color(0, 0, 0, 140)); // Color s�lido para pruebas
+    roundedBox.setFillColor(sf::Color(0, 0, 0, 140)); // Color solido para pruebas
     message.setFillColor(sf::Color::White);
 
     message.setOutlineThickness(2);
@@ -83,7 +83,7 @@ void MensageBox::update() {
 
     float elapsed = clock.getElapsedTime().asSeconds();
 
-    // Animaci�n de subida y bajada (solo ocurre una vez)
+    // Animacion de subida y bajada (solo ocurre una vez)
     if (!isFading && elapsed < 0.5f) {
         float t = elapsed / 0.5f;
         roundedBox.setPosition(startX + 15, targetPosition.y - 35 * (1 - t)); // Ajusta para bajar una vez
@@ -91,7 +91,7 @@ void MensageBox::update() {
         centerText();
     }
     else if (elapsed >= 0.5f && elapsed <= 2.0f) {
-        // Mantener la posici�n sin realizar ning�n movimiento adicional
+        // Mantener la posicion sin realizar ningon movimiento adicional
         roundedBox.setPosition(startX + 15, targetPosition.y);
         message.setPosition(startX + 15, targetPosition.y);
         centerText();
@@ -102,7 +102,7 @@ void MensageBox::update() {
         clock.restart();
     }
 
-    // L�gica para desvanecimiento
+    // Logica para desvanecimiento
     if (isFading) {
         float alpha = std::max(0.0f, 180 - (clock.getElapsedTime().asSeconds() * 180));
         sf::Color newColor(0, 0, 0, static_cast<sf::Uint8>(alpha));

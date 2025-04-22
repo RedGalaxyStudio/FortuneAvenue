@@ -26,16 +26,16 @@ void HouseBuy::resource() {
 
 	SpriteCasa.resize(17);
 	if (!TextureXcOFF.loadFromFile("assets/image/Button/XOffC.png")) {
-		std::cerr << "Error al cargar el bot�n de confirmaci�n.\n";
+		std::cerr << "Error al cargar el boton de confirmacion.\n";
 	}
 	if (!TextureXcOn.loadFromFile("assets/image/Button/XOnC.png")) {
-		std::cerr << "Error al cargar el bot�n de confirmaci�n.\n";
+		std::cerr << "Error al cargar el boton de confirmacion.\n";
 	}
 
 	Xc.setTexture(TextureXcOFF);
 
 	if (!TextureBotonComprar.loadFromFile("assets/image/Button/comprarcasa.png")) {
-		std::cerr << "Error al cargar el bot�n de confirmaci�n.\n";
+		std::cerr << "Error al cargar el boton de confirmacion.\n";
 	}
 	SpriteBotonComprar.setTexture(TextureBotonComprar);
 	SpriteBotonComprar.setPosition(640, 545);
@@ -65,13 +65,13 @@ void HouseBuy::resource() {
 
 	std::vector<std::pair<int, nlohmann::json>> houseList;
 
-	// Extraer los datos y guardar el n�mero de la casa
+	// Extraer los datos y guardar el nomero de la casa
 	for (auto& [key, value] : jsonData.items()) {
-		int houseNumber = std::stoi(key.substr(4)); // Extrae el n�mero de "casaX"
+		int houseNumber = std::stoi(key.substr(4)); // Extrae el nomero de "casaX"
 		houseList.push_back({ houseNumber, value });
 	}
 
-	// Ordenar por el n�mero de la casa
+	// Ordenar por el nomero de la casa
 	std::sort(houseList.begin(), houseList.end(), [](const auto& a, const auto& b) {
 		return a.first < b.first;
 		});

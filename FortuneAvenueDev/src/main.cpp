@@ -13,7 +13,7 @@
 
 void terminator() {
 	Logger::log("Error fatal: std::terminate fue llamado.");
-	std::cerr << "El juego se cerr� inesperadamente." << std::endl;
+	std::cerr << "El juego se cerro inesperadamente." << std::endl;
 	std::abort();  
 }
 
@@ -52,14 +52,14 @@ int main(){
 
 	}
 	catch (const std::exception& e) {
-		std::cerr << "Excepci�n atrapada: " << e.what() << std::endl;
+		std::cerr << "Excepcion atrapada: " << e.what() << std::endl;
 		std::ofstream log("crash_log.txt", std::ios::app);
-		log << "Excepci�n atrapada: " << e.what() << std::endl;
+		log << "Excepcion atrapada: " << e.what() << std::endl;
 	}
 	catch (...) {
-		std::cerr << "Excepci�n desconocida atrapada." << std::endl;
+		std::cerr << "Excepcion desconocida atrapada." << std::endl;
 		std::ofstream log("crash_log.txt", std::ios::app);
-		log << "Excepci�n desconocida atrapada." << std::endl;
+		log << "Excepcion desconocida atrapada." << std::endl;
 	}
 	return EXIT_SUCCESS;
 }
