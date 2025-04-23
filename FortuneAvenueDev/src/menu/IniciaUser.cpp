@@ -9,6 +9,7 @@
 #include <fstream>
 #include "../../libs/nlohmann/json.hpp"
 #ifdef _WIN32
+#include <shlobj.h>
 #include <windows.h>
 #include <commdlg.h>
 #endif
@@ -103,6 +104,19 @@ std::string openFileDialog() {
 }
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
 	: window(&windowRef), currentIndex(0), TextGrd(Grd) {
+	char appDataPath[MAX_PATH];
+	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+		return;
+	}
+
+	std::string rutaFinal = std::string(appDataPath) + "\\Fortune Avenue\\Avatars\\personal\\";
+
+	// Crear directorios si no existen
+	if (!std::filesystem::exists(rutaFinal)) {
+		std::error_code ec;
+		std::filesystem::create_directories(rutaFinal, ec);
+	}
 	Resource();
 	loadAvatars();
 }
@@ -119,8 +133,16 @@ void IniciaUser::Resource() {
 	SpriteFondoMenu.setTexture(TextureFondoMenu);
 }
 void IniciaUser::Update() {
+	char appDataPath[MAX_PATH];
+	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+		return;
+	}
 
-	if (!std::filesystem::exists("perfil.json")) {
+	std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
+	std::string documente = rutaFinalC + "perfil.json";
+
+	if (!std::filesystem::exists(documente)) {
 		if (!ckeck.loadFromFile("assets/image/Avatars/cheeke2.png")) return;
 		spriteCkeck.setTexture(ckeck);
 		if (!TextureFondoMenuAvar.loadFromFile("assets/image/Fondos/fondomenuAvar.png")) return;
@@ -417,12 +439,18 @@ void IniciaUser::IniciAcion() {
 									}
 								}
 							}
+							char appDataPath[MAX_PATH];
+							if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+								std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+								return;
+							}
 
-							std::filesystem::current_path(projectPath);
-							std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
-							croppedImage.saveToFile(dirPath);
+							std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\Avatars\\personal\\temp_crop.png";
 
-							textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+							
+							croppedImage.saveToFile(rutaFinalC);
+
+							textselectedAvatarCopy.loadFromFile(rutaFinalC);
 							newSelection = new sf::CircleShape(64);
 							newSelection->setTexture(&textselectedAvatarCopy);
 							selectedIndex = 0;
@@ -497,13 +525,39 @@ void IniciaUser::IniciAcion() {
 }
 void IniciaUser::saveSelectedAvatar() {
 	std::filesystem::current_path(projectPath);
+	char appDataPath[MAX_PATH];
+	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+		return;
+	}	
 
+	std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
+	std::error_code ec;
+	std::filesystem::create_directories(rutaFinalC, ec);
 	if (selectedAvatar != nullptr) {
 
 		if (selectedIndex != -1) {
 
 			json avatarData;
 			if (selectedIndex == 0) {
+				// Obtener %AppData%
+				std::string nombreArchivo = "temp_crop.png";
+				// Crear directorios si no existen
+
+					std::string rutaFinal = std::string(appDataPath) + "\\Fortune Avenue\\Avatars\\personal\\";
+		
+						// Crear directorios si no existen
+				
+					std::filesystem::create_directories(rutaFinal, ec);
+					if (ec) {
+						std::cerr << "Error al crear carpetas: " << ec.message() << std::endl;
+						return;
+					}
+
+
+					// Guardar imagen
+				std::string rutaCompleta = rutaFinal + nombreArchivo;
+
 
 				sf::RenderTexture renderTexturo;
 
@@ -514,7 +568,7 @@ void IniciaUser::saveSelectedAvatar() {
 				spo.setFillColor(colores.getFillColor());
 				spo.setSize(sf::Vector2f(128.f, 128.f));
 				sf::Texture tempTexture;
-				tempTexture.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+				tempTexture.loadFromFile(rutaCompleta);
 				sf::Sprite sprite(tempTexture);
 				renderTexturo.clear(colores.getFillColor());
 				renderTexturo.draw(spo);
@@ -523,17 +577,15 @@ void IniciaUser::saveSelectedAvatar() {
 
 				sf::Image croppedImage = renderTexturo.getTexture().copyToImage();
 
-				std::filesystem::current_path(projectPath);
-				std::string dirPath = projectPath + "/assets/image/Avatars/personal/temp_crop.png";
-				croppedImage.saveToFile(dirPath);
-				textselectedAvatarCopy.loadFromFile("assets/image/Avatars/personal/temp_crop.png");
+				croppedImage.saveToFile(rutaCompleta);
+				textselectedAvatarCopy.loadFromFile(rutaCompleta);
 				sf::CircleShape* newSelection;
 				newSelection = new sf::CircleShape(64);
 				newSelection->setTexture(&textselectedAvatarCopy);
 				textselectedAvatarCopy = *newSelection->getTexture();
 				selectedAvatarCopy.setTexture(&textselectedAvatarCopy);
-				avatarData["selected_avatar_path"] = "assets/image/Avatars/personal/temp_crop.png";
-				TextureAvatarPath = "assets/image/Avatars/personal/temp_crop.png";
+				avatarData["selected_avatar_path"] = rutaCompleta;
+				TextureAvatarPath = rutaCompleta;
 			}
 			else {
 
@@ -543,7 +595,9 @@ void IniciaUser::saveSelectedAvatar() {
 
 			avatarData["username"] = input1;
 
-			std::ofstream outFile("perfil.json");
+
+			std::string documente = rutaFinalC +"perfil.json";
+			std::ofstream outFile(documente);
 
 			if (outFile.is_open()) {
 				outFile << avatarData.dump(4);
@@ -554,9 +608,18 @@ void IniciaUser::saveSelectedAvatar() {
 }
 void IniciaUser::loadSelectedAvatar() {
 
+	char appDataPath[MAX_PATH];
+	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+		return;
+	}
 
-	std::ifstream inFile("perfil.json");
+	std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
+	std::string documente = rutaFinalC + "perfil.json";
+	std::cout << "Archivo abierto correctamente.\n"<< documente;
+	std::ifstream inFile(documente);
 	if (inFile.is_open()) {
+		std::cout << "Archivo abierto correctamente.\n";
 		json avatarData;
 		inFile >> avatarData;
 		inFile.close();
