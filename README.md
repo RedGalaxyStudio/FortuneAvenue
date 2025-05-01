@@ -28,18 +28,13 @@ Este proyecto es parte de un trabajo de investigación en la carrera de Ingenier
 - **IDE:** Visual Studio Code, Visual Studio 2022
 - **Sistema Operativo:** Windows 10
 
-🕹️ Requisitos mínimos para jugar
-Sistema operativo: Windows 10
-
-CPU: Procesador dual-core
-
-RAM: 4 GB
-
-GPU: Compatible con OpenGL 2.1 o superior
-
-Red: Conexión a internet para modo multijugador
-
-Resolución mínima recomendada: 1280x720
+## 🕹️ Requisitos mínimos para jugar
+- **Sistema operativo:** Windows 10
+- **CPU:** Procesador dual-core
+- **RAM:** 4 GB
+- **GPU:** Compatible con OpenGL 2.1 o superior
+- **Red:** Conexión a internet para modo multijugador
+- **Resolución mínima recomendada:** 1280x720
 
 
 
