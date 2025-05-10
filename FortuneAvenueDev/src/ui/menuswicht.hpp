@@ -18,11 +18,18 @@ public:
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
+    void moveThumb(float mouseX);
+    float clamp(float value, float min, float max) const;
+    sf::Vector2f sizeFilledBar;
+    sf::Vector2f thumbPosition;
     sf::ConvexShape capsule;
     sf::RenderWindow& window;
     std::vector<sf::Text> Menu;
+    sf::Vector2i mousePos;
     sf::Text Selection;
     float size;
+    bool isDragging;
+    float radius = 15.f;
     sf::RectangleShape backgroum;
     sf::Vector2f position;
     float MaxSizeback;

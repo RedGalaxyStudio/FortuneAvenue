@@ -7,55 +7,20 @@
   // requiere C++20
 menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position) : window(windowRef),position(Position){
 
-	float radius = 10.f;
+
 	float M_PI = std::numbers::pi;
-	backgroum.setFillColor(sf::Color(75, 75, 75));
-	backgroum.setSize(sf::Vector2f( 50, (radius - 5.f)*2));
-	backgroum.setOutlineColor(sf::Color(50, 50, 50));
-	backgroum.setOutlineThickness(5);
-	// Tamaño común
-
-
-	// Fondo círculos
-	backIzqCir.setRadius(radius);
-	backIzqCir.setFillColor(sf::Color(50, 50, 50));
-	backIzqCir.setOrigin(radius, radius);
-
-	backDerCir.setRadius(radius);
-	backDerCir.setFillColor(sf::Color(50, 50, 50));
-	backDerCir.setOrigin(radius, radius);
-
-	// Flechas círculos
-	IzqCir.setRadius(radius - 5.f);
-	IzqCir.setFillColor(sf::Color(75, 75, 75));
-	IzqCir.setOrigin(radius - 5.f, radius - 5.f);
-
-	DerCir.setRadius(radius - 5.f);
-	DerCir.setFillColor(sf::Color(75, 75, 75));
-	DerCir.setOrigin(radius - 5.f, radius - 5.f);
 
 	// Selector
-	CirSelec.setRadius(radius + 4.f);
-	CirSelec.setFillColor(sf::Color::White);
-	CirSelec.setOutlineColor(sf::Color(50, 50, 50));
+	CirSelec.setRadius(radius - 4.f);
+	CirSelec.setFillColor(sf::Color(200,200,200));
+	CirSelec.setOutlineColor(sf::Color(60, 60, 60));
 	CirSelec.setOutlineThickness(2.f);
-	CirSelec.setOrigin(radius + 4.f, radius + 4.f);
-
-	// Posiciones (puedes ajustarlas)
-	backIzqCir.setPosition(250.f, 400.f);
-	backgroum.setOrigin(0,radius-5.f);
-	backgroum.setPosition(250.f, 400.f);
-	IzqCir.setPosition(250.f, 400.f);
-
-	backDerCir.setPosition(backgroum.getPosition().x+ backgroum.getGlobalBounds().width- backgroum.getOutlineThickness(), 400.f);
-	DerCir.setPosition(backDerCir.getPosition().x, 400.f);
-
-	CirSelec.setPosition(400.f, 400.f); // centro del menú seleccionado
+	CirSelec.setOrigin(radius - 4.f, radius - 4.f);
 
 
+	CirSelec.setPosition(531, 333); // centro del menú seleccionado
 
-
-	const float length = 100.f; // largo del rectángulo
+	const float length = 30.f; // largo del rectángulo
 	const int pointCount = 10;  // más puntos = más redondeado
 	capsule.setPointCount(pointCount * 2 + 2);
 
@@ -82,7 +47,8 @@ menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position) : win
 	capsule.setOutlineThickness(5.f);
 	capsule.setPosition(500, 333);
 	// Centra origen en el medio de la cápsula
-	capsule.setOrigin(length / 2.f, 0.f);
+	
+	capsule.setOrigin( 0.f,0.f);
 
 }
 
@@ -107,50 +73,67 @@ void menuswicht::setColors(sf::Color color) {
 }
 void menuswicht::setPosition(sf::Vector2f Position) {
 
-	position = Position;
-	//backgroum.setPosition(position.x - 5, position.y );
-	if (Menu.empty()) {
-		std::cerr << "Error: El vector Menu está vacío." << std::endl;
-		return;  // Salir si el vector está vacío
-	}
-	Selection = Menu[SelecIdio];
-	Selection.setPosition(position);
-	// const sf::Text text = Selection;
-	float offsetY = position.y;  // Usamos offsetX para acumular el desplazamiento
-
-	for (auto& tex : Menu) {
-		if (tex.getFont() == nullptr) {
-			std::cerr << "Error: Fuente no asignada a sf::Text." << std::endl;
-			continue;  // Continuar si la fuente no está asignada
-		}
-
-		tex.setPosition( position.x,offsetY);
-
-		offsetY += tex.getGlobalBounds().height;  // Actualizamos solo offsetX, no Position
-		MaxSizeback += tex.getGlobalBounds().height;
-	}
-	MaxSizeback += 20;
-	backgroum.setSize(sf::Vector2f(backgroum.getSize().x+10, Selection.getGlobalBounds().height + 10));
-
 
 	
 }
 void menuswicht::event(const sf::Event event) {
+	mousePos = sf::Mouse::getPosition(window);
 
+
+	switch (event.type) {
+	case sf::Event::MouseButtonPressed:
+		if (CirSelec.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+			isDragging = true;
+	
+		}
+		break;
+
+	case sf::Event::MouseButtonReleased:
+		isDragging = false;
+
+		break;
+
+	case sf::Event::MouseMoved:
+		//On ? false : true;
+
+		if (isDragging) {
+			moveThumb(static_cast<float>(mousePos.x));
+		}
+		break;
+
+	default:
+		break;
+	}
 
 
 
 
 }
+float menuswicht::clamp(float value, float min, float max) const {
+	return std::max(min, std::min(value, max));
+}
+
+void menuswicht::moveThumb(float mouseX) {
+	float barLeft = capsule.getPosition().x;
+	float barRight = barLeft + 31.f;
+
+	mouseX = clamp(mouseX, barLeft, barRight);
+
+	thumbPosition = sf::Vector2f(mouseX , CirSelec.getPosition().y);
+	CirSelec.setPosition(thumbPosition);
+	if (On) {
+		CirSelec.setPosition(barRight, CirSelec.getPosition().y);
+	}
+	else {
+		CirSelec.setPosition(barLeft, CirSelec.getPosition().y);
+	}
+
+}
 
 void menuswicht::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	target.draw(backIzqCir, states);
-	target.draw(backDerCir, states);
-	target.draw(backgroum, states);
-	target.draw(IzqCir, states);
-	target.draw(DerCir, states);
-	target.draw(CirSelec, states);
+
+	
 	target.draw(capsule, states);
-
-
+	target.draw(CirSelec, states);
+	std::cout << "\n" << CirSelec.getPosition().x;
 }

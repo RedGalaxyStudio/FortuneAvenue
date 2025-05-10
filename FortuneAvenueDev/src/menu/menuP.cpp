@@ -473,7 +473,8 @@ void menuP::MenuOpcion(bool fon) {
 			musicSlider->handleEvent(event, *window);
 			effectSlider->handleEvent(event, *window);
 			SelectingIdiome->event(event);
-
+			pantacon.event(event);
+			
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				mousePosition = sf::Mouse::getPosition(*window);
 				mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
