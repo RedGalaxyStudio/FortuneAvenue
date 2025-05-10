@@ -28,10 +28,25 @@ Este proyecto es parte de un trabajo de investigación en la carrera de Ingenier
 - **IDE:** Visual Studio Code, Visual Studio 2022
 - **Sistema Operativo:** Windows 10
 
-## 📄 Requisitos
-- Windows 10
-- Visual Studio o VS Code con extensiones para C++
-- Librerías instaladas: SFML, ENet, JSON
+## 🕹️ Requisitos mínimos para jugar
+- **Sistema operativo:** Windows 10
+- **CPU:** Procesador dual-core
+- **RAM:** 4 GB
+- **GPU:** Compatible con OpenGL 2.1 o superior
+- **Red:** Conexión a internet para modo multijugador
+- **Resolución mínima recomendada:** 1280x720
+
+
+
+## 📄  Requisitos mínimos de desarrollo
+Sistema operativo: Windows 10
+
+IDE: Visual Studio o VS Code con extensiones para C++
+
+Librerías necesarias:
+  SFML
+  ENet
+  JSON for Modern C++ (nlohmann/json)
 
  ## 👨‍💻 Equipo de Desarrollo
 
