@@ -23,13 +23,6 @@
 
 using json = nlohmann::json;
 
-sf::RectangleShape createCorner(sf::Color color) {
-	sf::RectangleShape corner(sf::Vector2f(10, 10));
-	corner.setFillColor(color);
-	return corner;
-}
-
-
 std::string wideToString(const std::wstring& wideStr) {
 
 #ifdef _WIN32
@@ -103,7 +96,7 @@ std::string openFileDialog() {
 #endif
 }
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
-	: window(&windowRef), currentIndex(0), TextGrd(Grd) {
+	: TextGrd(Grd), window(&windowRef), currentIndex(0) {
 	char appDataPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
 		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
@@ -121,12 +114,11 @@ IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
 	loadAvatars();
 }
 IniciaUser::IniciaUser(sf::RenderWindow& windowRef)
-	: window(&windowRef), currentIndex(0), TextGrd("") {
+	:  TextGrd(""), window(&windowRef), currentIndex(0) {
 	Resource();
 	loadAvatars();
 }
-IniciaUser::~IniciaUser() {
-}
+IniciaUser::~IniciaUser() {}
 void IniciaUser::Resource() {
 	projectPath = std::filesystem::current_path().string(); // Guarda la ruta original
 
@@ -174,8 +166,6 @@ void IniciaUser::IniciAcion() {
 	spriteCkeck.setPosition(850, 70);
 	float baseXPos = 92.0f;
 	float baseYPos = 472.0f;
-	float deltaScroll = 0.0f;
-	float scrollStep = 10.0f; // Para el desplazamiento con las teclas
 	const float avatarWidth = 128.0f;
 	const float avatarHeight = 128.0f;
 	const float avatarSeparation = 28.0f;
@@ -240,7 +230,6 @@ void IniciaUser::IniciAcion() {
 	sf::Color selectedBackgroundColor = sf::Color::White; 
 	sf::Texture tempTexture;
 	sf::Image croppedImage;
-	bool hasTransparency = false;
 	sf::Image imageWithBackground;
 
 	colores.setRadius(selectedAvatarCopy.getRadius());
@@ -308,13 +297,11 @@ void IniciaUser::IniciAcion() {
 
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Down) {
-					deltaScroll = 1.0f; 
-					scrollbar.update(deltaScroll);
+					scrollbar.update(1.0f);
 					avatarYOffset = scrollbar.getScrollOffset();
 				}
 				else if (event.key.code == sf::Keyboard::Up) {
-					deltaScroll = -1.0f; 
-					scrollbar.update(deltaScroll);
+					scrollbar.update(-1.0f);
 					avatarYOffset = scrollbar.getScrollOffset();
 				}
 			}
@@ -328,7 +315,7 @@ void IniciaUser::IniciAcion() {
 			}
 
 			if (avatarYOffset != 0) {
-				std::vector<sf::FloatRect> avatarBounds(avatars.size());
+				//std::vector<sf::FloatRect> avatarBounds(avatars.size());
 				for (int i = 0; i < avatars.size(); ++i) {
 					int column = i % 8;
 					int row = i / 8;
@@ -337,7 +324,7 @@ void IniciaUser::IniciAcion() {
 
 					float yPos = (baseYPos + row * heightSeparation) - avatarYOffset;
 
-					avatarBounds[i] = sf::FloatRect(xPos, yPos, avatars[i].getGlobalBounds().width, avatars[i].getGlobalBounds().height);
+					//avatarBounds[i] = sf::FloatRect(xPos, yPos, avatars[i].getGlobalBounds().width, avatars[i].getGlobalBounds().height);
 
 					avatars[i].setPosition(xPos, yPos);
 
@@ -431,14 +418,6 @@ void IniciaUser::IniciAcion() {
 
 							sf::Image imageWithBackground = croppedImage;
 
-							for (unsigned int y = 0; y < imageWithBackground.getSize().y; y++) {
-								for (unsigned int x = 0; x < imageWithBackground.getSize().x; x++) {
-									sf::Color pixelColor = imageWithBackground.getPixel(x, y);
-									if (pixelColor.a == 0) {  // Si es transparente
-										hasTransparency = true;
-									}
-								}
-							}
 							char appDataPath[MAX_PATH];
 							if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
 								std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
@@ -616,10 +595,8 @@ void IniciaUser::loadSelectedAvatar() {
 
 	std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
 	std::string documente = rutaFinalC + "perfil.json";
-	std::cout << "Archivo abierto correctamente.\n"<< documente;
 	std::ifstream inFile(documente);
 	if (inFile.is_open()) {
-		std::cout << "Archivo abierto correctamente.\n";
 		json avatarData;
 		inFile >> avatarData;
 		inFile.close();
@@ -875,31 +852,26 @@ sf::Texture IniciaUser::fun() {
 					float minSize = 50; // Tamaño mínimo
 					float maxSize = std::min(imgSize.x * scale, imgSize.y * scale); // Tamaño máximo
 
-					float diff = 0;
-
 					if (resizingCorner == 0 || resizingCorner == 1) {  // Esquina superior izquierda
-						diff = selectionBox.getPosition().x - mousePos.x;
-						newSize.x += diff;
-						newSize.y += diff;
-						newPos.x -= diff;
-						newPos.y -= diff;
+						newSize.x += selectionBox.getPosition().x - mousePos.x;
+						newSize.y += selectionBox.getPosition().x - mousePos.x;
+						newPos.x -= selectionBox.getPosition().x - mousePos.x;
+						newPos.y -= selectionBox.getPosition().x - mousePos.x;
 					}
 					else if (resizingCorner == 2 || resizingCorner == 3) {  // Esquina superior derecha
-						diff = mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
-						newSize.x += diff;
-						newSize.y += diff;
-						newPos.y -= diff; //  Ajustar posición en Y para que la reducción sea hacia abajo
+						newSize.x += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
+						newSize.y += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
+						newPos.y -= mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x); //  Ajustar posición en Y para que la reducción sea hacia abajo
 					}
 					else if (resizingCorner == 4 || resizingCorner == 5) {  // Esquina inferior izquierda
-						diff = selectionBox.getPosition().x - mousePos.x;
-						newSize.x += diff;
-						newSize.y += diff;
-						newPos.x -= diff;
+					
+						newSize.x += selectionBox.getPosition().x - mousePos.x;
+						newSize.y += selectionBox.getPosition().x - mousePos.x;
+						newPos.x -= selectionBox.getPosition().x - mousePos.x;
 					}
 					else if (resizingCorner == 6 || resizingCorner == 7) {  // Esquina inferior derecha
-						diff = mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
-						newSize.x += diff;
-						newSize.y += diff;
+						newSize.x += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
+						newSize.y += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
 					}
 
 					newSize.x = std::max(minSize, std::min(newSize.x, maxSize));

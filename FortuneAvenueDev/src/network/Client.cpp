@@ -5,9 +5,7 @@
 #include <iostream>
 #include "../core/ResourceGlobal.hpp"
 
-Client::Client() : client(nullptr), peer(nullptr) {
-	clientData = new ClientData();
-	SMessageHandler = new ServerMessageHandler(clientData);
+Client::Client() :  peer(nullptr), client(nullptr), clientData(new ClientData()), SMessageHandler(new ServerMessageHandler(clientData)){
 	clientData->running = false;
 	clientData->isConnected = false;
 	clientData->lastRollResult = 0;

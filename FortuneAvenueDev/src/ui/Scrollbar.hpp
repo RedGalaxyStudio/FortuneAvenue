@@ -21,7 +21,7 @@ public:
     void setPosition(float xNew, float yNew);
 
     
-    void setColors(const sf::Color& trackColor, const sf::Color& thumbColor, const sf::Color& borderColor);
+   // void setColors(const sf::Color& trackColor, const sf::Color& thumbColor, const sf::Color& borderColor);
 
    
     void setOutlineThickness(float thickness);

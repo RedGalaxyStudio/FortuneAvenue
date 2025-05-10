@@ -17,7 +17,7 @@ public:
      static void sendMessage(ENetPeer* Peer, const std::string& message);
      void cargarImagen(const std::string& ruta);
      void sendSafeInvestment();
-     void sendSmg(std::string mensaje);
+     void sendSmg(const std::string mensaje);
      void sendXHouse();
      void sendEventHouse();
      void sendEventTax();

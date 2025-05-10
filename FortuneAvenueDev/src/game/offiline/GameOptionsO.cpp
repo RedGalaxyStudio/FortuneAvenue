@@ -150,14 +150,8 @@ void GameOptions::update() {
 
 		while (window->pollEvent(event)) {
 
-			if (event.type == sf::Event::Closed ||
-				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-				renderTexture.clear();
-				renderTexture.draw(spriteBackgroundG);
-				renderTexture.draw(TOpcion);
-				renderTexture.draw(spriteX);
-				renderTexture.draw(overlay);
-				Menup.MenuSalir(nullptr);
+			if (event.type == sf::Event::Closed) {
+
 			}
 
 

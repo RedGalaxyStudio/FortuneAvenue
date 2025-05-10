@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath> 
-
+#include <random>
 class Particle {
 public:
     sf::CircleShape shape;
@@ -53,8 +53,12 @@ public:
 
             // Calcular la velocidad en la direccion del ongulo
             sf::Vector2f velocity(cos(angle) * speed, sin(angle) * speed);
+            std::random_device rd;                          // Semilla
+            std::mt19937 gen(rd());                         // Generador Mersenne Twister
+            std::uniform_real_distribution<float> dist(0.2f, 4.f);   // Distribución entre 1 y 100
 
-            particles.emplace_back(initialPosition, velocity, 5.0f, 3.0f, color);
+       
+            particles.emplace_back(initialPosition, velocity, 5.0f,dist(gen), color);
         }
     }
 

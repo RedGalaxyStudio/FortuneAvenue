@@ -1,1 +1,9 @@
 Excepci�n atrapada: bad allocation
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: invalid vector subscript

@@ -8,7 +8,7 @@
 class SettingsManager
 {
 public:
-    SettingsManager(sf::RenderWindow& windowRef);
+    explicit SettingsManager(sf::RenderWindow& windowRef);
     ~SettingsManager();
     SettingsManager();
 
@@ -18,10 +18,6 @@ public:
     void handleEvent(sf::Event& event, const sf::RenderWindow& window);
     void draw(sf::RenderWindow& window) const;
     void Printf()const;
-    float getVolume() const;
-
-    void toggleMusic(bool enable);
-    void toggleEffects(bool enable);
     void saveSettings();
 private:
     sf::RenderWindow& window;

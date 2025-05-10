@@ -9,26 +9,20 @@
 class Cinematic {
 public:
    
-    Cinematic(sf::RenderWindow& windowRef);
-
+    explicit Cinematic(sf::RenderWindow& windowRef);
     ~Cinematic();
-
-  
     void Resource();
-
     void Update();
 
 private:
 
     sf::RenderWindow& window;
-
     sf::Texture textures[6];
     sf::Sprite SpriteFondoLogo;
     sf::Sprite spriteLogoStudio;
     sf::Sprite spriteLogoJuego;
     sf::Texture textureLogoStudio;
     sf::Texture textureLogoJuego;
-
 
     float alpha;
     bool fadeIn;

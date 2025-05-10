@@ -225,14 +225,14 @@ public :
 
 	}
 
-	float getWidth() const {
+/*	float getWidth() const {
 		return CDis * 2; // Ancho del cubo
 	}
 
 	// Método para obtener la altura del cubo
 	float getHeight() const {
 		return CDis * 2; // Altura del cubo
-	}
+	}*/
 
 	Vector3D getPosition() const {
 		return center; // Devuelve la posición del centro del cubo

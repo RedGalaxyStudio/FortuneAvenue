@@ -49,38 +49,159 @@ void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::V
 	this->final = fin;
 	this->CsFinal = CsFin;
 	PieceUser = PiecUser;
-	*vuelta = 0;
+	*vuelta = 1;
 }
 void MovePiecesO::iniciarMovimiento(int numeroCasillas, float duracion) {
+
 	casillasRestantes = numeroCasillas;
 
 	if (caminoActual + 1 > (*casillas).size()) {
 
-		finalCamino = true;
-		updateCAmbioCasilla();
-		posicionInicial = sprite->getPosition();
-		posicionFinal = (*casillas)[caminoActual][casillaActual];
-		this->duracionMovimiento = duracion;
-		this->t = 0.0f;
-		this->enMovimiento = true;
-	}
-	else if (caminoActual < casillas->size() && casillaActual < (*casillas)[caminoActual].size()) {
+		if (*vuelta < 2) {
+
+			casillaActual = 0;
+
+			switch (mapaActual) {
+			case 1: // Configuración para el mapa 1
+
+				if (caminoActual + 1 == 7 && casillasRestantes != 0) {
+					*vuelta += 1;
+
+					if (*vuelta > 2) {
+						*vuelta = 2;
+					}
+
+					if (*vuelta == 2) {
+
+
+						posicionFinal = final;
+						casillasRestantes = 1;
+
+
+					}
+					else {
+						(*casillas).resize(1);
+						caminoActual = -1;
+
+
+					}
+
+
+				}
+				else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+
+					finalCamino = true;
+
+					updateCAmbioCasilla();
+				}
+
+			
+				break;
+
+			case 2:
+				if (sf::Vector2f(931.000f, 515.500f) == sprite->getPosition() && casillasRestantes != 0) {
+					*vuelta += 1;
+
+					if (*vuelta > 2) {
+						*vuelta = 2;
+					}
+
+					if (*vuelta == 2) {
+
+						posicionFinal = final;
+						casillasRestantes = 1;
+
+					}
+					else {
+						(*casillas).resize(1);
+						caminoActual = -1;
+					}
+
+				}
+				else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+
+					finalCamino = true;
+
+					updateCAmbioCasilla();
+				}
+
+				break;
+			case 3:
+				if (sf::Vector2f(828.167f, 157.500f) == sprite->getPosition() && casillasRestantes != 0) {
+					*vuelta += 1;
+
+					if (*vuelta > 2) {
+						*vuelta = 2;
+					}
+
+					if (*vuelta == 2) {
+
+						posicionFinal = final;
+						casillasRestantes = 1;
+
+
+					}
+					else {
+
+						(*casillas).clear();
+						casillas->clear();
+						std::vector<sf::Vector2f> camino1 = {
+						sf::Vector2f(853.500f, 212.500f),
+						sf::Vector2f(857.500f, 273.500f),
+						sf::Vector2f(858.500f, 332.500f)
+						};
+
+						(*casillas).push_back(camino1);
+
+						caminoActual = -1;
+
+
+					}
+
+
+				}
+				else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
+
+					finalCamino = true;
+
+					updateCAmbioCasilla();
+
+				}
+
+	
+				break;
+			}
+		}
+
+
+
 
 		posicionInicial = sprite->getPosition();
-		posicionFinal = (*casillas)[caminoActual][casillaActual];
+
+		if (caminoActual < 0) {
+
+			caminoActual = 0;
+
+		}
+		std::cout << "\n\n"<<caminoActual<<"::" << casillaActual;
+		posicionFinal = (*casillas).at(caminoActual).at(casillaActual);
 		this->duracionMovimiento = duracion;
 		this->t = 0.0f;
 		this->enMovimiento = true;
 	}
+	else if (caminoActual < casillas->size() && casillaActual < (*casillas).at(caminoActual).size()) {
+
+		posicionInicial = sprite->getPosition();
+		posicionFinal = (*casillas).at(caminoActual).at(casillaActual);
+		this->duracionMovimiento = duracion;
+		this->t = 0.0f;
+		this->enMovimiento = true;
+	}
+
 }
-int MovePiecesO::getCaminoActual() {
-	return caminoActual;
-}
-int MovePiecesO::getcasillaActual() {
-	return casillaActual;
-}
+
 void MovePiecesO::actualizarMovimiento(float deltaTime) {
-
+	std::cout << "\nhola 1";
 	if (enMovimiento && !finalCamino) {
 		t += deltaTime / duracionMovimiento;
 		while (t > 1.0f && casillasRestantes > 0 && !*CsFinal) {
@@ -94,7 +215,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 
 
 			if (*vuelta < 2) {
-				if (casillaActual >= (*casillas)[caminoActual].size()) {
+				if (casillaActual >= (*casillas).at(caminoActual).size()) {
 					casillaActual = 0;
 
 					switch (mapaActual) {
@@ -176,10 +297,10 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 								posicionFinal = final;
 								casillasRestantes = 1;
 
-						
+
 							}
 							else {
-					
+
 								(*casillas).clear();
 								casillas->clear();
 								std::vector<sf::Vector2f> camino1 = {
@@ -191,18 +312,18 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 								(*casillas).push_back(camino1);
 
 								caminoActual = -1;
-							
+
 
 							}
 
 
 						}
 						else if (caminoActual + 1 >= (*casillas).size() && casillasRestantes != 0) {
-						
+
 							finalCamino = true;
 
 							updateCAmbioCasilla();
-				
+
 						}
 
 						caminoActual++;
@@ -215,11 +336,11 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 			if (casillasRestantes != 0) {
 
 				posicionInicial = sprite->getPosition();
-			
+
 				if (*vuelta != 2) {
 
-					posicionFinal = (*casillas)[caminoActual][casillaActual];
-					
+					posicionFinal = (*casillas).at(caminoActual).at(casillaActual);
+
 				}
 			}
 		}
@@ -240,7 +361,7 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				GM.juegoTerminadoo = true;
 				for (int i = 0; i < ActiveUsers.size(); i++)
 				{
-					if (!playerGameInfo[i].final) {
+					if (!playerGameInfo.at(i).final) {
 						GM.juegoTerminadoo = false;
 					}
 				}
@@ -255,19 +376,20 @@ void MovePiecesO::actualizarMovimiento(float deltaTime) {
 				GM.juegoTerminadoo = true;
 				for (int i = 0; i < ActiveUsers.size(); i++)
 				{
-					if (!playerGameInfo[i].final) {
+					if (!playerGameInfo.at(i).final) {
 						GM.juegoTerminadoo = false;
 					}
 
 				}
 			}
-			
+
 		}
 		if (casillasRestantes != 0) {
 			animacionRebote(posicionFinal, deltaTime);
 		}
-		
+
 	}
+	std::cout << "\nhola 1O";
 }
 void MovePiecesO::updateCAmbioCasilla() {
 
@@ -308,7 +430,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 	case 2:
 		for (int i = 0; i < posSelecCAm.size(); i++)
 		{
-			if (posSelecCAm[i] == sprite->getPosition()) {
+			if (posSelecCAm.at(i) == sprite->getPosition()) {
 				tan = i + 1;
 			}
 		}
@@ -359,7 +481,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 
 		for (int i = 0; i < posSelecCAm.size(); i++)
 		{
-			if (posSelecCAm[i] == sprite->getPosition()) {
+			if (posSelecCAm.at(i) == sprite->getPosition()) {
 				tan = i + 1;
 			}
 		}
@@ -410,6 +532,7 @@ void MovePiecesO::updateCAmbioCasilla() {
 		GM.bot.resetTCAM();
 	}
 
+
 	while (finalCamino == true) {
 
 		sf::Event event;
@@ -425,10 +548,10 @@ void MovePiecesO::updateCAmbioCasilla() {
 				renderTexture.draw(MapSprite);
 				for (int i = 0; i < ActiveUsers.size(); i++)
 				{
-					renderTexture.draw(playerGameOff[i].NamePlayer);
-					renderTexture.draw(playerGameOff[i].boxPlayer);
-					renderTexture.draw(playerGameOff[i].MarcoPlayer);
-					renderTexture.draw(playerGameOff[i].AvatarPlayer);
+					renderTexture.draw(playerGameOff.at(i).NamePlayer);
+					renderTexture.draw(playerGameOff.at(i).boxPlayer);
+					renderTexture.draw(playerGameOff.at(i).MarcoPlayer);
+					renderTexture.draw(playerGameOff.at(i).AvatarPlayer);
 				}
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
@@ -857,8 +980,8 @@ void MovePiecesO::updateCAmbioCasilla() {
 		case 3: // Configuración para el mapa 3
 			if (tan == 3) {
 				window->draw(DownArrow);
-\
-				window->draw(SpriteUpArrow);
+				\
+					window->draw(SpriteUpArrow);
 
 			}
 			else if (tan == 2 || tan == 4) {
@@ -1571,7 +1694,7 @@ void MovePiecesO::animacionRebote(sf::Vector2f posicionFinal, float deltaTime) {
 		sprite->move(0, 4);
 	}
 }
-void MovePiecesO::animacionRotacion(float deltaTime) {
+/*void MovePiecesO::animacionRotacion(float deltaTime) {
 	timer += deltaTime;
 
 	const float rotacionDerecha = 20.0f;
@@ -1608,4 +1731,4 @@ void MovePiecesO::animacionEscala(float deltaTime) {
 
 	float factorEscala = escalaMinima + (escalaMaxima - escalaMinima) * std::sin(velocidadEscala * deltaTime);
 	sprite->setScale(factorEscala, factorEscala);
-}
+}*/

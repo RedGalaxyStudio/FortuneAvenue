@@ -45,12 +45,12 @@ void HouseBuyO::resource() {
 
 	if (!file.is_open()) {
 		char error_message[256];
-		
-		#ifdef _WIN32
-    		strerror_s(error_message, sizeof(error_message), errno);
-		#else
-    		strerror_r(errno, error_message, sizeof(error_message));
-		#endif
+
+#ifdef _WIN32
+		strerror_s(error_message, sizeof(error_message), errno);
+#else
+		strerror_r(errno, error_message, sizeof(error_message));
+#endif
 		std::cerr << "Error: No se pudo abrir el archivo. Motivo: " << error_message << std::endl;
 		return;
 	}
@@ -61,7 +61,7 @@ void HouseBuyO::resource() {
 	std::vector<std::pair<int, nlohmann::json>> houseList;
 
 	for (auto& [key, value] : jsonData.items()) {
-		int houseNumber = std::stoi(key.substr(4)); 
+		int houseNumber = std::stoi(key.substr(4));
 		houseList.push_back({ houseNumber, value });
 	}
 	std::sort(houseList.begin(), houseList.end(), [](const auto& a, const auto& b) {
@@ -121,8 +121,8 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 	settings.stencilBits = 8;
 
 	bool cierre = false;
-	const sf::Vector3f Wquad = { 1., 1., -1. }; 
-	const sf::Vector3f Oquad = { 199., 350., -187.5 }; 
+	const sf::Vector3f Wquad = { 1., 1., -1. };
+	const sf::Vector3f Oquad = { 199., 350., -187.5 };
 	ITER(cellQua, i) cellQua.at(i).Rotate(Oquad, Wquad, 235.);
 
 	while (window->isOpen() && !cierre) {
@@ -162,6 +162,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 						playerGameInfo[IndexTurn1].impuesto += houses[IndexCAsa].impuesto;
 						playerGameInfo[IndexTurn1].money -= houses[IndexCAsa].costo;
 						playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+						playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
 						CasasCompradas CasasaCOMPRAR;
 						CasasaCOMPRAR.CsCmpdrsSprite.setTexture(TextureHouse[playerGameInfo[ActiveUsers[0]].casasPorJugador[IndexCAsa]]);
 						VCcompradas.push_back(CasasaCOMPRAR);
@@ -177,7 +178,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					if (Xc.getGlobalBounds().contains(mousePosFloat)) {
 						playClickSound();
 						cierre = true;
-		
+
 					}
 				}
 			}
@@ -199,6 +200,7 @@ void HouseBuyO::update(sf::Vector2f posicionactuInicial) {
 					playerGameInfo[IndexTurn1].salario += houses[playerGameInfo[IndexTurn1].casasPorJugador[IndexCAsa]].salario;
 					playerGameInfo[IndexTurn1].money -= houses[IndexCAsa].costo;
 					playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+					playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
 					playerGameOff[IndexTurn1].CasasN.setString(std::to_string(playerGameInfo[IndexTurn1].numCasas));
 					cierre = true;
 
@@ -280,7 +282,7 @@ void HouseBuyO::ViewHouseBuysO() {
 		}
 	}
 }
-void HouseBuyO::ViewHouseBsaO(){
+void HouseBuyO::ViewHouseBsaO() {
 
 	CartaActiva = false;
 	window->clear();
@@ -296,46 +298,46 @@ void HouseBuyO::ViewHouseBsaO(){
 	window->draw(spriteX);
 }
 
-void HouseBuyO::evenViewHouseCVO(sf::Event event) {
-
-	while (window->pollEvent(event)) {
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
-
-		if (event.type == sf::Event::Closed ||
-			(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-			renderTexture.clear();
-			renderTexture.draw(spriteBackgroundG);
-
-			renderTexture.draw(spriteX);
-			renderTexture.draw(overlay);
-			Menup.MenuSalir(nullptr);
-		}
+void HouseBuyO::evenViewHouseCVO(const sf::Event& event) {
 
 
-		for (int i = 0; i < VCcompradas.size(); i++) {
-			VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
-		}
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+	sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
-		cartaActivaIndex = -1;
-		for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
-			if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
-				VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
-				cartaActivaIndex = i;
-				break;
-			}
+	if (event.type == sf::Event::Closed ||
+		(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+		renderTexture.clear();
+		renderTexture.draw(spriteBackgroundG);
 
-		}
-		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-			if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
-
-				playClickSound();
-				seleccionlista = true;
-
-			}
-
-
-		}
+		renderTexture.draw(spriteX);
+		renderTexture.draw(overlay);
+		Menup.MenuSalir(nullptr);
 	}
+	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+		if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
+
+			playClickSound();
+			seleccionlista = true;
+
+		}
+
+
+	}
+
+	for (int i = 0; i < VCcompradas.size(); i++) {
+		VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].ocultaCasa);
+	}
+
+	cartaActivaIndex = -1;
+	for (int i = static_cast<int>(VCcompradas.size()) - 1; i >= 0; i--) {
+		if (VCcompradas[i].CsCmpdrsSprite.getGlobalBounds().contains(mousePosFloat)) {
+			VCcompradas[i].CsCmpdrsSprite.setPosition(VCcompradas[i].mostrarCasa);
+			cartaActivaIndex = i;
+			break;
+		}
+
+	}
+
+
 
 }

@@ -35,19 +35,16 @@ extern sf::Texture textureXOn;
 extern sf::Texture textureXOff;
 extern sf::Sprite spriteX;
 extern ButtonG* botonX;
-
-
 extern sf::CircleShape selectedAvatarCopy; 
 extern sf::Texture textselectedAvatarCopy;
 extern sf::Texture textureBox;
 extern sf::Sprite box;
 extern sf::Font fontUser;
 extern sf::Font fontEnd;
-extern  std::wstring Token;
-extern  std::string email;
-extern  std::string id;
-extern  std::string pictureUrl;
-
+extern std::wstring Token;
+extern std::string email;
+extern std::string id;
+extern std::string pictureUrl;
 extern sf::Texture TextureBotonSiOn;
 extern sf::Texture TextureBotonSiOff;
 extern sf::Sprite SpriteBotonSi;
@@ -56,8 +53,6 @@ extern std::string TextureAvatarPath;
 extern sf::Texture TextureBotonNoOn;
 extern sf::Texture TextureBotonNoOff;
 extern sf::Sprite SpriteBotonNo;
-
-
 void printMemoryUsage();
 void playClickSound();
 

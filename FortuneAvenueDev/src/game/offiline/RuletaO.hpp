@@ -75,7 +75,6 @@ private:
     void setupLights();
     void drawLights(sf::RenderWindow& window, float deltaTime);
     void createPointer();
-    void animatePointer();
     void setupBase();
 };
 

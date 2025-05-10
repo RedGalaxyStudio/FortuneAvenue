@@ -13,10 +13,6 @@ LoadingScreen::~LoadingScreen() {
 	}
 }
 
-void LoadingScreen::loadBackground() {
-
-}
-
 void LoadingScreen::LoadResources() {
 
 	if (!textureFondo.loadFromFile("assets/image/Fondos/fondomenu.png")) return;

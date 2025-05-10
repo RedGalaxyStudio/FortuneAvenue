@@ -4,12 +4,14 @@
 #include "../settings/SettingsManager.hpp"
 #include "../core/ResourceGlobal.hpp"
 #include "../ui/ButtonG.hpp"
+#include "../ui/menuswicht.hpp"
 #include "../game/online/ResourceGame.hpp"
 #include "../ui/ResourceGeneral.hpp"
 #include "GameModeSelector.hpp"
 #include "IniciaUser.hpp"
 #include "../ui/Sound.hpp"
-menuP::menuP() : window(nullptr), SesionValida(true) ,effectSlider(nullptr),musicSlider(nullptr), lastHoveredButton(nullptr) {
+
+menuP::menuP() : window(nullptr), SesionValida(true) ,effectSlider(nullptr),musicSlider(nullptr), SelectingIdiome(nullptr), lastHoveredButton(nullptr) {
 }
 menuP::~menuP() {
 	if (musicSlider) {
@@ -165,7 +167,22 @@ void menuP::Resource() {
 	musicSlider = new SettingsManager(200, 300, 200, 10, MusicPointers, *window);
 
 	effectSlider = new SettingsManager(200, 400, 200, 10, effectPointers, *window);
+
 	
+
+	SelectingIdiome = new menuSelecting(*window, { "Espanol","Ingles","Portugues","puta" });
+	
+
+	SelectingIdiome->setFont(fontUser);	
+
+	SelectingIdiome->setColors(sf::Color::White);
+
+	SelectingIdiome->setSize(23.f);
+
+
+	SelectingIdiome->setPosition(sf::Vector2f(900.f,500.f));	
+
+
 	sf::Image cursorNormal;
 	if (!cursorNormal.loadFromFile("assets/image/Cursor/normal-select-0.png")) return;
 
@@ -223,16 +240,22 @@ void menuP::MenuPrincipal() {
 
 	SpriteBotonOpciones.setPosition(640, 560);
 	ValidarUser();
+	////////////////////////////////////////
+	sf::Font font;
+	if (!font.loadFromFile("assets/fonts/OstrichSaUUUUns-Bold.ttf")) return ;
 
+	GradientText gt("SALIR", font, 49);
+	gt.setBorderThickness(-1.f);
+
+	gt.setPosition(383, 560);
+
+	///////////////////////////////////////
 	while (window->isOpen()) {
 
+		eventoMenuP(gt);
 
-
-		eventoMenuP();
-
-
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+		mousePosition = sf::Mouse::getPosition(*window);
+		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 		window->setMouseCursorVisible(true);
 
 
@@ -245,6 +268,9 @@ void menuP::MenuPrincipal() {
 
 
 
+
+	//	gt.update(*window);
+	
 		window->clear();
 		window->draw(SpriteFondoMenu);
 		window->draw(spriteLogoFortuneAvenue);
@@ -253,6 +279,7 @@ void menuP::MenuPrincipal() {
 		window->draw(selectedAvatarCopy);
 		window->draw(recua);
 		window->draw(SpriteBotonJugar);
+		window->draw(gt);
 		window->draw(SpriteBotonOpciones);
 		window->draw(SpriteBotonSalir);
 		window->draw(spriteAcercaDe);
@@ -272,7 +299,7 @@ void menuP::ValidarUser() {
 	}
 
 }
-void menuP::eventoMenuP() {
+void menuP::eventoMenuP(GradientText &gt) {
 
 	sf::Event event;
 
@@ -298,11 +325,12 @@ void menuP::eventoMenuP() {
 			MenuSalir(nullptr);
 		}
 
-
+		if (event.type == sf::Event::KeyPressed) {
+			gt.ajustarColores(event.key);
+		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-
-			sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+			mousePosition = sf::Mouse::getPosition(*window);
+			mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 
 			if (SpriteBotonJugar.getGlobalBounds().contains(mousePosFloat)) {
@@ -396,38 +424,23 @@ void menuP::editPerfil() {
 
 }
 void menuP::MenuOpcion(bool fon) {
-
+	menuswicht pantacon(*window, sf::Vector2f(400, 500));
 	SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
 	SpriteBotonOpciones.setPosition(640, 100);
-
 	SpriteBotonSi.setTexture(TextureBotonSiOn);
 	SpriteBotonSi.setPosition(800, 350);
-
-
 	SpriteBotonNo.setTexture(TextureBotonNoOff);
 	SpriteBotonNo.setPosition(1000, 350);
-
-
 	if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
 		return;
 	}
-
-
 	sf::Text TextpantallaCompleta;
-
-
 	TextpantallaCompleta.setString("Pantalla Completa");
 	TextpantallaCompleta.setFont(Fuente);
 	TextpantallaCompleta.setCharacterSize(30);
 	TextpantallaCompleta.setFillColor(sf::Color::White);
 	TextpantallaCompleta.setPosition(795, 270);
-
-	bool cierre = false;
 	window->setMouseCursorVisible(true);
-
-
-
-
 	ButtonG BotonSi(SpriteBotonSi, TextureBotonSiOff, TextureBotonSiOn);
 	ButtonG BotonNo(SpriteBotonNo, TextureBotonNoOff, TextureBotonNoOn);
 	ButtonG BotonInstrucciones(spriteInstrucciones, textureInstruccionesOff, textureInstruccionesOn);
@@ -459,14 +472,21 @@ void menuP::MenuOpcion(bool fon) {
 
 			musicSlider->handleEvent(event, *window);
 			effectSlider->handleEvent(event, *window);
-
+			SelectingIdiome->event(event);
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+				mousePosition = sf::Mouse::getPosition(*window);
+				mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 				if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
-					window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa", sf::Style::Fullscreen);
+					window->create(sf::VideoMode(1280, 720), "Fortune Avenue", sf::Style::Fullscreen);
+					window->setFramerateLimit(60);
+
+
+					sf::Image icono;
+					if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return ;
+					window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
+
 					playClickSound();
 
 					SpriteBotonNo.setTexture(TextureBotonNoOff);
@@ -482,7 +502,14 @@ void menuP::MenuOpcion(bool fon) {
 				}
 
 				if (SpriteBotonNo.getGlobalBounds().contains(mousePosFloat)) {
-					window->create(sf::VideoMode(1280, 720), "Juego en Pantalla Completa");
+					window->create(sf::VideoMode(1280, 720), "Fortune Avenue");
+					window->setFramerateLimit(60);
+
+
+					sf::Image icono;
+					if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return ;
+				
+					window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
 
 					playClickSound();
 
@@ -529,6 +556,8 @@ void menuP::MenuOpcion(bool fon) {
 		window->draw(SpriteBotonNo);
 
 		window->draw(TextpantallaCompleta);
+		window->draw(*SelectingIdiome);
+		window->draw(pantacon);
 
 		window->display();
 
@@ -568,8 +597,8 @@ void menuP::MenuSalir(Client* client) {
 			}
 			
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+				mousePosition = sf::Mouse::getPosition(*window);
+				mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 				if (SpriteBotonSi.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -593,8 +622,8 @@ void menuP::MenuSalir(Client* client) {
 		}
 
 		currentCursor = &normalCursor;
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-		sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+		mousePosition = sf::Mouse::getPosition(*window);
+		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 		BotonSi.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 		BotonNo.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 
@@ -727,8 +756,8 @@ void menuP::instruccionesGame() {
 
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+				mousePosition = sf::Mouse::getPosition(*window);
+				mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
@@ -805,7 +834,7 @@ void menuP::MenuAcercaDe() {
 	overlay.setFillColor(sf::Color(0, 0, 0, 100));
 
 	sf::Font Fuente;
-	if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
+	if (!Fuente.loadFromFile("assets/fonts/OstrichSaUUUUns-Bold.ttf")) {
 		return;
 	}
 
@@ -868,8 +897,8 @@ void menuP::MenuAcercaDe() {
 
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-				sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+				mousePosition = sf::Mouse::getPosition(*window);
+				mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 

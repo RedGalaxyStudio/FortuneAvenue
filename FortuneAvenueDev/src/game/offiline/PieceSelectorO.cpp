@@ -17,6 +17,7 @@ PieceSelectOff::~PieceSelectOff() {
 	pieceShape.clear();
 	window = nullptr;
 	newSelection = nullptr;
+	ActiveUsers.clear();
 }
 void PieceSelectOff::Resource() {
 
@@ -28,7 +29,7 @@ void PieceSelectOff::Resource() {
 	if (!Textucicle.loadFromFile("assets/image/Game/pieces/1ntitled.png")) return;
 	if (!TextureMoney1.loadFromFile("assets/image/Game/cash.png")) return;
 	if (!TextureBuilding.loadFromFile("assets/image/Game/casa.png")) return;
-
+	if (!Preguntasalir.loadFromFile("assets/image/Button/ExitSala.png")) return;
 	turn_dice = false;
 	firstTurn = false;
 	turn_roulette =false;
@@ -92,7 +93,7 @@ void PieceSelectOff::updateSelection() {
 	PlayerInformation playerInfoNew;
 	PlayerGameOff playerGameNew;
 	playerInfoNew.playerName = namePlayer;
-	playerInfoNew.PiecUserme = true;
+	playerInfoNew.PiecUserme = false;
 	playerGameInfo.push_back(playerInfoNew);
 	playerGameNew.CashSprite.setTexture(TextureMoney1);
 	playerGameNew.Home.setTexture(TextureBuilding);
@@ -171,18 +172,28 @@ void PieceSelectOff::updateSelection() {
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+
+
+				playClickSound();
+				renderTexture.clear();
 				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < ActiveUsers.size(); i++) {
-				
-					renderTexture.draw(playerGameOff[ActiveUsers[i]].NamePlayer);
-					renderTexture.draw(playerGameOff[ActiveUsers[i]].boxPlayer);
-					renderTexture.draw(playerGameOff[ActiveUsers[i]].PieceSelect);
-					renderTexture.draw(playerGameOff[ActiveUsers[i]].Check);
+
+					renderTexture.draw(playerGameOff[0].NamePlayer);
+					renderTexture.draw(playerGameOff[0].boxPlayer);
+					renderTexture.draw(playerGameOff[0].PieceSelect);
+					renderTexture.draw(playerGameOff[0].Check);
 				}
-				
+
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir(nullptr);
+				renderTexture.display();
+				cierre = salirXoff(Preguntasalir, window);
+
+				if (cierre) {
+					resetGameResourcesO();
+					return;
+				}
 			}
 
 			scrollbarPiece.handleEvent(event, *window);
@@ -255,6 +266,7 @@ void PieceSelectOff::updateSelection() {
 							piecesOff[i].setColor(sf::Color(248, 134, 255));  // Resaltar la nueva pieza
 							playerGameInfo[0].indexPiece = i;
 							piecesOff[i].setColor(sf::Color(248, 134, 255));
+							playerGameInfo[0].PiecUserme = true;
 							playClickSound();
 							previousSelection = &piecesOff[i]; 
 						}
@@ -264,25 +276,47 @@ void PieceSelectOff::updateSelection() {
 				}
 				if (playerGameOff[ActiveUsers[0]].Check.getGlobalBounds().contains(mousePosFloat)) {
 					playClickSound();
-					const sf::Texture* texturePtr = playerGameOff[ActiveUsers[0]].PieceSelect.getTexture();
-			
-					if (texturePtr != nullptr&& ActiveUsers.size()>0) {
-						sf::Texture textureSelec = *texturePtr; 
+					if (playerGameInfo[0].PiecUserme) {
+						std::cout << "T281ll1111a;\n";
+						const sf::Texture* texturePtr = playerGameOff[ActiveUsers[0]].PieceSelect.getTexture();
 
-						playerGameInfo[ActiveUsers[0]].isSelectingPiece = true;
-				
+						if (texturePtr != nullptr && ActiveUsers.size() > 0) {
+							sf::Texture textureSelec = *texturePtr;
+
+							playerGameInfo[ActiveUsers[0]].isSelectingPiece = true;
+
+						}
+						std::cout << "T28qq\n";
+						GM.GenerarBot(nUserBot);
+						std::cout << "T2jjjj8\n";
+						GameOffline gameOff(*window, Nmap);
+						std::cout << "T281ll;\n";
+						gameOff.update();
 					}
-					GM.GenerarBot(nUserBot);
-					GameOffline gameOff(*window, Nmap);
-				
-					gameOff.update();
-				
 				}
 				if (spriteX.getGlobalBounds().contains(mousePosFloat)) {
 			
 					playClickSound();
-			
-					return;
+					renderTexture.clear();
+					renderTexture.draw(spriteBackgroundG);
+					for (int i = 0; i < ActiveUsers.size(); i++) {
+
+						renderTexture.draw(playerGameOff[0].NamePlayer);
+						renderTexture.draw(playerGameOff[0].boxPlayer);
+						renderTexture.draw(playerGameOff[0].PieceSelect);
+						renderTexture.draw(playerGameOff[0].Check);
+					}
+
+					renderTexture.draw(spriteX);
+					renderTexture.draw(overlay);
+					renderTexture.display();
+					cierre = salirXoff(Preguntasalir, window);
+
+					if (cierre) {
+						resetGameResourcesO();
+						return;
+					}
+
 				}
 
 			}

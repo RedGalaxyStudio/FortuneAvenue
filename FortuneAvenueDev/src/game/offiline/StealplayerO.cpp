@@ -35,6 +35,7 @@ void StealplayerO::BotRobar() {
     int aux = static_cast<int>(playerGameInfo.size()) - 1;
     playerGameInfo[IndexTurn1].money += 100;
     playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+    playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -47,6 +48,7 @@ void StealplayerO::BotRobar() {
     
     playerGameInfo[in].money -= 100;
     playerGameOff[in].Money.setString(std::to_string(playerGameInfo[in].money));
+    playerGameOff[in].Money.setOrigin(playerGameOff[in].Money.getLocalBounds().width, 0.f);
 }
 
 void StealplayerO::update() {
@@ -146,8 +148,10 @@ void StealplayerO::update() {
                     playClickSound();
                     playerGameInfo[IndexTurn1].money += 100;
                     playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+                    playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
                     playerGameInfo[UsuariosEleccion[indexMouseOver]].money -= 100;
                     playerGameOff[UsuariosEleccion[indexMouseOver]].Money.setString(std::to_string(playerGameInfo[UsuariosEleccion[indexMouseOver]].money));
+                    playerGameOff[UsuariosEleccion[indexMouseOver]].Money.setOrigin(playerGameOff[UsuariosEleccion[indexMouseOver]].Money.getLocalBounds().width, 0.f);
                     seleccionlista = true;                 
 
                 }

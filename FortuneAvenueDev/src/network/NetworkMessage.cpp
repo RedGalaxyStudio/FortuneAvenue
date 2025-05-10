@@ -61,7 +61,7 @@ void NetworkMessage::sendSafeInvestment() {
 	std::string message = "INVERCIONSEGURA";
 	sendMessage(peer, message);
 }
-void NetworkMessage::sendSmg(std::string mensaje) {
+void NetworkMessage::sendSmg(const std::string mensaje) {
 	std::string message = "SMG" + mensaje;
 	sendMessage(peer, message);
 }

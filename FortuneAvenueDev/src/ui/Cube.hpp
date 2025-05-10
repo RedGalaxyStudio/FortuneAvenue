@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-class Cube {
+class UICube {
 public:
-    Cube(float size, float dotSize, float cornerRadius, sf::Vector2f position);
+    UICube(float size, float dotSize, float cornerRadius, sf::Vector2f position);
 
     void roll();  // Lanza el dado
     void update(float elapsedTime);  // Actualiza el estado del dado durante el lanzamiento

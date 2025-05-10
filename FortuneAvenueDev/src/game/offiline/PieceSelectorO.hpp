@@ -19,7 +19,7 @@ private:
     sf::Sprite CircleSpri;
     sf::Texture Textufondopiece;
     sf::Texture Textucicle;
-    
+    sf::Texture Preguntasalir;
     sf::Text CODE;
     float startX;
     float startY;

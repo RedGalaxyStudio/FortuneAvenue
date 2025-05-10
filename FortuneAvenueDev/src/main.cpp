@@ -17,12 +17,13 @@ void terminator() {
 	std::abort();  
 }
 
-int main(){
 
+
+int runGame() {
 	std::set_terminate(terminator);
 
 	try {
-	
+
 		sf::err().rdbuf(std::cout.rdbuf());
 
 
@@ -41,9 +42,9 @@ int main(){
 			std::cerr << "No se pudo activar el contexto OpenGL.\n";
 			return -1;
 		}
-		Cinematic cinematic(*window);
-		cinematic.Resource();
-		cinematic.Update();
+		//Cinematic cinematic(*window);
+		//cinematic.Resource();
+		//cinematic.Update();
 
 		Menup.setWindow(*window);
 		Menup.Resource();
@@ -62,4 +63,16 @@ int main(){
 		log << "Excepcion desconocida atrapada." << std::endl;
 	}
 	return EXIT_SUCCESS;
+	
 }
+
+//#ifdef _WIN32
+//#include <windows.h>
+//int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+//	return runGame();
+//}
+//#else
+int main() {
+	return runGame();
+}
+//#endif

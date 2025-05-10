@@ -156,6 +156,8 @@ void PieceSelector::updateSelection() {
 
 			if (event.type == sf::Event::Closed ||
 				(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+				playClickSound();
+				renderTexture.clear();
 				renderTexture.draw(spriteBackgroundG);
 				for (int i = 0; i < UsuariosActivos.size(); i++) {
 
@@ -167,7 +169,13 @@ void PieceSelector::updateSelection() {
 
 				renderTexture.draw(spriteX);
 				renderTexture.draw(overlay);
-				Menup.MenuSalir(client);
+				renderTexture.display();
+				cierre = salirX(Preguntasalir, window, client);
+
+				if (cierre) {
+					resetGameResources();
+					return;
+				}
 			}
 
 
@@ -448,14 +456,3 @@ void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
 }
 
 std::atomic<bool> chatActivo(true);
-
-void chat() {
-	std::string mensaje;
-	while (chatActivo) {
-		std::getline(std::cin, mensaje);
-		if (mensaje == "/salir") {
-			chatActivo = false;
-			break;
-		}
-	}
-}

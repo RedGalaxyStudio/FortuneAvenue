@@ -21,8 +21,6 @@ extern int customIndex;
 extern sf::Texture TextureBuilding; //TextureHome
 extern sf::Texture TextureFrame; //TextureMarco
 extern int NumberPlayers; // numplayers
-extern sf::SoundBuffer DiceSoundBuffer; //DiceBuffer
-extern sf::Sound DicesSound; //DiceSound
 extern sf::Font &fontUserProfile; //&fontUserPerfil
 extern sf::Texture &textureBoxPerfilOff; 
 extern sf::Sprite MapSprite; //spriteMapa
@@ -36,8 +34,6 @@ extern bool userRulette; //userRuleta
 extern bool userTax; //userImpuesto
 extern bool userHouse; //userCasa
 extern std::vector<sf::Texture> pieceShape; //piecesTextures
-extern sf::SoundBuffer turnBuffer; //girosBuffer
-extern sf::Sound turnSound; //girosSound
 extern int countsalary; //conteosuel
 extern bool zero; //nular
 extern std::string Code1; //Code
@@ -115,7 +111,7 @@ struct PlayerGameOff {
 	sf::Sprite boxPlayer;
 	sf::Sprite PieceSelect;
 	sf::Text Money;
-	bool Activo;
+	bool Activo=false;
 	sf::Vector2f origen;
 	sf::Texture TextureCash;
 	sf::Sprite CashSprite;
@@ -138,8 +134,7 @@ extern std::vector<PlayerInformation> playerGameInfo; //playersInfo
 extern std::vector<PlayerGameOff> playerGameOff; //playersGame
 
 void loadResourceGameO();
-
-
-
+bool salirXoff(sf::Texture Pregunta, sf::RenderWindow* window);
+void resetGameResourcesO();
 #endif 
 

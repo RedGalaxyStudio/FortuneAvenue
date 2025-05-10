@@ -2,7 +2,7 @@
 #include "ResourceGameO.hpp"
 #include <random>
 #include <cstdlib> 
-
+#include "../../ui/Sound.hpp"
 
 RuletaO::RuletaO(float width, float height, float centerX, float centerY)
 	: width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
@@ -31,7 +31,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 	if (firstTurn) {
 		if ( giroActivo && turno) {
 			isSpinning = !isSpinning;
-			turnSound.play();
+			girosSound.play();
 			giro = true;
 			resultado = true;
 			isSpinning = true;
@@ -58,7 +58,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 	if (!firstTurn) {
 		if (giroActivo && turno) {
 			isSpinning = !isSpinning;
-			turnSound.play();
+			girosSound.play();
 			giro = true;
 			resultado = true;
 			isSpinning = true;
@@ -191,7 +191,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 				for (size_t i = 0; i < ActiveUsers.size(); i++) {
 
 					playerGameOff[i].Money.setString(std::to_string(playerGameInfo[i].money));
-
+					playerGameOff[i].Money.setOrigin(playerGameOff[i].Money.getLocalBounds().width, 0.f);
 					
 				}
 		
@@ -202,6 +202,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 
 				playerGameInfo[IndexTurn1].money += 150;
 				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
+				playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
 				break;
 
 			case 5://paga impuestos
@@ -214,7 +215,7 @@ void RuletaO::draw(sf::RenderWindow& window, float deltaTime, bool &giroActivo) 
 				playerGameInfo[IndexTurn1].inversionActiva = true;
 				playerGameInfo[IndexTurn1].turnosInversion = 2;
 				playerGameOff[IndexTurn1].Money.setString(std::to_string(playerGameInfo[IndexTurn1].money));
-
+				playerGameOff[IndexTurn1].Money.setOrigin(playerGameOff[IndexTurn1].Money.getLocalBounds().width, 0.f);
 				break;
 
 			default:
@@ -444,13 +445,3 @@ void RuletaO::createPointer() {
 
 }
 
-void RuletaO::animatePointer() {
-	static float bounce = 0.0f;
-	if (!isSpinning) {
-		bounce += 0.1f;
-		pointer.setPosition(centerX, centerY - radius + std::sin(bounce) * 5.0f);
-	}
-	else {
-		pointer.setPosition(centerX, centerY - radius);
-	}
-}

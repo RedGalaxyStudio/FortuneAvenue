@@ -57,7 +57,6 @@ void Stealplayer::update() {
 
         for (int i = 0; i < totalPerfiles; i++) {
             float xPos = startX + i * (perfilWidth + separacion);
-            float yPos = startY;
 
             PosIsMouseOver[i] = sf::Vector2f(xPos, startY +270);
        

@@ -42,8 +42,6 @@ private:
 
 	std::atomic<bool> loadedTextures;
 	std::thread loadedTexturesThread;
-
-	void loadBackground();
 	void updateDice(sf::Time deltaTiempo);
 };
 

@@ -57,7 +57,7 @@ private:
 	std::vector<std::vector<std::vector<sf::Vector2f>>> casillas;
 	std::vector<sf::Vector2f> origenS;
 
-
+	sf::CircleShape R;
 	std::vector<sf::Vector2f> casillasRuleta;
 
 	std::vector<sf::CircleShape> puntos;

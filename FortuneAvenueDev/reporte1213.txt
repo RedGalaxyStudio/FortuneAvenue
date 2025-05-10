@@ -1,0 +1,2079 @@
+src\network\NetworkMessage.hpp:20:37: performance: Function parameter 'mensaje' should be passed by const reference. [passedByValue]
+     void sendSmg(const std::string mensaje);
+                                    ^
+src\game\offiline\Bot.cpp:94:6: warning: Member variable 'Bot::waitTime' is not initialized in the constructor. [uninitMemberVar]
+Bot::Bot() {}
+     ^
+src\game\offiline\Bot.hpp:16:10: style: inconclusive: Technically the member function 'Bot::roll' can be const. [functionConst]
+    bool roll();
+         ^
+src\game\offiline\Bot.cpp:95:11: note: Technically the member function 'Bot::roll' can be const.
+bool Bot::roll() {
+          ^
+src\game\offiline\Bot.hpp:16:10: note: Technically the member function 'Bot::roll' can be const.
+    bool roll();
+         ^
+src\game\offiline\Bot.hpp:17:9: performance: inconclusive: Technically the member function 'Bot::eleccion' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    int eleccion();
+        ^
+src\game\offiline\Bot.cpp:101:10: note: Technically the member function 'Bot::eleccion' can be static (but you may consider moving to unnamed namespace).
+int Bot::eleccion() {
+         ^
+src\game\offiline\Bot.hpp:17:9: note: Technically the member function 'Bot::eleccion' can be static (but you may consider moving to unnamed namespace).
+    int eleccion();
+        ^
+src\game\offiline\Bot.cpp:39:24: performance: Searching before insertion is not necessary. [stlFindInsert]
+    usedIndices.insert(randomIndex);
+                       ^
+src\game\offiline\GameEndO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\GameEndO.hpp:24:5: style: Class 'GameEndO' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    GameEndO(sf::RenderWindow* window);
+    ^
+src\game\offiline\GameEndO.cpp:320:53: style: The if condition is the same as the previous if condition [duplicateCondition]
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                    ^
+src\game\offiline\GameEndO.cpp:316:52: note: First condition
+   if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                   ^
+src\game\offiline\GameEndO.cpp:320:53: note: Second condition
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                    ^
+src\game\offiline\GameEndO.cpp:220:17: style: Local variable 'globalBounds' shadows outer variable [shadowVariable]
+  sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
+                ^
+src\game\offiline\GameEndO.cpp:204:16: note: Shadowed declaration
+ sf::FloatRect globalBounds = fingame12.getGlobalBounds();
+               ^
+src\game\offiline\GameEndO.cpp:220:17: note: Shadow variable
+  sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
+                ^
+src\game\offiline\GameEndO.cpp:353:9: style: Local variable 'perfilWidth' shadows outer variable [shadowVariable]
+  float perfilWidth = 200.0f;
+        ^
+src\game\offiline\GameEndO.cpp:228:8: note: Shadowed declaration
+ float perfilWidth = 200.0f;
+       ^
+src\game\offiline\GameEndO.cpp:353:9: note: Shadow variable
+  float perfilWidth = 200.0f;
+        ^
+src\game\offiline\GameEndO.cpp:354:9: style: Local variable 'separacion' shadows outer variable [shadowVariable]
+  float separacion = 20.0f;
+        ^
+src\game\offiline\GameEndO.cpp:229:8: note: Shadowed declaration
+ float separacion = 20.0f;
+       ^
+src\game\offiline\GameEndO.cpp:354:9: note: Shadow variable
+  float separacion = 20.0f;
+        ^
+src\game\offiline\GameEndO.cpp:355:7: style: Local variable 'totalPerfiles' shadows outer variable [shadowVariable]
+  int totalPerfiles = static_cast<int>(ActiveUsers.size());
+      ^
+src\game\offiline\GameEndO.cpp:230:6: note: Shadowed declaration
+ int totalPerfiles = static_cast<int>(ActiveUsers.size());
+     ^
+src\game\offiline\GameEndO.cpp:355:7: note: Shadow variable
+  int totalPerfiles = static_cast<int>(ActiveUsers.size());
+      ^
+src\game\offiline\GameEndO.cpp:363:10: style: Local variable 'totalWidth' shadows outer variable [shadowVariable]
+   float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+         ^
+src\game\offiline\GameEndO.cpp:356:9: note: Shadowed declaration
+  float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+        ^
+src\game\offiline\GameEndO.cpp:363:10: note: Shadow variable
+   float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+         ^
+src\game\offiline\GameEndO.cpp:364:10: style: Local variable 'startX' shadows outer variable [shadowVariable]
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\offiline\GameEndO.cpp:357:9: note: Shadowed declaration
+  float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
+        ^
+src\game\offiline\GameEndO.cpp:364:10: note: Shadow variable
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\offiline\GameEndO.cpp:365:10: style: Local variable 'startY' shadows outer variable [shadowVariable]
+   float startY = 100.0f;
+         ^
+src\game\offiline\GameEndO.cpp:358:9: note: Shadowed declaration
+  float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
+        ^
+src\game\offiline\GameEndO.cpp:365:10: note: Shadow variable
+   float startY = 100.0f;
+         ^
+src\game\offiline\GameEndO.cpp:36:102: style: Parameter 'window' can be declared as reference to const [constParameterReference]
+void ConfettiRainO::update(float deltaTime, float screenWidth, float screenHeight, sf::RenderWindow& window) {
+                                                                                                     ^
+src\game\offiline\GameEndO.cpp:241:15: style: Variable 'yPos' is assigned a value that is never used. [unreadVariable]
+   float yPos = startY;
+              ^
+src\game\offiline\GameEndO.cpp:337:15: style: Variable 'speed' is assigned a value that is never used. [unreadVariable]
+  float speed = static_cast<float>(std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y));
+              ^
+src\game\offiline\GameEndO.cpp:357:16: style: Variable 'startX' is assigned a value that is never used. [unreadVariable]
+  float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
+               ^
+src\game\offiline\GameEndO.cpp:358:16: style: Variable 'startY' is assigned a value that is never used. [unreadVariable]
+  float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
+               ^
+src\game\offiline\GameManager.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\GameManager.hpp:14:7: performance: inconclusive: Technically the member function 'GameManager::CasasAleatorias' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void CasasAleatorias();
+      ^
+src\game\offiline\GameManager.cpp:7:19: note: Technically the member function 'GameManager::CasasAleatorias' can be static (but you may consider moving to unnamed namespace).
+void GameManager::CasasAleatorias() {
+                  ^
+src\game\offiline\GameManager.hpp:14:7: note: Technically the member function 'GameManager::CasasAleatorias' can be static (but you may consider moving to unnamed namespace).
+ void CasasAleatorias();
+      ^
+src\game\offiline\GameManager.hpp:15:7: performance: inconclusive: Technically the member function 'GameManager::GenerarBot' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void GenerarBot(int BotN);
+      ^
+src\game\offiline\GameManager.cpp:37:19: note: Technically the member function 'GameManager::GenerarBot' can be static (but you may consider moving to unnamed namespace).
+void GameManager::GenerarBot(int BotN) {
+                  ^
+src\game\offiline\GameManager.hpp:15:7: note: Technically the member function 'GameManager::GenerarBot' can be static (but you may consider moving to unnamed namespace).
+ void GenerarBot(int BotN);
+      ^
+src\game\offiline\GameManager.hpp:16:7: performance: inconclusive: Technically the member function 'GameManager::startGame' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void startGame();
+      ^
+src\game\offiline\GameManager.cpp:86:19: note: Technically the member function 'GameManager::startGame' can be static (but you may consider moving to unnamed namespace).
+void GameManager::startGame() {
+                  ^
+src\game\offiline\GameManager.hpp:16:7: note: Technically the member function 'GameManager::startGame' can be static (but you may consider moving to unnamed namespace).
+ void startGame();
+      ^
+src\game\offiline\GameManager.hpp:18:7: performance: inconclusive: Technically the member function 'GameManager::impuesto' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void impuesto();
+      ^
+src\game\offiline\GameManager.cpp:215:19: note: Technically the member function 'GameManager::impuesto' can be static (but you may consider moving to unnamed namespace).
+void GameManager::impuesto() {
+                  ^
+src\game\offiline\GameManager.hpp:18:7: note: Technically the member function 'GameManager::impuesto' can be static (but you may consider moving to unnamed namespace).
+ void impuesto();
+      ^
+src\game\offiline\GameManager.cpp:201:22: style: Condition 'IndexTurn1!=0' is always true [knownConditionTrueFalse]
+ else if (IndexTurn1 != 0) {
+                     ^
+src\game\offiline\GameManager.cpp:101:9: style: Local variable 'currentTurn' shadows outer variable [shadowVariable]
+ size_t currentTurn = IndexTurn1;
+        ^
+src\game\offiline\GameManager.hpp:26:6: note: Shadowed declaration
+ int currentTurn;
+     ^
+src\game\offiline\GameManager.cpp:101:9: note: Shadow variable
+ size_t currentTurn = IndexTurn1;
+        ^
+src\game\offiline\GameOfflineO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\CubeClassO.h:135:2: warning: Member variable 'CubeO::Dist' is not initialized in the constructor. [uninitMemberVar]
+ CubeO(float _size)
+ ^
+src\game\offiline\WindowClassO.h:84:2: warning: Member variable 'WindowO::faceIndex' is not initialized in the constructor. [uninitMemberVar]
+ WindowO(sf::RenderWindow* windowRef) : window(windowRef), cube(nullptr) {}
+ ^
+src\ui\fileio.h:29:5: warning: Member variable 'Vtk::x' is not initialized in the constructor. [uninitMemberVar]
+    Vtk() {}
+    ^
+src\ui\fileio.h:29:5: warning: Member variable 'Vtk::c' is not initialized in the constructor. [uninitMemberVar]
+    Vtk() {}
+    ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::turnoGiro' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::auxHouse' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::ActiveHouse' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::client' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::vectorActual' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::resultadoDado' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::animacionImpuesto' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\GameOfflineO.cpp:8:14: warning: Member variable 'GameOffline::animacionCasa' is not initialized in the constructor. [uninitMemberVar]
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+             ^
+src\game\offiline\WindowClassO.h:21:8: style: Unused private function: 'WindowO::calcdis' [unusedPrivateFunction]
+ float calcdis(sf::Vector2i p1, sf::Vector2i p2)
+       ^
+src\game\offiline\WindowClassO.h:18:9: style: inconclusive: Member variable 'WindowO::cube' is in the wrong place in the initializer list. [initializerList]
+ CubeO* cube;
+        ^
+src\game\offiline\WindowClassO.h:84:60: note: Member variable 'WindowO::cube' is in the wrong place in the initializer list.
+ WindowO(sf::RenderWindow* windowRef) : window(windowRef), cube(nullptr) {}
+                                                           ^
+src\game\offiline\WindowClassO.h:18:9: note: Member variable 'WindowO::cube' is in the wrong place in the initializer list.
+ CubeO* cube;
+        ^
+src\game\offiline\GameOfflineO.hpp:84:27: style: inconclusive: Member variable 'GameOffline::moverFichas' is in the wrong place in the initializer list. [initializerList]
+ std::vector<MovePiecesO> moverFichas;
+                          ^
+src\game\offiline\GameOfflineO.cpp:8:108: note: Member variable 'GameOffline::moverFichas' is in the wrong place in the initializer list.
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+                                                                                                           ^
+src\game\offiline\GameOfflineO.hpp:84:27: note: Member variable 'GameOffline::moverFichas' is in the wrong place in the initializer list.
+ std::vector<MovePiecesO> moverFichas;
+                          ^
+src\game\offiline\GameOfflineO.hpp:54:6: style: inconclusive: Member variable 'GameOffline::impuestoCasa' is in the wrong place in the initializer list. [initializerList]
+ int impuestoCasa;
+     ^
+src\game\offiline\GameOfflineO.cpp:8:208: note: Member variable 'GameOffline::impuestoCasa' is in the wrong place in the initializer list.
+GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
+                                                                                                                                                                                                               ^
+src\game\offiline\GameOfflineO.hpp:54:6: note: Member variable 'GameOffline::impuestoCasa' is in the wrong place in the initializer list.
+ int impuestoCasa;
+     ^
+src\game\offiline\CubeClassO.h:46:8: performance: inconclusive: Technically the member function 'CubeO::calcDistance' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ float calcDistance(Vector3D view, Vector3D obj){
+       ^
+src\game\offiline\WindowClassO.h:21:8: performance: inconclusive: Technically the member function 'WindowO::calcdis' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ float calcdis(sf::Vector2i p1, sf::Vector2i p2)
+       ^
+src\ui\Particles.h:71:10: style: inconclusive: Technically the member function 'ParticleSystem::draw' can be const. [functionConst]
+    void draw(sf::RenderWindow& window) {
+         ^
+src\game\offiline\CubeClassO.h:139:3: warning: Class 'CubeO' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+  distances = new float[9];
+  ^
+src\game\offiline\CubeClassO.h:139:3: warning: Class 'CubeO' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+  distances = new float[9];
+  ^
+src\game\offiline\GameOfflineO.cpp:10:2: warning: Class 'GameOffline' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+ ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicializacion del puntero
+ ^
+src\game\offiline\GameOfflineO.cpp:10:2: warning: Class 'GameOffline' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+ ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicializacion del puntero
+ ^
+src\game\offiline\CubeClassO.h:135:2: style: Class 'CubeO' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+ CubeO(float _size)
+ ^
+src\game\offiline\WindowClassO.h:84:2: style: Class 'WindowO' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+ WindowO(sf::RenderWindow* windowRef) : window(windowRef), cube(nullptr) {}
+ ^
+src\game\offiline\WindowClassO.h:60:16: style: Condition 'j==3' is always true [knownConditionTrueFalse]
+    else if (j == 3)
+               ^
+src\game\offiline\WindowClassO.h:57:16: note: Assuming that condition 'j==2' is not redundant
+    else if (j == 2)
+               ^
+src\game\offiline\WindowClassO.h:47:22: note: Assuming that condition 'j<4' is not redundant
+   for (int j = 0; j < 4; j++) {
+                     ^
+src\game\offiline\WindowClassO.h:60:16: note: Condition 'j==3' is always true
+    else if (j == 3)
+               ^
+src\game\offiline\GameOfflineO.cpp:661:9: style: The scope of the variable 'tiempoRuletaVisible' can be reduced. [variableScope]
+  float tiempoRuletaVisible = 3.0f;
+        ^
+src\game\offiline\GameOfflineO.cpp:662:8: style: The scope of the variable 'ruletaVisible' can be reduced. [variableScope]
+  bool ruletaVisible = false;
+       ^
+src\game\offiline\GameOfflineO.cpp:320:16: style: Local variable 'globalBounds' shadows outer variable [shadowVariable]
+ sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+               ^
+src\game\offiline\GameOfflineO.hpp:74:16: note: Shadowed declaration
+ sf::FloatRect globalBounds;
+               ^
+src\game\offiline\GameOfflineO.cpp:320:16: note: Shadow variable
+ sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+               ^
+src\game\offiline\GameOfflineO.cpp:564:12: style: Local variable 'clock' shadows outer variable [shadowVariable]
+ sf::Clock clock;
+           ^
+src\game\offiline\GameOfflineO.hpp:89:12: note: Shadowed declaration
+ sf::Clock clock;
+           ^
+src\game\offiline\GameOfflineO.cpp:564:12: note: Shadow variable
+ sf::Clock clock;
+           ^
+src\game\offiline\GameOfflineO.cpp:660:13: style: Local variable 'clock' shadows outer variable [shadowVariable]
+  sf::Clock clock;
+            ^
+src\game\offiline\GameOfflineO.cpp:564:12: note: Shadowed declaration
+ sf::Clock clock;
+           ^
+src\game\offiline\GameOfflineO.cpp:660:13: note: Shadow variable
+  sf::Clock clock;
+            ^
+src\game\offiline\GameOfflineO.cpp:823:17: style: Local variable 'mousePosition' shadows outer variable [shadowVariable]
+   sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                ^
+src\game\offiline\GameOfflineO.hpp:77:15: note: Shadowed declaration
+ sf::Vector2i mousePosition;
+              ^
+src\game\offiline\GameOfflineO.cpp:823:17: note: Shadow variable
+   sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+                ^
+src\game\offiline\GameOfflineO.cpp:824:17: style: Local variable 'mousePosFloat' shadows outer variable [shadowVariable]
+   sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+                ^
+src\game\offiline\GameOfflineO.hpp:78:15: note: Shadowed declaration
+ sf::Vector2f mousePosFloat;
+              ^
+src\game\offiline\GameOfflineO.cpp:824:17: note: Shadow variable
+   sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+                ^
+src\game\offiline\GameOfflineO.cpp:952:9: style: Local variable 'deltaTime' shadows outer variable [shadowVariable]
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\offiline\GameOfflineO.cpp:910:8: note: Shadowed declaration
+ float deltaTime = clock.restart().asSeconds();
+       ^
+src\game\offiline\GameOfflineO.cpp:952:9: note: Shadow variable
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\offiline\GameOfflineO.cpp:1017:8: style: Local variable 'duration' shadows outer variable [shadowVariable]
+ float duration = 1.0f;
+       ^
+src\game\offiline\GameOfflineO.hpp:52:8: note: Shadowed declaration
+ float duration = 2.0f;
+       ^
+src\game\offiline\GameOfflineO.cpp:1017:8: note: Shadow variable
+ float duration = 1.0f;
+       ^
+src\game\offiline\GameOfflineO.cpp:1240:9: style: Local variable 'deltaTime' shadows outer variable [shadowVariable]
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\offiline\GameOfflineO.cpp:1220:8: note: Shadowed declaration
+ float deltaTime = clock.restart().asSeconds();
+       ^
+src\game\offiline\GameOfflineO.cpp:1240:9: note: Shadow variable
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\ui\cell.h:42:42: performance: Function parameter 'pt' should be passed by const reference. [passedByValue]
+    Cell(const std::vector<sf::Vector3f> pt, sf::Color col, sf::Vector2f posicionInicial);
+                                         ^
+src\ui\cell.h:43:42: performance: Function parameter 'pt' should be passed by const reference. [passedByValue]
+    Cell(const std::vector<sf::Vector3f> pt, sf::Texture *texcar, sf::Vector2f posicionInicial);
+                                         ^
+src\game\offiline\WindowClassO.h:145:17: style: Variable 'face' can be declared as pointer to const [constVariablePointer]
+    sf::Vertex* face = &Cube3D[i * 4];
+                ^
+src\game\offiline\GameOfflineO.cpp:20:17: style: Variable 'DadoResul' is assigned a value that is never used. [unreadVariable]
+  int DadoResul = 0;
+                ^
+src\game\offiline\GameOfflineO.cpp:111:17: style: Variable 'DadoResul' is assigned a value that is never used. [unreadVariable]
+  int DadoResul = 0;
+                ^
+src\game\offiline\GameOfflineO.cpp:187:17: style: Variable 'DadoResul' is assigned a value that is never used. [unreadVariable]
+  int DadoResul = 0;
+                ^
+src\game\offiline\GameOfflineO.cpp:741:19: style: Variable 'ruletaVisible' is assigned a value that is never used. [unreadVariable]
+    ruletaVisible = true;
+                  ^
+src\game\offiline\GameOfflineO.cpp:748:20: style: Variable 'ruletaVisible' is assigned a value that is never used. [unreadVariable]
+     ruletaVisible = false;
+                   ^
+src\game\offiline\GameOfflineO.cpp:1013:22: style: Variable 'currentScaleX' is assigned a value that is never used. [unreadVariable]
+ float currentScaleX = 0.5f;
+                     ^
+src\game\offiline\GameOfflineO.cpp:1014:22: style: Variable 'currentScaleY' is assigned a value that is never used. [unreadVariable]
+ float currentScaleY = 0.5f;
+                     ^
+src\game\offiline\GameOfflineO.cpp:1220:18: style: Variable 'deltaTime' is assigned a value that is never used. [unreadVariable]
+ float deltaTime = clock.restart().asSeconds();
+                 ^
+src\game\offiline\GameOptionsO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\GameOptionsO.cpp:9:14: warning: Member variable 'GameOptions::isWebViewOpen' is not initialized in the constructor. [uninitMemberVar]
+GameOptions::GameOptions(sf::RenderWindow& win) : window(&win) {
+             ^
+src\game\offiline\GameOptionsO.cpp:9:14: warning: Member variable 'GameOptions::sesionValida' is not initialized in the constructor. [uninitMemberVar]
+GameOptions::GameOptions(sf::RenderWindow& win) : window(&win) {
+             ^
+src\game\offiline\GameOptionsO.cpp:9:14: warning: Member variable 'GameOptions::Valida' is not initialized in the constructor. [uninitMemberVar]
+GameOptions::GameOptions(sf::RenderWindow& win) : window(&win) {
+             ^
+src\game\offiline\GameOptionsO.hpp:11:5: style: Class 'GameOptions' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    GameOptions(sf::RenderWindow& win);
+    ^
+src\game\offiline\HouseBuyO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::perfilWidth' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::separacion' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::totalPerfiles' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::CartaActiva' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::indexMouseOver' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::cartaActivaIndex' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::csIndex' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::seleccionlista' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:14:12: warning: Member variable 'HouseBuyO::indexX' is not initialized in the constructor. [uninitMemberVar]
+HouseBuyO::HouseBuyO() :window(nullptr), IndexCAsa(-1) {}
+           ^
+src\game\offiline\HouseBuyO.cpp:87:14: style: Variable 'angle' is assigned a value that is never used. [unreadVariable]
+ float angle = 0.f;
+             ^
+src\game\offiline\HouseBuyO.cpp:88:22: style: Variable 'rotationSpeed' is assigned a value that is never used. [unreadVariable]
+ float rotationSpeed = 45.f;
+                     ^
+src\game\offiline\HouseBuyO.cpp:119:29: style: Variable 'settings.antialiasingLevel' is assigned a value that is never used. [unreadVariable]
+ settings.antialiasingLevel = 4;
+                            ^
+src\game\offiline\HouseBuyO.cpp:120:21: style: Variable 'settings.depthBits' is assigned a value that is never used. [unreadVariable]
+ settings.depthBits = 24;
+                    ^
+src\game\offiline\HouseBuyO.cpp:121:23: style: Variable 'settings.stencilBits' is assigned a value that is never used. [unreadVariable]
+ settings.stencilBits = 8;
+                      ^
+src\game\offiline\HouseBuyO.cpp:160:29: style: Variable 'clavesita' is assigned a value that is never used. [unreadVariable]
+      std::string clavesita = "casa" + std::to_string(IndexCAsa);
+                            ^
+src\game\offiline\HouseBuyO.cpp:271:15: style: Variable 'yPos' is assigned a value that is never used. [unreadVariable]
+   float yPos = startY;
+              ^
+src\game\offiline\MovePiecesO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\MovePiecesO.cpp:12:14: warning: Member variable 'MovePiecesO::tan' is not initialized in the constructor. [uninitMemberVar]
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+             ^
+src\game\offiline\MovePiecesO.cpp:12:14: warning: Member variable 'MovePiecesO::vuelta' is not initialized in the constructor. [uninitMemberVar]
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+             ^
+src\game\offiline\MovePiecesO.cpp:12:14: warning: Member variable 'MovePiecesO::CsFinal' is not initialized in the constructor. [uninitMemberVar]
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+             ^
+src\game\offiline\MovePiecesO.cpp:12:14: warning: Member variable 'MovePiecesO::PieceUser' is not initialized in the constructor. [uninitMemberVar]
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+             ^
+src\game\offiline\MovePiecesO.hpp:48:14: style: inconclusive: Member variable 'MovePiecesO::sprite' is in the wrong place in the initializer list. [initializerList]
+ sf::Sprite* sprite;
+             ^
+src\game\offiline\MovePiecesO.cpp:12:78: note: Member variable 'MovePiecesO::sprite' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                             ^
+src\game\offiline\MovePiecesO.hpp:48:14: note: Member variable 'MovePiecesO::sprite' is in the wrong place in the initializer list.
+ sf::Sprite* sprite;
+             ^
+src\game\offiline\MovePiecesO.hpp:49:42: style: inconclusive: Member variable 'MovePiecesO::casillas' is in the wrong place in the initializer list. [initializerList]
+ std::vector<std::vector<sf::Vector2f>>* casillas;
+                                         ^
+src\game\offiline\MovePiecesO.cpp:12:116: note: Member variable 'MovePiecesO::casillas' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                   ^
+src\game\offiline\MovePiecesO.hpp:49:42: note: Member variable 'MovePiecesO::casillas' is in the wrong place in the initializer list.
+ std::vector<std::vector<sf::Vector2f>>* casillas;
+                                         ^
+src\game\offiline\MovePiecesO.hpp:33:7: style: inconclusive: Member variable 'MovePiecesO::enMovimiento' is in the wrong place in the initializer list. [initializerList]
+ bool enMovimiento;
+      ^
+src\game\offiline\MovePiecesO.cpp:12:170: note: Member variable 'MovePiecesO::enMovimiento' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                         ^
+src\game\offiline\MovePiecesO.hpp:33:7: note: Member variable 'MovePiecesO::enMovimiento' is in the wrong place in the initializer list.
+ bool enMovimiento;
+      ^
+src\game\offiline\MovePiecesO.hpp:53:6: style: inconclusive: Member variable 'MovePiecesO::casillasRestantes' is in the wrong place in the initializer list. [initializerList]
+ int casillasRestantes;
+     ^
+src\game\offiline\MovePiecesO.cpp:12:200: note: Member variable 'MovePiecesO::casillasRestantes' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                       ^
+src\game\offiline\MovePiecesO.hpp:53:6: note: Member variable 'MovePiecesO::casillasRestantes' is in the wrong place in the initializer list.
+ int casillasRestantes;
+     ^
+src\game\offiline\MovePiecesO.hpp:61:8: style: inconclusive: Member variable 'MovePiecesO::duracionMovimiento' is in the wrong place in the initializer list. [initializerList]
+ float duracionMovimiento;
+       ^
+src\game\offiline\MovePiecesO.cpp:12:348: note: Member variable 'MovePiecesO::duracionMovimiento' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                                                                                                                                                                           ^
+src\game\offiline\MovePiecesO.hpp:61:8: note: Member variable 'MovePiecesO::duracionMovimiento' is in the wrong place in the initializer list.
+ float duracionMovimiento;
+       ^
+src\game\offiline\MovePiecesO.hpp:24:7: style: inconclusive: Member variable 'MovePiecesO::finalCamino' is in the wrong place in the initializer list. [initializerList]
+ bool finalCamino;
+      ^
+src\game\offiline\MovePiecesO.cpp:12:374: note: Member variable 'MovePiecesO::finalCamino' is in the wrong place in the initializer list.
+MovePiecesO::MovePiecesO(sf::RenderWindow& win, int mapauso) : window(&win), sprite(nullptr), mapaActual(mapauso), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                                                                                                                                                                                                     ^
+src\game\offiline\MovePiecesO.hpp:24:7: note: Member variable 'MovePiecesO::finalCamino' is in the wrong place in the initializer list.
+ bool finalCamino;
+      ^
+src\game\offiline\MovePiecesO.hpp:27:6: style: inconclusive: Technically the member function 'MovePiecesO::getCaminoActual' can be const. [functionConst]
+ int getCaminoActual();
+     ^
+src\game\offiline\MovePiecesO.cpp:76:18: note: Technically the member function 'MovePiecesO::getCaminoActual' can be const.
+int MovePiecesO::getCaminoActual() {
+                 ^
+src\game\offiline\MovePiecesO.hpp:27:6: note: Technically the member function 'MovePiecesO::getCaminoActual' can be const.
+ int getCaminoActual();
+     ^
+src\game\offiline\MovePiecesO.hpp:28:6: style: inconclusive: Technically the member function 'MovePiecesO::getcasillaActual' can be const. [functionConst]
+ int getcasillaActual();
+     ^
+src\game\offiline\MovePiecesO.cpp:79:18: note: Technically the member function 'MovePiecesO::getcasillaActual' can be const.
+int MovePiecesO::getcasillaActual() {
+                 ^
+src\game\offiline\MovePiecesO.hpp:28:6: note: Technically the member function 'MovePiecesO::getcasillaActual' can be const.
+ int getcasillaActual();
+     ^
+src\game\offiline\MovePiecesO.hpp:29:7: style: inconclusive: Technically the member function 'MovePiecesO::animacionRastro' can be const. [functionConst]
+ void animacionRastro(float deltaTime);
+      ^
+src\game\offiline\MovePiecesO.cpp:1539:19: note: Technically the member function 'MovePiecesO::animacionRastro' can be const.
+void MovePiecesO::animacionRastro(float deltaTime) {
+                  ^
+src\game\offiline\MovePiecesO.hpp:29:7: note: Technically the member function 'MovePiecesO::animacionRastro' can be const.
+ void animacionRastro(float deltaTime);
+      ^
+src\game\offiline\MovePiecesO.cpp:1563:25: style: Checking if unsigned expression 's.getColor().a' is less than zero. [unsignedLessThanZero]
+  return s.getColor().a <= 0;
+                        ^
+src\game\offiline\MovePiecesO.cpp:45:43: style: inconclusive: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'. [funcArgNamesDifferent]
+void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
+                                          ^
+src\game\offiline\MovePiecesO.hpp:17:31: note: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'.
+ void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser);
+                              ^
+src\game\offiline\MovePiecesO.cpp:45:43: note: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'.
+void MovePiecesO::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
+                                          ^
+src\game\offiline\MovePiecesO.cpp:1570:16: style: Variable 'rebote' is assigned a value that is never used. [unreadVariable]
+  float rebote = std::sin(deltaTime * 10) * 5;
+               ^
+src\game\offiline\PieceSelectorO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\PieceSelectorO.cpp:10:17: warning: Member variable 'PieceSelectOff::newSelection' is not initialized in the constructor. [uninitMemberVar]
+PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
+                ^
+src\game\offiline\PieceSelectorO.cpp:10:17: warning: Member variable 'PieceSelectOff::startX' is not initialized in the constructor. [uninitMemberVar]
+PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
+                ^
+src\game\offiline\PieceSelectorO.cpp:10:17: warning: Member variable 'PieceSelectOff::startY' is not initialized in the constructor. [uninitMemberVar]
+PieceSelectOff::PieceSelectOff(sf::RenderWindow* windowRef, int UsersN, int Map)
+                ^
+src\game\offiline\PieceSelectorO.hpp:12:9: style: inconclusive: Member variable 'PieceSelectOff::selectedPiece' is in the wrong place in the initializer list. [initializerList]
+    int selectedPiece;
+        ^
+src\game\offiline\PieceSelectorO.cpp:11:23: note: Member variable 'PieceSelectOff::selectedPiece' is in the wrong place in the initializer list.
+ : window(windowRef), selectedPiece(-1), nUserBot(UsersN), Nmap(Map) {
+                      ^
+src\game\offiline\PieceSelectorO.hpp:12:9: note: Member variable 'PieceSelectOff::selectedPiece' is in the wrong place in the initializer list.
+    int selectedPiece;
+        ^
+src\game\offiline\PieceSelectorO.cpp:165:28: style: Condition '!cierre' is always true [knownConditionTrueFalse]
+ while (window->isOpen()&& !cierre) {
+                           ^
+src\game\offiline\PieceSelectorO.cpp:153:16: note: Assignment 'cierre=false', assigned value is 0
+ bool cierre = false;
+               ^
+src\game\offiline\PieceSelectorO.cpp:165:28: note: Condition '!cierre' is always true
+ while (window->isOpen()&& !cierre) {
+                           ^
+src\game\offiline\PieceSelectorO.cpp:306:9: style: The scope of the variable 'totalPerfiles' can be reduced. [variableScope]
+  float totalPerfiles = 1;
+        ^
+src\game\offiline\PieceSelectorO.cpp:310:10: style: Local variable 'startX' shadows outer variable [shadowVariable]
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\offiline\PieceSelectorO.hpp:24:11: note: Shadowed declaration
+    float startX;
+          ^
+src\game\offiline\PieceSelectorO.cpp:310:10: note: Shadow variable
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\offiline\PieceSelectorO.cpp:312:10: style: Local variable 'startY' shadows outer variable [shadowVariable]
+   float startY = 100.0f;
+         ^
+src\game\offiline\PieceSelectorO.hpp:25:11: note: Shadowed declaration
+    float startY;
+          ^
+src\game\offiline\PieceSelectorO.cpp:312:10: note: Shadow variable
+   float startY = 100.0f;
+         ^
+src\game\offiline\PieceSelectorO.cpp:48:15: style: Variable 'radio' is assigned a value that is never used. [unreadVariable]
+  float radio = pieceShape[i].getSize().x / 2.0f;
+              ^
+src\game\offiline\PieceSelectorO.cpp:121:20: style: Variable 'deltaScroll' is assigned a value that is never used. [unreadVariable]
+ float deltaScroll = 0.0f;
+                   ^
+src\game\offiline\PieceSelectorO.cpp:122:19: style: Variable 'scrollStep' is assigned a value that is never used. [unreadVariable]
+ float scrollStep = 10.0f;
+                  ^
+src\game\offiline\PieceSelectorO.cpp:149:22: style: Variable 'avatarYOffset' is assigned a value that is never used. [unreadVariable]
+ float avatarYOffset = 0.0f;
+                     ^
+src\game\offiline\PieceSelectorO.cpp:229:22: style: Variable 'avatarBounds[i]' is assigned a value that is never used. [unreadVariable]
+     avatarBounds[i] = sf::FloatRect(xPos, yPos, piecesOff[i].getGlobalBounds().width, piecesOff[i].getGlobalBounds().height);
+                     ^
+src\game\offiline\ResourceGameO.cpp:84:18: style: Redundant assignment of 'fontUserProfile' to itself. [selfAssignment]
+ fontUserProfile = fontUser;
+                 ^
+src\game\offiline\RuletaO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\RuletaO.cpp:7:10: warning: Member variable 'RuletaO::initialSpeed' is not initialized in the constructor. [uninitMemberVar]
+RuletaO::RuletaO(float width, float height, float centerX, float centerY)
+         ^
+src\game\offiline\RuletaO.cpp:7:10: warning: Member variable 'RuletaO::decelerationRate' is not initialized in the constructor. [uninitMemberVar]
+RuletaO::RuletaO(float width, float height, float centerX, float centerY)
+         ^
+src\game\offiline\RuletaO.cpp:7:10: warning: Member variable 'RuletaO::decelerationStarted' is not initialized in the constructor. [uninitMemberVar]
+RuletaO::RuletaO(float width, float height, float centerX, float centerY)
+         ^
+src\game\offiline\RuletaO.hpp:78:10: style: Unused private function: 'RuletaO::animatePointer' [unusedPrivateFunction]
+    void animatePointer();
+         ^
+src\game\offiline\RuletaO.hpp:28:11: style: inconclusive: Member variable 'RuletaO::blinkTimer' is in the wrong place in the initializer list. [initializerList]
+    float blinkTimer;
+          ^
+src\game\offiline\RuletaO.cpp:8:70: note: Member variable 'RuletaO::blinkTimer' is in the wrong place in the initializer list.
+ : width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
+                                                                     ^
+src\game\offiline\RuletaO.hpp:28:11: note: Member variable 'RuletaO::blinkTimer' is in the wrong place in the initializer list.
+    float blinkTimer;
+          ^
+src\game\offiline\RuletaO.hpp:23:10: style: inconclusive: Member variable 'RuletaO::turno' is in the wrong place in the initializer list. [initializerList]
+    bool turno;
+         ^
+src\game\offiline\RuletaO.cpp:8:184: note: Member variable 'RuletaO::turno' is in the wrong place in the initializer list.
+ : width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
+                                                                                                                                                                                       ^
+src\game\offiline\RuletaO.hpp:23:10: note: Member variable 'RuletaO::turno' is in the wrong place in the initializer list.
+    bool turno;
+         ^
+src\game\offiline\RuletaO.hpp:17:9: style: inconclusive: Member variable 'RuletaO::event' is in the wrong place in the initializer list. [initializerList]
+    int event;
+        ^
+src\game\offiline\RuletaO.cpp:8:212: note: Member variable 'RuletaO::event' is in the wrong place in the initializer list.
+ : width(width), height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0){
+                                                                                                                                                                                                                   ^
+src\game\offiline\RuletaO.hpp:17:9: note: Member variable 'RuletaO::event' is in the wrong place in the initializer list.
+    int event;
+        ^
+src\game\offiline\RuletaO.hpp:76:10: style: inconclusive: Technically the member function 'RuletaO::drawLights' can be const. [functionConst]
+    void drawLights(sf::RenderWindow& window, float deltaTime);
+         ^
+src\game\offiline\RuletaO.cpp:389:15: note: Technically the member function 'RuletaO::drawLights' can be const.
+void RuletaO::drawLights(sf::RenderWindow& window, float deltaTime) {
+              ^
+src\game\offiline\RuletaO.hpp:76:10: note: Technically the member function 'RuletaO::drawLights' can be const.
+    void drawLights(sf::RenderWindow& window, float deltaTime);
+         ^
+src\game\offiline\RuletaO.cpp:448:15: style: The scope of the variable 'bounce' can be reduced. [variableScope]
+ static float bounce = 0.0f;
+              ^
+src\game\offiline\RuletaO.cpp:116:8: style: Local variable 'currentSegment' shadows outer variable [shadowVariable]
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+       ^
+src\game\offiline\RuletaO.hpp:42:9: note: Shadowed declaration
+    int currentSegment;
+        ^
+src\game\offiline\RuletaO.cpp:116:8: note: Shadow variable
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+       ^
+src\game\offiline\RuletaO.cpp:336:14: style: Variable 'iconPaths' can be declared as const array [constVariable]
+ std::string iconPaths[] = {
+             ^
+src\game\offiline\RuletaO.cpp:116:23: style: Variable 'currentSegment' is assigned a value that is never used. [unreadVariable]
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+                      ^
+src\game\offiline\RuletaO.cpp:355:18: style: Variable 'ScaleIcon' is assigned a value that is never used. [unreadVariable]
+ float ScaleIcon = radius / 200;
+                 ^
+src\game\offiline\StealplayerO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\offiline\StealplayerO.hpp:27:10: performance: inconclusive: Technically the member function 'StealplayerO::BotRobar' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    void BotRobar();
+         ^
+src\game\offiline\StealplayerO.cpp:33:20: note: Technically the member function 'StealplayerO::BotRobar' can be static (but you may consider moving to unnamed namespace).
+void StealplayerO::BotRobar() {
+                   ^
+src\game\offiline\StealplayerO.hpp:27:10: note: Technically the member function 'StealplayerO::BotRobar' can be static (but you may consider moving to unnamed namespace).
+    void BotRobar();
+         ^
+src\game\offiline\StealplayerO.cpp:6:111: performance: Function parameter 'PSteal' should be passed by const reference. [passedByValue]
+StealplayerO::StealplayerO(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGameOff> PSteal) : window(window), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+                                                                                                              ^
+src\game\offiline\StealplayerO.cpp:86:24: style: Variable 'yPos' is assigned a value that is never used. [unreadVariable]
+            float yPos = startY;
+                       ^
+src\game\offiline\nuloO.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\Chat.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\Chat.cpp:8:7: warning: Member variable 'Chat::isWebViewOpen' is not initialized in the constructor. [uninitMemberVar]
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
+      ^
+src\game\online\Chat.cpp:8:7: warning: Member variable 'Chat::sesionValida' is not initialized in the constructor. [uninitMemberVar]
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
+      ^
+src\game\online\Chat.cpp:8:7: warning: Member variable 'Chat::Valida' is not initialized in the constructor. [uninitMemberVar]
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
+      ^
+src\game\online\Chat.hpp:23:13: style: inconclusive: Member variable 'Chat::client' is in the wrong place in the initializer list. [initializerList]
+    Client* client;
+            ^
+src\game\online\Chat.cpp:8:66: note: Member variable 'Chat::client' is in the wrong place in the initializer list.
+Chat::Chat(sf::RenderWindow* win, Client* clienT) : window(win), client(clienT) {
+                                                                 ^
+src\game\online\Chat.hpp:23:13: note: Member variable 'Chat::client' is in the wrong place in the initializer list.
+    Client* client;
+            ^
+src\game\online\Chat.cpp:194:9: style: Variable 'Valida' is reassigned a value before the old one has been used. [redundantAssignment]
+ Valida = true;
+        ^
+src\game\online\Chat.cpp:192:9: note: Valida is assigned
+ Valida = false;
+        ^
+src\game\online\Chat.cpp:194:9: note: Valida is overwritten
+ Valida = true;
+        ^
+src\game\online\Chat.cpp:165:27: style: Variable 'posicionUltimoEspacio' is assigned a value that is never used. [unreadVariable]
+    posicionUltimoEspacio = 0;
+                          ^
+src\game\online\GameEnd.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\GameEnd.cpp:347:20: style: Condition 'event.type==sf::Event::MouseButtonPressed' is always true [knownConditionTrueFalse]
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                   ^
+src\game\online\GameEnd.cpp:341:19: note: Assuming that condition 'event.type==sf::Event::MouseButtonPressed' is not redundant
+   if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                  ^
+src\game\online\GameEnd.cpp:347:20: note: Condition 'event.type==sf::Event::MouseButtonPressed' is always true
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                   ^
+src\game\online\GameEnd.cpp:347:81: style: Condition 'event.mouseButton.button==sf::Mouse::Left' is always true [knownConditionTrueFalse]
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                                                ^
+src\game\online\GameEnd.cpp:341:80: note: Assuming that condition 'event.mouseButton.button==sf::Mouse::Left' is not redundant
+   if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                                               ^
+src\game\online\GameEnd.cpp:347:81: note: Condition 'event.mouseButton.button==sf::Mouse::Left' is always true
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                                                                                ^
+src\game\online\GameEnd.cpp:247:17: style: Local variable 'globalBounds' shadows outer variable [shadowVariable]
+  sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
+                ^
+src\game\online\GameEnd.cpp:204:16: note: Shadowed declaration
+ sf::FloatRect globalBounds = SBotonMenu.getGlobalBounds();
+               ^
+src\game\online\GameEnd.cpp:247:17: note: Shadow variable
+  sf::FloatRect globalBounds = posicionesGanadores[i].getGlobalBounds();
+                ^
+src\game\online\GameEnd.cpp:387:9: style: Local variable 'perfilWidth' shadows outer variable [shadowVariable]
+  float perfilWidth = 200.0f;
+        ^
+src\game\online\GameEnd.cpp:254:8: note: Shadowed declaration
+ float perfilWidth = 200.0f;
+       ^
+src\game\online\GameEnd.cpp:387:9: note: Shadow variable
+  float perfilWidth = 200.0f;
+        ^
+src\game\online\GameEnd.cpp:388:9: style: Local variable 'separacion' shadows outer variable [shadowVariable]
+  float separacion = 20.0f;
+        ^
+src\game\online\GameEnd.cpp:255:8: note: Shadowed declaration
+ float separacion = 20.0f;
+       ^
+src\game\online\GameEnd.cpp:388:9: note: Shadow variable
+  float separacion = 20.0f;
+        ^
+src\game\online\GameEnd.cpp:389:7: style: Local variable 'totalPerfiles' shadows outer variable [shadowVariable]
+  int totalPerfiles = static_cast<int>(UsuariosActivos.size());
+      ^
+src\game\online\GameEnd.cpp:256:6: note: Shadowed declaration
+ int totalPerfiles = static_cast<int>(UsuariosActivos.size());
+     ^
+src\game\online\GameEnd.cpp:389:7: note: Shadow variable
+  int totalPerfiles = static_cast<int>(UsuariosActivos.size());
+      ^
+src\game\online\GameEnd.cpp:398:10: style: Local variable 'totalWidth' shadows outer variable [shadowVariable]
+   float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+         ^
+src\game\online\GameEnd.cpp:391:9: note: Shadowed declaration
+  float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+        ^
+src\game\online\GameEnd.cpp:398:10: note: Shadow variable
+   float totalWidth = (totalPerfiles * perfilWidth) + ((totalPerfiles - 1) * separacion);
+         ^
+src\game\online\GameEnd.cpp:401:10: style: Local variable 'startX' shadows outer variable [shadowVariable]
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\online\GameEnd.cpp:393:9: note: Shadowed declaration
+  float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
+        ^
+src\game\online\GameEnd.cpp:401:10: note: Shadow variable
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\online\GameEnd.cpp:402:10: style: Local variable 'startY' shadows outer variable [shadowVariable]
+   float startY = 100.0f;
+         ^
+src\game\online\GameEnd.cpp:394:9: note: Shadowed declaration
+  float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
+        ^
+src\game\online\GameEnd.cpp:402:10: note: Shadow variable
+   float startY = 100.0f;
+         ^
+src\game\online\GameEnd.cpp:39:101: style: Parameter 'window' can be declared as reference to const [constParameterReference]
+void ConfettiRain::update(float deltaTime, float screenWidth, float screenHeight, sf::RenderWindow& window) {
+                                                                                                    ^
+src\game\online\GameEnd.cpp:266:15: style: Variable 'yPos' is assigned a value that is never used. [unreadVariable]
+   float yPos = startY;
+              ^
+src\game\online\GameEnd.cpp:373:15: style: Variable 'speed' is assigned a value that is never used. [unreadVariable]
+  float speed = static_cast<float>(std::sqrt(deltaMouse.x * deltaMouse.x + deltaMouse.y * deltaMouse.y));
+              ^
+src\game\online\GameEnd.cpp:393:16: style: Variable 'startX' is assigned a value that is never used. [unreadVariable]
+  float startX = ((1280.0f - totalWidth) / 2.0f) + 100;
+               ^
+src\game\online\GameEnd.cpp:394:16: style: Variable 'startY' is assigned a value that is never used. [unreadVariable]
+  float startY = (720.0f - (180.0f + 70.0f + 50.0f)) / 2.0f;
+               ^
+src\game\online\HouseBuy.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::client' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::perfilWidth' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::separacion' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::totalPerfiles' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::CartaActiva' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::indexMouseOver' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::cartaActivaIndex' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::seleccionlista' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:16:11: warning: Member variable 'HouseBuy::csIndex' is not initialized in the constructor. [uninitMemberVar]
+HouseBuy::HouseBuy() :window(nullptr), IndexCAsa(-1) {}
+          ^
+src\game\online\HouseBuy.cpp:227:11: style: Variable 'cierre' is reassigned a value before the old one has been used. [redundantAssignment]
+   cierre = true;
+          ^
+src\game\online\HouseBuy.cpp:224:11: note: cierre is assigned
+   cierre = true;
+          ^
+src\game\online\HouseBuy.cpp:227:11: note: cierre is overwritten
+   cierre = true;
+          ^
+src\game\online\HouseBuy.cpp:98:14: style: Variable 'angle' is assigned a value that is never used. [unreadVariable]
+ float angle = 0.f;
+             ^
+src\game\online\HouseBuy.cpp:99:22: style: Variable 'rotationSpeed' is assigned a value that is never used. [unreadVariable]
+ float rotationSpeed = 45.f;
+                     ^
+src\game\online\HouseBuy.cpp:139:29: style: Variable 'settings.antialiasingLevel' is assigned a value that is never used. [unreadVariable]
+ settings.antialiasingLevel = 4;
+                            ^
+src\game\online\HouseBuy.cpp:140:21: style: Variable 'settings.depthBits' is assigned a value that is never used. [unreadVariable]
+ settings.depthBits = 24;
+                    ^
+src\game\online\HouseBuy.cpp:141:23: style: Variable 'settings.stencilBits' is assigned a value that is never used. [unreadVariable]
+ settings.stencilBits = 8;
+                      ^
+src\game\online\HouseBuy.cpp:284:15: style: Variable 'yPos' is assigned a value that is never used. [unreadVariable]
+   float yPos = startY;
+              ^
+src\game\online\MovePieces.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\MovePieces.cpp:11:13: warning: Member variable 'MovePieces::vuelta' is not initialized in the constructor. [uninitMemberVar]
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+            ^
+src\game\online\MovePieces.cpp:11:13: warning: Member variable 'MovePieces::CsFinal' is not initialized in the constructor. [uninitMemberVar]
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+            ^
+src\game\online\MovePieces.cpp:11:13: warning: Member variable 'MovePieces::PieceUser' is not initialized in the constructor. [uninitMemberVar]
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+            ^
+src\game\online\MovePieces.hpp:36:14: style: inconclusive: Member variable 'MovePieces::sprite' is in the wrong place in the initializer list. [initializerList]
+ sf::Sprite* sprite;
+             ^
+src\game\online\MovePieces.cpp:11:94: note: Member variable 'MovePieces::sprite' is in the wrong place in the initializer list.
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                             ^
+src\game\online\MovePieces.hpp:36:14: note: Member variable 'MovePieces::sprite' is in the wrong place in the initializer list.
+ sf::Sprite* sprite;
+             ^
+src\game\online\MovePieces.hpp:33:7: style: inconclusive: Member variable 'MovePieces::enMovimiento' is in the wrong place in the initializer list. [initializerList]
+ bool enMovimiento;
+      ^
+src\game\online\MovePieces.cpp:11:165: note: Member variable 'MovePieces::enMovimiento' is in the wrong place in the initializer list.
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                    ^
+src\game\online\MovePieces.hpp:33:7: note: Member variable 'MovePieces::enMovimiento' is in the wrong place in the initializer list.
+ bool enMovimiento;
+      ^
+src\game\online\MovePieces.hpp:41:6: style: inconclusive: Member variable 'MovePieces::casillasRestantes' is in the wrong place in the initializer list. [initializerList]
+ int casillasRestantes;
+     ^
+src\game\online\MovePieces.cpp:11:195: note: Member variable 'MovePieces::casillasRestantes' is in the wrong place in the initializer list.
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                  ^
+src\game\online\MovePieces.hpp:41:6: note: Member variable 'MovePieces::casillasRestantes' is in the wrong place in the initializer list.
+ int casillasRestantes;
+     ^
+src\game\online\MovePieces.hpp:49:8: style: inconclusive: Member variable 'MovePieces::duracionMovimiento' is in the wrong place in the initializer list. [initializerList]
+ float duracionMovimiento;
+       ^
+src\game\online\MovePieces.cpp:11:343: note: Member variable 'MovePieces::duracionMovimiento' is in the wrong place in the initializer list.
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                                                                                                                                                                      ^
+src\game\online\MovePieces.hpp:49:8: note: Member variable 'MovePieces::duracionMovimiento' is in the wrong place in the initializer list.
+ float duracionMovimiento;
+       ^
+src\game\online\MovePieces.hpp:23:7: style: inconclusive: Member variable 'MovePieces::finalCamino' is in the wrong place in the initializer list. [initializerList]
+ bool finalCamino;
+      ^
+src\game\online\MovePieces.cpp:11:369: note: Member variable 'MovePieces::finalCamino' is in the wrong place in the initializer list.
+MovePieces::MovePieces(sf::RenderWindow& win, Client* clienT) : window(&win),client(clienT), sprite(nullptr), casillas(nullptr), caminoActual(0), casillaActual(0), enMovimiento(false), t(0.0f), casillasRestantes(0), rotacionActual(0.0f), rotacionMaxima(30.0f), velocidadRotacion(90.0f), girarIzquierda(true), tiempoCambio(0.5f), timer(0.0f), duracionMovimiento(0.0f), finalCamino(false) {
+                                                                                                                                                                                                                                                                                                                                                                                ^
+src\game\online\MovePieces.hpp:23:7: note: Member variable 'MovePieces::finalCamino' is in the wrong place in the initializer list.
+ bool finalCamino;
+      ^
+src\game\online\MovePieces.hpp:27:6: style: inconclusive: Technically the member function 'MovePieces::getCaminoActual' can be const. [functionConst]
+ int getCaminoActual();
+     ^
+src\game\online\MovePieces.cpp:67:17: note: Technically the member function 'MovePieces::getCaminoActual' can be const.
+int MovePieces::getCaminoActual() {
+                ^
+src\game\online\MovePieces.hpp:27:6: note: Technically the member function 'MovePieces::getCaminoActual' can be const.
+ int getCaminoActual();
+     ^
+src\game\online\MovePieces.hpp:28:6: style: inconclusive: Technically the member function 'MovePieces::getcasillaActual' can be const. [functionConst]
+ int getcasillaActual();
+     ^
+src\game\online\MovePieces.cpp:70:17: note: Technically the member function 'MovePieces::getcasillaActual' can be const.
+int MovePieces::getcasillaActual() {
+                ^
+src\game\online\MovePieces.hpp:28:6: note: Technically the member function 'MovePieces::getcasillaActual' can be const.
+ int getcasillaActual();
+     ^
+src\game\online\MovePieces.hpp:29:7: style: inconclusive: Technically the member function 'MovePieces::animacionRastro' can be const. [functionConst]
+ void animacionRastro(float deltaTime);
+      ^
+src\game\online\MovePieces.cpp:509:18: note: Technically the member function 'MovePieces::animacionRastro' can be const.
+void MovePieces::animacionRastro(float deltaTime) {
+                 ^
+src\game\online\MovePieces.hpp:29:7: note: Technically the member function 'MovePieces::animacionRastro' can be const.
+ void animacionRastro(float deltaTime);
+      ^
+src\game\online\MovePieces.cpp:533:25: style: Checking if unsigned expression 's.getColor().a' is less than zero. [unsignedLessThanZero]
+  return s.getColor().a <= 0;
+                        ^
+src\game\online\MovePieces.cpp:38:42: style: inconclusive: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'. [funcArgNamesDifferent]
+void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
+                                         ^
+src\game\online\MovePieces.hpp:16:31: note: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'.
+ void Inicializar(sf::Sprite* sprite, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser);
+                              ^
+src\game\online\MovePieces.cpp:38:42: note: Function 'Inicializar' argument 1 names different: declaration 'sprite' definition 'spriteC'.
+void MovePieces::Inicializar(sf::Sprite* spriteC, std::vector<std::vector<sf::Vector2f>>* casillasC, int* vuel, sf::Vector2f fin, bool* CsFin, bool PiecUser) {
+                                         ^
+src\game\online\MovePieces.cpp:411:43: style: Variable 'caminocasa2_1' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminocasa2_1 = {  };
+                                          ^
+src\game\online\MovePieces.cpp:426:47: style: Variable 'caminoimpuesto4_1' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminoimpuesto4_1 = {  };
+                                              ^
+src\game\online\MovePieces.cpp:427:43: style: Variable 'caminocasa4_1' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminocasa4_1 = { sf::Vector2f(323,629), sf::Vector2f(394,678),sf::Vector2f(765, 623) };
+                                          ^
+src\game\online\MovePieces.cpp:457:47: style: Variable 'caminoimpuesto2_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminoimpuesto2_2 = {  };
+                                              ^
+src\game\online\MovePieces.cpp:458:43: style: Variable 'caminocasa2_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminocasa2_2 = {  };
+                                          ^
+src\game\online\MovePieces.cpp:478:47: style: Variable 'caminoimpuesto4_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminoimpuesto4_2 = {  };
+                                              ^
+src\game\online\MovePieces.cpp:479:43: style: Variable 'caminocasa4_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminocasa4_2 = {  };
+                                          ^
+src\game\online\MovePieces.cpp:500:47: style: Variable 'caminoimpuesto6_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminoimpuesto6_2 = { sf::Vector2f(790, 539),sf::Vector2f(444, 42), sf::Vector2f(320, 118),sf::Vector2f(869, 679),sf::Vector2f(428, 517) };
+                                              ^
+src\game\online\MovePieces.cpp:501:43: style: Variable 'caminocasa6_2' is assigned a value that is never used. [unreadVariable]
+  std::vector<sf::Vector2f> caminocasa6_2 = {  };
+                                          ^
+src\game\online\MovePieces.cpp:540:16: style: Variable 'rebote' is assigned a value that is never used. [unreadVariable]
+  float rebote = std::sin(deltaTime * 10) * 5;
+               ^
+src\game\online\MultiplayerGame.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\CubeClass.h:135:2: warning: Member variable 'Cube::Dist' is not initialized in the constructor. [uninitMemberVar]
+ Cube(float _size)
+ ^
+src\game\online\WindowClass.h:98:2: warning: Member variable 'Window::cube' is not initialized in the constructor. [uninitMemberVar]
+ Window(sf::RenderWindow* windowRef) : window(windowRef) {}
+ ^
+src\game\online\WindowClass.h:98:2: warning: Member variable 'Window::faceIndex' is not initialized in the constructor. [uninitMemberVar]
+ Window(sf::RenderWindow* windowRef) : window(windowRef) {}
+ ^
+src\game\online\MultiplayerGame.cpp:7:18: warning: Member variable 'MultiplayerGame::turnoGiro' is not initialized in the constructor. [uninitMemberVar]
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                 ^
+src\game\online\MultiplayerGame.cpp:7:18: warning: Member variable 'MultiplayerGame::vectorActual' is not initialized in the constructor. [uninitMemberVar]
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                 ^
+src\game\online\MultiplayerGame.cpp:7:18: warning: Member variable 'MultiplayerGame::resultadoDado' is not initialized in the constructor. [uninitMemberVar]
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                 ^
+src\game\online\MultiplayerGame.cpp:7:18: warning: Member variable 'MultiplayerGame::animacionImpuesto' is not initialized in the constructor. [uninitMemberVar]
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                 ^
+src\game\online\MultiplayerGame.cpp:7:18: warning: Member variable 'MultiplayerGame::animacionCasa' is not initialized in the constructor. [uninitMemberVar]
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                 ^
+src\game\online\WindowClass.h:23:8: style: Unused private function: 'Window::calcdis' [unusedPrivateFunction]
+ float calcdis(sf::Vector2i p1, sf::Vector2i p2)
+       ^
+src\game\online\MultiplayerGame.hpp:56:10: style: inconclusive: Member variable 'MultiplayerGame::client' is in the wrong place in the initializer list. [initializerList]
+ Client* client;
+         ^
+src\game\online\MultiplayerGame.cpp:7:100: note: Member variable 'MultiplayerGame::client' is in the wrong place in the initializer list.
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                                                                                                   ^
+src\game\online\MultiplayerGame.hpp:56:10: note: Member variable 'MultiplayerGame::client' is in the wrong place in the initializer list.
+ Client* client;
+         ^
+src\game\online\MultiplayerGame.hpp:55:8: style: inconclusive: Member variable 'MultiplayerGame::chats' is in the wrong place in the initializer list. [initializerList]
+ Chat *chats;
+       ^
+src\game\online\MultiplayerGame.cpp:7:130: note: Member variable 'MultiplayerGame::chats' is in the wrong place in the initializer list.
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                                                                                                                                 ^
+src\game\online\MultiplayerGame.hpp:55:8: note: Member variable 'MultiplayerGame::chats' is in the wrong place in the initializer list.
+ Chat *chats;
+       ^
+src\game\online\MultiplayerGame.hpp:63:6: style: inconclusive: Member variable 'MultiplayerGame::impuestoCasa' is in the wrong place in the initializer list. [initializerList]
+ int impuestoCasa;
+     ^
+src\game\online\MultiplayerGame.cpp:7:248: note: Member variable 'MultiplayerGame::impuestoCasa' is in the wrong place in the initializer list.
+MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clienT ) : window(&win),client(clienT), Dado(window), chats(&chat), moverFichas(UsuariosActivos.size(), MovePieces(win,client)), house(UsuariosActivos.size(), HouseBuy()), impuestoCasa(0) {
+                                                                                                                                                                                                                                                       ^
+src\game\online\MultiplayerGame.hpp:63:6: note: Member variable 'MultiplayerGame::impuestoCasa' is in the wrong place in the initializer list.
+ int impuestoCasa;
+     ^
+src\game\online\CubeClass.h:46:8: performance: inconclusive: Technically the member function 'Cube::calcDistance' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ float calcDistance(Vector3D view, Vector3D obj){
+       ^
+src\game\online\WindowClass.h:23:8: performance: inconclusive: Technically the member function 'Window::calcdis' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ float calcdis(sf::Vector2i p1, sf::Vector2i p2)
+       ^
+src\game\online\CubeClass.h:139:3: warning: Class 'Cube' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+  distances = new float[9];
+  ^
+src\game\online\CubeClass.h:139:3: warning: Class 'Cube' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+  distances = new float[9];
+  ^
+src\game\online\MultiplayerGame.cpp:8:2: warning: Class 'MultiplayerGame' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+ ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT);
+ ^
+src\game\online\MultiplayerGame.cpp:8:2: warning: Class 'MultiplayerGame' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+ ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT);
+ ^
+src\game\online\CubeClass.h:135:2: style: Class 'Cube' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+ Cube(float _size)
+ ^
+src\game\online\WindowClass.h:98:2: style: Class 'Window' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+ Window(sf::RenderWindow* windowRef) : window(windowRef) {}
+ ^
+src\game\online\loading.hpp:13:2: style: Class 'LoadingScreen' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+ LoadingScreen(sf::RenderWindow& windowRef);
+ ^
+src\game\online\WindowClass.h:67:16: style: Condition 'j==3' is always true [knownConditionTrueFalse]
+    else if (j == 3)
+               ^
+src\game\online\WindowClass.h:64:16: note: Assuming that condition 'j==2' is not redundant
+    else if (j == 2)
+               ^
+src\game\online\WindowClass.h:54:22: note: Assuming that condition 'j<4' is not redundant
+   for (int j = 0; j < 4; j++) {
+                     ^
+src\game\online\WindowClass.h:67:16: note: Condition 'j==3' is always true
+    else if (j == 3)
+               ^
+src\game\online\MultiplayerGame.cpp:459:9: style: The scope of the variable 'tiempoRuletaVisible' can be reduced. [variableScope]
+  float tiempoRuletaVisible = 3.0f;
+        ^
+src\game\online\MultiplayerGame.cpp:460:8: style: The scope of the variable 'ruletaVisible' can be reduced. [variableScope]
+  bool ruletaVisible = false;
+       ^
+src\game\online\MultiplayerGame.cpp:106:16: style: Local variable 'globalBounds' shadows outer variable [shadowVariable]
+ sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+               ^
+src\game\online\MultiplayerGame.hpp:132:16: note: Shadowed declaration
+ sf::FloatRect globalBounds;
+               ^
+src\game\online\MultiplayerGame.cpp:106:16: note: Shadow variable
+ sf::FloatRect globalBounds = SpriteImpuesto.getGlobalBounds();
+               ^
+src\game\online\MultiplayerGame.cpp:366:12: style: Local variable 'clock' shadows outer variable [shadowVariable]
+ sf::Clock clock;
+           ^
+src\game\online\MultiplayerGame.hpp:147:12: note: Shadowed declaration
+ sf::Clock clock;
+           ^
+src\game\online\MultiplayerGame.cpp:366:12: note: Shadow variable
+ sf::Clock clock;
+           ^
+src\game\online\MultiplayerGame.cpp:458:13: style: Local variable 'clock' shadows outer variable [shadowVariable]
+  sf::Clock clock;
+            ^
+src\game\online\MultiplayerGame.cpp:366:12: note: Shadowed declaration
+ sf::Clock clock;
+           ^
+src\game\online\MultiplayerGame.cpp:458:13: note: Shadow variable
+  sf::Clock clock;
+            ^
+src\game\online\MultiplayerGame.cpp:489:36: style: Local variable 'lock' shadows outer variable [shadowVariable]
+      std::unique_lock<std::mutex> lock(client->clientData->impuestoMutex);
+                                   ^
+src\game\online\MultiplayerGame.cpp:391:31: note: Shadowed declaration
+ std::unique_lock<std::mutex> lock(loading.mtx);
+                              ^
+src\game\online\MultiplayerGame.cpp:489:36: note: Shadow variable
+      std::unique_lock<std::mutex> lock(client->clientData->impuestoMutex);
+                                   ^
+src\game\online\MultiplayerGame.cpp:649:15: style: Local variable 'mousePosition' shadows outer variable [shadowVariable]
+ sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+              ^
+src\game\online\MultiplayerGame.hpp:135:15: note: Shadowed declaration
+ sf::Vector2i mousePosition;
+              ^
+src\game\online\MultiplayerGame.cpp:649:15: note: Shadow variable
+ sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+              ^
+src\game\online\MultiplayerGame.cpp:650:15: style: Local variable 'mousePosFloat' shadows outer variable [shadowVariable]
+ sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+              ^
+src\game\online\MultiplayerGame.hpp:136:15: note: Shadowed declaration
+ sf::Vector2f mousePosFloat;
+              ^
+src\game\online\MultiplayerGame.cpp:650:15: note: Shadow variable
+ sf::Vector2f mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
+              ^
+src\game\online\MultiplayerGame.cpp:787:9: style: Local variable 'deltaTime' shadows outer variable [shadowVariable]
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\online\MultiplayerGame.cpp:754:8: note: Shadowed declaration
+ float deltaTime = clock.restart().asSeconds();
+       ^
+src\game\online\MultiplayerGame.cpp:787:9: note: Shadow variable
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\online\MultiplayerGame.cpp:869:8: style: Local variable 'duration' shadows outer variable [shadowVariable]
+ float duration = 1.0f;
+       ^
+src\game\online\MultiplayerGame.hpp:61:8: note: Shadowed declaration
+ float duration = 2.0f;
+       ^
+src\game\online\MultiplayerGame.cpp:869:8: note: Shadow variable
+ float duration = 1.0f;
+       ^
+src\game\online\MultiplayerGame.cpp:1065:9: style: Local variable 'deltaTime' shadows outer variable [shadowVariable]
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\online\MultiplayerGame.cpp:1048:8: note: Shadowed declaration
+ float deltaTime = clock.restart().asSeconds();
+       ^
+src\game\online\MultiplayerGame.cpp:1065:9: note: Shadow variable
+  float deltaTime = clockMensaje.restart().asSeconds();
+        ^
+src\game\online\WindowClass.h:160:17: style: Variable 'face' can be declared as pointer to const [constVariablePointer]
+    sf::Vertex* face = &Cube3D[i * 4];
+                ^
+src\game\online\MultiplayerGame.cpp:865:22: style: Variable 'currentScaleX' is assigned a value that is never used. [unreadVariable]
+ float currentScaleX = 0.5f;
+                     ^
+src\game\online\MultiplayerGame.cpp:866:22: style: Variable 'currentScaleY' is assigned a value that is never used. [unreadVariable]
+ float currentScaleY = 0.5f;
+                     ^
+src\game\online\MultiplayerGame.cpp:1048:8: style: Variable 'deltaTime' is assigned a value that is never used. [unreadVariable]
+ float deltaTime = clock.restart().asSeconds();
+       ^
+src\game\online\PieceSelector.cpp:14:0: information: Include file: "string" not found. [missingInclude]
+#include "string"
+^
+src\game\online\PieceSelector.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\PieceSelector.cpp:16:16: warning: Member variable 'PieceSelector::newSelection' is not initialized in the constructor. [uninitMemberVar]
+PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
+               ^
+src\game\online\PieceSelector.cpp:16:16: warning: Member variable 'PieceSelector::startX' is not initialized in the constructor. [uninitMemberVar]
+PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
+               ^
+src\game\online\PieceSelector.cpp:16:16: warning: Member variable 'PieceSelector::startY' is not initialized in the constructor. [uninitMemberVar]
+PieceSelector::PieceSelector(sf::RenderWindow* windowRef, Client* clientRef)
+               ^
+src\game\online\PieceSelector.hpp:13:9: style: inconclusive: Member variable 'PieceSelector::selectedPiece' is in the wrong place in the initializer list. [initializerList]
+    int selectedPiece;
+        ^
+src\game\online\PieceSelector.cpp:17:42: note: Member variable 'PieceSelector::selectedPiece' is in the wrong place in the initializer list.
+ : window(windowRef), client(clientRef), selectedPiece(-1) {
+                                         ^
+src\game\online\PieceSelector.hpp:13:9: note: Member variable 'PieceSelector::selectedPiece' is in the wrong place in the initializer list.
+    int selectedPiece;
+        ^
+src\game\online\PieceSelector.hpp:38:10: style: inconclusive: Technically the member function 'PieceSelector::updatePlayerPieceSelection' can be const. [functionConst]
+    void updatePlayerPieceSelection(int newPieceIndex);
+         ^
+src\game\online\PieceSelector.cpp:436:21: note: Technically the member function 'PieceSelector::updatePlayerPieceSelection' can be const.
+void PieceSelector::updatePlayerPieceSelection(int newPieceIndex) {
+                    ^
+src\game\online\PieceSelector.hpp:38:10: note: Technically the member function 'PieceSelector::updatePlayerPieceSelection' can be const.
+    void updatePlayerPieceSelection(int newPieceIndex);
+         ^
+src\game\online\PieceSelector.cpp:405:10: style: Local variable 'startX' shadows outer variable [shadowVariable]
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\online\PieceSelector.hpp:24:11: note: Shadowed declaration
+    float startX;
+          ^
+src\game\online\PieceSelector.cpp:405:10: note: Shadow variable
+   float startX = (1280.0f - totalWidth) / 2.0f + (perfilWidth / 2.0f);
+         ^
+src\game\online\PieceSelector.cpp:406:10: style: Local variable 'startY' shadows outer variable [shadowVariable]
+   float startY = 100.0f;
+         ^
+src\game\online\PieceSelector.hpp:25:11: note: Shadowed declaration
+    float startY;
+          ^
+src\game\online\PieceSelector.cpp:406:10: note: Shadow variable
+   float startY = 100.0f;
+         ^
+src\game\online\PieceSelector.cpp:55:15: style: Variable 'radio' is assigned a value that is never used. [unreadVariable]
+  float radio = piecesTextures[i].getSize().x / 2.0f;
+              ^
+src\game\online\ResourceGame.cpp:76:17: style: Redundant assignment of 'fontUserPerfil' to itself. [selfAssignment]
+ fontUserPerfil = fontUser;
+                ^
+src\game\online\ResourceGame.cpp:83:24: style: Local variable 'overlay' shadows outer variable [shadowVariable]
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+                       ^
+src\core\ResourceGlobal.hpp:14:27: note: Shadowed declaration
+extern sf::RectangleShape overlay;
+                          ^
+src\game\online\ResourceGame.cpp:83:24: note: Shadow variable
+    sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+                       ^
+src\game\online\ResourceGame.cpp:79:25: performance: Function parameter 'Pregunta' should be passed by const reference. [passedByValue]
+bool salirX(sf::Texture Pregunta, sf::RenderWindow* window, Client*cliente){
+                        ^
+src\game\online\ResourceGame.cpp:216:15: style: Consider using std::fill algorithm instead of a raw loop. [useStlAlgorithm]
+        index = -1;
+              ^
+src\game\online\Ruleta.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\Ruleta.cpp:7:9: warning: Member variable 'Ruleta::initialSpeed' is not initialized in the constructor. [uninitMemberVar]
+Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
+        ^
+src\game\online\Ruleta.cpp:7:9: warning: Member variable 'Ruleta::decelerationRate' is not initialized in the constructor. [uninitMemberVar]
+Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
+        ^
+src\game\online\Ruleta.cpp:7:9: warning: Member variable 'Ruleta::decelerationStarted' is not initialized in the constructor. [uninitMemberVar]
+Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
+        ^
+src\game\online\Ruleta.hpp:82:10: style: Unused private function: 'Ruleta::animatePointer' [unusedPrivateFunction]
+    void animatePointer();
+         ^
+src\game\online\Ruleta.hpp:25:13: style: inconclusive: Member variable 'Ruleta::client' is in the wrong place in the initializer list. [initializerList]
+    Client* client;
+            ^
+src\game\online\Ruleta.cpp:8:17: note: Member variable 'Ruleta::client' is in the wrong place in the initializer list.
+ : width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
+                ^
+src\game\online\Ruleta.hpp:25:13: note: Member variable 'Ruleta::client' is in the wrong place in the initializer list.
+    Client* client;
+            ^
+src\game\online\Ruleta.hpp:32:11: style: inconclusive: Member variable 'Ruleta::blinkTimer' is in the wrong place in the initializer list. [initializerList]
+    float blinkTimer;
+          ^
+src\game\online\Ruleta.cpp:8:84: note: Member variable 'Ruleta::blinkTimer' is in the wrong place in the initializer list.
+ : width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
+                                                                                   ^
+src\game\online\Ruleta.hpp:32:11: note: Member variable 'Ruleta::blinkTimer' is in the wrong place in the initializer list.
+    float blinkTimer;
+          ^
+src\game\online\Ruleta.hpp:27:10: style: inconclusive: Member variable 'Ruleta::turno' is in the wrong place in the initializer list. [initializerList]
+    bool turno;
+         ^
+src\game\online\Ruleta.cpp:8:198: note: Member variable 'Ruleta::turno' is in the wrong place in the initializer list.
+ : width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
+                                                                                                                                                                                                     ^
+src\game\online\Ruleta.hpp:27:10: note: Member variable 'Ruleta::turno' is in the wrong place in the initializer list.
+    bool turno;
+         ^
+src\game\online\Ruleta.hpp:21:9: style: inconclusive: Member variable 'Ruleta::event' is in the wrong place in the initializer list. [initializerList]
+    int event;
+        ^
+src\game\online\Ruleta.cpp:8:226: note: Member variable 'Ruleta::event' is in the wrong place in the initializer list.
+ : width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
+                                                                                                                                                                                                                                 ^
+src\game\online\Ruleta.hpp:21:9: note: Member variable 'Ruleta::event' is in the wrong place in the initializer list.
+    int event;
+        ^
+src\game\online\Ruleta.hpp:80:10: style: inconclusive: Technically the member function 'Ruleta::drawLights' can be const. [functionConst]
+    void drawLights(sf::RenderWindow& window, float deltaTime);
+         ^
+src\game\online\Ruleta.cpp:359:14: note: Technically the member function 'Ruleta::drawLights' can be const.
+void Ruleta::drawLights(sf::RenderWindow& window, float deltaTime) {
+             ^
+src\game\online\Ruleta.hpp:80:10: note: Technically the member function 'Ruleta::drawLights' can be const.
+    void drawLights(sf::RenderWindow& window, float deltaTime);
+         ^
+src\game\online\Ruleta.cpp:419:15: style: The scope of the variable 'bounce' can be reduced. [variableScope]
+ static float bounce = 0.0f;
+              ^
+src\game\online\Ruleta.cpp:24:67: style: inconclusive: Function 'draw' argument 3 names different: declaration 'Validar' definition 'giroActivo'. [funcArgNamesDifferent]
+void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
+                                                                  ^
+src\game\online\Ruleta.hpp:17:63: note: Function 'draw' argument 3 names different: declaration 'Validar' definition 'giroActivo'.
+    void draw(sf::RenderWindow& window, float deltaTime, bool Validar);
+                                                              ^
+src\game\online\Ruleta.cpp:24:67: note: Function 'draw' argument 3 names different: declaration 'Validar' definition 'giroActivo'.
+void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
+                                                                  ^
+src\game\online\Ruleta.cpp:100:8: style: Local variable 'currentSegment' shadows outer variable [shadowVariable]
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+       ^
+src\game\online\Ruleta.hpp:46:9: note: Shadowed declaration
+    int currentSegment;
+        ^
+src\game\online\Ruleta.cpp:100:8: note: Shadow variable
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+       ^
+src\game\online\Ruleta.cpp:308:14: style: Variable 'iconPaths' can be declared as const array [constVariable]
+ std::string iconPaths[] = {
+             ^
+src\game\online\Ruleta.cpp:100:23: style: Variable 'currentSegment' is assigned a value that is never used. [unreadVariable]
+   int currentSegment = static_cast<int>(finalAngle / (360.0f / numSegments));
+                      ^
+src\game\online\Ruleta.cpp:325:18: style: Variable 'ScaleIcon' is assigned a value that is never used. [unreadVariable]
+ float ScaleIcon = radius / 200;
+                 ^
+src\game\online\Stealplayer.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\game\online\Stealplayer.hpp:14:22: style: inconclusive: Member variable 'Stealplayer::UsuariosEleccion' is in the wrong place in the initializer list. [initializerList]
+    std::vector<int> UsuariosEleccion;
+                     ^
+src\game\online\Stealplayer.cpp:6:163: note: Member variable 'Stealplayer::UsuariosEleccion' is in the wrong place in the initializer list.
+Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal, Client* clienT) : window(window),client(clienT), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+                                                                                                                                                                  ^
+src\game\online\Stealplayer.hpp:14:22: note: Member variable 'Stealplayer::UsuariosEleccion' is in the wrong place in the initializer list.
+    std::vector<int> UsuariosEleccion;
+                     ^
+src\game\online\Stealplayer.cpp:6:106: performance: Function parameter 'PSteal' should be passed by const reference. [passedByValue]
+Stealplayer::Stealplayer(sf::RenderWindow* window, std::vector<int> UsuariosElec,std::vector<PlayerGame> PSteal, Client* clienT) : window(window),client(clienT), UsuariosEleccion(UsuariosElec), PlayersSteal(PSteal) {
+                                                                                                         ^
+src\game\online\loading.hpp:46:7: style: Unused private function: 'LoadingScreen::loadBackground' [unusedPrivateFunction]
+ void loadBackground();
+      ^
+src\game\online\loading.hpp:46:7: performance: inconclusive: Technically the member function 'LoadingScreen::loadBackground' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void loadBackground();
+      ^
+src\game\online\loading.cpp:16:21: note: Technically the member function 'LoadingScreen::loadBackground' can be static (but you may consider moving to unnamed namespace).
+void LoadingScreen::loadBackground() {
+                    ^
+src\game\online\loading.hpp:46:7: note: Technically the member function 'LoadingScreen::loadBackground' can be static (but you may consider moving to unnamed namespace).
+ void loadBackground();
+      ^
+src\game\online\loading.cpp:89:41: style: inconclusive: Function 'updateDice' argument 1 names different: declaration 'deltaTiempo' definition 'deltaTime'. [funcArgNamesDifferent]
+void LoadingScreen::updateDice(sf::Time deltaTime) {
+                                        ^
+src\game\online\loading.hpp:47:27: note: Function 'updateDice' argument 1 names different: declaration 'deltaTiempo' definition 'deltaTime'.
+ void updateDice(sf::Time deltaTiempo);
+                          ^
+src\game\online\loading.cpp:89:41: note: Function 'updateDice' argument 1 names different: declaration 'deltaTiempo' definition 'deltaTime'.
+void LoadingScreen::updateDice(sf::Time deltaTime) {
+                                        ^
+src\game\online\loading.cpp:53:12: style: Local variable 'frameClock' shadows outer variable [shadowVariable]
+ sf::Clock frameClock;
+           ^
+src\game\online\loading.hpp:41:12: note: Shadowed declaration
+ sf::Clock frameClock;
+           ^
+src\game\online\loading.cpp:53:12: note: Shadow variable
+ sf::Clock frameClock;
+           ^
+src\game\online\loading.cpp:57:24: style: Variable 'deltaTiempo' is assigned a value that is never used. [unreadVariable]
+  sf::Time deltaTiempo = fadeclock.restart();
+                       ^
+src\game\online\nulo.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\menu\GameModeSelector.cpp:10:19: warning: Member variable 'GameModeSelector::isWebViewOpen' is not initialized in the constructor. [uninitMemberVar]
+GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
+                  ^
+src\menu\GameModeSelector.cpp:10:19: warning: Member variable 'GameModeSelector::sesionValida' is not initialized in the constructor. [uninitMemberVar]
+GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
+                  ^
+src\menu\GameModeSelector.cpp:10:19: warning: Member variable 'GameModeSelector::Valida' is not initialized in the constructor. [uninitMemberVar]
+GameModeSelector::GameModeSelector(sf::RenderWindow& win) : window(&win) {
+                  ^
+src\menu\GameModeSelector.hpp:10:5: style: Class 'GameModeSelector' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    GameModeSelector (sf::RenderWindow& win);
+    ^
+src\menu\IniciarPartida.hpp:11:5: style: Class 'IniciarPartida' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    IniciarPartida(sf::RenderWindow& win);
+    ^
+src\menu\IniciaUser.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\menu\IniciaUser.hpp:26:17: style: inconclusive: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list. [initializerList]
+    std::string TextGrd;
+                ^
+src\menu\IniciaUser.cpp:106:41: note: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list.
+ : window(&windowRef), currentIndex(0), TextGrd(Grd) {
+                                        ^
+src\menu\IniciaUser.hpp:26:17: note: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list.
+    std::string TextGrd;
+                ^
+src\menu\IniciaUser.hpp:26:17: style: inconclusive: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list. [initializerList]
+    std::string TextGrd;
+                ^
+src\menu\IniciaUser.cpp:124:41: note: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list.
+ : window(&windowRef), currentIndex(0), TextGrd("") {
+                                        ^
+src\menu\IniciaUser.hpp:26:17: note: Member variable 'IniciaUser::TextGrd' is in the wrong place in the initializer list.
+    std::string TextGrd;
+                ^
+src\menu\IniciaUser.hpp:22:10: performance: inconclusive: Technically the member function 'IniciaUser::loadSelectedAvatar' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    void loadSelectedAvatar();
+         ^
+src\menu\IniciaUser.cpp:596:18: note: Technically the member function 'IniciaUser::loadSelectedAvatar' can be static (but you may consider moving to unnamed namespace).
+void IniciaUser::loadSelectedAvatar() {
+                 ^
+src\menu\IniciaUser.hpp:22:10: note: Technically the member function 'IniciaUser::loadSelectedAvatar' can be static (but you may consider moving to unnamed namespace).
+    void loadSelectedAvatar();
+         ^
+src\menu\IniciaUser.hpp:14:5: style: Class 'IniciaUser' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    IniciaUser(sf::RenderWindow &windowRef);
+    ^
+src\menu\IniciaUser.cpp:466:11: style: Condition 'newSelection' is always true [knownConditionTrueFalse]
+      if (newSelection) {
+          ^
+src\menu\IniciaUser.cpp:185:10: style: Local variable 'textBox' shadows outer variable [shadowVariable]
+ TextBox textBox(496, 50, "Ingresa tu nombre: ", TextGrd);
+         ^
+src\menu\IniciaUser.hpp:49:13: note: Shadowed declaration
+    TextBox textBox;
+            ^
+src\menu\IniciaUser.cpp:185:10: note: Shadow variable
+ TextBox textBox(496, 50, "Ingresa tu nombre: ", TextGrd);
+         ^
+src\menu\IniciaUser.cpp:427:18: style: Local variable 'imageWithBackground' shadows outer variable [shadowVariable]
+       sf::Image imageWithBackground = croppedImage;
+                 ^
+src\menu\IniciaUser.cpp:241:12: note: Shadowed declaration
+ sf::Image imageWithBackground;
+           ^
+src\menu\IniciaUser.cpp:427:18: note: Shadow variable
+       sf::Image imageWithBackground = croppedImage;
+                 ^
+src\menu\IniciaUser.cpp:403:22: style: Local variable 'imgSize' shadows outer variable [shadowVariable]
+        sf::Vector2u imgSize = tempTexture.getSize();
+                     ^
+src\menu\IniciaUser.cpp:369:21: note: Shadowed declaration
+       sf::Vector2u imgSize = originalImage.getSize();
+                    ^
+src\menu\IniciaUser.cpp:403:22: note: Shadow variable
+        sf::Vector2u imgSize = tempTexture.getSize();
+                     ^
+src\menu\IniciaUser.cpp:676:19: style: Local variable 'window' shadows outer variable [shadowVariable]
+ sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Selecciona el área");
+                  ^
+src\menu\IniciaUser.hpp:28:23: note: Shadowed declaration
+    sf::RenderWindow *window;
+                      ^
+src\menu\IniciaUser.cpp:676:19: note: Shadow variable
+ sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Selecciona el área");
+                  ^
+src\menu\IniciaUser.cpp:907:16: style: Local variable 'pos' shadows outer variable [shadowVariable]
+  sf::Vector2f pos = selectionBox.getPosition();
+               ^
+src\menu\IniciaUser.cpp:760:15: note: Shadowed declaration
+ sf::Vector2f pos = selectionBox.getPosition();
+              ^
+src\menu\IniciaUser.cpp:907:16: note: Shadow variable
+  sf::Vector2f pos = selectionBox.getPosition();
+               ^
+src\menu\IniciaUser.cpp:908:16: style: Local variable 'size' shadows outer variable [shadowVariable]
+  sf::Vector2f size = selectionBox.getSize();
+               ^
+src\menu\IniciaUser.cpp:761:15: note: Shadowed declaration
+ sf::Vector2f size = selectionBox.getSize();
+              ^
+src\menu\IniciaUser.cpp:908:16: note: Shadow variable
+  sf::Vector2f size = selectionBox.getSize();
+               ^
+src\menu\IniciaUser.cpp:105:65: performance: Function parameter 'Grd' should be passed by const reference. [passedByValue]
+IniciaUser::IniciaUser(sf::RenderWindow& windowRef, std::string Grd)
+                                                                ^
+src\menu\IniciaUser.cpp:932:14: style: Variable 'corner' can be declared as pointer to const [constVariableReference]
+  for (auto& corner : corners) {
+             ^
+src\menu\IniciaUser.cpp:200:22: style: Variable 'avatarYOffset' is assigned a value that is never used. [unreadVariable]
+ float avatarYOffset = 0.0f;
+                     ^
+src\menu\IniciaUser.cpp:238:36: style: Variable 'selectedBackgroundColor' is assigned a value that is never used. [unreadVariable]
+ sf::Color selectedBackgroundColor = sf::Color::White;
+                                   ^
+src\menu\IniciarPartida.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\menu\IniciarPartida.cpp:8:17: warning: Member variable 'IniciarPartida::isWebViewOpen' is not initialized in the constructor. [uninitMemberVar]
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win){
+                ^
+src\menu\IniciarPartida.cpp:8:17: warning: Member variable 'IniciarPartida::sesionValida' is not initialized in the constructor. [uninitMemberVar]
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win){
+                ^
+src\menu\IniciarPartida.cpp:8:17: warning: Member variable 'IniciarPartida::Valida' is not initialized in the constructor. [uninitMemberVar]
+IniciarPartida::IniciarPartida(sf::RenderWindow& win) : window(&win){
+                ^
+src\menu\IniciarPartida.cpp:10:3: warning: Class 'IniciarPartida' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+  client = new Client();
+  ^
+src\menu\IniciarPartida.cpp:10:3: warning: Class 'IniciarPartida' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+  client = new Client();
+  ^
+src\menu\IniciarPartida.cpp:113:7: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+      client->initialize();
+      ^
+src\menu\IniciarPartida.cpp:124:19: note: Assuming that condition 'client!=nullptr' is not redundant
+       if (client != nullptr) {
+                  ^
+src\menu\IniciarPartida.cpp:113:7: note: Null pointer dereference
+      client->initialize();
+      ^
+src\menu\IniciarPartida.cpp:114:19: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+      if (true == client->connectToServer("208.68.36.50", 1234)) {
+                  ^
+src\menu\IniciarPartida.cpp:124:19: note: Assuming that condition 'client!=nullptr' is not redundant
+       if (client != nullptr) {
+                  ^
+src\menu\IniciarPartida.cpp:114:19: note: Null pointer dereference
+      if (true == client->connectToServer("208.68.36.50", 1234)) {
+                  ^
+src\menu\IniciarPartida.cpp:115:15: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+       Code = client->createRoom(nameUser, TextureAvatarPath);
+              ^
+src\menu\IniciarPartida.cpp:124:19: note: Assuming that condition 'client!=nullptr' is not redundant
+       if (client != nullptr) {
+                  ^
+src\menu\IniciarPartida.cpp:115:15: note: Null pointer dereference
+       Code = client->createRoom(nameUser, TextureAvatarPath);
+              ^
+src\menu\IniciarPartida.cpp:222:8: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+       client->initialize();
+       ^
+src\menu\IniciarPartida.cpp:234:20: note: Assuming that condition 'client!=nullptr' is not redundant
+        if (client != nullptr) {
+                   ^
+src\menu\IniciarPartida.cpp:222:8: note: Null pointer dereference
+       client->initialize();
+       ^
+src\menu\IniciarPartida.cpp:224:20: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+       if (true == client->connectToServer("208.68.36.50", 1234)) {
+                   ^
+src\menu\IniciarPartida.cpp:234:20: note: Assuming that condition 'client!=nullptr' is not redundant
+        if (client != nullptr) {
+                   ^
+src\menu\IniciarPartida.cpp:224:20: note: Null pointer dereference
+       if (true == client->connectToServer("208.68.36.50", 1234)) {
+                   ^
+src\menu\IniciarPartida.cpp:226:9: warning: Either the condition 'client!=nullptr' is redundant or there is possible null pointer dereference: client. [nullPointerRedundantCheck]
+        client->joinRoom(code, nameUser, TextureAvatarPath);
+        ^
+src\menu\IniciarPartida.cpp:234:20: note: Assuming that condition 'client!=nullptr' is not redundant
+        if (client != nullptr) {
+                   ^
+src\menu\IniciarPartida.cpp:226:9: note: Null pointer dereference
+        client->joinRoom(code, nameUser, TextureAvatarPath);
+        ^
+src\menu\menuP.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\menu\menuP.hpp:43:22: style: inconclusive: Member variable 'menuP::musicSlider' is in the wrong place in the initializer list. [initializerList]
+    SettingsManager* musicSlider;
+                     ^
+src\menu\menuP.cpp:12:77: note: Member variable 'menuP::musicSlider' is in the wrong place in the initializer list.
+menuP::menuP() : window(nullptr), SesionValida(true) ,effectSlider(nullptr),musicSlider(nullptr), lastHoveredButton(nullptr) {
+                                                                            ^
+src\menu\menuP.hpp:43:22: note: Member variable 'menuP::musicSlider' is in the wrong place in the initializer list.
+    SettingsManager* musicSlider;
+                     ^
+src\menu\menuP.hpp:36:10: style: inconclusive: Technically the member function 'menuP::ValidarUser' can be const. [functionConst]
+    void ValidarUser();
+         ^
+src\menu\menuP.cpp:260:13: note: Technically the member function 'menuP::ValidarUser' can be const.
+void menuP::ValidarUser() {
+            ^
+src\menu\menuP.hpp:36:10: note: Technically the member function 'menuP::ValidarUser' can be const.
+    void ValidarUser();
+         ^
+src\menu\menuP.cpp:48:41: style: inconclusive: Function 'setWindow' argument 1 names different: declaration 'windowRef' definition 'win'. [funcArgNamesDifferent]
+void menuP::setWindow(sf::RenderWindow& win) {
+                                        ^
+src\menu\menuP.hpp:15:38: note: Function 'setWindow' argument 1 names different: declaration 'windowRef' definition 'win'.
+    void setWindow(sf::RenderWindow& windowRef);
+                                     ^
+src\menu\menuP.cpp:48:41: note: Function 'setWindow' argument 1 names different: declaration 'windowRef' definition 'win'.
+void menuP::setWindow(sf::RenderWindow& win) {
+                                        ^
+src\menu\menuP.cpp:521:21: style: Local variable 'overlay' shadows outer variable [shadowVariable]
+ sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+                    ^
+src\core\ResourceGlobal.hpp:14:27: note: Shadowed declaration
+extern sf::RectangleShape overlay;
+                          ^
+src\menu\menuP.cpp:521:21: note: Shadow variable
+ sf::RectangleShape overlay(sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)));
+                    ^
+src\menu\menuP.cpp:600:21: style: Local variable 'overlay' shadows outer variable [shadowVariable]
+ sf::RectangleShape overlay(sf::Vector2f(
+                    ^
+src\core\ResourceGlobal.hpp:14:27: note: Shadowed declaration
+extern sf::RectangleShape overlay;
+                          ^
+src\menu\menuP.cpp:600:21: note: Shadow variable
+ sf::RectangleShape overlay(sf::Vector2f(
+                    ^
+src\menu\menuP.cpp:611:11: style: Local variable 'Fuente' shadows outer variable [shadowVariable]
+ sf::Font Fuente;
+          ^
+src\menu\menuP.hpp:101:14: note: Shadowed declaration
+    sf::Font Fuente;
+             ^
+src\menu\menuP.cpp:611:11: note: Shadow variable
+ sf::Font Fuente;
+          ^
+src\menu\menuP.cpp:777:21: style: Local variable 'overlay' shadows outer variable [shadowVariable]
+ sf::RectangleShape overlay(sf::Vector2f(
+                    ^
+src\core\ResourceGlobal.hpp:14:27: note: Shadowed declaration
+extern sf::RectangleShape overlay;
+                          ^
+src\menu\menuP.cpp:777:21: note: Shadow variable
+ sf::RectangleShape overlay(sf::Vector2f(
+                    ^
+src\menu\menuP.cpp:788:11: style: Local variable 'Fuente' shadows outer variable [shadowVariable]
+ sf::Font Fuente;
+          ^
+src\menu\menuP.hpp:101:14: note: Shadowed declaration
+    sf::Font Fuente;
+             ^
+src\menu\menuP.cpp:788:11: note: Shadow variable
+ sf::Font Fuente;
+          ^
+src\menu\menuP.cpp:793:11: style: Local variable 'TextAcercaDe' shadows outer variable [shadowVariable]
+ sf::Text TextAcercaDe;
+          ^
+src\menu\menuP.hpp:102:14: note: Shadowed declaration
+    sf::Text TextAcercaDe;
+             ^
+src\menu\menuP.cpp:793:11: note: Shadow variable
+ sf::Text TextAcercaDe;
+          ^
+src\network\Client.cpp:8:53: warning: Class 'Client' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+Client::Client() :  peer(nullptr), client(nullptr), clientData(new ClientData()), SMessageHandler(new ServerMessageHandler(clientData)){
+                                                    ^
+src\network\Client.cpp:8:53: warning: Class 'Client' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+Client::Client() :  peer(nullptr), client(nullptr), clientData(new ClientData()), SMessageHandler(new ServerMessageHandler(clientData)){
+                                                    ^
+src\network\NetworkMessage.cpp:64:48: performance: Function parameter 'mensaje' should be passed by const reference. [passedByValue]
+void NetworkMessage::sendSmg(const std::string mensaje) {
+                                               ^
+src\network\ServerMessageHandler.cpp:2:0: information: Include file: "iostream" not found. [missingInclude]
+#include "iostream"
+^
+src\network\ServerMessageHandler.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\network\ServerMessageHandler.hpp:27:6: performance: inconclusive: Technically the member function 'ServerMessageHandler::calcularNumeroDeLineas' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ int calcularNumeroDeLineas(const sf::Text& text);
+     ^
+src\network\ServerMessageHandler.cpp:13:27: note: Technically the member function 'ServerMessageHandler::calcularNumeroDeLineas' can be static (but you may consider moving to unnamed namespace).
+int ServerMessageHandler::calcularNumeroDeLineas(const sf::Text& text) {
+                          ^
+src\network\ServerMessageHandler.hpp:27:6: note: Technically the member function 'ServerMessageHandler::calcularNumeroDeLineas' can be static (but you may consider moving to unnamed namespace).
+ int calcularNumeroDeLineas(const sf::Text& text);
+     ^
+src\network\ServerMessageHandler.hpp:29:7: performance: inconclusive: Technically the member function 'ServerMessageHandler::moneyActu' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void moneyActu(int money);
+      ^
+src\network\ServerMessageHandler.cpp:22:28: note: Technically the member function 'ServerMessageHandler::moneyActu' can be static (but you may consider moving to unnamed namespace).
+void ServerMessageHandler::moneyActu(int money) {
+                           ^
+src\network\ServerMessageHandler.hpp:29:7: note: Technically the member function 'ServerMessageHandler::moneyActu' can be static (but you may consider moving to unnamed namespace).
+ void moneyActu(int money);
+      ^
+src\network\ServerMessageHandler.hpp:31:7: performance: inconclusive: Technically the member function 'ServerMessageHandler::MONEYSALARIO' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+ void MONEYSALARIO(std::string message, int usuario);
+      ^
+src\network\ServerMessageHandler.cpp:32:28: note: Technically the member function 'ServerMessageHandler::MONEYSALARIO' can be static (but you may consider moving to unnamed namespace).
+void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
+                           ^
+src\network\ServerMessageHandler.hpp:31:7: note: Technically the member function 'ServerMessageHandler::MONEYSALARIO' can be static (but you may consider moving to unnamed namespace).
+ void MONEYSALARIO(std::string message, int usuario);
+      ^
+src\network\ServerMessageHandler.cpp:871:25: style: Condition 'playerIndex<index' is always true [knownConditionTrueFalse]
+   else if (playerIndex < index) {
+                        ^
+src\network\ServerMessageHandler.cpp:860:25: note: Assuming that condition 'playerIndex>=index' is not redundant
+   else if (playerIndex >= index) {
+                        ^
+src\network\ServerMessageHandler.cpp:871:25: note: Condition 'playerIndex<index' is always true
+   else if (playerIndex < index) {
+                        ^
+src\network\ServerMessageHandler.cpp:78:14: style: Local variable 'header' shadows outer variable [shadowVariable]
+   uint32_t* header = reinterpret_cast<uint32_t*>(packetData.data() + 4);
+             ^
+src\network\ServerMessageHandler.cpp:59:14: note: Shadowed declaration
+ std::string header(rawData.begin(), rawData.begin() + std::min<size_t>(rawData.size(), 10));
+             ^
+src\network\ServerMessageHandler.cpp:78:14: note: Shadow variable
+   uint32_t* header = reinterpret_cast<uint32_t*>(packetData.data() + 4);
+             ^
+src\network\ServerMessageHandler.cpp:131:19: style: Local variable 'chunk' shadows outer variable [shadowVariable]
+    for (uint32_t chunk : missingChunks) {
+                  ^
+src\network\ServerMessageHandler.cpp:128:19: note: Shadowed declaration
+    for (uint32_t chunk : missingChunks) //std::cout << chunk << " ";
+                  ^
+src\network\ServerMessageHandler.cpp:131:19: note: Shadow variable
+    for (uint32_t chunk : missingChunks) {
+                  ^
+src\network\ServerMessageHandler.cpp:134:16: style: Local variable 'header' shadows outer variable [shadowVariable]
+     uint32_t* header = reinterpret_cast<uint32_t*>(requestPacket.data() + 4);
+               ^
+src\network\ServerMessageHandler.cpp:59:14: note: Shadowed declaration
+ std::string header(rawData.begin(), rawData.begin() + std::min<size_t>(rawData.size(), 10));
+             ^
+src\network\ServerMessageHandler.cpp:134:16: note: Shadow variable
+     uint32_t* header = reinterpret_cast<uint32_t*>(requestPacket.data() + 4);
+               ^
+src\network\ServerMessageHandler.cpp:180:16: style: Local variable 'message' shadows outer variable [shadowVariable]
+   std::string message = "END_TURN";
+               ^
+src\network\ServerMessageHandler.cpp:63:14: note: Shadowed declaration
+ std::string message(reinterpret_cast<char*>(preprocces->data), preprocces->dataLength);
+             ^
+src\network\ServerMessageHandler.cpp:180:16: note: Shadow variable
+   std::string message = "END_TURN";
+               ^
+src\network\ServerMessageHandler.cpp:32:53: performance: Function parameter 'message' should be passed by const reference. [passedByValue]
+void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
+                                                    ^
+src\network\ServerMessageHandler.cpp:73:26: style: Variable 'chunkData' can be declared as reference to const [constVariableReference]
+   std::vector<uint8_t>& chunkData = MYplayerImageFragments[chunkIndex];
+                         ^
+src\network\ServerMessageHandler.cpp:277:11: performance: Inefficient usage of string::find() in condition; string::starts_with() could be faster. [stlIfStrFind]
+ else if (message.find("COMPRADA:") == 0) {
+          ^
+src\network\ServerMessageHandler.cpp:100:40: performance: Searching before insertion is not necessary. Instead of 'expectedChunksPerPlayer[senderID]=totalChunks' consider using 'expectedChunksPerPlayer.try_emplace(senderID, totalChunks);'. [stlFindInsert]
+   expectedChunksPerPlayer[senderID] = totalChunks;
+                                       ^
+src\network\ServerMessageHandler.cpp:23:22: style: Variable 'message' is assigned a value that is never used. [unreadVariable]
+ std::string message = "MONEY_ACTU:" + std::to_string(money);
+                     ^
+src\network\ServerMessageHandler.cpp:743:21: style: Variable 'tipo' is assigned a value that is never used. [unreadVariable]
+   std::string tipo = partes[0];   // "image0"
+                    ^
+src\network\ServerMessageHandler.cpp:669:15: style: Unused variable: token [unusedVariable]
+  std::string token;
+              ^
+src\settings\SettingsManager.cpp:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src\settings\SettingsManager.hpp:32:10: style: inconclusive: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list. [initializerList]
+    bool musicEnabled;
+         ^
+src\settings\SettingsManager.cpp:19:75: note: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list.
+    : window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
+                                                                          ^
+src\settings\SettingsManager.hpp:32:10: note: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list.
+    bool musicEnabled;
+         ^
+src\settings\SettingsManager.hpp:32:10: style: inconclusive: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list. [initializerList]
+    bool musicEnabled;
+         ^
+src\settings\SettingsManager.cpp:109:215: note: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list.
+SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef): window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
+                                                                                                                                                                                                                      ^
+src\settings\SettingsManager.hpp:32:10: note: Member variable 'SettingsManager::musicEnabled' is in the wrong place in the initializer list.
+    bool musicEnabled;
+         ^
+src\settings\SettingsManager.hpp:25:10: style: inconclusive: Technically the member function 'SettingsManager::saveSettings' can be const. [functionConst]
+    void saveSettings();
+         ^
+src\settings\SettingsManager.cpp:337:23: note: Technically the member function 'SettingsManager::saveSettings' can be const.
+void SettingsManager::saveSettings() {
+                      ^
+src\settings\SettingsManager.hpp:25:10: note: Technically the member function 'SettingsManager::saveSettings' can be const.
+    void saveSettings();
+         ^
+src\settings\SettingsManager.hpp:49:11: performance: inconclusive: Technically the member function 'SettingsManager::clamp' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    float clamp(float value, float min, float max) const;
+          ^
+src\settings\SettingsManager.cpp:333:24: note: Technically the member function 'SettingsManager::clamp' can be static (but you may consider moving to unnamed namespace).
+float SettingsManager::clamp(float value, float min, float max) const {
+                       ^
+src\settings\SettingsManager.hpp:49:11: note: Technically the member function 'SettingsManager::clamp' can be static (but you may consider moving to unnamed namespace).
+    float clamp(float value, float min, float max) const;
+          ^
+src\settings\SettingsManager.cpp:97:14: style: Local variable 'TextpantallaCompleta' shadows outer variable [shadowVariable]
+    sf::Text TextpantallaCompleta;
+             ^
+src\settings\SettingsManager.hpp:42:14: note: Shadowed declaration
+    sf::Text TextpantallaCompleta;
+             ^
+src\settings\SettingsManager.cpp:97:14: note: Shadow variable
+    sf::Text TextpantallaCompleta;
+             ^
+src\settings\SettingsManager.cpp:197:46: style: Parameter 'event' can be declared as reference to const [constParameterReference]
+void SettingsManager::handleEvent(sf::Event& event, const sf::RenderWindow& window) {
+                                             ^
+src\ui\ButtonG.hpp:22:25: style: inconclusive: Member variable 'ButtonG::Borde' is in the wrong place in the initializer list. [initializerList]
+    sf::RectangleShape *Borde;
+                        ^
+src\ui\ButtonG.cpp:7:82: note: Member variable 'ButtonG::Borde' is in the wrong place in the initializer list.
+    : sprite(&sprite), textureNormal(textureNormal), textureHover(textureHover), Borde(nullptr){}
+                                                                                 ^
+src\ui\ButtonG.hpp:22:25: note: Member variable 'ButtonG::Borde' is in the wrong place in the initializer list.
+    sf::RectangleShape *Borde;
+                        ^
+src\ui\ButtonG.hpp:21:17: style: inconclusive: Member variable 'ButtonG::sprite' is in the wrong place in the initializer list. [initializerList]
+    sf::Sprite* sprite;
+                ^
+src\ui\ButtonG.cpp:14:67: note: Member variable 'ButtonG::sprite' is in the wrong place in the initializer list.
+    :  textureNormal(textureNormal), textureHover(textureHover) , sprite(nullptr), Borde(nullptr) {}
+                                                                  ^
+src\ui\ButtonG.hpp:21:17: note: Member variable 'ButtonG::sprite' is in the wrong place in the initializer list.
+    sf::Sprite* sprite;
+                ^
+src\ui\ButtonG.hpp:16:10: style: inconclusive: Technically the member function 'ButtonG::resetLastHoveredButton' can be const. [functionConst]
+    void resetLastHoveredButton();
+         ^
+src\ui\ButtonG.cpp:69:15: note: Technically the member function 'ButtonG::resetLastHoveredButton' can be const.
+void ButtonG::resetLastHoveredButton() {
+              ^
+src\ui\ButtonG.hpp:16:10: note: Technically the member function 'ButtonG::resetLastHoveredButton' can be const.
+    void resetLastHoveredButton();
+         ^
+src\ui\ButtonG.hpp:18:10: performance: inconclusive: Technically the member function 'ButtonG::playHoverSound' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    void playHoverSound();
+         ^
+src\ui\ButtonG.cpp:82:15: note: Technically the member function 'ButtonG::playHoverSound' can be static (but you may consider moving to unnamed namespace).
+void ButtonG::playHoverSound() {
+              ^
+src\ui\ButtonG.hpp:18:10: note: Technically the member function 'ButtonG::playHoverSound' can be static (but you may consider moving to unnamed namespace).
+    void playHoverSound();
+         ^
+src\ui\Cube.hpp:32:21: performance: inconclusive: Technically the member function 'Cube::createRoundedRectangle' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    sf::ConvexShape createRoundedRectangle(float width, float height, float radius);
+                    ^
+src\ui\Cube.cpp:30:23: note: Technically the member function 'Cube::createRoundedRectangle' can be static (but you may consider moving to unnamed namespace).
+sf::ConvexShape Cube::createRoundedRectangle(float width, float height, float radius) {
+                      ^
+src\ui\Cube.hpp:32:21: note: Technically the member function 'Cube::createRoundedRectangle' can be static (but you may consider moving to unnamed namespace).
+    sf::ConvexShape createRoundedRectangle(float width, float height, float radius);
+                    ^
+src\ui\Cube.cpp:127:16: style: Variable 'dot' can be declared as reference to const [constVariableReference]
+    for (auto& dot : faces[currentFace].dots) {
+               ^
+src\ui\Cube.cpp:53:11: style: Variable 'grid' can be declared as const array [constVariable]
+    float grid[3][3] = {
+          ^
+src\ui\MensageBox.hpp:27:10: style: inconclusive: Technically the member function 'MensageBox::draw' can be const. [functionConst]
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\MensageBox.cpp:133:18: note: Technically the member function 'MensageBox::draw' can be const.
+void MensageBox::draw(sf::RenderWindow& window) {
+                 ^
+src\ui\MensageBox.hpp:27:10: note: Technically the member function 'MensageBox::draw' can be const.
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\Scrollbar.cpp:6:12: warning: Member variable 'Scrollbar::width' is not initialized in the constructor. [uninitMemberVar]
+Scrollbar::Scrollbar(float windowHeight, float scrollbarHeight, float width)
+           ^
+src\ui\Scrollbar.hpp:40:19: style: inconclusive: Member variable 'Scrollbar::x' is in the wrong place in the initializer list. [initializerList]
+    float conerPs,x,y;
+                  ^
+src\ui\Scrollbar.cpp:7:69: note: Member variable 'Scrollbar::x' is in the wrong place in the initializer list.
+    : windowHeight(windowHeight), scrollbarHeight(scrollbarHeight), x(0), y(0), scrollOffset(0) {
+                                                                    ^
+src\ui\Scrollbar.hpp:40:19: note: Member variable 'Scrollbar::x' is in the wrong place in the initializer list.
+    float conerPs,x,y;
+                  ^
+src\ui\Scrollbar.hpp:16:10: style: inconclusive: Technically the member function 'Scrollbar::draw' can be const. [functionConst]
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\Scrollbar.cpp:100:17: note: Technically the member function 'Scrollbar::draw' can be const.
+void Scrollbar::draw(sf::RenderWindow& window) {
+                ^
+src\ui\Scrollbar.hpp:16:10: note: Technically the member function 'Scrollbar::draw' can be const.
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\Scrollbar.hpp:18:10: style: inconclusive: Technically the member function 'Scrollbar::Prinft' can be const. [functionConst]
+    void Prinft();
+         ^
+src\ui\Scrollbar.cpp:118:17: note: Technically the member function 'Scrollbar::Prinft' can be const.
+void Scrollbar::Prinft() {
+                ^
+src\ui\Scrollbar.hpp:18:10: note: Technically the member function 'Scrollbar::Prinft' can be const.
+    void Prinft();
+         ^
+src\ui\TextBox.cpp:5:10: warning: inconclusive: Member variable 'TextBox::x' is not initialized in the constructor. [uninitMemberVar]
+TextBox::TextBox() {}// Constructor por defecto
+         ^
+src\ui\TextBox.cpp:5:10: warning: inconclusive: Member variable 'TextBox::y' is not initialized in the constructor. [uninitMemberVar]
+TextBox::TextBox() {}// Constructor por defecto
+         ^
+src\ui\TextBox.cpp:8:5: performance: Variable 'input' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    input = TextGrd;
+    ^
+src\ui\TextBox.cpp:48:5: performance: Variable 'input' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    input = "";
+    ^
+src\ui\TextBox.hpp:17:10: style: inconclusive: Technically the member function 'TextBox::draw' can be const. [functionConst]
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\TextBox.cpp:122:15: note: Technically the member function 'TextBox::draw' can be const.
+void TextBox::draw(sf::RenderWindow& window) {
+              ^
+src\ui\TextBox.hpp:17:10: note: Technically the member function 'TextBox::draw' can be const.
+    void draw(sf::RenderWindow& window);
+         ^
+src\ui\TextBox.hpp:18:10: style: inconclusive: Technically the member function 'TextBox::Prinf' can be const. [functionConst]
+    void Prinf();
+         ^
+src\ui\TextBox.cpp:128:15: note: Technically the member function 'TextBox::Prinf' can be const.
+void TextBox::Prinf() {
+              ^
+src\ui\TextBox.hpp:18:10: note: Technically the member function 'TextBox::Prinf' can be const.
+    void Prinf();
+         ^
+src\ui\TextBox.hpp:19:17: style: inconclusive: Technically the member function 'TextBox::Actu' can be const. [functionConst]
+    std::string Actu();
+                ^
+src\ui\TextBox.cpp:115:22: note: Technically the member function 'TextBox::Actu' can be const.
+std::string TextBox::Actu() {
+                     ^
+src\ui\TextBox.hpp:19:17: note: Technically the member function 'TextBox::Actu' can be const.
+    std::string Actu();
+                ^
+src\ui\TextBox.hpp:19:17: performance: Function 'Actu()' should return member 'input' by const reference. [returnByReference]
+    std::string Actu();
+                ^
+src\ui\TextBox.cpp:6:56: performance: Function parameter 'solicitud' should be passed by const reference. [passedByValue]
+TextBox::TextBox(float width, float height,std::string solicitud, std::string TextGrd) {
+                                                       ^
+src\ui\TextBox.cpp:6:79: performance: Function parameter 'TextGrd' should be passed by const reference. [passedByValue]
+TextBox::TextBox(float width, float height,std::string solicitud, std::string TextGrd) {
+                                                                              ^
+src\ui\TextBox.cpp:46:57: performance: Function parameter 'solicitud' should be passed by const reference. [passedByValue]
+TextBox::TextBox(float width, float height, std::string solicitud) {
+                                                        ^
+src\ui\cell.cpp:13:5: performance: Variable 'n' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    n = sf::Vector3f(0., 0., 0.); // normal vector components
+    ^
+src\ui\cell.h:24:18: style: inconclusive: Technically the member function 'Shape::getN' can be const. [functionConst]
+    sf::Vector3f getN();
+                 ^
+src\ui\cell.cpp:232:21: note: Technically the member function 'Shape::getN' can be const.
+sf::Vector3f Shape::getN() {
+                    ^
+src\ui\cell.h:24:18: note: Technically the member function 'Shape::getN' can be const.
+    sf::Vector3f getN();
+                 ^
+src\ui\cell.h:25:18: style: inconclusive: Technically the member function 'Shape::getMC' can be const. [functionConst]
+    sf::Vector3f getMC();
+                 ^
+src\ui\cell.cpp:238:21: note: Technically the member function 'Shape::getMC' can be const.
+sf::Vector3f Shape::getMC() {
+                    ^
+src\ui\cell.h:25:18: note: Technically the member function 'Shape::getMC' can be const.
+    sf::Vector3f getMC();
+                 ^
+src\ui\cell.h:46:21: style: inconclusive: Technically the member function 'Cell::getCell' can be const. [functionConst]
+    sf::ConvexShape getCell();
+                    ^
+src\ui\cell.cpp:226:23: note: Technically the member function 'Cell::getCell' can be const.
+sf::ConvexShape Cell::getCell() {
+                      ^
+src\ui\cell.h:46:21: note: Technically the member function 'Cell::getCell' can be const.
+    sf::ConvexShape getCell();
+                    ^
+src\ui\cell.h:49:10: performance: inconclusive: Technically the member function 'Cell::get_projected_point' can be static (but you may consider moving to unnamed namespace). [functionStatic]
+    void get_projected_point(float &x, float &y, float &z);
+         ^
+src\ui\cell.cpp:18:12: note: Technically the member function 'Cell::get_projected_point' can be static (but you may consider moving to unnamed namespace).
+void Cell::get_projected_point(float &x, float &y, float &z) {
+           ^
+src\ui\cell.h:49:10: note: Technically the member function 'Cell::get_projected_point' can be static (but you may consider moving to unnamed namespace).
+    void get_projected_point(float &x, float &y, float &z);
+         ^
+src\ui\cell.cpp:74:59: style: Redundant assignment of 'z' to itself. [selfAssignment]
+        (*this).cShape.setPoint(i, sf::Vector2f(x, y)); z = z; // avoid warning
+                                                          ^
+src\ui\cell.cpp:161:59: style: Redundant assignment of 'z' to itself. [selfAssignment]
+        (*this).cShape.setPoint(i, sf::Vector2f(x, y)); z = z; // avoid warning
+                                                          ^
+src\ui\cell.cpp:37:44: performance: Function parameter 'pt' should be passed by const reference. [passedByValue]
+Cell::Cell(const std::vector<sf::Vector3f> pt, sf::Color col,sf::Vector2f posicionInicial) : Shape(), initialPos{ posicionInicial.x, posicionInicial.y}, finAnimacion(false), conte(0){
+                                           ^
+src\ui\cell.cpp:129:44: performance: Function parameter 'pt' should be passed by const reference. [passedByValue]
+Cell::Cell(const std::vector<sf::Vector3f> pt, sf::Texture *texcar, sf::Vector2f posicionInicial) : Shape(), initialPos{ posicionInicial.x, posicionInicial.y },finAnimacion(false), conte(0) {
+                                           ^
+src\ui\cell.cpp:129:61: style: Parameter 'texcar' can be declared as pointer to const [constParameterPointer]
+Cell::Cell(const std::vector<sf::Vector3f> pt, sf::Texture *texcar, sf::Vector2f posicionInicial) : Shape(), initialPos{ posicionInicial.x, posicionInicial.y },finAnimacion(false), conte(0) {
+                                                            ^

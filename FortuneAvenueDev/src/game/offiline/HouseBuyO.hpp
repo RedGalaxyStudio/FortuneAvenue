@@ -66,7 +66,7 @@ public:
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuysO();
     void ViewHouseBsaO();
-    void evenViewHouseCVO(sf::Event event);
+    void evenViewHouseCVO(const sf::Event& event);
     int indexX;
     
 };

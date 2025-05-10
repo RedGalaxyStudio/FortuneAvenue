@@ -90,7 +90,7 @@ struct PlayerGame {
 	sf::Sprite boxPlayer;
 	sf::Sprite PieceSelect;
 	sf::Text Money;
-	bool Activo;
+	bool Activo=false;
 	sf::Vector2f origen;
 	sf::Texture TextureCash;
 	sf::Sprite CashSprite;
@@ -111,11 +111,11 @@ struct PlayerInfo {
 	int numCasas = 0;
 	int money = 300;
 	int impuesto = 50;
-	int roomconect;
-	int Posicion;
+	int roomconect=-0;
+	int Posicion=-1;
 	bool isSelectingPiece = false;
 	bool isInGame = false;
-	int indexPiece;
+	int indexPiece=-1;
 	std::vector<int> casasPorJugador;
 	int Vueltas = 0;
 	bool final = false;

@@ -140,7 +140,7 @@ sfml-network-d.lib;enet.lib;opengl32.lib;winmm.lib;ws2_32.lib;%(AdditionalDepend
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -199,6 +199,8 @@ sfml-network.lib;enet.lib;opengl32.lib;winmm.lib;ws2_32.lib;%(AdditionalDependen
     <ClCompile Include="src\ui\Cube.cpp" />
     <ClCompile Include="src\ui\fileio.cpp" />
     <ClCompile Include="src\ui\MensageBox.cpp" />
+    <ClCompile Include="src\ui\menuSelecting.cpp" />
+    <ClCompile Include="src\ui\menuswicht.cpp" />
     <ClCompile Include="src\ui\ResourceGeneral.cpp" />
     <ClCompile Include="src\ui\Scrollbar.cpp" />
     <ClCompile Include="src\ui\Sound.cpp" />
@@ -254,6 +256,8 @@ sfml-network.lib;enet.lib;opengl32.lib;winmm.lib;ws2_32.lib;%(AdditionalDependen
     <ClInclude Include="src\ui\Cube.hpp" />
     <ClInclude Include="src\ui\fileio.h" />
     <ClInclude Include="src\ui\MensageBox.hpp" />
+    <ClInclude Include="src\ui\menuSelecting.hpp" />
+    <ClInclude Include="src\ui\menuswicht.hpp" />
     <ClInclude Include="src\ui\Particles.h" />
     <ClInclude Include="src\ui\ResourceGeneral.hpp" />
     <ClInclude Include="src\ui\Scrollbar.hpp" />

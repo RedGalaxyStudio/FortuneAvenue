@@ -17,8 +17,6 @@ public:
     int eleccion();
     void resetT();
     void resetTCAM();
-    void houseBuy(int costo, int money);
-    void resetTRuleta();
     void resetTCAMRuleta();
 
 private:

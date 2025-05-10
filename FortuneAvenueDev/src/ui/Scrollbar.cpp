@@ -152,7 +152,7 @@ void Scrollbar::setPosition(float xNew, float yNew) {
     cornerBRB.setPosition(x + scrollbarThumb.getSize().x - conerPs, y + scrollbarThumb.getSize().y);
 }
 
-// Método para cambiar los colores
+/* Método para cambiar los colores
 void Scrollbar::setColors(const sf::Color& trackColor, const sf::Color& thumbColor, const sf::Color& borderColor) {
     scrollbarTrack.setFillColor(trackColor);
     scrollbarThumb.setFillColor(thumbColor);
@@ -166,7 +166,7 @@ void Scrollbar::setColors(const sf::Color& trackColor, const sf::Color& thumbCol
     cornerTRB.setFillColor(sf::Color(35, 46, 51));
     cornerBLB.setFillColor(sf::Color(35, 46, 51));
     cornerBRB.setFillColor(sf::Color(35, 46, 51));
-}
+}*/
 
 // Método para ajustar el grosor del borde
 void Scrollbar::setOutlineThickness(float thickness) {

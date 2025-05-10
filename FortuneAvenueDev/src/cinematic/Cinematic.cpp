@@ -5,8 +5,9 @@
 
 Cinematic::Cinematic(sf::RenderWindow& windowRef)
     : window(windowRef), alpha(0.0f), fadeIn(true), currentFrame(0),
-    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f), currentTextureIndex(0), texturesLoaded(false) {
-}
+    frameTime(1.0f / 12.0f), tiempoAcumuladoFondo(0.0f),
+    currentTextureIndex(0), soundOne(false), texturesLoaded(false){}
+
 Cinematic::~Cinematic() {
     if (textureLoaderThread.joinable()) {
         textureLoaderThread.join();
@@ -55,7 +56,7 @@ void Cinematic::Resource() {
 
 
 void Cinematic::Update() {
-    sf::Clock fondoClock;
+    fondoClock.restart();
 
     while (window.isOpen()) {
         sf::Time deltaTime = fadeClock.restart();
@@ -66,6 +67,10 @@ void Cinematic::Update() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 window.close();
+            }
+
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                return;
             }
         }
 

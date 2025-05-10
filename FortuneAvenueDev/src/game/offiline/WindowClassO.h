@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <random>
+#include "../../ui/Sound.hpp"
 class WindowO {
 
 	std::vector<int> textureIndices;
@@ -18,12 +19,12 @@ class WindowO {
 	CubeO* cube;
 
 
-	float calcdis(sf::Vector2i p1, sf::Vector2i p2)
+	/*float calcdis(sf::Vector2i p1, sf::Vector2i p2)
 	{
 		float xcb = (static_cast<float>(p2.x) - static_cast<float>(p1.x)) * (static_cast<float>(p2.x) - static_cast<float>(p1.x));
 		float ycb = (static_cast<float>(p2.y) - static_cast<float>(p1.y)) * (static_cast<float>(p2.y) - static_cast<float>(p1.y));
 		return sqrt(xcb + ycb);
-	}
+	}*/
 	void updateDraw() {
 		textureIndices.clear();
 
@@ -161,7 +162,7 @@ public:
 
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
 				turn_dice = false;
-				DicesSound.play();
+				DiceSound.play();
 				updateDiceAppearance();
 				eventStarted = true;
 
@@ -184,7 +185,7 @@ public:
 	};
 	void loopP(){
 		turn_diceB = false;
-		DicesSound.play();
+		DiceSound.play();
 		updateDiceAppearance();
 		eventStarted = true;
 		mouseStart.x = rand() % 400 + 1;

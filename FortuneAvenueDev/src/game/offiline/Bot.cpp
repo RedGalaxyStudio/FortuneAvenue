@@ -54,7 +54,7 @@ namespace CreatorB {
 		std::unordered_set<int> usedNumbers;
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<int> dist(0, 19);
+		std::uniform_int_distribution<int> dist(0, 18);
 
 		while (pieces.size() < count) {
 			int num = dist(gen);
@@ -114,10 +114,6 @@ void Bot::resetT() {
 void Bot::resetTCAM() {
 	waitTime = 2.0f + std::rand() % 4; 
 	clock.restart();
-}
-
-void Bot::resetTRuleta() {
-	waitTime = 1.0f + std::rand() % 4;
 }
 void Bot::resetTCAMRuleta() {
 	waitTime = 2.0f + std::rand() % 4;

@@ -62,7 +62,7 @@ public:
     std::vector<houseInfo> houses;
     void setWindow(sf::RenderWindow& win, int indice, Client& clienT);
     void resource();
-    void evenViewHouseCV(sf::Event event);
+    void evenViewHouseCV(const sf::Event& event);
     void update(sf::Vector2f posicionactuInicial);
     void ViewHouseBuys();
     void ViewHouseBs();

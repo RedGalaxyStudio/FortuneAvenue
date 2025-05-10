@@ -19,15 +19,6 @@ int ServerMessageHandler::calcularNumeroDeLineas(const sf::Text& text) {
 
 	return numeroDeLineas;
 }
-void ServerMessageHandler::moneyActu(int money) {
-	std::string message = "MONEY_ACTU:" + std::to_string(money);
-
-	//	ENetPacket* packet = enet_packet_create(message.c_str(), message.size() + 1, ENET_PACKET_FLAG_RELIABLE);
-	//	enet_peer_send(peer, 0, packet);
-		//enet_host_flush();
-
-
-}
 
 void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
 	size_t moneyPos = message.find(":MONEYSALARIO:");
@@ -37,6 +28,7 @@ void ServerMessageHandler::MONEYSALARIO(std::string message, int usuario) {
 		int playerMoney = std::stoi(moneyStr);
 		playerInfos[usuario].money = playerMoney;
 		playersGame[usuario].Money.setString(std::to_string(playerInfos[usuario].money));
+		playersGame[usuario].Money.setOrigin(playersGame[usuario].Money.getLocalBounds().width, 0.f);
 
 	}
 }
@@ -287,6 +279,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			}
 			playerInfos[indexPlayerr].money = moneyy;
 			playersGame[indexPlayerr].Money.setString(std::to_string(playerInfos[indexPlayerr].money));
+			playersGame[indexPlayerr].Money.setOrigin(playersGame[indexPlayerr].Money.getLocalBounds().width, 0.f);
 		}
 	}
 	else if (message.rfind("RULETE_GAME:", 0) == 0) {
@@ -328,6 +321,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 			int indexjugador = std::stoi(message.substr(firstColon + 1, secondColon - firstColon - 1));
 			playerInfos[indexjugador].money = std::stoi(message.substr(secondColon + 1));
 			playersGame[indexjugador].Money.setString(std::to_string(playerInfos[indexjugador].money));
+			playersGame[indexjugador].Money.setOrigin(playersGame[indexjugador].Money.getLocalBounds().width, 0.f);
 
 		}
 
@@ -348,6 +342,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerInfos[indext].money = std::stoi(moneyStr);
 
 		playersGame[indext].Money.setString(std::to_string(playerInfos[indext].money));
+		playersGame[indext].Money.setOrigin(playersGame[indext].Money.getLocalBounds().width, 0.f);
 
 	}
 	else if (message.rfind("TODOSPIERDEN:", 0) == 0) {
@@ -370,6 +365,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 				playerInfos[indexjugador].money = moneyAmount;
 				playersGame[indexjugador].Money.setString(std::to_string(playerInfos[indexjugador].money));
+				playersGame[indexjugador].Money.setOrigin(playersGame[indexjugador].Money.getLocalBounds().width, 0.f);
 
 			}
 		}
@@ -680,6 +676,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 
 				playerInfos[indice].money = dinero;
 				playersGame[indice].Money.setString(std::to_string(dinero));
+				playersGame[indice].Money.setOrigin(playersGame[indice].Money.getLocalBounds().width, 0.f);
 			}
 			catch (const std::exception& e) {
 				std::cerr << "Error al convertir valores: " << e.what() << std::endl;
@@ -706,6 +703,7 @@ void ServerMessageHandler::handleServerMessage(const ENetPacket* preprocces) {
 		playerInfos[indext].impuesto = std::stoi(impuesto);
 
 		playersGame[indext].Money.setString(std::to_string(playerInfos[indext].money));
+		playersGame[indext].Money.setOrigin(playersGame[indext].Money.getLocalBounds().width, 0.f);
 		{
 			std::lock_guard<std::mutex> lock(clientData->impuestoMutex);
 			if (IndexTurn != playerIndex) {

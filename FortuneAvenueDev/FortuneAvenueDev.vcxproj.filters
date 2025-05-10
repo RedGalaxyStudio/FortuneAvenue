@@ -147,10 +147,16 @@
     <ClCompile Include="src\ui\Scrollbar.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\TextBox.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
     <ClCompile Include="src\ui\Sound.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\TextBox.cpp">
+    <ClCompile Include="src\ui\menuSelecting.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\menuswicht.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -302,9 +308,6 @@
     <ClInclude Include="src\ui\Scrollbar.hpp">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\Sound.hpp">
-      <Filter>Archivos de origen</Filter>
-    </ClInclude>
     <ClInclude Include="src\ui\TextBox.hpp">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
@@ -315,6 +318,15 @@
       <Filter>Archivos de origen</Filter>
     </ClInclude>
     <ClInclude Include="libs\nlohmann\json_fwd.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Sound.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\menuSelecting.hpp">
+      <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\menuswicht.hpp">
       <Filter>Archivos de origen</Filter>
     </ClInclude>
   </ItemGroup>

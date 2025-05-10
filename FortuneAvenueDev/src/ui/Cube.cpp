@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-Cube::Cube(float size, float dotSize, float cornerRadius, sf::Vector2f position)
+UICube::UICube(float size, float dotSize, float cornerRadius, sf::Vector2f position)
     : cubeSize(size), dotSize(dotSize), cornerRadius(cornerRadius), position(position),
     currentFace(0), isRolling(false), rollTime(0) {
 
@@ -27,7 +27,7 @@ Cube::Cube(float size, float dotSize, float cornerRadius, sf::Vector2f position)
 }
 
 // Función para crear un rectángulo con bordes redondeados
-sf::ConvexShape Cube::createRoundedRectangle(float width, float height, float radius) {
+sf::ConvexShape UICube::createRoundedRectangle(float width, float height, float radius) {
     sf::ConvexShape roundedRect;
     roundedRect.setPointCount(8);
 
@@ -48,7 +48,7 @@ sf::ConvexShape Cube::createRoundedRectangle(float width, float height, float ra
 }
 
 // Función para crear los puntos del dado
-void Cube::createDots(CubeFace& face, int number) {
+void UICube::createDots(CubeFace& face, int number) {
     face.dots.clear();
     float grid[3][3] = {
         {cubeSize / 4, cubeSize / 4},
@@ -78,7 +78,7 @@ void Cube::createDots(CubeFace& face, int number) {
 }
 
 // Función para crear las 6 caras del dado
-void Cube::createCube() {
+void UICube::createCube() {
     faces.resize(6);
     for (auto& face : faces) {
         face.face = createRoundedRectangle(cubeSize, cubeSize, cornerRadius);
@@ -89,7 +89,7 @@ void Cube::createCube() {
 }
 
 // Actualiza el estado del dado mientras está rodando
-void Cube::update(float elapsedTime) {
+void UICube::update(float elapsedTime) {
 
     const int WINDOW_WIDTH = 800;
     const int WINDOW_HEIGHT = 600;
@@ -114,14 +114,14 @@ void Cube::update(float elapsedTime) {
 }
 
 // Lanza el dado
-void Cube::roll() {
+void UICube::roll() {
     isRolling = true;
     rollTime = 2.0f;
     clock.restart();
 }
 
 // Dibuja la cara actual del dado
-void Cube::draw(sf::RenderWindow& window) {
+void UICube::draw(sf::RenderWindow& window) {
     window.draw(shadow);
     window.draw(faces[currentFace].face);
     for (auto& dot : faces[currentFace].dots) {
