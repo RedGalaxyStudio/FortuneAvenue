@@ -6,13 +6,9 @@
 
 Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* clienT)
 	: width(width),client(clienT),height(height), centerX(centerX), centerY(centerY), blinkTimer(0.0f), blinkDuration(0.5f), giro(false), resultado(false), currentRotation(0.0f), rotationSpeed(6.0f), turno(true), sincro(false), event(0) {
-
 	currentSegment = -1;
-
-
 	isSpinning = false;
-	radius = std::min(width, height) / 2.0f - 20.0f;  
-
+	radius = std::min(width, height) / 2.0f - 20.0f;
 	createSegments();
 	loadIconTextures();
 	setupIcons();
@@ -23,49 +19,21 @@ Ruleta::Ruleta(float width, float height, float centerX, float centerY,Client* c
 
 void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
-	if (turn) {
-		if (giroActivo&& turno) {
-			isSpinning = !isSpinning;
+	if (giroActivo&& turno) {//Si la ruleta esta activo el giro y el turno es true se ejecuta este codigo
 			girosSound.play();
 			giro = true;
 			resultado = true;
 			isSpinning = true;
 			int i = 0;
-
 			for (auto& segment : segments) {
 				segment.setFillColor(segmentColors[i % numSegments]);
 				i++;
 			}
 			turno = false;
-		
-			initialSpeed = initialSpeedActi;
-			decelerationRate = initialSpeed / 7.0f;
-			rotationSpeed = initialSpeed;			
+			rotationSpeed = initialSpeedActi;
+			decelerationRate = rotationSpeed / 7.0f;
 			clock.restart(); 
-		}
 	}
-	
-	if (!turn) {
-		if (giroActivo && turno) {
-			isSpinning = !isSpinning;
-			girosSound.play();
-			giro = true;
-			resultado = true;
-			isSpinning = true;
-			int i = 0;
-			for (auto& segment : segments) {
-				segment.setFillColor(segmentColors[i % numSegments]);
-				i++;
-			}
-			turno = false;
-
-			initialSpeed = initialSpeedActi;
-			decelerationRate = initialSpeed / 7.0f; 
-			rotationSpeed = initialSpeed;
-			clock.restart();
-		}
-	}
-
 
 	deltaTime = clock.restart().asSeconds();
 
@@ -128,7 +96,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 	if (currentSegment == -1 && pointerAngle >= (numSegments - 1) * segmentAngle) {
 
-		currentSegment = numSegments - 1; // El pointer está en el último segmento
+		currentSegment = numSegments - 1; // El pointer estï¿½ en el ï¿½ltimo segmento
 	}
 
 	sf::Color currentSegmentColor;
@@ -137,43 +105,7 @@ void Ruleta::draw(sf::RenderWindow& window, float deltaTime, bool giroActivo) {
 
 		currentSegmentColor = segments[currentSegment].getFillColor();
 
-		if(turn){
-			switch (currentSegment) {
-			case 0://pierdes un turno
-				turnopermitido -= 1;
-				break;
-
-			case 1://robar a un jugador
-				event = 3;
-				break;
-
-			case 2://Opcion de comprar una casa
-				event = 1;
-				break;
-
-			case 3://todos pierden 30 y se les da a el jugador
-				client->networkMessage.everyoneLoses();
-				break;
-
-			case 4://ganas 150
-				client->networkMessage.win150();
-
-				break;
-
-			case 5://paga impuestos
-
-				event = 2;
-				break;
-
-			case 6://inversion segura se te quitan 100 y 2 turnos despues se te dan 200
-
-				client->networkMessage.sendSafeInvestment();
-				break;
-
-			default:
-				break;
-			}
-		}
+		if(turn) winEventRulete();
 
 		giro = false;
 
@@ -374,6 +306,42 @@ void Ruleta::drawLights(sf::RenderWindow& window, float deltaTime) {
 	}
 }
 
+void Ruleta::winEventRulete(){
+
+	switch (currentSegment) {
+		case 0:{//pierdes un turno
+			turnopermitido -= 1;
+			break;
+		}
+		case 1:{//robar a un jugador
+			event = 3;
+			break;
+		}
+		case 2:{//opcion de comprar una casa
+			event = 1;
+			break;
+		}
+		case 3:{//todos pierden 30 y se les da a el jugador
+			client->networkMessage.everyoneLoses();
+			break;
+		}
+		case 4:{//ganas 150
+			client->networkMessage.win150();
+			break;
+		}
+		case 5:{//paga impuestos
+			event = 2;
+			break;
+		}
+		case 6:{//inversion segura se te quitan 100 y 2 turnos despues se te dan 200
+			client->networkMessage.sendSafeInvestment();
+			break;
+		}
+		default:
+			break;
+	}
+
+}
 void Ruleta::setupBase() {
 
 

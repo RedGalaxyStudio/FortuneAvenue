@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="Cpp.Editor" type="string" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="fortuneAvenueDev" targetName="rebuild_cache" />
+      <config projectName="fortuneAvenueDev" targetName="default_target" />
+      <config projectName="fortuneAvenueDev" targetName="depend" />
+      <config projectName="fortuneAvenueDev" targetName="cmake_force" />
+      <config projectName="fortuneAvenueDev" targetName="edit_cache" />
+      <config projectName="fortuneAvenueDev" targetName="fortuneAvenue" />
+      <config projectName="fortuneAvenueDev" targetName="all" />
+      <config projectName="fortuneAvenueDev" targetName="help" />
+      <config projectName="fortuneAvenueDev" targetName="cmake_check_build_system" />
+      <config projectName="fortuneAvenueDev" targetName="preinstall" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.28.3/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/cinematic/Cinematic.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/cinematic/Cinematic.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/core/ObjetosGlobal.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/core/ObjetosGlobal.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/core/ResourceGlobal.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/core/ResourceGlobal.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/Bot.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/Bot.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameEndO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameEndO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameManager.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameManager.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameOfflineO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameOfflineO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameOptionsO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/GameOptionsO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/HouseBuyO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/HouseBuyO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/MovePiecesO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/MovePiecesO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/PieceSelectorO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/PieceSelectorO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/ResourceGameO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/ResourceGameO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/RuletaO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/RuletaO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/StealplayerO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/StealplayerO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/nuloO.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/offiline/nuloO.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Chat.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Chat.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/GameEnd.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/GameEnd.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/HouseBuy.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/HouseBuy.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/MovePieces.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/MovePieces.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/OnlineVars.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/OnlineVars.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/PieceSelector.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/PieceSelector.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/ResourceGame.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/ResourceGame.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Ruleta.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Ruleta.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Stealplayer.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/Stealplayer.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/loading.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/loading.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/nulo.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/game/online/nulo.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/main.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/GameModeSelector.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/GameModeSelector.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/IniciaUser.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/IniciaUser.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/IniciarPartida.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/IniciarPartida.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/menuP.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/menu/menuP.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/Client.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/Client.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/ClientData.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/ClientData.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/NetworkMessage.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/NetworkMessage.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/ServerMessageHandler.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/network/ServerMessageHandler.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/settings/SettingsManager.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/settings/SettingsManager.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/ButtonG.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/ButtonG.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Cube.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Cube.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/MensageBox.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/MensageBox.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/ResourceGeneral.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/ResourceGeneral.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Scrollbar.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Scrollbar.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Sound.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/Sound.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/TextBox.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/TextBox.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/cell.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/cell.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/fileio.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/FortuneAvenueDev/src/ui/fileio.cpp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/compiler_depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/compiler_depend.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/fortuneAvenue.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOff.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOff.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/PieceSelector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/PieceSelector.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/Ruleta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/Ruleta.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/Ruleta.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/Ruleta.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/DATE/NBOTS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/DATE/NBOTS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/Enet/lib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/external/Enet/lib/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fortuneAvenue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/build/x64-Debug/.cmake/api/v1/query/client-MicrosoftVS/query.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/build/x64-Debug/VSInheritEnvironments.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2025" />
+    <option name="minorVersion" value="1.1" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2x4dC0oau1j5Vk5MpSMZ8rBQgfV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Native Application.all.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/D2niel/Desktop/FortuneAvenueDev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Native Application.all">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$/FortuneAvenueDev/" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fortuneAvenueDev" TARGET_NAME="fortuneAvenue" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="fortuneAvenueDev" RUN_TARGET_NAME="fortuneAvenue">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cmake_check_build_system" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="cmake_check_build_system" CONFIG_NAME="cmake_check_build_system" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cmake_force" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="cmake_force" CONFIG_NAME="cmake_force" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="default_target" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="default_target" CONFIG_NAME="default_target" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="depend" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="depend" CONFIG_NAME="depend" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="edit_cache" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="edit_cache" CONFIG_NAME="edit_cache" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fortuneAvenue" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="fortuneAvenue" CONFIG_NAME="fortuneAvenue" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="help" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="help" CONFIG_NAME="help" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="preinstall" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="preinstall" CONFIG_NAME="preinstall" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="rebuild_cache" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FortuneAvenueDev" TARGET_NAME="rebuild_cache" CONFIG_NAME="rebuild_cache" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Native Application.all" />
+      <item itemvalue="Native Application.cmake_check_build_system" />
+      <item itemvalue="Native Application.cmake_force" />
+      <item itemvalue="Native Application.default_target" />
+      <item itemvalue="Native Application.depend" />
+      <item itemvalue="Native Application.edit_cache" />
+      <item itemvalue="Native Application.fortuneAvenue" />
+      <item itemvalue="Native Application.help" />
+      <item itemvalue="Native Application.preinstall" />
+      <item itemvalue="Native Application.rebuild_cache" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="" />
+      <created>1747201150598</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747201150598</updated>
+      <workItem from="1747201153411" duration="2491000" />
+      <workItem from="1747249812639" duration="937000" />
+      <workItem from="1747251285786" duration="3742000" />
+      <workItem from="1747281619887" duration="1098000" />
+      <workItem from="1747287342857" duration="1225000" />
+      <workItem from="1747341993618" duration="681000" />
+      <workItem from="1747342695478" duration="5939000" />
+      <workItem from="1747363493793" duration="801000" />
+      <workItem from="1747426224298" duration="724000" />
+      <workItem from="1747426975451" duration="334000" />
+      <workItem from="1747427407459" duration="1087000" />
+      <workItem from="1747431672631" duration="6602000" />
+      <workItem from="1747456938290" duration="1119000" />
+      <workItem from="1747489367032" duration="3388000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

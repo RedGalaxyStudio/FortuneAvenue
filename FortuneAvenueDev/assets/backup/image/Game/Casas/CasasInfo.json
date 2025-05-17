@@ -1,0 +1,105 @@
+{
+    "casa0": {
+      "nombre": "Villa Fortuna",
+      "salario": "90$",
+      "costo": "600$",
+      "impuesto": "75$"
+    },
+    "casa1": {
+      "nombre": "Cabaña Horizonte",
+      "salario": "60$",
+      "costo": "400$",
+      "impuesto": "50$"
+    },
+    "casa2": {
+      "nombre": "Casa de la Suerte",
+      "salario": "83$",
+      "costo": "550$",
+      "impuesto": "69$"
+    },
+    "casa3": {
+      "nombre": "Casa Vida Nueva",
+      "salario": "68$",
+      "costo": "450$",
+      "impuesto": "56$"
+    },
+    "casa4": {
+      "nombre": "Castillo de la Prosperidad",
+      "salario": "75$",
+      "costo": "500$",
+      "impuesto": "63$"
+    },
+    "casa5": {
+      "nombre": "La Jugada Perfecta",
+      "salario": "98$",
+      "costo": "650$",
+      "impuesto": "81$"
+    },
+    "casa6": {
+      "nombre": "Mansión de los Dados",
+      "salario": "105$",
+      "costo": "750$",
+      "impuesto": "94$"
+    },
+    "casa7": {
+      "nombre": "Mansión Horizonte Dorado",
+      "salario": "68$",
+      "costo": "450$",
+      "impuesto": "56$"
+    },
+    "casa8": {
+      "nombre": "Mansión Jackpot",
+      "salario": "105$",
+      "costo": "700$",
+      "impuesto": "88$"
+    },
+    "casa9": {
+      "nombre": "Palacio del Triunfo",
+      "salario": "83$",
+      "costo": "550$",
+      "impuesto": "69$"
+    },
+    "casa10": {
+      "nombre": "Residencia 8-Bit",
+      "salario": "105$",
+      "costo": "750$",
+      "impuesto": "94$"
+    },
+    "casa11": {
+      "nombre": "Residencia Lucky",
+      "salario": "90$",
+      "costo": "600$",
+      "impuesto": "75$"
+    },
+    "casa12": {
+      "nombre": "Villa Arcade",
+      "salario": "105$",
+      "costo": "750$",
+      "impuesto": "94$"
+    },
+    "casa13": {
+      "nombre": "Villa Armonía",
+      "salario": "60$",
+      "costo": "400$",
+      "impuesto": "50$"
+    },
+    "casa14": {
+      "nombre": "Villa Destino",
+      "salario": "105$",
+      "costo": "700$",
+      "impuesto": "88$"
+    },
+    "casa15": {
+      "nombre": "Villa Estrella",
+      "salario": "98$",
+      "costo": "650$",
+      "impuesto": "81$"
+    },
+    "casa16": {
+      "nombre": "Villa Eterna",
+      "salario": "75$",
+      "costo": "500$",
+      "impuesto": "63$"
+    }
+  }
+  

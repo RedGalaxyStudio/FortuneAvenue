@@ -308,7 +308,7 @@ void PieceSelector::updateSelection() {
 
 		}
 		if (client->clientData->agregardor) {
-			botonCheck1.spriteAsig(playersGame[UsuariosActivos[0]].Check);
+			botonCheck1.asignarSprite(playersGame[UsuariosActivos[0]].Check);
 			client->clientData->agregardor = false;
 			Agregado = true;
 

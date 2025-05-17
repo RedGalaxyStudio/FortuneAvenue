@@ -1,30 +1,33 @@
 #include "ButtonG.hpp"
+
 #include ".././core/ResourceGlobal.hpp"
-// Inicializar el puntero estático
+// Inicializar el puntero estï¿½tico
 sf::Sprite* ButtonG::lastHoveredButton = nullptr;
 
 ButtonG::ButtonG(sf::Sprite& sprite, sf::Texture& textureNormal, sf::Texture& textureHover)
-    : sprite(&sprite), textureNormal(textureNormal), textureHover(textureHover), Borde(nullptr){}
+    : sprite(&sprite), bordeMapaHover(nullptr), textureNormal(textureNormal), textureHover(textureHover){}
 
 ButtonG::ButtonG(sf::Sprite& sprite, sf::Texture& textureNormal, sf::Texture& textureHover,sf::RectangleShape& borde, sf::Vector2f vectorpeque, sf::Vector2f vectorMax)
-    : sprite(&sprite), textureNormal(textureNormal), textureHover(textureHover),Borde(&borde), VectorMax(vectorMax),Vectorpeque(vectorpeque){}
+    : sprite(&sprite),bordeMapaHover(&borde),Vectorpeque(vectorpeque),VectorMax(vectorMax), textureNormal(textureNormal), textureHover(textureHover){}
 
 
 ButtonG::ButtonG(sf::Texture& textureNormal, sf::Texture& textureHover)
-    :  textureNormal(textureNormal), textureHover(textureHover) , sprite(nullptr), Borde(nullptr) {}
+    : sprite(nullptr), bordeMapaHover(nullptr), textureNormal(textureNormal), textureHover(textureHover)  {}
 
-void ButtonG::spriteAsig(sf::Sprite& Sprite) {
-
+void ButtonG::asignarSprite(sf::Sprite& Sprite){
     this->sprite = &Sprite;
-    
 }
 
-// Implementación del método update
-void ButtonG::update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor) {
+// Implementaciï¿½n del mï¿½todo update
+void ButtonG::update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor,GradientText *TextButton) {
+
     if (sprite->getGlobalBounds().contains(mousePos)) {
         sprite->setTexture(textureHover);
         if (currentCursor == &normalCursor) { // Solo cambiar si es el cursor normal
             currentCursor = &linkCursor;
+        }
+        if(TextButton){
+            TextButton
         }
         handleHover();
     }
@@ -36,19 +39,16 @@ void ButtonG::update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, s
 
 void ButtonG::Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, sf::Cursor& linkCursor, sf::Cursor& normalCursor, bool Selec) {
 
-
     if (Selec) {
         return;
     }
 
-
     if (sprite->getGlobalBounds().contains(mousePos)) {
         sprite->setTexture(textureHover);
-        Borde->setSize(VectorMax);
+        bordeMapaHover->setSize(VectorMax);
 
-        sf::FloatRect globalBounds = Borde->getGlobalBounds();
-        Borde->setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
-
+        sf::FloatRect globalBounds = bordeMapaHover->getGlobalBounds();
+        bordeMapaHover->setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
         if (currentCursor == &normalCursor) { // Solo cambiar si es el cursor normal
             currentCursor = &linkCursor;
@@ -56,9 +56,9 @@ void ButtonG::Update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, s
         handleHover();
     }
     else {
-        Borde->setSize(Vectorpeque);
-        sf::FloatRect globalBounds = Borde->getGlobalBounds();
-        Borde->setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
+        bordeMapaHover->setSize(Vectorpeque);
+        sf::FloatRect globalBounds = bordeMapaHover->getGlobalBounds();
+        bordeMapaHover->setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 
         sprite->setTexture(textureNormal);

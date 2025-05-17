@@ -5,10 +5,9 @@
 #include "core/ResourceGlobal.hpp"
 #include <fstream>
 #include <SFML/System.hpp>
-#include <string>
-#include <vector>
 #include <exception>
 #include "Logger.hpp"
+#include <filesystem>
 
 
 void terminator() {
@@ -21,35 +20,23 @@ void terminator() {
 
 int runGame() {
 	std::set_terminate(terminator);
-
+	std::cout<<"\nuy";
 	try {
-
 		sf::err().rdbuf(std::cout.rdbuf());
-
-
 		std::unique_ptr<sf::RenderWindow> window = std::make_unique<sf::RenderWindow>(
 			sf::VideoMode(1280, 720), "Fortune Avenue", sf::Style::Fullscreen);
-
 		window->setFramerateLimit(60);
-
-
 		sf::Image icono;
 		if (!icono.loadFromFile("assets/image/Icon/FortuneAvenue.png")) return EXIT_FAILURE;
 		window->setMouseCursorVisible(false);
 		window->setIcon(icono.getSize().x, icono.getSize().y, icono.getPixelsPtr());
-
-		if (!window->setActive(true)) {
-			std::cerr << "No se pudo activar el contexto OpenGL.\n";
-			return -1;
-		}
+		if (!window->setActive(true)) return -1;
 		//Cinematic cinematic(*window);
 		//cinematic.Resource();
 		//cinematic.Update();
-
 		Menup.setWindow(*window);
 		Menup.Resource();
 		Menup.MenuPrincipal();
-
 
 	}
 	catch (const std::exception& e) {

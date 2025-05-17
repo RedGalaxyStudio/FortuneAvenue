@@ -3,7 +3,12 @@ project(fortuneAvenueDev)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
+
+# Define SFML_STATIC para usar las libs estáticas
+#add_definitions(-DSFML_STATIC)
+
+
 # Nombre del ejecutable final
 set(EXECUTABLE_NAME fortuneAvenue)
 
@@ -11,15 +16,14 @@ set(EXECUTABLE_NAME fortuneAvenue)
 file(GLOB_RECURSE SOURCES FortuneAvenueDev/src/*.cpp FortuneAvenueDev/src/*.hpp)
 
 # Incluir encabezados desde src
-include_directories(${CMAKE_SOURCE_DIR}FortuneAvenueDev/src)
+include_directories(${CMAKE_SOURCE_DIR}/FortuneAvenueDev/src)
 
 # Agregar soporte para GTK-3
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
-
-# Incluir las rutas de los encabezados de GTK
-include_directories(${GTK3_INCLUDE_DIRS})
-
+if(NOT WIN32)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+    include_directories(${GTK3_INCLUDE_DIRS})
+endif()
 
 # Incluir SFML
 if(WIN32)
@@ -32,7 +36,7 @@ endif()
 # ENet
 if(WIN32)
     include_directories(external/Enet/include)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/external/Enet/lib)  # Asegúrate que tenga un CMakeLists.txt
+    link_directories(${CMAKE_SOURCE_DIR}/external/Enet/lib)
     set(ENET_LIB enet)
 else()
     find_library(ENET_LIB enet REQUIRED)
@@ -45,11 +49,16 @@ add_executable(${EXECUTABLE_NAME} ${SOURCES})
 # Enlazar SFML
 if(WIN32)
     target_link_libraries(${EXECUTABLE_NAME}
+
         sfml-graphics
         sfml-window
         sfml-system
         sfml-audio
         sfml-network
+        winmm
+        ws2_32
+        opengl32
+        enet
     )
 else()
     target_link_libraries(${EXECUTABLE_NAME}
@@ -59,13 +68,14 @@ else()
         sfml-audio
         sfml-network
     )
+    # Enlazar GTK
+    target_link_libraries(${EXECUTABLE_NAME} ${GTK3_LIBRARIES})
+
+
 endif()
 
 # Enlazar ENet
 target_link_libraries(${EXECUTABLE_NAME} ${ENET_LIB})
-
-# Enlazar GTK
-target_link_libraries(${EXECUTABLE_NAME} ${GTK3_LIBRARIES})
 
 
 # En Windows, agregar libs del sistema

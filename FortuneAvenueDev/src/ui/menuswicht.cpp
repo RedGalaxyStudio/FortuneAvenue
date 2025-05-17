@@ -121,12 +121,13 @@ void menuswicht::moveThumb(float mouseX) {
 
 	thumbPosition = sf::Vector2f(mouseX , CirSelec.getPosition().y);
 	CirSelec.setPosition(thumbPosition);
-	if (On) {
+	/*if (On) {
 		CirSelec.setPosition(barRight, CirSelec.getPosition().y);
 	}
 	else {
 		CirSelec.setPosition(barLeft, CirSelec.getPosition().y);
 	}
+	*/
 
 }
 

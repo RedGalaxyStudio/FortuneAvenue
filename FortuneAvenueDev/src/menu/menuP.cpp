@@ -10,6 +10,7 @@
 #include "GameModeSelector.hpp"
 #include "IniciaUser.hpp"
 #include "../ui/Sound.hpp"
+#include "../ui/GradientText.h"
 
 menuP::menuP() : window(nullptr), SesionValida(true) ,effectSlider(nullptr),musicSlider(nullptr), SelectingIdiome(nullptr), lastHoveredButton(nullptr) {
 }
@@ -51,7 +52,6 @@ void menuP::setWindow(sf::RenderWindow& win) {
 	window = &win;
 }
 void menuP::Resource() {
-
 	if (!TextureFondoMenu.loadFromFile("assets/image/Fondos/fondomenu.png")) return;
 	if (!textureXOn.loadFromFile("assets/image/Button/XOn.png")) return;
 	if (!textureXOff.loadFromFile("assets/image/Button/XOff.png")) return;
@@ -214,16 +214,10 @@ void menuP::MenuPrincipal() {
 	window->setMouseCursorVisible(true);
 	MenuMusicFondo.setLoop(true);
 	MenuMusicFondo.play();
-
 	Inicializar();
-
 	selectedAvatarCopy.setPosition(84, 74);
 	selectedAvatarCopy.setScale(1, 1);
 	sf::CircleShape hola;
-
-
-
-
 	recua.setPosition(84, 74);
 	recua.setScale(1, 1);
 	Sesion.setCharacterSize(24);
@@ -240,24 +234,27 @@ void menuP::MenuPrincipal() {
 
 	SpriteBotonOpciones.setPosition(640, 560);
 	ValidarUser();
-	////////////////////////////////////////
 	sf::Font font;
-	if (!font.loadFromFile("assets/fonts/OstrichSaUUUUns-Bold.ttf")) return ;
+	if (!font.loadFromFile("assets/fonts/FontRedGalaxyF1-Bold.ttf")) return ;
 
-	GradientText gt("SALIR", font, 49);
-	gt.setBorderThickness(-1.f);
+	GradientText ButtonSalirM("SALIR", font, 49);
+	GradientText ButtonOpcionesM("OPCIONES", font, 46);
+	GradientText ButtonJugarM("JUGAR", font, 49);
+	ButtonSalirM.setBorderThickness(3.f);
+	ButtonOpcionesM.setBorderThickness(3.f);
+	ButtonJugarM.setBorderThickness(3.f);
 
-	gt.setPosition(383, 560);
+	ButtonSalirM.setPosition(897, 548);
+	ButtonOpcionesM.setPosition(639, 548);
+	ButtonJugarM.setPosition(383, 548);
 
-	///////////////////////////////////////
 	while (window->isOpen()) {
 
-		eventoMenuP(gt);
-
+		eventoMenuP();
+	
 		mousePosition = sf::Mouse::getPosition(*window);
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 		window->setMouseCursorVisible(true);
-
 
 		currentCursor = &normalCursor;
 		botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
@@ -266,10 +263,9 @@ void menuP::MenuPrincipal() {
 		botonAcercaDe.update(mousePosFloat, currentCursor, linkCursor, normalCursor);
 		window->setMouseCursor(*currentCursor);
 
-
-
-
-	//	gt.update(*window);
+		ButtonSalirM.update(*window);
+		ButtonOpcionesM.update(*window);
+		ButtonJugarM.update(*window);
 	
 		window->clear();
 		window->draw(SpriteFondoMenu);
@@ -279,9 +275,11 @@ void menuP::MenuPrincipal() {
 		window->draw(selectedAvatarCopy);
 		window->draw(recua);
 		window->draw(SpriteBotonJugar);
-		window->draw(gt);
+		window->draw(ButtonJugarM);
 		window->draw(SpriteBotonOpciones);
+		window->draw(ButtonOpcionesM);
 		window->draw(SpriteBotonSalir);
+		window->draw(ButtonSalirM);
 		window->draw(spriteAcercaDe);
 		window->draw(spriteEditButton);
 		window->display();
@@ -290,16 +288,14 @@ void menuP::MenuPrincipal() {
 void menuP::ValidarUser() {
 
 	if (SesionValida) {
-
 		Sesion.setString(input1);
 		sf::FloatRect globalBounds = Sesion.getGlobalBounds();
-
 		// Ajustar la posición centrando el texto
 		Sesion.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 	}
 
 }
-void menuP::eventoMenuP(GradientText &gt) {
+void menuP::eventoMenuP() {
 
 	sf::Event event;
 
@@ -325,9 +321,6 @@ void menuP::eventoMenuP(GradientText &gt) {
 			MenuSalir(nullptr);
 		}
 
-		if (event.type == sf::Event::KeyPressed) {
-			gt.ajustarColores(event.key);
-		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 			mousePosition = sf::Mouse::getPosition(*window);
 			mousePosFloat = static_cast<sf::Vector2f>(mousePosition);

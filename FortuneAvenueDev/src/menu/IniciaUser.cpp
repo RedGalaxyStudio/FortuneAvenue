@@ -31,7 +31,7 @@ std::string wideToString(const std::wstring& wideStr) {
 	WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, &strTo[0], sizeNeeded, nullptr, nullptr);
 	return strTo;
 #else
-	// En sistemas no Windows, podemos usar std::wstring_convert o métodos alternativos
+	// En sistemas no Windows, podemos usar std::wstring_convert o mï¿½todos alternativos
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 	return conv.to_bytes(wideStr);
 #endif
@@ -41,7 +41,7 @@ std::string wideToString(const std::wstring& wideStr) {
 std::string openFileDialog() {
 #ifdef _WIN32
 	wchar_t filename[MAX_PATH] = L"";
-	OPENFILENAME ofn;
+	OPENFILENAMEW ofn;
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
@@ -50,7 +50,7 @@ std::string openFileDialog() {
 	ofn.nMaxFile = MAX_PATH;
 	ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
 
-	if (GetOpenFileName(&ofn)) {
+	if (GetOpenFileNameW(&ofn)) {
 		return wideToString(filename);
 	}
 	return "";
@@ -60,7 +60,7 @@ std::string openFileDialog() {
 	// Inicializar GTK
 	gtk_init(NULL, NULL);
 
-	// Crear un cuadro de diálogo de selección de archivo
+	// Crear un cuadro de diï¿½logo de selecciï¿½n de archivo
 	GtkWidget* dialog = gtk_file_chooser_dialog_new(
 		"Abrir Archivo", NULL,
 		GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -69,7 +69,7 @@ std::string openFileDialog() {
 		NULL
 	);
 
-	// Establecer el filtro para mostrar solo imágenes
+	// Establecer el filtro para mostrar solo imï¿½genes
 	GtkFileFilter* filter = gtk_file_filter_new();
 	gtk_file_filter_add_mime_type(filter, "image/png");
 	gtk_file_filter_add_mime_type(filter, "image/jpeg");
@@ -77,7 +77,7 @@ std::string openFileDialog() {
 	gtk_file_filter_add_mime_type(filter, "image/tga");
 	gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
 
-	// Mostrar el diálogo y esperar la respuesta
+	// Mostrar el diï¿½logo y esperar la respuesta
 	std::string result = "";
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
 		// Obtener el archivo seleccionado
@@ -86,7 +86,7 @@ std::string openFileDialog() {
 		g_free(filename); // Liberar memoria
 	}
 
-	// Cerrar el diálogo
+	// Cerrar el diï¿½logo
 	gtk_widget_destroy(dialog);
 
 	// Finalizar GTK
@@ -200,8 +200,8 @@ void IniciaUser::IniciAcion() {
 		sf::Color(221, 160, 221), // Magenta/Lila pastel
 	sf::Color(175, 238, 238), // Cian pastel
 	sf::Color(255, 218, 185), // Naranja pastel
-	sf::Color(216, 191, 216), // Púrpura pastel
-	sf::Color(205, 133, 63),  // Marrón claro (Tono pastel)
+	sf::Color(216, 191, 216), // Pï¿½rpura pastel
+	sf::Color(205, 133, 63),  // Marrï¿½n claro (Tono pastel)
 	sf::Color(240, 128, 128)  // Rojo pastel
 	};
 
@@ -215,7 +215,7 @@ void IniciaUser::IniciAcion() {
 	float firstCircleX = (windowWidth - totalWidth) / 2;  
 	for (size_t i = 0; i < numCircles; ++i) {
 		sf::CircleShape circle(circleRadius);
-		circle.setFillColor(colors[i]);  // Colores de los círculos
+		circle.setFillColor(colors[i]);  // Colores de los cï¿½rculos
 
 		float posX = firstCircleX + i * spacing;
 
@@ -411,7 +411,7 @@ void IniciaUser::IniciAcion() {
 							croppedImage = renderTexturo.getTexture().copyToImage();
 
 							if (croppedImage.getSize().x == 0 || croppedImage.getSize().y == 0) {
-								std::cerr << " Error: La imagen final está vacía.\n";
+								std::cerr << " Error: La imagen final estï¿½ vacï¿½a.\n";
 								return;
 							}
 
@@ -658,24 +658,24 @@ sf::Texture IniciaUser::fun() {
 
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 
-	// Calcular el tamaño de la ventana (2/3 del tamaño de la pantalla)
+	// Calcular el tamaï¿½o de la ventana (2/3 del tamaï¿½o de la pantalla)
 	unsigned int windowWidth = desktop.width * 2 / 3;
 	unsigned int windowHeight = desktop.height * 2 / 3;
 
-	// Crear la ventana con el tamaño calculado
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Selecciona el área");
+	// Crear la ventana con el tamaï¿½o calculado
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Selecciona el ï¿½rea");
 
 	sf::Texture tempTexture;
 	tempTexture.loadFromImage(originalImage);
 	sf::Sprite sprite(tempTexture);
 
-	// Aquí puedes permitir que el usuario seleccione una región
+	// Aquï¿½ puedes permitir que el usuario seleccione una regiï¿½n
 	sf::IntRect selectedRegion(0, 0, 128, 128);
 
 	bool dragging = false;
 	sf::Vector2f offset;
 
-	// Obtener tamaño de la imagen
+	// Obtener tamaï¿½o de la imagen
 	sf::Vector2u imgSize = tempTexture.getSize();
 	sf::RectangleShape selectionBox;
 
@@ -684,7 +684,7 @@ sf::Texture IniciaUser::fun() {
 	selectionBox.setOutlineThickness(2);
 	selectionBox.setOutlineColor(sf::Color::Red);
 
-	// Calcular escalado manteniendo la proporción
+	// Calcular escalado manteniendo la proporciï¿½n
 	float scaleX = static_cast<float>(windowWidth) / imgSize.x;
 	float scaleY = static_cast<float>(windowHeight) / imgSize.y;
 	float scale = std::min(scaleX, scaleY);  // Escalar para que todo quepa en la ventana
@@ -711,7 +711,7 @@ sf::Texture IniciaUser::fun() {
 	float offsetX = (windowWidth - imgSize.x * scale) / 2;
 	float offsetY = (windowHeight - imgSize.y * scale) / 2;
 	sprite.setPosition(offsetX, offsetY);
-	// Posición inicial dentro del sprite
+	// Posiciï¿½n inicial dentro del sprite
 	selectionBox.setPosition(offsetX, offsetY);
 
 	bool resizing = false;
@@ -730,7 +730,7 @@ sf::Texture IniciaUser::fun() {
 	sf::RectangleShape bottomRightH(sf::Vector2f(enA, enH));
 	sf::RectangleShape bottomRightV(sf::Vector2f(enH, enA));
 
-	// Color de las líneas
+	// Color de las lï¿½neas
 	sf::Color cornerColor = sf::Color::Red;
 	topLeftH.setFillColor(cornerColor);
 	topLeftV.setFillColor(cornerColor);
@@ -789,14 +789,14 @@ sf::Texture IniciaUser::fun() {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 
 					if (!resizing && !dragging && boton.getGlobalBounds().contains(mousePos)) {
-						// Obtener la posición y tamaño del `selectionBox`
+						// Obtener la posiciï¿½n y tamaï¿½o del `selectionBox`
 						sf::Vector2f selPos = selectionBox.getPosition();
 						sf::Vector2f selSize = selectionBox.getSize();
 
-						// Convertir la posición en coordenadas de textura (en caso de transformaciones)
+						// Convertir la posiciï¿½n en coordenadas de textura (en caso de transformaciones)
 						sf::Vector2f texCoords = selPos - sf::Vector2f(offsetX, offsetY);
 
-						// Definir el rectángulo a recortar
+						// Definir el rectï¿½ngulo a recortar
 						sf::IntRect textureRect(static_cast<int>(texCoords.x / scale), static_cast<int>(texCoords.y / scale),
 							static_cast<int>(selSize.x / scale),  static_cast<int>(selSize.y / scale));
 
@@ -849,8 +849,8 @@ sf::Texture IniciaUser::fun() {
 					sf::Vector2f newSize = selectionBox.getSize();
 					sf::Vector2f newPos = selectionBox.getPosition();
 
-					float minSize = 50; // Tamaño mínimo
-					float maxSize = std::min(imgSize.x * scale, imgSize.y * scale); // Tamaño máximo
+					float minSize = 50; // Tamaï¿½o mï¿½nimo
+					float maxSize = std::min(imgSize.x * scale, imgSize.y * scale); // Tamaï¿½o mï¿½ximo
 
 					if (resizingCorner == 0 || resizingCorner == 1) {  // Esquina superior izquierda
 						newSize.x += selectionBox.getPosition().x - mousePos.x;
@@ -861,7 +861,7 @@ sf::Texture IniciaUser::fun() {
 					else if (resizingCorner == 2 || resizingCorner == 3) {  // Esquina superior derecha
 						newSize.x += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
 						newSize.y += mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x);
-						newPos.y -= mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x); //  Ajustar posición en Y para que la reducción sea hacia abajo
+						newPos.y -= mousePos.x - (selectionBox.getPosition().x + selectionBox.getSize().x); //  Ajustar posiciï¿½n en Y para que la reducciï¿½n sea hacia abajo
 					}
 					else if (resizingCorner == 4 || resizingCorner == 5) {  // Esquina inferior izquierda
 					

@@ -23,7 +23,7 @@ public:
 private:
     sf::Color fillColor;
     Client* client;
-
+    void winEventRulete();
     bool turno;
     float initialSpeed;
     float decelerationRate;
@@ -38,13 +38,10 @@ private:
     bool sincro;
 
     float rotationSpeed;
-  
     float width, height;
     float centerX, centerY;  
     float radius;
-
     int currentSegment;
-
     sf::Clock clock;
     sf::Clock lightClock;
     bool lightState = true;
