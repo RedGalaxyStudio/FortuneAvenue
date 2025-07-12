@@ -44,7 +44,10 @@ else()
 endif()
 
 # Crear ejecutable
-add_executable(${EXECUTABLE_NAME} ${SOURCES})
+add_executable(${EXECUTABLE_NAME} ${SOURCES}
+        FortuneAvenueDev/src/menu/clases.h
+        FortuneAvenueDev/src/menu/ResourceLoader.cpp
+        FortuneAvenueDev/src/menu/ResourceLoader.h)
 
 # Enlazar SFML
 if(WIN32)

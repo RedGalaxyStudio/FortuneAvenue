@@ -2,10 +2,13 @@
 #include <iostream>
 #include "../core/ResourceGlobal.hpp"
 #include <SFML/Graphics.hpp>
-#include <math.h>
 #include <numbers>
+#include <fstream>
+#include "../../libs/nlohmann/json.hpp"
+#include <shlobj.h>
+using json = nlohmann::json;
   // requiere C++20
-menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position) : window(windowRef),position(Position){
+menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position,std::string Name) : window(windowRef),position(Position),sumador(0.f),nameSwich(Name){
 
 
 	float M_PI = std::numbers::pi;
@@ -18,7 +21,7 @@ menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position) : win
 	CirSelec.setOrigin(radius - 4.f, radius - 4.f);
 
 
-	CirSelec.setPosition(531, 333); // centro del menú seleccionado
+	CirSelec.setPosition(Position.x+31, Position.y); // centro del menú seleccionado
 
 	const float length = 30.f; // largo del rectángulo
 	const int pointCount = 10;  // más puntos = más redondeado
@@ -45,17 +48,62 @@ menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position) : win
 	capsule.setFillColor(sf::Color(75, 75, 75));
 	capsule.setOutlineColor(sf::Color(50, 50, 50));
 	capsule.setOutlineThickness(5.f);
-	capsule.setPosition(500, 333);
+	capsule.setPosition(Position.x, Position.y);
 	// Centra origen en el medio de la cápsula
 	
 	capsule.setOrigin( 0.f,0.f);
 
+	char appDataPath[MAX_PATH];
+	if (SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, appDataPath) != S_OK) {
+		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+		return;
+	}
+
+	std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
+	std::string documente = rutaFinalC + "settings.json";
+
+	if (std::filesystem::exists(documente)) {
+
+		std::ifstream inFile(documente);
+		if (inFile.is_open()) {
+			json settingData;
+
+			inFile >> settingData;
+			inFile.close();
+
+			On = settingData.value(nameSwich, true);
+
+			if (On){
+				float barRight = capsule.getPosition().x + 31.f;
+				sumador=31.f;
+				thumbPosition = sf::Vector2f(barRight , CirSelec.getPosition().y);
+				CirSelec.setPosition(thumbPosition);
+			}else {
+				float barLeft = capsule.getPosition().x ;
+				thumbPosition = sf::Vector2f(barLeft , CirSelec.getPosition().y);
+				CirSelec.setPosition(thumbPosition);
+			}
+		}
+	}
+
 }
 
-void menuswicht::setFont(sf::Font font) {
+void menuswicht::Funcions() {
 	
-	for (auto& tex : Menu) {
-		tex.setFont(font);
+	if (On&&(sumador<31.f)){
+		sumador+=1.9375f;
+		float mouseX=capsule.getPosition().x +sumador;
+
+		moveThumb(mouseX);
+
+
+	}else if (!On&&(sumador>0.f)) {
+		sumador-=1.9375f;
+		float mouseX=capsule.getPosition().x +sumador;
+
+
+		moveThumb(mouseX);
+
 
 	}
 }
@@ -78,35 +126,43 @@ void menuswicht::setPosition(sf::Vector2f Position) {
 }
 void menuswicht::event(const sf::Event event) {
 	mousePos = sf::Mouse::getPosition(window);
+	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
-
-	switch (event.type) {
-	case sf::Event::MouseButtonPressed:
 		if (CirSelec.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
-			isDragging = true;
-	
+			On=!On;
+			stateChanged=true;
+			char appDataPath[MAX_PATH];
+			if (SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, appDataPath) != S_OK) {
+				std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
+				return;
+			}
+
+			std::string rutaFinalC = std::string(appDataPath) + "\\Fortune Avenue\\";
+
+			if (!std::filesystem::exists(rutaFinalC)) {
+				std::error_code ec;
+				std::filesystem::create_directories(rutaFinalC, ec);
+			}
+			std::string documente = rutaFinalC + "settings.json";
+			json settingData;
+
+			std::ifstream inFile(documente);
+			if (inFile.is_open()) {
+				inFile >> settingData;  // Cargar el JSON existente
+				inFile.close();
+			}
+			settingData[nameSwich] = On;
+
+
+			std::ofstream outFile(documente);
+
+			if (outFile.is_open()) {
+				outFile << settingData.dump(4);
+				outFile.close();
+			}
+
 		}
-		break;
-
-	case sf::Event::MouseButtonReleased:
-		isDragging = false;
-
-		break;
-
-	case sf::Event::MouseMoved:
-		//On ? false : true;
-
-		if (isDragging) {
-			moveThumb(static_cast<float>(mousePos.x));
-		}
-		break;
-
-	default:
-		break;
 	}
-
-
-
 
 }
 float menuswicht::clamp(float value, float min, float max) const {
@@ -132,9 +188,17 @@ void menuswicht::moveThumb(float mouseX) {
 }
 
 void menuswicht::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-
 	
 	target.draw(capsule, states);
 	target.draw(CirSelec, states);
 	std::cout << "\n" << CirSelec.getPosition().x;
+}
+bool menuswicht::isOnState() const {
+	return On;
+}
+
+bool menuswicht::hasStateChanged() {
+	bool result = stateChanged;
+	stateChanged = false;  // auto-reset
+	return result;
 }

@@ -44,7 +44,7 @@ std::string openFileDialog() {
 	OPENFILENAMEW ofn;
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = NULL;
+	ofn.hwndOwner = nullptr;
 	ofn.lpstrFilter = L"Im genes\0*.png;*.jpg;*.jpeg;*.bmp;*.tga\0Todos los archivos\0*.*\0";
 	ofn.lpstrFile = filename;
 	ofn.nMaxFile = MAX_PATH;

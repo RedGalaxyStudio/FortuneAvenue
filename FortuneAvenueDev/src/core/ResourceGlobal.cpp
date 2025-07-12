@@ -60,4 +60,14 @@ sf::Sprite recua;
 void playClickSound() {
     ClickSound.play();
 }
+void createtheWindow(sf::RenderWindow* window, bool fullscreen, const std::string& title) {
+    sf::Uint32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Default;
+    window->create(sf::VideoMode(1280, 720), title, style);
+    window->setFramerateLimit(60);
+    window->setMouseCursorVisible(true);
 
+    sf::Image icon;
+    if (icon.loadFromFile("assets/image/Icon/FortuneAvenue.png")) {
+        window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    }
+}

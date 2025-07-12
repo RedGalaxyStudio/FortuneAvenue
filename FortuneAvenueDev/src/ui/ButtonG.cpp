@@ -27,12 +27,15 @@ void ButtonG::update(const sf::Vector2f& mousePos, sf::Cursor*& currentCursor, s
             currentCursor = &linkCursor;
         }
         if(TextButton){
-            TextButton
+            TextButton->update(true);
         }
         handleHover();
     }
     else {
         sprite->setTexture(textureNormal);
+        if(TextButton){
+            TextButton->update(false);
+        }
         resetLastHoveredButton();
     }
 }

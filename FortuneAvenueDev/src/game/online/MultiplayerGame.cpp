@@ -9,7 +9,9 @@ MultiplayerGame::MultiplayerGame(sf::RenderWindow& win, Chat& chat,Client* clien
 	ruleta = new Ruleta(500.0f, 500.0f, 640.0f, 360.0f,clienT); 
 
 	loadResourceGame();
+
 	resource();
+
 }
 void MultiplayerGame::resource() {
 

@@ -55,5 +55,6 @@ extern sf::Texture TextureBotonNoOff;
 extern sf::Sprite SpriteBotonNo;
 void printMemoryUsage();
 void playClickSound();
+void createtheWindow(sf::RenderWindow* window, bool fullscreen, const std::string& title = "Fortune Avenue");
 
 #endif 

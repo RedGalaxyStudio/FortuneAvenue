@@ -1,15 +1,13 @@
-﻿ #ifndef MENUP_HPP
+﻿#ifndef MENUP_HPP
 #define MENUP_HPP
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include "../settings/SettingsManager.hpp" 
-#include "../ui/menuSelecting.hpp" 
+#include "../settings/SettingsManager.hpp"
+#include "../ui/menuSelecting.hpp"
 #include "../network/Client.hpp"
-#include <cmath>
-#include <iostream>
-
+#include "ResourceLoader.h"
 class Client;
+class GradientText;
 class menuP{
 public:
 
@@ -22,27 +20,27 @@ public:
 
     void MenuSalir(Client* client);
 private:
-    
+
 
     void Inicializar();
     void editPerfil();
     void MenuJugar();
 
 
-  
 
-    void eventoMenuP();
+
+    void eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM,GradientText &ButtonJugarM );
 
 
     void instruccionesGame();
-    
+
     void MenuAcercaDe();
     void ValidarUser();
 
 
     sf::RenderWindow* window;
 
-    
+
     bool SesionValida;
     SettingsManager* musicSlider;
     SettingsManager* effectSlider;
@@ -78,7 +76,7 @@ private:
     sf::Sprite SpriteBotonOpciones;
 
     sf::Texture TextureBotonSiOff;
-    sf::Texture TextureBotonSiOn; 
+    sf::Texture TextureBotonSiOn;
     sf::Sprite SpriteBotonSi;
 
     sf::Texture TextureBotonNoOff;
@@ -106,13 +104,16 @@ private:
     sf::Text TextAcercaDe;
     sf::Sprite renderedSprite;
 
-    
+
 
     sf::Sprite* lastHoveredButton;
     sf::Shader Blur;
    
     sf::Vector2i mousePosition;
     sf::Vector2f mousePosFloat;
+
+    sf::Font fontMenu;
+    ResourceLoader* resourceLoad;
 
 };
 

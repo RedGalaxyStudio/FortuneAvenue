@@ -38,7 +38,29 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="17/05/2025 cambios" />
+    <list default="true" id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="17/05/2025 cambios">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/fonts/FontRedGalaxyF1-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/fonts/FontRedGalaxyF1-Bold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOff.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonJugarOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonJugarOn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/crash_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/crash_log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.hpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +77,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -73,36 +101,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Native Application.all.executor": "Run",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/D2niel/Desktop/FortuneAvenueDev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Subversion.SSH",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Native Application.all.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/D2niel/Desktop/FortuneAvenueDev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Subversion.SSH&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Native Application.all">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$/FortuneAvenueDev/" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fortuneAvenueDev" TARGET_NAME="fortuneAvenue" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="fortuneAvenueDev" RUN_TARGET_NAME="fortuneAvenue">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -166,6 +189,9 @@
       <item itemvalue="Native Application.rebuild_cache" />
     </list>
   </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\D2niel\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="" />
@@ -186,7 +212,20 @@
       <workItem from="1747427407459" duration="1087000" />
       <workItem from="1747431672631" duration="6602000" />
       <workItem from="1747456938290" duration="1119000" />
-      <workItem from="1747489367032" duration="4108000" />
+      <workItem from="1747489367032" duration="9011000" />
+      <workItem from="1750623862690" duration="5824000" />
+      <workItem from="1750814836191" duration="582000" />
+      <workItem from="1750889977293" duration="4087000" />
+      <workItem from="1750999466239" duration="2595000" />
+      <workItem from="1751388640788" duration="18562000" />
+      <workItem from="1751418944774" duration="2764000" />
+      <workItem from="1751495142313" duration="3115000" />
+      <workItem from="1751565040793" duration="933000" />
+      <workItem from="1751594580736" duration="446000" />
+      <workItem from="1751653988699" duration="11015000" />
+      <workItem from="1751833416973" duration="6000" />
+      <workItem from="1752274495972" duration="10585000" />
+      <workItem from="1752338177153" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="17/05/2025 cambios">
       <option name="closed" value="true" />
@@ -230,6 +269,22 @@
     <MESSAGE value="17/05/2025 cambios1" />
     <MESSAGE value="17/05/2025 cambios" />
     <option name="LAST_COMMIT_MESSAGE" value="17/05/2025 cambios" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp</url>
+          <line>18</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp</url>
+          <line>306</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

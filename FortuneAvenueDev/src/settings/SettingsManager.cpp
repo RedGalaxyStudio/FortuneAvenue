@@ -25,7 +25,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	thumb.setOutlineColor(sf::Color::Black);
 	thumb.setOutlineThickness(-2.0f);
 	char appDataPath[MAX_PATH];
-	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+	if (SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, appDataPath) != S_OK) {
 		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
 		return;
 	}
@@ -46,7 +46,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 			volume = settingData["Volumen_Music"];
 
 			thumbPosition.x = settingData["thumbPosition_Music"]["x"];
-			thumbPosition.y = settingData["thumbPosition_Music"]["y"];
+			thumbPosition.y = y + (height / 2) - thumb.getRadius();
 			thumb.setPosition(thumbPosition);
 			sizeFilledBar.x = settingData["sizeFilledBar_Music"]["x"];
 			sizeFilledBar.y = settingData["sizeFilledBar_Music"]["y"];
@@ -324,7 +324,7 @@ float SettingsManager::clamp(float value, float min, float max) const {
 
 void SettingsManager::saveSettings() {
 	char appDataPath[MAX_PATH];
-	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
+	if (SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, appDataPath) != S_OK) {
 		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
 		return;
 	}

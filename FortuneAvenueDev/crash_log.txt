@@ -7,3 +7,4 @@ Excepcion atrapada: invalid vector subscript
 Excepcion atrapada: invalid vector subscript
 Excepcion atrapada: invalid vector subscript
 Excepcion atrapada: invalid vector subscript
+Excepcion atrapada: [json.exception.type_error.302] type must be boolean, but is null

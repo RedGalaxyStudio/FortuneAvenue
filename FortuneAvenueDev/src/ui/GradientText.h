@@ -27,9 +27,9 @@ public:
 		);
 	}
 
-	void update(const sf::RenderWindow& window) {
-		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-		if (m_text.getGlobalBounds().contains(mousePos)) {
+	void update(bool band) {
+
+		if (band) {
 			// Mouse encima → degradado azul
 			setBorderColors(
 				sf::Color(100, 149, 237, 255), // azul opaco (CornflowerBlue)

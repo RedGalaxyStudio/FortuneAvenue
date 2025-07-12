@@ -9,12 +9,15 @@
 class menuswicht : public sf::Drawable
 {
 public:
-    explicit menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position);
-    void setFont(sf::Font font);
+    explicit menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position,std::string Name);
+    void Funcions();
     void setSize(float Size);
     void setColors(sf::Color color);
     void setPosition(sf::Vector2f Position);
     void event(const sf::Event);
+    bool isOnState() const;
+    bool hasStateChanged();
+
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
@@ -28,6 +31,7 @@ private:
     sf::Vector2i mousePos;
     sf::Text Selection;
     float size;
+    std::string nameSwich;
     bool isDragging;
     float radius = 15.f;
     sf::RectangleShape backgroum;
@@ -35,7 +39,11 @@ private:
     float MaxSizeback;
     sf::Color Color;
     int SelecIdio=0;
-    bool On = false;
+    bool On = true;
+    bool stateChanged=false;
+    float sumador;
+
+
     sf::CircleShape backIzqCir, backDerCir, IzqCir, DerCir,CirSelec;
 };
 
