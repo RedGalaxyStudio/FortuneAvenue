@@ -39,27 +39,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d3e0f36-3bdf-416a-a658-268d17c46a63" name="Changes" comment="17/05/2025 cambios">
+      <change afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/LanguageManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/LanguageManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/fonts/FontRedGalaxyF1-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/fonts/FontRedGalaxyF1-Bold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOff.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOff.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/AcercaDeOn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonJugarOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonJugarOn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonOpcionesOn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOn.png" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/assets/image/Button/BotonSalirOn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/crash_log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/crash_log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/core/ResourceGlobal.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/online/MultiplayerGame.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/offiline/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/offiline/GameManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/game/offiline/GameOfflineO.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/game/offiline/GameOfflineO.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/IniciaUser.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/ButtonG.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuSelecting.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuSelecting.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuSelecting.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuSelecting.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-audio-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-audio-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-audio-d-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-audio-d-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-graphics-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-graphics-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-graphics-d-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-graphics-d-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-network-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-network-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-network-d-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-network-d-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-system-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-system-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-system-d-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-system-d-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-window-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-window-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-window-d-2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/bin/sfml-window-d-2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLSharedTargets-debug.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLSharedTargets-debug.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLSharedTargets-release.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLSharedTargets-release.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLStaticTargets-debug.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLStaticTargets-debug.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLStaticTargets-release.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/external/SFML-2.6.2/lib/cmake/SFML/SFMLStaticTargets-release.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/flac.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/freetype.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/ogg.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/openal32.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-audio-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-audio-s-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-audio-s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-audio.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-graphics-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-graphics-s-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-graphics-s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-graphics.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-main-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-main.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-network-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-network-s-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-network-s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-network.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-system-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-system-s-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-system-s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-system.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-window-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-window-s-d.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-window-s.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/sfml-window.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/vorbis.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/vorbisenc.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external/SFML-2.6.2/lib/vorbisfile.lib" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,10 +116,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/D2niel/Desktop/FortuneAvenueDev/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FortuneAvenueDev/src/game/offiline/GameOfflineO.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FortuneAvenueDev/src/menu/menuP.hpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -115,7 +152,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/D2niel/Desktop/FortuneAvenueDev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/D2niel/Desktop/University/FortuneAvenueDev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -176,6 +213,11 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Native Application.all" />
       <item itemvalue="Native Application.cmake_check_build_system" />
@@ -225,7 +267,29 @@
       <workItem from="1751653988699" duration="11015000" />
       <workItem from="1751833416973" duration="6000" />
       <workItem from="1752274495972" duration="10585000" />
-      <workItem from="1752338177153" duration="6000" />
+      <workItem from="1752338177153" duration="9613000" />
+      <workItem from="1752369879202" duration="12335000" />
+      <workItem from="1752417320772" duration="1203000" />
+      <workItem from="1752418744195" duration="7191000" />
+      <workItem from="1752431399071" duration="4272000" />
+      <workItem from="1752528686868" duration="9646000" />
+      <workItem from="1752616131128" duration="77000" />
+      <workItem from="1752848992090" duration="171000" />
+      <workItem from="1753053100370" duration="106000" />
+      <workItem from="1753589110671" duration="1393000" />
+      <workItem from="1754172919024" duration="889000" />
+      <workItem from="1754843496785" duration="37000" />
+      <workItem from="1754850907701" duration="1128000" />
+      <workItem from="1754876163005" duration="4000" />
+      <workItem from="1754876350131" duration="2297000" />
+      <workItem from="1755389512515" duration="2671000" />
+      <workItem from="1755471837515" duration="1497000" />
+      <workItem from="1757827387129" duration="379000" />
+      <workItem from="1757872779014" duration="10000" />
+      <workItem from="1758238211778" duration="115000" />
+      <workItem from="1759092663811" duration="850000" />
+      <workItem from="1762655990557" duration="3234000" />
+      <workItem from="1762721149925" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="17/05/2025 cambios">
       <option name="closed" value="true" />
@@ -280,8 +344,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/SettingsManager.cpp</url>
-          <line>306</line>
+          <line>298</line>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/LanguageManager.h</url>
+          <line>3</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/settings/LanguageManager.cpp</url>
+          <line>97</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/ui/GradientText.h</url>
+          <line>60</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuSelecting.cpp</url>
+          <line>34</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FortuneAvenueDev/src/ui/menuswicht.cpp</url>
+          <line>10</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

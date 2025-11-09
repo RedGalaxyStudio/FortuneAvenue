@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../settings/SettingsManager.hpp"
+#include "../settings/LanguageManager.h"
 #include "../core/ResourceGlobal.hpp"
 #include "../ui/ButtonG.hpp"
 #include "../ui/menuswicht.hpp"
@@ -64,7 +65,7 @@ void menuP::Resource() {
 	SpriteBotonSi.setTexture(TextureBotonSiOff);
 	// Ahora que las texturas están cargadas, se puede crear el botón
 	botonX = new ButtonG(spriteX, textureXOff, textureXOn);
-	if (!fontUser.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
+	if (!fontUser.loadFromFile("assets/fonts/Arcadepix2.ttf")) {
 		std::cerr << "Error loading font\n";
 	}
 	if (!textureBox.loadFromFile("assets/image/Button/rectanguloEncendido.png")) return;
@@ -164,13 +165,13 @@ void menuP::Resource() {
 	spriteAcercaDe.setPosition(1190.5f, 680);
 	SpriteFondoMenu.setTexture(TextureFondoMenu);
 
-	musicSlider = new SettingsManager(200, 300, 200, 10, MusicPointers, *window);
+	musicSlider = new SettingsManager(200, 300, 200, 10,LanguageManager::getInstance().getsettingsTranslations("music"), MusicPointers, *window);
 
-	effectSlider = new SettingsManager(200, 400, 200, 10, effectPointers, *window);
+	effectSlider = new SettingsManager(200, 400, 200, 10,LanguageManager::getInstance().getsettingsTranslations("sound_effects"), effectPointers, *window);
 
 
 
-	SelectingIdiome = new menuSelecting(*window, { "Espanol","Ingles","Portugues","puta" });
+	SelectingIdiome = new menuSelecting(*window,LanguageManager::getInstance().getMenuLanguage());
 
 
 	SelectingIdiome->setFont(fontUser);
@@ -236,25 +237,42 @@ void menuP::MenuPrincipal() {
 	SpriteBotonOpciones.setPosition(640, 560);
 	ValidarUser();
 
-	GradientText ButtonSalirM("SALIR", fontMenu, 49);
-	GradientText ButtonOpcionesM("OPCIONES", fontMenu, 46);
-	GradientText ButtonJugarM("JUGAR", fontMenu, 49);
-	GradientText ButtonAcercaDe("ACERCA DE", fontMenu, 28);
+	GradientText ButtonSalirM(LanguageManager::getInstance().getmainMenuTranslations("exit"), fontMenu, 49);
+	GradientText ButtonOpcionesM(LanguageManager::getInstance().getmainMenuTranslations("options"), fontMenu, 46);
+	GradientText ButtonJugarM(LanguageManager::getInstance().getmainMenuTranslations("play"), fontMenu, 49);
+	GradientText ButtonAcercaDe(LanguageManager::getInstance().getmainMenuTranslations("about"), fontMenu, 28);
 	ButtonSalirM.setBorderThickness(3.f);
 	ButtonOpcionesM.setBorderThickness(3.f);
 	ButtonJugarM.setBorderThickness(3.f);
 	ButtonAcercaDe.setBorderThickness(1.5f);
-	ButtonSalirM.setPosition(897, 548);
-	ButtonOpcionesM.setPosition(639, 548);
-	ButtonJugarM.setPosition(383, 548);
-	ButtonAcercaDe.setPosition(1198.f, 676);
+	ButtonSalirM.setPosition(897, 560);
+	ButtonOpcionesM.setPosition(639, 560);
+	ButtonJugarM.setPosition(383, 560);
+	ButtonAcercaDe.setPosition(1198.f, 684);
+	// Load shaders list
+	const int SHADER_COUNT = 20;
+	std::vector<sf::Shader> shaders(SHADER_COUNT);
+	std::vector<bool> shaderLoaded(SHADER_COUNT,false);
+	for (int i=0;i<SHADER_COUNT;i++) {
+		std::string path = std::string("shaders/border") + (i < 9 ? "0" : "") + std::to_string(i + 1) + ".frag";
+		if (shaders[i].loadFromFile(path, sf::Shader::Fragment)) {
+			shaderLoaded[i] = true;
+		} else {
+			std::cerr << "Warning: failed to load " << path << "\n";
+		}
+	}
+
+
+	std::cout << "Controls: keys 1-9,0 and q-t switch shader (20 total). R = reload shaders. Esc to quit.\n";
+	sf::Clock clock43;
 	while (window->isOpen()) {
 
-		eventoMenuP(ButtonSalirM,ButtonOpcionesM,ButtonJugarM);
+		eventoMenuP(ButtonSalirM,ButtonOpcionesM,ButtonJugarM,ButtonAcercaDe);
 
 		mousePosition = sf::Mouse::getPosition(*window);
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 		window->setMouseCursorVisible(true);
+		float time = clock43.getElapsedTime().asSeconds();
 
 		currentCursor = &normalCursor;
 		botonJugar.update(mousePosFloat, currentCursor, linkCursor, normalCursor,&ButtonJugarM);
@@ -263,14 +281,24 @@ void menuP::MenuPrincipal() {
 		botonAcercaDe.update(mousePosFloat, currentCursor, linkCursor, normalCursor,&ButtonAcercaDe);
 		window->setMouseCursor(*currentCursor);
 
-
 		window->clear();
 		window->draw(SpriteFondoMenu);
 		window->draw(spriteLogoFortuneAvenue);
 		window->draw(box);
 		window->draw(Sesion);
 		window->draw(selectedAvatarCopy);
-		window->draw(recua);
+
+		if (shaderLoaded[current]) {
+			sf::Shader& sh = shaders[current];
+			sh.setUniform("texSize", sf::Glsl::Vec2((float)Texrecua.getSize().x, (float)Texrecua.getSize().y));
+			sh.setUniform("time", time);
+			sh.setUniform("thickness", 3.0f);
+			sh.setUniform("outlineColor", sf::Glsl::Vec4(0.0f,1.0f,1.0f,1.0f));
+			window->draw(recua, &sh);
+		} else {
+			window->draw(recua);
+		}
+
 		window->draw(SpriteBotonJugar);
 		window->draw(ButtonJugarM);
 		window->draw(SpriteBotonOpciones);
@@ -293,7 +321,7 @@ void menuP::ValidarUser() {
 	}
 
 }
-void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM,GradientText &ButtonJugarM) {
+void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM,GradientText &ButtonJugarM,GradientText &ButtonAcercaDe) {
 
 	sf::Event event;
 
@@ -313,6 +341,7 @@ void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM
 		renderTexture.draw(SpriteBotonSalir);
 		renderTexture.draw(ButtonSalirM);
 		renderTexture.draw(spriteAcercaDe);
+		renderTexture.draw(ButtonAcercaDe);
 		renderTexture.draw(spriteEditButton);
 		renderTexture.draw(overlay);
 		renderTexture.display();
@@ -321,7 +350,13 @@ void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM
 
 			MenuSalir(nullptr);
 		}
+		if (event.type == sf::Event::KeyPressed){
+			// keys 1..0 (numbers) and q..t for 10..19
+			if (keyToShaderIndex.count(event.key.code) > 0) {
+				current = keyToShaderIndex[event.key.code];
+			}
 
+		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 			mousePosition = sf::Mouse::getPosition(*window);
 			mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
@@ -334,6 +369,7 @@ void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM
 				selectedAvatarCopy.setPosition(84, 74);
 				selectedAvatarCopy.setScale(1, 1);
 				recua.setPosition(84, 74);
+
 				recua.setScale(1, 1);
 				Sesion.setCharacterSize(24);
 				Sesion.setPosition(273, 74 - 4);
@@ -347,6 +383,10 @@ void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM
 				playClickSound();
 				MenuOpcion(true);
 				SpriteBotonOpciones.setPosition(640, 560);
+				ButtonSalirM.setString(LanguageManager::getInstance().getmainMenuTranslations("exit"));
+				ButtonOpcionesM.setString(LanguageManager::getInstance().getmainMenuTranslations("options"));
+				ButtonJugarM.setString(LanguageManager::getInstance().getmainMenuTranslations("play"));
+				ButtonAcercaDe.setString(LanguageManager::getInstance().getmainMenuTranslations("about"));
 
 			}
 
@@ -354,6 +394,7 @@ void menuP::eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM
 			if (SpriteBotonSalir.getGlobalBounds().contains(mousePosFloat)) {
 				playClickSound();
 				MenuSalir(nullptr);
+
 
 			}
 			if (spriteAcercaDe.getGlobalBounds().contains(mousePosFloat)) {
@@ -421,31 +462,34 @@ void menuP::MenuOpcion(bool fon) {
 	menuswicht fullscreenSw(*window, sf::Vector2f(1100, 304),"fullscreen");
 	SpriteBotonOpciones.setTexture(TextureBotonOpcionesOn);
 	SpriteBotonOpciones.setPosition(640, 100);
-	if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
+	if (!Fuente.loadFromFile("assets/fonts/Arcadepix2.ttf")) {
 		return;
 	}
 
-	GradientText ButtonOpcionesM("OPCIONES", fontMenu, 46);
+	GradientText ButtonOpcionesM(LanguageManager::getInstance().getmainMenuTranslations("options"), fontMenu, 46);
 
 	ButtonOpcionesM.setBorderThickness(3.f);
 
-	ButtonOpcionesM.setPosition(639, 88);
+	ButtonOpcionesM.setPosition(639, 100);
 	ButtonOpcionesM.update(true);
 	sf::Text TextpantallaCompleta;
-	TextpantallaCompleta.setString("Pantalla Completa");
+	TextpantallaCompleta.setString(LanguageManager::getInstance().getsettingsTranslations("fullscreen"));
 	TextpantallaCompleta.setFont(Fuente);
 	TextpantallaCompleta.setCharacterSize(24);
 	TextpantallaCompleta.setFillColor(sf::Color::White);
 	TextpantallaCompleta.setPosition(795, 288);
 	window->setMouseCursorVisible(true);
-	ButtonG BotonInstrucciones(spriteInstrucciones, textureInstruccionesOff, textureInstruccionesOn);
 
+
+
+
+	ButtonG BotonInstrucciones(spriteInstrucciones, textureInstruccionesOff, textureInstruccionesOn);
+	ButtonOpcionesM.debugPrint();
 	while (window->isOpen()) {
 		currentCursor = &normalCursor;
 		mousePosition = sf::Mouse::getPosition(*window);
 		mousePosFloat = static_cast<sf::Vector2f>(mousePosition);
 		botonX->update(mousePosFloat, currentCursor, linkCursor, normalCursor);
-
 
 		sf::Event event;
 
@@ -475,7 +519,21 @@ void menuP::MenuOpcion(bool fon) {
 			musicSlider->handleEvent(event, *window);
 			effectSlider->handleEvent(event, *window);
 			SelectingIdiome->event(event);
+
+			if (SelectingIdiome->haschanged()) {
+
+				LanguageManager::getInstance().setLanguage(SelectingIdiome->getSelected());
+				SelectingIdiome->setVector(LanguageManager::getInstance().getMenuLanguage());
+				ButtonOpcionesM.setString(LanguageManager::getInstance().getmainMenuTranslations("options"));
+				musicSlider->setString(LanguageManager::getInstance().getsettingsTranslations("music"));
+				effectSlider->setString(LanguageManager::getInstance().getsettingsTranslations("sound_effects"));
+				TextpantallaCompleta.setString(LanguageManager::getInstance().getsettingsTranslations("fullscreen"));
+				//ButtonOpcionesM.debugPrint();
+
+			}
+
 			fullscreenSw.event(event);
+
 			if (fullscreenSw.hasStateChanged()){
 				createtheWindow(window,fullscreenSw.isOnState());
 				playClickSound();
@@ -620,7 +678,7 @@ void menuP::instruccionesGame() {
 	overlay.setFillColor(sf::Color(0, 0, 0, 100));
 
 	sf::Font Fuente;
-	if (!Fuente.loadFromFile("assets/fonts/ARCADEPI.ttf")) {
+	if (!Fuente.loadFromFile("assets/fonts/Arcadepix2.ttf")) {
 		return;
 	}
 

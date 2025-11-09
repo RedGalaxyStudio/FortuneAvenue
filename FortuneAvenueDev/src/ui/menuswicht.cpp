@@ -11,7 +11,7 @@ using json = nlohmann::json;
 menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position,std::string Name) : window(windowRef),position(Position),sumador(0.f),nameSwich(Name){
 
 
-	float M_PI = std::numbers::pi;
+	float myPI = 3.14159265358979323846f;
 
 	// Selector
 	CirSelec.setRadius(radius - 4.f);
@@ -29,7 +29,7 @@ menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position,std::s
 
 	// Semicírculo izquierdo
 	for (int i = 0; i <= pointCount; ++i) {
-		float angle = M_PI / 2 + (i * M_PI / pointCount); // 90° a 270°
+		float angle = myPI / 2 + (i * myPI / pointCount); // 90° a 270°
 		capsule.setPoint(i, sf::Vector2f(
 			std::cos(angle) * radius,
 			std::sin(angle) * radius
@@ -38,7 +38,7 @@ menuswicht::menuswicht(sf::RenderWindow& windowRef, sf::Vector2f Position,std::s
 
 	// Semicírculo derecho
 	for (int i = 0; i <= pointCount; ++i) {
-		float angle = 3 * M_PI / 2 + (i * M_PI / pointCount); // 270° a 450° (equivale a 90°)
+		float angle = 3 * myPI / 2 + (i * myPI / pointCount); // 270° a 450° (equivale a 90°)
 		capsule.setPoint(i + pointCount + 1, sf::Vector2f(
 			length + std::cos(angle) * radius,
 			std::sin(angle) * radius
@@ -191,7 +191,7 @@ void menuswicht::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	
 	target.draw(capsule, states);
 	target.draw(CirSelec, states);
-	std::cout << "\n" << CirSelec.getPosition().x;
+	
 }
 bool menuswicht::isOnState() const {
 	return On;

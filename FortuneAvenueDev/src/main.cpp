@@ -10,15 +10,13 @@
 #include <filesystem>
 #include "../libs/nlohmann/json.hpp"
 #include <shlobj.h>
+#include "settings/LanguageManager.h"
 using json = nlohmann::json;
 void terminator() {
 	Logger::log("Error fatal: std::terminate fue llamado.");
 	std::cerr << "El juego se cerro inesperadamente." << std::endl;
 	std::abort();  
 }
-
-
-
 int runGame() {
 	std::set_terminate(terminator);
 	try {
@@ -47,7 +45,7 @@ int runGame() {
 
 			}
 		}
-
+		LanguageManager::getInstance();
 		window->setMouseCursorVisible(false);
 
 

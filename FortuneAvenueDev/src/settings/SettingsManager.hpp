@@ -12,11 +12,12 @@ public:
     ~SettingsManager();
     SettingsManager();
 
-    SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>& music, sf::RenderWindow& windowRef);
-    SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef);
+    SettingsManager(float x, float y, float width, float height,const std::string id, std::vector<sf::Music*>& music, sf::RenderWindow& windowRef);
+    SettingsManager(float x, float y, float width, float height,const std::string id, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef);
 
     void handleEvent(sf::Event& event, const sf::RenderWindow& window);
     void draw(sf::RenderWindow& window) const;
+    void setString(const std::string& str);
     void Printf()const;
     void saveSettings();
 private:

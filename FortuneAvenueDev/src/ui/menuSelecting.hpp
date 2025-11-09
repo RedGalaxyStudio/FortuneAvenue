@@ -1,7 +1,6 @@
 #ifndef MENUSELECTING_HPP
 #define MENUSELECTING_HPP
 
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
@@ -15,6 +14,10 @@ public:
     void setColors(sf::Color color);
     void setPosition(sf::Vector2f Position);
     void event(const sf::Event);
+
+    void setVector(std::vector<std::string>InfoMenu);
+    std::string getSelected();
+    bool haschanged();
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
@@ -29,7 +32,7 @@ private:
     sf::Color Color;
     int SelecIdio=0;
     bool open = false;
-    
+    bool changed = false;
 };
 
 #endif // SETTINGSMANAGER_HPP

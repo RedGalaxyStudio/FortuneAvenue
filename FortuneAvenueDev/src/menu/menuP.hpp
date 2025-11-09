@@ -6,6 +6,7 @@
 #include "../ui/menuSelecting.hpp"
 #include "../network/Client.hpp"
 #include "ResourceLoader.h"
+
 class Client;
 class GradientText;
 class menuP{
@@ -29,14 +30,36 @@ private:
 
 
 
-    void eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM,GradientText &ButtonJugarM );
+    void eventoMenuP(GradientText &ButtonSalirM,GradientText &ButtonOpcionesM,GradientText &ButtonJugarM,GradientText &ButtonAcercaDe );
 
 
     void instruccionesGame();
 
     void MenuAcercaDe();
     void ValidarUser();
-
+    std::map<sf::Keyboard::Key, int> keyToShaderIndex = {
+        {sf::Keyboard::Num1, 0},
+        {sf::Keyboard::Num2, 1},
+        {sf::Keyboard::Num3, 2},
+        {sf::Keyboard::Num4, 3},
+        {sf::Keyboard::Num5, 4},
+        {sf::Keyboard::Num6, 5},
+        {sf::Keyboard::Num7, 6},
+        {sf::Keyboard::Num8, 7},
+        {sf::Keyboard::Num9, 8},
+        {sf::Keyboard::Num0, 9}, // tecla 0 para shader 10
+        {sf::Keyboard::Q, 10},
+        {sf::Keyboard::W, 11},
+        {sf::Keyboard::E, 12},
+        {sf::Keyboard::R, 13},
+        {sf::Keyboard::T, 14},
+        {sf::Keyboard::Y, 15},
+        {sf::Keyboard::U, 16},
+        {sf::Keyboard::I, 17},
+        {sf::Keyboard::O, 18},
+        {sf::Keyboard::P, 19}
+    };
+    int current = 0;
 
     sf::RenderWindow* window;
 

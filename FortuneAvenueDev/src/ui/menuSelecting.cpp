@@ -6,7 +6,10 @@ menuSelecting::menuSelecting(sf::RenderWindow& windowRef, std::vector<std::strin
 {
 	Menu.resize(InfoMenu.size());
 	for (size_t i = 0; i < InfoMenu.size(); ++i) {
-		Menu[i].setString(InfoMenu[i]);
+		sf::String unicodeText = sf::String::fromUtf8(
+			InfoMenu[i].begin(), InfoMenu[i].end()
+		);
+		Menu[i].setString(unicodeText);
 		Menu[i].setCharacterSize(20);
 	}
 
@@ -35,13 +38,26 @@ void menuSelecting::setColors(sf::Color color) {
 		tex.setFillColor(Color);
 	}
 }
+void menuSelecting::setVector(std::vector<std::string>InfoMenu) {
+	Menu.resize(InfoMenu.size());
+	for (size_t i = 0; i < InfoMenu.size(); ++i) {
+		sf::String unicodeText = sf::String::fromUtf8(
+			InfoMenu[i].begin(), InfoMenu[i].end()
+		);
+		Menu[i].setString(unicodeText);
+		Menu[i].setCharacterSize(20);
+	}
+	Selection = Menu[SelecIdio];
+	Selection.setPosition(position);
+	Selection.setCharacterSize(size);
+}
 void menuSelecting::setPosition(sf::Vector2f Position) {
 
 	position = Position;
 	backgroum.setPosition(position.x - 5, position.y );
 	if (Menu.empty()) {
-		std::cerr << "Error: El vector Menu está vacío." << std::endl;
-		return;  // Salir si el vector está vacío
+		std::cerr << "Error: El vector Menu estï¿½ vacï¿½o." << std::endl;
+		return;  // Salir si el vector estï¿½ vacï¿½o
 	}
 	Selection = Menu[SelecIdio];
 	Selection.setPosition(position);
@@ -51,7 +67,7 @@ void menuSelecting::setPosition(sf::Vector2f Position) {
 	for (auto& tex : Menu) {
 		if (tex.getFont() == nullptr) {
 			std::cerr << "Error: Fuente no asignada a sf::Text." << std::endl;
-			continue;  // Continuar si la fuente no está asignada
+			continue;  // Continuar si la fuente no estï¿½ asignada
 		}
 
 		tex.setPosition( position.x,offsetY);
@@ -65,6 +81,8 @@ void menuSelecting::setPosition(sf::Vector2f Position) {
 
 	
 }
+
+
 void menuSelecting::event(const sf::Event event) {
 
 	if (!open) {
@@ -77,7 +95,7 @@ void menuSelecting::event(const sf::Event event) {
 					if (Selection.getGlobalBounds().contains(mousePos)) {
 						
 						if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-							open = true;  // Se clickeó
+							open = true;  // Se clickeï¿½
 							backgroum.setSize(sf::Vector2f(backgroum.getSize().x, MaxSizeback));
 
 						}
@@ -100,17 +118,22 @@ void menuSelecting::event(const sf::Event event) {
 					Menu[i].setCharacterSize(30); // Resalta
 
 					if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+						if (SelecIdio != i){
 						SelecIdio = i;
+
+
+							changed=true;
+						}
 						Selection = Menu[SelecIdio];
 						Selection.setPosition(position);
 						Selection.setCharacterSize(size);
 						backgroum.setSize(sf::Vector2f(backgroum.getSize().x, Selection.getGlobalBounds().height+10));
 
-						open = false;  // Se clickeó
+						open = false;  // Se clickeï¿½
 					}
 				}
 				else {
-					Menu[i].setCharacterSize(23); // Tamaño normal
+					Menu[i].setCharacterSize(23); // Tamaï¿½o normal
 				}
 			}
 		}
@@ -132,4 +155,13 @@ void menuSelecting::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 			target.draw(text, states);
 		}
 	}
+}
+
+std::string menuSelecting::getSelected() {
+	return Selection.getString();
+}
+bool menuSelecting::haschanged() {
+	bool result = changed;
+	changed = false;  // auto-reset
+	return result;
 }

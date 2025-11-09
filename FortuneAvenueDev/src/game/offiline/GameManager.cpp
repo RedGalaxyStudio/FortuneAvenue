@@ -40,8 +40,8 @@ void GameManager::GenerarBot(int BotN) {
 
 	std::vector<int> PiecesBot = CreatorB::getRandomBotPieces(BotN, playerGameInfo[0].indexPiece);
 	std::vector<int> avatarsBot = CreatorB::getRandomBotAvatar(BotN);
-	std::cout << "T28\n"<<PiecesBot.size()<<"::"<< avatarsBot.size()<<"::"<< NamesBots.size();
-	std::cout << "\n ::"<< BotN<<"::\n";
+	//std::cout << "T28\n"<<PiecesBot.size()<<"::"<< avatarsBot.size()<<"::"<< NamesBots.size();
+	//std::cout << "\n ::"<< BotN<<"::\n";
 
 	// Validación de tamaños antes de continuar
 	if (NamesBots.size() < BotN || PiecesBot.size() < BotN || avatarsBot.size() < BotN) {
@@ -55,51 +55,51 @@ void GameManager::GenerarBot(int BotN) {
 	sf::FloatRect globalBounds;
 	for (int i = 0; i < BotN; i++)
 	{
-		std::cout << "P1\n";
+	//	std::cout << "P1\n";
 		plantillaInfoMBot.playerName = NamesBots[i];
 		plantillaInfoMBot.PiecUserme = true;
 		plantillaInfoMBot.indexPiece = PiecesBot[i];
-		std::cout << "P2"<< plantillaInfoMBot.indexPiece <<"\n";
+	//	std::cout << "P2"<< plantillaInfoMBot.indexPiece <<"\n";
 		playerGameInfo.push_back(plantillaInfoMBot);
 		plantillaGMBot.CashSprite.setTexture(TextureMoney1);
 		plantillaGMBot.Home.setTexture(TextureBuilding);
-		std::cout << "P3\n";
+		//std::cout << "P3\n";
 		plantillaGMBot.textureAvatarPLayer.loadFromFile("assets/image/Avatars/avatar" + std::to_string(avatarsBot[i]) + ".png");
-		std::cout << "P511\n";
+		//std::cout << "P511\n";
 		plantillaGMBot.NamePlayer.setCharacterSize(17);
 		plantillaGMBot.NamePlayer.setFont(fontUserProfile);
 		plantillaGMBot.NamePlayer.setFillColor(sf::Color::White);
 		plantillaGMBot.NamePlayer.setOutlineThickness(2);
 		plantillaGMBot.NamePlayer.setOutlineColor(sf::Color(135, 135, 135));
 		plantillaGMBot.NamePlayer.setString(plantillaInfoMBot.playerName);
-		std::cout << "P4\n";
+		//std::cout << "P4\n";
 		globalBounds = plantillaGMBot.NamePlayer.getGlobalBounds();
 		plantillaGMBot.NamePlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 		plantillaGMBot.MarcoPlayer.setTexture(TextureFrame);
-		std::cout << "P5\n";
+		//std::cout << "P5\n";
 		globalBounds = plantillaGMBot.MarcoPlayer.getGlobalBounds();
 		plantillaGMBot.MarcoPlayer.setOrigin(globalBounds.width / 2.0f, globalBounds.height / 2.0f);
 
 		plantillaGMBot.MarcoPlayer.setPosition(52.5f, 62.5f);
-		std::cout << "P6222\n";
+		//std::cout << "P6222\n";
 		plantillaGMBot.PieceSelect.setTexture(pieceShape[plantillaInfoMBot.indexPiece], true);
-		std::cout << "P6\n";
+		//std::cout << "P6\n";
 
 		sf::IntRect rect = plantillaGMBot.PieceSelect.getTextureRect();
-		std::cout << "P7\n";
+		//std::cout << "P7\n";
 		plantillaGMBot.boxPlayer.setTexture(textureBoxPerfilOff);
-		std::cout << "P8\n";
+		//std::cout << "P8\n";
 		plantillaGMBot.boxPlayer.setOrigin(125, 40);
-		std::cout << "P9\n";
+		//std::cout << "P9\n";
 		plantillaGMBot.boxPlayer.setScale(0.9f, 0.9f);
-		std::cout << "P10\n";
+		//std::cout << "P10\n";
 		playerGameOff.push_back(plantillaGMBot);
-		std::cout << "P11\n";
+		//std::cout << "P11\n";
 		ActiveUsers.push_back(i + 1);
-		std::cout << "P12\n";
+		//std::cout << "P12\n";
 
 	}
-	std::cout << "T222\n";
+	//std::cout << "T222\n";
 
 }
 void GameManager::startGame() {

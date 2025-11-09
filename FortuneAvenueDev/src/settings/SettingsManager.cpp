@@ -16,15 +16,16 @@ SettingsManager::SettingsManager()
 {
 }
 
-SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Music*>& music, sf::RenderWindow& windowRef)
-	: window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true)
-{
+SettingsManager::SettingsManager(float x, float y, float width, float height,const std::string id,std::vector<sf::Music*>& music, sf::RenderWindow& windowRef)
+	: window(windowRef), volume(100.0f), isDragging(false), music(music), musicEnabled(true), effectsEnabled(true){
 
 	thumb.setRadius((height + 5) / 2 + 5.f);
 	thumb.setFillColor(sf::Color(95, 179, 255));
 	thumb.setOutlineColor(sf::Color::Black);
 	thumb.setOutlineThickness(-2.0f);
+
 	char appDataPath[MAX_PATH];
+
 	if (SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, appDataPath) != S_OK) {
 		std::cerr << "No se pudo obtener la ruta de AppData." << std::endl;
 		return;
@@ -78,7 +79,6 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	bar.setOutlineColor(sf::Color::Black);
 	bar.setOutlineThickness(2.0f);
 
-
 	filledBar.setPosition(x, y);
 	filledBar.setFillColor(sf::Color(249, 108, 223));
 	filledBar.setOutlineColor(sf::Color::Black);
@@ -96,7 +96,7 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	IdenVolumen.setCharacterSize(20);
 	IdenVolumen.setPosition(width - 100, y - 10);
 	IdenVolumen.setFillColor(sf::Color::White);
-	IdenVolumen.setString("Musica");
+	IdenVolumen.setString(id);
 	ImgVolumen.setTexture(TextureHigh);
 	ImgVolumen.setOrigin(25, 25);
 	ImgVolumen.setPosition(width + 310, y + 7);
@@ -105,16 +105,11 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	sf::Text TextpantallaCompleta;
 
 
-	TextpantallaCompleta.setString("Pantalla Completa");
-	TextpantallaCompleta.setFont(font);
-	TextpantallaCompleta.setCharacterSize(30);
-	TextpantallaCompleta.setFillColor(sf::Color::White);
-	TextpantallaCompleta.setPosition(795, 270);
 
 
 }
 
-SettingsManager::SettingsManager(float x, float y, float width, float height, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
+SettingsManager::SettingsManager(float x, float y, float width, float height,const std::string id, std::vector<sf::Sound*>& effects, sf::RenderWindow& windowRef) : window(windowRef), volume(100.0f), isDragging(false), effects(effects), musicEnabled(true), effectsEnabled(true)
 {
 	char appDataPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, appDataPath) != S_OK) {
@@ -157,17 +152,14 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 		filledBar.setSize(sf::Vector2f(width, height));
 		thumb.setPosition(x + width - thumb.getRadius(), y + (height / 2) - thumb.getRadius());
 	}
-
 	for (auto* effect : effects) {
 		if (effect) {
 			effect->setVolume(volume);
 		}
 	}
-
 	if (!TextureMuted.loadFromFile("assets/image/Button/VolumeMuted.png")) return;
 	if (!TextureMedium.loadFromFile("assets/image/Button/VolumeMedium.png")) return;
 	if (!TextureHigh.loadFromFile("assets/image/Button/VolumeHigh.png")) return;
-
 
 	bar.setSize(sf::Vector2f(width, height));
 	bar.setPosition(x, y);
@@ -175,12 +167,10 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	bar.setOutlineColor(sf::Color::Black);
 	bar.setOutlineThickness(2.0f);
 
-
 	filledBar.setPosition(x, y);
 	filledBar.setFillColor(sf::Color(249, 108, 223));
 	filledBar.setOutlineColor(sf::Color::Black);
 	filledBar.setOutlineThickness(2.0f);
-
 
 	if (!font.loadFromFile("assets/fonts/Pixel Times Bold.ttf")) {
 		std::cerr << "Error en cargar la fuente" << std::endl;
@@ -193,19 +183,21 @@ SettingsManager::SettingsManager(float x, float y, float width, float height, st
 	IdenVolumen.setPosition(width - 100, y - 10);
 	IdenVolumen.setCharacterSize(20);
 	IdenVolumen.setFillColor(sf::Color::White);
-	IdenVolumen.setString("Efectos");
+	IdenVolumen.setString(id);
 	ImgVolumen.setTexture(TextureHigh);
 	ImgVolumen.setOrigin(25, 25);
 	ImgVolumen.setPosition(width + 310, y + 7);
 	updateVolumeText();
-
-
-
 }
 SettingsManager::~SettingsManager()
 {
 }
+void SettingsManager::setString(const std::string& str) {
 
+	IdenVolumen.setString(str);
+
+
+}
 void SettingsManager::handleEvent(sf::Event& event, const sf::RenderWindow& window) {
 	mousePos = sf::Mouse::getPosition(window);
 
@@ -284,7 +276,6 @@ void SettingsManager::draw(sf::RenderWindow& window) const {
 	window.draw(volumeText);
 	window.draw(IdenVolumen);
 	window.draw(ImgVolumen);
-	window.draw(TextpantallaCompleta);
 
 }
 

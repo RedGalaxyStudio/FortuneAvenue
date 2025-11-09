@@ -8,14 +8,14 @@
 GameOffline::GameOffline(sf::RenderWindow& win, int NumMapa) : window(&win), NMapa(NumMapa), Dado(window), moverFichas(ActiveUsers.size(), MovePiecesO(win, NumMapa)), house(ActiveUsers.size(), HouseBuyO()), impuestoCasa(0) {
 
 	ruleta = new RuletaO(500.0f, 500.0f, 640.0f, 360.0f); // Inicializacion del puntero
-	std::cout << "Ta2\n";
+//	std::cout << "Ta2\n";
 	resource();
 }
 void GameOffline::resource() {
 	R.setFillColor(sf::Color::Yellow);
 	R.setRadius(4);
 	R.setOrigin(2, 2);
-	std::cout << "Ta1\n";
+	//std::cout << "Ta1\n";
 	if (NMapa == 1) {
 		if (!TextureMapa.loadFromFile("assets/image/Game/mapa+S+++.png")) return;
 
@@ -350,8 +350,8 @@ void GameOffline::resource() {
 
 }
 void GameOffline::positionPefil() {
-	std::cout << "Se llamó a positionPefil()\n";
-	std::cout << "Tamaño de ActiveUsers: " << ActiveUsers.size() << "\n";
+	std::cout << "Se llamï¿½ a positionPefil()\n";
+	std::cout << "Tamaï¿½o de ActiveUsers: " << ActiveUsers.size() << "\n";
 	for (int i = 0; i < ActiveUsers.size(); i++) {
 
 

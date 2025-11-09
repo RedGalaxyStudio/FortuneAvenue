@@ -19,12 +19,14 @@ public:
 		m_border.setFont(font);
 		m_border.setString(text);
 		m_border.setCharacterSize(characterSize);
-
+		centerOrigin();
 		// borde interior rojo sólido → borde exterior rojo transparente
 		setBorderColors(
 			sf::Color(95, 95, 95, 255), // gris claro opaco
 			sf::Color(95, 95, 95, 0)    // gris claro transparente
 		);
+
+
 	}
 
 	void update(bool band) {
@@ -46,12 +48,16 @@ public:
 	}
 	void setPosition(float x, float y) {
 		m_text.setPosition(x, y);
-		m_text.setOrigin(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2);
-
 		m_border.setPosition(x, y);
-		m_border.setOrigin(m_border.getGlobalBounds().width / 2, m_border.getGlobalBounds().height / 2);
-	}
 
+		centerOrigin();
+
+	}
+	void setString(const std::string& str) {
+		m_text.setString(str);
+		m_border.setString(str);
+		centerOrigin();
+	}
 	void setBorderThickness(float thickness) {
 		m_borderThickness = thickness;
 	}
@@ -101,7 +107,25 @@ public:
 			<< (int)m_borderColor1.a << ")\n";
 	}
 
+	void debugPrint() const {
+		std::cout << "========== GradientText DEBUG ==========\n";
 
+		std::cout << "Character Size: " << m_text.getCharacterSize() << "\n";
+
+		sf::Vector2f pos = m_text.getPosition();
+		std::cout << "Position: (" << pos.x << ", " << pos.y << ")\n";
+
+		sf::Vector2f origin = m_text.getOrigin();
+		std::cout << "Origin:   (" << origin.x << ", " << origin.y << ")\n";
+
+		auto bounds = m_text.getLocalBounds();
+		std::cout << "Local Bounds: left = " << bounds.left
+			<< ", top = " << bounds.top
+			<< ", width = " << bounds.width
+			<< ", height = " << bounds.height << "\n";
+
+		std::cout << "========================================\n";
+	}
 
 
 
@@ -142,4 +166,16 @@ private:
 
 		return sf::Color(r, g, b, a);
 	}
+
+	void centerOrigin() {
+		auto bounds = m_text.getLocalBounds();
+		m_text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+
+		bounds = m_border.getLocalBounds();
+		m_border.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+	}
+
+
+
+
 };
